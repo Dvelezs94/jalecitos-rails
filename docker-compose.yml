@@ -1,0 +1,27 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+
+  rails:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+#    command: tail -f /var/log/dpkg.log
+    volumes:
+      - .:/jalesitos
+    environment:
+      - STRIPE_PUBLISHABLE_KEY=pk_test_xhGbN2rGbm3i0WCJKDImJF3a
+      - STRIPE_SECRET_KEY=sk_test_Hz89ZLoGrNPphGpGrX7pm2It
+      - DEVISE_SECRET_KEY=qowndkqwdkqmwuqcb287dbwe9220192wn1kwnso1i
+    ports:
+      - "80:3000"
+    depends_on:
+      - db
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
