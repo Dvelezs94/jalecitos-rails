@@ -8,9 +8,9 @@ default: &default
 
 development:
   <<: *default
-  database: jalesitos_development
+  database: jalecitos_development
 
 
 test:
   <<: *default
-  database: jalesitos_test%
+  database: jalecitos_test%
