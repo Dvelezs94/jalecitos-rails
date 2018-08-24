@@ -10,6 +10,7 @@ function stop() {
 
 function create_db() {
   docker-compose exec app rails db:create
+  docker-compose exec app rails db:migrate
 }
 
 case $1 in

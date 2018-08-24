@@ -60,3 +60,5 @@ gem 'font-awesome-rails'
 gem "autoprefixer-rails"
 #gem 'therubyracer'
 #gem 'less-rails-bootstrap'
+gem 'devise'
+gem 'devise-bootstrapped'
