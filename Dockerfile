@@ -1,5 +1,7 @@
 FROM ruby:2.5
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev curl software-properties-common
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt install -y nodejs
 RUN mkdir /jalesitos
 WORKDIR /jalesitos
 COPY . .
