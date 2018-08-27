@@ -15,7 +15,6 @@
     <meta name="author" content="">
 
     <title>Jalecitos</title>
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
 
   </head>
@@ -28,22 +27,18 @@
     <p class="alert alert-danger"><%= alert %></p>
     <% end %>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+
+   <nav class="navbar navbar-light bg-light static-top navbar-expand-lg">
       <div class="container">
-        <a class="navbar-brand" href="#">Jalecitos</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <%= link_to "Sign up", new_user_registration_path, :class => 'nav-link'  %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Login", new_user_session_path, :class => 'nav-link' =%>
-            </li>
-          </ul>
-        </div>
+        <a class="navbar-brand" href="<%= root_path %>">Jalecitos</a>
+        <ul class="nav navbar-right">
+          <li class="nav-item">
+            <%= link_to "Sign up", new_user_registration_path, :class => 'nav-link'  %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, :class => 'nav-link' =%>
+          </li>
+        </ul>
       </div>
     </nav>
     <%= yield %>

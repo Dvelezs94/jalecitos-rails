@@ -56,7 +56,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
-#gem 'simple-line-icons-rails'
+#gem 'simple-line-icons-rails', github: 'hi5dev/simple-line-icons-rails', branch: 'railties-5.2'
 gem "autoprefixer-rails"
 #gem 'therubyracer'
 #gem 'less-rails-bootstrap'
