@@ -10,10 +10,72 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_24_204916) do
+ActiveRecord::Schema.define(version: 2018_08_30_033738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "extras", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.float "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "gig_id"
+    t.index ["gig_id"], name: "index_extras_on_gig_id"
+  end
+
+  create_table "gigs", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "string"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "category_id"
+    t.bigint "tag_id"
+    t.index ["category_id"], name: "index_gigs_on_category_id"
+    t.index ["tag_id"], name: "index_gigs_on_tag_id"
+    t.index ["user_id"], name: "index_gigs_on_user_id"
+  end
+
+  create_table "packages", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.float "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.float "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "package_id"
+    t.index ["package_id"], name: "index_payments_on_package_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.float "stars"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +85,18 @@ ActiveRecord::Schema.define(version: 2018_08_24_204916) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.float "employee_stars"
+    t.float "employer_stars"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "extras", "gigs"
+  add_foreign_key "gigs", "categories"
+  add_foreign_key "gigs", "tags"
+  add_foreign_key "gigs", "users"
+  add_foreign_key "payments", "packages"
+  add_foreign_key "payments", "users"
 end

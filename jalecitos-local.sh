@@ -32,11 +32,11 @@ case $1 in
     start
   ;;
   fix-perms)
-    sudo chown -R $USER:$USER .
+    sudo chown -R $USER:$USER app/
   ;;
   *)
     echo "
-    Usage: 
+    Usage:
     $0 start/stop
     $0 create-db
     $0 run command here
