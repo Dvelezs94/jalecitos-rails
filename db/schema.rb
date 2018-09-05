@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_30_033738) do
+ActiveRecord::Schema.define(version: 2018_09_05_191034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,14 +27,14 @@ ActiveRecord::Schema.define(version: 2018_08_30_033738) do
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "gig_id"
-    t.index ["gig_id"], name: "index_extras_on_gig_id"
+    t.bigint "gigs_id"
+    t.index ["gigs_id"], name: "index_extras_on_gigs_id"
   end
 
   create_table "gigs", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.string "string"
+    t.string "image"
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -44,6 +44,11 @@ ActiveRecord::Schema.define(version: 2018_08_30_033738) do
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["tag_id"], name: "index_gigs_on_tag_id"
     t.index ["user_id"], name: "index_gigs_on_user_id"
+  end
+
+  create_table "gigs_tags", id: false, force: :cascade do |t|
+    t.bigint "tag_id", null: false
+    t.bigint "gig_id", null: false
   end
 
   create_table "packages", force: :cascade do |t|
@@ -69,6 +74,8 @@ ActiveRecord::Schema.define(version: 2018_08_30_033738) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "gigs_id"
+    t.index ["gigs_id"], name: "index_reviews_on_gigs_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -93,10 +100,11 @@ ActiveRecord::Schema.define(version: 2018_08_30_033738) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "extras", "gigs"
+  add_foreign_key "extras", "gigs", column: "gigs_id"
   add_foreign_key "gigs", "categories"
   add_foreign_key "gigs", "tags"
   add_foreign_key "gigs", "users"
   add_foreign_key "payments", "packages"
   add_foreign_key "payments", "users"
+  add_foreign_key "reviews", "gigs", column: "gigs_id"
 end

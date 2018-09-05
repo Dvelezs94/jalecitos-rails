@@ -62,3 +62,5 @@ gem "autoprefixer-rails"
 #gem 'less-rails-bootstrap'
 gem 'devise'
 gem 'devise-bootstrapped'
+# Gem to export active record as diagram
+gem 'railroady', '~> 1.5', '>= 1.5.3', group: :development
