@@ -1,7 +1,19 @@
 #!/bin/bash -x
 
 function start() {
+  read -p "Delete DB folder to start from scratch? (y/n): " DBDEL
+  read -p "Create DB and migrations on startup? (y/n): " DBCREATE
+  if [ "$DBDEL" == "y" ]
+  then
+    echo "Deleting DB folder..."
+    sudo rm -rf tmp/db/
+    echo "done."
+  fi
   docker-compose up -d --build --force-recreate
+  if [ "$DBCREATE" == "y" ]
+  then
+    bash $0 create-db
+  fi
 }
 
 function stop() {
