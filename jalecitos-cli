@@ -29,6 +29,10 @@ function generate_db_diagram {
   bash $0 run rake diagram:all
 }
 
+function path {
+  export PATH=$PATH:$(pwd)
+}
+
 case $1 in
   start)
     start
@@ -53,13 +57,17 @@ case $1 in
   db_diag)
     generate_db_diagram
   ;;
+  path)
+    path
+  ;;
   *)
     echo "
     Usage:
-    $0 start/stop
-    $0 create-db
-    $0 run command here
-    $0 fix-perms
-    $0 db_diag"
+    $0 path                Export cli to your shell
+    $0 start/stop          Start the project by using docker-compose
+    $0 create-db           Run db create and migrations
+    $0 run command here    Run any command inside the container
+    $0 fix-perms           Experimental - fix code permission issues
+    $0 db_diag             Export DB diagram"
   ;;
 esac

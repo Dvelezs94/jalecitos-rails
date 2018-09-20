@@ -1,24 +1,21 @@
-# README
+# Jalecitos
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This Readme shows how to run Jalecitos locally, utilizing docker and docker compose
 
-Things you may want to cover:
 
-* Ruby version
+# Prerequisites
 
-* System dependencies
+- Linux / MacOS
+- Docker
+- Docker Compose
 
-* Configuration
+## Start
 
-* Database creation
+1. Download Code by doing `git clone git@gitlab.com:jalecitos/jalecitos-rails.git`
+2. Move to the directory `cd jalecitos-rails`
+3. Export PATH for jalecitos CLI `bash jalecitos-local.sh path`
+4. Start project `jalecitos-cli start`
 
-* Database initialization
+## Stop
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. `jalecitos-cli stop`
