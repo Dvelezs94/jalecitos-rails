@@ -1,6 +1,7 @@
-#!/bin/bash -x
+#!/bin/bash
 
 function start() {
+  set -e
   read -p "Delete DB folder to start from scratch? (y/n): " DBDEL
   read -p "Create DB and migrations on startup? (y/n): " DBCREATE
   if [ "$DBDEL" == "y" ]
