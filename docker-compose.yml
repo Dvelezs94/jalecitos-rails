@@ -15,6 +15,9 @@ services:
       - STRIPE_PUBLISHABLE_KEY=pk_test_xhGbN2rGbm3i0WCJKDImJF3a
       - STRIPE_SECRET_KEY=sk_test_Hz89ZLoGrNPphGpGrX7pm2It
       - DEVISE_SECRET_KEY=qowndkqwdkqmwuqcb287dbwe9220192wn1kwnso1i
+      - FACEBOOK_ID=307778330022720
+      - FACEBOOK_SECRET=0486dbcf6b932519e4f14c10e421c4c3
+      - FACEBOOK_CALLBACK=http://local.jalecitos.com/users/auth/facebook/callback
     ports:
       - "80:3000"
     depends_on:
