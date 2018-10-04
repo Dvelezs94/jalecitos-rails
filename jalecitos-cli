@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function start() {
+function build() {
   set -e
   read -p "Delete DB folder to start from scratch? (y/n): " DBDEL
   read -p "Create DB and migrations on startup? (y/n): " DBCREATE
@@ -13,8 +13,13 @@ function start() {
   docker-compose up -d --build --force-recreate
   if [ "$DBCREATE" == "y" ]
   then
+    sleep 10
     bash $0 create-db
   fi
+}
+
+function start() {
+  docker-compose up -d
 }
 
 function stop() {
@@ -31,10 +36,16 @@ function generate_db_diagram {
 }
 
 function path {
+  echo "exporting path"
   export PATH=$PATH:$(pwd)
+  echo "You can now use jalecitos-cli as a native command"
+  exec $(which bash)
 }
 
 case $1 in
+  build)
+    build
+  ;;
   start)
     start
   ;;
@@ -65,6 +76,7 @@ case $1 in
     echo "
     Usage:
     $0 path                Export cli to your shell
+    $0 build               You will need this if you want to build from scratch
     $0 start/stop          Start the project by using docker-compose
     $0 create-db           Run db create and migrations
     $0 run command here    Run any command inside the container
