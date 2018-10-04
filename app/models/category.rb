@@ -1,3 +1,3 @@
 class Category < ApplicationRecord
-  belongs_to :gigs
+  has_many :gigs
 end
