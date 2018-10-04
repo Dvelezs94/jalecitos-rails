@@ -67,3 +67,6 @@ gem 'railroady', '~> 1.5', '>= 1.5.3', group: :development
 
 #Roles
 gem 'petergate', '~> 1.9', '>= 1.9.1'
+
+#Facebook login
+gem 'omniauth-facebook'
