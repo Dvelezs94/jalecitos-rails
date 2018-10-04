@@ -45,6 +45,10 @@ function logs() {
   docker-compose logs -f
 }
 
+function seed() {
+  bash $0 run rails db:seed
+}
+
 case $1 in
   build)
     build
@@ -77,6 +81,9 @@ case $1 in
   ;;
   path)
     path
+  ;;
+  seed)
+    seed
   ;;
   *)
     echo "
