@@ -19,3 +19,9 @@ puts "Created 5 users"
      )
 end
 puts "Created 5 categories"
+
+User.create!(
+      email: "admin@example.com",
+      password: "adminpassword",
+      role: "admin"
+ )

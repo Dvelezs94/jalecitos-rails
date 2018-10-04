@@ -9,7 +9,9 @@ module ApplicationHelper
   end
 
   def hompepage_content_helper
-     if logged_in?(:user)
+     if  has_role?(:admin)
+         render 'shared_admin/admin_dashboard'
+     elsif  has_role?(:user)
        render 'shared/gig_links'
      else
        (render 'shared/masthead_image')+
