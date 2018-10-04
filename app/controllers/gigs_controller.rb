@@ -22,7 +22,7 @@ class GigsController < ApplicationController
 
   # POST /gigs
   def create
-    @gig = Gig.new(gig_params)
+    @gig = Gig.new(params_with_user)
 
     if @gig.save
       redirect_to @gig, notice: 'Gig was successfully created.'
@@ -55,5 +55,11 @@ class GigsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def gig_params
       params.require(:gig).permit(:name, :description, :image, :location, :user_id, :category_id, :tag_id)
+    end
+
+    def params_with_user
+      params_with_user = gig_params
+      params_with_user['user_id'] = current_user.id
+      params_with_user
     end
 end
