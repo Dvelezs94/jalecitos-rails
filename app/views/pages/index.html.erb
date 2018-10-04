@@ -1,12 +1,1 @@
-<% if logged_in?(:user)%>
-    <%= link_to "Create new Gig", new_gig_path %>
-<% else %>
-
-  <%= render 'shared/masthead_image' %>
-
-  <%= render 'shared/icons_home' %>
-
-  <%= render 'shared/images_home' %>
-
-  <%= render 'shared/mastbottom' %>
-  <% end %>
+<%= hompepage_content_helper %>

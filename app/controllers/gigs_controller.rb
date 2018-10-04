@@ -1,10 +1,10 @@
 class GigsController < ApplicationController
   before_action :set_gig, only: [:show, :edit, :update, :destroy]
-  access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
+  access all: [:index, :show], user: :all
 
   # GET /gigs
   def index
-    @gigs = Gig.all
+    @gigs = Gig.where("user_id = #{current_user.id}")
   end
 
   # GET /gigs/1
