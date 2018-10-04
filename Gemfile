@@ -64,3 +64,6 @@ gem 'devise'
 gem 'devise-bootstrapped'
 # Gem to export active record as diagram
 gem 'railroady', '~> 1.5', '>= 1.5.3', group: :development
+
+#Roles
+gem 'petergate', '~> 1.9', '>= 1.9.1'

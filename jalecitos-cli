@@ -41,6 +41,9 @@ function path {
   echo "You can now use jalecitos-cli as a native command"
   exec $(which bash)
 }
+function logs() {
+  docker-compose logs -f
+}
 
 case $1 in
   build)
@@ -63,6 +66,9 @@ case $1 in
     stop
     start
   ;;
+  logs)
+    logs
+  ;;
   fix-perms)
     sudo chown -R $USER:$USER app/
   ;;
@@ -78,6 +84,7 @@ case $1 in
     $0 path                Export cli to your shell
     $0 build               You will need this if you want to build from scratch
     $0 start/stop          Start the project by using docker-compose
+    $0 logs                Tail logs
     $0 create-db           Run db create and migrations
     $0 run command here    Run any command inside the container
     $0 fix-perms           Experimental - fix code permission issues
