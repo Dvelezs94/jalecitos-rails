@@ -1,5 +1,6 @@
 class GigsController < ApplicationController
   before_action :set_gig, only: [:show, :edit, :update, :destroy]
+  before_action :check_gig_ownership, only:[:edit, :update, :destroy]
   access all: [:index, :show], user: :all
 
   # GET /gigs
@@ -61,5 +62,11 @@ class GigsController < ApplicationController
       params_with_user = gig_params
       params_with_user['user_id'] = current_user.id
       params_with_user
+    end
+
+    def check_gig_ownership
+      if current_user.id != @gig.user_id
+        redirect_to root_path
+      end
     end
 end
