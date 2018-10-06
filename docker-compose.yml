@@ -19,6 +19,7 @@ services:
       - FACEBOOK_ID=307778330022720
       - FACEBOOK_SECRET=0486dbcf6b932519e4f14c10e421c4c3
       - FACEBOOK_CALLBACK=http://local.jalecitos.com/users/auth/facebook/callback
+      
     ports:
       - "80:3000"
     depends_on:

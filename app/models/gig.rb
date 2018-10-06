@@ -5,4 +5,5 @@ class Gig < ApplicationRecord
 
   validates_presence_of :name, :description, :location
 
+  mount_uploader :image, GigUploader
 end

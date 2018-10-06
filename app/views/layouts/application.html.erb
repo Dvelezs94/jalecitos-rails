@@ -7,7 +7,7 @@
     <%= csp_meta_tag %>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 
 
@@ -37,9 +37,10 @@
     <%= yield %>
   </body>
 <!-- Autocomplete Google scripts-->
-  <%= javascript_include_tag 'google_functions', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places&callback=activatePlacesSearch", 'data-turbolinks-track': 'reload' %>
-
+  <%if  !@set_google_javascript.nil? %>
+    <%= javascript_include_tag 'google_functions', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places&callback=activatePlacesSearch", 'data-turbolinks-track': 'reload' %>
+  <% end %>
 
 <!-- Footer -->
 <footer class="footer bg-light">
