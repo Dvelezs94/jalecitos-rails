@@ -29,7 +29,15 @@
         },
         class: 'form-control'
     ) %>
-</div>
+  </div>
+  <div class="form-group">
+    <%= form.text_field :location,
+                         class: 'form-control',
+                         size: 50,
+                         placeholder: 'Busca tu ciudad...',
+                         id: 'autocomplete' %>
+  </div>
+
 
   <div class="form-group">
     <%= form.submit "Crear trabajo", class: "btn btn-primary btn-block" %>
