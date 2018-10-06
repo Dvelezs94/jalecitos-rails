@@ -70,3 +70,5 @@ gem 'petergate', '~> 1.9', '>= 1.9.1'
 
 #Facebook login
 gem 'omniauth-facebook'
+#Notifications
+gem 'gritter', '~> 1.2'
