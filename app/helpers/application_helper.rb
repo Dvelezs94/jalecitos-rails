@@ -21,4 +21,15 @@ module ApplicationHelper
      end
   end
 
+  def notification_helper
+    alert = (flash[:alert] || flash[:error] || flash[:notice])
+    if alert
+        notification_generator_helper alert
+    end
+  end
+
+  def notification_generator_helper msg
+     js add_gritter(msg, :title=>"Jalecitos", :sticky => false, :time => 2000 )
+   end
+
 end
