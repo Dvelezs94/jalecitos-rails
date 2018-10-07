@@ -1,8 +1,10 @@
 class GigUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+   include CarrierWave::MiniMagick
 
+   #resize uploaded image
+   process resize_to_fill: [0, 300]
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog

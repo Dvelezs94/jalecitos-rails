@@ -1,22 +1,49 @@
-<p id="notice"><%= notice %></p>
+    <main role="main">
 
-<h1>Gigs</h1>
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Album example</h1>
+          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+          <p>
+            <a href="#" class="btn btn-primary my-2">Main call to action</a>
+            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+          </p>
+        </div>
+      </section>
+      <div class="album py-5 bg-light">
 
-<div class="row">
-  <% @gigs.each do |gig| %>
-  <div class="col-sm-6">
-    <%= gig.name %>
-    <td><%= link_to 'Más', gig %></td>
-    <td><%= link_to 'Editar', edit_gig_path(gig) %></td>
-    <td><%= link_to 'Borrar', gig, method: :delete, data: { confirm: 'Estás seguro de querer borrar este trabajo?' } %></td>
-  </div>
+        <div class="container">
 
-  <% end %>
+          <div class="row">
+            <% @gigs.each do |gig|  %>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <%= image_tag "http://placehold.it/600x400",  class: "card-img-top"  %>
+                <div class="card-body">
+                  <p class="card-text"><%=truncate(gig.description, length: 150)%></p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <%= link_to "Más", gig, class: "btn btn-sm btn-outline-secondary"  %>
+                      <%= link_to "Editar", edit_gig_path(gig.id), class: "btn btn-sm btn-outline-secondary"  %>
+                      <%= link_to "Borrar", gig, method: :delete, data: { confirm: '¿Estás seguro de querer borrar este trabajo?' }, class: "btn btn-sm btn-outline-secondary"  %>
+                    </div>
+                    <small class="text-muted"><%=gig.user.first_name %></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </main>
 
-</div>
-
-
-<br>
-
-<%= link_to 'Atrás', root_path %>
-<%= link_to 'Nuevo trabajo', new_gig_path %>
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+      </div>
+    </footer>

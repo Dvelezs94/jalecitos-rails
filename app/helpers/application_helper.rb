@@ -12,7 +12,7 @@ module ApplicationHelper
      if  has_role?(:admin)
        render 'shared_admin/admin_dashboard'
      elsif  has_role?(:user)
-       render 'shared/gig_links'
+       render 'shared/interesting_gigs'
      else
        (render 'shared/masthead_image')+
        (render 'shared/icons_home')+
