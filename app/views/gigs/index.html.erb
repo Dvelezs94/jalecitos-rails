@@ -1,22 +1,16 @@
-<p id="notice"><%= notice %></p>
+    <main role="main">
+      
+      <%= render 'shared_user/masthead' %>
 
-<h1>Gigs</h1>
+      <div class="album py-5 bg-light">
 
-<div class="row">
-  <% @gigs.each do |gig| %>
-  <div class="col-sm-6">
-    <%= gig.name %>
-    <td><%= link_to 'Más', gig %></td>
-    <td><%= link_to 'Editar', edit_gig_path(gig) %></td>
-    <td><%= link_to 'Borrar', gig, method: :delete, data: { confirm: 'Estás seguro de querer borrar este trabajo?' } %></td>
-  </div>
+        <div class="container">
 
-  <% end %>
+          <div class="row">
+            <%= render @gigs %>
+          </div>
+        </div>
+      </div>
+    </main>
 
-</div>
-
-
-<br>
-
-<%= link_to 'Atrás', root_path %>
-<%= link_to 'Nuevo trabajo', new_gig_path %>
+    <%= render 'shared_user/footer' %>

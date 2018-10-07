@@ -24,11 +24,20 @@
 
   <body>
     <%= notification_helper %>
+    <!-- Navigation -->
 
-    <%= render 'shared/main_nav_bar' %>
-
+   <nav class="navbar navbar-light bg-light static-top navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="<%= root_path %>">Jalecitos</a>
+        <ul class="nav navbar-right">
+          <%= nav_links_helper %>
+        </ul>
+      </div>
+    </nav>
     <%= yield %>
   </body>
+
+<%= google_scripts_helper %>
 
 <footer class="footer bg-light">
     <div class="container">
