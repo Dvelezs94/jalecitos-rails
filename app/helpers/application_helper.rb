@@ -2,9 +2,9 @@ module ApplicationHelper
 
   def nav_links_helper
     if logged_in?(:user)
-      render 'shared/nav_links_user'
+      render 'shared_user/nav_links_user'
     else
-      render 'shared/nav_links_guest'
+      render 'shared_guest/nav_links_guest'
     end
   end
 
@@ -12,12 +12,12 @@ module ApplicationHelper
      if  has_role?(:admin)
        render 'shared_admin/admin_dashboard'
      elsif  has_role?(:user)
-       render 'shared/interesting_gigs'
+       render 'shared_user/interesting_gigs'
      else
-       (render 'shared/masthead_image')+
-       (render 'shared/icons_home')+
-       (render 'shared/images_home')+
-       (render 'shared/mastbottom')
+       (render 'shared_guest/masthead_image')+
+       (render 'shared_guest/icons_home')+
+       (render 'shared_guest/images_home')+
+       (render 'shared_guest/mastbottom')
      end
   end
 

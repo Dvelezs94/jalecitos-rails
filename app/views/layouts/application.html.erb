@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 
@@ -24,16 +24,9 @@
 
   <body>
     <%= notification_helper %>
-    <!-- Navigation -->
 
-   <nav class="navbar navbar-light bg-light static-top navbar-expand-lg">
-      <div class="container">
-        <a class="navbar-brand" href="<%= root_path %>">Jalecitos</a>
-        <ul class="nav navbar-right">
-          <%= nav_links_helper %>
-        </ul>
-      </div>
-    </nav>
+    <%= render 'shared/main_nav_bar' %>
+
     <%= yield %>
   </body>
 
