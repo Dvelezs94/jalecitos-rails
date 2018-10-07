@@ -14,10 +14,7 @@ module ApplicationHelper
      elsif  has_role?(:user)
        render 'shared_user/interesting_gigs'
      else
-       (render 'shared_guest/masthead_image')+
-       (render 'shared_guest/icons_home')+
-       (render 'shared_guest/images_home')+
-       (render 'shared_guest/mastbottom')
+       render 'shared_guest/guest_page'
      end
   end
 
