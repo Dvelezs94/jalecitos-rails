@@ -36,13 +36,7 @@
   </div>
 
 
-  <%if params[:action] == "new"  %>
-    <% @confirm_text = "Crear trabajo"  %>
-  <% else %>
-    <% @confirm_text = "Guardar cambios"  %>
-  <% end %>
-
   <div class="form-group">
-    <%= form.submit @confirm_text,  class: "btn btn-primary btn-block" %>
+    <%= form.submit confirm_text_helper,  class: "btn btn-primary btn-block" %>
   </div>
 <% end %>

@@ -6,4 +6,12 @@ module GigsHelper
       image
     end
   end
+
+  def confirm_text_helper
+      if params[:action] == "new"
+        "Crear trabajo"
+     else
+        "Guardar cambios"
+     end
+   end
 end
