@@ -1,7 +1,6 @@
 class GigsController < ApplicationController
   before_action :set_gig, only: [:show, :edit, :update, :destroy]
   before_action :check_gig_ownership, only:[:edit, :update, :destroy]
-  before_action :set_google_scripts, only: [:new, :edit ]
   access all: [:index, :show], user: :all
 
   # GET /gigs
@@ -69,9 +68,6 @@ class GigsController < ApplicationController
       if current_user.id != @gig.user_id
         redirect_to root_path
       end
-    end
-    def set_google_scripts
-      @set_google_javascript = ''
     end
 
 end

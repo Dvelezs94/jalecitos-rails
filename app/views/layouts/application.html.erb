@@ -36,11 +36,9 @@
     </nav>
     <%= yield %>
   </body>
+  <%= params.inspect %>
 <!-- Autocomplete Google scripts-->
-  <%if  !@set_google_javascript.nil? %>
-    <%= javascript_include_tag 'google_functions', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places&callback=activatePlacesSearch", 'data-turbolinks-track': 'reload' %>
-  <% end %>
+<%= google_scripts_helper %>
 
 <!-- Footer -->
 <footer class="footer bg-light">

@@ -30,6 +30,12 @@ module ApplicationHelper
 
   def notification_generator_helper msg
      js add_gritter(msg, :title=>"Jalecitos", :sticky => false, :time => 2000 )
-   end
+  end
 
+  def google_scripts_helper
+    if params[:controller] == 'gigs' && ( params[:action] == 'new' || params[:action] == 'edit' )
+      (javascript_include_tag 'google_functions', 'data-turbolinks-track': 'reload')+
+      (javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places&callback=activatePlacesSearch", 'data-turbolinks-track': 'reload')
+     end
+  end
 end
