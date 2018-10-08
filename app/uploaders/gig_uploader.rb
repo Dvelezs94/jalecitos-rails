@@ -6,7 +6,8 @@ class GigUploader < CarrierWave::Uploader::Base
    #resize uploaded image
    process resize_to_fill: [600, 400]
   # Choose what kind of storage to use for this uploader:
-  storage :file
+    storage :aws
+
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
