@@ -2,6 +2,8 @@ image: docker:latest
 
 variables:
   REPOSITORY_URL: 167732392816.dkr.ecr.us-east-2.amazonaws.com/jalecitos-rails
+  ECS_CLUSTER: jalecitos-dev
+  ECS_SERVICE: rails
 
 services:
 - docker:dind
@@ -12,6 +14,7 @@ before_script:
 
 stages:
   - build
+  - deploy
 
 build:
   stage: build
@@ -19,6 +22,15 @@ build:
     - $(aws ecr get-login --no-include-email --region us-east-2)
     - docker build -t $REPOSITORY_URL .
     - docker push $REPOSITORY_URL
+  only:
+    - master
+  tags:
+    - docker
+
+deploy:
+  stage: deploy
+  script:
+    - aws ecs stop-task --cluster $ECS_CLUSTER --task $(aws ecs list-tasks --cluster $ECS_CLUSTER --service $ECS_SERVICE --output text --query taskArns[0])
   only:
     - master
   tags:
