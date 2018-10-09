@@ -1,0 +1,10 @@
+<tr>
+  <td><%= gig_dashboard.name %></td>
+  <td><%= gig_dashboard.user.first_name %></td>
+  <td><%= gig_dashboard.image %></td>
+  <td>Published <%= distance_of_time_in_words(gig_dashboard.created_at, Time.now) %> ago</td>
+  <td>1000</td>
+  <td><%= link_to content_tag("span", "", class: "fe fe-eye"), gig_path(gig_dashboard) %></td>
+  <td><%= link_to content_tag("span", "", class: "fe fe-lock"), edit_gig_path(gig_dashboard) %></td>
+  <td><%= link_to content_tag("span", "", class: "fe fe-trash"), gig_dashboard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
