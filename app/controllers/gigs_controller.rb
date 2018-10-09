@@ -1,7 +1,7 @@
 class GigsController < ApplicationController
   layout 'gig'
   before_action :set_gig, only: [:show, :edit, :update, :destroy, :toggle_status, :ban_gig]
-  before_action :check_gig_ownership, only:[:edit, :update, :destroy]
+  before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status]
   before_action :check_status, only:[:update]
   access user: {except: [:ban_gig]}, admin: [:ban_gig]
 
