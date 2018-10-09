@@ -81,3 +81,5 @@ gem 'mini_magick', '~> 4.9', '>= 4.9.2'
 gem 'aws-sdk', '~> 3.0', '>= 3.0.1'
 # FeatherIcons
 gem 'feathericon-rails', '~> 1.0'
+# Pagination
+gem 'kaminari', '~> 1.1', '>= 1.1.1'

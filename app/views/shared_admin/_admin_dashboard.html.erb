@@ -55,13 +55,13 @@
                   <th>Balance</th>
                   <th></th>
                   <th></th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 <%= render partial: 'gigs/gig_dashboard', collection: @gigs %>
               </tbody>
             </table>
+            <%= paginate @gigs, param_name: :gig_page %>
           </div>
       </main>
       <main role="main" class="col-md-2">
@@ -79,6 +79,7 @@
                   <%= render @categories %>
               </tbody>
             </table>
+            <%= paginate @categories, param_name: :category_page %>
           </div>
         </main>
       </div>
