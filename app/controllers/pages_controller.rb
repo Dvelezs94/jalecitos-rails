@@ -1,6 +1,10 @@
 class PagesController < ApplicationController
   def home
-    if current_user
+    # Info for admin Dashboard
+    if current_user && current_user.has_role?(:admin)
+      @gigs = Gig.all
+      @categories = Category.all
+    elsif current_user && current_user.has_role?(:user)
       @gigs = Gig.where.not(user_id: current_user.id)
     end
   end
