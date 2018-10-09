@@ -32,9 +32,11 @@ module GigsHelper
    end
 
 
-   def checked_helper status
-     if @gig.status?
+   def checked_helper option_status
+     if @gig.status == option_status
        opions = {checked: true}
+     else
+       opions = {checked: false}
      end
    end
 end
