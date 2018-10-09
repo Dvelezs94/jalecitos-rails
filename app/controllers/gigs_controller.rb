@@ -1,8 +1,9 @@
 class GigsController < ApplicationController
   layout 'gig'
-  before_action :set_gig, only: [:show, :edit, :update, :destroy]
+  before_action :set_gig, only: [:show, :edit, :update, :destroy, :toggle_status, :ban_gig]
   before_action :check_gig_ownership, only:[:edit, :update, :destroy]
-  access user: :all
+  before_action :check_status, only:[:update]
+  access user: {except: [:ban_gig]}, admin: [:ban_gig]
 
   # GET /gigs
   def index
@@ -48,6 +49,26 @@ class GigsController < ApplicationController
     redirect_to gigs_url, notice: 'Gig was successfully destroyed.'
   end
 
+  def toggle_status
+    if @gig.banned?
+      redirect_to gigs_path, notice: 'This Gig is banned'
+    end
+    if @gig.draft?
+        @gig.published!
+    else
+         @gig.draft!
+   end
+   redirect_to gigs_path, notice: "Gig status has been updated"
+  end
+
+  def ban_gig
+    if @gig.published? || @gig.draft?
+      @gig.banned!
+    else
+      @gig.draft!
+    end
+    redirect_to root_path, notice: "Gig status has been updated"
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_gig
@@ -56,7 +77,15 @@ class GigsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def gig_params
-      params.require(:gig).permit(:name, :description, :image, :location, :user_id, :category_id, :tag_id)
+      params.require(:gig).permit(:name,
+                                  :description,
+                                  :image,
+                                  :location,
+                                  :user_id,
+                                  :category_id,
+                                  :tag_id,
+                                  :status
+                                )
     end
 
     def params_with_user
@@ -68,6 +97,11 @@ class GigsController < ApplicationController
     def check_gig_ownership
       if current_user.id != @gig.user_id
         redirect_to root_path
+      end
+    end
+    def check_status
+      if @gig.banned?
+        redirect_to gigs_path, notice: 'This Gig is banned'
       end
     end
 

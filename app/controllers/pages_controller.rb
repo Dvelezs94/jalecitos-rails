@@ -5,7 +5,7 @@ class PagesController < ApplicationController
       @gigs = Gig.all
       @categories = Category.all
     elsif current_user && current_user.has_role?(:user)
-      @gigs = Gig.where.not(user_id: current_user.id)
+      @gigs = Gig.where.not(user_id: current_user.id, status: "published")
     end
   end
 end
