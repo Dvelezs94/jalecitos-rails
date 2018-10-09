@@ -2,6 +2,8 @@
   <div class="card mb-4 box-shadow">
     <%= image_tag image_display_helper(gig.image_url),  class: "card-img-top" %>
     <div class="card-body">
+      <p class="card-title"><%=gig.name%></p>
+      <p class="card-subtitle mb-2 text-muted"><%=gig.location%></p>
       <p class="card-text"><%=truncate(gig.description, length: 150)%></p>
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
