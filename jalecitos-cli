@@ -74,7 +74,7 @@ case $1 in
     logs
   ;;
   fix-perms)
-    sudo chown -R $USER:$USER app/
+    sudo chown -R $USER:$USER app/ db/ public/
   ;;
   db_diag)
     generate_db_diagram
