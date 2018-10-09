@@ -25,6 +25,8 @@
     ) %>
   </div>
   <div class="form-group">
+
+  <div class="form-group">
     <%= form.text_field :location,
                          class: 'form-control',
                          size: 50,
@@ -35,6 +37,7 @@
     <%= form.file_field :image, class: 'form-control' %>
   </div>
 
+  <%= status_options_helper(form) %>
 
   <div class="form-group">
     <%= form.submit confirm_text_helper,  class: "btn btn-primary btn-block" %>

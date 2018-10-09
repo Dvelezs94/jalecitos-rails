@@ -1,6 +1,6 @@
 module GigsHelper
   def image_display_helper image
-    if image.nil? 
+    if image.nil?
       "http://placehold.it/600x400"
     else
       image
@@ -12,6 +12,29 @@ module GigsHelper
         "Crear trabajo"
      else
         "Guardar cambios"
+     end
+   end
+
+   def status_text_helper gig
+     if gig.published?
+       "Ocultar"
+     else
+       "Publicar"
+     end
+   end
+
+   def status_options_helper form
+     if @gig.banned?
+       '<p>This gig is banned<p>'.html_safe
+     else
+       render 'status_options', form: form
+     end
+   end
+
+
+   def checked_helper status
+     if @gig.status?
+       opions = {checked: true}
      end
    end
 end

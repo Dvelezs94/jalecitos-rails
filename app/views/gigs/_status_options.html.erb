@@ -1,0 +1,7 @@
+<div class="form-group">
+  <%=form.radio_button :status, 'published', checked_helper('published')%>
+  <%=form.label :status, 'Público'%>
+
+  <%=form.radio_button :status, 'draft'%>
+  <%=form.label :status, 'Borrador'%>
+<div class="form-group">
