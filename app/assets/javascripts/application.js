@@ -36,7 +36,7 @@
 
     if (panel.find('.panel-body').is(':visible')) {
       var height = messages_list[0].scrollHeight;
-      messages_list.scrollTop(height);
+      messages_list.scrollBottom(height);
     }
   });
 })();

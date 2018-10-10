@@ -11,7 +11,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
         var messages_visible = (conversation).find('.card-body').is(':visible');
 
         if (!messages_visible) {
-          conversation.removeClass('card-default').addClass('card-success');
+          conversation.removeClass('border-dark').addClass('border-success');
         }
         conversation.find('.messages-list').find('ul').append(data['message']);
       }
