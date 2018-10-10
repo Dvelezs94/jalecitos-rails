@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_09_013553) do
+ActiveRecord::Schema.define(version: 2018_10_10_185128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,11 +53,14 @@ ActiveRecord::Schema.define(version: 2018_10_09_013553) do
   end
 
   create_table "packages", force: :cascade do |t|
+    t.integer "type"
     t.string "name"
     t.string "description"
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "gig_id"
+    t.index ["gig_id"], name: "index_packages_on_gig_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -110,6 +113,7 @@ ActiveRecord::Schema.define(version: 2018_10_09_013553) do
   add_foreign_key "gigs", "categories"
   add_foreign_key "gigs", "tags"
   add_foreign_key "gigs", "users"
+  add_foreign_key "packages", "gigs"
   add_foreign_key "payments", "packages"
   add_foreign_key "payments", "users"
   add_foreign_key "reviews", "gigs", column: "gigs_id"

@@ -4,7 +4,7 @@
     <div class="card-body">
       <p class="card-title"><%=gig.name%></p>
       <p class="card-subtitle mb-2 text-muted"><%=gig.location%></p>
-      <p class="card-text"><%=truncate(gig.description, length: 150)%></p>
+      <p class="card-text"><%=truncate(gig.description.html_safe, length: 150)%></p>
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
           <%= link_to status_text_helper(gig), toggle_status_gig_path(gig), class: "btn btn-sm btn-outline-secondary" unless gig.banned? || gig.user_id != current_user.id %>

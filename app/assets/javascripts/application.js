@@ -21,3 +21,5 @@
 //= require bootstrap
 
 //= require gritter
+
+//= require trix

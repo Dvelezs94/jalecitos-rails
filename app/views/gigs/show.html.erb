@@ -9,7 +9,7 @@
     <p class="card-subtitle mb-2 text-muted"><%=@gig.user.first_name if @gig.user_id != current_user.id%></p>
     <small class="text-muted"><%=@gig.location%></small>
     <%= image_tag image_display_helper(@gig.image_url),  class: "card-img-top" %>
-    <p class="card-text"><%=@gig.description%></p>
+    <p class="card-text"><%=@gig.description.html_safe%></p>
     <div class="btn-group">
       <%= link_to status_text_helper(@gig), toggle_status_gig_path(@gig), class: "btn btn-sm btn-outline-secondary" unless @gig.banned? %>
       <%= link_to "Editar", edit_gig_path(@gig), class: "btn btn-sm btn-outline-secondary" if @gig.user_id == current_user.id %>
