@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  # Chat Relations
+  has_many :messages
+  has_many :conversations, foreign_key: :sender_id
+
   ############################################################################################
   ## PeterGate Roles                                                                        ##
   ## The :user role is added by default and shouldn't be included in this list.             ##
