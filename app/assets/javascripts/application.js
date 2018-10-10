@@ -21,6 +21,7 @@
 //= require bootstrap
 
 //= require gritter
+//= require cable
 
 
 // Method for toggle conversations views
