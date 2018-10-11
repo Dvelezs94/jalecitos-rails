@@ -1,7 +1,7 @@
 module SanitizeParams
 
   def string_params
-    str_par = [:name, :description, :location]
+    str_par = [:description]
   end
 
   def sanitized_params

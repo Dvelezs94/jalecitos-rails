@@ -30,7 +30,7 @@ class GigsController < ApplicationController
     @gig = Gig.new(sanitized_params)
 
     if @gig.save
-      redirect_to @gig, notice: 'Gig was successfully created.'
+      redirect_to new_gig_package_path(@gig)
     else
       render :new
     end
@@ -63,9 +63,7 @@ class GigsController < ApplicationController
                                   :description,
                                   :image,
                                   :location,
-                                  :category_id,
-                                  :tag_id,
-                                  :status
+                                  :category_id
                                 )
       gig_params = set_owner(gig_params)
     end

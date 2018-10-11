@@ -7,27 +7,11 @@ module GigsHelper
     end
   end
 
-  def confirm_text_helper
-      if params[:action] == "new"
-        "Crear trabajo"
-     else
-        "Guardar cambios"
-     end
-   end
-
    def status_text_helper gig
      if gig.published?
        "Ocultar"
      else
        "Publicar"
-     end
-   end
-
-   def status_options_helper form
-     if @gig.banned?
-       '<p>This gig is banned<p>'.html_safe
-     else
-       render 'status_options', form: form
      end
    end
 
