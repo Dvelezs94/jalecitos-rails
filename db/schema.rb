@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_181750) do
     t.float "budget"
     t.string "image"
     t.string "location"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_requests_on_category_id"
