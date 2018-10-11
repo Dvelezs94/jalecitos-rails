@@ -1,5 +1,7 @@
 class GigsController < ApplicationController
   layout 'gig'
+  include SanitizeParams
+  include GigStatus
   before_action :set_gig, only: [:show, :edit, :update, :destroy, :toggle_status, :ban_gig]
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status]
   before_action :check_status, only:[:update]
@@ -25,10 +27,10 @@ class GigsController < ApplicationController
 
   # POST /gigs
   def create
-    @gig = Gig.new(params_with_user)
+    @gig = Gig.new(sanitized_params)
 
     if @gig.save
-      redirect_to @gig, notice: 'Gig was successfully created.'
+      redirect_to new_gig_package_path(@gig)
     else
       render :new
     end
@@ -36,7 +38,7 @@ class GigsController < ApplicationController
 
   # PATCH/PUT /gigs/1
   def update
-    if @gig.update(gig_params)
+    if @gig.update(sanitized_params)
       redirect_to @gig, notice: 'Gig was successfully updated.'
     else
       render :edit
@@ -49,26 +51,6 @@ class GigsController < ApplicationController
     redirect_to gigs_url, notice: 'Gig was successfully destroyed.'
   end
 
-  def toggle_status
-    if @gig.banned?
-      redirect_to gigs_path, notice: 'This Gig is banned'
-    end
-    if @gig.draft?
-        @gig.published!
-    else
-         @gig.draft!
-   end
-   redirect_to gigs_path, notice: "Gig status has been updated"
-  end
-
-  def ban_gig
-    if @gig.published? || @gig.draft?
-      @gig.banned!
-    else
-      @gig.draft!
-    end
-    redirect_to root_path, notice: "Gig status has been updated"
-  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_gig
@@ -77,31 +59,23 @@ class GigsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def gig_params
-      params.require(:gig).permit(:name,
+      gig_params = params.require(:gig).permit(:name,
                                   :description,
                                   :image,
                                   :location,
-                                  :user_id,
-                                  :category_id,
-                                  :tag_id,
-                                  :status
+                                  :category_id
                                 )
+      gig_params = set_owner(gig_params)
     end
 
-    def params_with_user
-      params_with_user = gig_params
-      params_with_user['user_id'] = current_user.id
-      params_with_user
+    def set_owner parameters
+      parameters[:user_id] = current_user.id
+      parameters
     end
 
     def check_gig_ownership
       if current_user.id != @gig.user_id
         redirect_to root_path
-      end
-    end
-    def check_status
-      if @gig.banned?
-        redirect_to gigs_path, notice: 'This Gig is banned'
       end
     end
 

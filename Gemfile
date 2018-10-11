@@ -83,3 +83,7 @@ gem 'aws-sdk', '~> 3.0', '>= 3.0.1'
 gem 'feathericon-rails', '~> 1.0'
 # Pagination
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
+#Text editor
+gem 'trix', '~> 0.9.5'
+#Snitize data
+gem 'sanitize', '~> 4.6', '>= 4.6.6'

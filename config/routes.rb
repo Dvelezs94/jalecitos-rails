@@ -4,6 +4,7 @@ Rails.application.routes.draw do
            get :toggle_status
            get :ban_gig, as: 'ban'
       end
+      resources :packages, except: [:destroy,:show,:index]
   end
   resources :conversations do
     member do

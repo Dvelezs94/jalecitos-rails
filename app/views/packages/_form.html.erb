@@ -1,0 +1,40 @@
+<%= form_with(model: package, url: gig_packages_path(params[:gig_id], package), local: true) do |form|%>
+
+
+  <% package.each_with_index do |pack, n| %>
+
+
+    <% if pack.errors.any? %>
+      <%pack.errors.full_messages.each do |error| %>
+        <%= notification_generator_helper error %>
+      <% end %>
+    <% end %>
+
+    <%= fields_for 'packages[]', pack do |pa| %>
+      <h3><%= @types[n] %></h3>  
+      <div class="form-group">
+        <%= pa.label :name %>
+        <%= pa.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= pa.label :description %>
+        <%= pa.text_field :description, class: 'form-control', id: "description#{n}", type: "hidden" %>
+        <trix-editor input="description<%= n %>"></trix-editor>
+      </div>
+
+      <div class="form-group">
+        <%= pa.label :price %>
+        <%= pa.number_field :price, options ={min: 100} %>
+      </div>
+      <% n += 1  %>
+    <% end %>
+
+
+  <% end %>
+  <div class="form-group">
+    <%= form.submit "Guardar y continuar",  class: "btn btn-primary btn-block" %>
+  </div>
+
+
+<% end %>

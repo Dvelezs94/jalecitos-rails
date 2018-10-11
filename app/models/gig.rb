@@ -5,7 +5,10 @@ class Gig < ApplicationRecord
 
   validates_presence_of :name, :description, :location
 
+  has_many :packages, dependent: :destroy 
+
   enum status: { draft: 0, published: 1, banned: 2}
 
   mount_uploader :image, GigUploader
+
 end

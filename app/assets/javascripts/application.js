@@ -21,6 +21,9 @@
 //= require bootstrap
 
 //= require gritter
+
+//= require trix
+
 //= require cable
 
 
@@ -40,3 +43,4 @@
     }
   });
 })();
+
