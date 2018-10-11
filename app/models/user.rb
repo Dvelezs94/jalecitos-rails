@@ -3,6 +3,12 @@ class User < ApplicationRecord
   has_many :messages
   has_many :conversations, foreign_key: :sender_id
 
+  # Request System
+  has_many :requests
+  has_many :offers
+  # Gigs
+  has_many :gigs
+
   ############################################################################################
   ## PeterGate Roles                                                                        ##
   ## The :user role is added by default and shouldn't be included in this list.             ##

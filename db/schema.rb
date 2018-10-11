@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< db/schema.rb
-ActiveRecord::Schema.define(version: 2018_10_10_185128) do
-=======
-ActiveRecord::Schema.define(version: 2018_10_10_170958) do
->>>>>>> db/schema.rb
+ActiveRecord::Schema.define(version: 2018_10_11_181750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +70,19 @@ ActiveRecord::Schema.define(version: 2018_10_10_170958) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "offers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.string "description"
+    t.float "price"
+    t.bigint "request_id"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_id"], name: "index_offers_on_request_id"
+    t.index ["user_id"], name: "index_offers_on_user_id"
+  end
+
   create_table "packages", force: :cascade do |t|
     t.integer "pack_type"
     t.string "name"
@@ -91,8 +100,24 @@ ActiveRecord::Schema.define(version: 2018_10_10_170958) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "package_id"
+    t.bigint "offer_id"
+    t.index ["offer_id"], name: "index_payments_on_offer_id"
     t.index ["package_id"], name: "index_payments_on_package_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.string "description"
+    t.bigint "category_id"
+    t.float "budget"
+    t.string "image"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_requests_on_category_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -135,10 +160,15 @@ ActiveRecord::Schema.define(version: 2018_10_10_170958) do
   add_foreign_key "gigs", "categories"
   add_foreign_key "gigs", "tags"
   add_foreign_key "gigs", "users"
-  add_foreign_key "packages", "gigs"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "offers", "requests"
+  add_foreign_key "offers", "users"
+  add_foreign_key "packages", "gigs"
+  add_foreign_key "payments", "offers"
   add_foreign_key "payments", "packages"
   add_foreign_key "payments", "users"
+  add_foreign_key "requests", "categories"
+  add_foreign_key "requests", "users"
   add_foreign_key "reviews", "gigs", column: "gigs_id"
 end

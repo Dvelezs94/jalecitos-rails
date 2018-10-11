@@ -28,12 +28,13 @@ class PackagesController < ApplicationController
   def update
   end
 
-  # Only allow a trusted parameter "white list" through.
-  def gig_param
-    gig_param = params.require(:gig_id)
-  end
-  def package_params(my_params)
-    my_params.permit(:name, :description, :price )
-  end
+  private
+    # Only allow a trusted parameter "white list" through.
+    def gig_param
+      gig_param = params.require(:gig_id)
+    end
+    def package_params(my_params)
+      my_params.permit(:name, :description, :price )
+    end
 
 end
