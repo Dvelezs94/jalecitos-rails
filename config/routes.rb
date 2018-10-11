@@ -6,7 +6,12 @@ Rails.application.routes.draw do
       end
       resources :packages, except: [:destroy,:show,:index]
   end
-
+  resources :conversations do
+    member do
+      post :close
+    end
+    resources :messages, only: [:create]
+  end
   resources :categories
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   root to: "pages#home"

@@ -3,40 +3,19 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="#">
-                  <span data-feather="home"></span>
-                  Dashboard <span class="sr-only">(current)</span>
-                </a>
+                <%= link_to content_tag("span", " Gigs", class: "nav-link fe fe-app-menu"), root_path %>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file"></span>
-                  Gigs
-                </a>
+                <%= link_to content_tag("span", " Categories", class: "nav-link fe fe-list-bullet"), root_path %>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="shopping-cart"></span>
-                  Categories
-                </a>
+                <%= link_to content_tag("span", " Users", class: "nav-link fe fe-user"), root_path %>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
-                  Customers
-                </a>
+                <%= link_to content_tag("span", " Reports", class: "nav-link fe fe-file"), root_path %>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="bar-chart-2"></span>
-                  Reports
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="layers"></span>
-                  Integrations
-                </a>
+                <%= link_to content_tag("span", " Integrations", class: "nav-link fe fe-layer"), root_path %>
               </li>
             </ul>
           </div>
@@ -82,11 +61,23 @@
             <%= paginate @categories, param_name: :category_page %>
           </div>
         </main>
-      </div>
-    </div>
 
-    <!-- Icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-      feather.replace()
-    </script>
+        <main role="main" class="col-md-4">
+            <h2>Users</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-sm">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <%= render partial: 'users/user_dashboard', collection: @users %>
+                </tbody>
+              </table>
+              <%= paginate @users, param_name: :user_page %>
+            </div>
+          </main>
+      </div>
