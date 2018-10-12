@@ -22,6 +22,7 @@ end
         gig.description = Faker::Lorem.paragraphs
         gig.location = Faker::Address.state
         gig.category_id = Faker::Number.between(0, 19)
+        gig.status = Faker::Number.between(0, 2)
       end
     end
     10.times do
