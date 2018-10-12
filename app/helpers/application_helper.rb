@@ -37,4 +37,12 @@ module ApplicationHelper
       (javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places&callback=activatePlacesSearch", 'data-turbolinks-track': 'reload')
      end
   end
+
+  def image_display_helper image
+    if image.nil?
+      "https://picsum.photos/600/400?image=#{Faker::Number.between(1, 500)}"
+    else
+      image
+    end
+  end
 end

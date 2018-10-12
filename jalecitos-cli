@@ -10,6 +10,7 @@ function build() {
     sudo rm -rf tmp/db/
     echo "done."
   fi
+  docker-compose down
   docker-compose up -d --build --force-recreate
   if [ "$DBCREATE" == "y" ]
   then
