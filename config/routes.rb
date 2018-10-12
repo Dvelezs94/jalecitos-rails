@@ -12,6 +12,13 @@ Rails.application.routes.draw do
     end
     resources :messages, only: [:create]
   end
+
+  resources :requests do
+    collection do
+      get 'my_requests', as: 'my'
+    end
+  end
+  resources :offers
   resources :categories
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   root to: "pages#home"

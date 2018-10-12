@@ -32,7 +32,7 @@ module ApplicationHelper
   end
 
   def google_scripts_helper
-    if params[:controller] == 'gigs' && ( params[:action] == 'new' || params[:action] == 'edit' )
+    if (params[:controller] == 'gigs' || params[:controller] == 'requests') && ( params[:action] == 'new' || params[:action] == 'edit' )
       (javascript_include_tag 'google_functions', 'data-turbolinks-track': 'reload')+
       (javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places&callback=activatePlacesSearch", 'data-turbolinks-track': 'reload')
      end
