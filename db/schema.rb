@@ -72,11 +72,10 @@ ActiveRecord::Schema.define(version: 2018_10_11_181750) do
 
   create_table "offers", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "name"
     t.string "description"
     t.float "price"
     t.bigint "request_id"
-    t.string "image"
+    t.integer "hours"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["request_id"], name: "index_offers_on_request_id"

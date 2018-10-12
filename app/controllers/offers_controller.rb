@@ -1,18 +1,25 @@
 class OffersController < ApplicationController
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
-  access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
+  access all: [:show], user: :all
+  before_action :check_offer_ownership, only:[:edit, :update, :destroy]
+  include OffersHelper
 
   # GET /offers
   def index
-    @offers = Offer.all
+    redirect_to root_path
   end
 
   # GET /offers/1
   def show
+    redirect_to request_path(params[:request_id])
   end
 
   # GET /offers/new
   def new
+    @request = Request.find(params[:request_id])
+    if has_offered(current_user.id)
+      redirect_to request_path(params[:request_id]), notice: 'You already offered on this request'
+    end
     @offer = Offer.new
   end
 
@@ -25,7 +32,7 @@ class OffersController < ApplicationController
     @offer = Offer.new(offer_params)
 
     if @offer.save
-      redirect_to @offer, notice: 'Offer was successfully created.'
+      redirect_to request_path(params[:request_id]), notice: 'Offer was successfully created.'
     else
       render :new
     end
@@ -34,7 +41,7 @@ class OffersController < ApplicationController
   # PATCH/PUT /offers/1
   def update
     if @offer.update(offer_params)
-      redirect_to @offer, notice: 'Offer was successfully updated.'
+      redirect_to request_path(params[:request_id]), notice: 'Offer was successfully updated.'
     else
       render :edit
     end
@@ -43,7 +50,7 @@ class OffersController < ApplicationController
   # DELETE /offers/1
   def destroy
     @offer.destroy
-    redirect_to offers_url, notice: 'Offer was successfully destroyed.'
+    redirect_to request_path(params[:request_id]), notice: 'Offer was successfully destroyed.'
   end
 
   private
@@ -52,8 +59,23 @@ class OffersController < ApplicationController
       @offer = Offer.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def offer_params
-      params[:offer]
+      offer_params = params.require(:offer).permit(:description,
+                                                   :price,
+                                                   :hours
+                                                  )
+      offer_params = set_owner(offer_params)
+    end
+
+    def set_owner parameters
+      parameters[:request_id] = params[:request_id]
+      parameters[:user_id] = current_user.id
+      parameters
+    end
+
+    def check_offer_ownership
+      if current_user.id != @offer.user_id
+        redirect_to root_path
+      end
     end
 end

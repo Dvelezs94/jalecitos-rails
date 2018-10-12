@@ -19,7 +19,7 @@ end
     10.times do
       user.gigs.new do |gig|
         gig.name = Faker::Hacker.say_something_smart
-        gig.description = Faker::Lorem.paragraphs
+        gig.description = Faker::Lorem.paragraph(30, true)
         gig.location = Faker::Address.state
         gig.category_id = Faker::Number.between(0, 19)
         gig.status = Faker::Number.between(0, 2)
