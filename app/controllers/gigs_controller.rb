@@ -14,6 +14,7 @@ class GigsController < ApplicationController
 
   # GET /gigs/1
   def show
+    @packages = Package.where(gig_id: @gig).order(id: :asc)
   end
 
   # GET /gigs/new

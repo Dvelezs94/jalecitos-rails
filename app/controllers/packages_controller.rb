@@ -32,7 +32,7 @@ class PackagesController < ApplicationController
 
 
   def update_packages
-    records = get_pack_ids
+    records = get_pack_records
     records.each do |record, pack_type|
       pack = params[:packages]["#{record.id}"]
 
@@ -63,7 +63,7 @@ class PackagesController < ApplicationController
     end
   end
 
-  def get_pack_ids
-    Package.where(gig_id: @gig).order(id: :asc).to_a
+  def get_pack_records
+    Package.where(gig_id: @gig).order(id: :asc)
   end
 end
