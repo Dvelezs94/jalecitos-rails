@@ -1,7 +1,6 @@
 function generate_error(form_number) {
     for(var i = 0; i < 3; i++) {
       if ($(".form_fields_"+form_number)[i].value == ""){
-        console.log("error")
         $(".error_span_"+ (form_number*3+i+1) ).html("Por favor, llene este campo");
         break;
       }
