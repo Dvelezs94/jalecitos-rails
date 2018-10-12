@@ -39,7 +39,8 @@ class GigsController < ApplicationController
   # PATCH/PUT /gigs/1
   def update
     if @gig.update(sanitized_params(gig_params))
-      redirect_to @gig, notice: 'Gig was successfully updated.'
+      @package = Package.find_by_gig_id(@gig)
+      redirect_to edit_gig_packages_path( @gig )
     else
       render :edit
     end

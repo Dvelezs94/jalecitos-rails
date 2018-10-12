@@ -2,7 +2,7 @@
 
 </div>
 
-<%= form_with(model: package, url: gig_packages_path(params[:gig_id], package), local: true, :html => { :id => "packages_form" }) do |form|%>
+<%= form_with(model: package, url: package_form_url_helper, local: true, :html => { :id => "packages_form" }) do |form|%>
 
   <div class="row">
 
