@@ -27,7 +27,7 @@ class GigsController < ApplicationController
 
   # POST /gigs
   def create
-    @gig = Gig.new(sanitized_params)
+    @gig = Gig.new(sanitized_params(gig_params))
 
     if @gig.save
       redirect_to new_gig_package_path(@gig)
@@ -38,7 +38,7 @@ class GigsController < ApplicationController
 
   # PATCH/PUT /gigs/1
   def update
-    if @gig.update(sanitized_params)
+    if @gig.update(sanitized_params(gig_params))
       redirect_to @gig, notice: 'Gig was successfully updated.'
     else
       render :edit

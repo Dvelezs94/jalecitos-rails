@@ -1,4 +1,5 @@
 class PackagesController < ApplicationController
+  include SanitizeParams
   before_action :set_gig, only: [:new, :create, :edit, :update]
   before_action :check_package_ownership, only: [:new, :create, :edit, :update]
   access user: :all
@@ -14,7 +15,7 @@ class PackagesController < ApplicationController
   def create
     if params[:packages].count == 3
       params[:packages].each_with_index do |pack, pack_type|
-          pack = package_params(pack)
+          pack = sanitized_params( package_params(pack) )
           pack[:pack_type] = pack_type
           pack[:gig_id] = gig_param
           @pack = Package.new(pack)
