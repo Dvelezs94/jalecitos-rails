@@ -32,13 +32,9 @@ class PackagesController < ApplicationController
 
 
   def update_packages
-    records = get_pack_records
-    records.each do |record, pack_type|
+    get_pack_records.each do |record|
       pack = params[:packages]["#{record.id}"]
-
       pack = sanitized_params( package_params(pack) )
-      pack[:pack_type] = pack_type
-      pack[:gig_id] = gig_param
       record.update(pack)
     end
     redirect_to gigs_path, notice: 'Tu Gig se ha actualizado exitosamente'
@@ -64,6 +60,6 @@ class PackagesController < ApplicationController
   end
 
   def get_pack_records
-    Package.where(gig_id: @gig).order(id: :asc)
+    Package.where(gig_id: @gig).limit(3).order(id: :asc)
   end
 end
