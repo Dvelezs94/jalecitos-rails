@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-<div class="card" style="width: 70%; padding: 10px; margin: 20px;">
+<div class="card" style="width: 70%; padding: 10px; margin: 20px auto;">
   <div class="card-body">
     <h5 class="card-title"><%= @request.name %></h5>
     <p class="card-text"><%= @request.description %></p>
@@ -7,11 +6,14 @@
     <p><small class="text-muted"><%=@request.location%></small></p>
     <p><small class="text-muted">Publicado hace <%= distance_of_time_in_words(@request.created_at, Time.now) %></small></p>
     <% if current_user.id == @request.id %>
-    <hr>
-    <%= link_to 'Edit', edit_request_path(@request) %> |
-    <%= link_to 'Back', requests_path %>
+     <hr>
+     <%= link_to 'Edit', edit_request_path(@request) %> |
+     <%= link_to 'Back', requests_path %>
+    <% elsif has_offered(current_user.id)  %>
+     <p class="text-muted">Tu oferta esta postulada</p>
     <% else %>
-    <%= link_to 'Postularse', offer_path, class: "btn btn-primary" %>
+     <%= link_to 'Postularse', new_request_offer_path(params[:id]), class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
+<%= render @request.offers %>

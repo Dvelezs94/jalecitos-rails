@@ -1,7 +1,7 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: [:show, :edit, :update, :destroy]
   access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
-  before_action :check_request_ownership, only:[:edit, :update, :destroy, :toggle_status]
+  before_action :check_request_ownership, only:[:edit, :update, :destroy]
 
   # GET /requests
   def index

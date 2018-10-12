@@ -1,17 +1,29 @@
-<%= form_with(model: offer, local: true) do |form| %>
+<%= form_with(model: offer, url: offer_form_url_helper(params[:request_id], offer), local: true) do |form| %>
   <% if offer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(offer.errors.count, "error") %> prohibited this offer from being saved:</h2>
-
-      <ul>
-      <% offer.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+  <%offer.errors.full_messages.each do |error| %>
+    <%= notification_generator_helper error %>
+  <% end %>
   <% end %>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.label :description %>
+
+    <%= form.text_field :description, class: 'form-control', id: "description", type: "hidden" %>
+    <trix-editor input="description" placeholder="Por favor describe por que serias la mejor opcion para este proyecto"></trix-editor>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :hours %>
+    <%= form.number_field :hours %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit "Guardar y continuar",  class: "btn btn-primary btn-block" %>
   </div>
 <% end %>
