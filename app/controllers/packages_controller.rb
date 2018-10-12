@@ -9,8 +9,6 @@ class PackagesController < ApplicationController
     3.times do
       @package << Package.new
     end
-    puts "x" *500
-    puts params.inspect
   end
 
   def create
