@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2018_10_11_181750) do
 
   # These are extensions that must be enabled in order to support this database
@@ -163,6 +164,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_181750) do
   add_foreign_key "gigs", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "packages", "gigs"
   add_foreign_key "offers", "requests"
   add_foreign_key "offers", "users"
   add_foreign_key "packages", "gigs"
