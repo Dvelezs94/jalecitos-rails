@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< db/schema.rb
 ActiveRecord::Schema.define(version: 2018_10_10_185128) do
-=======
-ActiveRecord::Schema.define(version: 2018_10_10_170958) do
->>>>>>> db/schema.rb
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,9 +131,9 @@ ActiveRecord::Schema.define(version: 2018_10_10_170958) do
   add_foreign_key "gigs", "categories"
   add_foreign_key "gigs", "tags"
   add_foreign_key "gigs", "users"
-  add_foreign_key "packages", "gigs"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "packages", "gigs"
   add_foreign_key "payments", "packages"
   add_foreign_key "payments", "users"
   add_foreign_key "reviews", "gigs", column: "gigs_id"

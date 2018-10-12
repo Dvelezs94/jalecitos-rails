@@ -1,40 +1,47 @@
-<%= form_with(model: package, url: gig_packages_path(params[:gig_id], package), local: true) do |form|%>
+<div class="error-messages">
+  <div class="error-details">
 
-
-  <% package.each_with_index do |pack, n| %>
-
-
-    <% if pack.errors.any? %>
-      <%pack.errors.full_messages.each do |error| %>
-        <%= notification_generator_helper error %>
-      <% end %>
-    <% end %>
-
-    <%= fields_for 'packages[]', pack do |pa| %>
-      <h3><%= @types[n] %></h3>  
-      <div class="form-group">
-        <%= pa.label :name %>
-        <%= pa.text_field :name, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= pa.label :description %>
-        <%= pa.text_field :description, class: 'form-control', id: "description#{n}", type: "hidden" %>
-        <trix-editor input="description<%= n %>"></trix-editor>
-      </div>
-
-      <div class="form-group">
-        <%= pa.label :price %>
-        <%= pa.number_field :price, options ={min: 100} %>
-      </div>
-      <% n += 1  %>
-    <% end %>
-
-
-  <% end %>
-  <div class="form-group">
-    <%= form.submit "Guardar y continuar",  class: "btn btn-primary btn-block" %>
   </div>
+</div>
 
+<%= form_with(model: package, url: gig_packages_path(params[:gig_id], package), local: true, :html => { :id => "packages_form" }) do |form|%>
 
+  <div class="row">
+
+    <% package.each_with_index do |pack, n| %>
+      <div class="form-number-<%= n %> col-md-4">
+
+        <% if pack.errors.any? %>
+          <%pack.errors.full_messages.each do |error| %>
+            <%= notification_generator_helper error %>
+          <% end %>
+        <% end %>
+
+        <%= fields_for 'packages[]', pack do |pa| %>
+          <h3><%= @types[n] %></h3>
+          <div class="form-group form-group-<%= n %>">
+            <%= pa.label :name %>
+            <%= pa.text_field :name, class: "form-control form_fields_#{n}" %>
+          </div>
+
+          <div class="form-group form-group-<%= n %>">
+            <%= pa.label :description %>
+            <%= pa.text_field :description, class: "form-control", id: "description#{n}", type: "hidden" %>
+            <trix-editor input="description<%= n %>" class="form_fields_<%= n %>"></trix-editor>
+          </div>
+
+          <div class="form-group form-group-<%= n %>">
+            <%= pa.label :price %>
+            <%= pa.number_field :price, options ={min: 100, class: "form_fields_#{n}"} %>
+          </div>
+          <% n += 1  %>
+        <% end %>
+
+      </div>
+    <% end %>
+
+    <div class="form-group submit-button">
+      <%= form.submit "Guardar y continuar",  class: "btn btn-primary btn-block" %>
+    </div>
+  </div>
 <% end %>

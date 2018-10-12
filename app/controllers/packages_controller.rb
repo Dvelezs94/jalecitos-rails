@@ -1,10 +1,16 @@
 class PackagesController < ApplicationController
+  before_action :set_gig, only: [:new, :create, :edit, :update]
+  before_action :check_package_ownership, only: [:new, :create, :edit, :update]
+  access user: :all
+
   def new
     @types =['Básico', 'Estándar' ,'Premium']
     @package =[]
     3.times do
       @package << Package.new
     end
+    puts "x" *500
+    puts params.inspect
   end
 
   def create
@@ -14,11 +20,11 @@ class PackagesController < ApplicationController
           pack[:pack_type] = pack_type
           pack[:gig_id] = gig_param
           @pack = Package.new(pack)
-          @pack.save!
+          @pack.save
       end
     end
 
-    redirect_to gigs_path, notice: 'Gig was successfully created.'
+    redirect_to gigs_path, notice: 'Tu Gig se ha creado exitosamente'
 
   end
 
@@ -36,4 +42,13 @@ class PackagesController < ApplicationController
     my_params.permit(:name, :description, :price )
   end
 
+  def set_gig
+    @gig = Gig.find(params[:gig_id])
+  end
+
+  def check_package_ownership
+    if ! current_user || current_user.id != @gig.user_id
+      redirect_to root_path
+    end
+  end
 end
