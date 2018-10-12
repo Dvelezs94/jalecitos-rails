@@ -1,6 +1,7 @@
 class PackagesController < ApplicationController
-  before_action :set_gig, only: [:new, :create, :edit, :update]
-  before_action :check_package_ownership, only: [:new, :create, :edit, :update]
+  include SanitizeParams
+  before_action :set_gig, only: [:new, :create, :edit_packages, :update_packages]
+  before_action :check_package_ownership, only: [:new, :create, :edit_packages, :update_packages]
   access user: :all
 
   def new
@@ -14,22 +15,29 @@ class PackagesController < ApplicationController
   def create
     if params[:packages].count == 3
       params[:packages].each_with_index do |pack, pack_type|
-          pack = package_params(pack)
+          pack = sanitized_params( package_params(pack) )
           pack[:pack_type] = pack_type
           pack[:gig_id] = gig_param
           @pack = Package.new(pack)
           @pack.save
       end
     end
-
     redirect_to gigs_path, notice: 'Tu Gig se ha creado exitosamente'
-
   end
 
-  def edit
+  def edit_packages
+    @types =['Básico', 'Estándar' ,'Premium']
+    @package = Package.where(gig_id: params[:gig_id]).to_a
   end
 
-  def update
+
+  def update_packages
+    get_pack_records.each do |record|
+      pack = params[:packages]["#{record.id}"]
+      pack = sanitized_params( package_params(pack) )
+      record.update(pack)
+    end
+    redirect_to gigs_path, notice: 'Tu Gig se ha actualizado exitosamente'
   end
 
   private
@@ -49,5 +57,9 @@ class PackagesController < ApplicationController
     if ! current_user || current_user.id != @gig.user_id
       redirect_to root_path
     end
+  end
+
+  def get_pack_records
+    Package.where(gig_id: @gig).limit(3).order(id: :asc)
   end
 end

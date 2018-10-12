@@ -4,7 +4,12 @@ Rails.application.routes.draw do
            get :toggle_status
            get :ban_gig, as: 'ban'
       end
-      resources :packages, except: [:destroy,:show,:index]
+      resources :packages, except: [:destroy,:show,:index, :edit, :update] do
+        collection do
+          get 'edit_packages', to: 'packages#edit_packages', as: 'edit'
+          patch 'update_packages', to: 'packages#update_packages', as: 'update'
+        end
+      end
   end
   resources :conversations do
     member do

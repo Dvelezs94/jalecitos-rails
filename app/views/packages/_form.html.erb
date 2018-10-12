@@ -2,7 +2,7 @@
 
 </div>
 
-<%= form_with(model: package, url: gig_packages_path(params[:gig_id], package), local: true, :html => { :id => "packages_form" }) do |form|%>
+<%= form_with(model: package, url: package_form_url_helper, local: true, :html => { :id => "packages_form" }) do |form|%>
 
   <div class="row">
 
@@ -20,17 +20,20 @@
           <div class="form-group form-group-<%= n %>">
             <%= pa.label :name %>
             <%= pa.text_field :name, class: "form-control form_fields_#{n}" %>
+            <span class="error error_span_<%= 3*n+1 %>"></span>
           </div>
 
           <div class="form-group form-group-<%= n %>">
             <%= pa.label :description %>
             <%= pa.text_field :description, class: "form-control", id: "description#{n}", type: "hidden" %>
             <trix-editor input="description<%= n %>" class="form_fields_<%= n %>"></trix-editor>
+            <span class="error error_span_<%= 3*n+2 %>"></span>
           </div>
 
           <div class="form-group form-group-<%= n %>">
             <%= pa.label :price %>
             <%= pa.number_field :price, options ={min: 100, class: "form_fields_#{n}"} %>
+            <span class="error error_span_<%= 3*n+3 %>"></span>
           </div>
           <% n += 1  %>
         <% end %>
