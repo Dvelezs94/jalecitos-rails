@@ -12,26 +12,26 @@
 end
 
 20.times do
-  User.create do |user|
+  User.create! do |user|
     user.email = Faker::Internet.email
     user.role = "user"
     user.password = "123456"
-    10.times do
-      user.gigs.new do |gig|
-        gig.name = Faker::Hacker.say_something_smart
-        gig.description = Faker::Lorem.paragraph(30, true)
-        gig.location = Faker::Address.state
-        gig.category_id = Faker::Number.between(0, 19)
-        gig.status = Faker::Number.between(0, 2)
-      end
-    end
     10.times do
       user.requests.new do |request|
         request.name = Faker::Hacker.say_something_smart
         request.description = Faker::Lorem.paragraph(30, true)
         request.location = Faker::Address.state
-        request.category_id = 1
+        request.category_id = Faker::Number.between(1, 10)
         request.budget = Faker::Number.between(100, 5000)
+      end
+    end
+    10.times do
+      user.gigs.new do |gig|
+        gig.name = Faker::Hacker.say_something_smart
+        gig.description = Faker::Lorem.paragraph(30, true)
+        gig.location = Faker::Address.state
+        gig.category_id = Faker::Number.between(1, 10)
+        gig.status = Faker::Number.between(0, 2)
       end
     end
     puts user.email
