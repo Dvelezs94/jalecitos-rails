@@ -27,7 +27,10 @@ class PackagesController < ApplicationController
 
   def edit_packages
     @types =['Básico', 'Estándar' ,'Premium']
-    @package = Package.where(gig_id: params[:gig_id]).to_a
+    @package = Package.where(gig_id: @gig)
+    if @package.count == 0
+      redirect_to new_gig_package_path(@gig)
+    end
   end
 
 

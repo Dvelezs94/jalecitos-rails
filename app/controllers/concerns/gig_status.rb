@@ -1,15 +1,14 @@
 module GigStatus
 
   def toggle_status
-    if @gig.banned?
-      redirect_to gigs_path, notice: 'This Gig is banned'
-    end
-    if @gig.draft?
-        @gig.published!
+    check_if_banned(@gig)
+    check_packages_count(@gig)
+    if flash[:error]
+      redirect_to gigs_path
     else
-         @gig.draft!
-   end
-   redirect_to gigs_path, notice: "Gig status has been updated"
+      change_status(@gig)
+      redirect_to gigs_path, notice: "Se ha cambiado el estado del Gig exitosamente"
+    end
   end
 
   def ban_gig
@@ -24,6 +23,25 @@ module GigStatus
   def check_status
     if @gig.banned?
       redirect_to gigs_path, notice: 'This Gig is banned'
+    end
+  end
+
+  def check_packages_count gig
+    if gig.packages.count == 0
+      flash[:error]='Este Gig no contiene ningún paquete'
+    end
+  end
+  def change_status gig
+    if gig.draft?
+        gig.published!
+    else
+        gig.draft!
+    end
+  end
+
+  def check_if_banned gig
+    if gig.banned?
+      flash[:error]='Este Gig está baneado'
     end
   end
 
