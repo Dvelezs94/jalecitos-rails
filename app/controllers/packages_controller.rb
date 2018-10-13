@@ -61,24 +61,19 @@ class PackagesController < ApplicationController
   end
 
   def create_redirect
-    if @packages.any?
-      redirect_to edit_gig_packages_path(@gig)
-    end
+    (@packages.any?) ? redirect_to( edit_gig_packages_path(@gig) ) : nil
   end
 
   def update_redirect
-    if @packages.none?
-      redirect_to new_gig_package_path(@gig)
-    end
+    (@packages.none?) ? redirect_to( new_gig_package_path(@gig) ) : nil
   end
+
   def define_pack_names
     @types =['Básico', 'Estándar' ,'Premium']
   end
 
 
   def check_gig_ownership
-    if ! current_user || current_user.id != @gig.user_id
-      redirect_to root_path
-    end
+    (current_user.nil? || current_user.id != @gig.user_id) ? redirect_to(root_path) : nil
   end
 end

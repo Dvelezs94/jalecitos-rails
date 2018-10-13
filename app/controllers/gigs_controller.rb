@@ -5,7 +5,7 @@ class GigsController < ApplicationController
   before_action :set_gig, only: [:edit, :update, :destroy, :toggle_status, :ban_gig]
   before_action :set_gig_with_ref, only: :show
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status]
-  access user: {except: [:ban_gig]}, admin: [:ban_gig]
+  access user: { except: [:ban_gig] }, admin: [:ban_gig]
 
   # GET /gigs
   def index
@@ -80,9 +80,7 @@ class GigsController < ApplicationController
     end
 
     def check_gig_ownership
-      if current_user.id != @gig.user_id
-        redirect_to root_path
-      end
+      (current_user.nil? || current_user.id != @gig.user_id) ? redirect_to(root_path) : nil
     end
 
 end
