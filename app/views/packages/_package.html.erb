@@ -1,4 +1,4 @@
-<% if show==true && package.name != "" && package.description != "" && package.price != nil%>
+<% if @show_packages == true  && package.name != "" && package.description != "" && package.price != nil%>
   <div class="col-md-4">
     <div class="card mb-4 box-shadow">
       <div class="card-body">
@@ -11,5 +11,5 @@
     </div>
   </div>
 <% else %>
-  <% show = false %>
+  <% @show_packages= false %>
 <% end  %>

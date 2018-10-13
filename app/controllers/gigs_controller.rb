@@ -2,7 +2,8 @@ class GigsController < ApplicationController
   layout 'gig'
   include SanitizeParams
   include GigStatus
-  before_action :set_gig, only: [:show, :edit, :update, :destroy, :toggle_status, :ban_gig]
+  before_action :set_gig, only: [:edit, :update, :destroy, :toggle_status, :ban_gig]
+  before_action :set_gig_with_ref, only: :show
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status]
   before_action :check_status, only:[:update]
   access user: {except: [:ban_gig]}, admin: [:ban_gig]
@@ -14,7 +15,7 @@ class GigsController < ApplicationController
 
   # GET /gigs/1
   def show
-    @packages = Package.where(gig_id: @gig).order(id: :asc)
+    @show_packages = true
   end
 
   # GET /gigs/new
@@ -57,6 +58,10 @@ class GigsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_gig
       @gig = Gig.find(params[:id])
+    end
+
+    def set_gig_with_ref
+      @gig = Gig.includes(:packages).find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
