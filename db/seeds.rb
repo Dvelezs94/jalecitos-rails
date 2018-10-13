@@ -34,6 +34,7 @@ end
         request.budget = Faker::Number.between(100, 5000)
       end
     end
+    puts user.email
   end
 end
 
