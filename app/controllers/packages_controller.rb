@@ -1,14 +1,17 @@
 class PackagesController < ApplicationController
   include SanitizeParams
   before_action :set_gig, only: [:new, :create, :edit_packages, :update_packages]
-  before_action :check_package_ownership, only: [:new, :create, :edit_packages, :update_packages]
+  before_action :check_gig_ownership, only: [:new, :create, :edit_packages, :update_packages]
+  before_action :set_packages, only: [:new, :edit_packages, :create,:update_packages]
+  before_action :create_redirect, only: [:new, :create]
+  before_action :update_redirect, only: [:edit_packages, :update_packages]
   access user: :all
 
   def new
-    @types =['Básico', 'Estándar' ,'Premium']
-    @package =[]
+    define_pack_names
+    @new_packages =[]
     3.times do
-      @package << Package.new
+      @new_packages << Package.new
     end
   end
 
@@ -26,16 +29,12 @@ class PackagesController < ApplicationController
   end
 
   def edit_packages
-    @types =['Básico', 'Estándar' ,'Premium']
-    @package = Package.where(gig_id: @gig)
-    if @package.count == 0
-      redirect_to new_gig_package_path(@gig)
-    end
+    define_pack_names
   end
 
 
   def update_packages
-    get_pack_records.each do |record|
+    @packages.each do |record|
       pack = params[:packages]["#{record.id}"]
       pack = sanitized_params( package_params(pack) )
       record.update(pack)
@@ -48,6 +47,7 @@ class PackagesController < ApplicationController
     def gig_param
       gig_param = params.require(:gig_id)
     end
+
     def package_params(my_params)
       my_params.permit(:name, :description, :price )
     end
@@ -56,13 +56,29 @@ class PackagesController < ApplicationController
     @gig = Gig.find(params[:gig_id])
   end
 
-  def check_package_ownership
-    if ! current_user || current_user.id != @gig.user_id
-      redirect_to root_path
+  def set_packages
+    @packages = Package.where(gig_id: @gig).limit(3).order(id: :asc)
+  end
+
+  def create_redirect
+    if @packages.any?
+      redirect_to edit_gig_packages_path(@gig)
     end
   end
 
-  def get_pack_records
-    Package.where(gig_id: @gig).limit(3).order(id: :asc)
+  def update_redirect
+    if @packages.none?
+      redirect_to new_gig_package_path(@gig)
+    end
+  end
+  def define_pack_names
+    @types =['Básico', 'Estándar' ,'Premium']
+  end
+
+
+  def check_gig_ownership
+    if ! current_user || current_user.id != @gig.user_id
+      redirect_to root_path
+    end
   end
 end

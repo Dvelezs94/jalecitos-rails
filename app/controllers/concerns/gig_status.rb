@@ -19,10 +19,10 @@ module GigStatus
     end
     redirect_to root_path, notice: "Gig status has been updated"
   end
-
+  private
   def check_status
     if @gig.banned?
-      redirect_to gigs_path, notice: 'This Gig is banned'
+      redirect_to gigs_path, notice: 'Este Gig está baneado'
     end
   end
 

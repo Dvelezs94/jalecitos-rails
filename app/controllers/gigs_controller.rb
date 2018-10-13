@@ -5,7 +5,6 @@ class GigsController < ApplicationController
   before_action :set_gig, only: [:edit, :update, :destroy, :toggle_status, :ban_gig]
   before_action :set_gig_with_ref, only: :show
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status]
-  before_action :check_status, only:[:update]
   access user: {except: [:ban_gig]}, admin: [:ban_gig]
 
   # GET /gigs
