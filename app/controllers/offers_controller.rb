@@ -1,4 +1,5 @@
 class OffersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
   access all: [:show], user: :all
   before_action :check_offer_ownership, only:[:edit, :update, :destroy]

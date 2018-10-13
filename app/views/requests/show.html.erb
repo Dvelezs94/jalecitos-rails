@@ -2,10 +2,10 @@
   <div class="card-body">
     <h5 class="card-title"><%= @request.name %></h5>
     <p class="card-text"><%= @request.description %></p>
-    <p class="card-text">Presupuesto: $<%= @request.budget.to_i %> MXN</p>
+    <p class="card-text">Presupuesto: <%= number_to_currency(@request.budget.to_i) %> MXN</p>
     <p><small class="text-muted"><%=@request.location%></small></p>
     <p><small class="text-muted">Publicado hace <%= distance_of_time_in_words(@request.created_at, Time.now) %></small></p>
-    <% if current_user.id == @request.id %>
+    <% if current_user.id == @request.user_id %>
      <hr>
      <%= link_to 'Edit', edit_request_path(@request) %> |
      <%= link_to 'Back', requests_path %>
