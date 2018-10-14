@@ -1,4 +1,5 @@
 class RequestsController < ApplicationController
+  layout 'request'
   before_action :authenticate_user!
   before_action :set_request, only: [:show, :edit, :update, :destroy]
   access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all

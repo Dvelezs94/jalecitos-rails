@@ -9,9 +9,18 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 # Precompile additional assets.
+################js
 Rails.application.config.assets.precompile += %w( google_functions.js )
 
-Rails.application.config.assets.precompile += %w( gig.css )
+Rails.application.config.assets.precompile += %w( gig.js )
+
+Rails.application.config.assets.precompile += %w( request.js )
+###################css
+Rails.application.config.assets.precompile += %w( gig.scss )
+
+Rails.application.config.assets.precompile += %w( page-styles.scss )
+
+Rails.application.config.assets.precompile += %w( request.scss )
 
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.

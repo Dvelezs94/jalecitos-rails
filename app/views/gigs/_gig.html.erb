@@ -1,6 +1,6 @@
 <div class="col-md-4">
   <div class="card mb-4 box-shadow">
-    <%= image_tag image_display_helper(gig.image_url),  class: "card-img-top", :size => '600x400' %>
+    <%= image_tag image_display_helper(gig.image_url),  class: "card-img-top", style:"background-size: cover;" %>
     <div class="card-body">
       <p class="card-title"><%=gig.name%></p>
       <p class="card-subtitle mb-2 text-muted"><%=gig.location%></p>

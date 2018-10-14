@@ -6,8 +6,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag  'request', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'request', 'data-turbolinks-track': 'reload' %>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,23 +16,19 @@
 
     <title>Jalecitos</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
+    <%= favicon_link_tag asset_path('favicon.ico') %>
 
   </head>
 
   <body>
     <%= notification_helper %>
-    <!-- Navigation -->
 
-   <nav class="navbar navbar-light bg-light static-top navbar-expand-lg">
-      <div class="container">
-        <a class="navbar-brand" href="<%= root_path %>">Jalecitos</a>
-        <ul class="nav navbar-right">
-          <%= nav_links_helper %>
-        </ul>
-      </div>
-    </nav>
+    <%= render 'shared/main_nav_bar' %>
+
     <%= yield %>
   </body>
+
+  <%= google_scripts_helper %>
 
 <footer class="footer bg-light">
     <div class="container">

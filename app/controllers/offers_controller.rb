@@ -1,4 +1,5 @@
 class OffersController < ApplicationController
+  layout 'request'
   before_action :authenticate_user!
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
   access all: [:show], user: :all
