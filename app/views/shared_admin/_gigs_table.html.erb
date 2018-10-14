@@ -1,0 +1,22 @@
+<div class="col-md-8">
+  <h2>Gigs</h2>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Author</th>
+          <th>Image</th>
+          <th>Date</th>
+          <th>Balance</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'gigs/gig_dashboard', collection: @gigs %>
+      </tbody>
+    </table>
+    <%= paginate @gigs, param_name: :gig_page %>
+  </div>
+</div>

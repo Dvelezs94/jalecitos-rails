@@ -1,16 +1,15 @@
 class PagesController < ApplicationController
+  before_action :admin_redirect, only: :home
   def home
-    # Info for admin Dashboard
-    if current_user && current_user.has_role?(:admin)
-      @gigs = Gig.order(status: :desc).page(params[:gig_page]).per(25)
-      @categories =  Category.order(:name).page(params[:category_page]).per(10)
-      @users =  User.order(:name).page(params[:user_page]).per(25)
-    elsif current_user && current_user.has_role?(:user)
+    if current_user && current_user.has_role?(:user)
       @gigs = Gig.where(status: "published").where.not(user_id: current_user.id)
     end
   end
 
-  def project
+  private
 
+  def admin_redirect
+    (current_user && current_user.has_role?(:admin)) ? redirect_to(:controller => 'admins', :action => 'dashboard') : nil
   end
+
 end

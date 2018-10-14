@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'admins/dashboard'
   resources :gigs do
       member do
            get :toggle_status
