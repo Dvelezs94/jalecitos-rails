@@ -10,10 +10,8 @@ module ApplicationHelper
     end
   end
 
-  def hompepage_content_helper
-     if has_role?(:admin)
-       render 'shared_admin/admin_dashboard'
-     elsif  has_role?(:user)
+  def homepage_content_helper
+     if  has_role?(:user)
        render 'shared_user/interesting_gigs'
      else
        render 'shared_guest/guest_page'
