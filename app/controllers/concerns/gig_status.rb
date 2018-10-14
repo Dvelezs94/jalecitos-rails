@@ -15,7 +15,7 @@ module GigStatus
     (@gig.published? || @gig.draft?) ? @gig.banned! : @gig.draft!
     redirect_to root_path, notice: "Gig status has been updated"
   end
-  
+
   private
 
   def check_status

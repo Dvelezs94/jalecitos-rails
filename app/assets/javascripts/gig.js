@@ -13,3 +13,5 @@
 //= require trix
 
 //= require cable
+
+//= require package_forms

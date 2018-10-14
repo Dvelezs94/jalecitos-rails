@@ -1,4 +1,5 @@
 class PackagesController < ApplicationController
+  layout 'gig'
   include SanitizeParams
   before_action :set_gig, only: [:new, :create, :edit_packages, :update_packages]
   before_action :check_gig_ownership, only: [:new, :create, :edit_packages, :update_packages]

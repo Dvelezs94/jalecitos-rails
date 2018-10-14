@@ -12,7 +12,6 @@ module SanitizeParams
               :elements => ['li', 'ul', 'ol', 'bold', 'em', 'strong', 'del', 'a'])
     end
     sanitized_par
-
   end
 
 end
