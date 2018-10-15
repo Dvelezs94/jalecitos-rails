@@ -682,6 +682,8 @@ GEM
     ffi (1.9.25)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
+    friendly_id (5.2.4)
+      activerecord (>= 4.0.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     gritter (1.2.0)
@@ -865,6 +867,7 @@ DEPENDENCIES
   faker (~> 1.9, >= 1.9.1)
   feathericon-rails (~> 1.0)
   font-awesome-rails
+  friendly_id (~> 5.2, >= 5.2.4)
   gritter (~> 1.2)
   jbuilder (~> 2.5)
   jquery-rails
