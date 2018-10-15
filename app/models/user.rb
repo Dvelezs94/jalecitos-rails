@@ -44,14 +44,14 @@ class User < ApplicationRecord
    end
 
    # Create default values
-   after_initialize :set_defaults
+   before_create :set_defaults
 
    private
    def set_defaults
        # self.role ||= "user"
        set_alias
    end
-   
+
    def set_alias
      login_part = self.email.split("@").first
      hex = SecureRandom.hex(3)

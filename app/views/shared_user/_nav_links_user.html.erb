@@ -10,7 +10,7 @@
 <li class="nav-item">
   <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <%= current_user.email %>
+    <%= current_user.alias %>
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <%= link_to "Mi cuenta", root_path, :class => 'nav-link' %>

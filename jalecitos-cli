@@ -4,6 +4,7 @@ function build() {
   set -e
   read -p "Delete DB folder to start from scratch? (y/n): " DBDEL
   read -p "Create DB and migrations on startup? (y/n): " DBCREATE
+  read -p "Want to run the seeds after the creation? (y/n)" DBSEED
   if [ "$DBDEL" == "y" ]
   then
     echo "Deleting DB folder..."
@@ -16,6 +17,9 @@ function build() {
   then
     sleep 10
     bash $0 create-db
+  fi
+  if [  "$DBSEED" == "y" ]; then
+    bash $0 seed
   fi
 }
 
