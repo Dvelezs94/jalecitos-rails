@@ -143,8 +143,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_181750) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name"
-    t.string "last_name"
+    t.string "alias"
     t.float "employee_stars"
     t.float "employer_stars"
     t.string "roles"
