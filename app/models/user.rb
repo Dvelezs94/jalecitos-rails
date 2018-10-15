@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :alias, use: :slugged
   # Chat Relations
   has_many :messages
   has_many :conversations, foreign_key: :sender_id
@@ -44,7 +46,7 @@ class User < ApplicationRecord
    end
 
    # Create default values
-   before_create :set_defaults
+   after_initialize :set_defaults
 
    private
    def set_defaults

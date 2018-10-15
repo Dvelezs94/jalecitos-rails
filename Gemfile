@@ -89,3 +89,5 @@ gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'trix', '~> 0.9.5'
 #Snitize data
 gem 'sanitize', '~> 4.6', '>= 4.6.6'
+# Friendly URLs
+gem 'friendly_id', '~> 5.2', '>= 5.2.4'
