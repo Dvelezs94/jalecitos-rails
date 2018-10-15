@@ -26,7 +26,7 @@ Rails.application.routes.draw do
      end
 
      resources :requests, except: :index do
-       resources :offers, except: :index
+       resources :offers, except: [:index, :show]
          collection do
            get 'my_requests', as: 'my'
        end

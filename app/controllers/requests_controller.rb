@@ -1,8 +1,8 @@
 class RequestsController < ApplicationController
   layout 'request'
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :show
   before_action :set_request, only: [:show, :edit, :update, :destroy]
-  access all: [:show, :new, :edit, :create, :update, :destroy], user: :all
+  access all: [:show], user: :all
   before_action :check_request_ownership, only:[:edit, :update, :destroy]
 
   def my_requests
@@ -26,7 +26,7 @@ class RequestsController < ApplicationController
     @request = Request.new(request_params)
 
     if @request.save
-      redirect_to user_request_path(@request.user_id, @request.id), notice: 'Request was successfully created.'
+      redirect_to user_request_path(@request.user_id, @request), notice: 'Request was successfully created.'
     else
       render :new
     end
@@ -35,7 +35,7 @@ class RequestsController < ApplicationController
   # PATCH/PUT /requests/1
   def update
     if @request.update(request_params)
-      redirect_to user_request_path(@request.user_id, @request.id), notice: 'Request was successfully updated.'
+      redirect_to user_request_path(@request.user_id, @request), notice: 'Request was successfully updated.'
     else
       render :edit
     end
@@ -50,7 +50,7 @@ class RequestsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_request
-      @request = Request.friendly.find(params[:id])
+      @request = Request.includes(:offers).friendly.find(params[:id])
     end
 
     def request_params

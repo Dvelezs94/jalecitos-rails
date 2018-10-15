@@ -3,12 +3,12 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   def home
     if current_user && current_user.has_role?(:user)
-      @gigs = Gig.where(status: "published").where.not(user_id: current_user.id)
+      @gigs = Gig.friendly.where(status: "published").where.not(user_id: current_user.id)
     end
   end
 
   def requests_index
-    @requests = Request.all.order(created_at: :desc)
+    @requests = Request.friendly.order(created_at: :desc)
     render "requests"
   end
 
