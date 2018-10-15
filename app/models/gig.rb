@@ -5,7 +5,7 @@ class Gig < ApplicationRecord
 
   validates_presence_of :name, :description, :location
 
-  has_many :packages
+  has_many :packages, -> {limit(3)}, class_name: "Package"
 
   enum status: { draft: 0, published: 1, banned: 2}
 
