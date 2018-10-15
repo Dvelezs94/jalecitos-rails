@@ -1,4 +1,5 @@
 class ConversationsController < ApplicationController
+  layout 'conversation'
   access user: :all
 
   # GET /conversations
