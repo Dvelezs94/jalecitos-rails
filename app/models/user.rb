@@ -9,6 +9,7 @@ class User < ApplicationRecord
   # Gigs
   has_many :gigs
 
+
   ############################################################################################
   ## PeterGate Roles                                                                        ##
   ## The :user role is added by default and shouldn't be included in this list.             ##

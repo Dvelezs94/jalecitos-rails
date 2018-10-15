@@ -53,7 +53,7 @@ class PackagesController < ApplicationController
     end
 
   def set_gig_and_packages
-    @gig = Gig.includes(:packages).find(params[:gig_id])
+    @gig = Gig.includes(:packages).friendly.find(params[:gig_id])
   end
 
   def create_redirect

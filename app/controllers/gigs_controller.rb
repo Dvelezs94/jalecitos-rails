@@ -9,7 +9,7 @@ class GigsController < ApplicationController
 
   # GET /gigs
   def index
-    @gigs = Gig.includes(:packages).where(user_id: current_user.id)
+    @gigs = Gig.includes(:packages).friendly.where(user_id: current_user.id)
   end
 
   # GET /gigs/1
@@ -56,11 +56,11 @@ class GigsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_gig
-      @gig = Gig.find(params[:id])
+      @gig = Gig.includes(:packages).friendly.find(params[:id])
     end
 
     def set_gig_with_ref
-      @gig = Gig.includes(:packages).find(params[:id])
+      @gig = Gig.includes(:packages).friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
