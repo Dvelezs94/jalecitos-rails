@@ -6,7 +6,7 @@ class RequestsController < ApplicationController
   before_action :check_request_ownership, only:[:edit, :update, :destroy]
 
   def my_requests
-    @requests = Request.where(user_id: current_user.id).order(:id).order(created_at: :desc)
+    @requests = Request.friendly.where(user_id: current_user.id).order(:id).order(created_at: :desc)
   end
   # GET /requests/1
   def show
@@ -50,7 +50,7 @@ class RequestsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_request
-      @request = Request.find(params[:id])
+      @request = Request.friendly.find(params[:id])
     end
 
     def request_params

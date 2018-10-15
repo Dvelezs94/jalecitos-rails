@@ -62,7 +62,9 @@ ActiveRecord::Schema.define(version: 2018_10_15_204642) do
     t.bigint "category_id"
     t.bigint "tag_id"
     t.integer "status", default: 0
+    t.string "slug"
     t.index ["category_id"], name: "index_gigs_on_category_id"
+    t.index ["slug"], name: "index_gigs_on_slug", unique: true
     t.index ["tag_id"], name: "index_gigs_on_tag_id"
     t.index ["user_id"], name: "index_gigs_on_user_id"
   end
@@ -128,7 +130,9 @@ ActiveRecord::Schema.define(version: 2018_10_15_204642) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["category_id"], name: "index_requests_on_category_id"
+    t.index ["slug"], name: "index_requests_on_slug", unique: true
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
