@@ -7,6 +7,11 @@ class PagesController < ApplicationController
     end
   end
 
+  def requests_index
+    @requests = Request.all.order(created_at: :desc)
+    render "requests"
+  end
+
   private
 
   def admin_redirect

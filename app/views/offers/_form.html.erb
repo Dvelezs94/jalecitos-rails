@@ -1,4 +1,4 @@
-<%= form_with(model: offer, url: offer_form_url_helper(params[:request_id], offer), local: true) do |form| %>
+<%= form_with(model: offer, url: offer_form_url_helper, local: true) do |form| %>
   <% if offer.errors.any? %>
   <%offer.errors.full_messages.each do |error| %>
     <%= notification_generator_helper error %>

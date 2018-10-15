@@ -15,7 +15,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <%= link_to "Mi cuenta", root_path, :class => 'nav-link' %>
     <%= link_to "Mis trabajos", user_gigs_path(current_user.id), :class => 'nav-link' =%>
-    <%= link_to "Mis Pedidos", my_requests_path, :class => 'nav-link' =%>
+    <%= link_to "Mis Pedidos", my_user_requests_path(current_user.id), :class => 'nav-link' =%>
     <%= link_to "Log out", destroy_user_session_path, method: :delete, :class => 'nav-link' =%>
   </div>
 </div>

@@ -2,13 +2,8 @@ class RequestsController < ApplicationController
   layout 'request'
   before_action :authenticate_user!
   before_action :set_request, only: [:show, :edit, :update, :destroy]
-  access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
+  access all: [:show, :new, :edit, :create, :update, :destroy], user: :all
   before_action :check_request_ownership, only:[:edit, :update, :destroy]
-
-  # GET /requests
-  def index
-    @requests = Request.all.order(created_at: :desc)
-  end
 
   def my_requests
     @requests = Request.where(user_id: current_user.id).order(:id).order(created_at: :desc)
@@ -31,7 +26,7 @@ class RequestsController < ApplicationController
     @request = Request.new(request_params)
 
     if @request.save
-      redirect_to @request, notice: 'Request was successfully created.'
+      redirect_to user_request_path(@request.user_id, @request.id), notice: 'Request was successfully created.'
     else
       render :new
     end
@@ -40,7 +35,7 @@ class RequestsController < ApplicationController
   # PATCH/PUT /requests/1
   def update
     if @request.update(request_params)
-      redirect_to @request, notice: 'Request was successfully updated.'
+      redirect_to user_request_path(@request.user_id, @request.id), notice: 'Request was successfully updated.'
     else
       render :edit
     end
@@ -49,7 +44,7 @@ class RequestsController < ApplicationController
   # DELETE /requests/1
   def destroy
     @request.destroy
-    redirect_to requests_url, notice: 'Request was successfully destroyed.'
+    redirect_to my_user_requests_path(current_user.id), notice: 'Request was successfully destroyed.'
   end
 
   private

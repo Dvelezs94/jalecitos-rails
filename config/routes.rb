@@ -8,15 +8,6 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
-  resources :requests do
-    resources :offers
-    collection do
-      get 'my_requests', as: 'my'
-    end
-  end
-  resources :categories
-
-
    devise_for :users, controllers: {
      sessions: 'users/sessions'
    }
@@ -33,8 +24,16 @@ Rails.application.routes.draw do
            end
          end
      end
-   end
 
+     resources :requests, except: :index do
+       resources :offers, except: :index
+         collection do
+           get 'my_requests', as: 'my'
+       end
+     end
+     resources :categories
+   end
+  get 'requests', to: 'pages#requests_index'
   root to: "pages#home"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
