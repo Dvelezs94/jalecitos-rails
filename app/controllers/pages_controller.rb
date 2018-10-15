@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  layout 'page'
   before_action :admin_redirect, only: :home
   def home
     if current_user && current_user.has_role?(:user)

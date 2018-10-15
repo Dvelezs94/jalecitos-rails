@@ -12,6 +12,8 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 ################js
 Rails.application.config.assets.precompile += %w( google_functions.js )
 
+Rails.application.config.assets.precompile += %w( page.js )
+
 Rails.application.config.assets.precompile += %w( gig.js )
 
 Rails.application.config.assets.precompile += %w( request.js )
@@ -21,6 +23,8 @@ Rails.application.config.assets.precompile += %w( admin.js )
 Rails.application.config.assets.precompile += %w( conversation.js )
 ###################css
 Rails.application.config.assets.precompile += %w( gig.scss )
+
+Rails.application.config.assets.precompile += %w( page.scss )
 
 Rails.application.config.assets.precompile += %w( page-styles.scss )
 
