@@ -25,7 +25,7 @@ class PackagesController < ApplicationController
           @pack.save
       end
     end
-    redirect_to gigs_path, notice: 'Tu Gig se ha creado exitosamente'
+    redirect_to user_gig_path(current_user.id, @gig), notice: 'Tu Gig se ha creado exitosamente'
   end
 
   def edit_packages
@@ -39,7 +39,7 @@ class PackagesController < ApplicationController
       pack = sanitized_params( package_params(pack) )
       record.update(pack)
     end
-    redirect_to gigs_path, notice: 'Tu Gig se ha actualizado exitosamente'
+    redirect_to user_gig_path(current_user.id, @gig), notice: 'Tu Gig se ha actualizado exitosamente'
   end
 
   private
@@ -57,11 +57,11 @@ class PackagesController < ApplicationController
   end
 
   def create_redirect
-    (@gig.packages.any?) ? redirect_to( edit_gig_packages_path(@gig) ) : nil
+    (@gig.packages.any?) ? redirect_to( edit_user_gig_packages_path(current_user.id,@gig) ) : nil
   end
 
   def update_redirect
-    (@gig.packages.none?) ? redirect_to( new_gig_package_path(@gig) ) : nil
+    (@gig.packages.none?) ? redirect_to( new_user_gig_package_path(current_user.id, @gig) ) : nil
   end
 
   def define_pack_names

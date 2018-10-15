@@ -2,5 +2,5 @@
 
 <%= render 'form', gig: @gig %>
 
-<%= link_to 'Show', @gig %> |
-<%= link_to 'Back', gigs_path %>
+<%= link_to 'Show', user_gig_path(current_user.id,@gig) %> |
+<%= link_to 'Back', user_gigs_path %>

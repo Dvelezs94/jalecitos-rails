@@ -7,7 +7,7 @@ module GigStatus
       redirect_to gigs_path
     else
       change_status
-      redirect_to gigs_path, notice: "Se ha cambiado el estado del Gig exitosamente"
+      redirect_to user_gigs_path(current_user.id, @gig), notice: "Se ha cambiado el estado del Gig exitosamente"
     end
   end
 
