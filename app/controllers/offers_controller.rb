@@ -7,7 +7,6 @@ class OffersController < ApplicationController
   access all: [:show], user: :all
   before_action :check_offer_ownership, only:[:edit, :update, :destroy]
 
-
   # GET /offers
   def index
     redirect_to root_path
