@@ -2,5 +2,5 @@
 
 <%= render 'form', request: @request %>
 
-<%= link_to 'Show', @request %> |
-<%= link_to 'Back', requests_path %>
+<%= link_to 'Show', user_request_path(@request.user_id, @request) %> |
+<%= link_to 'Back', :back %>

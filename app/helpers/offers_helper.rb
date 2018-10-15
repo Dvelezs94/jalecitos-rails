@@ -4,11 +4,11 @@ module OffersHelper
     @request.offers.pluck(:user_id).include? user_id
   end
 
-  def offer_form_url_helper (parent, model)
+  def offer_form_url_helper
     if params[:action] == "new"
-      request_offers_path(parent, model)
+      user_request_offers_path(@request.user_id, @request)
     else
-      request_offer_path(parent, model)
+      user_request_offer_path(@request.user_id, @request, @offer)
     end
   end
 

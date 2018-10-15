@@ -31,7 +31,7 @@ class GigsController < ApplicationController
     @gig = Gig.new(sanitized_params(gig_params))
 
     if @gig.save
-      redirect_to new_gig_package_path(@gig)
+      redirect_to new_user_gig_package_path(params[:user_id],@gig)
     else
       render :new
     end
@@ -41,7 +41,7 @@ class GigsController < ApplicationController
   def update
     if @gig.update(sanitized_params(gig_params))
       @package = Package.find_by_gig_id(@gig)
-      redirect_to edit_gig_packages_path( @gig )
+      redirect_to edit_user_gig_packages_path(params[:user_id], @gig )
     else
       render :edit
     end
@@ -50,7 +50,7 @@ class GigsController < ApplicationController
   # DELETE /gigs/1
   def destroy
     @gig.destroy
-    redirect_to gigs_url, notice: 'Gig was successfully destroyed.'
+    redirect_to user_gigs_path(params[:user_id]), notice: 'Gig was successfully destroyed.'
   end
 
   private

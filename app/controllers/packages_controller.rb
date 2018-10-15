@@ -1,9 +1,8 @@
 class PackagesController < ApplicationController
   layout 'gig'
   include SanitizeParams
-  before_action :set_gig, only: [:new, :create, :edit_packages, :update_packages]
+  before_action :set_gig_and_packages, only: [:new, :create, :edit_packages, :update_packages]
   before_action :check_gig_ownership, only: [:new, :create, :edit_packages, :update_packages]
-  before_action :set_packages, only: [:new, :edit_packages, :create,:update_packages]
   before_action :create_redirect, only: [:new, :create]
   before_action :update_redirect, only: [:edit_packages, :update_packages]
   access user: :all
@@ -26,7 +25,7 @@ class PackagesController < ApplicationController
           @pack.save
       end
     end
-    redirect_to gigs_path, notice: 'Tu Gig se ha creado exitosamente'
+    redirect_to user_gig_path(params[:user_id], @gig), notice: 'Tu Gig se ha creado exitosamente'
   end
 
   def edit_packages
@@ -35,12 +34,12 @@ class PackagesController < ApplicationController
 
 
   def update_packages
-    @packages.each do |record|
+    @gig.packages.each do |record|
       pack = params[:packages]["#{record.id}"]
       pack = sanitized_params( package_params(pack) )
       record.update(pack)
     end
-    redirect_to gigs_path, notice: 'Tu Gig se ha actualizado exitosamente'
+    redirect_to user_gig_path(params[:user_id], @gig), notice: 'Tu Gig se ha actualizado exitosamente'
   end
 
   private
@@ -53,20 +52,16 @@ class PackagesController < ApplicationController
       my_params.permit(:name, :description, :price )
     end
 
-  def set_gig
-    @gig = Gig.find(params[:gig_id])
-  end
-
-  def set_packages
-    @packages = Package.where(gig_id: @gig).limit(3).order(id: :asc)
+  def set_gig_and_packages
+    @gig = Gig.includes(:packages).find(params[:gig_id])
   end
 
   def create_redirect
-    (@packages.any?) ? redirect_to( edit_gig_packages_path(@gig) ) : nil
+    (@gig.packages.any?) ? redirect_to( edit_user_gig_packages_path(params[:user_id],@gig) ) : nil
   end
 
   def update_redirect
-    (@packages.none?) ? redirect_to( new_gig_package_path(@gig) ) : nil
+    (@gig.packages.none?) ? redirect_to( new_user_gig_package_path(params[:user_id], @gig) ) : nil
   end
 
   def define_pack_names

@@ -1,4 +1,21 @@
 module GigsHelper
+
+  def gig_form_url_helper
+    if params[:action] == "new"
+      user_gigs_path(current_user.id)
+    else
+      user_gig_path(current_user.id,@gig)
+    end
+  end
+
+  def gig_form_method_helper
+    if params[:action] == "new"
+       :post
+    else
+      :patch
+    end
+  end
+
    def status_text_helper gig
      if gig.published?
        "Ocultar"
