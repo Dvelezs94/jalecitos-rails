@@ -1,6 +1,6 @@
 <tr>
   <td><%= gig_dashboard.name %></td>
-  <td><%= gig_dashboard.user.first_name %></td>
+  <td><%= gig_dashboard.user.alias %></td>
   <td><%= gig_dashboard.image %></td>
   <td>Published <%= distance_of_time_in_words(gig_dashboard.created_at, Time.now) %> ago</td>
   <td>1000</td>
