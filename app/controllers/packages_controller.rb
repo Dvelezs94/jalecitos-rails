@@ -20,7 +20,7 @@ class PackagesController < ApplicationController
       params[:packages].each_with_index do |pack, pack_type|
           pack = sanitized_params( package_params(pack) )
           pack[:pack_type] = pack_type
-          pack[:gig_id] = gig_param
+          pack[:gig_id] = @gig.id
           @pack = Package.new(pack)
           @pack.save
       end
@@ -44,10 +44,6 @@ class PackagesController < ApplicationController
 
   private
     # Only allow a trusted parameter "white list" through.
-    def gig_param
-      gig_param = params.require(:gig_id)
-    end
-
     def package_params(my_params)
       my_params.permit(:name, :description, :price )
     end
