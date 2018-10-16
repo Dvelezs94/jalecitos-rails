@@ -9,7 +9,7 @@ class GigsController < ApplicationController
 
   # GET /gigs
   def index
-    @gigs = Gig.includes(:packages).friendly.where(user_id: current_user.id)
+    @gigs = Gig.includes(:packages, :user).friendly.where(user_id: current_user.id)
   end
 
   # GET /gigs/1

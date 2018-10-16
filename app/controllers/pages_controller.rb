@@ -8,7 +8,7 @@ class PagesController < ApplicationController
   end
 
   def requests_index
-    @requests = Request.friendly.order(created_at: :desc)
+    @requests = Request.includes(:user).friendly.order(created_at: :desc)
     render "requests"
   end
 

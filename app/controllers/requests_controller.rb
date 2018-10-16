@@ -6,7 +6,7 @@ class RequestsController < ApplicationController
   before_action :check_request_ownership, only:[:edit, :update, :destroy]
 
   def my_requests
-    @requests = Request.friendly.where(user_id: current_user.id).order(:id).order(created_at: :desc)
+    @requests = Request.includes(:user).friendly.where(user_id: current_user.id).order(:id).order(created_at: :desc)
   end
   # GET /requests/1
   def show
