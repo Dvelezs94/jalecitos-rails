@@ -7,12 +7,12 @@
     <p><small class="text-muted">Publicado hace <%= distance_of_time_in_words(@request.created_at, Time.now) %></small></p>
     <% if current_user && current_user.id == @request.user_id %>
      <hr>
-     <%= link_to 'Edit', edit_user_request_path(@request.user_id, @request) %> |
+     <%= link_to 'Edit', edit_user_request_path(@request.user.slig, @request) %> |
      <%= link_to 'Back', :back %>
     <% elsif  current_user && has_offered(current_user.id)  %>
      <p class="text-muted">Tu oferta esta postulada</p>
     <% else %>
-     <%= link_to 'Postularse', new_user_request_offer_path(@request.user_id, @request), class: "btn btn-primary" %>
+     <%= link_to 'Postularse', new_user_request_offer_path(@request.user.slug, @request), class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
