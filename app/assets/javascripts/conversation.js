@@ -14,4 +14,4 @@
 
 //= require cable
 
-//=require messages
+//= require messages-script
