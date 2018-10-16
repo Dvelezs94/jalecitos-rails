@@ -12,7 +12,10 @@ services:
     volumes:
       - .:/jalecitos
     environment:
+      - RAILS_ENV=development
+      - SECRET_KEY_BASE=dumapaikqwdkqmwuqcb287deuivk3837nmvk92wn1kwnkelleo
       - REDIS_URL=redis://redis:6379/1
+      - SKYLIGHT_KEY=s2YGA-ltfzwnm-YxufvxG6DwHJGP6eBrX-7JMvNqo8k
       - STRIPE_PUBLISHABLE_KEY=pk_test_xhGbN2rGbm3i0WCJKDImJF3a
       - STRIPE_SECRET_KEY=sk_test_Hz89ZLoGrNPphGpGrX7pm2It
       - DEVISE_SECRET_KEY=qowndkqwdkqmwuqcb287dbwe9220192wn1kwnso1i

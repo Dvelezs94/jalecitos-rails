@@ -14,3 +14,12 @@ development:
 test:
   <<: *default
   database: jalecitos_test%
+
+staging:
+  <<: *default
+  database: staging
+
+
+production:
+  <<: *default
+  database: jalecitos
