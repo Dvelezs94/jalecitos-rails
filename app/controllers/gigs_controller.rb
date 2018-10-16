@@ -2,8 +2,9 @@ class GigsController < ApplicationController
   layout 'gig'
   include SanitizeParams
   include GigStatus
-  before_action :set_gig, only: [:edit, :update, :destroy, :toggle_status, :ban_gig]
-  before_action :set_gig_with_ref, only: :show
+  before_action :set_gig, only: [:edit, :update, :destroy, :ban_gig]
+  before_action :set_gig_with_pack, only: :toggle_status
+  before_action :set_gig_with_all_asc, only: :show
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status]
   access user: { except: [:ban_gig] }, admin: [:ban_gig]
 
@@ -59,7 +60,11 @@ class GigsController < ApplicationController
       @gig = Gig.friendly.find(params[:id])
     end
 
-    def set_gig_with_ref
+    def set_gig_with_pack
+      @gig = Gig.includes(:packages).friendly.find(params[:id])
+    end
+
+    def set_gig_with_all_asc
       @gig = Gig.includes(:packages, :category, :user).friendly.find(params[:id])
     end
 
