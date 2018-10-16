@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   def home
     if current_user && current_user.has_role?(:user)
-      @gigs = Gig.friendly.where(status: "published").where.not(user_id: current_user.id)
+      @gigs = Gig.includes(:user).friendly.where(status: "published").where.not(user_id: current_user.id)
     end
   end
 

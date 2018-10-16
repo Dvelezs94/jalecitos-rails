@@ -3,7 +3,7 @@ class Gig < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
   #Associations
-  belongs_to :user, -> {limit(1)}, class_name: "User"
+  belongs_to :user
   belongs_to :category
   has_and_belongs_to_many :tags
   has_many :packages, -> {limit(3)}, class_name: "Package", dependent: :destroy
