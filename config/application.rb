@@ -29,5 +29,6 @@ module Jalecitos
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.web_console.whitelisted_ips = '0.0.0.0/0'
   end
 end
