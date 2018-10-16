@@ -4,10 +4,10 @@ module GigStatus
     check_if_banned
     check_packages_count
     if flash[:error]
-      redirect_to user_gigs_path(current_user.id)
+      redirect_to user_gigs_path(current_user.slug)
     else
       change_status
-      redirect_to user_gigs_path(current_user.id), notice: "Se ha cambiado el estado del Gig exitosamente"
+      redirect_to user_gigs_path(current_user.slug), notice: "Se ha cambiado el estado del Gig exitosamente"
     end
   end
 
