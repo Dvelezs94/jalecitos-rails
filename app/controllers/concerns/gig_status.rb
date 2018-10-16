@@ -23,7 +23,7 @@ module GigStatus
   end
 
   def check_packages_count
-    (@gig.packages.count == 0) ? flash[:error]='Este Gig no contiene ningún paquete' : nil
+    (@gig.packages.none?) ? flash[:error]='Este Gig no contiene ningún paquete' : nil
   end
 
   def change_status

@@ -11,9 +11,9 @@
     <%= image_tag image_display_helper(@gig.image_url),  class: "card-img-top" %>
     <p class="card-text"><%=@gig.description.html_safe%></p>
     <div class="btn-group">
-      <%= link_to status_text_helper(@gig), toggle_status_user_gig_path(current_user.id,@gig), class: "btn btn-sm btn-outline-secondary" unless @gig.banned? || current_user.id != @gig.user_id || @gig.packages.count == 0 %>
-      <%= link_to "Editar", edit_user_gig_path(current_user.id,@gig), class: "btn btn-sm btn-outline-secondary" if @gig.user_id == current_user.id %>
-      <%= link_to "Borrar", user_gig_path(current_user.id,@gig), method: :delete,
+      <%= link_to status_text_helper(@gig), toggle_status_user_gig_path(current_user.slug,@gig), class: "btn btn-sm btn-outline-secondary" unless @gig.banned? || current_user.id != @gig.user_id || @gig.packages.none? %>
+      <%= link_to "Editar", edit_user_gig_path(current_user.slug,@gig), class: "btn btn-sm btn-outline-secondary" if @gig.user_id == current_user.id %>
+      <%= link_to "Borrar", user_gig_path(current_user.slug,@gig), method: :delete,
        data: { confirm: '¿Estás seguro de querer borrar este trabajo?' },
         class: "btn btn-sm btn-outline-secondary" if @gig.user_id == current_user.id  %>
     </div>
