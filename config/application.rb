@@ -29,6 +29,5 @@ module Jalecitos
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-    config.skylight.environments += [ENV.fetch("RAILS_ENV") {"development"}]
   end
 end
