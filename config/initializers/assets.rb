@@ -22,6 +22,8 @@ Rails.application.config.assets.precompile += %w( admin.js )
 
 Rails.application.config.assets.precompile += %w( conversation.js )
 
+Rails.application.config.assets.precompile += %w( tag.js )
+
 Rails.application.config.assets.precompile += %w( user.js )
 ###################css
 Rails.application.config.assets.precompile += %w( gig.scss )

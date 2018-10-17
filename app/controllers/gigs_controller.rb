@@ -74,7 +74,8 @@ class GigsController < ApplicationController
                                   :description,
                                   :image,
                                   :location,
-                                  :category_id
+                                  :category_id,
+                                  :tag_list
                                 )
       gig_params = set_owner(gig_params)
     end

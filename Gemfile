@@ -91,5 +91,7 @@ gem 'trix', '~> 0.9.5'
 gem 'sanitize', '~> 4.6', '>= 4.6.6'
 # Friendly URLs
 gem 'friendly_id', '~> 5.2', '>= 5.2.4'
+#Tags
+gem 'acts-as-taggable-on', '~> 6.0'
 # Edit in place
 gem 'best_in_place', '~> 3.1', '>= 3.1.1'
