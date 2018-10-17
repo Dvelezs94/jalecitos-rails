@@ -1,9 +1,9 @@
 module PackagesHelper
   def package_form_url_helper
     if params[:action] == "new"
-      user_gig_packages_path(current_user.id,params[:gig_id], @package)
+      user_gig_packages_path(current_user.slug,params[:gig_id], @package)
     else
-      update_user_gig_packages_path(current_user.id,@gig)
+      update_user_gig_packages_path(current_user.slug,@gig)
     end
   end
 

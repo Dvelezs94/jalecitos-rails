@@ -60,18 +60,11 @@ ActiveRecord::Schema.define(version: 2018_10_15_211732) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "category_id"
-    t.bigint "tag_id"
     t.integer "status", default: 0
     t.string "slug"
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true
-    t.index ["tag_id"], name: "index_gigs_on_tag_id"
     t.index ["user_id"], name: "index_gigs_on_user_id"
-  end
-
-  create_table "gigs_tags", id: false, force: :cascade do |t|
-    t.bigint "tag_id", null: false
-    t.bigint "gig_id", null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -145,12 +138,6 @@ ActiveRecord::Schema.define(version: 2018_10_15_211732) do
     t.index ["gigs_id"], name: "index_reviews_on_gigs_id"
   end
 
-  create_table "tags", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -175,7 +162,6 @@ ActiveRecord::Schema.define(version: 2018_10_15_211732) do
 
   add_foreign_key "extras", "gigs", column: "gigs_id"
   add_foreign_key "gigs", "categories"
-  add_foreign_key "gigs", "tags"
   add_foreign_key "gigs", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"

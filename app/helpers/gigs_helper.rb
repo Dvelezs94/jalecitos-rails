@@ -2,9 +2,9 @@ module GigsHelper
 
   def gig_form_url_helper
     if params[:action] == "new"
-      user_gigs_path(current_user.id)
+      user_gigs_path(current_user.slug)
     else
-      user_gig_path(current_user.id,@gig)
+      user_gig_path(current_user.slug,@gig)
     end
   end
 
