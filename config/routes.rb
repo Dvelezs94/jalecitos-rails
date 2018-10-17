@@ -33,8 +33,8 @@ Rails.application.routes.draw do
            get 'my_requests', as: 'my'
        end
      end
-     resources :categories
    end
+  resources :categories
   get 'requests', to: 'pages#requests_index'
   root to: "pages#home"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
