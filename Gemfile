@@ -93,3 +93,5 @@ gem 'sanitize', '~> 4.6', '>= 4.6.6'
 gem 'friendly_id', '~> 5.2', '>= 5.2.4'
 # Edit in place
 gem 'best_in_place', '~> 3.1', '>= 3.1.1'
+# JQuery file upload
+gem 'jquery-fileupload-rails', '~> 0.4.7'

@@ -43,4 +43,12 @@ module ApplicationHelper
       image
     end
   end
+
+  def avatar_display_helper image
+    if image.nil?
+      "https://picsum.photos/100/100?image=#{Faker::Number.between(1, 500)}"
+    else
+      image
+    end
+  end
 end

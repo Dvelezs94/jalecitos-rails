@@ -8,10 +8,11 @@
   <div class="wraper" style="display: flex;">
   <div class="col-md-4">
     <div class="card mb-4 box-shadow">
+      <label class="profile-container">
+        <%= image_tag avatar_display_helper(@user.image_url(:thumb)) %>
+        <%= form.file_field :image, class: 'form-control' %>
+      </label>
       <div class="card-body">
-        <div class="form-group">
-          <%= form.file_field :image, class: 'form-control' %>
-        </div>
         <p class="card-title">Name: <%= best_in_place_if my_profile, @user, :name %></p>
         <p class="card-title">Alias: <%= best_in_place_if my_profile,@user, :alias %></p>
         <p class="card-title">Member since: <%= @user.created_at.strftime("%B %d, %Y") %></p>
