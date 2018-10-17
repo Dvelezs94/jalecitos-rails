@@ -1,6 +1,13 @@
 class User < ApplicationRecord
   extend FriendlyId
   friendly_id :alias, use: :slugged
+
+  # Validates uniqueness of id
+  validates :email, :alias,  uniqueness: true
+
+  # Avatar image
+  mount_uploader :image, AvatarUploader
+
   # Chat Relations
   has_many :messages
   has_many :conversations, foreign_key: :sender_id
@@ -46,6 +53,10 @@ class User < ApplicationRecord
     end
    end
 
+   def should_generate_new_friendly_id?
+     alias_changed?
+   end
+
    # Create default values
    after_initialize :set_defaults
 
@@ -56,8 +67,10 @@ class User < ApplicationRecord
    end
 
    def set_alias
-     login_part = self.email.split("@").first
-     hex = SecureRandom.hex(3)
-     self.alias = "#{ login_part }-#{ hex }"
+     if self.alias.nil?
+       login_part = self.email.split("@").first
+       hex = SecureRandom.hex(3)
+       self.alias = "#{ login_part }-#{ hex }"
+     end
    end
 end
