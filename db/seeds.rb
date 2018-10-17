@@ -9,9 +9,6 @@
     Category.create do |category|
       category.name = Faker::Company.industry
     end
-    Tag.create do |tag|
-      tag.name = Faker::Company.industry
-    end
 end
 
 20.times do
@@ -35,7 +32,6 @@ end
         gig.location = Faker::Address.state
         gig.category_id = Faker::Number.between(1, 10)
         gig.status = Faker::Number.between(0, 2)
-        gig.tag_id = Faker::Number.between(1, 10)
       end
     end
     puts user.email

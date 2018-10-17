@@ -7,7 +7,8 @@
     hiddenInput.setAttribute('name', 'gig[tag_list]');
 
     mainInput.setAttribute('type', 'text');
-    mainInput.classList.add('main-input');
+    mainInput.setAttribute('rows', 1);
+    mainInput.classList.add('main-input', 'form-control');
     mainInput.addEventListener('input', function () {
         let enteredTags = mainInput.value.split('\n');
         if (enteredTags.length > 1) {

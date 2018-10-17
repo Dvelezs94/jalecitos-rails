@@ -1,7 +1,6 @@
 class Gig < ApplicationRecord
-  include DataMapper::Resource
-  property :id, Serial
-  has_tags_on :tags
+  #Tags
+  acts_as_taggable
   #Slugs
   extend FriendlyId
   friendly_id :name, use: :slugged
