@@ -1,0 +1,40 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <%user.errors.full_messages.each do |error| %>
+      <%= notification_generator_helper error %>
+    <% end %>
+  <% end %>
+
+  <div class="wraper" style="display: flex;">
+  <div class="col-md-4">
+    <div class="card mb-4 box-shadow">
+      <div class="card-body">
+        <div class="form-group">
+          <%= form.file_field :image, class: 'form-control' %>
+        </div>
+        <p class="card-title">Name: <%= best_in_place_if my_profile, @user, :name %></p>
+        <p class="card-title">Alias: <%= best_in_place_if my_profile,@user, :alias %></p>
+        <p class="card-title">Member since: <%= @user.created_at.strftime("%B %d, %Y") %></p>
+        <p class="card-title">Bio: <%= best_in_place_if my_profile,@user, :bio, as: :textarea, ok_button: :save, cancel_button: :cancel %></p>
+        <div class="d-flex justify-content-between align-items-center">
+          <small class="text-muted"></small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+      <%= link_to "Gigs" %> | <%= link_to "Requests" %>
+      </div>
+      <div class="card-body">
+        <p class="card-title"><%=@user.slug%></p>
+        <div class="d-flex justify-content-between align-items-center">
+          <small class="text-muted"></small>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+<% end %>
