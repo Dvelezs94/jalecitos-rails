@@ -14,7 +14,7 @@ Rails.application.routes.draw do
    }
    resources :users, only: [:show, :edit, :update]
    resources :users do
-     resources :gigs do
+     resources :gigs, except: :index do
          member do
               get :toggle_status
               get :ban_gig, as: 'ban'
@@ -29,9 +29,6 @@ Rails.application.routes.draw do
 
      resources :requests, except: :index do
        resources :offers, except: [:index, :show]
-         collection do
-           get 'my_requests', as: 'my'
-       end
      end
    end
   resources :categories
