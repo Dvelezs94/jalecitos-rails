@@ -2,6 +2,7 @@
     let hiddenInput,
         mainInput = document.createElement('textarea'),
         stored,
+        tagNumber = 0,
         tags = [];
     if(window.location.href.indexOf("gigs") > -1) {
        hiddenInput = document.getElementById('gig_tag_list');
@@ -15,13 +16,24 @@
     mainInput.classList.add('main-input', 'form-control');
     mainInput.addEventListener('input', function () {
         let enteredTags = mainInput.value.split('\n');
-        if (enteredTags.length > 1) {
-            enteredTags.forEach(function (t) {
-                let filteredTag = filterTag(t);
-                if (filteredTag.length > 0)
-                    addTag(filteredTag);
-            });
-            mainInput.value = '';
+        let enteredTags2 = mainInput.value.split(' ');
+
+        if (enteredTags.length > 1 || enteredTags2.length > 1) {
+          let filteredTag = filterTag(enteredTags[0]);
+          if (tagNumber<5){
+            if(filteredTag.length > 0 && filteredTag.length < 16){
+              $(".tag-error" ).html("");
+              addTag(filteredTag);
+            }
+            else{
+              $(".tag-error" ).html("Cada tag debe contener de 1 a 15 caracteres");
+            }
+          }
+          else{
+            $(".tag-error" ).html("Sólo se admiten un máximo de 5 tags");
+          }
+          mainInput.value = '';
+
         }
     });
 
@@ -62,6 +74,7 @@
         tags.push(tag);
 
         el.insertBefore(tag.element, mainInput);
+        tagNumber+=1;
 
         refreshTags();
     }
@@ -70,6 +83,7 @@
         let tag = tags[index];
         tags.splice(index, 1);
         el.removeChild(tag.element);
+        tagNumber-=1;
         refreshTags();
     }
 

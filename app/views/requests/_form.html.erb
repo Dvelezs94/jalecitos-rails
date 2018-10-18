@@ -1,4 +1,4 @@
-<%= form_with(model: request, url: request_form_url_helper, local: true) do |form| %>
+<%= form_with(model: request, url: request_form_url_helper,method: request_form_method_helper, local: true) do |form| %>
   <% if request.errors.any? %>
   <%request.errors.full_messages.each do |error| %>
     <%= notification_generator_helper error %>
@@ -50,6 +50,8 @@
 
       <%= form.hidden_field :tag_list  %>
     </div>
+    Máximo de 5 tags <br>
+    <span class="tag-error"></span>
   </div>
 
   <div class="form-group">
