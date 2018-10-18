@@ -25,6 +25,8 @@ Rails.application.config.assets.precompile += %w( conversation.js )
 Rails.application.config.assets.precompile += %w( tag.js )
 
 Rails.application.config.assets.precompile += %w( user.js )
+
+Rails.application.config.assets.precompile += %w( back-no-cache.js )
 ###################css
 Rails.application.config.assets.precompile += %w( gig.scss )
 

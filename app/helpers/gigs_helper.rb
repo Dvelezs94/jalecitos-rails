@@ -1,7 +1,7 @@
 module GigsHelper
 
   def gig_form_url_helper
-    if params[:action] == "new"
+    if params[:action] == "new" || params[:action] == "create"
       user_gigs_path(current_user.slug)
     else
       user_gig_path(current_user.slug,@gig)
@@ -9,7 +9,7 @@ module GigsHelper
   end
 
   def gig_form_method_helper
-    if params[:action] == "new"
+    if params[:action] == "new" || params[:action] == "create"
        :post
     else
       :patch

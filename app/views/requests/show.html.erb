@@ -1,7 +1,7 @@
 <div class="card" style="width: 70%; padding: 10px; margin: 20px auto;">
   <div class="card-body">
     <h5 class="card-title"><%= @request.name %></h5>
-    <p class="card-text"><%= @request.description %></p>
+    <p class="card-text"><%= @request.description.html_safe %></p>
     <p class="card-text">Presupuesto: <%= number_to_currency(@request.budget.to_i) %> MXN</p>
     <p><small class="text-muted"><%=@request.location%></small></p>
     <p><small class="text-muted">Publicado hace <%= distance_of_time_in_words(@request.created_at, Time.now) %></small></p>
