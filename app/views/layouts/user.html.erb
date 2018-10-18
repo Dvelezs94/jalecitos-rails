@@ -6,8 +6,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag  'user', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'user', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag  'user', media: 'all' %>
+    <%= javascript_include_tag 'user'   %>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,6 +25,9 @@
 
    <%= render 'shared/main_nav_bar' %>
     <%= yield %>
+
+
+
   </body>
 
 <footer class="footer bg-light">
