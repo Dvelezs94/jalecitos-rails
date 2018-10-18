@@ -16,15 +16,10 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    respond_to do |format|
-      if @user.update_attributes(user_params)
-        format.html { redirect_to user_path(current_user.slug), :notice => 'User was successfully updated.' }
-        format.json { render json: @user }
-      else
-        format.html { redirect_to user_path(current_user.slug) }
-        format.json { render json: @user }
-      end
-    end
+
+    flash[:notice] = 'Your profile was successfully updated.' if @user.update_attributes(user_params)
+    respond_with(@user)
+
   end
 
   private
