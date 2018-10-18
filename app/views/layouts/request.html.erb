@@ -8,6 +8,7 @@
 
   <%= stylesheet_link_tag  'request', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'request', 'data-turbolinks-track': 'reload' %>
+  <%= back_no_cache_helper %>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -29,6 +30,7 @@
   </body>
 
   <%= google_scripts_helper %>
+  <%= javascript_include_tag 'tag', 'data-turbolinks-track': 'reload' %>
 
 <footer class="footer bg-light">
     <div class="container">

@@ -1,10 +1,14 @@
 [].forEach.call(document.getElementsByClassName('tags-input'), function (el) {
-    let hiddenInput = document.createElement('input'),
+    let hiddenInput,
         mainInput = document.createElement('textarea'),
+        stored,
         tags = [];
-
-    hiddenInput.setAttribute('type', 'hidden');
-    hiddenInput.setAttribute('name', 'gig[tag_list]');
+    if(window.location.href.indexOf("gigs") > -1) {
+       hiddenInput = document.getElementById('gig_tag_list');
+    }
+    else{
+      hiddenInput = document.getElementById('request_tag_list');
+    }
 
     mainInput.setAttribute('type', 'text');
     mainInput.setAttribute('rows', 1);
@@ -29,7 +33,15 @@
     });
 
     el.appendChild(mainInput);
-    el.appendChild(hiddenInput)
+
+    if (hiddenInput.value != ""){
+      stored = hiddenInput.value.split(" ");
+      stored.forEach(function(tag) {
+        addTag(tag);
+      });
+
+    }
+
 
     function addTag (text) {
         let tag = {

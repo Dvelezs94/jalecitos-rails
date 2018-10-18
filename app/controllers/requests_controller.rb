@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
   layout 'request'
+  include SanitizeParams
   before_action :authenticate_user!, except: :show
   before_action :set_request, only: [:show, :edit, :update, :destroy]
   access all: [:show], user: :all
@@ -23,7 +24,7 @@ class RequestsController < ApplicationController
 
   # POST /requests
   def create
-    @request = Request.new(request_params)
+    @request = Request.new( sanitized_params(request_params) )
 
     if @request.save
       redirect_to user_request_path(@request.user.slug, @request), notice: 'Request was successfully created.'
@@ -59,7 +60,8 @@ class RequestsController < ApplicationController
                                   :image,
                                   :location,
                                   :category_id,
-                                  :budget
+                                  :budget,
+                                  :tag_list
                                 )
       request_params = set_owner(request_params)
     end
