@@ -12,7 +12,7 @@ class Request < ApplicationRecord
   has_many :offers
   #Validations
   validates_presence_of :name, :description, :location, :budget, :category_id
-  validate :maximum_amount_of_tags
+  validate  :tag_length, :no_spaces_in_tag, :maximum_amount_of_tags
   #Custom fields
   mount_uploader :image, RequestUploader
 end

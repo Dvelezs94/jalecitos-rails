@@ -30,7 +30,7 @@ module ApplicationHelper
   end
 
   def google_scripts_helper
-    if params[:action] == 'new' || params[:action] == 'edit' 
+    if params[:action] == 'new' || params[:action] == 'edit'
       (javascript_include_tag 'google_functions', 'data-turbolinks-track': 'reload')+
       (javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places&callback=activatePlacesSearch", 'data-turbolinks-track': 'reload')
      end
@@ -38,7 +38,7 @@ module ApplicationHelper
 
   def back_no_cache_helper
     if params[:action] == 'new' || params[:action] == 'edit'
-      javascript_include_tag 'back-no-cache', 'data-turbolinks-track': 'reload'
+      javascript_include_tag 'back-no-cache'
      end
   end
 

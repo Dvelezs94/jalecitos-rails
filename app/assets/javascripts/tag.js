@@ -15,8 +15,17 @@
     mainInput.classList.add('main-input', 'form-control');
     mainInput.addEventListener('input', function () {
         let enteredTags = mainInput.value.split('\n');
+        let enteredTags2 = mainInput.value.split(' ');
         if (enteredTags.length > 1) {
             enteredTags.forEach(function (t) {
+                let filteredTag = filterTag(t);
+                if (filteredTag.length > 0)
+                    addTag(filteredTag);
+            });
+            mainInput.value = '';
+        }
+        if (enteredTags2.length > 1) {
+            enteredTags2.forEach(function (t) {
                 let filteredTag = filterTag(t);
                 if (filteredTag.length > 0)
                     addTag(filteredTag);

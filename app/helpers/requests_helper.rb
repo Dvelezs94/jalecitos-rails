@@ -1,9 +1,18 @@
 module RequestsHelper
   def request_form_url_helper
-    if params[:action] == "new" || params[:action] == "create"
-      user_requests_path(current_user.slug)
+    if params[:action] == "edit"
+      user_request_path(current_user.slug, @request)
     else
-      user_request_path(@request.user_id, @request)
+      user_requests_path(current_user.slug)
     end
   end
+
+  def request_form_method_helper
+    if params[:action] == "edit"
+      :patch
+    else
+      :post
+    end
+  end
+
 end
