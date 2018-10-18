@@ -27,10 +27,17 @@
   <div class="col-md-8">
     <div class="card mb-4 box-shadow">
       <div class="card-header">
-      <%= link_to "Gigs" %> | <%= link_to "Requests" %>
+      <%= link_to "Gigs", :q => "gigs" %> | <%= link_to "Requests", :q => "requests" %>
       </div>
       <div class="card-body">
-        <p class="card-title"><%=@user.slug%></p>
+        <% if params[:q] == 'gigs' %>
+          <%= render @user.gigs %>
+        <% elsif params[:q] == 'requests' %>
+          <%= render @user.requests %>
+        <% else %>
+          <%= render @user.gigs %>
+        <% end %>
+
         <div class="d-flex justify-content-between align-items-center">
           <small class="text-muted"></small>
         </div>
