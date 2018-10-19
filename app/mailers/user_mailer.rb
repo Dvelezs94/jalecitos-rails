@@ -21,4 +21,20 @@ class UserMailer  < Devise::Mailer
 
     mandrill_client.messages.send_template template_name, template_content, message
   end
+
+  def reset_password_instructions(record, token, opts={})
+    @token = token
+    template_name = "user-reset-password"
+    template_content = []
+    message = {
+      to: [{email: record.email}],
+      global_merge_vars: [
+           { name: "RESETURL", content: edit_password_url(record, reset_password_token: @token) },
+           { name: "EMAIL", content: record.email },
+           { name: "ALIAS", content: record.alias }
+          ]
+    }
+
+    mandrill_client.messages.send_template template_name, template_content, message
+    end
 end
