@@ -97,3 +97,5 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'best_in_place', '~> 3.1', '>= 3.1.1'
 # JQuery file upload
 gem 'jquery-fileupload-rails', '~> 0.4.7'
+# Transactional Email
+gem 'mandrill-api', '~> 1.0', '>= 1.0.53', require: "mandrill"
