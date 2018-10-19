@@ -22,7 +22,7 @@ services:
       - FACEBOOK_ID=307778330022720
       - FACEBOOK_SECRET=0486dbcf6b932519e4f14c10e421c4c3
       - FACEBOOK_CALLBACK=http://local.jalecitos.com/users/auth/facebook/callback
-      - EMAIL_API_TOKEN=1kP5oG2JFAMbGOhzsoF_ow
+      - EMAIL_API_TOKEN=a1uK0wsA1ClL9SCynPmj2g
       - S3_BUCKET_NAME=local.jalecitos.com
       - AWS_ACCESS_KEY_ID=AKIAI7WWMNOBVY4IKSBQ
       - AWS_SECRET_ACCESS_KEY=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

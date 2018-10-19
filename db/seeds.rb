@@ -16,6 +16,8 @@ end
     user.email = Faker::Internet.email
     user.role = "user"
     user.password = "123456"
+    # This is so we dont have to confirm the email on seeds
+    user.confirmed_at = Time.now
     10.times do
       user.requests.new do |request|
         request.name = Faker::Hacker.say_something_smart
