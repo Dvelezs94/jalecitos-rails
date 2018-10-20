@@ -13,6 +13,9 @@ class Request < ApplicationRecord
   #Validations
   validates_presence_of :name, :description, :location, :budget, :category_id
   validate  :tag_length, :no_spaces_in_tag, :maximum_amount_of_tags
+  validates_length_of :name, :maximum => 50
+  validates_length_of :description, :maximum => 500
+
   #Custom fields
   mount_uploader :image, RequestUploader
 end

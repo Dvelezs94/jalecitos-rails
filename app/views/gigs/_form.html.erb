@@ -1,4 +1,4 @@
-<%= form_with(model: gig,url: gig_form_url_helper, method: gig_form_method_helper, local: true) do |form| %>
+<%= form_with(model: gig,url: gig_form_url_helper, method: gig_form_method_helper, :html => { :id => "current_form" }, local: true) do |form| %>
   <% if gig.errors.any? %>
   <%gig.errors.full_messages.each do |error| %>
     <%= notification_generator_helper error %>
@@ -7,14 +7,14 @@
 
   <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, class: 'form-control' %>
+    <%= form.text_field :name, class: 'form-control required', maxlength: 50 %>
   </div>
 
   <div class="form-group">
     <%= form.label :description %>
 
     <%= form.text_field :description, class: 'form-control', id: "description", type: "hidden" %>
-    <trix-editor input="description"></trix-editor>
+    <trix-editor input="description" class="required" maxlength="500"></trix-editor>
   </div>
 
   <div class="form-group">
@@ -23,14 +23,14 @@
          {
               include_blank: true
         },
-        class: 'form-control'
+        class: 'form-control required'
     ) %>
   </div>
 
 
   <div class="form-group">
     <%= form.text_field :location,
-                         class: 'form-control',
+                         class: 'form-control required',
                          size: 50,
                          placeholder: 'Busca tu ciudad...',
                          id: 'autocomplete' %>

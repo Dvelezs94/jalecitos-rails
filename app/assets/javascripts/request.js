@@ -13,3 +13,9 @@
 //= require trix
 
 //= require cable
+
+//= require jquery.validate
+
+//= require form_validation
+
+//= require messages_es
