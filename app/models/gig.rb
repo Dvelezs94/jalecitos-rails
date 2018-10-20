@@ -13,8 +13,8 @@ class Gig < ApplicationRecord
   #Validations
   validates_presence_of :name, :description, :location
   validate :maximum_amount_of_tags
-  validates_length_of :name, :maximum => 50
-  validates_length_of :description, :maximum => 500
+  validates_length_of :name, :maximum => 100
+  validates_length_of :description, :maximum => 1000
   #Custom fields
   enum status: { draft: 0, published: 1, banned: 2}
   mount_uploader :image, GigUploader
