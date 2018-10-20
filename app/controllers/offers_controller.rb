@@ -23,6 +23,7 @@ class OffersController < ApplicationController
     check_if_offered
     @offer = Offer.new(offer_params_create)
     if @offer.save
+      OfferMailer.new_offer(@offer).deliver
       redirect_to user_request_path(params[:user_id], params[:request_id]), notice: 'Offer was successfully created.'
     else
       render :new
