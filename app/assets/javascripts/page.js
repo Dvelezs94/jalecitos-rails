@@ -15,3 +15,7 @@
 //= require cable
 
 //= require admin-dashboard
+
+//= require jquery.easing
+
+//= require_tree ./pages

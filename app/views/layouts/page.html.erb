@@ -2,12 +2,11 @@
 <html lang="en">
 
   <head>
-
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag  'page', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'page', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag  'page', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'page', 'data-turbolinks-track': 'reload' %>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,62 +14,88 @@
     <meta name="author" content="">
 
     <title>Jalecitos</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
 
   </head>
 
-  <body>
+
+  <body id="page-top">
     <%= notification_helper %>
     <!-- Navigation -->
 
-   <%= render 'shared/main_nav_bar' %>
+    <%= render 'shared/main_nav_bar' %>
     <%= yield %>
   </body>
 
-<footer class="footer bg-light">
-    <div class="container">
-    <div class="row">
-        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-        <ul class="list-inline mb-2">
-            <li class="list-inline-item">
-            <a href="#">About</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-            <a href="#">Contact</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-            <a href="#">Terms of Use</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-            <a href="#">Privacy Policy</a>
-            </li>
-        </ul>
-        <p class="text-muted small mb-4 mb-lg-0">&copy; Jalecitos.com 2018. All Rights Reserved.</p>
-        </div>
-        <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-        <ul class="list-inline mb-0">
-            <li class="list-inline-item mr-3">
-            <a href="#">
-                <i class="fa fa-facebook fa-2x fa-fw"></i>
-            </a>
-            </li>
-            <li class="list-inline-item mr-3">
-            <a href="#">
-                <i class="fa fa-twitter fa-2x fa-fw"></i>
-            </a>
-            </li>
-            <li class="list-inline-item">
-            <a href="#">
-                <i class="fa fa-instagram fa-2x fa-fw"></i>
-            </a>
-            </li>
-        </ul>
-        </div>
-    </div>
-    </div>
-</footer>
+  <!-- footr -->
+
+
+  <!--  - - - --  - - -   - - - - - -        Jalecitos Guides -->
+  <div class="Footer">
+
+      <div class="container">
+
+          <div class="row ">
+              <div class="col-lg-12">
+      <div class="legal">
+          <h3>Jalecitos</h3><div class="privacy-terms"><a class="privacy-policy" href="/privacy-policy" target="_blank">Privacy Policy</a><a href="/terms_of_service" target="_blank">Terms of Service</a></div><p class="all-rights"><!-- react-text: 7 -->© <!-- /react-text --><!-- react-text: 8 -->Jalecitos Int. Lmt. 2018<!-- /react-text --></p></div>
+  </div>
+      </div>
+
+      <div class="row">
+
+          <!--  -->
+  <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+  <h4>categories</h4>
+  <article><ul><li><a href="/categories/graphics-design">Graphics &amp; Design</a></li><li><a href="/categories/online-marketing">Digital Marketing</a></li><li><a href="/categories/writing-translation">Writing &amp; Translation</a></li><li><a href="/categories/video-animation">Video &amp; Animation</a></li><li><a href="/categories/music-audio">Music &amp; Audio</a></li><li><a href="/categories/programming-tech">Programming &amp; Tech</a></li><li><a href="/categories/business">Business</a></li><li><a href="/categories/lifestyle">Fun &amp; Lifestyle</a></li><li><a href="/categories?source=footer">Sitemap</a></li></ul></article>
+  </div>
+  <!--  -->
+
+  <div class="col-lg-2  col-md-2  col-sm-6  col-6">
+      <h4>About</h4>
+      <article><ul><li><a href="/jobs?source=footer"><!-- react-text: 43 -->Careers<!-- /react-text --></a></li><li><a href="/news?source=footer"><!-- react-text: 46 -->Press &amp; News<!-- /react-text --></a></li><li><a href="/partnerships?source=footer"><!-- react-text: 49 -->Partnerships<!-- /react-text --></a></li><li><a href="/privacy-policy?source=footer"><!-- react-text: 52 -->Privacy Policy<!-- /react-text --></a></li><li><a href="/terms_of_service?source=footer"><!-- react-text: 55 -->Terms of Service<!-- /react-text --></a></li><li><a href="/intellectual-property?source=footer"><!-- react-text: 58 -->Intellectual Property Claims<!-- /react-text --></a></li></ul></article>
+  </div>
+  <!--  -->
+
+  <div class="col-lg-2  col-md-2  col-sm-6  col-6">
+  <h4>Support</h4>
+
+  <article><ul><li><a href="https://support.Jalecitos.com" target="_blank"><!-- react-text: 67 -->Help &amp; Education<!-- /react-text --></a></li><li><a href="/trust_safety?source=footer"><!-- react-text: 70 -->Trust &amp; Safety<!-- /react-text --></a></li><li><a href="https://sellers.Jalecitos.com/en/article/how-to-start-selling-on-Jalecitos" target="_blank"><!-- react-text: 73 -->Selling on Jalecitos<!-- /react-text --></a></li><li><a href="/pages/howtofindafreelancer?show_join=true&amp;source=footer"><!-- react-text: 76 -->Buying on Jalecitos<!-- /react-text --></a></li></ul></article>
+  </div>
+  <!--  -->
+  <div class="col-lg-2  col-md-2  col-sm-6  col-6">
+
+  <h4>Community</h4>
+  <article><ul><li><a href="http://events.Jalecitos.com" target="_blank"><!-- react-text: 85 -->Events<!-- /react-text --></a></li><li><a href="https://blog.Jalecitos.com/?utm_source=Jalecitos&amp;utm_medium=website" target="_blank"><!-- react-text: 88 -->Blog<!-- /react-text --></a></li><li><a href="http://forum.Jalecitos.com/?utm_source=Jalecitos&amp;utm_medium=website" target="_blank"><!-- react-text: 91 -->Forum<!-- /react-text --></a></li><li><a href="http://forum.Jalecitos.com/Jalecitoscast/?utm_source=Jalecitos&amp;utm_medium=website" target="_blank"><!-- react-text: 94 -->Podcast<!-- /react-text --></a></li><li><a href="/affiliate_program?source=footer"><!-- react-text: 97 -->Affiliates<!-- /react-text --></a></li><li><a href="/referral_program?source=footer"><!-- react-text: 100 -->Invite a Friend<!-- /react-text --></a></li><li><a href="https://elevate.Jalecitos.com/?utm_source=Jalecitos" target="_blank"><!-- react-text: 103 -->Jalecitos Elevate<!-- /react-text --><small>Exclusive Benefits</small></a></li></ul></article>
+  </div>
+
+
+  <div class="col-lg-3  col-md-3  col-sm-6  col-12">
+
+  <h4>For Freelancers</h4>
+  <article><ul><li><a href="/start_selling?source=footer"><!-- react-text: 113 -->Become a Seller<!-- /react-text --></a></li><li><a href="/pro?source=footer"><!-- react-text: 116 -->Jalecitos Pro<!-- /react-text --></a></li><li><a href="https://www.and.co" target="_blank"><!-- react-text: 119 -->AND CO<!-- /react-text --><small>Free Invoice Software</small></a></li></ul></article>
+  </div>
+      </div>
+
+
+      <div class="row in_row social_footr">
+
+
+  <div class="col-lg-9 col-md-6 ">
+      <ul class="social"><li class="google">
+          <a href="https://twitter.com/Jalecitos" target="_blank"><%= fa_icon "twitter" %></a>
+
+         <a href="https://www.facebook.com/Jalecitos" target="_blank"><%= fa_icon "facebook" %></a>
+
+        <a href="https://www.linkedin.com/company/Jalecitos-com" target="_blank"><%= fa_icon "linkedin" %></a>
+
+         <a href="https://www.pinterest.com/Jalecitos" target="_blank"><%= fa_icon "pinterest" %></a>
+
+          <a href="https://instagram.com/Jalecitos" target="_blank"><%= fa_icon "instagram" %></a>
+      </ul>
+  </div>
+  </div>
+  </div>
+  </div>
+
 
 </html>
