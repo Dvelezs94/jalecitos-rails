@@ -99,3 +99,5 @@ gem 'best_in_place', '~> 3.1', '>= 3.1.1'
 gem 'jquery-fileupload-rails', '~> 0.4.7'
 # Transactional Email
 gem 'mandrill-api', '~> 1.0', '>= 1.0.53', require: "mandrill"
+#jquery form validation
+gem 'jquery-validation-rails', '~> 1.16'
