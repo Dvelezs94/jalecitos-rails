@@ -28,12 +28,14 @@
     <div class="card mb-4 box-shadow">
       <div class="card-header">
       <%= link_to "Gigs", :q => "gigs" %> | <%= link_to "Requests", :q => "requests" %>
-
+      <% if params[:q] == 'requests' %>
+        <%= link_to "New Request", new_user_request_path(@user), class: "pull-right" %>
+      <% else %>
+        <%= link_to "New Gig", new_user_gig_path(@user), class: "pull-right" %>
+      <% end %>
       </div>
       <div class="card-body">
-        <% if params[:q] == 'gigs' %>
-          <%= render @user.gigs %>
-        <% elsif params[:q] == 'requests' %>
+        <% if params[:q] == 'requests' %>
           <%= render @user.requests %>
         <% else %>
           <%= render @user.gigs %>

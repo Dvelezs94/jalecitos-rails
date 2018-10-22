@@ -1,3 +1,3 @@
-$(document).ready(function () {
-   $("#current_form").validate();
+document.addEventListener("turbolinks:load", function() {
+   $(".current_form").validate();
 });
