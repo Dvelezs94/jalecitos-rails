@@ -5,6 +5,8 @@ class PackagesController < ApplicationController
   before_action :check_gig_ownership, only: [:new, :create, :edit_packages, :update_packages]
   before_action :create_redirect, only: [:new, :create]
   before_action :update_redirect, only: [:edit_packages, :update_packages]
+  before_action :validate_create, only: [:create]
+  before_action :validate_update, only: [:update_packages]
   access user: :all
 
   def new
@@ -67,5 +69,23 @@ class PackagesController < ApplicationController
 
   def check_gig_ownership
     (current_user.nil? || current_user.id != @gig.user_id) ? redirect_to(root_path) : nil
+  end
+
+  def validate_create
+    params[:packages].each do |pack|
+      if pack[:name].length > 100 || pack[:description].length > 1000 || (pack[:price].to_f < 100 && pack[:price] != "")
+        redirect_to(root_path, notice: "Sus paquetes no han podido guardarse, por favor, inténtelo de nuevo.")
+        break
+      end
+    end
+  end
+  def validate_update
+    @gig.packages.each do |record|
+      pack = params[:packages]["#{record.id}"]
+      if pack[:name].length > 100 || pack[:description].length > 1000 || (pack[:price].to_f < 100 && pack[:price] != "")
+        redirect_to(root_path, notice: "Sus paquetes no han podido guardarse, por favor, inténtelo de nuevo.")
+        break
+      end
+    end
   end
 end

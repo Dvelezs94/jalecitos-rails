@@ -1,4 +1,4 @@
-<%= form_with(model: request, url: request_form_url_helper,method: request_form_method_helper, local: true) do |form| %>
+<%= form_with(model: request, url: request_form_url_helper,method: request_form_method_helper, :html => { :class=> "current_form" }, local: true) do |form| %>
   <% if request.errors.any? %>
   <%request.errors.full_messages.each do |error| %>
     <%= notification_generator_helper error %>
@@ -7,19 +7,19 @@
 
   <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, class: 'form-control' %>
+    <%= form.text_field :name, class: 'form-control required', maxlength: 100 %>
   </div>
 
   <div class="form-group">
     <%= form.label :budget %>
-    <%= form.number_field :budget, options ={min: 100} %>
+    <%= form.number_field :budget, options ={min: 100,  class: 'required'} %>
   </div>
 
   <div class="form-group">
     <%= form.label :description %>
 
     <%= form.text_field :description, class: 'form-control', id: "description", type: "hidden" %>
-    <trix-editor input="description"></trix-editor>
+    <trix-editor input="description" class="required" maxlength="1000" minlength="1"></trix-editor>
   </div>
 
   <div class="form-group">
@@ -28,14 +28,14 @@
          {
               include_blank: true
         },
-        class: 'form-control'
+        class: 'form-control required'
     ) %>
   </div>
 
 
   <div class="form-group">
     <%= form.text_field :location,
-                         class: 'form-control',
+                         class: 'form-control required',
                          size: 50,
                          placeholder: 'Busca tu ciudad...',
                          id: 'autocomplete' %>
