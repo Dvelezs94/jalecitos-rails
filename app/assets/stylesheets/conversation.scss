@@ -2,6 +2,7 @@
  *= require_self
  *= require gritter
 *= require message-styles
+*= require_tree ./pages
  */
  @import 'bootstrap';
  @import 'font-awesome';

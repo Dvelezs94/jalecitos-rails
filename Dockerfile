@@ -1,4 +1,4 @@
-FROM ruby:2.5
+FROM ruby:2.5.1
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev curl software-properties-common graphviz
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt install -y nodejs
