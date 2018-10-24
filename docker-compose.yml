@@ -25,6 +25,12 @@ services:
       - AWS_ACCESS_KEY_ID=AKIAI7WWMNOBVY4IKSBQ
       - AWS_SECRET_ACCESS_KEY=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
       - AWS_REGION=us-east-2
+      # Open API
+      - OPENPAY_PROD=false
+      - OPENPAY_MERCHANT_ID=mgaglakzbv6gzvpnzp6g
+      - OPENPAY_PRIVATE_KEY=sk_4c6a3e0b2c9c406b91fd6fbe5eddaeeb
+      - OPENPAY_PUBLIC_KEY=pk_c958326b8eb44e8b8ace1001948cb0ab
+
 
     ports:
       - "80:3000"

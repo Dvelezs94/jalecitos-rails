@@ -103,4 +103,5 @@ gem 'mandrill-api', '~> 1.0', '>= 1.0.53', require: "mandrill"
 gem 'jquery-easing-rails', '~> 0.0.2'
 #jquery form validation
 gem 'jquery-validation-rails', '~> 1.16'
-
+# Payments
+gem 'openpay', '~> 2.0'
