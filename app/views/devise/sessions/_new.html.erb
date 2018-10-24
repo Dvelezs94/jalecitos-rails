@@ -23,6 +23,7 @@
           <div class="divi-new js-form-join-section" data-section="1">
             <span>O</span></div>
           <%= form_for(:user, :url => session_path(:user)) do |f| %>
+          <%= devise_error_messages! %>
             <%= f.email_field :email, placeholder: "Correo" %>
             <%= f.password_field :password, placeholder: "Contraseña" %>
             <%= f.check_box :remember_me %>
@@ -43,3 +44,36 @@
 </div>
 
 </div>
+<!-- <header class="masthead text-center">
+    <div class="overlay"></div>
+    <div class="container">
+    <div class="row">
+    <div class="col-xl-9 mx-auto">
+    <h1 class="text-center">Log in</h1>
+    <hr>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-group">
+        <%= f.email_field :email, autofocus: true, placeholder: 'Email Address', class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.password_field :password, autocomplete: "off", placeholder: 'Password', class: 'form-control' %>
+      </div>
+
+      <% if devise_mapping.rememberable? -%>
+        <div class="form-group">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end -%>
+
+      <div class="form-group">
+          <%= f.submit "Log in", class: "btn btn-primary btn-block btn-lg" %>
+      </div>
+    <% end %>
+      <div class="text-center">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+</div>
+</header> -->
