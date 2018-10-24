@@ -22,14 +22,14 @@
           </div> -->
           <div class="divi-new js-form-join-section" data-section="1">
             <span>O</span></div>
-          <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+          <%= form_for(resource, :as => resource_name, :html => { :class => "sign_up_form" }, :url => registration_path(resource_name)) do |f| %>
             <%= devise_error_messages! %>
-            <%= f.email_field :email, placeholder: "Correo", id: "user_email_new",autofocus: true, autocomplete: "email" %>
+            <%= f.email_field :email, placeholder: "Correo", id: "user_email_new", class: "required", autofocus: true, autocomplete: "email" %>
             <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> characters minimum)</em>
             <% end %><br />
-            <%= f.password_field :password, placeholder: "Nueva contraseña", id: "user_password_new", autocomplete: "new-password" %>
-            <%= f.password_field :password_confirmation, placeholder: "Confirmar contraseña", id: "user_password_conf_new", autocomplete: "new-password" %>
+            <%= f.password_field :password, placeholder: "Nueva contraseña", id: "user_password_new", class: "required", autocomplete: "new-password" %>
+            <%= f.password_field :password_confirmation, placeholder: "Confirmar contraseña", id: "user_password_conf_new", class: "required", autocomplete: "new-password" %>
             <br>
             <%= f.submit 'Continuar', :class => 'btn btn-success' %>
             <br>

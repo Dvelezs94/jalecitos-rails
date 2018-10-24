@@ -18,6 +18,10 @@
 
 //= require jquery.easing
 
+//= require jquery.validate
+
+//= require messages_es
+
 //= require_tree ./pages
 
 //= require jquery.slick

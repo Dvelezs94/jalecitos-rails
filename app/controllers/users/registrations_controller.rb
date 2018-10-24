@@ -6,7 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    super
+    redirect_to root_path
   end
 
   # POST /resource
@@ -25,7 +25,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
     else
-        puts "X"*500
       clean_up_passwords resource
       set_minimum_password_length
       redirect_to root_path, notice: "Algo ha salido mal con tu registro."
