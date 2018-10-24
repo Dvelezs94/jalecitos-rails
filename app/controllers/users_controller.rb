@@ -2,11 +2,16 @@ class UsersController < ApplicationController
   respond_to :html, :json
   layout 'user'
   before_action :set_user, only: [:show, :update]
-  access all: [:show], user: [:show, :update]
+  access all: [:show, :index], user: [:show, :update]
   before_action :check_user_ownership, only:[:update]
   include UsersHelper
 
   # GET /users/1
+  #al poner sitio/users da error, por eso esta ruta
+  def index
+    redirect_to root_path
+  end
+
   def show
   end
 

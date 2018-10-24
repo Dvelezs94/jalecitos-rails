@@ -4,14 +4,18 @@ class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def new
+    auth_options = { :recall => 'pages#home', :scope => :user }
+    resource = warden.authenticate!(auth_options)
+    super
+  end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    auth_options = { :recall => 'pages#home', :scope => :user }
+    resource = warden.authenticate!(auth_options)
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy

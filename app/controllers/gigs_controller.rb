@@ -8,11 +8,6 @@ class GigsController < ApplicationController
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status]
   access user: { except: [:ban_gig] }, admin: [:ban_gig]
 
-  # GET /gigs
-  def index
-    @gigs = Gig.includes(:packages, :user).friendly.where(user_id: current_user.id)
-  end
-
   # GET /gigs/1
   def show
     @show_packages = true

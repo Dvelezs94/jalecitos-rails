@@ -34,9 +34,7 @@ h6 {
   font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-section {
-  padding: 100px 0;
-}
+
 
 section h2.section-heading {
   font-size: 40px;
@@ -53,11 +51,6 @@ section h3.section-subheading {
   font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-@media (min-width: 768px) {
-  section {
-    padding: 150px 0;
-  }
-}
 
 .btn {
   font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -141,8 +134,6 @@ img::-moz-selection {
 
 @media (min-width: 992px) {
   #mainNav {
-    padding-top: 25px;
-    padding-bottom: 25px;
     -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
     -moz-transition: padding-top 0.3s, padding-bottom 0.3s;
     transition: padding-top 0.3s, padding-bottom 0.3s;
@@ -159,8 +150,7 @@ img::-moz-selection {
     padding: 1.1em 1em !important;
   }
   #mainNav.navbar-shrink {
-    padding-top: 0;
-    padding-bottom: 0;
+
     background-color: #212529;
   }
   #mainNav.navbar-shrink .navbar-brand {

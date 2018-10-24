@@ -12,7 +12,7 @@ jQuery.extend(jQuery.validator.messages, {
   number: "Por favor, escribe un número entero válido.",
   digits: "Por favor, escribe sólo dígitos.",
   creditcard: "Por favor, escribe un número de tarjeta válido.",
-  equalTo: "Por favor, escribe el mismo valor de nuevo.",
+  equalTo: "Los valores ingresados no coinciden.",
   accept: "Por favor, escribe un valor con una extensión aceptada.",
   maxlength: jQuery.validator.format("Por favor, no escribas más de {0} caracteres."),
   minlength: jQuery.validator.format("Por favor, no escribas menos de {0} caracteres."),

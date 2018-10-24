@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: "pages#home"
   get 'admins/dashboard'
 
   resources :conversations do
@@ -9,10 +10,12 @@ Rails.application.routes.draw do
   end
 
    devise_for :users, controllers: {
+     registrations: 'users/registrations',
      sessions: 'users/sessions',
      omniauth_callbacks: "users/omniauth_callbacks"
    }
    resources :users, only: [:show, :edit, :update]
+
    resources :users do
      resources :gigs, except: :index do
          member do
@@ -33,6 +36,5 @@ Rails.application.routes.draw do
    end
   resources :categories
   get 'requests', to: 'pages#requests_index'
-  root to: "pages#home"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
