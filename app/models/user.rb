@@ -59,7 +59,7 @@ class User < ApplicationRecord
 
    # Create default values
    after_initialize :set_defaults
-
+   after_save :create_openpay_account
    private
    def set_defaults
        # self.role ||= "user"
@@ -71,6 +71,28 @@ class User < ApplicationRecord
        login_part = self.email.split("@").first
        hex = SecureRandom.hex(3)
        self.alias = "#{ login_part }-#{ hex }"
+     end
+   end
+   
+   def create_openpay_account
+     # Create openpay Account if not already there
+     if self.openpay_id.nil?
+       @openpay ||= OpenPay::Init::Openpay
+       # Create the custombeer object
+       @customer=@openpay.create(:customers)
+
+       # Create default hash for new user
+       request_hash={
+         "external_id" => self.id,
+         "name" => self.alias,
+         "last_name" => nil,
+         "email" => self.email,
+         "requires_account" => false
+       }
+
+       response_hash=@customer.create(request_hash.to_hash)
+       self.openpay_id = response_hash['id']
+       save
      end
    end
 end
