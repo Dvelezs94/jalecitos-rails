@@ -1,51 +1,155 @@
 <%= form_with(model: user, local: true) do |form| %>
-  <% if user.errors.any? %>
-    <%user.errors.full_messages.each do |error| %>
-      <%= notification_generator_helper error %>
-    <% end %>
+<% if user.errors.any? %>
+  <%user.errors.full_messages.each do |error| %>
+    <%= notification_generator_helper error %>
   <% end %>
+<% end %>
 
-  <div class="wraper" style="display: flex;">
-  <div class="col-md-4">
-    <div class="card mb-4 box-shadow">
-      <label class="profile-container">
-        <%= image_tag avatar_display_helper(@user.image_url(:thumb)) %>
-        <%= form.file_field :image, class: 'form-control' %>
-      </label>
-      <div class="card-body">
-        <p class="card-title">Name: <%= best_in_place_if my_profile, @user, :name %></p>
-        <p class="card-title">Alias: <%= best_in_place_if my_profile,@user, :alias %></p>
-        <p class="card-title">Member since: <%= @user.created_at.strftime("%B %d, %Y") %></p>
-        <p class="card-title">Bio: <%= best_in_place_if my_profile,@user, :bio, as: :textarea, ok_button: :save, cancel_button: :cancel %></p>
-        <div class="d-flex justify-content-between align-items-center">
-          <small class="text-muted"></small>
+<div class="container-fluid dashboard_front">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-4 ">
+        <div class="dashboard_front_left">
+
+          <!-- user avatar -->
+          <div class="col-lg-12 text-center">
+            <div class="gap"></div>
+            <label class="profile-container">
+              <%= image_tag avatar_display_helper(@user.image_url(:thumb)) %>
+              <%= form.file_field :image, class: 'form-control' %>
+            </label>
+
+          </div>
+          <!-- user avatar -->
+
+          <div class="col-lg-12 user_name text-center">
+            <h5 class="text-center"><%= best_in_place_if my_profile,@user, :alias %></p>
+          </h5>
+          <p class="card-title">Member since:
+            <%= @user.created_at.strftime("%B %d, %Y") %></p>
+        </div>
+
+        <!-- progresses rows -->
+        <div class="row text-center progresses">
+
+          <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <h5>Usuario</h5>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <h5>Proveedor</h5>
+          </div>
+          <!-- -->
+
+          <!-- -->
+        </div>
+        <!-- -->
+
+        <!-- Earned in month -->
+        <div class="row Earned">
+          <div class="col-lg-9  col-md-6 col-sm-6 col-6">
+            <strong>Biografia</strong>
+          </div>
+        </div>
+
+        <div class="row Earned">
+          <div class="col-lg-12  col-md-12 col-sm-12 col-12">
+            <p><%= best_in_place_if my_profile,@user, :bio, as: :textarea, ok_button: :save, cancel_button: :cancel, :ok_button_class => "btn", :cancel_button_class => "btn", :html_attrs => {:maxlength => 500} %></a>
+          </p>
+        </div>
+      </div>
+
+      <!-- response time -->
+      <div class="row response">
+        <hr>
+        <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+
+          <p>
+            <a href="#" data-tooltip="average " class="">
+              Ultima conexion</a>
+          </p>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-right">
+
+          <p>
+            <a href="#" data-tooltip="average " class="font-weight-bold green">
+              1Hrs</a>
+          </p>
+        </div>
+        <hr>
+      </div>
+
+      <!-- inbox -->
+      <div class="row response">
+        <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+
+          <p>inbox(0)</p>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-right">
+
+          <p>
+            <a href="#" class="green">
+              View All</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+    <!-- left col end -->
+    <div class="gap"></div>
+  </div>
+
+  <!-- right col -->
+  <div class="col-lg-8 dashboard_front_right">
+
+    <div class="row">
+      <div class="col-lg-6">
+        <h5><%= link_to "Gigs", :q => "gigs" %>
+          |
+          <%= link_to "Pedidos", :q => "requests" %></h5>
+      </div>
+      <div class="col-lg-6">
+        <h5>
+          <% if params[:q] == 'requests' %>
+            <%= link_to "Nuevo Pedido", new_user_request_path(@user), class: "pull-right" %>
+          <% else %>
+            <%= link_to "Nuevo Gig", new_user_gig_path(@user), class: "pull-right" %>
+          <% end %>
+        </h5>
+      </div>
+    </div>
+
+    <div class=" education_wrapper">
+      <div class="row no-gutters ">
+        <div class="learn_more text-center col-lg-2">
+          <img src="img/learn_more.svg">
+        </div>
+        <div class="learn_more col-lg-10">
+
+          <h1>Learn More, Earn More</h1>
+          <p>Take courses specifically created to meet your professional needs improve your ranking in the marketplace, and boost your sales.
+          </p>
+          <a href="#" class="become_seller" id="become_seller_popup">Enroll Now</a>
+
         </div>
       </div>
     </div>
   </div>
-
-  <div class="col-md-8">
-    <div class="card mb-4 box-shadow">
-      <div class="card-header">
-      <%= link_to "Gigs", :q => "gigs" %> | <%= link_to "Requests", :q => "requests" %>
-      <% if params[:q] == 'requests' %>
-        <%= link_to "New Request", new_user_request_path(@user), class: "pull-right" %>
-      <% else %>
-        <%= link_to "New Gig", new_user_gig_path(@user), class: "pull-right" %>
-      <% end %>
-      </div>
-      <div class="card-body">
-        <% if params[:q] == 'requests' %>
-          <%= render @user.requests %>
-        <% else %>
-          <%= render @user.gigs %>
-        <% end %>
-
-        <div class="d-flex justify-content-between align-items-center">
-          <small class="text-muted"></small>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
+  <!-- right col -->
+</div>
+</div>
+</div>
 <% end %>
