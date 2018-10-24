@@ -73,7 +73,7 @@ class User < ApplicationRecord
        self.alias = "#{ login_part }-#{ hex }"
      end
    end
-   
+
    def create_openpay_account
      # Create openpay Account if not already there
      if self.openpay_id.nil?
@@ -83,16 +83,19 @@ class User < ApplicationRecord
 
        # Create default hash for new user
        request_hash={
-         "external_id" => self.id,
          "name" => self.alias,
          "last_name" => nil,
          "email" => self.email,
          "requires_account" => false
        }
 
-       response_hash=@customer.create(request_hash.to_hash)
-       self.openpay_id = response_hash['id']
-       save
+       begin
+         response_hash = @customer.create(request_hash.to_hash)
+         self.openpay_id = response_hash['id']
+         save
+       rescue OpenpayTransactionException => e
+          puts "#{e.description}, so the user could not be created on openpay"
+       end
      end
    end
 end
