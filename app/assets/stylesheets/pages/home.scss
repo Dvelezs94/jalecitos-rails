@@ -15,9 +15,9 @@
 }
 
 a.navbar-brand.js-scroll-trigger {
-  color: #0e0e0f !important;
+  color: #fff !important;
 }
-.fiverr a.nav-link {
+.jalecitos a.nav-link {
   font-size: 14px;
   color: #e5e5e5 !important;
 }
@@ -37,7 +37,7 @@ a{
   padding-top:60px;
   padding-bottom: 60px;
 }
-.fiverr a.nav-link:hover {
+.jalecitos a.nav-link:hover {
 
   color: #00b22d !important;
 }
@@ -164,10 +164,8 @@ a.button_menu:hover {
 
 
 input.js-search-input {
-  border-radius: 3px 0 0 3px;
   height: 50px;
   border: 0;
-  border-radius: 3px 0 0 3px;
   font-size: inherit;
   border-top: 1px solid #999;
   border-left: 1px solid #999;
@@ -177,7 +175,6 @@ input.js-search-input {
   padding: 7px 30px 7px 10px;
   border-color: #eee;
   box-shadow: inset 0 3px 9px rgba(0,0,0,.08);
-  border-radius: 3px;
   -webkit-transition: background-color .2s,border-color .2s,width .2s;
   transition: background-color .2s,border-color .2s,width .2s;
   overflow: hidden;
@@ -205,17 +202,17 @@ input.btn-lrg-standard.btn-submit.js-search-submit:hover {
   border: 1px solid #00b22d;
   cursor:pointer;
 }
-
+.search_banner {
+  display: inline-flex;
+}
 @media only screen and (min-width:583px){
-
-  .search_banner {
-    display: inline-flex;
-
-  }
-
-
   input.js-search-input {
     width:400px;
+  }
+}
+@media only screen and (max-width:494px){
+  .TopQuality img{
+    width: 80%;
   }
 }
 
@@ -476,27 +473,27 @@ border-top: 1px solid #00b22d;
   color: #848181;
 }
 
-/* fiverr guides */
-.Fiverr_Guides_boxes h3, .Fiverr_Guides_boxes p {
+/* Jalecitos guides */
+.Jalecitos_Guides_boxes h3, .Jalecitos_Guides_boxes p {
   color: #555;
   text-align: left;
   text-decoration: none;
   font-size: 16px;
   margin: 0px;
 }
-.Fiverr_Guides_boxes img{
+.Jalecitos_Guides_boxes img{
 width: 100%;
 border-radius: 3px;
 margin-bottom: 10px;
 }
 
 
-.Fiverr_Guides_boxes:hover img {
+.Jalecitos_Guides_boxes:hover img {
   -webkit-filter: brightness(70%);
   filter: brightness(70%);
 }
 
-.Fiverr_Guides a.green_btn {
+.Jalecitos_Guides a.green_btn {
   padding: 14px 21px !important;
   border: 1px solid #00B22D;
   color: #00B22D;
@@ -504,7 +501,7 @@ margin-bottom: 10px;
   transition: background ease 0.5s;
 }
 
-.Fiverr_Guides a.green_btn:hover {
+.Jalecitos_Guides a.green_btn:hover {
   border: 1px solid #00B22D;
       transition: background ease 0.5s;
   color: white;

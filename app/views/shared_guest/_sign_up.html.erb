@@ -1,5 +1,5 @@
 <!-- The Modal -->
-<div class="modal inmodal" id="inModal">
+<div class="modal upmodal" id="upModal">
 
   <!-- Modal content -->
   <div class="modal-content">
@@ -10,7 +10,7 @@
 
         <div class="col-lg-12">
 
-          <h4>Iniciar sesión</h4>
+          <h4>Únete a Jalecitos</h4>
 
           <div class="fb_sign_in">
             <%= link_to "Continuar con facebook", user_facebook_omniauth_authorize_path, class: 'loginBtn loginBtn--facebook' %>
@@ -22,20 +22,15 @@
           </div> -->
           <div class="divi-new js-form-join-section" data-section="1">
             <span>O</span></div>
-          <%= form_for(:user, :url => session_path(:user)) do |f| %>
-            <%= f.text_field :email, placeholder: "Correo" %>
-            <%= f.password_field :password, placeholder: "Contraseña" %>
-            <%= f.check_box :remember_me %>
-            <%= f.label "Recordarme" %>
+          <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+            <%= f.text_field :email, placeholder: "Correo", id: "user_email_new" %>
+            <%= f.password_field :password, placeholder: "Contraseña", id: "user_password_new" %>
             <br>
             <%= f.submit 'Continuar', :class => 'btn btn-success' %>
             <br>
-            <%= link_to "Olvidé mi contraseña", new_password_path(:user) %>
           <% end %>
-
-        <hr>
-        <p>No eres miembro?
-          <a href="" id="register">Regístrate</a>
+        <p>Al unirme, acepto recibir correos de Jalecitos.
+        </p>
         </p>
       </div>
     </div>

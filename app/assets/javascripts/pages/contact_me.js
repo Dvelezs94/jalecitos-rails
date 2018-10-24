@@ -1,4 +1,4 @@
-$(function() {
+$( document ).on('turbolinks:load',function() {
 
   $("#contactForm input,#contactForm textarea").jqBootstrapValidation({
     preventSubmit: true,

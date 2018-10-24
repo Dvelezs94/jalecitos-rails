@@ -19,3 +19,5 @@
 //= require jquery.easing
 
 //= require_tree ./pages
+
+//= require jquery.slick
