@@ -13,7 +13,8 @@
           <h4>Nueva Tarjeta</h4>
 
           <div class="divi-new js-form-join-section" data-section="1"></div>
-          <%= form_with url: user_cards_path(current_user) do |f| %>
+          <%= form_with url: user_cards_path(current_user), id: "cardForm" do |f| %>
+            <%= f.hidden_field :device_session_id, class: "required" %>
             <%= f.number_field :card_number, class: "required", placeholder: "Numero de tarjeta" %>
             <%= f.number_field :expiration_month, class: "required", placeholder: "Mes de expiracion" %>
             <%= f.number_field :expiration_year, class: "required", placeholder: "Anio de expiracion" %>
