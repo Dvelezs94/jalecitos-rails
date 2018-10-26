@@ -1,7 +1,7 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark  jalecitos" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top jalecitos" id="mainNav">
   <div class="container">
-    <%= link_to "Jalecitos", root_path, :class => 'navbar-brand js-scroll-trigger' =%>
+    <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png', size: '108x36'), root_path, :class => 'navbar-brand js-scroll-trigger', id: "jalecitos-logo" %>
     <input class="js-search-input js-report-to-aux-data strt_selling_Srch1" name="query" placeholder="Find Services" type="text" autocomplete="off">
     <input type="submit" class="btn-lrg-standard btn-submit js-search-submit strt_selling_Srch" value="Search">
 
@@ -11,7 +11,10 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav  ml-auto">
         <li class="nav-item">
-          <%= link_to "Mensajes", conversations_path, :class => 'nav-link js-scroll-trigger' =%>
+          <%= link_to "Inicio", root_path, :class => 'nav-link js-scroll-trigger' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Mensajes", conversations_path, :class => 'nav-link js-scroll-trigger' %>
         </li>
 
         <li class="nav-item my_dropdown_menu_top">
@@ -60,7 +63,7 @@
         </li>
 
 
-        <li class="nav-item my_dropdown_menu">
+        <li class="nav-item my_dropdown_menu my_image">
           <div class="dropdown">
             <button class="dropbtn">U</button>
             <div class="dropdown-content">
@@ -76,7 +79,7 @@
                   <a class="" href="#">Ayuda</a>
                 </li>
                 <li>
-                  <%= link_to "Log out", destroy_user_session_path, method: :delete =%>
+                  <%= link_to "Log out", destroy_user_session_path, method: :delete %>
                 </li>
               </ul>
             </div>

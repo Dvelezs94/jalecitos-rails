@@ -44,7 +44,7 @@ a{
 
 
 #mainNav{
-  padding: 10px 0px !important;
+  padding: 10px 0px;
 }
 #mainNav a.button_menu {
   border: 1px solid;
@@ -511,8 +511,9 @@ font-size: 16px;
 }
 .Footer{
   padding: 20px 0px 0px;
-  background-color: #FAFAFA;
+  background-color: #212529;
   border-top: 1px solid #efefef;
+  color: #fff;
 }
 .social_footr{
   padding: 20px 0px;
@@ -522,7 +523,7 @@ font-size: 16px;
 .Footer a {
   font-size: 15px;
   line-height: 120%;
-  color: #777;
+  color: #fff;
 }
 
 .Footer ul  {

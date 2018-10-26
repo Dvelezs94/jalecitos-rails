@@ -23,7 +23,7 @@ input.js-search-input.js-report-to-aux-data.strt_selling_Srch1::placeholder {
 
 
 input.strt_selling_Srch {
-    padding: 5px 18px !important;
+    padding: 5.2px 18px !important;
 }
 @media only screen and (max-width:535px){
     input.js-search-input.js-report-to-aux-data.strt_selling_Srch1,
@@ -37,7 +37,7 @@ display: none !important;
 
 @media only screen and (max-width:992px){
     .mesages_ .dropdown-content {
-      
+
         left: 0px;
     }
 
@@ -251,7 +251,7 @@ display: none !important;
     border-radius: 58px;
     font-size: 11px;
     padding: 4px 5px;
-} 
+}
 
 .dashboard_menu#mainNav {
     background: white;
@@ -306,7 +306,7 @@ display: none !important;
 }
 .mesages_ .dropdown-content ul li {
     list-style: none;
-   
+
     width: 50%;
 }
 .mesages_ .dropdown-content ul li:nth-child(1) {
@@ -406,4 +406,9 @@ display: none !important;
 .noitify_right{
     width: 50%;
     float: right;
+}
+
+/*Color for star rating on user profile */
+.checked {
+    color: orange;
 }

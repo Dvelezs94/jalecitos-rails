@@ -413,7 +413,10 @@ h3.mp-start-selling {
 
 
 
-.modal-content input {
+.modal-content input[type="password"],
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content input[type="number"] {
     width: 100%;
     border-radius: 5px;
     margin-bottom: 17px;
