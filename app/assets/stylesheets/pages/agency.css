@@ -713,6 +713,9 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 .my_dropdown_menu.my_image{
   margin: auto;
 }
+.my_dropdown_menu.my_image label{
+  margin: auto;
+}
 
 .nav-avatar {
   display: block;
