@@ -19,3 +19,5 @@
 //= require jquery-fileupload/basic
 
 //=require users
+
+//=require_tree ./users

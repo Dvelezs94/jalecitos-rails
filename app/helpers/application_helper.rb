@@ -19,14 +19,28 @@ module ApplicationHelper
   end
 
   def notification_helper
-    alert = (flash[:alert] || flash[:error] || flash[:notice])
-    if alert
-        notification_generator_helper alert
+    msg = (flash[:alert] || flash[:error] || flash[:notice] || flash[:warning] || flash[:success])
+
+    if msg
+      case
+        when flash[:alert]
+          flash_type = :alert
+        when flash[:error]
+          flash_type = :error
+        when flash[:notice]
+          flash_type = :notice
+        when flash[:warning]
+          flash_type = :warning
+        when flash[:success]
+          flash_type = :success
+      end
+
+      notification_generator_helper msg, flash_type
     end
   end
 
-  def notification_generator_helper msg
-     js add_gritter(msg, :title=>"Jalecitos", :sticky => false, :time => 2000 )
+  def notification_generator_helper msg, flash_type
+     js add_gritter(msg, :image => flash_type, :title=>"Jalecitos", :sticky => false, :time => 2000 )
   end
 
   def google_scripts_helper

@@ -1,0 +1,86 @@
+body{
+	background: #eee;
+}
+.navbar-text a{
+	text-decoration: none;
+	color: #777777;
+	line-height: 22px;
+	 font-weight: 500;
+}
+.edit{
+	background: white;
+	width: 70%;}
+
+.edit p{
+
+	color: #555555;
+	line-height: 16px;
+	font-size: 12px;
+	font-weight: 400;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+.edit p span{
+	color: #00b22d;
+}
+ hr{
+	  display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 1em 0;
+    padding: 0;
+}
+.edit label{
+	font-size:12px;
+	color: #777777;
+}
+.edit label .fa-circle{
+	color: #00b22d;
+}
+ .edit input{
+
+  width: 500px;
+  line-height:1px;
+
+}
+.edit ul{
+	line-height: 21px;
+	font-size: 12px;
+}
+.edit .butn{
+	background-color: #919191;
+	color: white;
+	float: center;
+	margin-right:  18px;
+
+}
+
+.edit li{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   margin-left: -20px;
+	color: #777777;
+	line-height: 22px;
+	font-size: 12px;
+	font-weight: 700;
+
+}
+
+@media (max-width: 767px) { /* Makes these changes only when screen sizes is 767 px or less */
+  .edit input{
+width: 190px!important;}
+  .edit select{
+width: 190px!important;}
+.edit textarea{
+width: 190px!important;}
+.edit{
+margin-left: 90px!important;
+}
+.navbar-text{
+	margin-left: 10px!important;
+}
+#tell .text{
+	margin-left: 0px!important;
+}
+
+   }
