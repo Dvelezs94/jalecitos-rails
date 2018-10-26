@@ -1,0 +1,41 @@
+<!-- The Modal -->
+<div class="modal inmodal" id="cardModal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <!-- <span class="close">&times;</span> -->
+    <div class="container text-center">
+
+      <div class="row">
+
+        <div class="col-lg-12">
+
+          <h4>Nueva Tarjeta</h4>
+
+          <div class="divi-new js-form-join-section" data-section="1"></div>
+          <%= form_with url: user_cards_path(current_user) do |f| %>
+            <%= f.number_field :card_number, class: "required", placeholder: "Numero de tarjeta" %>
+            <%= f.number_field :expiration_month, class: "required", placeholder: "Mes de expiracion" %>
+            <%= f.number_field :expiration_year, class: "required", placeholder: "Anio de expiracion" %>
+            <%= f.number_field :cvv2, class: "required", placeholder: "CVV" %>
+            <%= f.text_field :holder_name, class: "required", placeholder: "Nombre del Titular" %>
+            <span>Direccion De Facturacion</span>
+            <hr>
+            <%= f.text_field :address_1, class: "required", placeholder: "Direccion 1" %>
+            <%= f.text_field :address_2, placeholder: "Direccion 2" %>
+            <%= f.number_field :postal_code, class: "required", placeholder: "Codigo Postal" %>
+            <%= f.text_field :city, class: "required", placeholder: "Ciudad" %>
+            <%= f.text_field :state, class: "required", placeholder: "Estado" %>
+            <%= f.text_field :country_code, class: "required", placeholder: "Pais" %>
+            <br>
+            <%= f.submit 'Continuar', :class => 'btn btn-success' %>
+          <% end %>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+<br>

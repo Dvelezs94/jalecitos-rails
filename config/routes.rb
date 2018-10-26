@@ -14,7 +14,11 @@ Rails.application.routes.draw do
      sessions: 'users/sessions',
      omniauth_callbacks: "users/omniauth_callbacks"
    }
-   resources :users, only: [:show, :edit, :update]
+   resources :users, only: [:show, :edit, :update] do
+     get 'configuration', to: 'users#configuration', as: 'config'
+     resources :banks, only: [:create, :destroy]
+     resources :cards, only: [:create, :destroy]
+   end
 
    resources :users do
      resources :gigs, except: :index do

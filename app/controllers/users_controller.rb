@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
+  include OpenpayHelper
+  include UsersHelper
   respond_to :html, :json
   layout 'user'
   before_action :set_user, only: [:show, :update]
-  access all: [:show, :index], user: [:show, :update]
-  before_action :check_user_ownership, only:[:update]
-  include UsersHelper
+  before_action :set_user_config, only: [:configuration]
+  access all: [:show, :index], user: [:show, :update, :configuration]
+  before_action :check_user_ownership, only:[:update, :configuration]
+
+
 
   # GET /users/1
   #al poner sitio/users da error, por eso esta ruta
@@ -12,12 +16,18 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def configuration
+    @openpay_id = @user.openpay_id
+    @user_banks = get_openpay_resource("bank", @openpay_id)
+    @user_cards = get_openpay_resource("card", @openpay_id)
+  end
+
   def show
   end
 
   # PATCH/PUT /users/1
   def update
-    flash[:notice] = 'Your profile was successfully updated.' if @user.update_attributes(user_params)
+    flash[:success] = 'Your profile was successfully updated.' if @user.update_attributes(user_params)
     respond_with(@user)
   end
 
@@ -25,6 +35,10 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.friendly.find(params[:id])
+    end
+
+    def set_user_config
+      @user = User.friendly.find(params[:user_id])
     end
 
     # Only allow a trusted parameter "white list" through.
@@ -36,6 +50,7 @@ class UsersController < ApplicationController
     end
     def check_user_ownership
       if ! my_profile
+        flash[:error] = "No tienes permisos para acceder aqui"
         redirect_to root_path
       end
     end

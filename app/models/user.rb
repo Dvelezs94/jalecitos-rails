@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   extend FriendlyId
+  include OpenpayHelper
   friendly_id :alias, use: :slugged
 
   # Validates uniqueness of id
@@ -77,9 +78,7 @@ class User < ApplicationRecord
    def create_openpay_account
      # Create openpay Account if not already there
      if self.openpay_id.nil?
-       @openpay ||= OpenPay::Init::Openpay
-       # Create the custombeer object
-       @customer=@openpay.create(:customers)
+       init_openpay("customer")
 
        # Create default hash for new user
        request_hash={
@@ -94,7 +93,7 @@ class User < ApplicationRecord
          self.openpay_id = response_hash['id']
          save
        rescue OpenpayTransactionException => e
-          puts "#{e.description}, so the user could not be created on openpay"
+          puts "#{self.alias} issue: #{e.description}, so the user could not be created on openpay"
        end
      end
    end
