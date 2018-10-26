@@ -16,9 +16,9 @@ a {
   color: #fed136;
 }
 
-a:hover {
+/* a:hover {
   color: #fec503;
-}
+} */
 
 .text-primary {
   color: #fed136 !important;
@@ -701,6 +701,17 @@ ul.social-buttons li a {
 
 ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
   background-color: #fed136;
+}
+
+.categories_drop button.dropbtn:hover{
+   color: #fed136;
+}
+
+.navbar-shrink{
+  padding: 0 0 !important;
+}
+.my_dropdown_menu.my_image{
+  margin: auto;
 }
 
 .nav-avatar {

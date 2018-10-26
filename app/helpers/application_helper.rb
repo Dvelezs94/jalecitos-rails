@@ -5,7 +5,7 @@ module ApplicationHelper
       render 'shared_admin/nav_links_admin'
     elsif  has_role?(:user)
       (render 'shared_user/nav_links_user')+
-      (render 'shared_user/gig_links_user')
+      (render 'shared_user/category_links')
     else
       render 'shared_guest/nav_links_guest'
     end
