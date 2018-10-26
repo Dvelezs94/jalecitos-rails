@@ -10,17 +10,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav  ml-auto">
-
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#">Community</a>
-        </li>
         <li class="nav-item">
           <%= link_to "Mensajes", conversations_path, :class => 'nav-link js-scroll-trigger' =%>
         </li>
 
         <li class="nav-item my_dropdown_menu_top">
           <div class="dropdown">
-            <a class="nav-link js-scroll-trigger">Vendiendo</a>
+            <a class="nav-link js-scroll-trigger">Vender</a>
             <div class="dropdown-content">
               <ul>
                 <li>
@@ -42,7 +38,7 @@
 
         <li class="nav-item my_dropdown_menu_top">
           <div class="dropdown">
-            <a class="nav-link js-scroll-trigger">Comprando</a>
+            <a class="nav-link js-scroll-trigger">Comprar</a>
             <div class="dropdown-content">
               <ul>
 
@@ -74,7 +70,7 @@
                   <%= link_to "Mi Perfil", user_path(current_user.slug, :q => "gigs") %>
                 </li>
                 <li>
-                  <a class="" href="edit.html">Configuracion</a>
+                  <%= link_to "Configuracion", user_config_path(current_user.slug) %>
                 </li>
                 <li>
                   <a class="" href="#">Ayuda</a>
