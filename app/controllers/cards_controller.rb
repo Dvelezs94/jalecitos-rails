@@ -26,6 +26,7 @@ class CardsController < ApplicationController
       "cvv2" => card_params[:cvv2],
       "expiration_month" => card_params[:expiration_month],
       "expiration_year" => card_params[:expiration_year],
+      "device_session_id" => card_params[:device_session_id],
       "address" => address_hash
     }
 
@@ -56,7 +57,7 @@ class CardsController < ApplicationController
   private
     # Only allow a trusted parameter "white list" through.
     def card_params
-        params.permit(:holder_name, :card_number, :cvv2,
+        params.permit(:holder_name, :card_number, :cvv2, :device_session_id,
                                      :expiration_month, :expiration_year,
                                      :address_1, :address_2, :state, :city, :postal_code, :country_code)
     end
