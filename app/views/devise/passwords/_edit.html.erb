@@ -1,0 +1,43 @@
+<!-- The Modal -->
+<div class="modal inmodal" id="changePasswordModal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <!-- <span class="close">&times;</span> -->
+    <div class="container text-center">
+
+      <div class="row">
+
+        <div class="col-lg-12">
+
+          <h4>Cambiar Contrasena</h4>
+          <div class="divi-new js-form-join-section" data-section="1"></div>
+          <%= form_with model: @user, url: user_registration_path, html: { method: :put } do |f| %>
+
+            <div class="form-group">
+              <%= f.label "Nueva Contrasena" %><br />
+              <%= f.password_field :password, autocomplete: "off", class: 'form-control'  %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label "Confirma la nueva contrasena" %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'  %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label "Contrasena actual" %> <i>(Necesitamos verificar que eres tu)</i><br />
+              <%= f.password_field :current_password, autocomplete: "off", class: 'form-control'  %>
+            </div>
+
+            <div class="form-group">
+              <%= f.submit "Actualizar", class: 'btn btn-lg btn-block btn-primary' %>
+            </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+<br>
