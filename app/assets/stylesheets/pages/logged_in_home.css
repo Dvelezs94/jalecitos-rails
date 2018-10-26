@@ -172,14 +172,13 @@ margin: 0px 0px;
 }
 
 
-
 @media only screen and (max-width:576px){
 
 .single_gig {
 
     max-width: 65% !important;
     margin: 6px auto;
-}
+  }
 }
 .single_gig {
 
@@ -200,7 +199,4 @@ margin: 0px 0px;
 
 .col-lg-2.single_gig {
   flex: 0 0 100%;
-}
-.gig_name_field{
-  height: 50px;
 }

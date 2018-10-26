@@ -1,11 +1,13 @@
 <div class="col-lg-2 col-md-4 col-sm-6 col-12 single_gig">
    <div class="get_pro_content">
-      <%= image_tag image_display_helper(gig.image_url), width: "100%", height: 139 %>
+      <%= link_to image_tag( image_display_helper(gig.image_url), width: "100%", height: 150 ), user_gig_path(gig.user.slug,gig) %>
       <div class="get_pro_content_container">
-         <div class="gig_avatar_"><img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/gig_avatr.png"><%= gig.user.alias %> </div>
+         <div class="gig_avatar_">
+           <%=link_to image_tag("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/gig_avatr.png"), user_path(gig.user.slug)%>
+           <%=link_to gig.user.alias, user_path(gig.user.slug) %> </div>
          <br>
          <div class="gig_name_field">
-           <%=gig.name%>
+           <%=link_to truncate(gig.name, length: 50), user_gig_path(gig.user.slug,gig)%>
          </div>
          <br>
          <br>
@@ -28,7 +30,7 @@
                <i class="fa fa-heart"></i>
             </div>
             <div class="col-lg-8">
-               <span>Desde</span><strong> <%= number_to_currency gig.packages.first.price, precision: 2 %></strong>
+               <span>Desde</span><strong> <%= link_to number_to_currency(gig.packages.first.price, precision: 2), user_path(gig.user.slug) %></strong>
             </div>
          </div>
       </div>
