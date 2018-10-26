@@ -45,12 +45,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
    if resource_updated
      flash[:success] = "La cuenta ha sido actualizada."
      bypass_sign_in resource, scope: resource_name
-     # flash[:success] = "La cuenta ha sido actualizada"
      redirect_to user_config_path(resource)
    else
      clean_up_passwords resource
      set_minimum_password_length
-     flash[:error] = "Ocurrio un error al intentar actualizar tus datos."
+     flash[:error] = "No se pudieron actualizar tus datos, intenta de nuevo."
      redirect_to user_config_path(resource)
    end
   end
