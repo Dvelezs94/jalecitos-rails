@@ -26,7 +26,7 @@ class CardsController < ApplicationController
       "cvv2" => card_params[:cvv2],
       "expiration_month" => card_params[:expiration_month],
       "expiration_year" => card_params[:expiration_year],
-      "device_session_id" => card_params[:device_session_id],
+      # "device_session_id" => card_params[:device_session_id],
       "address" => address_hash
     }
 

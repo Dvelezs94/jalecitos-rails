@@ -27,7 +27,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      redirect_to root_path, notice: "Algo ha salido mal con tu registro."
+      redirect_to root_path, alert: "Algo ha salido mal con tu registro."
     end
   end
 
@@ -36,10 +36,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+   self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+   prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+
+   resource_updated = update_resource(resource, account_update_params)
+   yield resource if block_given?
+   if resource_updated
+     flash[:success] = "La cuenta ha sido actualizada."
+     bypass_sign_in resource, scope: resource_name
+     # flash[:success] = "La cuenta ha sido actualizada"
+     redirect_to user_config_path(resource)
+   else
+     clean_up_passwords resource
+     set_minimum_password_length
+     flash[:error] = "Ocurrio un error al intentar actualizar tus datos."
+     redirect_to user_config_path(resource)
+   end
+  end
 
   # DELETE /resource
   # def destroy
