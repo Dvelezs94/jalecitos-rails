@@ -4,6 +4,9 @@
  *= require trix
  *= require trix-toolbar
  *= require tag-styles
+ *= require_tree ./gigs
  */
  @import 'bootstrap';
  @import 'font-awesome';
+ @import 'slick';
+ @import 'slick-theme';

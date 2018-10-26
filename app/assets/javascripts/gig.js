@@ -16,8 +16,12 @@
 
 //= require package_forms
 
+//= require jquery.easing
+
 //= require jquery.validate
 
 //= require form_validation
+
+//= require_tree ./gigs
 
 //= require messages_es
