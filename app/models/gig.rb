@@ -9,7 +9,7 @@ class Gig < ApplicationRecord
   #Associations
   belongs_to :user
   belongs_to :category
-  has_many :packages, -> {limit(3)}, class_name: "Package", dependent: :destroy
+  has_many :packages, dependent: :destroy
   #Validations
   validates_presence_of :name, :description, :location
   validate :maximum_amount_of_tags

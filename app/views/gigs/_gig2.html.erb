@@ -1,0 +1,21 @@
+<div class="col-md-4">
+  <div class="card mb-4 box-shadow">
+    <%= image_tag image_display_helper(gig.image_url),  class: "card-img-top", style:"background-size: cover;" %>
+    <div class="card-body">
+      <p class="card-title"><%=gig.name%></p>
+      <p class="card-subtitle mb-2 text-muted"><%=gig.location%></p>
+      <p class="card-text"><%=truncate(gig.description.html_safe, length: 150)%></p>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+          <%= link_to status_text_helper(gig), toggle_status_user_gig_path(gig.user.slug,gig), class: "btn btn-sm btn-outline-secondary" unless gig.banned? || current_user.id != gig.user_id || gig.packages.none? %>
+          <%= link_to "Más", user_gig_path(gig.user.slug,gig), class: "btn btn-sm btn-outline-secondary"  %>
+          <%= link_to "Editar", edit_user_gig_path(gig.user.slug,gig), class: "btn btn-sm btn-outline-secondary" if gig.user_id == current_user.id %>
+          <%= link_to "Borrar", user_gig_path(gig.user.slug,gig), method: :delete,
+           data: { confirm: '¿Estás seguro de querer borrar este trabajo?' },
+            class: "btn btn-sm btn-outline-secondary" if gig.user_id == current_user.id  %>
+        </div>
+        <small class="text-muted"><%=gig.user.alias %></small>
+      </div>
+    </div>
+  </div>
+</div>

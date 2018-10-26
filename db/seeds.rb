@@ -13,7 +13,8 @@ end
 
 20.times do |x|
   User.create! do |user|
-    user.email = Faker::Internet.email
+    user.name = Faker::Name.name + "#{x}"
+    user.email = Faker::Internet.email + "#{x}"
     user.role = "user"
     user.password = "123456"
     # This is so we dont have to confirm the email on seeds
@@ -29,10 +30,10 @@ end
     end
     10.times do |x|
       user.gigs.new do |gig|
-        gig.name = Faker::Company.industry + "#{x}"
+        gig.name = "Voy a #{Faker::Lorem.paragraph(2, true)}"
         gig.description = Faker::Lorem.paragraph(30, true)
         gig.location = Faker::Address.state
-        gig.category_id = Faker::Number.between(1, 10)
+        gig.category_id = Faker::Number.between(1, 5)
         gig.status = Faker::Number.between(0, 2)
       end
     end
@@ -40,8 +41,16 @@ end
   end
 end
 
+200.times do |x|
+  Package.create! do |package|
+    package.name = Faker::Commerce.product_name + "#{x}"
+    package.description = Faker::Lorem.paragraph(30, true)
+    package.price = Faker::Number.between(200, 500)
+    package.gig_id = x+1
+  end
+end
 
-puts "Created gigs"
+puts "Created gigs and packages"
 
 User.create!(
       email: "admin@e.com",
