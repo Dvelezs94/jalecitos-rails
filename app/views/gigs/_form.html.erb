@@ -78,7 +78,7 @@
                 <%= fa_icon "map-marker", class: "fa-2x" %>
               </div>
               <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-                <%= form.text_field :location, class: 'text_box required', size: 50, placeholder: 'Busca tu ciudad...' %>
+                <%= form.text_field :location, class: 'text_box required', id: "autocomplete", size: 50, placeholder: 'Busca tu ciudad...' %>
               </div>
               <%= render 'shared_user/gigs/forms/hints/delivery_time_hint.html.erb' %>
             </div>
@@ -94,9 +94,8 @@
                 <%= fa_icon "tags", class: "fa-2x" %>
               </div>
               <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-                <div class"tags-input" data-name="tags-input">
+                <div class="tags-input" data-name="tags-input">
                   <%= form.hidden_field :tag_list %>
-                  <textarea type="text" rows="1" class="main-input form-control"></textarea>
                 </div>
                 máximo de 5 tags
                 <br>

@@ -25,3 +25,5 @@
 //= require_tree ./gigs
 
 //= require messages_es
+
+//= require tag
