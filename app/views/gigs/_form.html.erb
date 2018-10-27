@@ -29,7 +29,7 @@
             <hr>
             <!-- -->
             <div class="col-lg-12  col-md-12">
-              <p>De que trata tu Gig? Se lo mas especifico posible.
+              <p>Descripcion:
               </p>
             </div>
             <div class="form_block row ">
@@ -78,7 +78,7 @@
                 <%= fa_icon "map-marker", class: "fa-2x" %>
               </div>
               <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-                <%= form.text_field :location, class: 'text_box required', size: 50, placeholder: 'Busca tu ciudad...', id: 'autocomplete' %>
+                <%= form.text_field :location, class: 'text_box required', size: 50, placeholder: 'Busca tu ciudad...' %>
               </div>
               <%= render 'shared_user/gigs/forms/hints/delivery_time_hint.html.erb' %>
             </div>
@@ -95,14 +95,15 @@
               </div>
               <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
                 <div class"tags-input" data-name="tags-input">
-                  <%= form.text_field :tag_list, class: 'text_box required', size: 50, placeholder: 'Especifica tus etiquetas...', id: 'autocomplete' %>
                   <%= form.hidden_field :tag_list %>
+                  <textarea type="text" rows="1" class="main-input form-control"></textarea>
                 </div>
                 máximo de 5 tags
                 <br>
                 <span class="tag-error"></span>
-                <%= render 'shared_user/gigs/forms/hints/delivery_time_hint.html.erb' %>
+
               </div>
+              <%= render 'shared_user/gigs/forms/hints/delivery_time_hint.html.erb' %>
             </div>
             <hr>
 
