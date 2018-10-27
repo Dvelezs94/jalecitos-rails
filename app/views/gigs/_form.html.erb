@@ -1,197 +1,126 @@
-
-
+<%= form_with(model: gig,url: gig_form_url_helper, method: gig_form_method_helper, :html => { :class => "current_form" }, local: true) do |form| %>
+<% if gig.errors.any? %>
+  <%gig.errors.full_messages.each do |error| %>
+    <%= notification_generator_helper error %>
+  <% end %>
+<% end %>
 <!-- ---post request form -->
 <div class="container-fluid section request_post_form">
-   <div class="container">
-      <div class="row">
-         <div class="col-lg-1  col-md-12">
-         </div>
-         <div class="col-lg-7 col-md-12">
-            <h3>Post A Request To The Seller Community</h3>
-            <div class="form_box post_form_col">
-               <form>
-                  <div class="col-lg-12  col-md-12">
-                     <p> Describe the service you're looking to purchase - please be as detailed as possible: </p>
-                  </div>
-                  <div class="form_block row ">
-                     <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-                        <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/post_request1.PNG">
-                     </div>
-                     <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-                        <textarea name="request[message]" class="js-br-description" placeholder="I'm looking for..." maxlength="2500"></textarea>
-                        <div class="row">
-                           <div class="col-lg-6">
-                              <label for="file-upload" class="custom-file-upload">
-                              <i class="fa fa-paperclip"></i> Attach File
-                              </label>
-                              <input id="file-upload" type="file"/>
-                              <small class="attach-limit">Max Size 30MB</small>
-                           </div>
-                           <!--  -->
-                           <div class="col-lg-6 text-right">
-                              <div class="char-count"><em>0</em> / 2500 Chars Max</div>
-                           </div>
-                        </div>
-                     </div>
-                    <%= render 'shared_user/gigs/forms/hints/definition_hint.html.erb' %>
-                  </div>
-                  <hr>
-                  <!--                                                        1 end -->
-                  <div class="col-lg-12  col-md-12">
-                     <p>Choose a category:</p>
-                  </div>
-                  <div class="form_block row">
-                     <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-                        <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/post_request3.PNG">
-                     </div>
-                     <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-                        <div class="input-box">
-                           <select>
-                              <option value="0">Select...</option>
-                              <option value="1">Graphics &amp; Design</option>
-                              <option value="2">Digital Marketing</option>
-                              <option value="3">Writing &amp; Translation</option>
-                              <option value="4">Video &amp; Animation</option>
-                              <option value="5">Music &amp; Audio</option>
-                              <option value="6">Programming &amp; Tech</option>
-                              <option value="7">Business</option>
-                              <option value="8">Fun &amp; Lifestyle</option>
-                           </select>
-                           <!--  -->
-                           <select>
-                              <option value="0">Select...</option>
-                              <option value="1">Logo Design</option>
-                              <option value="2">Business Cards &amp; Stationery</option>
-                              <option value="3">Illustration</option>
-                              <option value="4">Portraits &amp; Caricatures</option>
-                              <option value="5">Cartoons &amp; Comics</option>
-                              <option value="6">Flyers &amp; Brochures</option>
-                              <option value="7">Book &amp; Album Covers</option>
-                              <option value="8">Packaging Design</option>
-                           </select>
-                        </div>
-                     </div>
-                     <%= render 'shared_user/gigs/forms/hints/category_hint.html.erb' %>
-                  </div>
-                  <hr>
-                  <!--                                                                2 end  -->
-                  <div class="col-lg-12  col-md-12">
-                     <p>Once you place your order, when would you like your service delivered?   </p>
-                  </div>
-                  <div class="form_block row">
-                     <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-                        <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/post_request2.PNG">
-                     </div>
-                     <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-                        <div class="form cf">
-                           <section class="plan cf">
-                              <input type="radio" name="radio1" id="free" value="free">
-                              <label class="free-label four col" for="free">24 Hours</label>
-                              <input type="radio" name="radio1" id="basic" value="basic" >
-                              <label class="basic-label four col" for="basic">3 Days</label>
-                              <input type="radio" name="radio1" id="premium" value="premium">
-                              <label class="premium-label four col" for="premium">7 Days</label>
-                              <input type="text" placeholder="other" class="btn-standard2">
-                           </section>
-                        </div>
-                     </div>
-                     <%= render 'shared_user/gigs/forms/hints/delivery_time_hint.html.erb' %>
-                  </div>
-                  <hr>
-                  <!--                                                            3 end -->
-                  <div class="col-lg-12  col-md-12">
-                     <p>What is your budget for this service? (Optional)</p>
-                  </div>
-                  <div class="form_block row">
-                     <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-                        <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/post_request4.PNG">
-                     </div>
-                     <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-                        <div class="input-box">
-                           <input type="text" placeholder="$5 Minimum" class="text_box">
-                        </div>
-                     </div>
-                     <%= render 'shared_user/gigs/forms/hints/budget_hint.html.erb' %>
-                  </div>
-                  <%= link_to 'Atrás', :back %>
-                  <div class="col-lg-12  col-md-12 text-right">
-                     <input type="submit" class="post" value="Post">
-                  </div>
-               </form>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-1  col-md-12"></div>
+      <div class="col-lg-7 col-md-12">
+        <h3>Ofrece Tus Servicios Por Medio De Un Nuevo Gig</h3>
+        <div class="form_box post_form_col">
+            <div class="form_block row ">
+              <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
+                <%= fa_icon "font", class: "fa-2x" %>
+              </div>
+              <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
+                <%= form.text_area :name, class: 'js-br-description required', placeholder: "Voy a...", maxlength: 100 %>
+                <div class="row"></div>
+              </div>
+              <%= render 'shared_user/gigs/forms/hints/definition_hint.html.erb' %>
             </div>
-            <!-- form box -->
-            <!--  -->
-         </div>
-         <!--  -->
+            <hr>
+            <!-- -->
+            <div class="form_block row ">
+              <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
+                <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/post_request1.PNG">
+              </div>
+              <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
+                <%= form.text_field :description, class: 'js-br-description', id: "description", type: "hidden" %>
+                <trix-editor input="description" class="required" maxlength="1000"></trix-editor>
+                <div class="row">
+                  <div class="col-lg-8">
+                    <label for="file-upload" class="custom-file-upload">
+
+                      <i class="fa fa-paperclip"></i>
+                      Adjuntar archivo
+                    </label>
+                    <%= form.file_field :image, class: 'form-control' %>
+                    <small class="attach-limit">Tamano Maximo por archivo 30MB</small>
+                  </div>
+                </div>
+              </div>
+              <%= render 'shared_user/gigs/forms/hints/definition_hint.html.erb' %>
+            </div>
+            <hr>
+            <!-- 1 end -->
+            <div class="col-lg-12  col-md-12">
+              <p>Elige una categoria:</p>
+            </div>
+            <div class="form_block row">
+              <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
+                <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/post_request3.PNG">
+              </div>
+              <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
+                <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, class: 'input-box required' ) %>
+              </div>
+              <%= render 'shared_user/gigs/forms/hints/category_hint.html.erb' %>
+            </div>
+            <hr>
+            <!-- 2 end -->
+            <div class="col-lg-12  col-md-12">
+              <p>En que ciudad del mundo te ubicas?
+              </p>
+            </div>
+            <div class="form_block row">
+              <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
+                <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/post_request2.PNG">
+              </div>
+              <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
+                <%= form.text_field :location, class: 'text_box required', size: 50, placeholder: 'Busca tu ciudad...', id: 'autocomplete' %>
+              </div>
+              <%= render 'shared_user/gigs/forms/hints/delivery_time_hint.html.erb' %>
+            </div>
+            <hr>
+
+            <!-- tags -->
+            <div class="form_block row">
+              <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
+                <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/post_request2.PNG">
+              </div>
+              <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
+                <div class"tags-input"="class"tags-input"" data-name="tags-input">
+                  <%= form.hidden_field :tag_list %>
+                </div>
+                máximo de 5 tags
+                <br>
+                <span class="tag-error"></span>
+                <%= render 'shared_user/gigs/forms/hints/delivery_time_hint.html.erb' %>
+              </div>
+            </div>
+            <hr>
+
+            <!-- 3 end -->
+            <div class="col-lg-12  col-md-12">
+            <div class="col-lg-6  col-md-6 ">
+            <%= link_to 'Atrás', :back, class: "post" %>
+          </div>
+            <div class="col-lg-6  col-md-6 ">
+              <%= form.submit "Guardar y continuar",  class: "post" %>
+            </div>
+          </div>
+        </div>
+        <!-- form box -->
+        <!-- -->
       </div>
-      <!-- col lg 7 -->
-   </div>
+      <!-- -->
+    </div>
+    <!-- col lg 7 -->
+  </div>
 </div>
 <!-- container fluid -->
 
+<% end %>
 
+<!-- <%= form_with(model: gig,url: gig_form_url_helper, method: gig_form_method_helper, :html => { :class => "current_form" }, local: true) do |form| %> <% if gig.errors.any? %> <%gig.errors.full_messages.each do |error| %> <%=
+notification_generator_helper error %> <% end %> <% end %> -->
 
-
-
-
-<!-- <%= form_with(model: gig,url: gig_form_url_helper, method: gig_form_method_helper, :html => { :class => "current_form" }, local: true) do |form| %>
-  <% if gig.errors.any? %>
-  <%gig.errors.full_messages.each do |error| %>
-  <%= notification_generator_helper error %>
-  <% end %>
-  <% end %> -->
-
-  <!-- <div class="form-group">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: 'form-control required', maxlength: 100 %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :description %>
-
-    <%= form.text_field :description, class: 'form-control', id: "description", type: "hidden" %>
-    <trix-editor input="description" class="required" maxlength="1000"></trix-editor>
-  </div>
-
-  <%= render 'shared_user/gigs/forms/hints/definition_hint.html.erb' %>
-
-  <div class="form-group">
-    <%= form.label :category_id %>
-    <%= form.collection_select(:category_id, Category.all, :id, :name,
-         {
-              include_blank: true
-        },
-        class: 'form-control required'
-    ) %>
-  </div>
-
-
-  <div class="form-group">
-    <%= form.text_field :location,
-                         class: 'form-control required',
-                         size: 50,
-                         placeholder: 'Busca tu ciudad...',
-                         id: 'autocomplete' %>
-  </div>
-  <div class="form-group">
-    <%= form.file_field :image, class: 'form-control' %>
-  </div>
-
-
-  <div class="form-group">
-    <%= form.label :tags %>
-    <div class="tags-input" data-name="tags-input">
-
-      <%= form.hidden_field :tag_list  %>
-    </div>
-    máximo de 5 tags <br>
-    <span class="tag-error"></span>
-  </div>
-
-
-
-
-  <div class="form-group">
-    <%= form.submit "Guardar y continuar",  class: "btn btn-primary btn-block" %>
-  </div> -->
+<!-- <div class="form-group"> <%= form.label :name %> <%= form.text_field :name, class: 'form-control required', maxlength: 100 %> </div> <div class="form-group"> <%= form.label :description %> <%= form.text_field :description, class: 'form-control',
+id: "description", type: "hidden" %> <trix-editor input="description" class="required" maxlength="1000"></trix-editor> </div> <%= render 'shared_user/gigs/forms/hints/definition_hint.html.erb' %> <div class="form-group"> <%= form.label :category_id
+%> <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, class: 'form-control required' ) %> </div> <div class="form-group"> <%= form.text_field :location, class: 'form-control required', size: 50, placeholder:
+'Busca tu ciudad...', id: 'autocomplete' %> </div> <div class="form-group"> <%= form.file_field :image, class: 'form-control' %> </div> <div class="form-group"> <%= form.label :tags %> <div class="tags-input" data-name="tags-input"> <%=
+form.hidden_field :tag_list %> </div> máximo de 5 tags <br> <span class="tag-error"></span> </div> <div class="form-group"> <%= form.submit "Guardar y continuar", class: "btn btn-primary btn-block" %> </div> -->
 <% end %>
