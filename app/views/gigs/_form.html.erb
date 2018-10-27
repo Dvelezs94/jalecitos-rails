@@ -12,6 +12,10 @@
       <div class="col-lg-7 col-md-12">
         <h3>Ofrece Tus Servicios Por Medio De Un Nuevo Gig</h3>
         <div class="form_box post_form_col">
+          <div class="col-lg-12  col-md-12">
+            <p>Que estas ofreciendo?
+            </p>
+          </div>
             <div class="form_block row ">
               <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
                 <%= fa_icon "font", class: "fa-2x" %>
@@ -24,9 +28,13 @@
             </div>
             <hr>
             <!-- -->
+            <div class="col-lg-12  col-md-12">
+              <p>De que trata tu Gig? Se lo mas especifico posible.
+              </p>
+            </div>
             <div class="form_block row ">
               <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-                <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/post_request1.PNG">
+                <%= fa_icon "sticky-note", class: "fa-2x" %>
               </div>
               <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
                 <%= form.text_field :description, class: 'js-br-description', id: "description", type: "hidden" %>
@@ -52,7 +60,7 @@
             </div>
             <div class="form_block row">
               <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-                <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/post_request3.PNG">
+                <%= fa_icon "folder-open", class: "fa-2x" %>
               </div>
               <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
                 <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, class: 'input-box required' ) %>
@@ -67,7 +75,7 @@
             </div>
             <div class="form_block row">
               <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-                <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/post_request2.PNG">
+                <%= fa_icon "map-marker", class: "fa-2x" %>
               </div>
               <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
                 <%= form.text_field :location, class: 'text_box required', size: 50, placeholder: 'Busca tu ciudad...', id: 'autocomplete' %>
@@ -77,12 +85,17 @@
             <hr>
 
             <!-- tags -->
+            <div class="col-lg-12  col-md-12">
+              <p>Especifica las etiquetas para que te encuentren mas rapido
+              </p>
+            </div>
             <div class="form_block row">
               <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-                <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/post_request2.PNG">
+                <%= fa_icon "tags", class: "fa-2x" %>
               </div>
               <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-                <div class"tags-input"="class"tags-input"" data-name="tags-input">
+                <div class"tags-input" data-name="tags-input">
+                  <%= form.text_field :tag_list, class: 'text_box required', size: 50, placeholder: 'Especifica tus etiquetas...', id: 'autocomplete' %>
                   <%= form.hidden_field :tag_list %>
                 </div>
                 máximo de 5 tags
