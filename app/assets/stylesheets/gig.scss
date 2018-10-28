@@ -5,6 +5,8 @@
  *= require trix-toolbar
  *= require tag-styles
  *= require_tree ./gigs
+ *= require pages/agency
+ *= require pages/home
  */
  @import 'bootstrap';
  @import 'font-awesome';
