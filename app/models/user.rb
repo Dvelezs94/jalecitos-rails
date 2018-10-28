@@ -3,6 +3,8 @@ class User < ApplicationRecord
   include OpenpayHelper
   friendly_id :alias, use: :slugged
 
+  enum status: { active: 0, disabled: 1, blocked: 2}
+
   # Validates uniqueness of id
   validates :email, :alias,  uniqueness: true
 
@@ -60,7 +62,8 @@ class User < ApplicationRecord
 
    #  Deactivate user only instead of deleting
    def destroy
-        update_attributes(deactivated: true, openpay_id: "0") unless deactivated
+        disabled!
+        update_attributes(openpay_id: "0")
    end
 
    # Create default values
@@ -69,7 +72,7 @@ class User < ApplicationRecord
 
    # Override the method to support canceled accounts
    def active_for_authentication?
-       super && !deactivated
+       super && self.active?
    end
 
    private
