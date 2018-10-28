@@ -51,39 +51,16 @@
               <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="People who will try to view your profile or Gigs will get an " unavailabe="Unavailabe" page" message"="Page" message""="message" ""></span></li>
             <li>Tus ordenes activas seran canceladas y no seran reembolsara el dinero.<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Not including delivered orders.."></span></li>
             <li>Se Borraran tus tarjetas y bancos asociados a la cuenta</li>
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Not including delivered orders.."></span></li>
+            <li>Tu cuenta de correo ya no podra ser utilizada de nuevo para un nuevo registor en Jalecitos</li>
           </ul>
-
+            <%= link_to "Cancelar mi cuenta", registration_path(resource_name), class: "btn btn-md warn-butn", data: { confirm: "Una vez que aceptes, no podras utilizar este e-mail de nuevo. Estas Seguro?" }, method: :delete %>
         </div>
       </div>
       <br>
-      <div class="row">
-        <div class="col-sm-4">
-          <label for="">Me estoy yendo porque..</label>
-        </div>
-        <div class="col-sm-8">
-          <select name="" onclick="myFunction()" style="width: 500px; font-size: 12px;" class="form-control">
-            <option value="">Elige una razon</option>
-            <option value="">
-              <b>Cuenta</b>
-            </option>
-            <option value="">&nbsp &nbsp Envian mucha publicidad</option>
-            <option value="">&nbsp &nbsp Quiero cambiar mi nombre de usuario</option>
-            <option value="">&nbsp &nbsp Tengo otra cuenta de Jalecitos</option>
-            <option value="">
-              <b>Comprar</b>
-            </option>
-            <option value="">&nbsp &nbsp No encontre lo que necesito</option>
-            <option value="">&nbsp &nbsp Jalecitos es complicado de utilizar</option>
-            <option value="">&nbsp &nbsp Experiencias negativas con los vendedores</option>
-            <option value="">&nbsp &nbsp No estoy de acuerdo con las politicas</option>
-            <option value="">Otra Razon</option>
-          </select>
-          <br>
-            <button class="btn btn-md warn-butn" id="cardbtn">Cancelar Mi Cuenta</button>
-        </div>
+
         <hr width="98%">
         <br>
-      </div>
 
       <!-- Tarjetas -->
       <br>

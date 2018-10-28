@@ -58,10 +58,22 @@ class User < ApplicationRecord
      alias_changed?
    end
 
+   #  Deactivate user only instead of deleting
+   def destroy
+        update_attributes(deactivated: true, openpay_id: "0") unless deactivated
+   end
+
    # Create default values
    after_initialize :set_defaults
    after_save :create_openpay_account
+
+   # Override the method to support canceled accounts
+   def active_for_authentication?
+       super && !deactivated
+   end
+
    private
+
    def set_defaults
        # self.role ||= "user"
        set_alias
