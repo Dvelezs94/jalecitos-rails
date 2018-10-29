@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 2018_10_28_022007) do
     t.string "name"
     t.string "description"
     t.bigint "category_id"
-    t.float "budget"
+    t.string "budget"
     t.string "image"
     t.string "location"
     t.string "status"
