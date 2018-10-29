@@ -27,9 +27,10 @@ class RequestsController < ApplicationController
   # POST /requests
   def create
     @request = Request.new( sanitized_params(request_params) )
-
+    puts "xxxxxxxxxxxxxxxxxxxxxxxx"
+    puts @request.inspect
     if @request.save
-      redirect_to user_request_path(@request.user.slug, @request), notice: 'Request was successfully created.'
+      redirect_to request_path(@request), notice: 'Request was successfully created.'
     else
       render :new
     end
@@ -38,7 +39,7 @@ class RequestsController < ApplicationController
   # PATCH/PUT /requests/1
   def update
     if @request.update(request_params)
-      redirect_to user_request_path(@request.user.slug, @request), notice: 'Request was successfully updated.'
+      redirect_to request_path(@request), notice: 'Request was successfully updated.'
     else
       render :edit
     end
@@ -47,7 +48,7 @@ class RequestsController < ApplicationController
   # DELETE /requests/1
   def destroy
     @request.destroy
-    redirect_to my_user_requests_path(current_user.slug), notice: 'Request was successfully destroyed.'
+    redirect_to my_request_path, notice: 'Request was successfully destroyed.'
   end
 
   private

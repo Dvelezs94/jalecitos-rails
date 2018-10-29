@@ -20,6 +20,10 @@ Rails.application.routes.draw do
      resources :cards, only: [:create, :destroy]
    end
 
+   resources :requests, except: :index do
+     resources :offers, except: [:index, :show]
+   end
+
    resources :users do
      resources :gigs, except: :index do
          member do
@@ -32,10 +36,6 @@ Rails.application.routes.draw do
              patch 'update_packages', to: 'packages#update_packages', as: 'update'
            end
          end
-     end
-
-     resources :requests, except: :index do
-       resources :offers, except: [:index, :show]
      end
    end
   resources :categories

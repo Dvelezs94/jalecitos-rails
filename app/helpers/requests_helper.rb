@@ -1,9 +1,9 @@
 module RequestsHelper
   def request_form_url_helper
     if params[:action] == "edit"
-      user_request_path(current_user.slug, @request)
+      request_path(@request)
     else
-      user_requests_path(current_user.slug)
+      requests_path()
     end
   end
 
