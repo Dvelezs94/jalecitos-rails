@@ -2,12 +2,12 @@ module GigStatus
 
   def toggle_status
     check_if_banned
-    check_packages_count
+    check_first_package
     if flash[:error]
-      redirect_to user_gigs_path(current_user.slug)
+      redirect_to user_path(current_user.slug)
     else
       change_status
-      redirect_to user_gigs_path(current_user.slug), notice: "Se ha cambiado el estado del Gig exitosamente"
+      redirect_to user_path(current_user.slug), notice: "Se ha cambiado el estado del Gig exitosamente"
     end
   end
 
@@ -22,8 +22,8 @@ module GigStatus
     (@gig.banned?) ? redirect_to(gigs_path, notice: 'Este Gig está baneado') : nil
   end
 
-  def check_packages_count
-    (@gig.packages.none?) ? flash[:error]='Este Gig no contiene ningún paquete' : nil
+  def check_first_package
+    (@gig.gig_first_pack[0].nil? || @gig.gig_first_pack[0].name == "" || @gig.gig_first_pack[0].description == "" || @gig.gig_first_pack[0].price == nil) ? flash[:error]='Este Gig no contiene ningún paquete' : nil
   end
 
   def change_status

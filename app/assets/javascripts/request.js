@@ -19,5 +19,3 @@
 //= require form_validation
 
 //= require messages_es
-
-//= require_tree ./requests
