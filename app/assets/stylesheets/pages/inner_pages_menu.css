@@ -15,7 +15,7 @@ input.js-search-input.js-report-to-aux-data.strt_selling_Srch1::placeholder {
 
 @media only screen and (min-width:992px){
 
-    .fiverr a.nav-link {
+    .jalecitos a.nav-link {
         font-size: 14px;
         color: #101010 !important;
     }
@@ -47,7 +47,7 @@ display: none !important;
 }
 
 /* drop downmenu */
-.fiverr button.dropbtn:hover {
+.jalecitos button.dropbtn:hover {
     border-bottom: none;
 }
 
