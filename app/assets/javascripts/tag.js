@@ -13,7 +13,7 @@
 
     mainInput.setAttribute('type', 'text');
     mainInput.setAttribute('rows', 1);
-    mainInput.classList.add('main-input', 'tags-input');
+    mainInput.classList.add('main-input', 'tags-main-input');
     mainInput.addEventListener('input', function () {
         let enteredTags = mainInput.value.split('\n');
         let enteredTags2 = mainInput.value.split(' ');
