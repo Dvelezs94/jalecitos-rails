@@ -124,7 +124,7 @@
       <div class="col-lg-6">
         <h5>
           <% if params[:q] == 'requests' %>
-            <%= link_to "Nuevo Pedido", new_user_request_path(@user), class: "pull-right" %>
+            <%= link_to "Nuevo Pedido", new_request_path(), class: "pull-right" %>
           <% else %>
             <%= link_to "Nuevo Gig", new_user_gig_path(@user), class: "pull-right" %>
           <% end %>

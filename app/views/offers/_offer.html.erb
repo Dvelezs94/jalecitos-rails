@@ -1,14 +1,14 @@
 <div class="card" style="width: 70%; padding: 10px; margin: 20px auto;">
   <div class="card-body">
-    <h5 class="card-title"><%= offer.user.email %></h5>
+    <h5 class="card-title"><%= offer.user.slug %></h5>
     <% if current_user.id == offer.user_id || current_user.id == offer.request.user_id %>
     <p class="card-text"><%=offer.description.html_safe %></p>
     <p class="card-text">Hours: <%=offer.hours %></p>
     <% end %>
     <p class="card-text"><%= number_to_currency(offer.price) %> MXN</p>
     <% if current_user.id == offer.user_id %>
-    <p class="card-text"><%= link_to 'Editar oferta', edit_user_request_offer_path(offer.request.user.slug, offer.request, offer) %></p>
-    <p class="card-text"><%= link_to "Borrar", user_request_offer_path(offer.request.user.slug, offer.request, offer), method: :delete, data: { confirm: '¿Estás seguro de querer borrar esta oferta?' } %></p>
+    <p class="card-text"><%= link_to 'Editar oferta', edit_request_offer_path(offer.request, offer) %></p>
+    <p class="card-text"><%= link_to "Borrar", request_offer_path(offer.request, offer), method: :delete, data: { confirm: '¿Estás seguro de querer borrar esta oferta?' } %></p>
     <% end %>
   </div>
 </div>

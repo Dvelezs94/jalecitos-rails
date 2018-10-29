@@ -6,9 +6,9 @@ module OffersHelper
 
   def offer_form_url_helper
     if params[:action] == "new"
-      user_request_offers_path(params[:user_id], params[:request_id])
+      request_offers_path(params[:request_id])
     else
-      user_request_offer_path(params[:user_id], params[:request_id], params[:id])
+      request_offer_path(params[:request_id], params[:id])
     end
   end
 
