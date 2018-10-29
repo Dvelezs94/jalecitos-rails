@@ -14,13 +14,17 @@ class Users::SessionsController < Devise::SessionsController
   def create
     auth_options = { :recall => 'pages#home', :scope => :user }
     resource = warden.authenticate!(auth_options)
+    # Set cookie for Action cable
+    cookies.signed[:user_id] = current_user.id
     super
   end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    # Delete action cable cookie
+    cookies.delete :user_id
+    super
+  end
 
   # protected
 
