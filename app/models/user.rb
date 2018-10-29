@@ -62,8 +62,12 @@ class User < ApplicationRecord
 
    #  Deactivate user only instead of deleting
    def destroy
-        disabled!
-        update_attributes(openpay_id: "0")
+     @user_gigs = Gig.where(user_id: self.id)
+     @user_gigs.each do |gig|
+       (gig.published?)? gig.draft! : nil
+     end
+    disabled!
+    update_attributes(openpay_id: "0")
    end
 
    # Create default values

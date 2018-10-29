@@ -8,8 +8,12 @@ class Gig < ApplicationRecord
   friendly_id :name, use: :slugged
   #Associations
   belongs_to :user
+  #belongs_to :active_user, { where(:users => { status: "active" }) }, :class_name => "User"
+
   belongs_to :category
   has_many :packages, dependent: :destroy
+  has_many :gig_packages, ->{ limit(3) }, class_name: 'Package'
+  has_many :gigs_packages, ->{ limit(15) }, class_name: 'Package'
   #Validations
   validates_presence_of :name, :description, :location
   validate :maximum_amount_of_tags

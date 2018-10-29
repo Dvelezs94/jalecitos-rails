@@ -56,11 +56,11 @@ class GigsController < ApplicationController
     end
 
     def set_gig_with_pack
-      @gig = Gig.includes(:packages).friendly.find(params[:id])
+      @gig = Gig.includes(:gig_packages).friendly.find(params[:id])
     end
 
     def set_gig_with_all_asc
-      @gig = Gig.includes(:packages, :category, :user).friendly.find(params[:id])
+      @gig = Gig.includes(:gig_packages, :category, :user).friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

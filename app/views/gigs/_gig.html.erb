@@ -30,7 +30,7 @@
                <i class="fa fa-heart"></i>
             </div>
             <div class="col-lg-8">
-               <span>Desde</span><strong> <%= link_to number_to_currency(gig.packages.first.price, precision: 2), user_path(gig.user.slug) %></strong>
+               <span>Desde</span><strong> <%= link_to number_to_currency(gig.gigs_packages.first.price, precision: 2), user_path(gig.user.slug) %></strong>
             </div>
          </div>
       </div>
