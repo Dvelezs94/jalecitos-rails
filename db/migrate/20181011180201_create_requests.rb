@@ -8,7 +8,7 @@ class CreateRequests < ActiveRecord::Migration[5.2]
       t.string :budget
       t.string :image
       t.string :location
-      t.string :status
+      t.integer :status, default: 0
 
       t.timestamps
     end

@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(version: 2018_10_28_022007) do
     t.string "budget"
     t.string "image"
     t.string "location"
-    t.string "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
