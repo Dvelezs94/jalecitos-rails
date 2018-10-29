@@ -15,4 +15,14 @@ module RequestsHelper
     end
   end
 
+  def options_for_budget
+    [
+      ['$100 a $500'],
+      ['$500 a $1000'],
+      ['$1000 a $2000'],
+      ['$2000 a $5000'],
+      ['$5000 a $9999']
+    ]
+  end
+
 end

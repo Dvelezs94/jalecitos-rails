@@ -1,60 +1,149 @@
 <%= form_with(model: request, url: request_form_url_helper,method: request_form_method_helper, :html => { :class=> "current_form" }, local: true) do |form| %>
-  <% if request.errors.any? %>
+<% if request.errors.any? %>
   <%request.errors.full_messages.each do |error| %>
     <%= notification_generator_helper error %>
   <% end %>
-  <% end %>
+<% end %>
 
-  <div class="form-group">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: 'form-control required', maxlength: 100 %>
-  </div>
+<!-- ---post request form -->
+<div class="container-fluid section request_post_form">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 col-md-12 centered-form">
+        <h3>Encuentra al profesional indicado con un nuevo Pedido</h3>
+        <div class="form_box post_form_col">
+          <div class="col-lg-12  col-md-12">
+            <p>Nombre de tu pedido
+            </p>
+          </div>
+          <div class="form_block row ">
+            <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
+              <%= fa_icon "font", class: "fa-2x" %>
+            </div>
+            <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
+              <%= form.text_area :name, class: 'js-br-description required', placeholder: "Ocupo a alguien que...", maxlength: 100 %>
+              <div class="row"></div>
+            </div>
+            <%= render 'shared_user/gigs/forms/hints/definition_hint.html.erb' %>
+          </div>
+          <hr>
+          <!-- -->
+          <div class="col-lg-12  col-md-12">
+            <p>Descripcion:
+            </p>
+          </div>
+          <div class="form_block row ">
+            <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
+              <%= fa_icon "sticky-note", class: "fa-2x" %>
+            </div>
+            <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
+              <%= form.text_field :description, class: 'js-br-description', id: "description", type: "hidden" %>
+              <trix-editor input="description" class="required" maxlength="1000"></trix-editor>
+              <div class="row">
+                <div class="col-lg-8">
+                  <label for="file-upload" class="custom-file-upload">
 
-  <div class="form-group">
-    <%= form.label :budget %>
-    <%= form.number_field :budget, options ={min: 100,  class: 'required'} %>
-  </div>
+                    <i class="fa fa-paperclip"></i>
+                    Adjuntar archivo
+                  </label>
+                  <%= form.file_field :image, class: 'form-control' %>
+                  <small class="attach-limit">Tamano Maximo por archivo 30MB</small>
+                </div>
+              </div>
+            </div>
+            <%= render 'shared_user/gigs/forms/hints/definition_hint.html.erb' %>
+          </div>
+          <hr>
+          <!-- 1 end -->
+          <div class="col-lg-12  col-md-12">
+            <p>Elige una categoria:</p>
+          </div>
+          <div class="form_block row">
+            <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
+              <%= fa_icon "folder-open", class: "fa-2x" %>
+            </div>
+            <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
+              <div class="input-box">
+                <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, class: 'required', prompt: 'Selecciona Una Opcion' ) %>
+              </div>
+            </div>
+            <%= render 'shared_user/gigs/forms/hints/category_hint.html.erb' %>
+          </div>
+          <hr>
+          <!-- 2 end -->
+          <div class="col-lg-12  col-md-12">
+            <p>En que ciudad se realizaria el trabajo?
+            </p>
+          </div>
+          <div class="form_block row">
+            <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
+              <%= fa_icon "map-marker", class: "fa-2x" %>
+            </div>
+            <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
+              <%= form.text_field :location, class: 'text_box required', id: "autocomplete", size: 50, placeholder: 'Busca tu ciudad...' %>
+            </div>
+            <%= render 'shared_user/gigs/forms/hints/delivery_time_hint.html.erb' %>
+          </div>
+          <hr>
 
-  <div class="form-group">
-    <%= form.label :description %>
+          <!-- tags -->
+          <div class="col-lg-12  col-md-12">
+            <p>Especifica las etiquetas para que te encuentren mas rapido
+            </p>
+          </div>
+          <div class="form_block row">
+            <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
+              <%= fa_icon "tags", class: "fa-2x" %>
+            </div>
+            <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
+              <div class="tags-input" data-name="tags-input">
+                <%= form.hidden_field :tag_list %>
+              </div>
+              máximo de 5 tags
+              <br>
+              <span class="tag-error"></span>
 
-    <%= form.text_field :description, class: 'form-control', id: "description", type: "hidden" %>
-    <trix-editor input="description" class="required" maxlength="1000" minlength="1"></trix-editor>
-  </div>
+            </div>
+            <%= render 'shared_user/gigs/forms/hints/delivery_time_hint.html.erb' %>
+          </div>
+          <hr>
 
-  <div class="form-group">
-    <%= form.label :category_id %>
-    <%= form.collection_select(:category_id, Category.all, :id, :name,
-         {
-              include_blank: true
-        },
-        class: 'form-control required'
-    ) %>
-  </div>
+          <!-- Budget -->
+          <div class="col-lg-12  col-md-12">
+            <p>Cual es tu presupuesto? (MXN)
+            </p>
+          </div>
+          <div class="form_block row">
+            <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
+              <%= fa_icon "dollar", class: "fa-2x" %>
+            </div>
+            <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
+              <div class="input-box">
+                <%= form.select :budget, options_for_budget, {}, prompt: 'Selecciona Una Opcion', class: "required" %>
+              </div>
+            </div>
+            <%= render 'shared_user/gigs/forms/hints/delivery_time_hint.html.erb' %>
+          </div>
+          <hr>
 
-
-  <div class="form-group">
-    <%= form.text_field :location,
-                         class: 'form-control required',
-                         size: 50,
-                         placeholder: 'Busca tu ciudad...',
-                         id: 'autocomplete' %>
-  </div>
-  <div class="form-group">
-    <%= form.file_field :image, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :tags %>
-    <div class="tags-input" data-name="tags-input">
-
-      <%= form.hidden_field :tag_list  %>
+          <!-- 3 end -->
+          <div class="col-lg-12  col-md-12">
+            <div class="col-lg-6  col-md-6 ">
+              <%= link_to 'Atrás', :back, class: "post" %>
+            </div>
+            <div class="col-lg-6  col-md-6 ">
+              <%= form.submit "Guardar y continuar", class: "post" %>
+            </div>
+          </div>
+        </div>
+        <!-- form box -->
+        <!-- -->
+      </div>
+      <!-- -->
     </div>
-    Máximo de 5 tags <br>
-    <span class="tag-error"></span>
+    <!-- col lg 7 -->
   </div>
+</div>
+<!-- container fluid -->
 
-  <div class="form-group">
-    <%= form.submit "Guardar y continuar",  class: "btn btn-primary btn-block" %>
-  </div>
 <% end %>

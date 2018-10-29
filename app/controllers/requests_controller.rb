@@ -1,10 +1,12 @@
 class RequestsController < ApplicationController
   layout 'request'
   include SanitizeParams
+  include RequestsHelper
   before_action :authenticate_user!, except: :show
   before_action :set_request, only: [:show, :edit, :update, :destroy]
   access all: [:show], user: :all
   before_action :check_request_ownership, only:[:edit, :update, :destroy]
+  before_action :validate_options_for_budget, only: [:create, :update]
 
   def my_requests
     @requests = Request.includes(:user).friendly.where(user_id: current_user.id).order(:id).order(created_at: :desc)
@@ -73,6 +75,13 @@ class RequestsController < ApplicationController
 
     def check_request_ownership
       if current_user.id != @request.user_id
+        redirect_to root_path
+      end
+    end
+
+    def validate_options_for_budget
+      if ! options_for_budget.include?([request_params[:budget]])
+        flash[:error] = "No ingresaste una opcion valida"
         redirect_to root_path
       end
     end
