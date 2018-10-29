@@ -66,8 +66,12 @@ class User < ApplicationRecord
      @user_gigs.each do |gig|
        (gig.published?)? gig.draft! : nil
      end
-    disabled!
-    update_attributes(openpay_id: "0")
+     @user_requests = Request.where(user_id: self.id)
+     @user_requests.each do |request|
+       request.closed!
+     end
+     disabled!
+     update_attributes(openpay_id: "0")
    end
 
    # Create default values
