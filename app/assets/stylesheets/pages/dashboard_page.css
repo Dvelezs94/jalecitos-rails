@@ -1,13 +1,9 @@
-.dashboard_front {
-    background-color: #F7F7F7;
-}
 .dashboard_front_left {
     border: 1px solid #e5e5e5;
     background-color: white;
     padding: 20px 39px;
 }
 .dashboard_front {
-    background-color: #F7F7F7;
     padding: 40px 0px;
 }
 /* tooltip */
