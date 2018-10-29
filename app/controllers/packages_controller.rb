@@ -36,7 +36,7 @@ class PackagesController < ApplicationController
 
 
   def update_packages
-    @gig.packages.each do |record|
+    @gig.gig_packages.each do |record|
       pack = params[:packages]["#{record.id}"]
       pack = sanitized_params( package_params(pack) )
       record.update(pack)
@@ -51,15 +51,15 @@ class PackagesController < ApplicationController
     end
 
   def set_gig_and_packages
-    @gig = Gig.includes(:packages).friendly.find(params[:gig_id])
+    @gig = Gig.includes(:gig_packages).friendly.find(params[:gig_id])
   end
 
   def create_redirect
-    (@gig.packages.any?) ? redirect_to( edit_user_gig_packages_path(params[:user_id],@gig) ) : nil
+    (@gig.gig_packages.any?) ? redirect_to( edit_user_gig_packages_path(params[:user_id],@gig) ) : nil
   end
 
   def update_redirect
-    (@gig.packages.none?) ? redirect_to( new_user_gig_package_path(params[:user_id], @gig) ) : nil
+    (@gig.gig_packages.none?) ? redirect_to( new_user_gig_package_path(params[:user_id], @gig) ) : nil
   end
 
   def define_pack_names
@@ -80,7 +80,7 @@ class PackagesController < ApplicationController
     end
   end
   def validate_update
-    @gig.packages.each do |record|
+    @gig.gig_packages.each do |record|
       pack = params[:packages]["#{record.id}"]
       if pack[:name].length > 100 || pack[:description].length > 1000 || (pack[:price].to_f < 100 && pack[:price] != "")
         redirect_to(root_path, notice: "Sus paquetes no han podido guardarse, por favor, inténtelo de nuevo.")
