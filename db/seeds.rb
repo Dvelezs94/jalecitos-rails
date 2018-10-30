@@ -30,7 +30,7 @@ end
     end
     10.times do |x|
       user.gigs.new do |gig|
-        gig.name = "Voy a #{Faker::Lorem.paragraph(2, true)}"
+        gig.name = "#{Faker::Lorem.paragraph(2, true)}"
         gig.description = Faker::Lorem.paragraph(30, true)
         gig.location = Faker::Address.state
         gig.category_id = Faker::Number.between(1, 5)

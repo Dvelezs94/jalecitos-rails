@@ -20,7 +20,8 @@
                 <%= fa_icon "font", class: "fa-2x" %>
               </div>
               <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-                <%= form.text_area :name, class: 'js-br-description required', placeholder: "Voy a...", maxlength: 100 %>
+                Voy a...
+                <%= form.text_area :name, class: 'js-br-description required', placeholder: "arreglar el sistema eléctrico de tu casa.", maxlength: 100 %>
                 <div class="row"></div>
               </div>
               <%= render 'shared_user/gigs/forms/hints/definition_hint.html.erb' %>
@@ -37,7 +38,7 @@
               </div>
               <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
                 <%= form.text_field :description, class: 'js-br-description', id: "description", type: "hidden" %>
-                <trix-editor input="description" class="required" maxlength="1000"></trix-editor>
+                <trix-editor input="description" class="trix-input required" maxlength="1000"></trix-editor>
                 <div class="row">
                   <div class="col-lg-8">
                     <label for="file-upload" class="custom-file-upload">
