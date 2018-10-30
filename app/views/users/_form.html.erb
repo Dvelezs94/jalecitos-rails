@@ -84,29 +84,24 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-right">
 
           <p>
-            <a href="#" data-tooltip="average " class="font-weight-bold green">
-              1Hrs</a>
+            <p class="font-weight-bold green">
+              <%= @user.last_sign_in_at != nil ? distance_of_time_in_words_to_now(@user.last_sign_in_at) : "nunca" %> </p>
           </p>
         </div>
-        <hr>
+
       </div>
 
+    <% if ! my_profile %>
+    <hr>
       <!-- inbox -->
       <div class="row response">
-        <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+        <div class="col-12 text-center">
 
-          <p>inbox(0)</p>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-right">
-
-          <p>
-            <a href="#" class="green">
-              View All</a>
-          </p>
+          <a class="font-weight-bold green" href="">inbox</a>
         </div>
 
       </div>
+    <% end %>
     </div>
     <!-- left col end -->
     <div class="gap"></div>
