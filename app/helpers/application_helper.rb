@@ -10,14 +10,6 @@ module ApplicationHelper
     end
   end
 
-  def homepage_content_helper
-     if  has_role?(:user)
-       render 'shared_user/root/homepage'
-     else
-       render 'shared_guest/guest_page'
-     end
-  end
-
   def notification_helper
     msg = (flash[:alert] || flash[:error] || flash[:notice] || flash[:warning] || flash[:success])
 

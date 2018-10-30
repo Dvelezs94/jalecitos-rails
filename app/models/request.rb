@@ -1,6 +1,8 @@
 class Request < ApplicationRecord
   #includes
   include TagRestrictions
+  #search
+  searchkick
   #Tags
   acts_as_taggable
   #Slugs

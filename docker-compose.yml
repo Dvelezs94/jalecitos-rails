@@ -30,6 +30,7 @@ services:
       - OPENPAY_MERCHANT_ID=mgaglakzbv6gzvpnzp6g
       - OPENPAY_PRIVATE_KEY=sk_4c6a3e0b2c9c406b91fd6fbe5eddaeeb
       - OPENPAY_PUBLIC_KEY=pk_c958326b8eb44e8b8ace1001948cb0ab
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
 
 
     ports:

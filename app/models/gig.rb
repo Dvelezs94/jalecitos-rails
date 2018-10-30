@@ -1,6 +1,8 @@
 class Gig < ApplicationRecord
   #includes
   include TagRestrictions
+  #search
+  searchkick
   #Tags
   acts_as_taggable
   #Slugs

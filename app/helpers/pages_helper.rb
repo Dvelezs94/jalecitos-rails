@@ -15,4 +15,14 @@ module PagesHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  def homepage_content_helper
+    if  has_role?(:user) && params[:query]
+      render 'shared_user/root/homepage_query'
+    elsif has_role?(:user)
+       render 'shared_user/root/homepage'
+    else
+       render 'shared_guest/guest_page'
+    end
+  end
 end

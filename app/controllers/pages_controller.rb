@@ -3,9 +3,13 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   def home
     if current_user && current_user.has_role?(:user)
-      @verified_gigs = Gig.includes(:gigs_packages, :user).published.where(category: 1).first(5)
-      @recommended_gigs = Gig.includes(:gigs_packages, :user).published.where(category: 2).first(5)
-      @featured_gigs = Gig.includes(:gigs_packages, :user).published.where(category: 3).first(5)
+      if params[:query]
+        @search_gigs = Gig.search(params[:query])
+      else
+        @verified_gigs = Gig.includes(:gigs_packages, :user).published.where(category: 1).first(5)
+        @recommended_gigs = Gig.includes(:gigs_packages, :user).published.where(category: 2).first(5)
+        @featured_gigs = Gig.includes(:gigs_packages, :user).published.where(category: 3).first(5)
+      end
     end
   end
 
