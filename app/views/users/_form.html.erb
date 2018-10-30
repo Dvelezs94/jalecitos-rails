@@ -115,24 +115,26 @@
   <!-- right col -->
   <div class="col-lg-8 dashboard_front_right">
 
-    <div class="row">
-      <div class="col-lg-6">
-        <h5><%= link_to "Gigs", :q => "gigs" %>
-          |
-          <%= link_to "Pedidos", :q => "requests" %></h5>
-      </div>
-      <div class="col-lg-6">
-        <h5>
-          <% if params[:q] == 'requests' %>
-            <%= link_to "Nuevo Pedido", new_request_path(), class: "pull-right" %>
-          <% else %>
-            <%= link_to "Nuevo Gig", new_user_gig_path(@user), class: "pull-right" %>
-          <% end %>
-        </h5>
-      </div>
-    </div>
+
 
     <div class="education_wrapper">
+      <div class="row">
+        <div class="col-lg-6">
+          <h5><%= link_to "Gigs", :q => "gigs" %>
+            |
+            <%= link_to "Pedidos", :q => "requests" %></h5>
+        </div>
+        <div class="col-lg-6">
+          <h5>
+            <% if params[:q] == 'requests' %>
+              <%= link_to "Nuevo Pedido", new_request_path(), class: "pull-right" %>
+            <% else %>
+              <%= link_to "Nuevo Gig", new_user_gig_path(@user), class: "pull-right" %>
+            <% end %>
+          </h5>
+        </div>
+      </div>
+      <hr>
       <div class="row">
         <%= render partial: "gigs/gig", collection: @gigs %>
       </div>
