@@ -24,7 +24,7 @@
               Busco a alguien...
               <%= form.text_area :name, class: 'js-br-description required', placeholder: "que arregle el sistema eléctrico de mi casa.", maxlength: 100 %>
             </div>
-            <%= render 'shared_user/gigs/forms/hints/definition_hint.html.erb' %>
+            <%= render 'shared_user/requests/forms/hints/definition_hint.html.erb' %>
           </div>
           <hr>
           <!-- -->
@@ -51,7 +51,7 @@
                 </div>
               </div>
             </div>
-            <%= render 'shared_user/gigs/forms/hints/definition_hint.html.erb' %>
+            <%= render 'shared_user/requests/forms/hints/description_hint.html.erb' %>
           </div>
           <hr>
           <!-- 1 end -->
@@ -67,7 +67,7 @@
                 <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, class: 'required', prompt: 'Selecciona Una Opcion' ) %>
               </div>
             </div>
-            <%= render 'shared_user/gigs/forms/hints/category_hint.html.erb' %>
+            <%= render 'shared_user/requests/forms/hints/category_hint.html.erb' %>
           </div>
           <hr>
           <!-- 2 end -->
@@ -82,7 +82,7 @@
             <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
               <%= form.text_field :location, class: 'text_box required', id: "autocomplete", size: 50, placeholder: 'Busca tu ciudad...' %>
             </div>
-            <%= render 'shared_user/gigs/forms/hints/delivery_time_hint.html.erb' %>
+            <%= render 'shared_user/requests/forms/hints/city_hint.html.erb' %>
           </div>
           <hr>
 
@@ -104,7 +104,7 @@
               <span class="tag-error"></span>
 
             </div>
-            <%= render 'shared_user/gigs/forms/hints/delivery_time_hint.html.erb' %>
+            <%= render 'shared_user/requests/forms/hints/tags_hint.html.erb' %>
           </div>
           <hr>
 
@@ -122,7 +122,7 @@
                 <%= form.select :budget, options_for_budget, {}, prompt: 'Selecciona Una Opcion', class: "required" %>
               </div>
             </div>
-            <%= render 'shared_user/gigs/forms/hints/delivery_time_hint.html.erb' %>
+            <%= render 'shared_user/requests/forms/hints/budget_hint.html.erb' %>
           </div>
           <hr>
 
