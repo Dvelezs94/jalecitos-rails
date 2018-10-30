@@ -23,6 +23,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @gigs = User.friendly.find(params[:id]).gigs
+    @requests = User.friendly.find(params[:id]).gigs
   end
 
   # PATCH/PUT /users/1

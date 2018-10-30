@@ -132,19 +132,9 @@
       </div>
     </div>
 
-    <div class=" education_wrapper">
-      <div class="row no-gutters ">
-        <div class="learn_more text-center col-lg-2">
-          <img src="img/learn_more.svg">
-        </div>
-        <div class="learn_more col-lg-10">
-
-          <h1>Learn More, Earn More</h1>
-          <p>Take courses specifically created to meet your professional needs improve your ranking in the marketplace, and boost your sales.
-          </p>
-          <a href="#" class="become_seller" id="become_seller_popup">Enroll Now</a>
-
-        </div>
+    <div class="education_wrapper">
+      <div class="row">
+        <%= render partial: "gigs/gig", collection: @gigs %>
       </div>
     </div>
   </div>

@@ -58,3 +58,12 @@ User.create!(
       role: "admin"
  )
 puts "Created an admin"
+
+User.create!(
+      email: "testuser@jalecitos.com",
+      password: "testuserpass",
+      name: "Test User",
+      role: "user",
+      confirmed_at: Time.now
+ )
+puts "Created testing user"
