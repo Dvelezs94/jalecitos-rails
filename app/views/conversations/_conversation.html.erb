@@ -1,22 +1,39 @@
-<li>
-  <div class="card border-dark mb-3" style="max-width: 100;" data-conversation-id="<%= conversation.id %>">
-    <div class="card-header">
-      <%= link_to conversation.opposed_user(user).email, '', class: 'toggle-window' %>
-      <%= link_to "x", close_conversation_path(conversation), class: "btn btn-default btn-xs pull-right", remote: true, method: :post %>
-    </div>
+<div id="messages_list" class="tabcontent" data-conversation-id="<%= conversation.id %>">
 
-    <div class="card-body text-dark" style="display: none;">
-      <div class="messages-list">
-        <ul>
-          <%= render 'conversations/conversation_content', messages: conversation.messages, user: user %>
-        </ul>
+  <!-- header -->
+  <div class="view_box_header">
+
+    <!-- messenegr name and time -->
+    <div class="row messenegr_row_header">
+
+      <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+        <p><%= conversation.sender.slug == current_user.slug ? conversation.recipient.slug : current_user.slug %></p>
+        <small>
+          <span>
+            Activo hace:
+              <%= user.last_sign_in_at != nil ? distance_of_time_in_words_to_now(user.last_sign_in_at) : "nunca" %>
+          </span>
+        </small>
       </div>
-      <form class="new_message">
-        <input name="conversation_id" type="hidden" value="<%= conversation.id %>">
-        <input name="user_id" type="hidden" value="<%= user.id %>">
-        <textarea name="body" class="form-control"></textarea>
-        <input type="submit" class="btn btn-success" value="Send">
-      </form>
     </div>
   </div>
-</li>
+
+  <div class="row ">
+    <div class="col-lg-8 message_view_box messages-list">
+
+      <ul id="conversations-list">
+        <%= render 'conversations/conversation_content', messages: conversation.messages, user: user %>
+      </ul>
+
+    </div>
+
+  </div>
+  <div class="row tabcontent">
+    <form class="new_message">
+      <input name="conversation_id" type="hidden" value="<%= conversation.id %>">
+      <input name="user_id" type="hidden" value="<%= user.id %>">
+      <textarea name="body" class="form-control"></textarea>
+      <input type="submit" class="btn btn-success" value="Send">
+    </form>
+  </div>
+</div>
