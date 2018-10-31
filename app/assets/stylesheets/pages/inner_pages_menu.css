@@ -426,7 +426,7 @@ display: none !important;
         position: static !important;
     }
     .dropdown.dropdown-lg .dropdown-menu {
-        min-width: 500px;
+        min-width: 335px;
     }
 }
 .search-form{
@@ -447,4 +447,9 @@ input.js-search-input.js-report-to-aux-data.strt_selling_Srch1{
 }
 .button-dropdown{
   padding-right: 10px;
+}
+
+/*Dropdown of google*/
+.pac-container.pac-logo{
+  z-index: 10000;
 }

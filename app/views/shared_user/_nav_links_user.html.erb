@@ -5,33 +5,31 @@
     <%= form_with url: root_path, method: :get,:html =>{class: "search-form"} , local: true do |f|%>
       <%= f.text_field :query, class: "js-search-input js-report-to-aux-data strt_selling_Srch1 required" %>
 
-      <div class="btn-group" role="group">
-    <div class="dropdown dropdown-lg">
-        <button type="button" class="btn-default dropdown-toggle button-dropdown" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-        <div class="dropdown-menu dropdown-menu-right" role="menu">
-              <div class="form-group">
-                <label for="filter">Filter by</label>
-                <select class="form-control">
-                    <option value="0" selected>All Snippets</option>
-                    <option value="1">Featured</option>
-                    <option value="2">Most popular</option>
-                    <option value="3">Top rated</option>
-                    <option value="4">Most commented</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="contain">Author</label>
-                <input class="form-control" type="text" />
-              </div>
-              <div class="form-group">
-                <label for="contain">Contains the words</label>
-                <input class="form-control" type="text" />
-              </div>
-        </div>
+<div class="btn-group" role="group">
+  <div class="dropdown dropdown-lg">
+    <button type="button" class="btn-default dropdown-toggle button-dropdown" data-toggle="dropdown" aria-expanded="false">
+      <span class="caret"></span></button>
+    <div class="dropdown-menu dropdown-menu-right" role="menu" id="search-dropdown">
+      <div class="form-group">
+        <label for="filter">Buscar</label>
+        <select class="form-control" name="model_name">
+          <option value="gigs" selected="selected">Gigs</option>
+          <option value="requests">Pedidos</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="contain">Categoría</label>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, class: 'form-control' ) %>
+      </div>
+      <div class="form-group">
+        <label for="contain">Ubicación</label>
+        <%= f.text_field :location, class: 'text_box form-control', id: "autocomplete", size: 50 %>
+      </div>
     </div>
+  </div>
 </div>
 
-      <%= button_tag( :class => "btn-lrg-standard btn-submit js-search-submit strt_selling_Srch") do %>
+      <%= button_tag( :class => "btn-lrg-standard btn-submit js-search-submit strt_selling_Srch", :value => "commit") do %>
         <%= fa_icon "search" %>
       <% end %>
     <% end %>

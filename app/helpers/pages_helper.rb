@@ -25,4 +25,10 @@ module PagesHelper
        render 'shared_guest/guest_page'
     end
   end
+
+  def sign_script_helper
+    if current_user.nil?
+      javascript_include_tag 'sign', 'data-turbolinks-track': 'reload'
+    end
+  end
 end
