@@ -3,7 +3,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
   connected: function() {},
   disconnected: function() {},
   received: function(data) {
-    var conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
+    var conversation = $('#conversation-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
     conversation.find('.messages-list').find('ul').append(data['message']);
 
     var messages_list = conversation.find('.messages-list');

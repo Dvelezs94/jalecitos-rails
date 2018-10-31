@@ -314,6 +314,7 @@ div#defaultOpen {
     opacity: 0;
     visibility: hidden;
     transition: opacity .4s;
+    z-index: 10;
   }
   .about_messenger #menu:after {
     position: absolute;

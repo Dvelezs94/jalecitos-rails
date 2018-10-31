@@ -14,4 +14,4 @@
 
 //= require cable
 
-//= require messages-script
+//= require_tree ./conversations

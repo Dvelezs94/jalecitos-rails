@@ -44,7 +44,7 @@
 
       </div>
 
-      <div class="col-lg-9  col-md-9  col-sm-12  right_inbox_view">
+      <div class="col-lg-9  col-md-9  col-sm-12  right_inbox_view" id="conversation-list">
 
       <% if params[:user_id] && params[:user_id] != current_user.slug %>
         <%= render 'conversations/conversation', conversation: @conversation, user: current_user  %>
