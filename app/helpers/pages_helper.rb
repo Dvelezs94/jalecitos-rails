@@ -31,4 +31,13 @@ module PagesHelper
       javascript_include_tag 'sign', 'data-turbolinks-track': 'reload'
     end
   end
+
+  def query_or_home_helper gig
+    if params[:query]
+      link_to number_to_currency(gig.search_gigs_packages.first.price, precision: 2), user_path(gig.user.slug)
+    else
+      link_to number_to_currency(gig.gigs_packages.first.price, precision: 2), user_path(gig.user.slug)
+    end
+  end
+
 end

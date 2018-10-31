@@ -3,7 +3,9 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   def home
     if current_user && params[:query]
-        @search_gigs = Gig.search params[:query], includes: [:search_gigs_packages, :user], page: params[:page], per_page: 15
+
+        @search_gigs = Gig.search params[:query], where: {status: "published"}, includes: [:search_gigs_packages, :user], page: params[:page], per_page: 15
+
     elsif current_user
         @verified_gigs = Gig.includes(:gigs_packages, :user).published.where(category: 1).first(5)
         @recommended_gigs = Gig.includes(:gigs_packages, :user).published.where(category: 2).first(5)
@@ -21,6 +23,4 @@ class PagesController < ApplicationController
   def admin_redirect
     (current_user && current_user.has_role?(:admin)) ? redirect_to(:controller => 'admins', :action => 'dashboard') : nil
   end
-
-
 end
