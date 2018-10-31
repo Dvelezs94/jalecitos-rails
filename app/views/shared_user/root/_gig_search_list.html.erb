@@ -1,14 +1,16 @@
 <div class="container  Get_Pro_Services">
    <div class="row">
       <div class="col-lg-8">
-         <h3>Resultados de búsqueda</h3>
+         <h3>Resultados de búsqueda "<%= params[:query] %>" </h3>
       </div>
-      <div class="col-lg-4 text-right"> <a href=""  style="color: #1FD0B6;" > View All <i class="fa fa-chevron-right" style="font-size: 12px;">
-         </i></a>
-      </div>
+
    </div>
    <div class="row">
+     <% if @search_gigs.any? %>
       <%= render partial: "gigs/gig", collection: @search_gigs %>
+    <% else %>
+      Ninguna coincidencia para tu búsqueda
+    <% end  %>
       <div class="gap"></div>
    </div>
 </div>

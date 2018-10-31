@@ -5,10 +5,10 @@ input.js-search-input.js-report-to-aux-data.strt_selling_Srch1 {
     box-shadow: none;
     border: 1px solid #dcdada;
     width: 300px;
-    height: 28px;
+    height: 30px;
     border-radius: 0px;
 }
-input.js-search-input.js-report-to-aux-data.strt_selling_Srch1::placeholder {
+button.js-search-input.js-report-to-aux-data.strt_selling_Srch1::placeholder {
     font-size: 12px;
     color: #b5b1b1;
 }
@@ -21,8 +21,8 @@ input.js-search-input.js-report-to-aux-data.strt_selling_Srch1::placeholder {
 }
 
 
-input.strt_selling_Srch {
-    padding: 5.2px 18px !important;
+button.strt_selling_Srch {
+    padding: 1.2px 9px !important;
 }
 @media only screen and (max-width:535px){
     input.js-search-input.js-report-to-aux-data.strt_selling_Srch1,
@@ -410,4 +410,41 @@ display: none !important;
 /*Color for star rating on user profile */
 .checked {
     color: orange;
+}
+/*dropdown*/
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+
+@media screen and (min-width: 768px) {
+    #adv-search {
+        width: 500px;
+        margin: 0 auto;
+    }
+    .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+    }
+}
+.search-form{
+  display:flex;
+  height: 30px;
+}
+form.search-form .btn-submit{
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background-color: #00b22d;
+  cursor: pointer;
+  border: 1px solid #00b22d;
+  color: white;
+}
+input.js-search-input.js-report-to-aux-data.strt_selling_Srch1{
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.button-dropdown{
+  padding-right: 10px;
 }
