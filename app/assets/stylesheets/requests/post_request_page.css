@@ -121,7 +121,7 @@ ul.dropdown-menu {
     cursor: pointer;
 }
 
-.text_box{
+.current_form .text_box{
 
     border: 1px #b2b2b2 solid;
     border-radius: 4px;
@@ -364,4 +364,16 @@ p.example {
     padding-right: 26px;
     padding-left: 26px;
 }
+}
+
+.end-buttons{
+  display: flex;
+}
+
+.end-buttons input[type=submit]{
+  float: right;
+}
+
+.tags-main-input{
+  height: auto !important;
 }
