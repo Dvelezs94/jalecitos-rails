@@ -42,11 +42,13 @@ end
 end
 
 200.times do |x|
-  Package.create! do |package|
-    package.name = Faker::Commerce.product_name + "#{x}"
-    package.description = Faker::Lorem.paragraph(30, true)
-    package.price = Faker::Number.between(200, 500)
-    package.gig_id = x+1
+  3.times do |y|
+    Package.create! do |package|
+      package.name = Faker::Commerce.product_name + "#{x}#{y}"
+      package.description = Faker::Lorem.paragraph(30, true)
+      package.price = Faker::Number.between(200, 500)
+      package.gig_id = x+1
+    end
   end
 end
 

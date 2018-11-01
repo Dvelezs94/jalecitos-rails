@@ -3,6 +3,7 @@
  *= require gritter
  *= require message-styles
  *= require user-styles
+*= require_tree ./shared
  *= require_tree ./pages
  */
  @import 'bootstrap';

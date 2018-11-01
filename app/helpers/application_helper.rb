@@ -10,14 +10,6 @@ module ApplicationHelper
     end
   end
 
-  def homepage_content_helper
-     if  has_role?(:user)
-       render 'shared_user/root/homepage'
-     else
-       render 'shared_guest/guest_page'
-     end
-  end
-
   def notification_helper
     msg = (flash[:alert] || flash[:error] || flash[:notice] || flash[:warning] || flash[:success])
 
@@ -44,7 +36,7 @@ module ApplicationHelper
   end
 
   def google_scripts_helper
-    if params[:action] == 'new' || params[:action] == 'edit'
+    if params[:action] == 'new' || params[:action] == 'edit' || (params[:controller] == 'pages' &&  current_user )
       (javascript_include_tag 'google_functions', 'data-turbolinks-track': 'reload')+
       (javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places&callback=activatePlacesSearch", 'data-turbolinks-track': 'reload')
      end
