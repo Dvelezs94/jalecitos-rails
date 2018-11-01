@@ -3,31 +3,28 @@
   <div class="container">
     <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png', size: '108x36'), root_path, :class => 'navbar-brand js-scroll-trigger', id: "jalecitos-logo" %>
     <%= form_with url: root_path, method: :get,:html =>{class: "search-form"} , local: true do |f|%>
-      <%= f.text_field :query, class: "js-search-input js-report-to-aux-data strt_selling_Srch1 required" %>
+      <%= f.text_field :query, class: "js-search-input js-report-to-aux-data strt_selling_Srch1", value: params[:query] %>
 
-<div class="btn-group" role="group">
-  <div class="dropdown dropdown-lg">
-    <button type="button" class="btn-default dropdown-toggle button-dropdown" data-toggle="dropdown" aria-expanded="false">
-      <span class="caret"></span></button>
-    <div class="dropdown-menu dropdown-menu-right" role="menu" id="search-dropdown">
-      <div class="form-group">
-        <label for="filter">Buscar</label>
-        <select class="form-control" name="model_name">
-          <option value="gigs" selected="selected">Gigs</option>
-          <option value="requests">Pedidos</option>
-        </select>
+      <div class="btn-group" role="group">
+        <div class="dropdown dropdown-lg">
+          <button type="button" class="btn-default dropdown-toggle button-dropdown" data-toggle="dropdown" aria-expanded="false">
+            <span class="caret"></span></button>
+          <div class="dropdown-menu dropdown-menu-right" role="menu" id="search-dropdown">
+            <div class="form-group">
+              <label for="filter">Buscar</label>
+              <%= select_tag 'model_name', options_for_select([ ["Jales", "gigs"], ["Pedidos", "requests"]], selected: params[:model_name]), class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <label for="contain">Categoría</label>
+              <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Todas", :selected => params[:category_id] }, class: 'form-control', id: "category-select") %>
+            </div>
+            <div class="form-group">
+              <label for="contain">Ubicación</label>
+              <%= f.text_field :location, class: 'text_box form-control', id: "autocomplete", size: 50, value: params[:location], placeholder: "Cualquier lugar" %>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="contain">Categoría</label>
-        <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, class: 'form-control' ) %>
-      </div>
-      <div class="form-group">
-        <label for="contain">Ubicación</label>
-        <%= f.text_field :location, class: 'text_box form-control', id: "autocomplete", size: 50 %>
-      </div>
-    </div>
-  </div>
-</div>
 
       <%= button_tag( :class => "btn-lrg-standard btn-submit js-search-submit strt_selling_Srch", :value => "commit") do %>
         <%= fa_icon "search" %>
@@ -93,7 +90,6 @@
             </div>
           </div>
         </li>
-
 
         <li class="nav-item my_dropdown_menu my_image">
           <div class="dropdown">

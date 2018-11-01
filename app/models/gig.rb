@@ -2,7 +2,7 @@ class Gig < ApplicationRecord
   #includes
   include TagRestrictions
   #search
-  searchkick
+  searchkick language: "spanish"
   #Tags
   acts_as_taggable
   #Slugs
