@@ -22,6 +22,8 @@
 
 //= require form_validation
 
+//= require_tree ./shared
+
 //= require_tree ./gigs
 
 //= require messages_es

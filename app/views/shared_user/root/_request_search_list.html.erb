@@ -1,0 +1,14 @@
+<div class="row">
+  <% if @search_requests.any? %>
+    <div class="pagination-links">
+      <%= paginate @search_requests %>
+    </div>
+    <%= render partial: "requests/request", collection: @search_requests %>
+    <div class="pagination-links">
+      <%= paginate @search_requests %>
+    </div>
+  <% else %>
+    Ninguna coincidencia para tu búsqueda
+  <% end  %>
+  <div class="gap"></div>
+</div>

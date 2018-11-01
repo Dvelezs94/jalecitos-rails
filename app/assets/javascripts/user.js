@@ -12,12 +12,12 @@
 
 //= require cable
 
-//= require messages-script
-
 //= require best_in_place
 
 //= require jquery-fileupload/basic
 
 //=require users
+
+//= require_tree ./shared
 
 //=require_tree ./users

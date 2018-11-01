@@ -22,6 +22,8 @@
 
 //= require messages_es
 
+//= require_tree ./shared
+
 //= require_tree ./pages
 
 //= require jquery.slick

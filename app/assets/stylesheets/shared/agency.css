@@ -729,3 +729,10 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 .centered-form {
   margin: 0 auto;
 }
+/*Links of pagination*/
+.pagination{
+  justify-content: center;
+}
+.pagination-links{
+  width: 100%;
+}
