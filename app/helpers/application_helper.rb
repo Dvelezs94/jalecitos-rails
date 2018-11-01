@@ -75,7 +75,7 @@ module ApplicationHelper
   end
 
   def opposite_conversation_user(conversation, current_user)
-    @opposite_user = conversation.sender.slug == current_user.slug ? conversation.recipient.slug : current_user.slug
+    @opposite_user = conversation.sender == current_user ? conversation.recipient : current_user
   end
 
 end
