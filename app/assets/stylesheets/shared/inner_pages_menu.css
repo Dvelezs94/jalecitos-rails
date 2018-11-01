@@ -424,7 +424,7 @@ display: none !important;
         position: static !important;
     }
     .dropdown.dropdown-lg .dropdown-menu {
-        min-width: 335px;
+        min-width: 331px;
     }
 }
 .search-form{
