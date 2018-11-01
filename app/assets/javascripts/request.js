@@ -18,4 +18,6 @@
 
 //= require form_validation
 
+//= require_tree ./shared
+
 //= require messages_es
