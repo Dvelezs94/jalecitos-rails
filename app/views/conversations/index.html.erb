@@ -1,22 +1,64 @@
-<div class="row">
-  <div class="col-md-9">
-    <ul id="conversations-list">
-      <% @conversations.each do |conversation| %>
-        <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
-      <% end %>
-    </ul>
-  </div>
+<div class="container-fluid section main_bg">
 
-  <div class="col-md-3">
-    <div class="card mb-3" style="max-width: 18rem;">
-      <div class="card-header">User List</div>
-      <div class="card-body text-dark">
-        <ul>
+  <div class="container main_inbox">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-12 left_inbox_view">
+
+        <!-- tabs-->
+
+        <div class="tab">
+
+          <div class="tablinks" onclick="openCity(event, 'empty_box')" id="defaultOpen"></div>
+          <!-- -->
           <% @users.each do |user| %>
-            <li><%= link_to user.slug, conversations_path(user_id: user.id), remote: true, method: :post %></li>
+
+            <!-- -->
+            <%= link_to conversations_path(user_id: user.slug) do %>
+            <div class="chats_inbox_list tablinks" onclick="openCity(event, 'messages_list')">
+              <div class="row in_row">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-12">
+
+                  <div class="users">
+                    <div class="users_img">
+                      <%= image_tag(avatar_display_helper(user.image_url(:thumb)), class: "nav-avatar") %></div>
+
+                    <div class="users_txt">
+                      <h5><%= p "#{user.slug.first(15)}..." %></h5>
+                      <p>Activo hace:
+                        <%= user.last_sign_in_at != nil ? distance_of_time_in_words_to_now(user.last_sign_in_at) : "nunca" %></p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <% end  %>
+            <!-- -->
+
           <% end %>
-        </ul>
+          <!-- -->
+
+        </div>
+
+        <!-- tabs -->
+
       </div>
+
+      <div class="col-lg-9  col-md-9  col-sm-12  right_inbox_view" id="conversation-list">
+
+      <% if params[:user_id] && params[:user_id] != current_user.slug %>
+        <%= render 'conversations/conversation', conversation: @conversation, user: current_user  %>
+      <% else %>
+      <div id="empty_box" class="tabcontent">
+        <div class="empty-state no-conversations text-center">
+              <%= fa_icon "comments", class: "fa-5x" %>
+              <h4>Nada que ver aqui</h4>
+              <small>Abre una conversacion para mostrarla aqui</small>
+            </div>
+        </div>
+      <% end %>
+      </div>
+
     </div>
   </div>
 </div>

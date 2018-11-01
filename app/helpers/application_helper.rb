@@ -82,4 +82,8 @@ module ApplicationHelper
     (params[:controller] == 'users')? 'col-lg-3 col-md-4 col-sm-6 col-12 single_gig' : 'col-lg-2 col-md-4 col-sm-6 col-12 single_gig'
   end
 
+  def opposite_conversation_user(conversation, current_user)
+    @opposite_user = conversation.sender.slug == current_user.slug ? conversation.recipient.slug : current_user.slug
+  end
+
 end
