@@ -85,7 +85,7 @@
 
           <p>
             <p class="font-weight-bold green">
-              <%= @user.last_sign_in_at != nil ? distance_of_time_in_words_to_now(@user.last_sign_in_at) : "nunca" %> </p>
+              <%= @user.current_sign_in_at != nil ? distance_of_time_in_words_to_now(@user.current_sign_in_at) : "nunca" %> </p>
           </p>
         </div>
 

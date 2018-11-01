@@ -7,11 +7,11 @@
     <div class="row messenegr_row_header">
 
       <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-        <p><%= opposite_conversation_user(conversation, current_user) %></p>
+        <p><%= opposite_user.slug %></p>
         <small>
           <span>
             Activo hace:
-              <%= user.last_sign_in_at != nil ? distance_of_time_in_words_to_now(user.last_sign_in_at) : "nunca" %>
+              <%= opposite_user.current_sign_in_at != nil ? distance_of_time_in_words_to_now(opposite_user.current_sign_in_at) : "nunca" %>
           </span>
         </small>
       </div>
@@ -20,7 +20,7 @@
 
           <div id="menu">
             <ul>
-              <li><%= link_to "Perfil", user_path(opposite_conversation_user(conversation, current_user)) %></li>
+              <li><%= link_to "Perfil", user_path(opposite_user) %></li>
             </ul>
           </div>
           </div>
