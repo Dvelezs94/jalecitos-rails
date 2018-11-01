@@ -78,7 +78,7 @@
   form{
     width:100%;
   }
-  .form-group{
+  .main_inbox .form-group{
     position:relative;
   width:0%;
     min-width:60px;
@@ -87,7 +87,7 @@
   transition: width 1s;
   backface-visibility:hidden;
   }
-  .form-group input.form-control {
+  .main_inbox .form-group input.form-control {
     position: absolute;
     top: 15px;
     right: 0;
@@ -97,7 +97,7 @@
     /* margin: 0; */
     z-index: 10;
 }
-  input[type="text"].form-control{
+  .main_inbox input[type="text"].form-control{
     -webkit-appearence:none;
     -webkit-border-radius:0;
   }

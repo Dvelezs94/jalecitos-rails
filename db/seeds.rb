@@ -69,3 +69,9 @@ User.create!(
       confirmed_at: Time.now
  )
 puts "Created testing user"
+
+reindex_list = [Gig, Request]
+reindex_list.each do |model|
+  model.reindex
+end
+puts "reindex has finished"
