@@ -1,4 +1,4 @@
-var isHidden = false;
+var isHidden = true;
  function toggleVisibility() {
     var menu = document.getElementById('menu');
     if(!isHidden){
