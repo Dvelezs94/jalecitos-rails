@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :update_sign_in_at_periodically
-  before_action :authenticate
   UPDATE_LOGIN_PERIOD = 1.hours
 
   protected
@@ -18,12 +17,6 @@ class ApplicationController < ActionController::Base
       if user_signed_in? and current_user.current_sign_in_at < 1.minute.ago # prevents double logins
         sign_in(current_user, :force => true)
       end
-    end
-  end
-
-  def authenticate
-    authenticate_or_request_with_http_basic do |username, password|
-      username == "admin" && password == "test"
     end
   end
 end
