@@ -28,17 +28,19 @@ module PagesHelper
 
   def sign_script_helper
     if current_user.nil?
-      javascript_include_tag 'sign', 'data-turbolinks-track': 'reload'
+      javascript_include_tag 'sign'
     end
   end
 
-  def query_or_home_helper gig
+  def query_home_or_profile_helper gig
     if params[:query]
       link_to number_to_currency(gig.search_gigs_packages.first.price, precision: 2), user_gig_path(gig.user.slug,gig)
-    elsif gig.gigs_packages.first.present?
+    elsif params[:controller]=="pages" && gig.gigs_packages.first.present?
       link_to number_to_currency(gig.gigs_packages.first.price, precision: 2), user_gig_path(gig.user.slug,gig)
+    elsif params[:controller]=="users" && gig.packages.first.present?
+      link_to number_to_currency(gig.packages.first.price, precision: 2), user_gig_path(gig.user.slug,gig)
     else
-      link_to "Indefinido", user_gig_path(gig.user.slug,gig)
+      link_to "Indefinido", edit_user_gig_path(gig.user.slug,gig)
     end
   end
 

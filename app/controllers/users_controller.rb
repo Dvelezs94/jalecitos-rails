@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   layout 'user'
   before_action :set_user, only: [:show, :update]
   before_action :set_user_config, only: [:configuration]
-  access all: [:show, :index], user: [:show, :update, :configuration]
+  access all: [:show, :index], user: [:update, :configuration]
   before_action :check_user_ownership, only:[:update, :configuration]
 
 
@@ -23,8 +23,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @gigs = User.friendly.find(params[:id]).gigs
-    @requests = User.friendly.find(params[:id]).gigs
+    @gigs = Gig.includes(:packages, :user).where(user_id: @user)
+    @requests = @user.gigs
   end
 
   # PATCH/PUT /users/1

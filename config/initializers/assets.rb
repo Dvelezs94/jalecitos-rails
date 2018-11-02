@@ -14,6 +14,8 @@ Rails.application.config.assets.precompile += %w( google_functions.js )
 
 Rails.application.config.assets.precompile += %w( sign.js )
 
+Rails.application.config.assets.precompile += %w( config_modals.js )
+
 Rails.application.config.assets.precompile += %w( page.js )
 
 Rails.application.config.assets.precompile += %w( gig.js )

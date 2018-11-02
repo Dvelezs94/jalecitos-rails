@@ -19,5 +19,3 @@
 //= require users
 
 //= require_tree ./shared
-
-//=require_tree ./users
