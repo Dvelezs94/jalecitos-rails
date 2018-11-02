@@ -7,7 +7,8 @@ module GigStatus
       redirect_to user_path(current_user.slug)
     else
       change_status
-      redirect_to user_path(current_user.slug), notice: "Se ha cambiado el estado del Gig exitosamente"
+      flash[:success] = "Se ha cambiado el estado del Gig exitosamente"
+      redirect_to user_path(current_user.slug, :q => "gigs")
     end
   end
 
@@ -17,10 +18,6 @@ module GigStatus
   end
 
   private
-
-  def check_status
-    (@gig.banned?) ? redirect_to(gigs_path, notice: 'Este Gig está baneado') : nil
-  end
 
   def check_first_package
     (@gig.gig_first_pack[0].nil? || @gig.gig_first_pack[0].name == "" || @gig.gig_first_pack[0].description == "" || @gig.gig_first_pack[0].price == nil) ? flash[:error]='Este Gig no contiene ningún paquete' : nil

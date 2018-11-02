@@ -11,7 +11,7 @@ module ApplicationHelper
   end
 
   def notification_helper
-    msg = (flash[:alert] || flash[:error] || flash[:notice] || flash[:warning] || flash[:success])
+    msg = (flash[:alert] || flash[:error] || flash[:notice] || flash[:warning] || flash[:success] || flash[:progress])
 
     if msg
       case
@@ -25,8 +25,9 @@ module ApplicationHelper
           flash_type = :warning
         when flash[:success]
           flash_type = :success
+        when flash[:progress]
+          flash_type = :progress
       end
-
       notification_generator_helper msg, flash_type
     end
   end
