@@ -21,13 +21,11 @@
   </head>
 
   <body>
-    <%= notification_helper %>
-    <!-- Navigation -->
-
+  <%= notification_helper %>
    <%= render 'shared/main_nav_bar' %>
     <%= yield %>
+    <%= render 'shared/main_footer' %>
   </body>
-<%= google_scripts_helper %>
-<%= javascript_include_tag 'tag' %>
-<%= render 'shared/main_footer' %>
+  <%= google_scripts_helper %>
+  <%= javascript_include_tag 'tag' %>
 </html>

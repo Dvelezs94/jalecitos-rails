@@ -19,11 +19,10 @@
         let enteredTags2 = mainInput.value.split(' ');
 
         if (enteredTags.length > 1 || enteredTags2.length > 1) {
-          let filteredTag = filterTag(enteredTags[0]);
           if (tagNumber<5){
-            if(filteredTag.length > 0 && filteredTag.length < 16){
+            if(enteredTags[0].length > 0 && enteredTags[0].length < 16){
               $(".tag-error" ).html("");
-              addTag(filteredTag);
+              addTag(enteredTags[0]);
             }
             else{
               $(".tag-error" ).html("Cada tag debe contener de 1 a 15 caracteres");
@@ -95,7 +94,4 @@
         hiddenInput.value = tagsList.join(',');
     }
 
-    function filterTag (tag) {
-        return tag.replace(/[^\w -]/g, '').trim();
-    }
 });

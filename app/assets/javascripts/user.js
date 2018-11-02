@@ -16,7 +16,7 @@
 
 //= require jquery-fileupload/basic
 
-//=require users
+//= require users
 
 //= require_tree ./shared
 

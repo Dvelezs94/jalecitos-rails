@@ -6,13 +6,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag  'user', media: 'all' %>
+    <%= stylesheet_link_tag 'user', media: 'all', 'data-turbolinks-track': 'reload' %>
     <!-- Card Anti Fraud System -->
-    <!-- <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>
-    <script type="text/javascript" src="https://resources.openpay.mx/lib/openpay-data.v1.min.js"></script> -->
-    <%= javascript_include_tag 'user'   %>
-
-
+    <!-- <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script> <script type="text/javascript" src="https://resources.openpay.mx/lib/openpay-data.v1.min.js"></script> -->
+    <%= javascript_include_tag 'user', 'data-turbolinks-track': 'reload' %>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,15 +23,8 @@
 
   <body>
     <%= notification_helper %>
-    <!-- Navigation -->
-
-   <%= render 'shared/main_nav_bar' %>
+    <%= render 'shared/main_nav_bar' %>
     <%= yield %>
-
-
-
+    <%= render 'shared/main_footer' %>
   </body>
-
-  <%= render 'shared/main_footer' %>
-
 </html>

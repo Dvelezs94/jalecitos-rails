@@ -14,7 +14,7 @@ class Gig < ApplicationRecord
 
   belongs_to :category
   has_many :packages, dependent: :destroy
-  has_many :gig_first_pack, ->{ limit(1) }, class_name: 'Package'
+  has_many :gig_first_pack, ->{ limit(1).order(id: :asc) }, class_name: 'Package'
   has_many :gig_packages, ->{ limit(3).order(id: :asc) }, class_name: 'Package'
   has_many :gigs_packages, ->{ limit(15).order(id: :asc) }, class_name: 'Package'
   has_many :search_gigs_packages, ->{ limit(45).order(id: :asc) }, class_name: 'Package'

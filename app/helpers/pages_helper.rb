@@ -34,9 +34,11 @@ module PagesHelper
 
   def query_or_home_helper gig
     if params[:query]
-      link_to number_to_currency(gig.search_gigs_packages.first.price, precision: 2), user_path(gig.user.slug)
+      link_to number_to_currency(gig.search_gigs_packages.first.price, precision: 2), user_gig_path(gig.user.slug,gig)
+    elsif gig.gigs_packages.first.present?
+      link_to number_to_currency(gig.gigs_packages.first.price, precision: 2), user_gig_path(gig.user.slug,gig)
     else
-      link_to number_to_currency(gig.gigs_packages.first.price, precision: 2), user_path(gig.user.slug)
+      link_to "Indefinido", user_gig_path(gig.user.slug,gig)
     end
   end
 
