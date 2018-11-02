@@ -1,4 +1,4 @@
-(function($) {
+document.addEventListener("turbolinks:load", function() {
   "use strict"; // Start of use strict
 
   // Smooth scrolling using jQuery easing
@@ -47,4 +47,4 @@
     $(".navbar").removeClass("d-none");
   })
 
-})(jQuery); // End of use strict
+}); // End of use strict
