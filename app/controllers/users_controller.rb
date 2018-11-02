@@ -23,8 +23,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    puts "X"*500
-    puts flash.inspect
     @gigs = Gig.includes(:packages, :user).where(user_id: @user)
     @requests = @user.gigs
   end
