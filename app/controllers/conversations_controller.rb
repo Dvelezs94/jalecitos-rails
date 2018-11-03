@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_recipient, only: [:index, :create]
-  layout 'conversation'
+  layout 'logged'
   access user: :all
 
   # GET /conversations

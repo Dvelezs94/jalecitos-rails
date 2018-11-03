@@ -15,21 +15,22 @@
           <div class="fb_sign_in">
             <%= link_to "Continuar con facebook", user_facebook_omniauth_authorize_path, class: 'loginBtn loginBtn--facebook' %>
           </div>
-
           <!-- <div class="google_signin">
             <%= fa_icon "google" %>
             <span>Continue with Google</span>
           </div> -->
           <div class="divi-new js-form-join-section" data-section="1">
-            <span>O</span></div>
+            <span>O</span>
+          </div>
           <%= form_for(:user, :html => { :class => "sign_in_form" }, :url => session_path(:user)) do |f| %>
-          <%= devise_error_messages! %>
-            <%= f.email_field :email, class: "required", placeholder: "Correo" %>
-            <%= f.password_field :password, class: "required", placeholder: "Contraseña" %>
-            <br>
-            <%= f.check_box :remember_me %>
-            <%= f.label "Recordarme" %>
-            <br>
+            <div class="information">
+              <%= f.email_field :email, class: "required", placeholder: "Correo" %>
+              <%= f.password_field :password, class: "required", placeholder: "Contraseña" %>
+            </div>
+            <div class="remembr">
+              <%= f.check_box :remember_me %>
+              <%= f.label "Recordarme" %>
+            </div>
             <%= f.submit 'Continuar', :class => 'btn btn-success' %>
             <br>
             <%= link_to "Olvidé mi contraseña", new_password_path(:user) %>

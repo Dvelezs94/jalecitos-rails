@@ -37,9 +37,12 @@
               <%= fa_icon "sticky-note", class: "fa-2x" %>
             </div>
             <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-              <%= form.text_field :description, class: 'js-br-description', id: "description", type: "hidden" %>
-              <trix-editor input="description" class="trix-input required" maxlength="1000"></trix-editor>
-              <div class="row">
+              <div class="description">
+                <%= form.text_field :description, class: 'js-br-description', id: "description", type: "hidden" %>
+                <trix-editor input="description" class="trix-input required" maxlength="1000"></trix-editor>
+              </div>
+              <div class="gap"></div>
+              <div class="row file_upload">
                 <div class="col-lg-8">
                   <label for="file-upload" class="custom-file-upload">
 
@@ -80,7 +83,7 @@
               <%= fa_icon "map-marker", class: "fa-2x" %>
             </div>
             <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-              <%= form.text_field :location, class: 'text_box required', id: "autocomplete", size: 50, placeholder: 'Busca tu ciudad...' %>
+              <%= form.text_field :location, class: 'text_box required', id: "form_autocomplete", size: 50, placeholder: 'Busca tu ciudad...' %>
             </div>
             <%= render 'shared_user/requests/forms/hints/city_hint.html.erb' %>
           </div>
@@ -99,9 +102,7 @@
               <div class="tags-input" data-name="tags-input">
                 <%= form.hidden_field :tag_list %>
               </div>
-              máximo de 5 tags
-              <br>
-              <span class="tag-error"></span>
+              <label class="tag-error error"></label>
 
             </div>
             <%= render 'shared_user/requests/forms/hints/tags_hint.html.erb' %>

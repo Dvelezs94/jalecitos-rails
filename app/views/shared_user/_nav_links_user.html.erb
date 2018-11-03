@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top jalecitos" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top jalecitos" id="mainNav" >
   <div class="container">
     <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png', size: '108x36'), root_path, :class => 'navbar-brand js-scroll-trigger', id: "jalecitos-logo" %>
     <%= form_with url: root_path, method: :get,:html =>{class: "search-form"} , local: true do |f|%>
@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
               <label for="contain">Ubicación</label>
-              <%= f.text_field :location, class: 'text_box form-control', id: "autocomplete", size: 50, value: params[:location], placeholder: "Cualquier lugar" %>
+              <%= f.text_field :location, class: 'text_box form-control', id: "search_autocomplete", size: 50, value: params[:location], placeholder: "Cualquier lugar" %>
             </div>
           </div>
         </div>

@@ -36,19 +36,6 @@ module ApplicationHelper
      js add_gritter(msg, :image => flash_type, :title=>"Jalecitos", :sticky => false, :time => 2000 )
   end
 
-  def google_scripts_helper
-    if params[:action] == 'new' || params[:action] == 'edit' || (params[:controller] == 'pages' &&  current_user )
-      (javascript_include_tag 'google_functions')+
-      (javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places&callback=activatePlacesSearch")
-     end
-  end
-
-  def back_no_cache_helper
-    if params[:action] == 'new' || params[:action] == 'edit'
-      javascript_include_tag 'back-no-cache'
-     end
-  end
-
   def image_display_helper image
     if image.nil?
       "https://picsum.photos/600/400?image=#{Faker::Number.between(1, 500)}"

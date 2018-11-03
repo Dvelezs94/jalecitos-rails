@@ -26,12 +26,6 @@ module PagesHelper
     end
   end
 
-  def sign_script_helper
-    if current_user.nil?
-      javascript_include_tag 'sign'
-    end
-  end
-
   def query_home_or_profile_helper gig
     if params[:query]
       link_to number_to_currency(gig.search_gigs_packages.first.price, precision: 2), user_gig_path(gig.user.slug,gig)

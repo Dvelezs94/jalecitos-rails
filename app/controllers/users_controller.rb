@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   include OpenpayHelper
   include UsersHelper
   respond_to :html, :json
-  layout 'user'
+  layout 'logged'
   before_action :set_user, only: [:show, :update]
   before_action :set_user_config, only: [:configuration]
   access all: [:show, :index], user: [:update, :configuration]

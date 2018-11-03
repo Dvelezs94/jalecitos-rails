@@ -10,6 +10,10 @@
 
 //= require gritter
 
+//= require jquery.validate
+
+//= require jquery.slick
+
 //= require_tree ./main
 
-//= require_tree ./admin
+//= require_tree ./guest

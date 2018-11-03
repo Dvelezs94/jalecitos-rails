@@ -10,41 +10,21 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 # Precompile additional assets.
 ################js
-Rails.application.config.assets.precompile += %w( google_functions.js )
+Rails.application.config.assets.precompile += %w( logged.js )
 
-Rails.application.config.assets.precompile += %w( sign.js )
-
-Rails.application.config.assets.precompile += %w( config_modals.js )
-
-Rails.application.config.assets.precompile += %w( page.js )
-
-Rails.application.config.assets.precompile += %w( gig.js )
-
-Rails.application.config.assets.precompile += %w( request.js )
+Rails.application.config.assets.precompile += %w( guest.js )
 
 Rails.application.config.assets.precompile += %w( admin.js )
 
-Rails.application.config.assets.precompile += %w( conversation.js )
+Rails.application.config.assets.precompile += %w( google_turbolink.js )
 
-Rails.application.config.assets.precompile += %w( tag.js )
-
-Rails.application.config.assets.precompile += %w( user.js )
-
-Rails.application.config.assets.precompile += %w( back-no-cache.js )
 ###################css
-Rails.application.config.assets.precompile += %w( gig.scss )
+Rails.application.config.assets.precompile += %w( logged.scss )
 
-Rails.application.config.assets.precompile += %w( page.scss )
-
-Rails.application.config.assets.precompile += %w( page-styles.scss )
-
-Rails.application.config.assets.precompile += %w( request.scss )
+Rails.application.config.assets.precompile += %w( guest.scss )
 
 Rails.application.config.assets.precompile += %w( admin.scss )
 
-Rails.application.config.assets.precompile += %w( conversation.scss )
-
-Rails.application.config.assets.precompile += %w( user.scss )
 
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
