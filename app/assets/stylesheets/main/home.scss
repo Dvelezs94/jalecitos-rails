@@ -1,0 +1,560 @@
+
+@media  only screen and  (max-width: 991.98px){
+.navbar-expand-lg>.container, .navbar-expand-lg>.container-fluid {
+
+    padding: 0px 13px ;
+}
+
+}
+@media only screen and (min-width: 1200px)
+{
+
+  .container {
+    max-width: 1267px;
+}
+}
+
+a.navbar-brand.js-scroll-trigger {
+  color: #fff !important;
+}
+.jalecitos a.nav-link {
+  font-size: 14px;
+  color: #e5e5e5 !important;
+}
+.gap{
+  height:30px;
+}
+
+a{
+  color:#0e0e0f;
+}
+.row.in_row {
+  display: flex;
+  align-items: center;
+}
+.section{
+
+  padding-top:60px;
+  padding-bottom: 60px;
+}
+.jalecitos a.nav-link:hover {
+
+  color: #00b22d !important;
+}
+
+
+#mainNav{
+  padding: 10px 0px;
+}
+
+
+/* banner*/
+
+
+@media only screen and (min-width:768px){
+
+  .main_banner.slider {
+
+    height: 72vh;
+  }
+
+}
+
+@media only screen and (max-width:767px){
+
+  .main_banner.slider {
+
+    height: 91vh;
+  }
+
+}
+
+
+
+
+.main_banner.slider {
+  max-width: 100%;
+   position: relative;
+}
+.contnt{
+  text-align: center;
+  top: 33%;
+  position: absolute;
+  animation: none;
+  z-index: 400;
+  margin: 0px auto;
+  color: white;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+}
+.slide1,.slide2,.slide3,.slide4,.slide5 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.slide1 {
+  background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Cecily_Wiggins.jpg")no-repeat left;
+      background-size: cover;
+    animation:fade 8s infinite;
+    background-position: left;
+-webkit-animation:fade 8s infinite;
+
+}
+.slide2 {
+  background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Jill_Bigelow.jpg")no-repeat left;
+      background-size: cover;
+    animation:fade2 8s infinite;
+-webkit-animation:fade2 8s infinite;
+}
+.slide3 {
+    background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Jordan_Swain.jpg")  no-repeat left;
+      background-size: cover;
+    animation:fade3 8s infinite;
+-webkit-animation:fade3 8s infinite;
+}
+
+.slide4 {
+  background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Mike_Lin.jpg") no-repeat left;
+    background-size: cover;
+  animation:fade 8s infinite;
+-webkit-animation:fade 8s infinite;
+}
+.slide5 {
+  background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Rachel_Browning.jpg") no-repeat left;
+    background-size: cover;
+  animation:fade2 8s infinite;
+-webkit-animation:fade2 8s infinite;
+}
+@keyframes fade
+{
+  0%   {opacity:1}
+  33.333% { opacity: 0}
+  66.666% { opacity: 0}
+  100% { opacity: 1}
+}
+@keyframes fade2
+{
+  0%   {opacity:0}
+  33.333% { opacity: 1}
+  66.666% { opacity: 0 }
+  100% { opacity: 0}
+}
+@keyframes fade3
+{
+  0%   {opacity:0}
+  33.333% { opacity: 0}
+  66.666% { opacity: 1}
+  100% { opacity: 0}
+}
+
+.nav-link{
+  cursor: pointer;
+}
+
+input.js-search-input {
+  height: 50px;
+  border: 0;
+  font-size: inherit;
+  border-top: 1px solid #999;
+  border-left: 1px solid #999;
+  border-bottom: 1px solid #999;
+  background-color: #fff;
+  color: #0e0e0f;
+  padding: 7px 30px 7px 10px;
+  border-color: #eee;
+  box-shadow: inset 0 3px 9px rgba(0,0,0,.08);
+  -webkit-transition: background-color .2s,border-color .2s,width .2s;
+  transition: background-color .2s,border-color .2s,width .2s;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+input.btn-lrg-standard.btn-submit.js-search-submit {
+  background-color: #00b22d;
+  background: -webkit-linear-gradient(#35c350,#03b525);
+  background: linear-gradient(#35c350,#03b525);
+  font: 700 16px/16px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #fff;
+  border: 1px solid #00b22d;
+  padding: 15px 35px;
+  margin: 0;
+  display: inline-block;
+  font-size: 13px;
+  /* border-radius: 3px; */
+  text-shadow: 0 -1px 1px rgba(0,0,0,.2);
+  box-sizing: border-box;
+  -webkit-transition: color .2s,background-color .2s,box-shadow .2s,border .2s;
+  transition: color .2s,background-color .2s,box-shadow .2s,border .2s;
+}
+input.btn-lrg-standard.btn-submit.js-search-submit:hover {
+  border: 1px solid #00b22d;
+  cursor:pointer;
+}
+.search_banner {
+  display: inline-flex;
+}
+@media only screen and (min-width:583px){
+  input.js-search-input {
+    width:400px;
+  }
+}
+@media only screen and (max-width:494px){
+  .TopQuality img{
+    width: 80%;
+  }
+}
+
+
+
+@media only screen and (max-width:583px){
+
+  .input.js-search-input{
+    width:100%;
+  }
+
+}
+
+
+/*  */
+
+
+/* slider */
+.slick-slide {
+    margin: 0px 20px;
+  }
+
+  .slider_self
+  .slick-slide img {
+    width: 100%;
+    height: 421px;
+    object-fit: cover;
+    object-position: right;
+
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    color: black;
+  }
+
+
+  .slick-slide {
+    transition: all ease-in-out .3s;
+
+  }
+
+
+.self_drug .col-lg-6 {
+    width: 50%;
+    float: left;
+
+    padding: 0px;
+    margin: 0px;
+    /* min-height: 441px; */
+  }
+
+
+  @media only screen and (max-width:990px){
+
+    .col-lg-6.right_slider_col {
+      padding-left: 30px;
+      padding-right: 30px;
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+  .self_drug .row {
+
+    width: auto !important;
+  }
+  }
+  @media only screen and (min-width:991px){
+    .self_drug .col-lg-6 {
+           /* height: 825px; */
+            padding: 0px;
+    }
+
+    .col-lg-6.right_slider_col {
+
+      padding: 6px 48px;
+    }
+
+  }
+  .self_drug .row{
+    display: flex !important;
+    align-items: center;
+    background-color: white;
+  }
+
+a:hover{
+  text-decoration: none;
+}
+
+  /* second section */
+
+.Explore{
+
+  background-color: #f7f7f7;
+}
+
+li.categories h3 {
+  font-size: 18px;
+  color: #0e0e0f;
+}
+li.categories {
+  list-style: none;
+}
+li.categories p {
+  color: #999;
+  font-size: 14px;
+  line-height: 140%;
+  opacity: 0;
+  display: block;
+  padding-top: 10px;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+li.categories:hover p {
+  opacity: 1;
+  padding-top: 10px;
+}
+
+.line_green{
+display: block;
+width: 60px;
+height: 0;
+margin: 5px auto 10px;
+border-top: 1px solid #00b22d;
+}
+
+/* top quality */
+.green_btn {
+  padding: 8px 8px !important;
+  border: 1px solid white;
+  border-radius: 3px;
+  color: white;
+  font-size: 13px;
+}
+
+
+.green_btn:hover{
+  padding: 10px 20px;
+  border: 1px solid #00b22d;
+  border-radius: 3px;
+  color:white;
+  background-color:#00b22d;
+
+}
+
+.TopQuality {
+  background-color: #212121;
+}
+
+
+/*take step  */
+
+.Take_step{
+
+  background-color: #f7f7f7;
+}
+
+.captn {
+  position: absolute;
+  color: white;
+  text-align: left;
+  padding: 11px 16px;
+}
+
+.captn small {
+  font-size: 14px;
+}
+.captn h4 {
+  font-size: 22px;
+}
+.Take_step .slick-next {
+  right: -8px;
+}
+
+.Take_step .slick-prev {
+  left: -20px;
+}
+.Take_step button.slick-arrow {
+  top: 43%;
+}
+/* .Take_step .slick-list {
+
+  width: 98%;
+} */
+
+.focussed img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.Take_step .slick-slide {
+  margin: 0px 6px;
+  /* width: 13.6% !important; */
+}
+
+/*
+.Your_Terms*/
+
+.Your_Terms{
+  background-color: #353537;
+}
+/*  */
+
+
+
+
+.brand blockquote {
+  font: italic 22px/125% Georgia,"Times New Roman",serif;
+  margin-bottom: 15px;
+}
+
+.YOur_brand{
+  background-color: #F0F0F0;
+}
+/*
+.YOur_brand_container{
+
+  background-color: white;
+} */
+
+
+.YOur_brand_container .slick-prev {
+  left: -45px;
+}
+
+.YOur_brand_container .slick-next {
+  right: -1px;
+}
+
+
+.YOur_brand_container .slick-dots li button:before {
+  font-family: 'slick';
+  /* font-size: 33px; */
+  /* line-height: 20px; */
+  position: absolute;
+  top: 0;
+  left: 0px;
+  width: 52px;
+  height: 4px;
+  /* margin: 0px 29px; */
+  content: '';
+  text-align: center;
+  /* opacity: .25; */
+  border: 2px solid #c4c4c4;
+  border-radius: 0px;
+  background-color: #979797;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.YOur_brand_container .slick-dots li {
+
+  margin: 0 24px;
+
+}
+
+.YOur_brand_container  .slick-dots li.slick-active button:before {
+  color: #848181;
+}
+
+/* Jalecitos guides */
+.Jalecitos_Guides_boxes h3, .Jalecitos_Guides_boxes p {
+  color: #555;
+  text-align: left;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 0px;
+}
+.Jalecitos_Guides_boxes img{
+width: 100%;
+border-radius: 3px;
+margin-bottom: 10px;
+}
+
+
+.Jalecitos_Guides_boxes:hover img {
+  -webkit-filter: brightness(70%);
+  filter: brightness(70%);
+}
+
+.Jalecitos_Guides a.green_btn {
+  padding: 14px 21px !important;
+  border: 1px solid #00B22D;
+  color: #00B22D;
+  font-size: 16px;
+  transition: background ease 0.5s;
+}
+
+.Jalecitos_Guides a.green_btn:hover {
+  border: 1px solid #00B22D;
+      transition: background ease 0.5s;
+  color: white;
+
+background-color: #00B22D;
+font-size: 16px;
+}
+.Footer{
+  padding: 20px 0px 0px;
+  background-color: #212529;
+  border-top: 1px solid #efefef;
+  color: #fff;
+}
+.social_footr{
+  padding: 20px 0px;
+  border-top: 1px solid #efefef;
+}
+
+.Footer a {
+  font-size: 15px;
+  line-height: 120%;
+  color: #fff;
+}
+
+.Footer ul  {
+
+padding: 0px;
+margin: 0px;
+}
+
+.Footer ul li{
+list-style: none;
+margin-bottom: 10px;
+}
+
+.Footer h4{
+  color:#555555;
+font-size: 16px;
+text-transform: capitalize;
+}
+
+.Footer i {
+  display: inline-block;
+  font-size: 21px;
+  margin-right: 17px;
+}
+
+.Footer select {
+  background: transparent;
+  font-size: 15px;
+  line-height: 120%;
+  width: 100%;
+  height: 45px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  padding: 10px 15px;
+}
+
+.information{
+  float: left;
+  width: 100%;
+}
+
+label.error{
+  float: left;
+  color: red;
+}

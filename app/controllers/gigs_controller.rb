@@ -1,5 +1,5 @@
 class GigsController < ApplicationController
-  layout 'gig'
+  layout 'logged'
   include SanitizeParams
   include GigStatus
   before_action :set_gig, only: [:edit, :update, :destroy, :ban_gig]

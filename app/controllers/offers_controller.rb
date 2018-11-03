@@ -1,5 +1,5 @@
 class OffersController < ApplicationController
-  layout 'request'
+  layout 'logged'
   include SanitizeParams
   include OffersHelper
   before_action :authenticate_user!

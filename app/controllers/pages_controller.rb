@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
-  layout 'page'
   before_action :admin_redirect, only: :home
+  layout :set_layout
   def home
     if current_user && params[:query]
       if (params[:model_name] == "gigs")
@@ -28,6 +28,10 @@ class PagesController < ApplicationController
 
   def admin_redirect
     (current_user && current_user.has_role?(:admin)) ? redirect_to(:controller => 'admins', :action => 'dashboard') : nil
+  end
+
+  def set_layout
+    (current_user)? 'logged' : 'guest'
   end
 
   def search model, includes, status

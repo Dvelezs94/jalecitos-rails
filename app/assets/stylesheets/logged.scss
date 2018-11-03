@@ -1,8 +1,9 @@
 /*
  *= require_self
  *= require gritter
- *= require_tree ./admin
- *= require feathericon
+ *= require trix
+ *= require_tree ./main
+ *= require_tree ./logged
  */
  @import 'bootstrap';
  @import 'font-awesome';

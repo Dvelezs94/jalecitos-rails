@@ -1,5 +1,5 @@
 class RequestsController < ApplicationController
-  layout 'request'
+  layout 'logged'
   include SanitizeParams
   include RequestsHelper
   before_action :authenticate_user!, except: :show
