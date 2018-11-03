@@ -20,6 +20,8 @@ class User < ApplicationRecord
   has_many :offers
   # Gigs
   has_many :gigs
+  # Notifications
+  has_many :notifications, as: :recipient
 
 
   ############################################################################################
