@@ -23,7 +23,7 @@ class OffersController < ApplicationController
     check_if_offered
     @offer = Offer.new(offer_params_create)
     if @offer.save
-      create_notification(@offer.user, @offer.request.user, "ha ofertado en tu pedido: #{@offer.request.name}", request_path(params[:request_id]))
+      create_notification(@offer.user, @offer.request.user, "oferto", @offer.request)
       OfferMailer.new_offer(@offer).deliver
       redirect_to request_path(params[:request_id]), notice: 'La oferta ha sido creada con exito.'
     else

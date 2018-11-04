@@ -282,7 +282,7 @@ display: none !important;
     display: none;
     position: absolute;
     min-width: 333px;
-    right: 0px;
+    right: -80px;
     background: #ffffff;
     -webkit-transition: all .2s linear;
     transition: all .2s linear;
@@ -292,6 +292,7 @@ display: none !important;
     border: 1px #ddd solid;
     box-shadow: 0 0 5px 1px rgba(0,0,0,.05);
     z-index: 1;
+    height: auto;
 }
 
 
@@ -342,10 +343,8 @@ display: none !important;
     /* font-size: inherit; */
     float: left;
     /* width: 11%; */
-    background-color: #D1E7F0;
     margin-right: 0px;
-    border-radius: 29px;
-    padding: 9px 15px;
+    margin-top: 10px
 }
 .right {
     width: 10%;
@@ -360,8 +359,8 @@ display: none !important;
     font-size: 12px;
     /* float: left; */
     display: inline-block;
-    width: 81%;
-    padding-left: 11px;
+    width: 85%;
+    padding-left: 20px;
 }
 
 .tab-content .left i {
