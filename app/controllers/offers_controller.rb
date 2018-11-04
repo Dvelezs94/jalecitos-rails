@@ -23,8 +23,9 @@ class OffersController < ApplicationController
     check_if_offered
     @offer = Offer.new(offer_params_create)
     if @offer.save
+      create_notification(@offer.user, @offer.request.user, "ha ofertado en tu pedido: #{@offer.request.name}", request_path(params[:request_id]))
       OfferMailer.new_offer(@offer).deliver
-      redirect_to request_path(params[:request_id]), notice: 'Offer was successfully created.'
+      redirect_to request_path(params[:request_id]), notice: 'La oferta ha sido creada con exito.'
     else
       render :new
     end
@@ -33,7 +34,7 @@ class OffersController < ApplicationController
   # PATCH/PUT /offers/1
   def update
     if @offer.update(offer_params_update)
-      redirect_to request_path(params[:request_id]), notice: 'Offer was successfully updated.'
+      redirect_to request_path(params[:request_id]), notice: 'La oferta fue actualizada con exito'
     else
       render :edit
     end
@@ -42,7 +43,7 @@ class OffersController < ApplicationController
   # DELETE /offers/1
   def destroy
     @offer.destroy
-    redirect_to request_path(params[:request_id]), notice: 'Offer was successfully destroyed.'
+    redirect_to request_path(params[:request_id]), notice: 'Oferta destruida.'
   end
 
   private
