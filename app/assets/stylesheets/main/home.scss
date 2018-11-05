@@ -193,6 +193,12 @@ input.btn-lrg-standard.btn-submit.js-search-submit:hover {
 }
 .search_banner {
   display: inline-flex;
+  width: 100%;
+  height: 70px;
+}
+
+.banner-search{
+  margin: 0 auto;
 }
 @media only screen and (min-width:583px){
   input.js-search-input {
@@ -557,4 +563,8 @@ text-transform: capitalize;
 label.error{
   float: left;
   color: red;
+}
+
+.banner-submit{
+  height: 50px;
 }

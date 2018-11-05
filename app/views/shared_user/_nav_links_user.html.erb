@@ -1,126 +1,84 @@
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top jalecitos" id="mainNav" >
-  <div class="container">
-    <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png', size: '108x36'), root_path, :class => 'navbar-brand js-scroll-trigger', id: "jalecitos-logo" %>
-    <%= form_with url: root_path, method: :get,:html =>{class: "search-form"} , local: true do |f|%>
-      <%= f.text_field :query, class: "js-search-input js-report-to-aux-data strt_selling_Srch1", value: params[:query] %>
+<div class="collapse navbar-collapse" id="navbarResponsive">
+  <ul class="navbar-nav  ml-auto">
+    <li class="nav-item">
+      <%= link_to "Inicio", root_path, :class => 'nav-link js-scroll-trigger' %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Mensajes", conversations_path, :class => 'nav-link js-scroll-trigger' %>
+    </li>
 
-      <div class="btn-group" role="group">
-        <div class="dropdown dropdown-lg">
-          <button type="button" class="btn-default dropdown-toggle button-dropdown search-options" data-toggle="dropdown" aria-expanded="false">
-            <span class="caret"></span></button>
-          <div class="dropdown-menu dropdown-menu-right" role="menu" id="search-dropdown">
-            <div class="form-group">
-              <label for="filter">Buscar</label>
-              <%= select_tag 'model_name', options_for_select([ ["Jales", "gigs"], ["Pedidos", "requests"]], selected: params[:model_name]), class: "form-control" %>
-            </div>
-            <div class="form-group">
-              <label for="contain">Categoría</label>
-              <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Todas", :selected => params[:category_id] }, class: 'form-control', id: "category-select") %>
-            </div>
-            <div class="form-group">
-              <label for="contain">Ubicación</label>
-              <%= f.text_field :location, class: 'text_box form-control', id: "search_autocomplete", size: 50, value: params[:location], placeholder: "Cualquier lugar" %>
-            </div>
-          </div>
+    <li class="nav-item my_dropdown_menu_top">
+      <div class="dropdown">
+        <a class="nav-link js-scroll-trigger">Vender</a>
+        <div class="dropdown-content">
+          <ul>
+            <li>
+              <%= link_to "Nuevo Gig", new_user_gig_path(current_user) %>
+            </li>
+            <li>
+              <%= link_to "Mis Gigs", user_path(current_user, :q => "gigs") %>
+            </li>
+            <li>
+              <a >Mis Ofertas</a>
+            </li>
+            <li>
+              <a class="" href="#">Ganancias</a>
+            </li>
+            <li>
+              <a class="" href="#">Promuevete</a>
+            </li>
+          </ul>
         </div>
       </div>
+    </li>
 
-      <%= button_tag( :class => "btn-lrg-standard btn-submit js-search-submit strt_selling_Srch", :value => "commit") do %>
-        <%= fa_icon "search" %>
-      <% end %>
-    <% end %>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <i class="fa fa-th-large"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav  ml-auto">
-        <li class="nav-item">
-          <%= link_to "Inicio", root_path, :class => 'nav-link js-scroll-trigger' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Mensajes", conversations_path, :class => 'nav-link js-scroll-trigger' %>
-        </li>
+    <li class="nav-item my_dropdown_menu_top">
+      <div class="dropdown">
+        <a class="nav-link js-scroll-trigger">Comprar</a>
+        <div class="dropdown-content">
+          <ul>
 
-        <li class="nav-item my_dropdown_menu_top">
-          <div class="dropdown">
-            <a class="nav-link js-scroll-trigger">Vender</a>
-            <div class="dropdown-content">
-              <ul>
-                <li>
-                  <%= link_to "Nuevo Gig", new_user_gig_path(current_user) %>
-                </li>
-                <li>
-                  <%= link_to "Mis Gigs", user_path(current_user, :q => "gigs") %>
-                </li>
-                <li>
-                  <a >Mis Ofertas</a>
-                </li>
-                <li>
-                  <a class="" href="#">Ganancias</a>
-                </li>
-                <li>
-                  <a class="" href="#">Promuevete</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </li>
+            <li>
+              <a class="" href="#">Cómo funciona</a>
+            </li>
+            <li>
+              <%= link_to "Mis Pedidos", user_path(current_user, :q => "requests") %>
+            </li>
+            <li>
+              <%= link_to "Nuevo Pedido", new_request_path() %>
+            </li>
+            <li>
+              <a class="" href="saved.html">Gigs Guardados</a>
+            </li>
 
-        <li class="nav-item my_dropdown_menu_top">
-          <div class="dropdown">
-            <a class="nav-link js-scroll-trigger">Comprar</a>
-            <div class="dropdown-content">
-              <ul>
+          </ul>
+        </div>
+      </div>
+    </li>
 
-                <li>
-                  <a class="" href="#">Como funciona</a>
-                </li>
-                <li>
-                  <%= link_to "Mis Pedidos", user_path(current_user, :q => "requests") %>
-                </li>
-                <li>
-                  <%= link_to "Nuevo Pedido", new_request_path() %>
-                </li>
-                <li>
-                  <a class="" href="saved.html">Gigs Guardados</a>
-                </li>
+    <li class="nav-item my_dropdown_menu my_image">
+      <div class="dropdown">
+        <label>
+          <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "nav-avatar") %>
+        </label>
+        <div class="dropdown-content">
+          <ul>
 
-              </ul>
-            </div>
-          </div>
-        </li>
-
-        <li class="nav-item my_dropdown_menu my_image">
-          <div class="dropdown">
-            <label>
-              <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "nav-avatar") %>
-            </label>
-            <div class="dropdown-content">
-              <ul>
-
-                <li>
-                  <%= link_to "Mi Perfil", user_path(current_user.slug, :q => "gigs") %>
-                </li>
-                <li>
-                  <%= link_to "Configuracion", user_config_path(current_user.slug) %>
-                </li>
-                <li>
-                  <a class="" href="#">Ayuda</a>
-                </li>
-                <li>
-                  <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<div class="gap"></div>
-<div class="gap"></div>
-<div class="gap"></div>
-<div id="notifications">
+            <li>
+              <%= link_to "Mi Perfil", user_path(current_user.slug, :q => "gigs") %>
+            </li>
+            <li>
+              <%= link_to "Configuracion", user_config_path(current_user.slug) %>
+            </li>
+            <li>
+              <a class="" href="#">Ayuda</a>
+            </li>
+            <li>
+              <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

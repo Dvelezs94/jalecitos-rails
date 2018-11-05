@@ -10,6 +10,10 @@ module ApplicationHelper
     end
   end
 
+  def active? path
+    "active" if current_page? path
+  end
+
   def notification_helper
     msg = (flash[:alert] || flash[:error] || flash[:notice] || flash[:warning] || flash[:success] || flash[:progress])
 

@@ -2,15 +2,15 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   layout :set_layout
   def home
-    if current_user && params[:query]
-      if (params[:model_name] == "gigs")
-        includes = [:search_gigs_packages, :user]
-        status = "published"
-        @search_gigs = search(Gig, includes, status)
-      else
+    if params[:query]
+      if (params[:model_name] == "requests")
         includes = [:user]
         status = "open"
         @search_requests = search(Request, includes, status)
+      else
+        includes = [:search_gigs_packages, :user]
+        status = "published"
+        @search_gigs = search(Gig, includes, status)
       end
     elsif current_user
         @verified_gigs = Gig.includes(:gigs_packages, :user).published.where(category: 1).first(5)

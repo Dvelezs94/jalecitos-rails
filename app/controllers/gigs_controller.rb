@@ -6,7 +6,7 @@ class GigsController < ApplicationController
   before_action :set_gig_with_first_pack, only: :toggle_status
   before_action :set_gig_with_all_asc, only: :show
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status]
-  access user: { except: [:ban_gig] }, admin: [:ban_gig]
+  access user: { except: [:ban_gig] }, admin: [:ban_gig], all: [:show]
 
   # GET /gigs/1
   def show
