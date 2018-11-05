@@ -17,9 +17,12 @@
 a.navbar-brand.js-scroll-trigger {
   color: #fff !important;
 }
+li.active a{
+  color: #00b22d !important;
+}
 .jalecitos a.nav-link {
   font-size: 14px;
-  color: #e5e5e5 !important;
+  color: #e5e5e5;
 }
 .gap{
   height:30px;
