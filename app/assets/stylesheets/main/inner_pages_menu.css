@@ -143,7 +143,6 @@ display: none !important;
     border-radius: 0 0 3px 3px;
     position: absolute;
     z-index: 10;
-    border: 1px #ddd solid;
     box-shadow: 0 0 5px 1px rgba(0,0,0,.05);
     z-index: 1;
     padding: 7px 13px;
@@ -206,7 +205,6 @@ display: none !important;
     border-radius: 0 0 3px 3px;
     position: absolute;
     z-index: 10;
-    border: 1px #ddd solid;
     box-shadow: 0 0 5px 1px rgba(0,0,0,.05);
 
     z-index: 1;
@@ -289,7 +287,6 @@ display: none !important;
     border-radius: 0 0 3px 3px;
     position: absolute;
     z-index: 10;
-    border: 1px #ddd solid;
     box-shadow: 0 0 5px 1px rgba(0,0,0,.05);
     z-index: 1;
     height: auto;
@@ -313,7 +310,7 @@ display: none !important;
 .mesages_ .dropdown-content ul {
     text-align: center;
     margin: 0px;
-    padding: 6px 0px;
+    padding: 3px 0px;
     border-bottom: 1px #ddd solid;
     background-color: white;
 }
@@ -324,8 +321,9 @@ display: none !important;
 
 .mesages_ .dropdown:hover .dropdown-content {
     display: block;
-    height: 281px;
+    height: auto;
     overflow-y: auto;
+    max-height: 281px;
 }
 
 .notifications {

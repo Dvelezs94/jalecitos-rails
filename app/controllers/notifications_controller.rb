@@ -2,6 +2,6 @@ class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @notifications = Notification.where(recipient: current_user)
+    @notifications = Notification.where(recipient: current_user).order(id: :desc)
   end
 end

@@ -8,21 +8,12 @@ json.array! @notifications do |notification|
   json.action notification.action
   # Build the url depending on the notifiable type
   json.redirect do
-    case
-    when notification.notifiable_type == "Request"
-      json.path request_path(notification.notifiable.slug)
-    when notification.notifiable_type == "Gig"
-      json.path user_gig_path(notification.user, notification.notifiable.slug)
+      json.path url_generator_helper(notification.notifiable)
     end
-  end
+
   # Build the message depending on the notifiable type
   json.notifiable do
-    case
-    when notification.notifiable_type == "Request"
-      json.type "en tu pedido #{notification.notifiable.name}"
-    when notification.notifiable_type == "Gig"
-      json.type "en tu jale #{notification.notifiable.name}"
-    end
+    json.type build_notifiable_type(notification.notifiable)
   end
-  json.date notification.created_at
+  json.date distance_of_time_in_words_to_now(notification.created_at)
 end
