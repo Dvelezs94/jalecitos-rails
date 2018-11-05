@@ -17,8 +17,8 @@ module PagesHelper
   end
 
   def homepage_content_helper
-    if  has_role?(:user) && params[:query]
-      render 'shared_user/root/homepage_query'
+    if params[:query]
+        render 'shared/query/homepage_query'
     elsif has_role?(:user)
        render 'shared_user/root/homepage'
     else

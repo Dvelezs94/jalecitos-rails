@@ -1,13 +1,17 @@
+<%= render 'shared/query/banner_search_form' %>
 <div class="container  Get_Pro_Services">
+
   <div class="row">
     <div class="col-lg-8">
       <h3>Resultados de búsqueda "<%= params[:query] %>" en <%= params[:model_name] %>
       </h3>
     </div>
   </div>
-<% if params[:model_name] == "gigs" %>
-  <%= render 'shared_user/root/gig_search_list' %>
+<% if params[:model_name] == "requests" %>
+  <%= render 'shared/query/request_search_list' %>
 <% else %>
-  <%= render 'shared_user/root/request_search_list' %>
+  <%= render 'shared/query/gig_search_list' %>
 <% end %>
 </div>
+
+<%= render 'shared_guest/log/sessions' %>
