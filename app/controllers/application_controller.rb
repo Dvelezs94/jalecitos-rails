@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def create_notification(user, recipient, message, model)
+    Notification.create!(recipient: recipient, user: user, action: message, notifiable: model)
+  end
 end

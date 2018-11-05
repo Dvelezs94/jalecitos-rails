@@ -70,4 +70,21 @@ module ApplicationHelper
     @opposite_user = conversation.sender == current_user ? conversation.recipient : current_user
   end
 
+  def url_generator_helper (model)
+    case
+    when model.class == Request
+       request_path(model)
+    when model.class == Gig
+       user_gig_path(model.user, model.slug)
+    end
+  end
+
+  def build_notifiable_type (model)
+    case
+    when model.class == Request
+       "en tu pedido #{model.name}"
+    when model.class == Gig
+       "en tu jale #{model.name}"
+    end
+  end
 end

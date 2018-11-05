@@ -1,6 +1,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require action_cable
 
 //= require jquery3
 
