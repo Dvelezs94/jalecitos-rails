@@ -8,8 +8,7 @@
  * @version : 2.7.0
  *
  */
-;
-(function($) {
+document.addEventListener("turbolinks:load", function() {
   'use strict';
 
   var methods = {
@@ -756,4 +755,4 @@
     targetType   : 'hint'
   };
 
-})(jQuery);
+});
