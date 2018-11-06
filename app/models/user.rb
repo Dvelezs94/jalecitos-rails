@@ -24,6 +24,12 @@ class User < ApplicationRecord
   has_many :notifications, as: :recipient
 
 
+  #Define who can do the rating, which happens to be the user
+  ratyrate_rater
+
+  # Options to rate
+  ratyrate_rateable 'Employee', 'Employer'
+
   ############################################################################################
   ## PeterGate Roles                                                                        ##
   ## The :user role is added by default and shouldn't be included in this list.             ##
