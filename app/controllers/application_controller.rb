@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :update_sign_in_at_periodically
+  # before_action :get_location
   UPDATE_LOGIN_PERIOD = 1.hours
 
   protected
@@ -23,4 +24,8 @@ class ApplicationController < ActionController::Base
   def create_notification(user, recipient, message, model)
     Notification.create!(recipient: recipient, user: user, action: message, notifiable: model)
   end
+
+  # def get_location
+  #   (current_user && ENV.fetch("RAILS_ENV") != "development") ? @user_location = request.location.city + ", " + request.location.country : nil
+  # end
 end

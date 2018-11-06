@@ -571,3 +571,25 @@ label.error{
 .banner-submit{
   height: 50px;
 }
+
+.information-title{
+  text-align: right;
+}
+
+@media screen and (max-width: 767px){
+  .information-title{
+    text-align: center;
+  }
+  .info-text{
+    text-align: center;
+  }
+
+}
+
+span.best_in_place{
+  width: 100%;
+}
+
+span.best_in_place form select{
+  width: 100%;
+}

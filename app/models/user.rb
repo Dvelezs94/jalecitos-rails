@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   # Validates uniqueness of id
   validates :email, :alias,  uniqueness: true
+  validates_numericality_of :age, greater_than: 17, less_than: 101
 
   # Avatar image
   mount_uploader :image, AvatarUploader

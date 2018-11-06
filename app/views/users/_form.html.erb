@@ -9,7 +9,8 @@
   <div class="container">
     <div class="row">
 
-      <div class="col-lg-4 ">
+      <div class="col-lg-4">
+
         <div class="dashboard_front_left">
 
           <!-- user avatar -->
@@ -56,86 +57,138 @@
         </div>
         <!-- -->
 
-        <!-- Earned in month -->
-        <div class="row Earned">
-          <div class="col-lg-9  col-md-6 col-sm-6 col-6">
-            <strong>Biografia</strong>
+        <!-- response time -->
+        <div class="row response">
+          <hr>
+          <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+
+            <p>
+              <a href="#" data-tooltip="average " class="">
+                Ultima conexion</a>
+            </p>
           </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-right">
+
+            <p>
+              <p class="font-weight-bold green">
+                <%= @user.current_sign_in_at != nil ? distance_of_time_in_words_to_now(@user.current_sign_in_at) : "nunca" %>
+              </p>
+            </p>
+          </div>
+
         </div>
 
-        <div class="row Earned">
-          <div class="col-lg-12  col-md-12 col-sm-12 col-12">
-            <p><%= best_in_place_if my_profile,@user, :bio, as: :textarea, ok_button: :save, cancel_button: :cancel, :ok_button_class => "btn", :cancel_button_class => "btn", :html_attrs => {:maxlength => 500} %></a>
-          </p>
-        </div>
+        <% if ! my_profile %>
+          <hr>
+          <!-- inbox -->
+          <div class="row response">
+            <div class="col-12 text-center">
+              <%= link_to "inbox", conversations_path(user_id: @user.slug), class: "font-weight-bold green" %>
+
+            </div>
+          </div>
+        <% end %>
       </div>
-
-      <!-- response time -->
-      <div class="row response">
-        <hr>
-        <div class="col-lg-9 col-md-6 col-sm-6 col-6">
-
-          <p>
-            <a href="#" data-tooltip="average " class="">
-              Ultima conexion</a>
-          </p>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-right">
-
-          <p>
-            <p class="font-weight-bold green">
-              <%= @user.current_sign_in_at != nil ? distance_of_time_in_words_to_now(@user.current_sign_in_at) : "nunca" %> </p>
-          </p>
-        </div>
-
-      </div>
-
-    <% if ! my_profile %>
-    <hr>
-      <!-- inbox -->
-      <div class="row response">
-        <div class="col-12 text-center">
-          <%= link_to "inbox", conversations_path(user_id: @user.slug), class: "font-weight-bold green" %>
-        </div>
-
-      </div>
-    <% end %>
     </div>
     <!-- left col end -->
-    <div class="gap"></div>
-  </div>
+    <div class="col-lg-8">
+      <div class="dashboard_front_left">
+        <div class="row">
 
-  <!-- right col -->
-  <div class="col-lg-8 dashboard_front_right">
+          <div class="col-lg-3  col-md-3 col-sm-12 information-title">
+            <p>
+              <strong>Nombre:</strong>
+            </p>
+          </div>
 
-
-
-    <div class="education_wrapper">
-      <div class="row">
-        <div class="col-lg-6">
-          <h5><%= link_to "Gigs", :q => "gigs" %>
-            |
-            <%= link_to "Pedidos", :q => "requests" %></h5>
+          <div class="col-lg-9  col-md-9 col-sm-12 info-text">
+            <p><%= best_in_place_if my_profile,@user, :name, as: :textarea, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :html_attrs => {:maxlength => 500} %>
+          </p>
         </div>
-        <div class="col-lg-6">
-          <h5>
-            <% if params[:q] == 'requests' %>
-              <%= link_to "Nuevo Pedido", new_request_path(), class: "pull-right" %>
-            <% else %>
-              <%= link_to "Nuevo Gig", new_user_gig_path(@user), class: "pull-right" %>
-            <% end %>
-          </h5>
+
+        <div class="col-lg-3  col-md-3 col-sm-12 information-title">
+          <p>
+            <strong>Disponibilidad:</strong>
+          </p>
         </div>
+
+        <div class="col-lg-9  col-md-9 col-sm-12 info-text">
+          <p><%= best_in_place_if my_profile,@user, :bio, as: :textarea, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :html_attrs => {:maxlength => 500} %>
+        </p>
       </div>
-      <hr>
-      <div class="row">
-        <%= render partial: "gigs/gig", collection: @gigs %>
+
+      <div class="col-lg-3 col-md-3 col-sm-12 information-title ">
+        <p>
+          <strong>Ubicación:</strong>
+        </p>
       </div>
+
+      <div class="col-lg-9  col-md-9 col-sm-12 info-text">
+        <p><%= best_in_place_if my_profile,@user, :bio, as: :textarea, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :html_attrs => {:maxlength => 500} %>
+      </p>
     </div>
+
+    <div class="col-lg-3  col-md-3 col-sm-12 information-title">
+      <p>
+        <strong>Edad:</strong>
+      </p>
+    </div>
+
+    <div class="col-lg-9  col-md-9 col-sm-12 info-text">
+      <p><%=best_in_place_if my_profile,@user, :age, :as => :select, :collection => (18..100).map { |i| [i, "#{i} años"]} %>
+
+    </p>
   </div>
-  <!-- right col -->
+
+  <div class="col-lg-3  col-md-3 col-sm-12 information-title">
+    <p>
+      <strong>Sobre mí:</strong>
+    </p>
+  </div>
+
+  <div class="col-lg-9  col-md-9 col-sm-12 info-text">
+    <p><%= best_in_place_if my_profile,@user, :bio, as: :textarea, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :html_attrs => {:maxlength => 500} %>
+  </p>
+</div>
+
 </div>
 </div>
 </div>
+<!-- right col end -->
+<!-- profile bottom -->
+<div class="col-lg-12 dashboard_front_right">
+<div class="gap"></div>
+
+<div class="education_wrapper">
+<div class="row">
+  <div class="col-lg-9">
+    <button class="btn btn-primary"><%= link_to "Gigs", :q => "gigs" %></button>
+    <button class="btn btn-primary"><%= link_to "Pedidos", :q => "requests" %></button>
+  </div>
+  <div class="col-lg-3">
+
+    <% if params[:q] == 'requests' %>
+      <button class="btn btn-success">
+        <%= link_to "Nuevo Pedido", new_request_path %>
+      </button>
+    <% else %>
+      <button class="btn btn-success">
+        <%= link_to "Nuevo Jale", new_user_gig_path(@user) %>
+      </button>
+    <% end %>
+
+  </div>
+</div>
+<hr>
+<div class="row">
+  <%= render partial: "gigs/gig", collection: @gigs %>
+</div>
+</div>
+</div>
+<!-- right col -->
+</div>
+</div>
+</div>
+
 <% end %>

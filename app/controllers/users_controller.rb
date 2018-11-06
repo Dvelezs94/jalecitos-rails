@@ -49,7 +49,8 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name,
                                    :alias,
                                    :image,
-                                   :bio)
+                                   :bio,
+                                   :age)
     end
     def check_user_ownership
       if ! my_profile
