@@ -7,7 +7,11 @@ class User < ApplicationRecord
 
   # Validates uniqueness of id
   validates :email, :alias,  uniqueness: true
-  validates_numericality_of :age, greater_than: 17, less_than: 101
+  validates_numericality_of :age, greater_than: 17, less_than: 101, allow_blank: true
+  validates :available, :inclusion=> { :in => ["","Tiempo completo", "Medio tiempo", "Esporádico", "Fin de semana"]}, allow_blank: true
+  validates_length_of :name, maximum: 100
+  validates_length_of :location, maximum: 100
+  validates_length_of :bio, maximum: 500
 
   # Avatar image
   mount_uploader :image, AvatarUploader

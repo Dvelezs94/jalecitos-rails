@@ -95,60 +95,78 @@
     <div class="col-lg-8">
       <div class="dashboard_front_left">
         <div class="row">
+          <div class="col-lg-12  col-md-12 col-sm-12 information-title">
+            <h4>Información de usuario</h4>
+            <hr>
+          </div>
 
-          <div class="col-lg-3  col-md-3 col-sm-12 information-title">
+          <div class="col-lg-3  col-md-3 col-sm-12 information-field">
             <p>
               <strong>Nombre:</strong>
             </p>
           </div>
 
           <div class="col-lg-9  col-md-9 col-sm-12 info-text">
-            <p><%= best_in_place_if my_profile,@user, :name, as: :textarea, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :html_attrs => {:maxlength => 500} %>
+            <p><%= best_in_place_if my_profile,@user, :name, as: :input,
+                   ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success",
+                   :cancel_button_class => "btn btn-danger",
+                   :place_holder => "Edítame", :html_attrs => {:maxlength => 100} %>
           </p>
         </div>
 
-        <div class="col-lg-3  col-md-3 col-sm-12 information-title">
+        <div class="col-lg-3  col-md-3 col-sm-12 information-field">
           <p>
             <strong>Disponibilidad:</strong>
           </p>
         </div>
 
         <div class="col-lg-9  col-md-9 col-sm-12 info-text">
-          <p><%= best_in_place_if my_profile,@user, :bio, as: :textarea, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :html_attrs => {:maxlength => 500} %>
+          <p><%=best_in_place_if my_profile,@user, :available, :as => :select,
+               :collection => { "Tiempo completo" => "Tiempo completo", "Medio tiempo" => "Medio tiempo", "Fin de semana" => "Fin de semana", "Esporádico" => "Esporádico" },
+               :place_holder => "Edítame" %>
         </p>
       </div>
 
-      <div class="col-lg-3 col-md-3 col-sm-12 information-title ">
+      <div class="col-lg-3 col-md-3 col-sm-12 information-field ">
         <p>
           <strong>Ubicación:</strong>
         </p>
       </div>
 
       <div class="col-lg-9  col-md-9 col-sm-12 info-text">
-        <p><%= best_in_place_if my_profile,@user, :bio, as: :textarea, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :html_attrs => {:maxlength => 500} %>
+        <p><%= best_in_place_if my_profile,@user, :location, as: :input,
+               ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success",
+               :cancel_button_class => "btn btn-danger", :place_holder => "Edítame",
+               :inner_class => "best_google_input", :class => "google-span",
+               :html_attrs => {:maxlength => 30} %>
       </p>
     </div>
 
-    <div class="col-lg-3  col-md-3 col-sm-12 information-title">
+    <div class="col-lg-3  col-md-3 col-sm-12 information-field">
       <p>
         <strong>Edad:</strong>
       </p>
     </div>
 
     <div class="col-lg-9  col-md-9 col-sm-12 info-text">
-      <p><%=best_in_place_if my_profile,@user, :age, :as => :select, :collection => (18..100).map { |i| [i, "#{i} años"]} %>
+      <p><%=best_in_place_if my_profile,@user, :age, :as => :select,
+            :collection => (18..100).map { |i| [i, "#{i} años"]},
+            :place_holder => "Edítame" %>
 
     </p>
   </div>
 
-  <div class="col-lg-3  col-md-3 col-sm-12 information-title">
+  <div class="col-lg-3  col-md-3 col-sm-12 information-field">
     <p>
       <strong>Sobre mí:</strong>
     </p>
   </div>
 
   <div class="col-lg-9  col-md-9 col-sm-12 info-text">
-    <p><%= best_in_place_if my_profile,@user, :bio, as: :textarea, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :html_attrs => {:maxlength => 500} %>
+    <p><%= best_in_place_if my_profile,@user, :bio, as: :textarea,
+          ok_button: "Guardar", cancel_button: "Cancelar",
+          :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger",
+          :place_holder => "Edítame", :html_attrs => {:maxlength => 500} %>
   </p>
 </div>
 

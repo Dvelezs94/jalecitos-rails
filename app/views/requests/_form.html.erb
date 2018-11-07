@@ -83,7 +83,7 @@
               <%= fa_icon "map-marker", class: "fa-2x" %>
             </div>
             <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-              <%= form.text_field :location, class: 'text_box required', id: "form_autocomplete", size: 50, placeholder: 'Busca tu ciudad...' %>
+              <%= form.text_field :location, class: 'text_box required', id: "form_autocomplete", size: 50, placeholder: 'Busca tu ciudad...', value: current_user.location %>
             </div>
             <%= render 'shared_user/requests/forms/hints/city_hint.html.erb' %>
           </div>

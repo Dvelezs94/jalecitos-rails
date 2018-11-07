@@ -113,5 +113,3 @@ gem 'searchkick', '~> 3.1', '>= 3.1.2'
 gem 'eventmachine', '~> 1.2', '>= 1.2.7'
 # Better DNS resolution
 gem 'em-resolv-replace', '~> 1.1', '>= 1.1.3'
-#user locations
-gem 'geocoder', '~> 1.5'

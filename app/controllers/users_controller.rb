@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   include OpenpayHelper
+  include SetLayout
   include UsersHelper
   respond_to :html, :json
-  layout 'logged'
+  layout :set_layout
   before_action :set_user, only: [:show, :update]
   before_action :set_user_config, only: [:configuration]
   access all: [:show, :index], user: [:update, :configuration]
@@ -29,7 +30,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    flash[:success] = 'Your profile was successfully updated.' if @user.update_attributes(user_params)
+    flash[:success] = 'Your profile was successfully updated.' if @user.update_attributes!(user_params)
     respond_with(@user)
   end
 
@@ -50,7 +51,9 @@ class UsersController < ApplicationController
                                    :alias,
                                    :image,
                                    :bio,
-                                   :age)
+                                   :age,
+                                   :available,
+                                   :location)
     end
     def check_user_ownership
       if ! my_profile
