@@ -61,11 +61,7 @@ module ApplicationHelper
       image
     end
   end
-
-  def gig_class_helper
-    (params[:controller] == 'users')? 'col-lg-2 col-md-4 col-sm-6 col-12 single_gig' : 'col-lg-2 col-md-4 col-sm-6 col-12 single_gig'
-  end
-
+  
   def opposite_conversation_user(conversation, current_user)
     @opposite_user = conversation.sender == current_user ? conversation.recipient : current_user
   end
