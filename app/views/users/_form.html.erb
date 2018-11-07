@@ -36,12 +36,12 @@
 
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
             <%= rating_for @user, "Employer", readonly: true,  half_show: true  %>
-            <h5>Usuario</h5>
+            <h5 data-tooltip="Promedio de calificacion de los Jales contratados">Usuario</h5>
           </div>
 
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
             <%= rating_for @user, "Employee", readonly: true,  half_show: true %>
-            <h5>Proveedor</h5>
+            <h5 data-tooltip="Promedio de calificacion de los Jales realizados">Proveedor</h5>
           </div>
           <!-- -->
 
@@ -54,9 +54,7 @@
           <hr>
           <div class="col-lg-9 col-md-6 col-sm-6 col-6">
 
-            <p>
-              <a href="#" data-tooltip="average " class="">
-                Ultima conexion</a>
+            <p>Ultima conexion
             </p>
           </div>
 
