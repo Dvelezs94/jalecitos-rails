@@ -453,3 +453,7 @@ button.search-options{
 .pac-container.pac-logo{
   z-index: 10000;
 }
+
+.search-form.nav-search{
+  width: 50%;
+}
