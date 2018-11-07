@@ -22,14 +22,7 @@ button.js-search-input.js-report-to-aux-data.strt_selling_Srch1::placeholder {
 button.strt_selling_Srch {
     padding: 1.2px 9px !important;
 }
-@media only screen and (max-width:535px){
-    input.js-search-input.js-report-to-aux-data.strt_selling_Srch1,
-    input.strt_selling_Srch
- {
-display: none !important;
-    }
 
-}
 
 
 @media only screen and (max-width:992px){
