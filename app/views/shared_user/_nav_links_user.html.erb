@@ -27,11 +27,11 @@
         <a class="nav-link js-scroll-trigger">Vender</a>
         <div class="dropdown-content">
           <ul>
-            <li class="<%= active? new_user_gig_path(current_user) %>">
-              <%= link_to "Nuevo Gig", new_user_gig_path(current_user) %>
-            </li>
             <li class="<%= active? user_path(current_user, :q => "gigs") %>">
               <%= link_to "Mis Gigs", user_path(current_user, :q => "gigs") %>
+            </li>
+            <li class="<%= active? new_user_gig_path(current_user) %>">
+              <%= link_to "Nuevo Gig", new_user_gig_path(current_user) %>
             </li>
             <li class="" href="#">
               <a >Mis Ofertas</a>

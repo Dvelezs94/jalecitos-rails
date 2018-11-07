@@ -107,105 +107,87 @@
           </div>
 
           <div class="col-lg-9  col-md-9 col-sm-12 info-text">
-            <p><%= best_in_place_if my_profile,@user, :name, as: :input,
-                   ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success",
-                   :cancel_button_class => "btn btn-danger",
-                   :place_holder => "Edítame", :html_attrs => {:maxlength => 100} %>
-          </p>
+            <p><%= best_in_place_if my_profile,@user, :name, as: :input, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :html_attrs => {:maxlength =>
+              100} %>
+              <%= "Indefinido" if current_user != @user && @user.name.nil? %>
+            </p>
+          </div>
+
+          <div class="col-lg-3  col-md-3 col-sm-12 information-field">
+            <p>
+              <strong>Disponibilidad:</strong>
+            </p>
+          </div>
+
+          <div class="col-lg-9  col-md-9 col-sm-12 info-text">
+            <p><%= best_in_place_if my_profile,@user, :available, :as => :select, :collection => { "Tiempo completo" => "Tiempo completo", "Medio tiempo" => "Medio tiempo", "Fin de semana" => "Fin de semana", "Esporádico" => "Esporádico" }, :place_holder =>
+              "Edítame" %>
+              <%= "Indefinido" if current_user != @user && @user.available.nil? %>
+            </p>
+          </div>
+
+          <div class="col-lg-3 col-md-3 col-sm-12 information-field ">
+            <p>
+              <strong>Ubicación:</strong>
+            </p>
+          </div>
+
+          <div class="col-lg-9  col-md-9 col-sm-12 info-text">
+            <p><%= best_in_place_if my_profile,@user, :location, as: :input, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :inner_class =>
+              "best_google_input", :class => "google-span", :html_attrs => {:maxlength => 30} %>
+              <%= "Indefinido" if current_user != @user && @user.location.nil? %>
+            </p>
+          </div>
+
+          <div class="col-lg-3  col-md-3 col-sm-12 information-field">
+            <p>
+              <strong>Edad:</strong>
+            </p>
+          </div>
+
+          <div class="col-lg-9  col-md-9 col-sm-12 info-text">
+            <p><%=best_in_place_if my_profile,@user, :age, :as => :select, :collection => (18..100).map { |i| [i, "#{i} años"]}, :place_holder => "Edítame" %>
+              <%= "Indefinido" if current_user != @user && @user.age.nil? %>
+            </p>
+          </div>
+
+          <div class="col-lg-3  col-md-3 col-sm-12 information-field">
+            <p>
+              <strong>Sobre mí:</strong>
+            </p>
+          </div>
+
+          <div class="col-lg-9  col-md-9 col-sm-12 info-text">
+            <p><%= best_in_place_if my_profile,@user, :bio, as: :textarea, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :html_attrs => {:maxlength =>
+              500} %>
+              <%= "Indefinido" if current_user != @user && @user.bio.nil? %>
+            </p>
+          </div>
+
         </div>
+      </div>
+    </div>
+    <!-- right col end -->
+    <!-- profile bottom -->
+    <div class="col-lg-12 dashboard_front_right">
+      <div class="gap"></div>
 
-        <div class="col-lg-3  col-md-3 col-sm-12 information-field">
-          <p>
-            <strong>Disponibilidad:</strong>
-          </p>
+      <div class="education_wrapper">
+        <div class="title">
+          <h4>Mis Jales</h4>
         </div>
-
-        <div class="col-lg-9  col-md-9 col-sm-12 info-text">
-          <p><%=best_in_place_if my_profile,@user, :available, :as => :select,
-               :collection => { "Tiempo completo" => "Tiempo completo", "Medio tiempo" => "Medio tiempo", "Fin de semana" => "Fin de semana", "Esporádico" => "Esporádico" },
-               :place_holder => "Edítame" %>
-        </p>
+        <hr>
+        <div class="row align_center">
+          <div class="col-lg-12 align_center">
+            <div class="row align_center">
+              <%= render partial: "gigs/gig", collection: @gigs %>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="col-lg-3 col-md-3 col-sm-12 information-field ">
-        <p>
-          <strong>Ubicación:</strong>
-        </p>
-      </div>
-
-      <div class="col-lg-9  col-md-9 col-sm-12 info-text">
-        <p><%= best_in_place_if my_profile,@user, :location, as: :input,
-               ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success",
-               :cancel_button_class => "btn btn-danger", :place_holder => "Edítame",
-               :inner_class => "best_google_input", :class => "google-span",
-               :html_attrs => {:maxlength => 30} %>
-      </p>
     </div>
-
-    <div class="col-lg-3  col-md-3 col-sm-12 information-field">
-      <p>
-        <strong>Edad:</strong>
-      </p>
-    </div>
-
-    <div class="col-lg-9  col-md-9 col-sm-12 info-text">
-      <p><%=best_in_place_if my_profile,@user, :age, :as => :select,
-            :collection => (18..100).map { |i| [i, "#{i} años"]},
-            :place_holder => "Edítame" %>
-
-    </p>
+    <!-- right col -->
   </div>
-
-  <div class="col-lg-3  col-md-3 col-sm-12 information-field">
-    <p>
-      <strong>Sobre mí:</strong>
-    </p>
-  </div>
-
-  <div class="col-lg-9  col-md-9 col-sm-12 info-text">
-    <p><%= best_in_place_if my_profile,@user, :bio, as: :textarea,
-          ok_button: "Guardar", cancel_button: "Cancelar",
-          :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger",
-          :place_holder => "Edítame", :html_attrs => {:maxlength => 500} %>
-  </p>
-</div>
-
-</div>
-</div>
-</div>
-<!-- right col end -->
-<!-- profile bottom -->
-<div class="col-lg-12 dashboard_front_right">
-<div class="gap"></div>
-
-<div class="education_wrapper">
-<div class="row">
-  <div class="col-lg-9">
-    <button class="btn btn-primary"><%= link_to "Gigs", :q => "gigs" %></button>
-    <button class="btn btn-primary"><%= link_to "Pedidos", :q => "requests" %></button>
-  </div>
-  <div class="col-lg-3">
-
-    <% if params[:q] == 'requests' %>
-      <button class="btn btn-success">
-        <%= link_to "Nuevo Pedido", new_request_path %>
-      </button>
-    <% else %>
-      <button class="btn btn-success">
-        <%= link_to "Nuevo Jale", new_user_gig_path(@user) %>
-      </button>
-    <% end %>
-
-  </div>
-</div>
-<hr>
-<div class="row">
-  <%= render partial: "gigs/gig", collection: @gigs %>
-</div>
-</div>
-</div>
-<!-- right col -->
-</div>
 </div>
 </div>
 

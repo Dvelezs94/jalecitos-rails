@@ -25,12 +25,11 @@ class UsersController < ApplicationController
 
   def show
     @gigs = Gig.includes(:packages, :user).where(user_id: @user)
-    @requests = @user.gigs
   end
 
   # PATCH/PUT /users/1
   def update
-    flash[:success] = 'Your profile was successfully updated.' if @user.update_attributes!(user_params)
+    flash[:success] = 'Your profile was successfully updated.' if @user.update_attributes(user_params)
     respond_with(@user)
   end
 
