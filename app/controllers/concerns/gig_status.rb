@@ -8,7 +8,7 @@ module GigStatus
     else
       change_status
       flash[:success] = "Se ha cambiado el estado del Gig exitosamente"
-      redirect_to user_path(current_user.slug, :q => "gigs")
+      redirect_to user_path(current_user.slug)
     end
   end
 

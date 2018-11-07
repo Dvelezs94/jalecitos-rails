@@ -30,8 +30,8 @@
         <a class="nav-link js-scroll-trigger">Vender</a>
         <div class="dropdown-content">
           <ul>
-            <li class="<%= active? user_path(current_user, :q => "gigs") %>">
-              <%= link_to "Mis Gigs", user_path(current_user, :q => "gigs") %>
+            <li class="<%= active? user_path(current_user) %>">
+              <%= link_to "Mis Gigs", user_path(current_user) %>
             </li>
             <li class="<%= active? new_user_gig_path(current_user) %>">
               <%= link_to "Nuevo Gig", new_user_gig_path(current_user) %>
@@ -55,8 +55,8 @@
         <a class="nav-link js-scroll-trigger">Comprar</a>
         <div class="dropdown-content">
           <ul>
-            <li class="<%= active? user_path(current_user, :q => "requests") %>">
-              <%= link_to "Mis Pedidos", user_path(current_user, :q => "requests") %>
+            <li class="<%= active? user_path(current_user) %>">
+              <%= link_to "Mis Pedidos", user_path(current_user) %>
             </li>
             <li class="<%= active? new_request_path %>">
               <%= link_to "Nuevo Pedido", new_request_path %>
@@ -83,7 +83,7 @@
           <ul>
 
             <li>
-              <%= link_to "Mi Perfil", user_path(current_user.slug, :q => "gigs") %>
+              <%= link_to "Mi Perfil", user_path(current_user.slug) %>
             </li>
             <li>
               <%= link_to "Configuracion", user_config_path(current_user.slug) %>
