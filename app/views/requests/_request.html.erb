@@ -1,20 +1,15 @@
-<div class="col-md-4">
-  <div class="card mb-4 box-shadow">
-    <%= image_tag image_display_helper(request.image_url),  class: "card-img-top", style:"background-size: cover;" %>
-    <div class="card-body">
-      <p class="card-title"><%=request.name%></p>
-      <p class="card-subtitle mb-2 text-muted"><%=request.location%></p>
-      <p class="card-text"><%=truncate(request.description.html_safe, length: 150)%></p>
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="btn-group">
-          <%= link_to "Más", request_path(request), class: "btn btn-sm btn-outline-secondary"  %>
-          <%= link_to "Editar", edit_request_path(request), class: "btn btn-sm btn-outline-secondary" if current_user && request.user_id == current_user.id %>
-          <%= link_to "Borrar", request_path(request), method: :delete,
-           data: { confirm: '¿Estás seguro de querer borrar este trabajo?' },
-            class: "btn btn-sm btn-outline-secondary" if current_user && request.user_id == current_user.id  %>
-        </div>
-        <small class="text-muted"><%=request.user.alias %></small>
-      </div>
-    </div>
-  </div>
-</div>
+
+<tr class="body_table" valign="middle" data-link="<%= request_path(request) %>">
+  <td class="buyer">
+    <h5>Busco a alguien <%=request.name%></h5>
+  </td>
+  <td>
+    <%=truncate(request.description.html_safe, length: 150)%>
+  </td>
+  <td><%=request.location%></td>
+  <td><%= request.budget %> MXN</td>
+  <td><%= request.offers.count %></td>
+  <td>
+    <span class="in_progress"><%= request.status %></span>
+  </td>
+</tr>
