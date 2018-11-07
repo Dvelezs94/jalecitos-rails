@@ -16,7 +16,7 @@
       </div>
       <div class="form-group">
         <label for="contain">Ubicación</label>
-        <%= f.text_field :location, class: 'text_box form-control', id: "search_autocomplete", size: 50, value: params[:location], placeholder: "Cualquier lugar" %>
+        <%= f.text_field :location, class: 'text_box form-control', id: "search_autocomplete", size: 50, value: params[:location], placeholder: "Cualquier lugar en México", value: (params[:location].nil?)? current_user.location : params[:location] %>
       </div>
     </div>
   </div>

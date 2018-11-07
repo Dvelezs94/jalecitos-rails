@@ -12,10 +12,6 @@ p {
   line-height: 1.75;
 }
 
-a {
-  color: #fed136;
-}
-
 /* a:hover {
   color: #fec503;
 } */
@@ -57,11 +53,6 @@ section h3.section-subheading {
 .btn-xl {
   font-size: 18px;
   padding: 20px 40px;
-}
-
-.btn-primary {
-  background-color: #fed136;
-  border-color: #fed136;
 }
 
 .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
@@ -121,12 +112,7 @@ img::-moz-selection {
   font-weight: 400;
   padding: 0.75em 0;
   letter-spacing: 1px;
-  color: white;
   font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-#mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
-  color: #fed136;
 }
 
 @media (min-width: 992px) {

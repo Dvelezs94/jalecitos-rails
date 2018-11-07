@@ -1,12 +1,12 @@
 <div class="collapse navbar-collapse" id="navbarResponsive">
   <ul class="navbar-nav  ml-auto">
-    <li class="nav-item">
-      <%= link_to "Inicio", root_path, :class => 'nav-link js-scroll-trigger' %>
+    <li class="nav-item <%= active? root_path %>">
+        <%= link_to "Inicio", root_path, :class => 'nav-link js-scroll-trigger' %>
     </li>
-    <li class="nav-item">
+    <li class="nav-item <%= active? requests_path %>">
       <%= link_to "Pedidos", requests_path, :class => 'nav-link js-scroll-trigger' %>
     </li>
-    <li class="nav-item">
+    <li class="nav-item <%= active? conversations_path %>">
       <%= link_to "Mensajes", conversations_path, :class => 'nav-link js-scroll-trigger' %>
     </li>
 
@@ -30,19 +30,19 @@
         <a class="nav-link js-scroll-trigger">Vender</a>
         <div class="dropdown-content">
           <ul>
-            <li>
-              <%= link_to "Nuevo Gig", new_user_gig_path(current_user) %>
-            </li>
-            <li>
+            <li class="<%= active? user_path(current_user, :q => "gigs") %>">
               <%= link_to "Mis Gigs", user_path(current_user, :q => "gigs") %>
             </li>
-            <li>
+            <li class="<%= active? new_user_gig_path(current_user) %>">
+              <%= link_to "Nuevo Gig", new_user_gig_path(current_user) %>
+            </li>
+            <li class="" href="#">
               <a >Mis Ofertas</a>
             </li>
-            <li>
+            <li  class="">
               <a class="" href="#">Ganancias</a>
             </li>
-            <li>
+            <li  class="">
               <a class="" href="#">Promuevete</a>
             </li>
           </ul>
@@ -55,17 +55,17 @@
         <a class="nav-link js-scroll-trigger">Comprar</a>
         <div class="dropdown-content">
           <ul>
-
-            <li>
-              <a class="" href="#">Cómo funciona</a>
-            </li>
-            <li>
+            <li class="<%= active? user_path(current_user, :q => "requests") %>">
               <%= link_to "Mis Pedidos", user_path(current_user, :q => "requests") %>
             </li>
-            <li>
-              <%= link_to "Nuevo Pedido", new_request_path() %>
+            <li class="<%= active? new_request_path %>">
+              <%= link_to "Nuevo Pedido", new_request_path %>
             </li>
-            <li>
+
+            <li class="">
+              <a class="" href="#">Cómo funciona</a>
+            </li>
+            <li class="">
               <a class="" href="saved.html">Gigs Guardados</a>
             </li>
 

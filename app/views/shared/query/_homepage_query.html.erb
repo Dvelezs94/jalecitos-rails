@@ -1,9 +1,9 @@
-<%= render 'shared/query/banner_search_form' %>
+<%= render 'shared/query/banner_search_form' if current_user.nil? %>
 <div class="container  Get_Pro_Services">
 
   <div class="row">
     <div class="col-lg-8">
-      <h3>Resultados de búsqueda "<%= params[:query] %>" en <%= params[:model_name] %>
+      <h3>Resultados de búsqueda
       </h3>
     </div>
   </div>
@@ -13,5 +13,3 @@
   <%= render 'shared/query/gig_search_list' %>
 <% end %>
 </div>
-
-<%= render 'shared_guest/log/sessions' %>

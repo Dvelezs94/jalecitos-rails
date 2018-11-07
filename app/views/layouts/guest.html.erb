@@ -19,9 +19,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
   </head>
 
-  <body>
+  <body id="page-top">
     <%= render 'shared/main_nav_bar' %>
     <%= yield %>
+    <%= render 'shared_guest/log/sessions'%>
     <%= render 'shared/main_footer' %>
   </body>
 </html>
