@@ -35,20 +35,12 @@
         <div class="row text-center progresses">
 
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
+            <%= rating_for @user, "Employer", readonly: true,  half_show: true  %>
             <h5>Usuario</h5>
           </div>
 
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
+            <%= rating_for @user, "Employee", readonly: true,  half_show: true %>
             <h5>Proveedor</h5>
           </div>
           <!-- -->

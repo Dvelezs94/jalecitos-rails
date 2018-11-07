@@ -21,7 +21,7 @@ class PagesController < ApplicationController
   end
 
   def requests_index
-    @requests = Request.includes(:user).friendly.order(created_at: :desc)
+    @requests = Request.includes(:user).friendly.open.order(created_at: :desc).page params[:page]
     render "requests"
   end
 

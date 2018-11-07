@@ -3,6 +3,9 @@
     <li class="nav-item <%= active? root_path %>">
         <%= link_to "Inicio", root_path, :class => 'nav-link js-scroll-trigger' %>
     </li>
+    <li class="nav-item <%= active? requests_path %>">
+      <%= link_to "Pedidos", requests_path, :class => 'nav-link js-scroll-trigger' %>
+    </li>
     <li class="nav-item <%= active? conversations_path %>">
       <%= link_to "Mensajes", conversations_path, :class => 'nav-link js-scroll-trigger' %>
     </li>

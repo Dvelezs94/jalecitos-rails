@@ -1,9 +1,7 @@
 <div class="row">
   <% if @search_requests.any? %>
-    <div class="pagination-links">
-      <%= paginate @search_requests %>
-    </div>
-    <%= render partial: "requests/request", collection: @search_requests %>
+  <% @requests = @search_requests %>
+    <%= render template: "pages/requests", collection: @search_requests %>
     <div class="pagination-links">
       <%= paginate @search_requests %>
     </div>
