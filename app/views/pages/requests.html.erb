@@ -4,11 +4,21 @@
 
     <div class="container">
 
-      <div class="row">
-        <%= render @requests %>
+      <div class="tabContent">
+        <table class="table-responsive1">
+          <tr class="head_table">
+            <td >Pedido</td>
+            <td>Descripcion</td>
+            <td>Ubicacion</td>
+            <td>Presupuesto</td>
+            <td>Ofertas</td>
+            <td>Estado</td>
+          </tr>
+          <%= render @requests %>
+        </table>
+        <br>
+        <%= paginate @requests %>
       </div>
     </div>
   </div>
 </main>
-
-<%= render 'shared_user/footer' %>

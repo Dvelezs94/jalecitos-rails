@@ -4,9 +4,12 @@
       <%= link_to "Inicio", root_path, :class => 'nav-link js-scroll-trigger' %>
     </li>
     <li class="nav-item">
+      <%= link_to "Pedidos", requests_path, :class => 'nav-link js-scroll-trigger' %>
+    </li>
+    <li class="nav-item">
       <%= link_to "Mensajes", conversations_path, :class => 'nav-link js-scroll-trigger' %>
     </li>
-    
+
     <li class="nav-item  mesages_">
       <div class="dropdown">
         <a class="nav-link js-scroll-trigger" data-behavior="notifications">Notificaciones</a>
