@@ -115,3 +115,5 @@ gem 'eventmachine', '~> 1.2', '>= 1.2.7'
 gem 'em-resolv-replace', '~> 1.1', '>= 1.1.3'
 # star system
 gem 'ratyrate', '~> 1.2.2.alpha'
+# Select Country code
+gem 'country_select', '~> 3.1'

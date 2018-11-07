@@ -12,7 +12,7 @@ class BanksController < ApplicationController
 
   def create
     request_hash={
-     "holder_name" => bank_params[:holder_name],
+     "holder_name" => bank_params[:bank_holder_name],
      "alias" => bank_params[:alias],
      "clabe" => bank_params[:clabe]
     }
@@ -44,7 +44,7 @@ class BanksController < ApplicationController
   private
     # Only allow a trusted parameter "white list" through.
     def bank_params
-        params.permit(:holder_name, :alias, :clabe)
+        params.permit(:bank_holder_name, :alias, :clabe)
     end
 
     def set_user

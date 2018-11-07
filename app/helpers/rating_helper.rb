@@ -16,7 +16,7 @@ module RatingHelper
     cancel_hint  = options[:cancel_hint]  || "Cancel current rating!"
     cancel_on    = options[:cancel_on]    || asset_path('cancel-on.png')
     cancel_off   = options[:cancel_off]   || asset_path('cancel-off.png')
-    noRatedMsg   = options[:noRatedMsg]   || "I'am readOnly and I haven't rated yet!"
+    noRatedMsg   = options[:noRatedMsg]   || false
     # round        = options[:round]        || { down: .26, full: .6, up: .76 }
     space        = options[:space]        || false
     single       = options[:single]       || false
@@ -31,6 +31,8 @@ module RatingHelper
 
     if options[:readonly]
       readonly = options[:readonly]
+    elsif options[:number_only]
+      return avg
     elsif disable_after_rate
       readonly = !(current_user && rateable_obj.can_rate?(current_user, dimension))
     else

@@ -142,11 +142,16 @@ margin: 0px 0px;
     font-size: 18px;
 }
 .gig-rating {
-    color: #1FD0B6;
+    color: #C6C6C6;
+}
+
+.gig-rating img {
+  margin-bottom: 3px;
 }
 
 .gig-rating span {
-    color: #C6C6C6;
+    color: #F0A627;
+    font-weight: bold;
 }
 .favourites_and_price strong{
     color: black;

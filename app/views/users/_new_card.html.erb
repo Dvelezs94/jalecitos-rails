@@ -15,19 +15,15 @@
           <div class="divi-new js-form-join-section" data-section="1"></div>
           <%= form_with url: user_cards_path(current_user), id: "cardForm" do |f| %>
             <%= f.hidden_field :device_session_id, class: "required" %>
+            <%= f.text_field :card_holder_name, class: "required", placeholder: "Nombre del Titular" %>
             <%= f.number_field :card_number, class: "required", placeholder: "Numero de tarjeta" %>
-            <%= f.number_field :expiration_month, class: "required", placeholder: "Mes de expiracion" %>
-            <%= f.number_field :expiration_year, class: "required", placeholder: "Anio de expiracion" %>
-            <%= f.number_field :cvv2, class: "required", placeholder: "CVV" %>
-            <%= f.text_field :holder_name, class: "required", placeholder: "Nombre del Titular" %>
-            <span>Direccion De Facturacion</span>
-            <hr>
-            <%= f.text_field :address_1, class: "required", placeholder: "Direccion 1" %>
-            <%= f.text_field :address_2, placeholder: "Direccion 2" %>
-            <%= f.number_field :postal_code, class: "required", placeholder: "Codigo Postal" %>
-            <%= f.text_field :city, class: "required", placeholder: "Ciudad" %>
-            <%= f.text_field :state, class: "required", placeholder: "Estado" %>
-            <%= f.text_field :country_code, class: "required", placeholder: "Pais" %>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+            <%= f.select :expiration_month, 1..12,{}, class: "required col-lg-3 col-md-3 col-sm-3 col-3" %>
+            <%= f.select :expiration_year, Date.today.year.. 8.years.from_now.year,{}, class: "required col-lg-3 col-md-3 col-sm-3 col-3" %>
+            <%= f.number_field :cvv2, class: "required col-lg-3 col-md-3 col-sm-3 col-3", placeholder: "CVV" %>
+            </div>
+            </div>
             <br>
             <%= f.submit 'Continuar', :class => 'btn btn-success' %>
           <% end %>
