@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_002517) do
+ActiveRecord::Schema.define(version: 2018_11_08_040102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,19 @@ ActiveRecord::Schema.define(version: 2018_11_07_002517) do
     t.datetime "updated_at", null: false
     t.index ["request_id"], name: "index_offers_on_request_id"
     t.index ["user_id"], name: "index_offers_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.float "total"
+    t.integer "openpay_card"
+    t.string "purchase_type"
+    t.integer "purchase_id"
+    t.integer "status", default: 0
+    t.string "payment_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "overall_averages", force: :cascade do |t|
@@ -265,6 +278,7 @@ ActiveRecord::Schema.define(version: 2018_11_07_002517) do
   add_foreign_key "notifications", "users"
   add_foreign_key "offers", "requests"
   add_foreign_key "offers", "users"
+  add_foreign_key "orders", "users"
   add_foreign_key "packages", "gigs"
   add_foreign_key "payments", "offers"
   add_foreign_key "payments", "packages"
