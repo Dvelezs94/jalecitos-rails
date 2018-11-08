@@ -1,6 +1,7 @@
 class Gig < ApplicationRecord
   #includes
   include TagRestrictions
+  include DescriptionRestrictions
   #search
   searchkick language: "spanish"
   #Tags
@@ -20,10 +21,12 @@ class Gig < ApplicationRecord
   has_many :search_gigs_packages, ->{ limit(45).order(id: :asc) }, class_name: 'Package'
   #Validations
   validates_presence_of :name, :description, :location
-  validate :maximum_amount_of_tags
+  validate :maximum_amount_of_tags, :no_spaces_in_tag, :tag_length
   validates_length_of :name, :maximum => 100
-  validates_length_of :description, :maximum => 1000
+  validates_length_of :description, :maximum => 2000
+  validate :without_html
   #Custom fields
   enum status: { draft: 0, published: 1, banned: 2}
   mount_uploader :image, GigUploader
+
 end

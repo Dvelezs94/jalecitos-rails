@@ -1,7 +1,7 @@
 <%= form_with(model: user, local: true) do |form| %>
 <% if user.errors.any? %>
   <%user.errors.full_messages.each do |error| %>
-    <%= notification_generator_helper error %>
+    <%= notification_generator_helper error, :error %>
   <% end %>
 <% end %>
 

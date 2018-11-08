@@ -388,3 +388,9 @@ p.example {
 .trix-input{
   min-height: 150px;
 }
+button[disabled] {pointer-events:none}
+
+#count{
+  width: 100%;
+  text-align: right;
+}

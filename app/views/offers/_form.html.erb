@@ -1,7 +1,7 @@
 <%= form_with(model: offer, url: offer_form_url_helper, local: true) do |form| %>
   <% if offer.errors.any? %>
   <%offer.errors.full_messages.each do |error| %>
-    <%= notification_generator_helper error %>
+    <%= notification_generator_helper error, :error %>
   <% end %>
   <% end %>
 
@@ -24,6 +24,6 @@
   </div>
 
   <div class="form-group">
-    <%= form.submit "Guardar y continuar",  class: "btn btn-primary btn-block" %>
+    <%= form.submit "Continuar",  class: "btn btn-primary btn-block" %>
   </div>
 <% end %>
