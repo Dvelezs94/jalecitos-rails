@@ -20,8 +20,6 @@ module ApplicationHelper
       case
         when flash[:alert]
           flash_type = :alert
-        when flash[:base]
-          flash_type = :base
         when flash[:error]
           flash_type = :error
         when flash[:notice]
