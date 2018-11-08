@@ -35,13 +35,13 @@
         <div class="row text-center progresses">
 
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-            <%= rating_for @user, "Employer", readonly: true,  half_show: true  %>
-            <h5 data-tooltip="Promedio de calificacion de los Jales contratados">Usuario</h5>
+            <%= rating_for @user, "Employer", readonly: true,  half_show: true, stars: 5  %>
+            <h5 data-tooltip="<%= rating_for(@user, "Employer", number_only: true) %>">Usuario</h5>
           </div>
 
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-            <%= rating_for @user, "Employee", readonly: true,  half_show: true %>
-            <h5 data-tooltip="Promedio de calificacion de los Jales realizados">Proveedor</h5>
+            <%= rating_for @user, "Employee", readonly: true,  half_show: true, stars: 5 %>
+            <h5 data-tooltip="<%= rating_for(@user, "Employee", number_only: true) %>">Proveedor</h5>
           </div>
           <!-- -->
 

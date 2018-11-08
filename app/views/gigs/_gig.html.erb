@@ -3,7 +3,7 @@
       <%= link_to image_tag( image_display_helper(gig.image_url), width: "100%", height: 150 ), user_gig_path(gig.user.slug,gig) %>
       <div class="get_pro_content_container">
          <div class="gig_avatar_">
-           <%=link_to image_tag("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/gig_avatr.png"), user_path(gig.user.slug)%>
+           <%= image_tag(avatar_display_helper(gig.user.image_url(:thumb)), class: "gig-thumb") %>
            <%=link_to gig.user.alias, user_path(gig.user.slug) %> </div>
          <br>
          <div class="gig_name_field">
@@ -12,11 +12,8 @@
          <br>
          <br>
          <div class="row">
-            <div class="col-lg-6 gig_stars">
-               <div  class="gig-rating"><i class="fa fa-star"></i>5.0 <span>(2)</span></div>
-            </div>
-            <div class="col-lg-6">
-               <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pro-badge-outline-2.0.1b29959.svg">
+            <div class="col-lg-12 gig_stars">
+               <div  class="gig-rating"><%= image_tag('star-on.png') %><span><%= rating_for(gig.user, "Employee", number_only: true) %></span>(10)</div>
             </div>
          </div>
       </div>
@@ -26,8 +23,7 @@
       <div class="favourites_and_price">
          <div class="row">
             <div class="col-lg-4">
-               <i class="fa fa-bars"></i>
-               <i class="fa fa-heart"></i>
+               <%= fa_icon("thumbs-up") %>
             </div>
             <div class="col-lg-8">
                <span>Desde</span><strong> <%= query_home_or_profile_helper(gig) %></strong>
