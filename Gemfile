@@ -117,5 +117,3 @@ gem 'em-resolv-replace', '~> 1.1', '>= 1.1.3'
 gem 'ratyrate', '~> 1.2.2.alpha'
 # Select Country code
 gem 'country_select', '~> 3.1'
-# Job Processing
-gem 'sidekiq', '~> 5.2', '>= 5.2.3'
