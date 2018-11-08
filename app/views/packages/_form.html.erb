@@ -11,7 +11,7 @@
 
         <% if pack.errors.any? %>
           <%pack.errors.full_messages.each do |error| %>
-            <%= notification_generator_helper error %>
+            <%= notification_generator_helper error, :error %>
           <% end %>
         <% end %>
 
@@ -42,7 +42,7 @@
     <% end %>
 
     <div class="form-group submit-button">
-      <%= form.submit "Guardar y continuar",  class: "btn btn-primary btn-block" %>
+      <%= form.submit "Continuar",  class: "btn btn-primary btn-block" %>
     </div>
   </div>
 <% end %>

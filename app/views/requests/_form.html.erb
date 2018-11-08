@@ -1,7 +1,7 @@
 <%= form_with(model: request, url: request_form_url_helper,method: request_form_method_helper, :html => { :class=> "current_form" }, local: true) do |form| %>
 <% if request.errors.any? %>
   <%request.errors.full_messages.each do |error| %>
-    <%= notification_generator_helper error %>
+    <%= notification_generator_helper error, :error %>
   <% end %>
 <% end %>
 
@@ -133,7 +133,7 @@
               <%= link_to 'Cancelar', root_path(current_user.slug), :data => {:confirm => 'Tu progreso NO se guardará'}, class: "btn btn-danger" %>
             </div>
             <div class="col-lg-6  col-md-6 ">
-              <%= form.submit "Guardar y continuar", class: "post" %>
+              <%= form.submit "Continuar", class: "post" %>
             </div>
           </div>
         </div>

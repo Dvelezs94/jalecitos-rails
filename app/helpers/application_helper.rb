@@ -16,11 +16,12 @@ module ApplicationHelper
 
   def notification_helper
     msg = (flash[:alert] || flash[:error] || flash[:notice] || flash[:warning] || flash[:success] || flash[:progress])
-
     if msg
       case
         when flash[:alert]
           flash_type = :alert
+        when flash[:base]
+          flash_type = :base
         when flash[:error]
           flash_type = :error
         when flash[:notice]
@@ -61,7 +62,7 @@ module ApplicationHelper
       image
     end
   end
-  
+
   def opposite_conversation_user(conversation, current_user)
     @opposite_user = conversation.sender == current_user ? conversation.recipient : current_user
   end
