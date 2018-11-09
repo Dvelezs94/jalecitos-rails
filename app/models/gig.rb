@@ -2,6 +2,7 @@ class Gig < ApplicationRecord
   #includes
   include TagRestrictions
   include DescriptionRestrictions
+  include LocationValidation
   #search
   searchkick language: "spanish"
   #Tags
@@ -25,6 +26,7 @@ class Gig < ApplicationRecord
   validates_length_of :name, :maximum => 100
   validates_length_of :description, :maximum => 2000
   validate :without_html
+  validate :location_syntax
   #Custom fields
   enum status: { draft: 0, published: 1, banned: 2}
   mount_uploader :image, GigUploader

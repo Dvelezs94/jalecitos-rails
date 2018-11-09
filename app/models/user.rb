@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   extend FriendlyId
   include OpenpayHelper
+  include LocationValidation
   friendly_id :alias, use: :slugged
 
   enum status: { active: 0, disabled: 1, blocked: 2}
@@ -136,10 +137,4 @@ class User < ApplicationRecord
      end
    end
 
-   def location_syntax
-     if location != nil
-       valid = location.match(/, México/)
-       (valid.nil?)? errors.add(:base, "no válido") : nil
-     end
-   end
 end

@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  if ((window.location.href.indexOf("gigs") > -1 || window.location.href.indexOf("requests") > -1) && (window.location.href.indexOf("new") > -1 || window.location.href.indexOf("edit") > -1)) {
+  if ( (window.location.href.indexOf("gigs") > -1 || window.location.href.indexOf("requests") > -1) && (window.location.href.indexOf("new") > -1 || window.location.href.indexOf("edit") > -1) && ( $(".tags-main-input").length == 0 ) ) {
   let hiddenInput,
     el = document.getElementsByClassName('tags-input'),
     mainInput = document.createElement('textarea'),
