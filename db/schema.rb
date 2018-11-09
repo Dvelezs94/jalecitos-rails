@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_08_040102) do
+ActiveRecord::Schema.define(version: 2018_11_09_015412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2018_11_08_040102) do
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
     t.float "total"
-    t.integer "openpay_card"
+    t.integer "card"
     t.string "purchase_type"
     t.integer "purchase_id"
     t.integer "status", default: 0
@@ -145,7 +145,9 @@ ActiveRecord::Schema.define(version: 2018_11_08_040102) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "gig_id"
+    t.string "slug"
     t.index ["gig_id"], name: "index_packages_on_gig_id"
+    t.index ["slug"], name: "index_packages_on_slug", unique: true
   end
 
   create_table "payments", force: :cascade do |t|

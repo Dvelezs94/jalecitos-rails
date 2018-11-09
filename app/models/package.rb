@@ -1,4 +1,7 @@
 class Package < ApplicationRecord
+  #Slug
+  extend FriendlyId
+  friendly_id :name, use: :slugged
   #Associations
   belongs_to :gig
   #Custom fields

@@ -48,6 +48,7 @@ end
       package.description = Faker::Lorem.paragraph(30, true)
       package.price = Faker::Number.between(200, 500)
       package.gig_id = x+1
+      package.pack_type = y
     end
   end
 end

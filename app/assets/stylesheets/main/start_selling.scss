@@ -409,7 +409,10 @@ h3.mp-start-selling {
 
 
 
-.modal-content input,
+.modal-content input[type=password],
+.modal-content input[type=text],
+.modal-content input[type=email],
+.modal-content input[type=number],
 .modal-content select{
     width: 100%;
     border-radius: 5px;
@@ -420,6 +423,7 @@ h3.mp-start-selling {
     padding: 5px 10px;
     height: 43px;
 }
+
 .divi-new.js-form-join-section {
     overflow: visible;
     border-bottom: 1px solid #ddd;
