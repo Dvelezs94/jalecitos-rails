@@ -1,0 +1,14 @@
+<div class="Overview">
+  <h3>Voy a
+    <%= @gig.name %></h3>
+  <div class="row col-lg-10 col-md-10 col-sm-10 col-10">
+    <%= rating_for @gig.user, "Employer", readonly: true %>(<%= rating_for @gig.user, "Employer", number_only: true%>)
+  </div>
+  <div class="profile_management">
+    <%=link_to image_tag(avatar_display_helper(@gig.user.image_url(:thumb)), class: "gig-thumb"), user_path(@gig.user.slug) %>
+    <div class="user_name">
+      <%=link_to content_tag(:h6, @gig.user.alias), user_path(@gig.user.slug) %>
+    </div>
+  </div>
+  <hr>
+</div>

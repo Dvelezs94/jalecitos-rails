@@ -28,6 +28,8 @@ class User < ApplicationRecord
   # Notifications
   has_many :notifications, as: :recipient
 
+  # Orders
+  has_many :orders
 
   #Define who can do the rating, which happens to be the user
   ratyrate_rater
