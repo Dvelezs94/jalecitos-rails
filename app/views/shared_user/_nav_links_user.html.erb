@@ -30,6 +30,9 @@
         <a class="nav-link js-scroll-trigger">Vender</a>
         <div class="dropdown-content">
           <ul>
+            <li  class="">
+              <a class="" href="#">Mis ventas</a>
+            </li>
             <li class="<%= active? user_path(current_user) %>">
               <%= link_to "Mis Jales", user_path(current_user) %>
             </li>
@@ -38,9 +41,6 @@
             </li>
             <li class="" href="#">
               <a >Mis Ofertas</a>
-            </li>
-            <li  class="">
-              <a class="" href="#">Ganancias</a>
             </li>
             <li  class="">
               <a class="" href="#">Promuevete</a>
@@ -55,6 +55,9 @@
         <a class="nav-link js-scroll-trigger">Comprar</a>
         <div class="dropdown-content">
           <ul>
+            <li  class="">
+              <a class="" href="#">Mis Compras</a>
+            </li>
             <li class="<%= active? user_path(current_user) %>">
               <%= link_to "Mis Pedidos", user_path(current_user) %>
             </li>

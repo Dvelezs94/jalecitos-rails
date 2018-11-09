@@ -264,7 +264,8 @@
     }
 
     .payment_method img, .paypal.js-methods-label img {
-      width: 59px;
+      width: 192px;
+      padding: 10px;
     }
 
     .payment_method {

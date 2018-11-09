@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
     t.float "total"
-    t.integer "card"
+    t.integer "card_id"
     t.string "purchase_type"
     t.integer "purchase_id"
     t.integer "status", default: 0

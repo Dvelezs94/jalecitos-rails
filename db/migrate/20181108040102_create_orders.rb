@@ -3,7 +3,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
     create_table :orders do |t|
       t.references :user, foreign_key: true
       t.float :total
-      t.integer :card
+      t.integer :card_id
       t.string :purchase_type
       t.integer :purchase_id
       t.integer :status, default: 0

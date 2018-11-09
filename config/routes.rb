@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
+  post '/order' => 'orders#create', :as => 'order'
   root to: "pages#home"
   get 'admins/dashboard'
 
@@ -38,7 +39,7 @@ Rails.application.routes.draw do
              patch 'update_packages', to: 'packages#update_packages', as: 'update'
            end
            member do
-             get :hire 
+             get :hire
            end
          end
      end

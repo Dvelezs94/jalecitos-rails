@@ -3,14 +3,16 @@
     <div class="row ">
       <%= render "shared_user/hire/steps" %>
       <div class="container section">
+        <%= form_for @order, url: order_path do |f|  %>
         <div class="row">
           <div class="col-lg-8 checkout_cart">
-          <%= render "shared_user/hire/checkout_cart" %>
+          <%= render "shared_user/hire/checkout_cart", f: f%>
           </div>
           <div class="col-lg-4 confirm ">
-            <%= render "shared_user/hire/summary" %>
+            <%= render "shared_user/hire/summary", f: f %>
           </div>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
