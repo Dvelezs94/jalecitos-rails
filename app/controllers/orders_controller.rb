@@ -53,8 +53,11 @@ class OrdersController < ApplicationController
     end
 
     def set_defaults parameters
+      pack = Package.friendly.find(params[:order][:purchase])
       parameters[:user_id] = current_user.id
-      parameters[:purchase] = Package.friendly.find(params[:order][:purchase])
+      parameters[:receiver] = pack.gig.user_id
+      parameters[:purchase] = pack
+      parameters[:total] = pack.price
       parameters
     end
     def check_user_ownership

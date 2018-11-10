@@ -31,7 +31,7 @@
         <div class="dropdown-content">
           <ul>
             <li  class="">
-              <a class="" href="#">Mis ventas</a>
+              <%= link_to "Mis Ventas", sales_path %>
             </li>
             <li class="<%= active? user_path(current_user) %>">
               <%= link_to "Mis Jales", user_path(current_user) %>
@@ -56,7 +56,7 @@
         <div class="dropdown-content">
           <ul>
             <li  class="">
-              <a class="" href="#">Mis Compras</a>
+              <%= link_to "Mis Compras", purchases_path %>
             </li>
             <li class="<%= active? user_path(current_user) %>">
               <%= link_to "Mis Pedidos", user_path(current_user) %>

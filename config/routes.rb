@@ -47,5 +47,7 @@ Rails.application.routes.draw do
   resources :notifications
   resources :categories
   get 'requests', to: 'pages#requests_index'
+  get 'purchases', to: 'pages#purchases'
+  get 'sales', to: 'pages#sales'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

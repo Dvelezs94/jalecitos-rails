@@ -9,6 +9,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.integer :status, default: 0
       t.string :payment_message
       t.string :response_order_id
+      t.integer :receiver
 
       t.timestamps
     end
