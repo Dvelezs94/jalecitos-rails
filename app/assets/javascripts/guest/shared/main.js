@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", function() {
+$(document).on('turbolinks:load', function() {
 
   $(".regular").slick({
     dots: true,

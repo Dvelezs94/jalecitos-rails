@@ -43,7 +43,7 @@ end
 
   def update_packages
     @gig.gig_packages.each do |record|
-      pack = params[:packages]["#{record.id}"]
+      pack = params[:packages]["#{record.slug}"]
       pack = sanitized_params( package_params(pack) )
       record.update(pack)
     end
@@ -92,7 +92,7 @@ end
   end
   def validate_update
     @gig.gig_packages.each do |record|
-      pack = params[:packages]["#{record.id}"]
+      pack = params[:packages]["#{record.slug}"]
       if pack[:name].length > 100 || pack[:description].length > 1000 || (pack[:price].to_f < 100 && pack[:price] != "")
         redirect_to(root_path, notice: "Sus paquetes no han podido guardarse, por favor, inténtelo de nuevo.")
         break

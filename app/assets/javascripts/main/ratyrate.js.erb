@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", function() {
+$(document).on('turbolinks:load', function() {
 if ($(".star:has(img)").length == 0){
 $.fn.raty.defaults.half = false;
 $.fn.raty.defaults.halfShow = true;

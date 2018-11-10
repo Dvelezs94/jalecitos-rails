@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", function() {
+$(document).on('turbolinks:load', function() {
   // Get the modal
   var modal1 = document.getElementById('inModal');
   var modal2 = document.getElementById('upModal');

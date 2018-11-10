@@ -1,11 +1,13 @@
 $(document).on('turbolinks:load', function() {
-  if ((window.location.href.indexOf("gigs") > -1 || window.location.href.indexOf("requests") > -1) && (window.location.href.indexOf("edit") > -1 || window.location.href.indexOf("new"))) {
+  char_count();
+});
 
-    function textColor(length){
-      if (length <= 1000){
+function char_count() {
+  if ($(".trix-input").length == 1) {
+    function textColor(length) {
+      if (length <= 1000) {
         $("#count")[0].style.color = "green";
-      }
-      else{
+      } else {
         $("#count")[0].style.color = "red";
       }
     }
@@ -30,9 +32,8 @@ $(document).on('turbolinks:load', function() {
         $(".trix-input").keyup();
       }
     });
+    $(".trix-input").before("<label id='count'></label>");
 
-
-    $( ".trix-input" ).before( "<label id='count'></label>" );
     $(".trix-input").keyup();
   }
-});
+}
