@@ -69,8 +69,8 @@ module ApplicationHelper
     case
     when model.class == Request
        request_path(model)
-    when model.class == Gig
-       user_gig_path(model.user, model.slug)
+    when model.class == Package
+       user_gig_path(model.gig.user, model.gig.slug)
     end
   end
 
@@ -78,8 +78,8 @@ module ApplicationHelper
     case
     when model.class == Request
        "en tu pedido #{model.name}"
-    when model.class == Gig
-       "en tu jale #{model.name}"
+    when model.class == Package
+       "en tu jale Voy a #{model.gig.name} por el paquete #{model.pack_type}"
     end
   end
 end

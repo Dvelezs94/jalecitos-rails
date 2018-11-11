@@ -1,34 +1,34 @@
 class OrdersController < ApplicationController
+  include OpenpayHelper
+  include UsersHelper
   before_action :authenticate_user!
   access user: :all
   before_action only: [:create, :close] do
     init_openpay("charge")
   end
-  before_action :check_user_ownership, only:[:create, :destroy]
+#  before_action :check_user_ownership, only:[:create, :destroy]
 
   def create
-    @order = Order.new(sanitized_params(order_params))
+    @order = Order.new(order_params)
 
     request_hash = {
       "method" => "card",
-      "source_id" => order_params[:card],
-      "amount" => order_params[:total],
+      "source_id" => order_params[:card_id],
+      "amount" => @order.purchase.price,
       "currency" => "MXN",
-      "description" => "Buy #{@order.purchase_type} #{@order.purchase.name}",
-      "device_session_id" => params[:device_session_id]
+      "description" => "Compraste #{@order.purchase_type} #{@order.purchase.name} por la cantidad de #{@order.purchase.price}",
+      "device_session_id" => "params[:device_session_id]"
     }
 
     if @order.save
       begin
-        @charge.create(request_hash, current_user.openpay_id)
-        create_notification(order.user, order.purchase.user, "compro", order.purchase)
-        flash[:success] = 'La tarjeta fue creada exitosamente.'
-        redirect_to user_config_path
+        response = @charge.create(request_hash, current_user.openpay_id)
+        create_notification(@order.user, @order.purchase.gig.user, "te contrato", @order.purchase)
+        flash[:success] = 'La orden fue creada exitosamente.'
+        redirect_to root_path
       rescue OpenpayTransactionException => e
-          # e.http_code
-          # e.error_code
           flash[:error] = "#{e.description}, por favor intentalo de nuevo."
-          redirect_to user_config_path
+          redirect_to root_path
       end
     else
       puts "test de orden fallida"
@@ -48,12 +48,17 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      order_params = params.require(:order).permit(:purchase, :card)
-      order_params = set_owner(order_params)
+      order_params = params.require(:order).permit(:card_id, :purchase)
+      order_params = set_defaults(order_params)
     end
 
-    def set_owner parameters
+    def set_defaults parameters
+      pack = Package.friendly.find(params[:order][:purchase])
       parameters[:user_id] = current_user.id
+      parameters[:receiver] = pack.gig.user_id
+      parameters[:purchase] = pack
+      parameters[:total] = pack.price
+      parameters
     end
     def check_user_ownership
       if ! my_profile

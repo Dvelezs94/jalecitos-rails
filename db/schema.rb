@@ -116,12 +116,13 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
     t.float "total"
-    t.integer "card"
+    t.integer "card_id"
     t.string "purchase_type"
     t.integer "purchase_id"
     t.integer "status", default: 0
     t.string "payment_message"
     t.string "response_order_id"
+    t.integer "receiver"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
