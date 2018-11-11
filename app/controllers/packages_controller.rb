@@ -84,7 +84,7 @@ end
 
   def validate_create
     params[:packages].each do |pack|
-      if pack[:name].length > 100 || pack[:description].length > 1000 || (pack[:price].to_f < 100 && pack[:price] != "")
+      if pack[:name].length > 100 || pack[:description].length > 2000 || pack[:description].gsub(/<[^>]*>/, "").gsub(/\A[[:space:]]+|[[:space:]]+\z/, '').gsub(/&nbsp;/, ' ').length > 1000  || (pack[:price].to_f < 100 && pack[:price] != "")
         redirect_to(root_path, notice: "Sus paquetes no han podido guardarse, por favor, inténtelo de nuevo.")
         break
       end
@@ -93,7 +93,7 @@ end
   def validate_update
     @gig.gig_packages.each do |record|
       pack = params[:packages]["#{record.slug}"]
-      if pack[:name].length > 100 || pack[:description].length > 1000 || (pack[:price].to_f < 100 && pack[:price] != "")
+      if pack[:name].length > 100 || pack[:description].length > 2000|| pack[:description].gsub(/<[^>]*>/, "").gsub(/\A[[:space:]]+|[[:space:]]+\z/, '').gsub(/&nbsp;/, ' ').length > 1000 || (pack[:price].to_f < 100 && pack[:price] != "")
         redirect_to(root_path, notice: "Sus paquetes no han podido guardarse, por favor, inténtelo de nuevo.")
         break
       end

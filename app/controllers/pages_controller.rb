@@ -14,7 +14,7 @@ class PagesController < ApplicationController
         @search_gigs = search(Gig, includes, status)
       end
     elsif current_user
-        @verified_gigs = Gig.includes(:gigs_packages, :user).published.where(category: 1).first(5)
+        @verified_gigs = Gig.includes(:gigs_packages, :user ).published.where(category: 1).first(5)
         @recommended_gigs = Gig.includes(:gigs_packages, :user).published.where(category: 2).first(5)
         @featured_gigs = Gig.includes(:gigs_packages, :user).published.where(category: 3).first(5)
     end

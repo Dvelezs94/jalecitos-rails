@@ -26,9 +26,10 @@
           <div class="form-group form-group-<%= n %>">
             <%= pa.label :description %>
             <%= pa.text_field :description, class: "form-control", id: "description#{n}", type: "hidden" %>
-            <trix-editor input="description<%= n %>" class="form_fields_<%= n %>" maxlength="1000"></trix-editor>
+            <trix-editor input="description<%= n %>" class="trix-class trix_input_<%= n %> form_fields_<%= n %>" maxlength="1000"></trix-editor>
             <span class="error error_span_<%= 3*n+2 %>"></span>
           </div>
+          <br>
 
           <div class="form-group form-group-<%= n %>">
             <%= pa.label :price %>

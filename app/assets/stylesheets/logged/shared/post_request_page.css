@@ -385,12 +385,15 @@ p.example {
   display: inline;
 }
 
-.trix-input{
-  min-height: 150px;
+.trix-class{
+  min-height: 250px;
+  max-height: 250px;
+  background-color: white;
+  overflow-y: scroll;
 }
 button[disabled] {pointer-events:none}
 
-#count{
+.count{
   width: 100%;
   text-align: right;
 }

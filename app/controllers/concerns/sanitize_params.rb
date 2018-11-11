@@ -8,8 +8,10 @@ module SanitizeParams
     sanitized_par = model_params
 
     string_params.each do |item|
-    sanitized_par[item] = Sanitize.fragment(sanitized_par[item],
-              :elements => ['li', 'ul', 'ol', 'bold', 'em', 'strong', 'del', 'a'])
+      permitted_html = Sanitize.fragment(sanitized_par[item],
+              :elements => ['li', 'ul', 'ol', 'bold', 'em', 'strong', 'del', 'a', 'br'])
+      sanitized_par[item] = permitted_html.gsub(/\A[[:space:]]+|[[:space:]]+\z/, '').gsub(/^(\s*<br( \/)?>)*|(<br( \/)?>\s*)*$/, '').gsub(/&nbsp;/, ' ')
+
     end
     sanitized_par
   end
