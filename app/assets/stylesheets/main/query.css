@@ -1,4 +1,4 @@
-/* carouselbar */
+.gig_name_field/* carouselbar */
 
 a.post_request_call {
     background-color: #40aeb8;
@@ -106,6 +106,7 @@ margin: 0px 0px;
 .gig_name_field{
   padding-left: 15px;
   padding-right: 15px;
+  min-height: 57px;
 }
 
 .gig_stars{
@@ -188,7 +189,9 @@ margin: 0px 0px;
     margin-bottom: 6px;
 
 }
-
+.lowest-price{
+  text-align: right;
+}
 
 .Similar_To_Items .slick-slide img {
     display: block;

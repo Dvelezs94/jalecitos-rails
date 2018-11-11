@@ -7,6 +7,7 @@ class GigsController < ApplicationController
   before_action :set_gig_with_first_pack, only: :toggle_status
   before_action :set_gig_with_all_asc, only: :show
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status]
+  before_action :max_gigs, only: [:new, :create]
   access user: { except: [:ban_gig] }, admin: [:ban_gig], all: [:show]
 
   # GET /gigs/1
@@ -81,6 +82,10 @@ class GigsController < ApplicationController
     def set_owner parameters
       parameters[:user_id] = current_user.id
       parameters
+    end
+
+    def max_gigs
+      (Gig.where(user_id: current_user.id).count > 19)? redirect_to( user_path(current_user.slug), notice: "Sólo puedes tener como máximo 20 Jales" ) : nil
     end
 
     def check_gig_ownership
