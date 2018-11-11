@@ -1,12 +1,11 @@
 $(document).on('turbolinks:load', function() {
   if ($(".trix-class").length > 0) {
-    // eraseLastSpace();
-    init_char_count();
+    init_char_D_count();
   }
 });
 
-function init_char_count() {
-  $("trix-editor").keyup(char_count);
+function init_char_D_count() {
+  $("trix-editor").keyup(char_D_count);
   $("trix-toolbar").click(function() {
     $("trix-editor[toolbar="+this.id+"]").keyup();
   });
@@ -20,29 +19,15 @@ function init_char_count() {
   });
   trixInputs = $(".trix-class");
   for (var i = 0; i < trixInputs.length; i++) {
-    $(".trix_input_" + i).before("<label id='count" + i + "' class='count'></label>");
+    $(".trix_input_" + i).before("<label id='count_D_" + i + "' class='count'></label>");
     $(".trix_input_" + i).keyup();
   }
 }
-function textColor(length, number) {
-  if (length <= 1000) {
-    $("#count" + number)[0].style.color = "green";
-  } else {
-    $("#count" + number)[0].style.color = "red";
-  }
-}
-function char_count() {
+function char_D_count() {
   number = $(this)[0].className.split(" ")[1].match(/\d+$/)[0];
   input = $(this).val();
   noHtml = input.replace(/<[^>]*>/g, "");
   noHtml = noHtml.replace(/&nbsp;/g, " ");
-  $("#count" + number).text((1000 - noHtml.length) + "/1000");
-  textColor(noHtml.length, number);
+  $("#count_D_" + number).text((1000 - noHtml.length) + "/1000");
+  textColor(noHtml.length,"#count_D_", number);
 }
-// function eraseLastSpace(){
-//   trixInputs = $(".trix-class");
-//   for (var i = 0; i < trixInputs.length; i++) {
-//     $(".trix-class")[i].value = $(".trix-class")[i].value.replace(/&nbsp;/g,' ').trim();
-//
-//   }
-// }

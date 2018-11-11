@@ -29,3 +29,17 @@ function openCity(evt, cityName) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+function textColor(length, id, number) {
+  if (id == "#count_D_" && length <= 1000) {
+    $( id + number)[0].style.color = "green";
+  }
+  else if (id == "#count_D_" && length > 1000){
+    $(id + number)[0].style.color = "red";
+  }
+  else if (id == "#count_N_" && length <= 1000){
+    $(id + number)[0].style.color = "green";
+  }
+  else if (id == "#count_N_" && length > 100){
+    $(id + number)[0].style.color = "red";
+  }
+}

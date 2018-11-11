@@ -19,7 +19,7 @@
           <h3><%= @types[n] %></h3>
           <div class="form-group form-group-<%= n %>">
             <%= pa.label :name %>
-            <%= pa.text_field :name, class: "form-control form_fields_#{n}",maxlength: 100 %>
+            <%= pa.text_field :name, class: "name-class name-#{n} form-control form_fields_#{n}",maxlength: 100 %>
             <span class="error error_span_<%= 3*n+1 %>"></span>
           </div>
 
