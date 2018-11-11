@@ -39,8 +39,8 @@
                 <tr class="heading_table">
                   <td colspan="100%">Activos</td>
                 </tr>
-                <%= render 'pages/table_head' %>
-                <%= render partial: 'pages/order', collection: @in_progress_purchases %>
+                <%= render 'pages/purchases/table_head' %>
+                <%= render partial: 'pages/purchases/order', collection: @in_progress_purchases %>
 
               </table>
             </div>
@@ -53,8 +53,8 @@
                 <tr class="heading_table">
                   <td colspan="100%">Pendientes</td>
                 </tr>
-                <%= render 'pages/table_head' %>
-                <%= render partial: 'pages/order', collection: @pending_purchases %>
+                <%= render 'pages/purchases/table_head' %>
+                <%= render partial: 'pages/purchases/order', collection: @pending_purchases %>
 
 
               </table>
@@ -68,8 +68,8 @@
                 <tr class="heading_table">
                   <td colspan="100%">Reembolsados</td>
                 </tr>
-                <%= render 'pages/table_head' %>
-                <%= render partial: 'pages/order', collection: @refunded_purchases %>
+                <%= render 'pages/purchases/table_head' %>
+                <%= render partial: 'pages/purchases/order', collection: @refunded_purchases %>
 
               </table>
             </div>
@@ -82,8 +82,8 @@
                 <tr class="heading_table">
                   <td colspan="100%">Completados</td>
                 </tr>
-                <%= render 'pages/table_head' %>
-                <%= render partial: 'pages/order', collection: @closed_purchases %>
+                <%= render 'pages/purchases/table_head' %>
+                <%= render partial: 'pages/purchases/order', collection: @closed_purchases %>
 
               </table>
             </div>

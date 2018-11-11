@@ -37,9 +37,10 @@
               <table class="table-responsive1">
 
                 <tr class="heading_table">
-                  <td colspan="100%">Todos</td>
+                  <td colspan="100%">Activos</td>
                 </tr>
-                <%= render 'pages/sales' %>
+                <%= render 'pages/sales/table_head' %>
+                <%= render partial: 'pages/sales/order', collection: @in_progress_sales %>
 
               </table>
             </div>
@@ -52,7 +53,9 @@
                 <tr class="heading_table">
                   <td colspan="100%">Pendientes</td>
                 </tr>
-                <%= render 'pages/sales' %>
+                <%= render 'pages/sales/table_head' %>
+                <%= render partial: 'pages/sales/order', collection: @pending_sales %>
+
 
               </table>
             </div>
@@ -65,7 +68,8 @@
                 <tr class="heading_table">
                   <td colspan="100%">Reembolsados</td>
                 </tr>
-                <%= render 'pages/sales' %>
+                <%= render 'pages/sales/table_head' %>
+                <%= render partial: 'pages/sales/order', collection: @refunded_sales %>
 
               </table>
             </div>
@@ -78,7 +82,8 @@
                 <tr class="heading_table">
                   <td colspan="100%">Completados</td>
                 </tr>
-              <%= render 'pages/sales' %>
+                <%= render 'pages/sales/table_head' %>
+                <%= render partial: 'pages/sales/order', collection: @closed_sales %>
 
               </table>
             </div>
