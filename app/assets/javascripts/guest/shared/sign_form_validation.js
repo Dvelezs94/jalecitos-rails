@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", function() {
+$(document).on('turbolinks:load', function() {
    $(".sign_up_form").validate({
      rules : {
       'user[password]' : {

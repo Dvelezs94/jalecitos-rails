@@ -42,7 +42,7 @@ div#gig_menu2 {
     display: inline;
     margin-right: 10px;
     font-size: 13px;
-  
+
 }
 
 .categories_of_gig ul li a {
@@ -75,7 +75,7 @@ div#gig_menu2 {
 }
 /* slider */
 wrapper {
-  
+
 }
 .product__slider-main {
   margin-bottom: 15px;
@@ -99,7 +99,7 @@ wrapper {
 .product__slider-thmb.slick-initialized.slick-slider img {
     width: 100%;
     height: 68px;
-} 
+}
 .product__slider-thmb .slick-slide {
     margin: 1px 2px;
 }
@@ -199,7 +199,7 @@ wrapper {
     font-size: 13px;
 
    }
-   
+
    .padding_row p{
        margin: 0px auto;
    }
@@ -220,7 +220,7 @@ ul.portfolio {
 .faq h3 {
         background-color: #F7F7F7;
         padding: 11px 8px;
-  
+
 }
 .faq{
     margin: 10px 0px;
@@ -249,11 +249,11 @@ ul.portfolio {
     margin-left: 5px;
 }
 button:focus {
-   
+
     outline: none;
 }
 .active, .accordion:hover {
-   
+
 }
 
 .panel {
@@ -300,10 +300,11 @@ button:focus {
 
 /* Style the tab content */
 .tabcontent {
-    display: none;
     padding: 6px 12px;
-    border: 1px solid #ccc;
     border-top: none;
+}
+.package-content{
+  overflow-x: auto;
 }
 ul.buyables.p-b-10.p-t-10 li {
     list-style-type: none;

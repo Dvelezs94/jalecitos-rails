@@ -27,8 +27,6 @@ class RequestsController < ApplicationController
   # POST /requests
   def create
     @request = Request.new( sanitized_params(request_params) )
-    puts "xxxxxxxxxxxxxxxxxxxxxxxx"
-    puts @request.inspect
     if @request.save
       redirect_to request_path(@request), notice: 'Request was successfully created.'
     else

@@ -1,5 +1,5 @@
-document.addEventListener("turbolinks:load", function() {
-  if (window.location.href.indexOf("users") > -1) {
+$(document).on('turbolinks:load', function() {
+  if ($("span.best_in_place").length > 0 ) {
     $(".google-span").click(function() {
       activateBestSearch();
     });

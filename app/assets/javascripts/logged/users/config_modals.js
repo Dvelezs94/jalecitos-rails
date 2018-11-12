@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", function() {
+$(document).on('turbolinks:load', function() {
   if (window.location.href.indexOf("configuration") > -1) {
     // Get the modal
     var bankModal = document.getElementById('bankModal');

@@ -22,7 +22,7 @@ input[type="file"] {
     padding: 5px 9px;
     display: inline-block;
     width: 100%;
-    height: 99px;
+    height: 70px;
     border: 1px #b2b2b2 solid;
     border-radius: 4px;
     outline: none;
@@ -385,12 +385,23 @@ p.example {
   display: inline;
 }
 
-.trix-input{
-  min-height: 150px;
+.trix-class{
+  min-height: 250px;
+  max-height: 250px;
+  background-color: white;
+  overflow-y: scroll;
+  width: 100%;
+}
+.name-class{
+  width: 100%;
 }
 button[disabled] {pointer-events:none}
 
-#count{
-  width: 100%;
-  text-align: right;
+.count{
+  float: right;
+  font-size: 0.8rem;
+}
+span.error,
+div.error{
+  color: red;
 }

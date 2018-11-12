@@ -1,4 +1,4 @@
-<div class="error-messages">
+<div class="error error-messages">
 
 </div>
 
@@ -19,16 +19,17 @@
           <h3><%= @types[n] %></h3>
           <div class="form-group form-group-<%= n %>">
             <%= pa.label :name %>
-            <%= pa.text_field :name, class: "form-control form_fields_#{n}",maxlength: 100 %>
+            <%= pa.text_field :name, class: "name-class name-#{n} form-control form_fields_#{n}",maxlength: 100 %>
             <span class="error error_span_<%= 3*n+1 %>"></span>
           </div>
 
           <div class="form-group form-group-<%= n %>">
             <%= pa.label :description %>
             <%= pa.text_field :description, class: "form-control", id: "description#{n}", type: "hidden" %>
-            <trix-editor input="description<%= n %>" class="form_fields_<%= n %>" maxlength="1000"></trix-editor>
+            <trix-editor input="description<%= n %>" class="trix-class trix_input_<%= n %> form_fields_<%= n %>" maxlength="1000"></trix-editor>
             <span class="error error_span_<%= 3*n+2 %>"></span>
           </div>
+          <br>
 
           <div class="form-group form-group-<%= n %>">
             <%= pa.label :price %>
