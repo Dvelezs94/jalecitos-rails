@@ -23,12 +23,14 @@ class OrdersController < ApplicationController
     if @order.save
       begin
         response = @charge.create(request_hash, current_user.openpay_id)
+        @order.response_order_id = response["id"]
+        @order.save
         create_notification(@order.user, @order.purchase.gig.user, "te contrato", @order.purchase)
         flash[:success] = 'La orden fue creada exitosamente.'
-        redirect_to root_path
+        redirect_to purchases_path
       rescue OpenpayTransactionException => e
           flash[:error] = "#{e.description}, por favor intentalo de nuevo."
-          redirect_to root_path
+          redirect_to purchases_path
       end
     else
       puts "test de orden fallida"
@@ -36,12 +38,11 @@ class OrdersController < ApplicationController
 
   end
 
-  def close
-
+  def complete
   end
 
-  def show
 
+  def refund
   end
 
   private

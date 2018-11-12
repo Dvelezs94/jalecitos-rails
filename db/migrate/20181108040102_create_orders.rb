@@ -10,6 +10,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.string :payment_message
       t.string :response_order_id
       t.integer :receiver
+      t.integer :code
 
       t.timestamps
     end

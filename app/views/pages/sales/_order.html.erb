@@ -1,6 +1,6 @@
 <tr class="body_table" valign="middle">
   <td class="buyer">
-    <h5><%= order.user.slug %></h5>
+    <h5><%= link_to order.user.slug, user_path(order.user.slug) %></h5>
   </td>
 
   <td><%= order.purchase.name %>
@@ -9,5 +9,5 @@
   <td><%= order.created_at %></td>
   <td><%= order.total %> MXN</td>
   <td>
-    <span class="in_progress"><%= order.status %></span></td>
+    <span class="<%= order.status.downcase %>"><%= order.status %></span></td>
 </tr>

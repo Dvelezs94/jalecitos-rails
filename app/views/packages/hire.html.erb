@@ -3,7 +3,7 @@
     <div class="row ">
       <%= render "shared_user/hire/steps" %>
       <div class="container section">
-        <%= form_for @order, url: order_path do |f|  %>
+        <%= form_for @order, url: orders_path do |f|  %>
         <div class="row">
           <div class="col-lg-8 checkout_cart">
           <%= render "shared_user/hire/checkout_cart", f: f%>
@@ -16,4 +16,5 @@
       </div>
     </div>
   </div>
+  <%= render 'users/new_card' %>
 </section>

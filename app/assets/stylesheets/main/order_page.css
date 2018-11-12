@@ -144,7 +144,40 @@ span.custom_ordr {
 
 span.in_progress{
 
-    background-color: #00618D;
+    background-color:#1d4457;
+    color: white;
+    font-size: 11px;
+    padding: 4px 5px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    display:  inline-block;
+}
+
+span.pending{
+
+    background-color: #FFD700;
+    color: white;
+    font-size: 11px;
+    padding: 4px 5px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    display:  inline-block;
+}
+
+span.completed{
+
+    background-color: #00B23D;
+    color: white;
+    font-size: 11px;
+    padding: 4px 5px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    display:  inline-block;
+}
+
+span.refunded{
+
+    background-color: #1c1d20;
     color: white;
     font-size: 11px;
     padding: 4px 5px;
@@ -164,4 +197,9 @@ tr.body_table{
 
 tr[data-link] {
   cursor: pointer;
+}
+
+.pay-butn {
+  margin-right: 10px;
+  float: right;
 }

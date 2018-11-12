@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
     t.string "payment_message"
     t.string "response_order_id"
     t.integer "receiver"
+    t.integer "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"

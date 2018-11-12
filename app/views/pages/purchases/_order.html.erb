@@ -1,12 +1,11 @@
 <tr class="body_table" valign="middle">
   <td class="buyer">
-    <h5><%= order.purchase.gig.user.slug %></h5>
+    <h5><%= link_to order.purchase.gig.user.slug, user_path(order.purchase.gig.user.slug) %></h5>
   </td>
-  <td><%= order.purchase.name %>
-  </td>
+  <td><%= link_to "Voy a #{order.purchase.gig.name}", user_gig_path(order.purchase.gig.user, order.purchase.gig)  %></td>
     <td> <%= order.purchase.pack_type %></td>
   <td><%= order.created_at %></td>
   <td><%= order.total %> MXN</td>
   <td>
-    <span class="in_progress"><%= order.status %></span></td>
+    <span class="<%= order.status.downcase %>"><%= order.status %></span></td>
 </tr>

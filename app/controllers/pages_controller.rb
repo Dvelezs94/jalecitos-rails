@@ -29,7 +29,7 @@ class PagesController < ApplicationController
     @purchases = current_user.purchases
     @pending_purchases = @purchases.pending
     @in_progress_purchases = @purchases.in_progress
-    @closed_purchases = @purchases.closed
+    @completed_purchases = @purchases.completed
     @disputed_purchases = @purchases.disputed
     @refunded_purchases = @purchases.refunded
   end
@@ -38,7 +38,7 @@ class PagesController < ApplicationController
     @sales = current_user.sales
     @pending_sales = @sales.pending
     @in_progress_sales = @sales.in_progress
-    @closed_sales = @sales.closed
+    @completed_sales = @sales.completed
     @disputed_sales = @sales.disputed
     @refunded_sales = @sales.refunded
   end
