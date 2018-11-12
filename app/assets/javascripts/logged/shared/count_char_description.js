@@ -7,14 +7,14 @@ $(document).on('turbolinks:load', function() {
 function init_char_D_count() {
   $("trix-editor").keyup(char_D_count);
   $("trix-toolbar").click(function() {
-    $("trix-editor[toolbar="+this.id+"]").keyup();
+    $("trix-editor[toolbar=" + this.id + "]").keyup();
   });
   $("trix-toolbar").mouseup(function() {
     if ($("#" + this.id + " .undo")[0].disabled) {
-      $("trix-editor[toolbar="+this.id+"]").keyup();
+      $("trix-editor[toolbar=" + this.id + "]").keyup();
     }
     if ($("#" + this.id + " .redo")[0].disabled) {
-      $("trix-editor[toolbar="+this.id+"]").keyup();
+      $("trix-editor[toolbar=" + this.id + "]").keyup();
     }
   });
   trixInputs = $(".trix-class");
@@ -23,11 +23,12 @@ function init_char_D_count() {
     $(".trix_input_" + i).keyup();
   }
 }
+
 function char_D_count() {
   number = $(this)[0].className.split(" ")[1].match(/\d+$/)[0];
   input = $(this).val();
   noHtml = input.replace(/<[^>]*>/g, "");
-  noHtml = noHtml.replace(/&nbsp;/g, " ");
+  noHtml = decodeHTMLEntities(noHtml);
   $("#count_D_" + number).text((1000 - noHtml.length) + "/1000");
-  textColor(noHtml.length,"#count_D_", number);
+  textColor(noHtml.length, "#count_D_", number);
 }

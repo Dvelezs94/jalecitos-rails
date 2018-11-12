@@ -20,8 +20,7 @@ class Request < ApplicationRecord
   validates_presence_of :name, :description, :location, :budget, :category_id
   validate  :tag_length, :no_spaces_in_tag, :maximum_amount_of_tags
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
-  validates_length_of :description, :maximum => 2000, :message => "contiene demasiados efectos, considera usar más texto plano."
-  validate :count_without_html
+  validate :description_length, :count_without_html
   validate :location_syntax
 
   #Custom fields

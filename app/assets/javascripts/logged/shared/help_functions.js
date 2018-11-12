@@ -36,10 +36,10 @@ function textColor(length, id, number) {
   else if (id == "#count_D_" && length > 1000){
     $(id + number)[0].style.color = "red";
   }
-  else if (id == "#count_N_" && length <= 1000){
+  else if (id == "#count_N_" && length <= 100){
     $(id + number)[0].style.color = "green";
   }
-  else if (id == "#count_N_" && length > 100){
+  else{
     $(id + number)[0].style.color = "red";
   }
 }

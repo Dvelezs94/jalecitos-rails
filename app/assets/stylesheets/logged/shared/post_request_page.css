@@ -401,3 +401,7 @@ button[disabled] {pointer-events:none}
   float: right;
   font-size: 0.8rem;
 }
+span.error,
+div.error{
+  color: red;
+}

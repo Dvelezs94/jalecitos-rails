@@ -2,6 +2,7 @@ class PackagesController < ApplicationController
   layout 'logged'
   include SanitizeParams
   include PackTypes
+  include DescriptionRestrictions
   before_action :set_gig_and_packages, only: [:new, :create, :edit_packages, :update_packages]
   before_action :check_gig_ownership, only: [:new, :create, :edit_packages, :update_packages]
   before_action :create_redirect, only: [:new, :create]
@@ -16,11 +17,7 @@ def hire
 end
 
   def new
-    define_pack_names
-    @new_packages =[]
-    3.times do
-      @new_packages << Package.new
-    end
+    prepare_packages
   end
 
   def create
@@ -56,6 +53,14 @@ end
       my_params.permit(:name, :description, :price )
     end
 
+    def prepare_packages
+      define_pack_names
+      @new_packages =[]
+      3.times do
+        @new_packages << Package.new
+      end
+    end
+
   def set_gig_by_package
     @package = Package.includes(gig: :user).friendly.find(params[:id])
   end
@@ -84,8 +89,16 @@ end
 
   def validate_create
     params[:packages].each do |pack|
-      if pack[:name].length > 100 || pack[:description].length > 2000 || pack[:description].gsub(/<[^>]*>/, "").gsub(/\A[[:space:]]+|[[:space:]]+\z/, '').gsub(/&nbsp;/, ' ').length > 1000  || (pack[:price].to_f < 100 && pack[:price] != "")
-        redirect_to(root_path, notice: "Sus paquetes no han podido guardarse, por favor, inténtelo de nuevo.")
+      real_char = decodeHTMLEntities(pack[:description])
+      noHtml = pack[:description].gsub(/<[^>]*>/, "")
+      noHtml_real_char = decodeHTMLEntities(noHtml)
+      flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 100 && pack[:price] != "")
+      flash.now[:error] = "Sólo se admiten como máximo 1000 caracteres" if noHtml_real_char.length > 1000
+      flash.now[:error] = "La descriptión contiene demasiados efectos de texto" if real_char.length > 2000
+      flash.now[:error] = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
+      if flash.now[:error]
+        prepare_packages
+        render :new
         break
       end
     end
@@ -93,8 +106,16 @@ end
   def validate_update
     @gig.gig_packages.each do |record|
       pack = params[:packages]["#{record.slug}"]
-      if pack[:name].length > 100 || pack[:description].length > 2000|| pack[:description].gsub(/<[^>]*>/, "").gsub(/\A[[:space:]]+|[[:space:]]+\z/, '').gsub(/&nbsp;/, ' ').length > 1000 || (pack[:price].to_f < 100 && pack[:price] != "")
-        redirect_to(root_path, notice: "Sus paquetes no han podido guardarse, por favor, inténtelo de nuevo.")
+      real_char = decodeHTMLEntities(pack[:description])
+      noHtml = pack[:description].gsub(/<[^>]*>/, "")
+      noHtml_real_char = decodeHTMLEntities(noHtml)
+      flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 100 && pack[:price] != "")
+      flash.now[:error] = "Sólo se admiten como máximo 1000 caracteres" if noHtml_real_char.length > 1000
+      flash.now[:error] = "La descriptión contiene demasiados efectos de texto" if real_char.length > 2000
+      flash.now[:error] = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
+      if flash.now[:error]
+        define_pack_names
+        render :edit_packages
         break
       end
     end
