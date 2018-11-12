@@ -25,6 +25,24 @@ class PagesController < ApplicationController
     render "requests"
   end
 
+  def purchases
+    @purchases = current_user.purchases
+    @pending_purchases = @purchases.pending
+    @in_progress_purchases = @purchases.in_progress
+    @closed_purchases = @purchases.closed
+    @disputed_purchases = @purchases.disputed
+    @refunded_purchases = @purchases.refunded
+  end
+
+  def sales
+    @sales = current_user.sales
+    @pending_sales = @sales.pending
+    @in_progress_sales = @sales.in_progress
+    @closed_sales = @sales.closed
+    @disputed_sales = @sales.disputed
+    @refunded_sales = @sales.refunded
+  end
+
   private
 
   def admin_redirect

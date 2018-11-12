@@ -1,88 +1,24 @@
   <div class="design-process-content payment_by_cards">
     <h3 class="semi-bold">Payment options</h3>
-    <form>
-      <label class="fake-radio-green fiverrpay includes-credit-and-debit-label js-methods-label checked">
-        <input name="payment-method input_s" type="radio" value="fiverrpay" data-server-name="fiverrpay">
-        <span class="radio-img"></span>
-
-        <span class="credit-and-debit-label">Credit &amp; Debit Cards</span>
-      </label>
-      <div class="payment_method"><img src="img/visa.png">
-        <img src="img/master_crd.jpg">
-        <img src="img/discover.png">
-      </div>
+      <div class="payment_method"><img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/credit-card-png-hd-credit-card-visa-and-master-card-transparent-background-mastercard-press-release-mastercard-hd-png-2489.png"></div>
 
       <div class="card-details">
 
-        <div class="row">
-          <div class="col-lg-6 col-md-6 col-12">
-            <label class="card-number">
-              <span>Card Number</span>
-              <input type="text" class="js-card-number " data-lpignore="true">
-
-            </label>
-          </div>
-          <div class="col-lg-6 col-md-6 col-12">
-
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-12">
-                <label class="expiration-date">
-                  <span>Expiration Date</span>
-
-                  <input type="text" class=" js-expiration-date" placeholder="MM/YY">
-
-                </label>
-              </div>
-              <div class="col-lg-6 col-md-6 col-12">
-                <label class="security-code">
-                  <span>Security Code</span>
-                  <span class="tooltip hint--left"></span>
-                  <input type="text" class="js-security-code" data-lpignore="true">
-
-                </label>
-              </div>
-            </div>
-          </div>
+        <table class="table table-striped table-borderless">
+          <thead>
+            <tr>
+              <th>Tarjeta</th>
+              <th>Tipo</th>
+              <th>Banco</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render 'shared_user/hire/cards', f: f%>
+          </tbody>
+        </table>
 
         </div>
+
       </div>
-
-      <div class="row card-details">
-        <div class="col-lg-6 col-md-6 col-12">
-          <label class="first-name">First Name
-            <input type="text" name="first-name" class="js-first-name" data-lpignore="true">
-          </label>
-        </div>
-        <div class="col-lg-6 col-md-6 col-12">
-          <label class="last-name">Last Name
-            <input type="text" class="js-last-name" data-lpignore="true">
-
-          </label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-12">
-          <div class="save-default-container">
-            <label>
-              <input type="checkbox" class="save-default" checked="">
-              <span>Save as default</span>
-            </label>
-            <span class="tooltip hint--right" data-hint="This will be your default payment method for future payments on Fiverr."></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-
-        <div class="col-lg-12">
-          <label class="fake-radio-green paypal js-methods-label">
-            <input name="payment-method" type="radio" value="paypal" data-server-name="paypal_express_payment">
-            <span class="radio-img"></span>
-            <img src="img/paypal.png">
-          </label>
-        </div>
-      </div>
-    </form>
 
   </div>

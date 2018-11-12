@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
+  post '/order' => 'orders#create', :as => 'order'
   root to: "pages#home"
   get 'admins/dashboard'
 
@@ -38,7 +39,7 @@ Rails.application.routes.draw do
              patch 'update_packages', to: 'packages#update_packages', as: 'update'
            end
            member do
-             get :hire 
+             get :hire
            end
          end
      end
@@ -46,5 +47,7 @@ Rails.application.routes.draw do
   resources :notifications
   resources :categories
   get 'requests', to: 'pages#requests_index'
+  get 'purchases', to: 'pages#purchases'
+  get 'sales', to: 'pages#sales'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

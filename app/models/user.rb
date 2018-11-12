@@ -29,8 +29,9 @@ class User < ApplicationRecord
   # Notifications
   has_many :notifications, as: :recipient
 
-  # Orders
-  has_many :orders
+  # Orders and sales
+  has_many :purchases, class_name: :Order, foreign_key: :user
+  has_many :sales, class_name: :Order, foreign_key: :receiver
 
   #Define who can do the rating, which happens to be the user
   ratyrate_rater

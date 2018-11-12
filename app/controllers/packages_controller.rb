@@ -3,6 +3,7 @@ class PackagesController < ApplicationController
   include SanitizeParams
   include PackTypes
   include DescriptionRestrictions
+  include OpenpayHelper
   before_action :set_gig_and_packages, only: [:new, :create, :edit_packages, :update_packages]
   before_action :check_gig_ownership, only: [:new, :create, :edit_packages, :update_packages]
   before_action :create_redirect, only: [:new, :create]
@@ -14,6 +15,9 @@ class PackagesController < ApplicationController
   access user: :all
 
 def hire
+  @openpay_id = current_user.openpay_id
+  @order = Order.new
+  @user_cards = get_openpay_resource("card", @openpay_id)
 end
 
   def new
