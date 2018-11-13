@@ -1,21 +1,29 @@
 <div class="Overview">
-  <h3>Voy a
-    <%= @gig.name %></h3>
-    <% if current_user && @gig.user_id == current_user.id  %>
-    <div class="btn-group">
-      <%= link_to status_text_helper(@gig), toggle_status_user_gig_path(current_user.slug,@gig), class: "btn btn-sm btn-outline-secondary" unless current_user.nil? || @gig.banned? || current_user.id != @gig.user_id || @gig.gig_first_pack[0].nil? %>
-      <%= link_to "Editar", edit_user_gig_path(current_user.slug,@gig), class: "btn btn-sm btn-outline-secondary" if current_user.present? && @gig.user_id == current_user.id %>
-      <%= link_to "Borrar", user_gig_path(current_user.slug,@gig), method: :delete, data: { confirm: '¿Estás seguro de querer borrar este trabajo?' }, class: "btn btn-sm btn-outline-secondary" if current_user.present? && @gig.user_id == current_user.id %>
+  <div class="row gig_header_2">
+
+      <div class="<%= (current_user && current_user.id == @gig.user_id)? 'col-lg-9 col-md-9 col-sm-8 col-7' : 'col-lg-12 col-md-12 col-sm-12 col-12' %>">
+        <h3>Voy a
+          <%= @gig.name %></h3>
+      </div>
+      <% if current_user && current_user.id == @gig.user_id %>
+      <div class="col-lg-3 col-md-3 col-sm-4 col-5">
+          <div class="gig_actions">
+            <%= link_to status_text_helper(@gig), toggle_status_user_gig_path(current_user.slug,@gig) unless @gig.banned? || @gig.gig_first_pack[0].nil? %>
+            <%= link_to fa_icon("pencil", class: "fa-lg gig_action_icon", title: "Editar"), edit_user_gig_path(current_user.slug,@gig) %>
+            <%= link_to fa_icon("trash", class: "fa-lg gig_action_icon", title: "Eliminar"), user_gig_path(current_user.slug,@gig), method: :delete, data: { confirm: '¿Estás seguro de querer borrar este trabajo?' }%>
+          </div>
+      </div>
+      <% end %>
     </div>
-    <% end %>
-  <div class="row col-lg-10 col-md-10 col-sm-10 col-10">
-    <%= rating_for @gig.user, "Employer", readonly: true %>(<%= rating_for @gig.user, "Employer", number_only: true%>)
-  </div>
-  <div class="profile_management">
-    <%=link_to image_tag(avatar_display_helper(@gig.user.image_url(:thumb)), class: "gig-thumb"), user_path(@gig.user.slug) %>
-    <div class="user_name">
-      <%=link_to content_tag(:h6, @gig.user.alias), user_path(@gig.user.slug) %>
+
+    <div class="row col-lg-10 col-md-10 col-sm-10 col-10">
+      <%= rating_for @gig.user, "Employer", readonly: true %>(<%= rating_for @gig.user, "Employer", number_only: true%>)
     </div>
+    <div class="profile_management">
+      <%=link_to image_tag(avatar_display_helper(@gig.user.image_url(:thumb)), class: "gig-thumb"), user_path(@gig.user.slug) %>
+      <div class="user_name">
+        <%=link_to content_tag(:h6, @gig.user.alias), user_path(@gig.user.slug) %>
+      </div>
+    </div>
+    <hr>
   </div>
-  <hr>
-</div>

@@ -18,9 +18,9 @@ module GigsHelper
 
    def status_text_helper gig
      if gig.published?
-       "Ocultar"
+       fa_icon("eye-slash", class: "fa-lg gig_action_icon",title: "Ocultar")
      else
-       "Publicar"
+       fa_icon("eye", class: "fa-lg gig_action_icon",title: "Publicar")
      end
    end
 
