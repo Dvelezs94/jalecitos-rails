@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
-  post '/order' => 'orders#create', :as => 'order'
   root to: "pages#home"
   get 'admins/dashboard'
 
@@ -46,6 +45,13 @@ Rails.application.routes.draw do
    end
   resources :notifications
   resources :categories
+  resources :orders, only: [:create] do
+    member do
+      put :refund
+      put :complete
+      put :start
+    end
+  end
   get 'requests', to: 'pages#requests_index'
   get 'purchases', to: 'pages#purchases'
   get 'sales', to: 'pages#sales'

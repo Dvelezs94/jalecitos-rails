@@ -129,7 +129,7 @@ wrapper {
     height: 118px;
     background-color: #0000007d;
     border-top-right-radius: 13px;
-    z-index: 9999;
+    z-index: 1;
     border-bottom-right-radius: 13px;
 }
 .slick-slider .slick-prev:hover {
