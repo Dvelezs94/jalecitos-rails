@@ -23,7 +23,7 @@ end
       user.requests.new do |request|
         request.name = Faker::Company.industry + "#{x}#{y}"
         request.description = Faker::Lorem.paragraph(30, true)
-        request.location = Faker::Address.state
+        request.location = "#{Faker::Address.state}, México"
         request.category_id = Faker::Number.between(1, 10)
         request.budget = Faker::Number.between(100, 5000)
       end
@@ -32,7 +32,7 @@ end
       user.gigs.new do |gig|
         gig.name = "#{Faker::Lorem.paragraph(2, true)}"
         gig.description = Faker::Lorem.paragraph(30, true)
-        gig.location = Faker::Address.state
+        gig.location = "#{Faker::Address.state}, México"
         gig.category_id = Faker::Number.between(1, 5)
         gig.status = Faker::Number.between(0, 2)
       end

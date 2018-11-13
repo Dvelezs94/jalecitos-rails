@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     member do
       put :refund
       put :complete
+      put :request_start
       put :start
     end
   end

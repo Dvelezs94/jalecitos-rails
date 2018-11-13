@@ -1,4 +1,3 @@
-<%= form_with url: start_order_path(order.id), local: true, method: :put do |f| %>
 <tr class="body_table" valign="middle">
   <td class="buyer">
     <h5><%= link_to order.user.slug, user_path(order.user.slug) %></h5>
@@ -10,11 +9,11 @@
   <td>
     <span class="<%= order.status.downcase %>"><%= order.status %></span>
     <% if order.pending? %>
-    <%= f.number_field :code, options ={class: "number", min: "1", max: "99999"} %>
-    <button class="invisible_button">
-      <%= fa_icon "play"%>
-    </button>
+      <% if order.started_at? %>
+        <%= link_to fa_icon("times", title: "Cancelar Trabajo", class: "fa-lg"), root_path %>
+      <% else %>
+        <%= link_to fa_icon("play", title: "Solicitar Comenzar", class: "fa-lg"), request_start_order_path(order.id), :method => :put %>
+      <% end %>
     <% end %>
   </td>
 </tr>
-<% end %>
