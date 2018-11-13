@@ -16,55 +16,12 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-7">
-        <strong>2D+3D Eat-All-You-Can</strong>
-        <ul>
-          <li>
-            <i class="fa fa-check"></i>
-            10 Days Delivery
-          </li>
-          <li>
-            <i class="fa fa-check"></i>
-            Transparent Background
-          </li>
-          <li>
-            <i class="fa fa-check"></i>
-            2 Revisions
-          </li>
-          <li>
-            <i class="fa fa-check"></i>
-            Add Background Music
-          </li>
-        </ul>
-
-      </div>
-      <div class="col-lg-2 t">
-
-        x1
-      </div>
-      <div class="col-lg-3 ">
-
-        $1,500
-      </div>
-    </div>
-    <!-- -->
-    <div class="row">
       <div class="col-lg-12">
-        <a href="#">Enter promo code
-        </a>
-      </div>
+        <strong><%= @package.description %></strong>
 
-    </div>
-    <!-- -->
-    <div class="row">
-      <div class="col-lg-6">
-        Service Fee
-      </div>
-      <div class="col-lg-6 text-right">
-
-        $75
       </div>
     </div>
+
 
     <!-- -->
     <div class="row">
@@ -73,24 +30,15 @@
       </div>
       <div class="col-lg-6 text-right">
 
-        $1,575
+        <%= number_to_currency(@package.price, precision: 2)%> MXN
       </div>
     </div>
-    <!-- -->
-    <div class="row">
-      <div class="col-lg-6">
-        Total delivery time
-      </div>
-      <div class="col-lg-6 text-right">
 
-        10 days
-      </div>
-    </div>
     <div class="row">
+      <%= f.hidden_field :purchase, :value => params[:id] %>
 
       <div class="col-lg-12 text-center">
-        <a href="#" class="continue_purchase">Confirm & Pay</a>
-
+        <%= f.submit "Confirmar y Pagar",  class: "continue_purchase" %>
       </div>
     </div>
   </div>

@@ -38,13 +38,22 @@ Rails.application.routes.draw do
              patch 'update_packages', to: 'packages#update_packages', as: 'update'
            end
            member do
-             get :hire 
+             get :hire
            end
          end
      end
    end
   resources :notifications
   resources :categories
+  resources :orders, only: [:create] do
+    member do
+      put :refund
+      put :complete
+      put :start
+    end
+  end
   get 'requests', to: 'pages#requests_index'
+  get 'purchases', to: 'pages#purchases'
+  get 'sales', to: 'pages#sales'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

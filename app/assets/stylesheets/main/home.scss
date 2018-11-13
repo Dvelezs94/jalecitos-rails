@@ -625,6 +625,16 @@ span.best_in_place form select:focus {
 .reviews{
   margin-top: 2vh;
 }
+
 .seller_about{
   margin-bottom: 4vh;
+}
+
+.invisible_button {
+  background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
 }
