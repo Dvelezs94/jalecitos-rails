@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "user_id"
+    t.integer "user_id"
     t.float "total"
     t.integer "card_id"
     t.string "purchase_type"
@@ -122,11 +122,12 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
     t.integer "status", default: 0
     t.string "payment_message"
     t.string "response_order_id"
-    t.integer "receiver"
-    t.integer "code"
+    t.integer "receiver_id"
+    t.datetime "started_at"
+    t.datetime "closed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["user_id", "receiver_id"], name: "index_orders_on_user_id_and_receiver_id"
   end
 
   create_table "overall_averages", force: :cascade do |t|
@@ -283,7 +284,6 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
   add_foreign_key "notifications", "users"
   add_foreign_key "offers", "requests"
   add_foreign_key "offers", "users"
-  add_foreign_key "orders", "users"
   add_foreign_key "packages", "gigs"
   add_foreign_key "payments", "offers"
   add_foreign_key "payments", "packages"

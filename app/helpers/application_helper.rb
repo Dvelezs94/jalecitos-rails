@@ -70,16 +70,16 @@ module ApplicationHelper
     when model.class == Request
        request_path(model)
     when model.class == Package
-       user_gig_path(model.gig.user, model.gig.slug)
+       sales_path
     end
   end
 
   def build_notifiable_type (model)
     case
     when model.class == Request
-       "en tu pedido #{model.name}"
+       "en el pedido #{model.name}"
     when model.class == Package
-       "en tu jale Voy a #{model.gig.name} por el paquete #{model.pack_type}"
+       "en el jale Voy a #{model.gig.name} por el paquete #{model.pack_type}"
     end
   end
 end
