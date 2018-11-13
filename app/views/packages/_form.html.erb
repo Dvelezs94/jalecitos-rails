@@ -1,49 +1,55 @@
-<div class="error error-messages">
-
-</div>
+<div class="error error-messages"></div>
 
 <%= form_with(model: package, url: package_form_url_helper, method: package_form_method_helper, local: true, :html => { :id => "packages_form", class: "current_form" }) do |form|%>
 
-  <div class="row">
+<div class="row">
 
-    <% package.each_with_index do |pack, n| %>
-      <div class="form-number-<%= n %> col-md-4">
+  <% package.each_with_index do |pack, n| %>
+    <div class="form-number-<%= n %> col-md-4">
 
-        <% if pack.errors.any? %>
-          <%pack.errors.full_messages.each do |error| %>
-            <%= notification_generator_helper error, :error %>
-          <% end %>
+      <% if pack.errors.any? %>
+        <%pack.errors.full_messages.each do |error| %>
+          <%= notification_generator_helper error, :error %>
         <% end %>
+      <% end %>
 
-        <%= fields_for 'packages[]', pack do |pa| %>
-          <h3><%= @types[n] %></h3>
-          <div class="form-group form-group-<%= n %>">
-            <%= pa.label :name %>
-            <%= pa.text_field :name, class: "name-class name-#{n} form-control form_fields_#{n}",maxlength: 100 %>
-            <span class="error error_span_<%= 3*n+1 %>"></span>
-          </div>
-
-          <div class="form-group form-group-<%= n %>">
-            <%= pa.label :description %>
-            <%= pa.text_field :description, class: "form-control", id: "description#{n}", type: "hidden" %>
-            <trix-editor input="description<%= n %>" class="trix-class trix_input_<%= n %> form_fields_<%= n %>" maxlength="1000"></trix-editor>
-            <span class="error error_span_<%= 3*n+2 %>"></span>
-          </div>
-          <br>
-
-          <div class="form-group form-group-<%= n %>">
-            <%= pa.label :price %>
-            <%= pa.number_field :price, options ={min: 100, class: "form_fields_#{n}"} %>
-            <span class="error error_span_<%= 3*n+3 %>"></span>
-          </div>
-          <% n += 1  %>
-        <% end %>
-
+      <%= fields_for 'packages[]', pack do |pa| %>
+      <h3><%= @types[n] %></h3>
+      <div class="form-group form-group-<%= n %>">
+        <%= pa.label :name %>
+        <%= pa.text_field :name, class: "name-class name-#{n} form-control form_fields_#{n}",maxlength: 100 %>
+        <span class="error error_span_<%= 3*n+1 %>"></span>
       </div>
-    <% end %>
 
-    <div class="form-group submit-button">
-      <%= form.submit "Continuar",  class: "btn btn-primary btn-block" %>
+      <div class="form-group form-group-<%= n %>">
+        <%= pa.label :description %>
+        <%= pa.text_field :description, class: "form-control", id: "description#{n}", type: "hidden" %>
+        <trix-editor input="description<%= n %>" class="trix-class trix_input_<%= n %> form_fields_<%= n %>" maxlength="1000"></trix-editor>
+        <span class="error error_span_<%= 3*n+2 %>"></span>
+      </div>
+      <br>
+
+      <div class="form-group form-group-<%= n %> pack-price-class">
+        <div class="row">
+
+          <div class=" col-lg-6 col-md-6 col-sm-12 col-12">
+            Lo que quiero ganar:
+            <%= pa.number_field :price, options ={min: 100, class: "price-input price-input-#{n} form_fields_#{n}"} %>
+          </div>
+          <div class=" col-lg-6 col-md-6 col-sm-12 col-12">
+            Lo que se mostrará:
+            <label id="price-calc-<%= n %>"></label>
+          </div>
+        </div>
+        <span class="error error_span_<%= 3*n+3 %>"></span>
+      </div>
+      <% n += 1  %><% end %>
+
     </div>
+  <% end %>
+
+  <div class="form-group submit-button">
+    <%= form.submit "Continuar", class: "btn btn-primary btn-block" %>
   </div>
+</div>
 <% end %>

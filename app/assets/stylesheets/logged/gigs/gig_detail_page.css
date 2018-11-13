@@ -303,7 +303,8 @@ button:focus {
     padding: 6px 12px;
     border-top: none;
 }
-.package-content{
+.package-content,
+.gig_name_field{
   overflow-x: auto;
 }
 ul.buyables.p-b-10.p-t-10 li {

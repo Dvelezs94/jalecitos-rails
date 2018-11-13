@@ -405,3 +405,8 @@ span.error,
 div.error{
   color: red;
 }
+
+/* pack form */
+.price-input{
+  width: 100%;
+}

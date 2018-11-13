@@ -5,7 +5,7 @@
         <strong><%= package.name %></strong>
       </div>
       <div class="col-lg-4">
-        <strong><%= number_to_currency(package.price, precision: 2) %>
+        <strong><%=number_to_currency(package.price*1.1, precision: 2) %>
           MXN</strong>
       </div>
     </div>
