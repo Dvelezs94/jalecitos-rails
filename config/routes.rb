@@ -47,8 +47,9 @@ Rails.application.routes.draw do
   resources :categories
   resources :orders, only: [:create] do
     member do
-      get :refund
-      get :complete
+      put :refund
+      put :complete
+      put :start
     end
   end
   get 'requests', to: 'pages#requests_index'

@@ -26,7 +26,7 @@ class PagesController < ApplicationController
   end
 
   def purchases
-    @purchases = current_user.purchases
+    @purchases = current_user.purchases.order(created_at: :desc)
     @pending_purchases = @purchases.pending
     @in_progress_purchases = @purchases.in_progress
     @completed_purchases = @purchases.completed
@@ -35,7 +35,7 @@ class PagesController < ApplicationController
   end
 
   def sales
-    @sales = current_user.sales
+    @sales = current_user.sales.order(created_at: :desc)
     @pending_sales = @sales.pending
     @in_progress_sales = @sales.in_progress
     @completed_sales = @sales.completed

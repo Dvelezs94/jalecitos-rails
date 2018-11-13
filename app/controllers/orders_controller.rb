@@ -38,6 +38,20 @@ class OrdersController < ApplicationController
 
   end
 
+  def start
+    @order = Order.find(params[:id])
+    
+    if @order.code == params[:code].to_i
+      @order.in_progress!
+      flash[:success] = "La orden se actualizo correctamente"
+      redirect_to sales_path
+    else
+      flash[:error] = "Codigo incorrecto, intenta de nuevo con el codigo correcto"
+      redirect_to sales_path
+    end
+
+  end
+
   def complete
   end
 
@@ -59,6 +73,7 @@ class OrdersController < ApplicationController
       parameters[:receiver] = pack.gig.user_id
       parameters[:purchase] = pack
       parameters[:total] = pack.price
+      parameters[:code] = rand 10000..99999
       parameters
     end
     def check_user_ownership
