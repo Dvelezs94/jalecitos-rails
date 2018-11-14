@@ -30,9 +30,6 @@
         <a class="nav-link js-scroll-trigger">Vender</a>
         <div class="dropdown-content">
           <ul>
-            <li  class="">
-              <%= link_to "Mis Ventas", sales_path %>
-            </li>
             <li class="<%= active? user_path(current_user) %>">
               <%= link_to "Mis Jales", user_path(current_user) %>
             </li>
@@ -55,9 +52,6 @@
         <a class="nav-link js-scroll-trigger">Comprar</a>
         <div class="dropdown-content">
           <ul>
-            <li  class="">
-              <%= link_to "Mis Compras", purchases_path %>
-            </li>
             <li class="<%= active? user_path(current_user) %>">
               <%= link_to "Mis Pedidos", user_path(current_user) %>
             </li>
@@ -90,6 +84,9 @@
             </li>
             <li>
               <%= link_to "Configuracion", user_config_path(current_user.slug) %>
+            </li>
+            <li>
+              <%= link_to "Mis Finanzas", finance_path() %>
             </li>
             <li>
               <a class="" href="#">Ayuda</a>

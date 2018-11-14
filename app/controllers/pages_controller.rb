@@ -25,22 +25,9 @@ class PagesController < ApplicationController
     render "requests"
   end
 
-  def purchases
-    @purchases = current_user.purchases.order(created_at: :desc)
-    @pending_purchases = @purchases.pending
-    @in_progress_purchases = @purchases.in_progress
-    @completed_purchases = @purchases.completed
-    @disputed_purchases = @purchases.disputed
-    @refunded_purchases = @purchases.refunded
-  end
-
-  def sales
-    @sales = current_user.sales.order(created_at: :desc)
-    @pending_sales = @sales.pending
-    @in_progress_sales = @sales.in_progress
-    @completed_sales = @sales.completed
-    @disputed_sales = @sales.disputed
-    @refunded_sales = @sales.refunded
+  def finance
+    @purchases = current_user.purchases.order(updated_at: :desc)
+    @sales = current_user.sales.order(updated_at: :desc)
   end
 
   private

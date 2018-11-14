@@ -65,21 +65,21 @@ module ApplicationHelper
     @opposite_user = conversation.sender == current_user ? conversation.recipient : current_user
   end
 
-  def url_generator_helper (model)
+  def url_generator_helper (object)
     case
-    when model.class == Request
-       request_path(model)
-    when model.class == Package
-       sales_path
+    when object.class == Request
+       request_path(object)
+    when object.class == Package
+       finance_path
     end
   end
 
-  def build_notifiable_type (model)
+  def build_notifiable_type (object)
     case
-    when model.class == Request
-       "en el pedido #{model.name}"
-    when model.class == Package
-       "en el jale Voy a #{model.gig.name} por el paquete #{model.pack_type}"
+    when object.class == Request
+       "en el pedido #{object.name}"
+    when object.class == Package
+       "en el jale Voy a #{object.gig.name} por el paquete #{object.pack_type}"
     end
   end
 end

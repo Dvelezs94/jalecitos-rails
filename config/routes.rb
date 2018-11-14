@@ -48,13 +48,13 @@ Rails.application.routes.draw do
   resources :orders, only: [:create] do
     member do
       put :refund
+      put :request_complete
       put :complete
       put :request_start
       put :start
     end
   end
   get 'requests', to: 'pages#requests_index'
-  get 'purchases', to: 'pages#purchases'
-  get 'sales', to: 'pages#sales'
+  get 'finance', to: 'pages#finance'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

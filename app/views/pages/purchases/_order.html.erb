@@ -9,9 +9,21 @@
 
   <td>
     <span class="<%= order.status.downcase %>"><%= order.status %></span>
+  </td>
+  <td>
     <% if order.pending? %>
       <% if order.started_at? %>
         <%= link_to fa_icon("check", title: "Comenzar Trabajo", class: "fa-lg"), start_order_path(order.id), method: :put %>
+        <%= link_to fa_icon("undo", title: "Solicitar Reembolso", class: "fa-lg"), root_path %>
+      <% else %>
+        <%= link_to fa_icon("undo", title: "Solicitar Reembolso", class: "fa-lg"), root_path %>
+      <% end %>
+    <% elsif order.in_progress? %>
+      <% if order.completed_at? %>
+        <%= link_to fa_icon("check-circle", title: "Finalizar Orden", class: "fa-lg"), complete_order_path(order.id), :method => :put %>
+        <%= link_to fa_icon("times", title: "Abrir Disputa", class: "fa-lg"), root_path %>
+      <% else %>
+        <%= link_to fa_icon("times", title: "Abrir Disputa", class: "fa-lg"), root_path %>
       <% end %>
     <% end %>
   </td>
