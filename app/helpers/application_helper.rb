@@ -62,7 +62,7 @@ module ApplicationHelper
   end
 
   def opposite_conversation_user(conversation, current_user)
-    @opposite_user = conversation.sender == current_user ? conversation.recipient : current_user
+    @opposite_user = conversation.sender == current_user ? conversation.recipient : conversation.sender
   end
 
   def url_generator_helper (object)

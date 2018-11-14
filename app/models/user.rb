@@ -19,7 +19,6 @@ class User < ApplicationRecord
 
   # Chat Relations
   has_many :messages
-  has_many :conversations, foreign_key: :sender_id
 
   # Request System
   has_many :requests
@@ -98,6 +97,10 @@ class User < ApplicationRecord
    # Override the method to support canceled accounts
    def active_for_authentication?
        super && self.active?
+   end
+
+   def conversations
+     Conversation.where("sender_id = ? OR recipient_id = ?", self.id, self.id)
    end
 
    private

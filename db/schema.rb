@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
     t.text "body"
     t.bigint "user_id"
     t.bigint "conversation_id"
+    t.datetime "read_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
