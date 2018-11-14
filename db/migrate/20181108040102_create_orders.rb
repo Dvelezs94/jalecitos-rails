@@ -11,7 +11,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.string :response_order_id
       t.integer :receiver_id
       t.datetime :started_at
-      t.datetime :closed_at
+      t.datetime :completed_at
 
       t.timestamps
     end

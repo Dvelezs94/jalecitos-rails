@@ -3,13 +3,13 @@ class OrdersController < ApplicationController
   include UsersHelper
   before_action :authenticate_user!
   access user: :all
-  before_action only: [:create, :close] do
+  before_action only: [:create] do
     init_openpay("charge")
   end
-  before_action :get_order, only: [:request_start, :start]
-  before_action :check_receiver, only: :request_start
-  before_action :check_owner, only: :start
-#  before_action :check_user_ownership, only:[:create, :destroy]
+  before_action :get_order, only: [:request_start, :start, :request_complete, :complete]
+  before_action :verify_order_receiver, only: [:request_start, :request_complete]
+  before_action :verify_order_owner, only: [:start, :complete]
+
 
   def create
     @order = Order.new(order_params)
@@ -30,10 +30,10 @@ class OrdersController < ApplicationController
         @order.save
         create_notification(@order.user, @order.receiver, "te contrato", @order.purchase)
         flash[:success] = 'La orden fue creada exitosamente.'
-        redirect_to purchases_path
+        redirect_to finance_path
       rescue OpenpayTransactionException => e
           flash[:error] = "#{e.description}, por favor intentalo de nuevo."
-          redirect_to purchases_path
+          redirect_to finance_path
       end
     else
       puts "test de orden fallida"
@@ -46,10 +46,22 @@ class OrdersController < ApplicationController
     if @order.save
       flash[:success] = "La orden se actualizo correctamente"
       create_notification(@order.receiver, @order.user, "solicito comenzar", @order.purchase)
-      redirect_to sales_path
+      redirect_to finance_path
     else
       flash[:error] = "Hubo un error en tu  solicitud"
-      redirect_to sales_path
+      redirect_to finance_path
+    end
+  end
+
+  def request_complete
+    @order.completed_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+    if @order.save
+      flash[:success] = "La orden se actualizo correctamente"
+      create_notification(@order.receiver, @order.user, "solicito finalizar", @order.purchase)
+      redirect_to finance_path
+    else
+      flash[:error] = "Hubo un error en tu  solicitud"
+      redirect_to finance_path
     end
   end
 
@@ -57,15 +69,29 @@ class OrdersController < ApplicationController
     if @order.in_progress!
       flash[:success] = "La orden ahora esta en progreso"
       create_notification(@order.user, @order.receiver, "ha comenzado", @order.purchase)
-      redirect_to purchases_path
+      redirect_to finance_path
     else
       flash[:error] = "Hubo un error en tu solicitud"
-      redirect_to purchases_path
+      redirect_to finance_path
     end
-
   end
 
   def complete
+    if @order.completed!
+      @user = @order.receiver
+      @user.balance += @order.purchase.price.to_f
+      if @user.save
+        create_notification(@order.user, @order.receiver, "te ha depositado", @user)
+      else
+        create_notification(@order.user, @order.receiver, "algo salio mal depositando", @user)
+      end
+      flash[:success] = "La orden ahora esta finalizada"
+      create_notification(@order.user, @order.receiver, "ha finalizado", @order.purchase)
+      redirect_to finance_path
+    else
+      flash[:error] = "Hubo un error en tu solicitud"
+      redirect_to finance_path
+    end
   end
 
 
@@ -99,14 +125,14 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
     end
 
-    def check_receiver
+    def verify_order_receiver
       if @order.receiver != current_user
         flash[:error] = "No tienes permiso para acceder aqui"
         redirect_to root_path
         return
       end
     end
-    def check_owner
+    def verify_order_owner
       if @order.user != current_user
         flash[:error] = "No tienes permiso para acceder aqui"
         redirect_to root_path

@@ -37,7 +37,7 @@
 }
  .edit input{
 
-  width: 500px;
+  // width: 500px;
   line-height:1px;
 
 }
@@ -72,8 +72,8 @@
 }
 
 @media (max-width: 767px) { /* Makes these changes only when screen sizes is 767 px or less */
-  .edit input{
-width: 190px!important;}
+//   .edit input{
+// width: 190px!important;}
   .edit select{
 width: 190px!important;}
 .edit textarea{
