@@ -1,5 +1,7 @@
 <div class="collapse navbar-collapse" id="navbarResponsive">
+
   <ul class="navbar-nav  ml-auto">
+
     <li class="nav-item <%= active? root_path %>">
         <%= link_to "Inicio", root_path, :class => 'nav-link js-scroll-trigger' %>
     </li>
@@ -78,7 +80,6 @@
         </label>
         <div class="dropdown-content">
           <ul>
-
             <li>
               <%= link_to "Mi Perfil", user_path(current_user.slug) %>
             </li>
@@ -86,7 +87,7 @@
               <%= link_to "Configuracion", user_config_path(current_user.slug) %>
             </li>
             <li>
-              <%= link_to "Mis Finanzas", finance_path() %>
+              <%= link_to "Mis Finanzas", finance_path(:table => "purchases") %>
             </li>
             <li>
               <a class="" href="#">Ayuda</a>
@@ -98,5 +99,7 @@
         </div>
       </div>
     </li>
+
   </ul>
+  
 </div>

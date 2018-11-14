@@ -1,5 +1,5 @@
 <% if @show_packages == true  && package.name != "" && package.description != "" && package.price != nil%>
-  <div class="tabcontent" id="<%= package.pack_type %>" >
+  <div class="tabcontent" id="<%= package.pack_type %>" style="display: none;" >
     <div class="row ">
       <div class="col-lg-8">
         <strong><%= package.name %></strong>

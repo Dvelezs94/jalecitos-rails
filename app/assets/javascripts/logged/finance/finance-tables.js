@@ -1,8 +1,8 @@
 document.addEventListener("turbolinks:load", function() {
 if (window.location.href.indexOf("finance") > -1) {
   $(".tabContent").hide();  //Hides all tab content divs.
-  $(".tabs li:eq(0)").addClass("active").show();  //Adds the active class to the first tab li.
-  $(".tabContent:eq(0)").show();   //Shows the first tab content div.
+  // $(".tabs li:eq(0)").addClass("active").show();  //Adds the active class to the first tab li.
+  // $(".tabContent:eq(0)").show();   //Shows the first tab content div.
 
   $(".tabs li")
         .prepend("<div class='arrow'></div>")  //Prepends the arrow to the li in the tab menu.
@@ -44,4 +44,10 @@ if (window.location.href.indexOf("finance") > -1) {
 
   $(".tabs li:not(.active) .arrow").hide();  //Hides all arrows except the active tab arrow on page load.
 
+  //show the correct table
+  urlParams = new URLSearchParams(location.search);
+  table = urlParams.get('table');
+  if (table != null){
+    $("a[href='#"+table+"']").click();
+  }
 }});
