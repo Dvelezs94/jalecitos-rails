@@ -49,7 +49,7 @@
       <% if params[:user_id] && params[:user_id] != current_user.slug %>
         <%= render 'conversations/conversation', conversation: @conversation, user: current_user, opposite_user: opposite_conversation_user(@conversation, current_user)  %>
       <% else %>
-      <div id="empty_box" class="tabcontent">
+      <div id="empty_box">
         <div class="empty-state no-conversations text-center">
               <%= fa_icon "comments", class: "fa-5x" %>
               <h4>Nada que ver aqui</h4>
