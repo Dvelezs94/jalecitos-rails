@@ -6,7 +6,6 @@
         <%= render "shared_user/gigs/show/slider" %>
       </div>
       <%= render "shared_user/gigs/show/gig_info" %>
-      <%= render "shared_user/gigs/show/user_about" %>
     </div>
     <div class="col-lg-5">
       <div class="packages_of_gig">
@@ -15,6 +14,7 @@
         </div>
         <%= render @gig.gig_packages %>
       </div>
+      <%= render "shared_user/gigs/show/user_about" %>
       <%= render "shared_user/gigs/show/reviews" %>
     </div>
   </div>

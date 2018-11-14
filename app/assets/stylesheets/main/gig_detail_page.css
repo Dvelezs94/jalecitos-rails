@@ -1,0 +1,389 @@
+.gig_menu_tab li a {
+  color: #777777 !important;
+  font-size: 14px;
+}
+
+.gig_buttons#mainNav .navbar-toggler {
+  background-color: white !important;
+  border: 1px solid #c7c2c2;
+  box-shadow: 2px 2px 3px 0px #d8d8d8;
+  color: #ccc8c8;
+  font-size: 16px;
+  padding: 6px 9px;
+}
+
+div#gig_menu2 {
+  position: absolute;
+  top: 77%;
+  border: 1px solid #c7c2c2;
+  box-shadow: 2px 2px 3px 0px #d8d8d8;
+  color: #ccc8c8;
+  background-color: white;
+  z-index: 999;
+}
+
+#gig_menu2 ul li a {
+  font-size: 11px;
+  color: #727272;
+}
+
+#gig_menu2 ul li {
+  padding: 2px 0px;
+}
+
+/* gig menu end*/
+.profile_management img {
+  float: left;
+  margin-right: 10px;
+}
+
+.categories_of_gig ul li {
+  list-style-type: none;
+  display: inline;
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+.categories_of_gig ul li a {
+  color: #999999;
+}
+
+.categories_of_gig ul {
+  padding: 0px;
+}
+
+.profile_management img {
+  width: 42px;
+}
+
+.profile_management h6 {
+  margin: 0px;
+  font-size: 14px;
+}
+
+.profile_management span {
+  margin: 0px;
+  font-size: 13px;
+}
+
+.profile_management {
+  margin: 16px 0px;
+}
+
+.gig_header, .seller_info, .seller_about, .faq, .reviews {
+  border: 1px solid #cfc9c9;
+}
+
+.Overview {
+  padding: 14px 23px;
+}
+
+/* slider */
+wrapper {}
+
+.product__slider-main {
+  margin-bottom: 15px;
+}
+
+.product__slider-main img {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.product__slider-thmb .slick-slide {
+  opacity: 0.5;
+  transition: all .3s ease;
+}
+
+.product__slider-thmb .slick-slide.slick-active, .product__slider-thmb .slick-slide:hover {
+  opacity: 1;
+}
+
+.product__slider-main, .product__slider-thmb {
+  display: none;
+}
+
+.product__slider-thmb.slick-initialized.slick-slider img {
+  width: 100%;
+  height: 68px;
+}
+
+.product__slider-thmb .slick-slide {
+  margin: 1px 2px;
+}
+
+.slick-slide {
+  margin: 0px;
+}
+
+.slick-slider .slick-next {
+  width: 6%;
+  right: 0px;
+  height: 118px;
+  background-color: #0000007d;
+  border-top-left-radius: 13px;
+  border-bottom-left-radius: 13px;
+}
+
+.slick-slider .slick-next:hover {
+  width: 6%;
+  right: 0px;
+  height: 118px;
+  background-color: #0000007d !important;
+  border-top-left-radius: 13px;
+  border-bottom-left-radius: 13px;
+}
+
+.slick-slider .slick-prev {
+  width: 6%;
+  left: 0px;
+  height: 118px;
+  background-color: #0000007d;
+  border-top-right-radius: 13px;
+  z-index: 1;
+  border-bottom-right-radius: 13px;
+}
+
+.slick-slider .slick-prev:hover {
+  width: 6%;
+  left: 0px;
+  height: 118px;
+  background-color: #0000007d !important;
+  border-top-right-radius: 13px;
+  z-index: 9999;
+  border-bottom-right-radius: 13px;
+}
+
+.product__slider-thmb.slick-slider button.slick-arrow {
+  background-color: transparent;
+}
+
+.product__slider-thmb.slick-slider button.slick-arrow:hover {
+  background-color: transparent !important;
+}
+
+.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
+  color: #ffffff00 !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+/*  */
+.seller_info {
+  margin: 10px 0px;
+}
+
+.seller_info p {
+  font-size: 13px;
+}
+
+.seller_info h3 {
+  background-color: #F7F7F7;
+  padding: 11px 8px;
+}
+
+.seller_info_para {
+  padding: 11px 8px;
+  word-break: break-word;
+  text-align: justify;
+}
+
+.seller_about h3 {
+  background-color: #F7F7F7;
+  padding: 11px 8px;
+}
+
+.profile_management2 h6 {
+  margin: 0px;
+  font-size: 14px;
+}
+
+.profile_management2 p {
+  margin: 0px;
+  font-size: 13px;
+}
+
+a.contact_me {
+  color: #222;
+  border: 1px solid #222;
+  padding: 10px 30px;
+  white-space: nowrap;
+  font-size: 14px;
+  display: inline-block;
+  text-align: center;
+  margin: 13px 0px;
+}
+
+.padding_row {
+  padding: 3px 8px;
+  font-size: 13px;
+}
+
+.padding_row p {
+  margin: 0px auto;
+}
+
+.portfolio li {
+  list-style: none;
+  display: inline-block;
+  /* width: 0px; */
+}
+
+.portfolio img {
+  width: 107px;
+  height: 77px;
+}
+
+ul.portfolio {
+  margin: 14px auto;
+  padding: 0px;
+}
+
+.faq h3 {
+  background-color: #F7F7F7;
+  padding: 11px 8px;
+}
+
+.faq {
+  margin: 10px 0px;
+}
+
+.accordion {
+  background-color: white !important;
+  color: #444;
+  cursor: pointer;
+  padding: 11px 12px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: all 0.4s ease-in;
+  box-shadow: none !important;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+}
+
+.accordion:after {
+  content: '^';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+button:focus {
+  outline: none;
+}
+
+.active, .accordion:hover {}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+
+.details h3 {
+  font-size: 20px;
+}
+
+.reviews h3 {
+  padding: 11px 8px;
+}
+
+/*  */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  padding: 6px 12px;
+  border-top: none;
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+.package-content,
+.gig_name_field {
+  text-align: justify;
+  overflow-x: auto;
+}
+
+ul.buyables.p-b-10.p-t-10 li {
+  list-style-type: none;
+}
+
+.buyables i {
+  color: #1fd0b6;
+  margin-right: 10px;
+}
+
+ul.buyables.p-b-10.p-t-10 {
+  padding: 0px;
+}
+
+a.continue_purchase {
+  background: #222;
+  border-width: 0;
+  margin-bottom: 15px;
+  padding: 15px 35px;
+  margin: 0;
+  border-radius: 3px;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+}
+
+.gig_header_2 {
+  padding: 5px 5px;
+}
+
+.gig_actions {
+  float: right;
+}
+
+.gig_action_icon {
+  padding: 0 4px;
+}
+@media only screen and (max-width: 480px){
+  .gig_action_icon {
+    padding: 0 0;
+  }
+}
+.about_gig_user{
+  padding: 0 18px;
+}
+.align-right{
+  text-align: left;
+}

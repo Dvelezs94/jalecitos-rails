@@ -1,14 +1,15 @@
 class GigsController < ApplicationController
-  layout 'logged'
   include SanitizeParams
   include GigStatus
   include PackTypes
+  include SetLayout
   before_action :set_gig, only: [:edit, :update, :destroy, :ban_gig]
   before_action :set_gig_with_first_pack, only: :toggle_status
   before_action :set_gig_with_all_asc, only: :show
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status]
   before_action :max_gigs, only: [:new, :create]
   access user: { except: [:ban_gig] }, admin: [:ban_gig], all: [:show]
+  layout :set_layout
 
   # GET /gigs/1
   def show
