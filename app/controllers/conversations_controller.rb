@@ -6,7 +6,7 @@ class ConversationsController < ApplicationController
 
   # GET /conversations
   def index
-    @users = User.all.where.not(id: current_user)
+    get_opposite_user(current_user.conversations.order(updated_at: :desc))
     @conversations = Conversation.includes(:recipient, :messages).where("sender_id = ? OR recipient_id = ?", current_user.id, current_user.id)
 
   end
@@ -16,6 +16,15 @@ class ConversationsController < ApplicationController
 
     respond_to do |format|
       format.js
+    end
+  end
+
+  def mark_as_read
+    @conversation = Conversation.find(param[:conversation_id])
+    @unread_messages = @conversation.messages.where(read_at: nil)
+    @unread_messages.each do |m|
+      u.read_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+      u.save
     end
   end
 
@@ -41,6 +50,13 @@ class ConversationsController < ApplicationController
       end
     else
       @conversation = nil
+    end
+  end
+
+  def get_opposite_user(conversations)
+    @users = []
+    conversations.each do |c|
+        c.sender == current_user ? @users << c.recipient : @users << c.sender
     end
   end
 end

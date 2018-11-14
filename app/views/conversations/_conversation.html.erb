@@ -1,4 +1,4 @@
-<div class="tabcontent" data-conversation-id="<%= conversation.id %>">
+<div data-conversation-id="<%= conversation.id %>">
 
   <!-- header -->
   <div class="view_box_header">
@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <div class="row ">
+  <div class="row">
     <div class="col-lg-12 message_view_box messages-list">
 
       <ul class="messages-list">
@@ -37,7 +37,7 @@
     </div>
 
   </div>
-  <div class="row tabcontent">
+  <div class="row">
     <form class="new_message">
       <input name="conversation_id" type="hidden" value="<%= conversation.id %>">
       <input name="user_id" type="hidden" value="<%= user.id %>">
