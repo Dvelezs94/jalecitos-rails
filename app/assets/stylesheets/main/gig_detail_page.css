@@ -70,7 +70,7 @@ div#gig_menu2 {
   margin: 16px 0px;
 }
 
-.gig_header, .seller_info, .tag_info, .seller_about, .faq, .reviews {
+.gig_header, .seller_info, .seller_about, .faq, .reviews {
   border: 1px solid #cfc9c9;
 }
 
