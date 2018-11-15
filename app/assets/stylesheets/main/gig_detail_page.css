@@ -70,7 +70,7 @@ div#gig_menu2 {
   margin: 16px 0px;
 }
 
-.gig_header, .seller_info, .seller_about, .faq, .reviews {
+.gig_header, .seller_info, .tag_info, .seller_about, .faq, .reviews {
   border: 1px solid #cfc9c9;
 }
 
@@ -386,4 +386,11 @@ a.continue_purchase {
 }
 .align-right{
   text-align: left;
+}
+
+#tag-text{
+  color: #C0C0C0;
+}
+.tags-text{
+  padding: 0 20px;
 }

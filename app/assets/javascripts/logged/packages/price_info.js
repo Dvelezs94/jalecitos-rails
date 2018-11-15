@@ -17,5 +17,5 @@ function init_price_count() {
 function price_calculation() {
   input = $(this)[0].className.split(" ")[1].match(/\d+$/)[0];
   number = $(this)[0].value;
-  $("#price-calc-" + input).text((number*1.1).toFixed(2));
+  $("#price-calc-" + input).text("$"+(number*1.1).toFixed(2)+ " MXN");
 }

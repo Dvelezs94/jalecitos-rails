@@ -21,11 +21,13 @@ function startTags() {
     mainInput.classList.add('main-input', 'tags-main-input');
     mainInput.addEventListener('input', function() {
       let enteredTags = mainInput.value.split('\n');
-      let enteredTags2 = mainInput.value.split(' ');
+      let enteredTags2 = mainInput.value.replace(/^ +/gm, '');
+      enteredTags2 = enteredTags2.split(' ');
+      console.log(enteredTags2);
 
       if (enteredTags.length > 1 || enteredTags2.length > 1) {
         if (tagNumber < 5) {
-          if (enteredTags[0].length > 0 && enteredTags[0].length < 16) {
+          if (enteredTags[0].length > 0 && enteredTags[0].length < 16 || enteredTags2[0].length > 0 && enteredTags2[0].length < 16) {
             $(".tag-error").html("");
             addTag(enteredTags[0]);
           } else {
