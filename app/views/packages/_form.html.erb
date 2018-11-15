@@ -1,55 +1,72 @@
-<div class="error error-messages"></div>
-
 <%= form_with(model: package, url: package_form_url_helper, method: package_form_method_helper, local: true, :html => { :id => "packages_form", class: "current_form" }) do |form|%>
+<div class="container-fluid section request_post_form">
+  <h3 id="how-many-pack">¿Cuántos paquetes necesitas?</h3>
+  <div class="container justify-content-center">
+    <div class="error error-messages"></div>
+    <div class="row justify-content-center pack-row">
+      <% package.each_with_index do |pack, n| %>
+        <div class="form-number form-number-<%= n %> col-lg-4 col-md-12 col-sm-12 col-12" style="display: block;">
 
-<div class="row">
+          <div class="form_box pack_form_col">
+            <% if pack.errors.any? %>
+              <%pack.errors.full_messages.each do |error| %>
+                <%= notification_generator_helper error, :error %>
+              <% end %>
+            <% end %>
 
-  <% package.each_with_index do |pack, n| %>
-    <div class="form-number-<%= n %> col-md-4">
+            <%= fields_for 'packages[]', pack do |pa| %>
+            <h3 class="package-form-title package-form-name"><%= @types[n] %></h3>
+            <div class="form-block form-group-<%= n %> form-space">
+              <strong><%= pa.label :name %></strong>
+              <%= pa.text_field :name, class: "name-class name-#{n} form-control form_fields_#{n}",maxlength: 100 %>
+              <span class="error error_span_<%= 3*n+1 %>"></span>
+            </div>
+            <hr>
+            <div class="form-block form-group-<%= n %> form-space">
+              <strong><%= pa.label :description %></strong>
+              <%= pa.text_field :description, class: "form-control", id: "description#{n}", type: "hidden" %>
+              <trix-editor input="description<%= n %>" class="trix-class trix_input_<%= n %> form_fields_<%= n %>" maxlength="1000"></trix-editor>
+              <span class="error error_span_<%= 3*n+2 %>"></span>
+            </div>
+            <hr>
 
-      <% if pack.errors.any? %>
-        <%pack.errors.full_messages.each do |error| %>
-          <%= notification_generator_helper error, :error %>
-        <% end %>
-      <% end %>
+            <div class="form-block form-group-<%= n %> pack-price-class form-space">
+              <div class="row">
 
-      <%= fields_for 'packages[]', pack do |pa| %>
-      <h3><%= @types[n] %></h3>
-      <div class="form-group form-group-<%= n %>">
-        <%= pa.label :name %>
-        <%= pa.text_field :name, class: "name-class name-#{n} form-control form_fields_#{n}",maxlength: 100 %>
-        <span class="error error_span_<%= 3*n+1 %>"></span>
-      </div>
-
-      <div class="form-group form-group-<%= n %>">
-        <%= pa.label :description %>
-        <%= pa.text_field :description, class: "form-control", id: "description#{n}", type: "hidden" %>
-        <trix-editor input="description<%= n %>" class="trix-class trix_input_<%= n %> form_fields_<%= n %>" maxlength="1000"></trix-editor>
-        <span class="error error_span_<%= 3*n+2 %>"></span>
-      </div>
-      <br>
-
-      <div class="form-group form-group-<%= n %> pack-price-class">
-        <div class="row">
-
-          <div class=" col-lg-6 col-md-6 col-sm-12 col-12">
-            Lo que quiero ganar:
-            <%= pa.number_field :price, options ={min: 100, class: "price-input price-input-#{n} form_fields_#{n}"} %>
-          </div>
-          <div class=" col-lg-6 col-md-6 col-sm-12 col-12">
-            Lo que se mostrará:
-            <label id="price-calc-<%= n %>"></label>
-          </div>
+                <div class=" col-lg-6 col-md-6 col-sm-12 col-12">
+                  <strong>Lo que ganaré:</strong>
+                  <br>
+                  <div class="row justify-content-center">
+                    <label id="price-symbol">$</label>
+                    <%= pa.number_field :price, options ={min: 100, step:".01", class: "price-input price-input-#{n} form_fields_#{n} form-control"} %>
+                  </div>
+                </div>
+                <div class=" col-lg-6 col-md-6 col-sm-12 col-12">
+                  <strong>Lo que se mostrará:</strong>
+                  <label id="price-calc-<%= n %>" class="label-price"></label>
+                </div>
+              </div>
+              <span class="error error_span_<%= 3*n+3 %>"></span>
+            </div>
+          <% end %>
         </div>
-        <span class="error error_span_<%= 3*n+3 %>"></span>
+
       </div>
       <% n += 1  %><% end %>
-
+      <div class="row remove-add-container justify-content-center">
+        <div class="remove-add pack-minus-container">
+          <%= fa_icon("minus", class: "fa-5x", id: "pack-minus", title: "Remover paquete", style: "display: none;")%>
+        </div>
+        <div class="remove-add pack-plus-container">
+          <%= fa_icon("plus", class: "fa-5x", id: "pack-plus", title: "Agregar paquete", style: "display: none;") %>
+        </div>
+      </div>
+      <div class="form-group submit-button submit-pack-buttons">
+        <%= link_to 'Cancelar', user_path(current_user.slug), :data => {:confirm => 'Tu jale se ha guardado, pero tus paquetes NO'}, class: "btn btn-danger" %>
+        <%= form.submit "Continuar", class: "btn btn-success", id: "continue-pack" %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="form-group submit-button">
-    <%= form.submit "Continuar", class: "btn btn-primary btn-block" %>
   </div>
 </div>
+
 <% end %>

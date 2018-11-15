@@ -3,4 +3,12 @@
   <div class="seller_info_para">
     <%= @gig.description.html_safe %>
   </div>
+
+  <div class="tags-text">
+    <% @gig.tags.each do |tag| %>
+      <small id="tag-text">"<%= tag.name %>"</small>
+    <% end %>
+
+  </div>
+
 </div>
