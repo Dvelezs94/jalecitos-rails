@@ -27,7 +27,7 @@ class PagesController < ApplicationController
 
   def finance
     @purchases = current_user.purchases.order(updated_at: :desc)
-    @sales = current_user.sales.order(updated_at: :desc)
+    @sales = current_user.sales.where.not(status: "denied").order(updated_at: :desc)
   end
 
   private

@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
         flash[:success] = 'La orden fue creada exitosamente.'
         redirect_to finance_path(:table => "purchases")
       rescue OpenpayTransactionException => e
-        @order.destroy
+        @order.denied!
         flash[:error] = "#{e.description}, por favor intentalo de nuevo."
         redirect_to finance_path(:table => "purchases")
       end
@@ -82,7 +82,6 @@ class OrdersController < ApplicationController
   def complete
     if @order.completed!
       @user = @order.receiver
-      @user.balance += @order.purchase.price.to_f
       if @user.save
         create_notification(@order.user, @order.receiver, "te ha depositado", @user)
       else
@@ -104,7 +103,6 @@ class OrdersController < ApplicationController
       redirect_to finance_path(:table => "purchases")
     else
       @user = @order.user
-      @user.balance += @order.purchase.price.to_f
       if @user.save && @order.refunded!
         create_notification(@order.user, @order.user, "ha reembolsado", @order.purchase)
         flash[:success] = "La compra ha sido reembolsada y el dinero sumado a la cuenta"
