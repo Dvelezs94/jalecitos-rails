@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
     t.integer "receiver_id"
     t.datetime "started_at"
     t.datetime "completed_at"
+    t.datetime "paid_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "receiver_id"], name: "index_orders_on_user_id_and_receiver_id"
@@ -257,7 +258,6 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
     t.datetime "updated_at", null: false
     t.string "roles"
     t.string "alias"
-    t.float "balance", default: 0.0
     t.string "provider"
     t.string "uid"
     t.string "name"

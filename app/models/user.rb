@@ -103,6 +103,17 @@ class User < ApplicationRecord
      Conversation.where("sender_id = ? OR recipient_id = ?", self.id, self.id)
    end
 
+   def balance
+     @balance = 0.0
+     @refunded = self.purchases.refunded.where(paid_at: nil)
+     @sales = self.sales.completed.where(paid_at: nil)
+     @join = @sales + @refunded
+     @join.each do |b|
+       @balance += b.total
+     end
+     return @balance
+   end
+
    private
 
    def set_defaults

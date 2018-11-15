@@ -151,6 +151,8 @@ span.in_progress{
     text-transform: uppercase;
     border-radius: 6px;
     display:  inline-block;
+    width: 100%;
+    text-align: center;
 }
 
 span.pending{
@@ -162,6 +164,8 @@ span.pending{
     text-transform: uppercase;
     border-radius: 6px;
     display:  inline-block;
+    width: 100%;
+    text-align: center;
 }
 
 span.completed{
@@ -173,6 +177,8 @@ span.completed{
     text-transform: uppercase;
     border-radius: 6px;
     display:  inline-block;
+    width: 100%;
+    text-align: center;
 }
 
 span.refunded{
@@ -184,6 +190,21 @@ span.refunded{
     text-transform: uppercase;
     border-radius: 6px;
     display:  inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+span.denied{
+
+    background-color: #f92f0b;
+    color: white;
+    font-size: 11px;
+    padding: 4px 5px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    display:  inline-block;
+    width: 100%;
+    text-align: center;
 }
 
 i.far.fa-star {

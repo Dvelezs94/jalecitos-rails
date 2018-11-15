@@ -63,13 +63,22 @@ User.create!(
 puts "Created an admin"
 
 User.create!(
-      email: "testuser@jalecitos.com",
+      email: "testuser1@jalecitos.com",
       password: "testuserpass",
       name: "Test User",
       role: "user",
       confirmed_at: Time.now
  )
-puts "Created testing user"
+puts "Created testing user1"
+
+User.create!(
+      email: "testuser2@jalecitos.com",
+      password: "testuserpass",
+      name: "Test User",
+      role: "user",
+      confirmed_at: Time.now
+ )
+puts "Created testing user2"
 
 reindex_list = [Gig, Request]
 reindex_list.each do |model|
