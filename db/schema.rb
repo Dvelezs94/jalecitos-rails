@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
     t.datetime "started_at"
     t.datetime "completed_at"
     t.datetime "paid_at"
+    t.string "response_paid_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "receiver_id"], name: "index_orders_on_user_id_and_receiver_id"

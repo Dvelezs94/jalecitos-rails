@@ -2,7 +2,6 @@
 <div class="container-fluid section request_post_form">
   <h3 id="how-many-pack">¿Cuántos paquetes necesitas?</h3>
   <div class="container justify-content-center">
-    <div class="error error-messages"></div>
     <div class="row justify-content-center pack-row">
       <% package.each_with_index do |pack, n| %>
         <div class="form-number form-number-<%= n %> col-lg-4 col-md-12 col-sm-12 col-12" style="display: block;">
@@ -33,7 +32,7 @@
             <div class="form-block form-group-<%= n %> pack-price-class form-space">
               <div class="row">
 
-                <div class=" col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class=" col-lg-6 col-md-6 col-sm-12 col-12 i-want-win">
                   <strong>Lo que ganaré:</strong>
                   <br>
                   <div class="row justify-content-center">
@@ -65,6 +64,7 @@
         <%= link_to 'Cancelar', user_path(current_user.slug), :data => {:confirm => 'Tu jale se ha guardado, pero tus paquetes NO'}, class: "btn btn-danger" %>
         <%= form.submit "Continuar", class: "btn btn-success", id: "continue-pack" %>
       </div>
+      <div class="error error-messages"></div>
     </div>
   </div>
 </div>
