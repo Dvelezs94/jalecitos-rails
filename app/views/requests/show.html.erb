@@ -5,7 +5,7 @@
     <p class="card-text">Presupuesto: <%= @request.budget %> MXN</p>
     <p><small class="text-muted"><%=@request.location%></small></p>
     <p><small class="text-muted">Publicado hace <%= distance_of_time_in_words(@request.created_at, Time.now) %></small></p>
-    <% if current_user && current_user.id == @request.user_id %>
+    <% if current_user == @request.user %>
      <hr>
      <%= link_to 'Edit', edit_request_path(@request) %> |
      <%= link_to 'Back', :back %>

@@ -35,7 +35,7 @@ function validatePackages(){
     $(".error").html("");
 
     if (a != 3){
-      $(".error-messages").html("Por favor, llene el paquete básico o borre su contenido");
+      $(".error-messages").html("Por favor, llene el paquete básico");
       generate_error(0);
     }
     else if (b != 3){

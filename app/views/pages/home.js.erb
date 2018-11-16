@@ -1,0 +1,8 @@
+$(".paginated-elements").append('<%= j render(@search) %>');
+
+<% if @search.next_page %>
+  $('.pagination').replaceWith('<%= j paginate(@search) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>
+<% sleep 1 %>

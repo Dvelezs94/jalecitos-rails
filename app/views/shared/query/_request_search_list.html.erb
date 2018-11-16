@@ -1,9 +1,10 @@
 <div class="row">
-  <% if @search_requests.any? %>
-  <% @requests = @search_requests %>
-    <%= render template: "pages/requests", collection: @search_requests %>
+  <% if @search.any? %>
+    <div class="row paginated-elements">
+    <%= render partial: "requests/request", collection: @search %>
+  </div>
     <div class="pagination-links">
-      <%= paginate @search_requests %>
+      <%= paginate @search %>
     </div>
   <% else %>
     Ninguna coincidencia para tu búsqueda

@@ -6,6 +6,7 @@ class GigsController < ApplicationController
   before_action :set_gig, only: [:edit, :update, :destroy, :ban_gig]
   before_action :set_gig_with_first_pack, only: :toggle_status
   before_action :set_gig_with_all_asc, only: :show
+  before_action :check_published, only: :show
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status]
   before_action :max_gigs, only: [:new, :create]
   access user: { except: [:ban_gig] }, admin: [:ban_gig], all: [:show]
@@ -66,6 +67,10 @@ class GigsController < ApplicationController
 
     def set_gig_with_all_asc
       @gig = Gig.includes(:gig_packages, :category, :user).friendly.find(params[:id])
+    end
+
+    def check_published
+      ( (@gig.draft? && @gig.user != current_user) || @gig.banned? )? redirect_to( user_path(@gig.user.slug), notice: "Este jale no está disponible" ) : nil
     end
 
     # Only allow a trusted parameter "white list" through.
