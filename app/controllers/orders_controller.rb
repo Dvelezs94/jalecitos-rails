@@ -16,6 +16,16 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
+    # Validate if Gig is own, banned or draft
+    if @order.purchase.gig
+      @gig = @order.purchase.gig
+      if @gig.draft? || @gig.banned?
+        flash[:error] = "Este jale no esta disponible"
+        redirect_to root_path
+        return
+      end
+    end
+
     request_hash = {
       "method" => "card",
       "source_id" => order_params[:card_id],
@@ -39,7 +49,8 @@ class OrdersController < ApplicationController
         redirect_to finance_path(:table => "purchases")
       end
     else
-      puts "test de orden fallida"
+      puts "Orden fallida"
+      p @order
     end
 
   end

@@ -25,8 +25,8 @@ Rails.application.routes.draw do
      resources :offers, except: [:index, :show]
    end
 
+   resources :withdrawals, only: :create
    resources :users do
-     resources :withdrawals, only: :create
      resources :gigs, except: :index do
          member do
               get :toggle_status

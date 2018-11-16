@@ -38,6 +38,8 @@ class User < ApplicationRecord
   # Options to rate
   ratyrate_rateable 'Employee', 'Employer'
 
+  #withdrawals Relations
+  has_many :withdrawals
   ############################################################################################
   ## PeterGate Roles                                                                        ##
   ## The :user role is added by default and shouldn't be included in this list.             ##

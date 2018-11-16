@@ -5,6 +5,7 @@ class CreateGigs < ActiveRecord::Migration[5.2]
       t.string :description
       t.string :image
       t.string :location
+      t.integer :order_count, default: 0
 
       t.timestamps
     end
