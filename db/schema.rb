@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_09_015412) do
+ActiveRecord::Schema.define(version: 2018_11_15_212037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,9 +127,12 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
     t.datetime "started_at"
     t.datetime "completed_at"
     t.datetime "paid_at"
+    t.string "response_paid_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "withdrawal_id"
     t.index ["user_id", "receiver_id"], name: "index_orders_on_user_id_and_receiver_id"
+    t.index ["withdrawal_id"], name: "index_orders_on_withdrawal_id"
   end
 
   create_table "overall_averages", force: :cascade do |t|
@@ -278,6 +281,15 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
+  create_table "withdrawals", force: :cascade do |t|
+    t.string "transaction_id"
+    t.bigint "user_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_withdrawals_on_user_id"
+  end
+
   add_foreign_key "extras", "gigs", column: "gigs_id"
   add_foreign_key "gigs", "categories"
   add_foreign_key "gigs", "users"
@@ -286,6 +298,7 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
   add_foreign_key "notifications", "users"
   add_foreign_key "offers", "requests"
   add_foreign_key "offers", "users"
+  add_foreign_key "orders", "withdrawals"
   add_foreign_key "packages", "gigs"
   add_foreign_key "payments", "offers"
   add_foreign_key "payments", "packages"
@@ -293,4 +306,5 @@ ActiveRecord::Schema.define(version: 2018_11_09_015412) do
   add_foreign_key "requests", "categories"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "gigs", column: "gigs_id"
+  add_foreign_key "withdrawals", "users"
 end

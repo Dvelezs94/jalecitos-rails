@@ -26,6 +26,7 @@ Rails.application.routes.draw do
    end
 
    resources :users do
+     resources :withdrawals, only: :create
      resources :gigs, except: :index do
          member do
               get :toggle_status
