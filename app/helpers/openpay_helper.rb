@@ -13,6 +13,8 @@ module OpenpayHelper
         @customer = @openpay.create(:customers)
       when resource == "charge"
         @charge = @openpay.create(:charges)
+      when resource == "payout"
+        @payout = @openpay.create(:payouts)
       end
     end
 

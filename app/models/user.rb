@@ -38,6 +38,8 @@ class User < ApplicationRecord
   # Options to rate
   ratyrate_rateable 'Employee', 'Employer'
 
+  #withdrawals Relations
+  has_many :withdrawals
   ############################################################################################
   ## PeterGate Roles                                                                        ##
   ## The :user role is added by default and shouldn't be included in this list.             ##
@@ -105,13 +107,15 @@ class User < ApplicationRecord
 
    def balance
      @balance = 0.0
+     @order_ids = []
      @refunded = self.purchases.refunded.where(paid_at: nil)
      @sales = self.sales.completed.where(paid_at: nil)
      @join = @sales + @refunded
      @join.each do |b|
        @balance += b.total
+       @order_ids << b.id
      end
-     return @balance
+     return {amount: @balance, order_ids: @order_ids}
    end
 
    private

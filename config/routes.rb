@@ -25,6 +25,7 @@ Rails.application.routes.draw do
      resources :offers, except: [:index, :show]
    end
 
+   resources :withdrawals, only: :create
    resources :users do
      resources :gigs, except: :index do
          member do
