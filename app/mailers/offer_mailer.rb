@@ -1,20 +1,30 @@
 class OfferMailer < ApplicationMailer
   def new_offer(offer)
     @offer = offer
-    template_name = "new-request-offer"
-    template_content = []
-    message = {
-      to: [{email: @offer.request.user.email}],
-      subject: "New Offer for #{@offer.request.name}",
-      global_merge_vars: [
-           { name: "REQUEST_URL", content: request_url(@offer.request) },
-           { name: "REQUEST", content: @offer.request.name },
-           { name: "OFFERER_URL", content: user_url(@offer.user.slug) },
-           { name: "OFFERER", content: @offer.user.slug },
-           { name: "ALIAS", content: @offer.request.user.slug }
-          ]
+
+    data = {
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": @offer.request.user.email
+            }
+          ],
+          "dynamic_template_data": {
+            "REQUEST_URL": request_url(@offer.request),
+            "REQUEST": @offer.request.name,
+            "OFFERER_URL": user_url(@offer.user.slug),
+            "OFFERER": @offer.user.slug,
+            "ALIAS": @offer.request.user.slug
+          }
+        }
+      ],
+      "from": {
+        "email": "noreply@jalecitos.com"
+      },
+      "template_id": "d-0786709333f0406d86f9eca1fec0bdac"
     }
 
-    mandrill_client.messages.send_template template_name, template_content, message
+    sendgrid_client.client.mail._("send").post(request_body: (data))
   end
 end

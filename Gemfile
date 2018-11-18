@@ -97,8 +97,6 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'best_in_place', '~> 3.1', '>= 3.1.1'
 # JQuery file upload
 gem 'jquery-fileupload-rails', '~> 0.4.7'
-# Transactional Email
-gem 'mandrill-api', '~> 1.0', '>= 1.0.53', require: "mandrill"
 # jquery easing
 gem 'jquery-easing-rails', '~> 0.0.2'
 #jquery form validation
@@ -117,3 +115,5 @@ gem 'em-resolv-replace', '~> 1.1', '>= 1.1.3'
 gem 'ratyrate', '~> 1.2.2.alpha'
 # Select Country code
 gem 'country_select', '~> 3.1'
+# Sendgrid API calls v3
+gem 'sendgrid-ruby', '~> 5.3'
