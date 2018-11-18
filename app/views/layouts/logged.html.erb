@@ -23,10 +23,12 @@
   </head>
 
   <body id="page-top">
-    <%= notification_helper %>
-    <%= render 'shared/main_nav_bar' %>
-    <%= yield %>
-    <%= render 'shared/main_footer' %>
+    <div class="main_container">
+      <%= notification_helper %>
+      <%= render 'shared/main_nav_bar' %>
+      <%= yield %>
+    </div>
+      <%= render 'shared/main_footer' %>
   </body>
 
 </html>

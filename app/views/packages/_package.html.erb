@@ -16,7 +16,7 @@
     <div class="row padding_row">
 
       <div class="col-lg-12 text-center">
-        <%= link_to ("Continuar (#{number_to_currency(package.price, precision: 2)} MXN)" ), hire_user_gig_package_path(@gig.user, @gig, package), class: "continue_purchase" %>
+        <%= link_to ("Continuar (#{number_to_currency(package.price*1.1, precision: 2)} MXN)" ), hire_user_gig_package_path(@gig.user, @gig, package), class: "continue_purchase" %>
       </div>
     </div>
   </div>

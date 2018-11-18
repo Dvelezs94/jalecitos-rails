@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_212037) do
     t.string "description"
     t.string "image"
     t.string "location"
+    t.integer "order_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -284,7 +285,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_212037) do
   create_table "withdrawals", force: :cascade do |t|
     t.string "transaction_id"
     t.bigint "user_id"
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_withdrawals_on_user_id"
