@@ -33,8 +33,9 @@ end
           @pack = Package.new(pack)
           @pack.save
       end
+      @gig.published! if @gig.gig_packages[0].present? && @gig.gig_packages[0].name != "" && @gig.gig_packages[0].description != "" && @gig.gig_packages[0].price != nil && @gig.gig_packages[0].price > 100
     end
-    redirect_to user_gig_path(params[:user_id], @gig), notice: 'Tu Gig se ha creado exitosamente'
+    redirect_to user_gig_path(params[:user_id], @gig), notice: 'Tu Gig se ha publicado exitosamente'
   end
 
   def edit_packages
