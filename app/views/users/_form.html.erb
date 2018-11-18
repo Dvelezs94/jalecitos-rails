@@ -35,12 +35,12 @@
         <div class="row text-center progresses">
 
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-            <%= rating_for @user, "Employer", readonly: true,  half_show: true, stars: 5  %>
+            <%= rating_for @user, "Employer", readonly: true, half_show: true, stars: 5 %>
             <h5 data-tooltip="<%= rating_for(@user, "Employer", number_only: true) %>">Usuario</h5>
           </div>
 
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-            <%= rating_for @user, "Employee", readonly: true,  half_show: true, stars: 5 %>
+            <%= rating_for @user, "Employee", readonly: true, half_show: true, stars: 5 %>
             <h5 data-tooltip="<%= rating_for(@user, "Employee", number_only: true) %>">Proveedor</h5>
           </div>
           <!-- -->
@@ -166,13 +166,53 @@
         <div class="title">
           <h4>Mis Jales</h4>
         </div>
+        <% if @user == current_user%>
+        <ul class="tabs nav nav-tabs user_prof justify-content-center">
+          <li>
+            <a href="#published">Publicados</a>
+          </li>
+            <li>
+              <a href="#draft">Borradores</a>
+            </li>
+            <li>
+              <a href="#banned">Suspendidos</a>
+            </li>
+
+        </ul>
+        <% else %>
         <hr>
-        <div class="row align_center">
-          <div class="col-lg-12 align_center">
+        <% end %>
+        <div class="tabContainer gigs_collection">
+          <div id="published" class="tabContent">
             <div class="row align_center">
-              <%= render partial: "gigs/gig", collection: @gigs %>
+              <div class="col-lg-12 align_center">
+                <div class="row align_center">
+                  <%= render partial: "gigs/gig", collection: @gigs.published %>
+                </div>
+              </div>
             </div>
           </div>
+          <% if @user == current_user%>
+            <div id="draft" class="tabContent">
+              <div class="row align_center">
+                <div class="col-lg-12 align_center">
+                  <div class="row align_center">
+                    <%= render partial: "gigs/gig", collection: @gigs.draft %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- .tabContent -->
+            <div id="banned" class="tabContent">
+              <div class="row align_center">
+                <div class="col-lg-12 align_center">
+                  <div class="row align_center">
+                    <%= render partial: "gigs/gig", collection: @gigs.banned %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

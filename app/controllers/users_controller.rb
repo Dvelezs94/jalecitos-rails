@@ -24,7 +24,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @gigs = Gig.includes(:packages, :user).where(user_id: @user)
+    if @user == current_user
+      @gigs = Gig.includes(:packages, :user).where(user_id: @user)
+    else
+      @gigs = Gig.includes(:packages, :user).published.where(user_id: @user)
+    end
   end
 
   # PATCH/PUT /users/1

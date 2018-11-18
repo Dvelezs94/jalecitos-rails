@@ -53,6 +53,14 @@ table {
         border: 1px solid #dee2e6;
     }
 }
+
+@media only screen and (max-width:991px){
+
+    ul.nav.nav-tabs.user_prof li {
+        width: 32%;
+    }
+}
+
 ul.nav.nav-tabs li:nth-child(1) {
     padding-left: 0px;
 }
