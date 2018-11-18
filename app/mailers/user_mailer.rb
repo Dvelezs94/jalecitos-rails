@@ -1,40 +1,58 @@
 class UserMailer  < Devise::Mailer
   include Devise::Controllers::UrlHelpers # Optional. eg. `confirmation_url`
 
-  def mandrill_client
-    @mandrill_client ||= Mandrill::API.new ENV.fetch("EMAIL_API_TOKEN")
+  def sendgrid_client
+    require 'sendgrid-ruby'
+    @sendgrid_client = SendGrid::API.new(api_key: ENV.fetch('SENDGRID_API_KEY'))
   end
 
   def confirmation_instructions(record, token, opts={})
     @token = token
-    template_name = "user-confirmation"
-    template_content = []
-    message = {
-      to: [{email: record.email}],
-      subject: "Jalecitos Confirmation instructions",
-      global_merge_vars: [
-           { name: "CONFIRMURL", content: confirmation_url(record, confirmation_token: @token) },
-           { name: "EMAIL", content: record.email },
-           { name: "ALIAS", content: record.alias }
-          ]
+    data = {
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": record.email
+            }
+          ],
+          "dynamic_template_data": {
+            "ALIAS": record.alias,
+            "CONFIRMURL": confirmation_url(record, confirmation_token: @token)
+          }
+        }
+      ],
+      "from": {
+        "email": "noreply@jalecitos.com"
+      },
+      "template_id": "d-9e56d320528d4578ae6b1e006ea88edd"
     }
 
-    mandrill_client.messages.send_template template_name, template_content, message
+    sendgrid_client.client.mail._("send").post(request_body: (data))
   end
 
   def reset_password_instructions(record, token, opts={})
     @token = token
-    template_name = "user-reset-password"
-    template_content = []
-    message = {
-      to: [{email: record.email}],
-      global_merge_vars: [
-           { name: "RESETURL", content: edit_password_url(record, reset_password_token: @token) },
-           { name: "EMAIL", content: record.email },
-           { name: "ALIAS", content: record.alias }
-          ]
+    data = {
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": record.email
+            }
+          ],
+          "dynamic_template_data": {
+            "ALIAS": record.alias,
+            "RESETURL": edit_password_url(record, reset_password_token: @token)
+          }
+        }
+      ],
+      "from": {
+        "email": "noreply@jalecitos.com"
+      },
+      "template_id": "d-038e9bd99cef4c7ebe128b90e6da69cb"
     }
 
-    mandrill_client.messages.send_template template_name, template_content, message
+    sendgrid_client.client.mail._("send").post(request_body: (data))
     end
 end
