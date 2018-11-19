@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
-   devise_for :users, controllers: {
+   devise_for :users, path: '',controllers: {
      registrations: 'users/registrations',
      sessions: 'users/sessions',
      omniauth_callbacks: "users/omniauth_callbacks"
