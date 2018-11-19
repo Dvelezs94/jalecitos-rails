@@ -19,14 +19,6 @@ Rails.application.routes.draw do
      get 'configuration', to: 'users#configuration', as: 'config'
      resources :banks, only: [:create, :destroy]
      resources :cards, only: [:create, :destroy]
-   end
-
-   resources :requests, except: :index do
-     resources :offers, except: [:index, :show]
-   end
-
-   resources :withdrawals, only: :create
-   resources :users do
      resources :gigs, except: :index do
          member do
               get :toggle_status
@@ -44,6 +36,12 @@ Rails.application.routes.draw do
          end
      end
    end
+
+   resources :requests, except: :index do
+     resources :offers, except: [:index, :show]
+   end
+
+  resources :withdrawals, only: :create
   resources :notifications
   resources :categories
   resources :orders, only: [:create] do
