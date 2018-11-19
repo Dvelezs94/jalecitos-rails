@@ -1,13 +1,12 @@
-<div class="row">
-  <% if @search.any? %>
-    <div class="row paginated-elements">
-      <%= render partial: "gigs/gig", collection: @search %>
-    </div>
-    <div class="pagination-links">
-      <%= paginate @search %>
-    </div>
-  <% else %>
+<% if @search.any? %>
+  <div class="row paginated-elements">
+    <%= render partial: "gigs/gig", collection: @search %>
+  </div>
+  <div class="pagination-links">
+    <%= paginate @search %>
+  </div>
+<% else %>
+  <div class="container row">
     Ninguna coincidencia para tu búsqueda
-  <% end  %>
-  <div class="gap"></div>
-</div>
+  </div>
+<% end  %>

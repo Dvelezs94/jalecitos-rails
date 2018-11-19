@@ -1,13 +1,35 @@
-<div class="row">
+<main role="main">
   <% if @search.any? %>
-    <div class="row paginated-elements">
-    <%= render partial: "requests/request", collection: @search %>
-  </div>
-    <div class="pagination-links">
-      <%= paginate @search %>
-    </div>
-  <% else %>
+
+
+      <div class="tabWrap ">
+        <div class="tabContainer">
+          <div class="tabContent">
+            <table class="table-responsive1">
+              <thead>
+                <tr class="head_table">
+                  <td >Pedido</td>
+                  <td>Descripcion</td>
+                  <td>Ubicacion</td>
+                  <td>Presupuesto</td>
+                  <td>Ofertas</td>
+                  <td>Estado</td>
+                </tr>
+              </thead>
+              <tbody class="paginated-elements">
+                <%= render partial: "requests/request", collection: @search %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="pagination-links">
+        <%= paginate @search %>
+      </div>
+
+  </main>
+<% else %>
+  <div class="container row">
     Ninguna coincidencia para tu búsqueda
-  <% end  %>
-  <div class="gap"></div>
-</div>
+  </div>
+<% end  %>

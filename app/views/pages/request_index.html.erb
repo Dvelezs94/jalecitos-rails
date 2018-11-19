@@ -1,0 +1,29 @@
+<main role="main">
+  <div class="container">
+    <div class="tabWrap container">
+      <div class="tabContainer">
+
+        <div class="tabContent">
+          <table class="table-responsive1">
+            <thead>
+              <tr class="head_table">
+                <td >Pedido</td>
+                <td>Descripcion</td>
+                <td>Ubicacion</td>
+                <td>Presupuesto</td>
+                <td>Ofertas</td>
+                <td>Estado</td>
+              </tr>
+            </thead>
+            <tbody class="paginated-elements">
+              <%= render @requests %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagination-links">
+    <%= paginate @requests %>
+  </div>
+</main>

@@ -20,9 +20,8 @@ class PagesController < ApplicationController
     end
   end
 
-  def requests_index
+  def request_index
     @requests = Request.includes(:user).friendly.open.order(created_at: :desc).page params[:page]
-    render "requests"
   end
 
   def finance
@@ -39,13 +38,13 @@ class PagesController < ApplicationController
   def search model, includes, status
     (params[:query] == "")? query = "*" : query = params[:query]
     if params[:category_id] != "" && params[:location] != ""
-      model.search query,includes: includes, where: {status: status, category_id: params[:category_id], location: params[:location]}, page: params[:page], per_page: 15
+      model.search query,includes: includes, where: {status: status, category_id: params[:category_id], location: params[:location]}, page: params[:page], per_page: 20
     elsif params[:category_id] != ""
-      model.search query,includes: includes, where: {status: status, category_id: params[:category_id]}, page: params[:page], per_page: 15
+      model.search query,includes: includes, where: {status: status, category_id: params[:category_id]}, page: params[:page], per_page: 20
     elsif  params[:location] != ""
-      model.search query,includes: includes, where: {status: status, location: params[:location]}, page: params[:page], per_page: 15
+      model.search query,includes: includes, where: {status: status, location: params[:location]}, page: params[:page], per_page: 20
     else
-      model.search query,includes: includes, where: {status: status}, page: params[:page], per_page: 15
+      model.search query,includes: includes, where: {status: status}, page: params[:page], per_page: 20
     end
   end
 
