@@ -14,6 +14,7 @@ Rails.application.routes.draw do
      registrations: 'users/registrations',
      sessions: 'users/sessions',
      omniauth_callbacks: "users/omniauth_callbacks"
+     confirmations: "users/confirmation"
    }
    resources :users, only: [:show, :edit, :update] do
      get 'configuration', to: 'users#configuration', as: 'config'
