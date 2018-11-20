@@ -13,8 +13,8 @@ Rails.application.routes.draw do
    devise_for :users, path: '',controllers: {
      registrations: 'users/registrations',
      sessions: 'users/sessions',
-     omniauth_callbacks: "users/omniauth_callbacks"
-     confirmations: "users/confirmation"
+     omniauth_callbacks: "users/omniauth_callbacks",
+     confirmations: "users/confirmations"
    }
    resources :users, only: [:show, :edit, :update] do
      get 'configuration', to: 'users#configuration', as: 'config'
