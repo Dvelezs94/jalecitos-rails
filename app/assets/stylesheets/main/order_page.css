@@ -213,6 +213,19 @@ span.denied{
     text-align: center;
 }
 
+span.disputed{
+
+    background-color: #808080;
+    color: white;
+    font-size: 11px;
+    padding: 4px 5px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    display:  inline-block;
+    width: 100%;
+    text-align: center;
+}
+
 i.far.fa-star {
     /* color: #dee2e6; */
     /* font-weight: 100; */

@@ -2,11 +2,13 @@
   <td class="buyer">
     <h5><%= link_to order.purchase.gig.user.slug, user_path(order.purchase.gig.user.slug) %></h5>
   </td>
-  <td><%= link_to "Voy a #{order.purchase.gig.name}", user_gig_path(order.purchase.gig.user, order.purchase.gig)  %></td>
-    <td> <%= order.purchase.pack_type %></td>
+  <td><%= link_to "Voy a #{order.purchase.gig.name}", user_gig_path(order.purchase.gig.user, order.purchase.gig) %></td>
+  <td>
+    <%= order.purchase.pack_type %></td>
   <td><%= order.created_at %></td>
-  <td><%= order.total %> MXN</td>
-
+  <td><%= order.total %>
+    MXN</td>
+  <td><%= order.uuid.first(4) %></td>
   <td>
     <span class="<%= order.status.downcase %>"><%= order.status %></span>
   </td>
@@ -19,12 +21,14 @@
         <%= link_to fa_icon("undo", title: "Solicitar Reembolso", class: "fa-lg"), refund_order_path(order.id), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
       <% end %>
     <% elsif order.in_progress? %>
-      <% if order.completed_at? %>
-      <%= link_to fa_icon("exclamation-circle", title: "Abrir Disputa", class: "fa-lg"), root_path %>
-        <%= link_to fa_icon("check-circle", title: "Finalizar Orden", class: "fa-lg"), complete_order_path(order.id), :method => :put, :data => {:confirm => 'Seguro que quieres finalizar la orden?'} %>
-      <% else %>
-        <%= link_to fa_icon("exclamation-circle", title: "Abrir Disputa", class: "fa-lg"), root_path %>
-      <% end %>
+        <% if order.completed_at? %>
+          <%= link_to fa_icon("exclamation-circle", title: "Abrir Disputa", class: "fa-lg"), new_order_dispute_path(order.uuid) %>
+          <%= link_to fa_icon("check-circle", title: "Finalizar Orden", class: "fa-lg"), complete_order_path(order.id), :method => :put, :data => {:confirm => 'Seguro que quieres finalizar la orden?'} %>
+        <% else %>
+          <%= link_to fa_icon("exclamation-circle", title: "Abrir Disputa", class: "fa-lg"), new_order_dispute_path(order.uuid) %>
+        <% end %>
+    <% elsif order.disputed? %>
+          <%= link_to fa_icon("arrow-circle-right", title: "Ir al caso", class: "fa-lg"), order_dispute_path(order.uuid, order.dispute) %>
     <% end %>
-  </td>
-</tr>
+      </td>
+    </tr>

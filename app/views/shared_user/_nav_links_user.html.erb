@@ -87,7 +87,10 @@
               <%= link_to "Configuracion", user_config_path(current_user.slug) %>
             </li>
             <li>
-              <%= link_to "Mis Transacciones", finance_path(:table => "purchases") %>
+              <%= link_to "Transacciones", finance_path(:table => "purchases") %>
+            </li>
+            <li>
+              <%= link_to "Disputas", disputes_path %>
             </li>
             <li>
               <a class="" href="#">Ayuda</a>

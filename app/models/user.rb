@@ -105,6 +105,10 @@ class User < ApplicationRecord
      Conversation.where("sender_id = ? OR recipient_id = ?", self.id, self.id)
    end
 
+   def disputes
+     Dispute.where(order_id: Order.where(user_id: self.id)).or(Dispute.where(order_id: Order.where(receiver_id: self.id)))
+   end
+
    def balance
      @balance = 0.0
      @order_ids = []

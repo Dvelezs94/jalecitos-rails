@@ -109,10 +109,20 @@ class OrdersController < ApplicationController
 
 
   def refund
-    if @order.completed?
-      flash[:error] = "No se pueden reembolsar ordenes completadas"
+    if @order.completed? || @order.disputed?
+      flash[:error] = "No se pueden reembolsar ordenes completadas o en disputa"
       redirect_to finance_path(:table => "purchases")
+      return
+    elsif @order.refunded?
+      flash[:error] = "Esta orden ya fue reembolsada"
+      redirect_to finance_path(:table => "purchases")
+      return
     else
+      if @order.in_progress? && (current_user == @order.user)
+        flash[:error] = "Esta accion no esta permitida"
+        redirect_to finance_path(:table => "purchases")
+        return
+      end
       @user = @order.user
       if @user.save && @order.refunded!
         create_notification(@order.user, @order.user, "ha reembolsado", @order.purchase)
