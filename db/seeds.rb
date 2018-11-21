@@ -58,7 +58,9 @@ puts "Created gigs and packages"
 User.create!(
       email: "admin@e.com",
       password: "adminpassword",
-      role: "admin"
+      name: "admin",
+      role: "admin",
+      confirmed_at: Time.now
  )
 puts "Created an admin"
 

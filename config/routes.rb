@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :replies
   post '/rate' => 'rater#create', :as => 'rate'
   root to: "pages#home"
   get 'admins/dashboard'
@@ -53,8 +54,10 @@ Rails.application.routes.draw do
       put :request_start
       put :start
     end
+    resources :disputes, only: [:index, :new, :create, :show]
   end
   get 'requests', to: 'pages#request_index'
   get 'finance', to: 'pages#finance'
+  get 'disputes', to: 'disputes#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

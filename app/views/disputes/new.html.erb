@@ -1,0 +1,24 @@
+<h1>New Dispute</h1>
+
+<%= form_with(model: @dispute, url: order_disputes_path, local: true) do |form| %>
+  <% if @dispute.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dispute.errors.count, "error") %> prohibited this dispute from being saved:</h2>
+
+      <ul>
+      <% @dispute.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+<tr class="body_table" valign="middle">
+  <td class="buyer"><%= link_to dispute.order.user.slug, user_path(dispute.order.user.slug) %></td>
+  <td><%= link_to dispute.order.receiver.slug, user_path(dispute.order.receiver.slug) %></td>
+  <% if dispute.order.purchase_type == "Package" %>
+    <td><%= link_to dispute.order.uuid.first(4), user_gig_path(dispute.order.receiver.slug, dispute.order.purchase.gig) %></td>
+  <% end %>
+  <td><%=  dispute.status %></td>
+  <td><%= link_to fa_icon("arrow-circle-right", title: "Ir al caso", class: "fa-lg"), order_dispute_path(dispute.order.uuid, dispute.order.dispute) %></td>
+</tr>

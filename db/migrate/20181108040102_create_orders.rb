@@ -14,6 +14,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.datetime :completed_at
       t.datetime :paid_at
       t.string :response_paid_id
+      t.string :uuid
 
       t.timestamps
     end

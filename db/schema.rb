@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_212037) do
+ActiveRecord::Schema.define(version: 2018_11_20_190416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 2018_11_15_212037) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true
+  end
+
+  create_table "disputes", force: :cascade do |t|
+    t.bigint "order_id"
+    t.integer "status", default: 0
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_disputes_on_order_id"
   end
 
   create_table "extras", force: :cascade do |t|
@@ -129,6 +138,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_212037) do
     t.datetime "completed_at"
     t.datetime "paid_at"
     t.string "response_paid_id"
+    t.string "uuid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "withdrawal_id"
@@ -194,6 +204,16 @@ ActiveRecord::Schema.define(version: 2018_11_15_212037) do
     t.datetime "updated_at", null: false
     t.index ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type"
     t.index ["cacheable_type", "cacheable_id"], name: "index_rating_caches_on_cacheable_type_and_cacheable_id"
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.bigint "dispute_id"
+    t.string "message"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dispute_id"], name: "index_replies_on_dispute_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "requests", force: :cascade do |t|
@@ -291,6 +311,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_212037) do
     t.index ["user_id"], name: "index_withdrawals_on_user_id"
   end
 
+  add_foreign_key "disputes", "orders"
   add_foreign_key "extras", "gigs", column: "gigs_id"
   add_foreign_key "gigs", "categories"
   add_foreign_key "gigs", "users"
@@ -304,6 +325,8 @@ ActiveRecord::Schema.define(version: 2018_11_15_212037) do
   add_foreign_key "payments", "offers"
   add_foreign_key "payments", "packages"
   add_foreign_key "payments", "users"
+  add_foreign_key "replies", "disputes"
+  add_foreign_key "replies", "users"
   add_foreign_key "requests", "categories"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "gigs", column: "gigs_id"
