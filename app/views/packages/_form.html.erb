@@ -14,14 +14,17 @@
             <% end %>
 
             <%= fields_for 'packages[]', pack do |pa| %>
+
             <h3 class="package-form-title package-form-name"><%= @types[n] %></h3>
-            <div class="form-block form-group-<%= n %> form-space">
-              <strong><%= pa.label :name %></strong>
-              <%= pa.text_field :name, class: "name-class name-#{n} form-control form_fields_#{n}",maxlength: 100 %>
-              <span class="error error_span_<%= 3*n+1 %>"></span>
-            </div>
+
+            <div class="form-block form-group-<%= n %> form-space row col-lg-11 centered-form">
+                <strong><%= pa.label :name %></strong>
+                <%= pa.text_field :name, class: "name-class name-#{n} form-control form_fields_#{n}",maxlength: 100 %>
+                <span class="error error_span_<%= 3*n+1 %>"></span>
+          </div>
+
             <hr>
-            <div class="form-block form-group-<%= n %> form-space">
+            <div class="form-block form-group-<%= n %> form-space row col-lg-11 centered-form">
               <strong><%= pa.label :description %></strong>
               <%= pa.text_field :description, class: "form-control", id: "description#{n}", type: "hidden" %>
               <trix-editor input="description<%= n %>" class="trix-class trix_input_<%= n %> form_fields_<%= n %>" maxlength="1000"></trix-editor>
@@ -29,22 +32,21 @@
             </div>
             <hr>
 
-            <div class="form-block form-group-<%= n %> pack-price-class form-space">
-              <div class="row">
+            <div class="form-block form-group-<%= n %> pack-price-class form-space row col-lg-11 centered-form">
 
-                <div class=" col-lg-6 col-md-6 col-sm-12 col-12 i-want-win">
-                  <strong>Lo que ganaré:</strong>
-                  <br>
+
+                <div class="row will-earn justify-content-center col-lg-6 col-md-6 col-sm-12 col-12">
+                  <strong class="price-text">Lo que ganaré:</strong>
                   <div class="row justify-content-center">
-                    <label id="price-symbol">$</label>
+                                  <%= fa_icon "dollar", class: "fa-2x", id: "price-symbol" %>
                     <%= pa.number_field :price, options ={min: 100, step:".01", class: "price-input price-input-#{n} form_fields_#{n} form-control"} %>
                   </div>
                 </div>
-                <div class=" col-lg-6 col-md-6 col-sm-12 col-12">
-                  <strong>Lo que se mostrará:</strong>
+                <div class="row will-show col-lg-6 col-md-6 col-sm-12 col-12">
+                  <strong class="price-text">Se mostrará:</strong>
                   <label id="price-calc-<%= n %>" class="label-price"></label>
                 </div>
-              </div>
+
               <span class="error error_span_<%= 3*n+3 %>"></span>
             </div>
           <% end %>

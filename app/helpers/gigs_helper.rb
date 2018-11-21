@@ -8,14 +8,6 @@ module GigsHelper
     end
   end
 
-  def gig_form_method_helper
-    if params[:action] == "edit"
-      :patch
-    else
-      :post
-    end
-  end
-
    def status_text_helper gig
      if gig.published?
        fa_icon("eye-slash", class: "fa-lg gig_action_icon",title: "Ocultar")
