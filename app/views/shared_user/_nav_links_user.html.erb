@@ -81,7 +81,7 @@
         <div class="dropdown-content">
           <ul>
             <li>
-              <%= link_to "Mi Perfil", user_path(current_user.slug) %>
+              <%= link_to "Mi Perfil", user_path(current_user.slug), class: "profile-button" %>
             </li>
             <li>
               <%= link_to "Configuracion", user_config_path(current_user.slug) %>
