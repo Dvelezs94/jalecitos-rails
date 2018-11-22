@@ -25,15 +25,14 @@
                   <%= form.text_field :description, class: 'js-br-description', id: "description", type: "hidden" %>
                   <trix-editor input="description" class="trix-class trix_input_0 required" maxlength="1000"></trix-editor>
                 </div>
-                <div class="gap"></div>
                 <div class="row file_upload">
                   <div class="col-lg-8">
-                    <label for="file-upload" class="custom-file-upload">
-
+                    <label  class="custom-file-upload">
+                      <%= form.file_field :image %>
                       <i class="fa fa-paperclip"></i>
+
                       Adjuntar archivo
                     </label>
-                    <%= form.file_field :image, class: 'form-control' %>
                     <small class="attach-limit">Tamano Maximo por archivo 30MB</small>
                   </div>
                 </div>
