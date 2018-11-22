@@ -36,13 +36,13 @@
               <%= link_to "Mis Jales", user_path(current_user), class: "my-gigs-btn" %>
             </li>
             <li class="<%= active? new_user_gig_path(current_user) %>">
-              <%= link_to "Nuevo Jale", new_user_gig_path(current_user), class: "new-gig-btn"%>
+              <%= link_to "Nuevo Jale", new_user_gig_path(current_user), class: "new-gig-btn" %>
             </li>
             <li class="" href="#">
               <a >Mis Ofertas</a>
             </li>
             <li  class="">
-              <a class="" href="#">Promuevete</a>
+              <a class="promote" href="#">Promuevete</a>
             </li>
           </ul>
         </div>
@@ -93,7 +93,7 @@
               <%= link_to "Disputas", disputes_path, class: "disputes-btn" %>
             </li>
             <li>
-              <a class="" href="#">Ayuda</a>
+              <a class="help-btn" href="#">Ayuda</a>
             </li>
             <li>
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "logout-btn" %>
