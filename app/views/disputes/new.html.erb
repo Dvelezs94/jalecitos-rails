@@ -1,5 +1,3 @@
-<h1>New Dispute</h1>
-
 <%= form_with(model: @dispute, url: order_disputes_path, local: true) do |form| %>
   <% if @dispute.errors.any? %>
     <div id="error_explanation">
@@ -12,13 +10,51 @@
       </ul>
     </div>
   <% end %>
+  <div class="container-fluid section request_post_form">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 col-md-12 centered-form">
+          <h3>Describe el problema en la orden</h3>
+          <div class="form_box post_form_col">
+            <div class="form_block row ">
+              <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
+                <%= fa_icon "sticky-note", class: "fa-2x" %>
+              </div>
+              <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
+                <div class="description">
+                  <%= form.text_field :description, class: 'js-br-description', id: "description", type: "hidden" %>
+                  <trix-editor input="description" class="trix-class trix_input_0 required" maxlength="1000"></trix-editor>
+                </div>
+                <div class="gap"></div>
+                <div class="row file_upload">
+                  <div class="col-lg-8">
+                    <label for="file-upload" class="custom-file-upload">
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+                      <i class="fa fa-paperclip"></i>
+                      Adjuntar archivo
+                    </label>
+                    <%= form.file_field :image, class: 'form-control' %>
+                    <small class="attach-limit">Tamano Maximo por archivo 30MB</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 3 end -->
+            <div class="col-lg-12  col-md-12 end-buttons">
+              <div class="col-lg-6  col-md-6 ">
+                <%= link_to 'Cancelar', :back, class: "btn btn-danger" %>
+              </div>
+              <div class="col-lg-6  col-md-6 ">
+                <%= form.submit "Continuar", class: "post" %>
+              </div>
+            </div>
+          </div>
+          <!-- form box -->
+          <!-- -->
+        </div>
+        <!-- -->
+      </div>
+      <!-- col lg 7 -->
+    </div>
   </div>
 <% end %>

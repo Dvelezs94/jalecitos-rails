@@ -1,8 +1,9 @@
 class DisputesController < ApplicationController
-  before_action :set_dispute, only: [:show, :edit, :update, :destroy]
-  access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
+  before_action :authenticate_user!
+  before_action :set_dispute, only: [:show]
+  before_action :check_dispute_ownership, only: :show
   layout 'logged'
-  access user: :all
+  access user: :all, admin: :all
 
   # GET /disputes
   def index
@@ -11,6 +12,7 @@ class DisputesController < ApplicationController
 
   # GET /disputes/1
   def show
+    @replies = @dispute.replies.order(created_at: :desc)
   end
 
   # GET /disputes/new
@@ -22,11 +24,14 @@ class DisputesController < ApplicationController
   def create
     @dispute = Dispute.new(dispute_params)
 
-    if @dispute.save
-      @dispute.order.disputed!
-      redirect_to @dispute, notice: 'Dispute was successfully created.'
-    else
-      render :new
+    if @dispute.order.in_progress?
+      if @dispute.save
+        @dispute.order.disputed!
+        create_notification(@dispute.order.user, @dispute.order.receiver, "Abrio una disputa", @dispute)
+        redirect_to order_dispute_path(@dispute.order.uuid, @dispute), notice: 'La disputa fue creada exitosamente.'
+      else
+        render :new
+      end
     end
   end
 
@@ -34,6 +39,12 @@ class DisputesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_dispute
       @dispute = Dispute.find(params[:id])
+    end
+
+    def check_dispute_ownership
+      if ! (current_user == @dispute.order.user || current_user == @dispute.order.receiver || current_user.has_roles?(:admin))
+          redirect_to root_path, alert: "No puedes acceder aqui."
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

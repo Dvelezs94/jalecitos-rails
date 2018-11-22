@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def create_notification(user, recipient, message, model)
-    Notification.create!(recipient: recipient, user: user, action: message, notifiable: model)
+  def create_notification(user, recipient, message, model, query_url=nil)
+    Notification.create!(recipient: recipient, user: user, action: message, notifiable: model, query_url: query_url)
   end
 end

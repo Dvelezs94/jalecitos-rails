@@ -65,12 +65,14 @@ module ApplicationHelper
     @opposite_user = conversation.sender == current_user ? conversation.recipient : conversation.sender
   end
 
-  def url_generator_helper (object)
+  def url_generator_helper (notification, object)
     case
     when object.class == Request
        request_path(object)
     when object.class == Package
-       finance_path
+       finance_path(:table => notification.query_url)
+    when object.class == Dispute
+       order_dispute_path(object.order.uuid, object)
     end
   end
 
@@ -80,6 +82,8 @@ module ApplicationHelper
        "en el pedido #{object.name}"
     when object.class == Package
        "en el jale Voy a #{object.gig.name} por el paquete #{object.pack_type}"
+     when object.class == Dispute
+        "en la orden #{object.order.uuid}"
     end
   end
 

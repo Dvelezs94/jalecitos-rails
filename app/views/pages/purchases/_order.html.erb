@@ -15,8 +15,8 @@
   <td>
     <% if order.pending? %>
       <% if order.started_at? %>
-        <%= link_to fa_icon("check", title: "Comenzar Trabajo", class: "fa-lg"), start_order_path(order.id), method: :put, :data => {:confirm => 'Seguro que quieres comenzar la orden?'} %>
         <%= link_to fa_icon("undo", title: "Solicitar Reembolso", class: "fa-lg"), refund_order_path(order.id), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
+        <%= link_to fa_icon("check", title: "Comenzar Trabajo", class: "fa-lg"), start_order_path(order.id), method: :put, :data => {:confirm => 'Seguro que quieres comenzar la orden?'} %>
       <% else %>
         <%= link_to fa_icon("undo", title: "Solicitar Reembolso", class: "fa-lg"), refund_order_path(order.id), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
       <% end %>

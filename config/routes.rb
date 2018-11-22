@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :replies
   post '/rate' => 'rater#create', :as => 'rate'
   root to: "pages#home"
   get 'admins/dashboard'
@@ -54,7 +53,9 @@ Rails.application.routes.draw do
       put :request_start
       put :start
     end
-    resources :disputes, only: [:index, :new, :create, :show]
+    resources :disputes, only: [:index, :new, :create, :show] do
+      resources :replies, only: [:create]
+    end
   end
   get 'requests', to: 'pages#request_index'
   get 'finance', to: 'pages#finance'

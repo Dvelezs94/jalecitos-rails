@@ -25,6 +25,7 @@ class PagesController < ApplicationController
   end
 
   def finance
+    authenticate_user!
     @purchases = current_user.purchases.order(updated_at: :desc)
     @sales = current_user.sales.where.not(status: "denied").order(updated_at: :desc)
   end
