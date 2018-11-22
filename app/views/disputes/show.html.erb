@@ -17,10 +17,13 @@
                 <hr>
               <% end %>
               <div class="col-lg-8">
-
+              <strong>Causa de la disputa</strong>
+              <hr>
                 <%= @dispute.description.html_safe %>
               </div>
               <div class="col-lg-4">
+                <strong>Detalles de la disputa</strong>
+                <hr>
                 <p><strong>Numero de Orden: </strong><%= @dispute.order.uuid %></p>
                 <% if @dispute.order.purchase_type == "Package" %>
                 <p><strong>Jale: </strong><%= link_to "Voy a #{@dispute.order.purchase.gig.name}", user_gig_path(@dispute.order.purchase.gig.user.slug, @dispute.order.purchase.gig.slug) %></p>
@@ -31,13 +34,14 @@
                 <p><strong>Estado: </strong> <%= @dispute.status.split('_').map(&:capitalize).join(' ') %></p>
               </div>
               <div class="col-lg-12  col-md-12">
-                <%= form_with(model: @reply, url: order_dispute_replies_path(@dispute.order.uuid, @dispute), local: true) do |form| %>
-                <div class="col-lg-12  col-md-12 ">
-                  <%= form.text_field :message %>
-                </div>
-                <div class="col-lg-6  col-md-6 ">
-                  <%= form.submit "Continuar", class: "post" %>
-                </div>
+                <%= form_with(model: @reply, url: order_dispute_replies_path(@dispute.order.uuid, @dispute), local: true, :html=>{style: "display: flex;"}) do |form| %>
+
+                  <%= form.text_area :message, class: "form-control" %>
+
+                  <%= button_tag( :class => "btn btn-success send-message") do %>
+                    <%= fa_icon "angle-right", class: "fa-2x" %>
+                  <% end %>
+
                 <% end %>
               </div>
               <div class="col-lg-12 align_center">
