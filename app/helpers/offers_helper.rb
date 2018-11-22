@@ -5,7 +5,7 @@ module OffersHelper
   end
 
   def offer_form_url_helper
-    if params[:action] == "edit"
+    if params[:action] == "edit" || params[:action] == "update"
       request_offer_path(params[:request_id], params[:id])
     else
       request_offers_path(params[:request_id])

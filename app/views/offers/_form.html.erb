@@ -34,7 +34,7 @@
               <%= fa_icon "hourglass-end", class: "fa-2x" %>
             </div>
             <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-              <%= form.number_field :hours, class: 'form-control' %>
+              <%= form.number_field :hours, class: 'form-control', min: 1, step: 1 %>
             </div>
           </div>
           <hr>
@@ -43,7 +43,7 @@
               <strong class="price-text">Lo que ganaré:</strong>
               <div class="row justify-content-center">
                 <%= fa_icon "dollar", class: "fa-2x", id: "price-symbol" %>
-                <%= form.number_field :price, options ={min: 100, step:".01", class: "price-input price-input-0 form-control"} %>
+                <%= form.number_field :price, options ={min: 100, step:".01", class: "price-input price-input-0 form-control required"} %>
               </div>
             </div>
             <div class="row will-show col-lg-6 col-md-6 col-sm-12 col-12 row">

@@ -302,12 +302,31 @@ section.plan.cf {
     color: #655e5e;
     padding: 12px 13px;
     left: 100%;
-    top: -49%;
     font-size: 14px;
-    /* left: 50%; */
     position: absolute;
     z-index: 1;
 }
+/*Vertical position of hints */
+#gig_name_hint,
+#request_name_hint{
+  top: -49%;
+}
+#gig_description_hint,
+#request_description_hint{
+  top: -10%;
+}
+#gig_category_hint,
+#gig_city_hint,
+#request_category_hint,
+#request_city_hint,
+#request_budget_hint{
+  top: -200%;
+}
+#gig_tags_hint,
+#request_tags_hint{
+  top: -130%;
+}
+/*end*/
 .form_block:hover .tooltiptext {
     visibility: visible;
 }
@@ -482,5 +501,6 @@ div.error{
   }
   .will-earn{
     margin: 0 auto;
+    text-align: center;
   }
 }

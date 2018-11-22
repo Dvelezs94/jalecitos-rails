@@ -25,7 +25,7 @@ class OffersController < ApplicationController
     if @offer.save
       create_notification(@offer.user, @offer.request.user, "oferto", @offer.request)
       OfferMailer.new_offer(@offer).deliver
-      redirect_to request_path(params[:request_id]), notice: 'La oferta ha sido creada con exito.'
+      redirect_to request_path(params[:request_id]), notice: 'La oferta ha sido creada con éxito.'
     else
       render :new
     end
@@ -34,7 +34,7 @@ class OffersController < ApplicationController
   # PATCH/PUT /offers/1
   def update
     if @offer.update( sanitized_params( offer_params_update ) )
-      redirect_to request_path(params[:request_id]), notice: 'La oferta fue actualizada con exito'
+      redirect_to request_path(params[:request_id]), notice: 'La oferta fue actualizada con éxito'
     else
       render :edit
     end

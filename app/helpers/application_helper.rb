@@ -89,9 +89,13 @@ module ApplicationHelper
   end
 
   def form_method_helper
-    if params[:action] == "edit"
+    if params[:action] == "edit" || params[:action] == "update"
+      puts "X1"* 300
+      puts params[:action]
       :patch
     else
+      puts "X2"* 300
+      puts params[:action]
       :post
     end
   end

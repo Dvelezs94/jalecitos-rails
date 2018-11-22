@@ -1,17 +1,9 @@
 module RequestsHelper
   def request_form_url_helper
-    if params[:action] == "edit"
+    if params[:action] == "edit" || params[:action] == "update"
       request_path(@request)
     else
       requests_path()
-    end
-  end
-
-  def request_form_method_helper
-    if params[:action] == "edit"
-      :patch
-    else
-      :post
     end
   end
 
