@@ -82,4 +82,17 @@ module ApplicationHelper
        "en el jale Voy a #{object.gig.name} por el paquete #{object.pack_type}"
     end
   end
+
+  def cons_mult_helper number
+    number = number * 1.1
+    number
+  end
+
+  def form_method_helper
+    if params[:action] == "edit" || params[:action] == "update"
+      :patch
+    else
+      :post
+    end
+  end
 end

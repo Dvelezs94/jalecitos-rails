@@ -1,4 +1,4 @@
-jQuery ->
+$(document).on "turbolinks:load", ->
   if $('.pagination').length
     $(window).scroll ->
       url = $('a.next-page').attr('href')

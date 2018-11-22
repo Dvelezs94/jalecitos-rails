@@ -21,12 +21,15 @@ module DescriptionRestrictions
   end
 
   def count_without_html
+    #all the html is erased
     noHtml = description.gsub(/<[^>]*>/, "")
+    #the entities are encoded to its real char
     noHtml_real_char = decodeHTMLEntities(noHtml)
     errors.add(:base, "Sólo se admiten como máximo 1000 caracteres") if noHtml_real_char.length > 1000
   end
 
   def description_length
+    #the entities are encoded to its real char
     real_char = decodeHTMLEntities(description)
     errors.add(:base, "La descriptión contiene demasiados efectos de texto") if real_char.length > 2000
   end
