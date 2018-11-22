@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.response_order_id = response["id"]
         @order.save
-        create_notification(@order.user, @order.receiver, "te contrato", @order.purchase)
+        create_notification(@order.user, @order.receiver, "te contrato", @order.purchase, "sales")
         flash[:success] = 'La orden fue creada exitosamente.'
         redirect_to finance_path(:table => "purchases")
       rescue OpenpayTransactionException => e
@@ -56,54 +56,66 @@ class OrdersController < ApplicationController
   end
 
   def request_start
-    @order.started_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-    if @order.save
-      flash[:success] = "La orden se actualizo correctamente"
-      create_notification(@order.receiver, @order.user, "solicito comenzar", @order.purchase)
-      redirect_to finance_path(:table => "sales")
-    else
-      flash[:error] = "Hubo un error en tu  solicitud"
-      redirect_to finance_path(:table => "sales")
+    if @order.receiver == current_user
+      @order.started_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+      if @order.receiver == current_user
+        if @order.save
+          flash[:success] = "La orden se actualizo correctamente"
+          create_notification(@order.receiver, @order.user, "solicito comenzar", @order.purchase, "purchases")
+          redirect_to finance_path(:table => "sales")
+        else
+          flash[:error] = "Hubo un error en tu  solicitud"
+          redirect_to finance_path(:table => "sales")
+        end
+      end
     end
   end
 
   def request_complete
-    @order.completed_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-    if @order.save
-      flash[:success] = "La orden se actualizo correctamente"
-      create_notification(@order.receiver, @order.user, "solicito finalizar", @order.purchase)
-      redirect_to finance_path(:table => "sales")
-    else
-      flash[:error] = "Hubo un error en tu  solicitud"
-      redirect_to finance_path(:table => "sales")
+    if @order.receiver == current_user
+      @order.completed_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+      if @order.save
+        flash[:success] = "La orden se actualizo correctamente"
+        create_notification(@order.receiver, @order.user, "solicito finalizar", @order.purchase, "purchases")
+        redirect_to finance_path(:table => "sales")
+      else
+        flash[:error] = "Hubo un error en tu  solicitud"
+        redirect_to finance_path(:table => "sales")
+      end
     end
   end
 
   def start
-    if @order.in_progress!
-      flash[:success] = "La orden ahora esta en progreso"
-      create_notification(@order.user, @order.receiver, "ha comenzado", @order.purchase)
-      redirect_to finance_path(:table => "purchases")
-    else
-      flash[:error] = "Hubo un error en tu solicitud"
-      redirect_to finance_path(:table => "purchases")
+    if @order.user == current_user
+      if @order.in_progress!
+        flash[:success] = "La orden ahora esta en progreso"
+        create_notification(@order.user, @order.receiver, "ha comenzado", @order.purchase, "sales")
+        redirect_to finance_path(:table => "purchases")
+      else
+        flash[:error] = "Hubo un error en tu solicitud"
+        redirect_to finance_path(:table => "purchases")
+      end
     end
   end
 
   def complete
-    if @order.completed!
-      @user = @order.receiver
-      if @user.save
-        create_notification(@order.user, @order.receiver, "te ha depositado", @user)
-      else
-        create_notification(@order.user, @order.receiver, "algo salio mal depositando", @user)
+    if @order.user == current_user
+      if @order.in_progress?
+        if @order.completed!
+          @user = @order.receiver
+          if @user.save
+            create_notification(@order.user, @order.receiver, "te ha depositado", @user, "sales")
+          else
+            create_notification(@order.user, @order.receiver, "algo salio mal depositando", @user, "purchases")
+          end
+          flash[:success] = "La orden ahora esta finalizada"
+          create_notification(@order.user, @order.receiver, "ha finalizado", @order.purchase, "sales")
+          redirect_to finance_path(:table => "purchases")
+        else
+          flash[:error] = "Hubo un error en tu solicitud"
+          redirect_to finance_path(:table => "purchases")
+        end
       end
-      flash[:success] = "La orden ahora esta finalizada"
-      create_notification(@order.user, @order.receiver, "ha finalizado", @order.purchase)
-      redirect_to finance_path(:table => "purchases")
-    else
-      flash[:error] = "Hubo un error en tu solicitud"
-      redirect_to finance_path(:table => "purchases")
     end
   end
 
@@ -125,7 +137,7 @@ class OrdersController < ApplicationController
       end
       @user = @order.user
       if @user.save && @order.refunded!
-        create_notification(@order.user, @order.user, "ha reembolsado", @order.purchase)
+        create_notification(@order.user, @order.user, "ha reembolsado", @order.purchase, "purchases")
         flash[:success] = "La compra ha sido reembolsada y el dinero sumado a la cuenta"
         redirect_to user_config_path(current_user)
       else

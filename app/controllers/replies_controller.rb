@@ -1,59 +1,25 @@
 class RepliesController < ApplicationController
-  before_action :set_reply, only: [:show, :edit, :update, :destroy]
-  access all: [:index, :show, :new, :edit, :create, :update, :destroy], user: :all
-
-  # GET /replies
-  def index
-    @replies = Reply.all
-  end
-
-  # GET /replies/1
-  def show
-  end
-
-  # GET /replies/new
-  def new
-    @reply = Reply.new
-  end
-
-  # GET /replies/1/edit
-  def edit
-  end
+  before_action :authenticate_user!
+  access user: :all, admin: :all
 
   # POST /replies
   def create
     @reply = Reply.new(reply_params)
 
     if @reply.save
-      redirect_to @reply, notice: 'Reply was successfully created.'
+      redirect_to order_dispute_path(@reply.dispute.order.uuid, @reply.dispute), notice: 'Tu replica fue creada.'
     else
-      render :new
+      redirect_to order_dispute_path(@reply.dispute.order.uuid, @reply.dispute), error: 'Tu replica no pudo ser creada.'
     end
-  end
-
-  # PATCH/PUT /replies/1
-  def update
-    if @reply.update(reply_params)
-      redirect_to @reply, notice: 'Reply was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  # DELETE /replies/1
-  def destroy
-    @reply.destroy
-    redirect_to replies_url, notice: 'Reply was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_reply
-      @reply = Reply.find(params[:id])
-    end
-
     # Only allow a trusted parameter "white list" through.
     def reply_params
-      params.require(:reply).permit(:dispute_id, :message, :user_id)
+      @dispute = Dispute.find(params[:dispute_id])
+      reply_params = params.permit(:message)
+      reply_params[:user] = current_user
+      reply_params[:dispute] = @dispute
+      reply_params
     end
 end

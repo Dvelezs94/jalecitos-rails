@@ -7,7 +7,7 @@ default: &default
   password: <%= ENV.fetch("DB_PASSWORD") {}%>
   variables:
     statement_timeout: 5000
-
+    
 development:
   <<: *default
   database: jalecitos_development

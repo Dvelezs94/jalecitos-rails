@@ -8,7 +8,7 @@ json.array! @notifications do |notification|
   json.action notification.action
   # Build the url depending on the notifiable type
   json.redirect do
-      json.path url_generator_helper(notification.notifiable)
+      json.path url_generator_helper(notification, notification.notifiable)
     end
 
   # Build the message depending on the notifiable type

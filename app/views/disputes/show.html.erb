@@ -1,21 +1,55 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid dashboard_front">
+  <div class="container">
+    <div class="col-lg-12 dashboard_front_right">
+      <div class="gap"></div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @dispute.description %>
-</p>
+      <div class="education_wrapper">
+        <div class="tabContainer gigs_collection">
+          <div class="tabContent">
+            <div class="row align_center">
+              <% if current_user.has_roles?(:admin) %>
+                <div class="col-lg-6">
+                  <%= link_to "Reembolsar Orden", root_path, class: "post" %>
+                </div>
+                <div class="col-lg-6">
+                  <%= link_to "Completar Orden", root_path, class: "post" %>
+                </div>
+                <hr>
+              <% end %>
+              <div class="col-lg-8">
 
-<p>
-  <strong>Order:</strong>
-  <%= @dispute.order.uuid %>
-</p>
-
-<p>
-  <strong>Replies:</strong>
-  <%= @dispute.replies %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @dispute.status %>
-</p>
+                <%= @dispute.description.html_safe %>
+              </div>
+              <div class="col-lg-4">
+                <p><strong>Numero de Orden: </strong><%= @dispute.order.uuid %></p>
+                <% if @dispute.order.purchase_type == "Package" %>
+                <p><strong>Jale: </strong><%= link_to "Voy a #{@dispute.order.purchase.gig.name}", user_gig_path(@dispute.order.purchase.gig.user.slug, @dispute.order.purchase.gig.slug) %></p>
+                <p><strong>Paquete: </strong><%= @dispute.order.purchase.pack_type %></p>
+                <% else %>
+                <p><strong>Pedido: </strong>Busco a <%= @dispute.order.purchase.offer.name %></p>
+                <% end %>
+                <p><strong>Estado: </strong> <%= @dispute.status.split('_').map(&:capitalize).join(' ') %></p>
+              </div>
+              <div class="col-lg-12  col-md-12">
+                <%= form_with(model: @reply, url: order_dispute_replies_path(@dispute.order.uuid, @dispute), local: true) do |form| %>
+                <div class="col-lg-12  col-md-12 ">
+                  <%= form.text_field :message %>
+                </div>
+                <div class="col-lg-6  col-md-6 ">
+                  <%= form.submit "Continuar", class: "post" %>
+                </div>
+                <% end %>
+              </div>
+              <div class="col-lg-12 align_center">
+                <div class="row align_center">
+                  <%= render partial: "disputes/reply", collection: @replies %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- right col -->
+  </div>
+</div>
