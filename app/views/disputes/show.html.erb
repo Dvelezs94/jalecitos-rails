@@ -18,6 +18,7 @@
               <% end %>
               <div class="col-lg-8">
               <strong>Causa de la disputa</strong>
+              <%= @dispute.image? ? link_to(fa_icon("paperclip", class: "fa-lg"), @dispute.image_url) : "" %>
               <hr>
                 <%= @dispute.description.html_safe %>
               </div>
