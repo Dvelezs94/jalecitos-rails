@@ -50,7 +50,7 @@ class DisputesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def dispute_params
       @disputed_order = Order.find_by_uuid(params[:order_id])
-      dispute_params = params.require(:dispute).permit(:description)
+      dispute_params = params.require(:dispute).permit(:description, :image)
       dispute_params[:order] = @disputed_order
       dispute_params
     end
