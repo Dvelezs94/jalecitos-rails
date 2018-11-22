@@ -43,13 +43,12 @@
             <div class="row file_upload">
               <div class="col-lg-8">
                 <label for="file-upload" class="custom-file-upload">
-
                   <i class="fa fa-paperclip"></i>
+                  <%= form.file_field :image, class: "file-upload" %>
                   Adjuntar archivo
                 </label>
-                <%= form.file_field :image, class: 'form-control' %>
-                <small class="attach-limit">Tamano Maximo por archivo 30MB</small>
 
+                <small class="attach-limit">Tamano Maximo por archivo 30MB</small>
               </div>
             </div>
             <%= render 'shared_user/gigs/forms/hints/description_hint.html.erb' %>
