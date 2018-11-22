@@ -14,7 +14,7 @@
 </nav>
 <div class="gap"></div>
 <div class="gap"></div>
-<% if current_user.present? || ! current_page?(root_path) || params[:query] %>
+<% if params[:query] && current_user.nil? %>
   <div class="gap"></div>
 <% end  %>
 <div id="notifications"></div>
