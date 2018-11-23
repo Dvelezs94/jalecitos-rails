@@ -33,7 +33,7 @@ end
           @pack = Package.new(pack)
           @pack.save
       end
-      @gig.published! if @gig.gig_packages[0].present? && @gig.gig_packages[0].name != "" && @gig.gig_packages[0].description != "" && @gig.gig_packages[0].price != nil && @gig.gig_packages[0].price > 100
+      @gig.published! if @gig.gig_packages[0].present? && @gig.gig_packages[0].name != "" && @gig.gig_packages[0].description != "" && @gig.gig_packages[0].price != nil && @gig.gig_packages[0].price >= 100
     end
     redirect_to user_gig_path(params[:user_id], @gig), notice: 'Tu Gig se ha publicado exitosamente'
   end
@@ -89,7 +89,7 @@ end
   end
 
   def check_no_ownership
-    (current_user.id == @package.gig.user_id )? redirect_to( user_gig_path(current_user, @package.gig), notice: "No puedes contratarte a ti mismo." ) : nil
+    (current_user == @package.gig.user )? redirect_to( user_gig_path(current_user, @package.gig), notice: "No puedes contratarte a ti mismo." ) : nil
   end
 
   def validate_create
