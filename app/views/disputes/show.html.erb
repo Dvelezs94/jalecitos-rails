@@ -8,13 +8,15 @@
           <div class="tabContent">
             <div class="row align_center">
               <% if current_user.has_roles?(:admin) %>
-                <div class="col-lg-6">
-                  <%= link_to "Reembolsar Orden", root_path, class: "post" %>
-                </div>
-                <div class="col-lg-6">
-                  <%= link_to "Completar Orden", root_path, class: "post" %>
-                </div>
-                <hr>
+                <% if ! (@dispute.refunded? || @dispute.proceeded?) %>
+                  <div class="col-lg-6">
+                    <%= link_to "Reembolsar Orden", refund_order_path(@dispute.order), class: "post", method: :put %>
+                  </div>
+                  <div class="col-lg-6">
+                    <%= link_to "Completar Orden", complete_order_path(@dispute.order), class: "post", method: :put %>
+                  </div>
+                  <hr>
+                <% end %>
               <% end %>
               <div class="col-lg-8">
               <strong>Causa de la disputa</strong>
@@ -35,15 +37,14 @@
                 <p><strong>Estado: </strong> <%= @dispute.status.split('_').map(&:capitalize).join(' ') %></p>
               </div>
               <div class="col-lg-12  col-md-12">
-                <%= form_with(model: @reply, url: order_dispute_replies_path(@dispute.order.uuid, @dispute), local: true, :html=>{style: "display: flex;"}) do |form| %>
-
-                  <%= form.text_area :message, class: "form-control" %>
-
-                  <%= button_tag( :class => "btn btn-success send-message") do %>
-                    <%= fa_icon "angle-right", class: "fa-2x" %>
-                  <% end %>
-
+                <% if @dispute.status == "waiting_for_employee" && @dispute.employee == current_user %>
+                  <%= render 'disputes/reply_box'%>
+                <% elsif @dispute.status == "waiting_for_employer" && @dispute.employer == current_user %>
+                  <%= render 'disputes/reply_box'%>
+                <% elsif current_user.has_roles?(:admin) %>
+                  <%= render 'disputes/reply_box'%>
                 <% end %>
+
               </div>
               <div class="col-lg-12 align_center">
                 <div class="row align_center">

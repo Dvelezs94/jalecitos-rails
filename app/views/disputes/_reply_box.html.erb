@@ -1,0 +1,9 @@
+<%= form_with(model: @reply, url: order_dispute_replies_path(@dispute.order.uuid, @dispute), local: true, :html=>{style: "display: flex;"}) do |form| %>
+
+  <%= form.text_area :message, class: "form-control" %>
+
+  <%= button_tag( :class => "btn btn-success send-message") do %>
+    <%= fa_icon "angle-right", class: "fa-2x" %>
+  <% end %>
+
+<% end %>

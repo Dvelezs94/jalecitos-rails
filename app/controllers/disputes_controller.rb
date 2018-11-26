@@ -7,7 +7,7 @@ class DisputesController < ApplicationController
 
   # GET /disputes
   def index
-    @disputes = current_user.disputes
+    @disputes = current_user.disputes.order(updated_at: :desc)
   end
 
   # GET /disputes/1

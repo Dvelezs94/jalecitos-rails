@@ -13,7 +13,7 @@
   <td>
     <% if order.pending? %>
       <% if order.started_at? %>
-        <%= link_to fa_icon("undo", title: "Cancelar Trabajo", class: "fa-lg"), root_path %>
+      <%= link_to fa_icon("undo", title: "Denegar Trabajo", class: "fa-lg"), refund_order_path(order.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
       <% else %>
         <%= link_to fa_icon("undo", title: "Denegar Trabajo", class: "fa-lg"), refund_order_path(order.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
         <%= link_to fa_icon("play", title: "Solicitar Comenzar", class: "fa-lg"), request_start_order_path(order.id), :method => :put %>
