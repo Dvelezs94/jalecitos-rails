@@ -105,11 +105,9 @@ class OrdersController < ApplicationController
           if @order.dispute
             @order.dispute.proceeded!
           end
-          @user = @order.receiver
-          if @user.save
-            create_notification(@order.user, @order.receiver, "te ha depositado", @user, "sales")
-          else
-            create_notification(@order.user, @order.receiver, "algo salio mal depositando", @user, "purchases")
+          # add 1 to gig order count
+          if @order.purchase_type == "Package"
+            @order.purchase.gig.increment!(:order_count)
           end
           flash[:success] = "La orden ahora esta finalizada"
           create_notification(@order.user, @order.receiver, "ha finalizado", @order.purchase, "sales")
