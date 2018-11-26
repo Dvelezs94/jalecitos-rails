@@ -21,11 +21,8 @@ class ConversationsController < ApplicationController
 
   def mark_as_read
     @conversation = Conversation.find(param[:conversation_id])
-    @unread_messages = @conversation.messages.where(read_at: nil)
-    @unread_messages.each do |m|
-      u.read_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-      u.save
-    end
+    @unread_messages = @conversation.messages.where(read_at: nil).update_all(read_at: Time.zone.now)
+    render json: {success: true}
   end
 
   def close

@@ -16,4 +16,5 @@ json.array! @notifications do |notification|
     json.type build_notifiable_type(notification.notifiable)
   end
   json.date distance_of_time_in_words_to_now(notification.created_at)
+  json.seen notification.read_at?
 end
