@@ -5,17 +5,32 @@ $(document).on "turbolinks:load", ->
       @setup() if @notifications.length > 0
 
     setup: ->
+      $("[data-behavior='read-notifications']").on "click", @readNotifications
       $.ajax(
         url: "/notifications.json"
         dataType: "JSON"
         method: "GET"
-        success: @handleSuccess
+        success: @renderNotifications
       )
 
-    handleSuccess: (data) =>
+    readNotifications: (e) =>
+      $.ajax(
+        url: "/notifications/mark_as_read"
+        dataType: "JSON"
+        method: "POST"
+        success: ->
+          $("[data-behavior='unread-count']").text(0)
+      )
+
+    renderNotifications: (data) =>
+      unread_count = 0
+      unread = for d in data
+                 if ! d.seen
+                   unread_count += 1
+
       items = $.map data, (notification) ->
         "
-        <div class='notifications'>
+        <div class='notifications-#{notification.seen}'>
         <a href='#{notification.redirect.path}'>
           <div class='left'>
             <div class='icon_notify'>
@@ -28,7 +43,9 @@ $(document).on "turbolinks:load", ->
         </a>
         </div>
         "
+
+      $("[data-behavior='unread-count']").text(unread_count)
       $("[data-behavior='notification-items']").html(items)
-      console.log(items)
+
   jQuery ->
     new Notifications

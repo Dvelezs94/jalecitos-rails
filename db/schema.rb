@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_22_231132) do
+ActiveRecord::Schema.define(version: 2018_11_20_190416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,9 +46,9 @@ ActiveRecord::Schema.define(version: 2018_11_22_231132) do
     t.bigint "order_id"
     t.integer "status", default: 0
     t.string "description"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image"
     t.index ["order_id"], name: "index_disputes_on_order_id"
   end
 
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 2018_11_22_231132) do
     t.string "notifiable_type"
     t.integer "notifiable_id"
     t.string "query_url"
+    t.datetime "read_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_notifications_on_user_id"

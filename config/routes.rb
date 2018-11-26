@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :conversations do
     member do
       post :close
+      post :mark_as_read
     end
     resources :messages, only: [:create]
   end
@@ -43,7 +44,11 @@ Rails.application.routes.draw do
    end
 
   resources :withdrawals, only: :create
-  resources :notifications
+  resources :notifications do
+    collection do
+      post :mark_as_read
+    end
+  end
   resources :categories
   resources :orders, only: [:create] do
     member do
