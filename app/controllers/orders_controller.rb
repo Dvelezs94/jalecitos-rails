@@ -99,9 +99,12 @@ class OrdersController < ApplicationController
   end
 
   def complete
-    if @order.user == current_user
-      if @order.in_progress?
+    if @order.user == current_user || current_user.has_roles?(:admin)
+      if @order.in_progress? || @order.disputed?
         if @order.completed!
+          if @order.dispute
+            @order.dispute.proceeded!
+          end
           @user = @order.receiver
           if @user.save
             create_notification(@order.user, @order.receiver, "te ha depositado", @user, "sales")
@@ -121,29 +124,31 @@ class OrdersController < ApplicationController
 
 
   def refund
-    if @order.completed? || @order.disputed?
-      flash[:error] = "No se pueden reembolsar ordenes completadas o en disputa"
-      redirect_to finance_path(:table => "purchases")
-      return
-    elsif @order.refunded?
-      flash[:error] = "Esta orden ya fue reembolsada"
-      redirect_to finance_path(:table => "purchases")
-      return
-    else
+    # check if is not admin
+    if ! current_user.has_roles?(:admin)
+      # Cancel transaction if the order is on any of these states
+      cancel_state(["completed", "disputed", "refunded"])
       if @order.in_progress? && (current_user == @order.user)
-        flash[:error] = "Esta accion no esta permitida"
-        redirect_to finance_path(:table => "purchases")
-        return
+        cancel_state(["in_progress"])
       end
-      @user = @order.user
-      if @user.save && @order.refunded!
-        create_notification(@order.user, @order.user, "ha reembolsado", @order.purchase, "purchases")
-        flash[:success] = "La compra ha sido reembolsada y el dinero sumado a la cuenta"
-        redirect_to user_config_path(current_user)
-      else
-        flash[:error] = "Algo salio mal reembolsando la orden"
-        redirect_to finance_path(:table => "purchases")
+    else
+      cancel_state(["completed", "refunded"])
+    end
+    if flash[:error]
+      redirect_to root_path
+      return
+    end
+    @user = @order.user
+    if @user.save && @order.refunded!
+      if @order.dispute
+        @order.dispute.refunded!
       end
+      create_notification(@order.user, @order.user, "ha reembolsado", @order.purchase, "purchases")
+      flash[:success] = "La compra ha sido reembolsada y el dinero sumado a la cuenta"
+      redirect_to user_config_path(current_user)
+    else
+      flash[:error] = "Algo salio mal reembolsando la orden"
+      redirect_to finance_path(:table => "purchases")
     end
   end
 
@@ -183,7 +188,7 @@ class OrdersController < ApplicationController
     end
 
     def verify_order_owner
-      if @order.user != current_user
+      if @order.user != current_user && ! current_user.has_role?(:admin)
         flash[:error] = "No tienes permiso para acceder aqui"
         redirect_to root_path
         return
@@ -202,6 +207,15 @@ class OrdersController < ApplicationController
       if @order.response_order_id.nil?
         flash[:error] = "Esta orden no a sido procesada, y por lo tanto no puede ser empezada"
         redirect_to root_path
+      end
+    end
+
+    def cancel_state(state)
+      state.each do |s|
+        if @order.status == s
+          flash[:error] = "No se puede completar la transaccion"
+          break
+        end
       end
     end
 end

@@ -1,6 +1,6 @@
 <div class="col-lg-12 align_center">
   <hr>
-  <strong><%= reply.user.slug %></strong>
+  <strong><%= reply.user.role == :user ? reply.user.slug : "Soporte Jalecitos" %></strong>
   <p><%= reply.message %></p>
   <small>Hace <%= distance_of_time_in_words_to_now(reply.created_at) %></small>
 </div>
