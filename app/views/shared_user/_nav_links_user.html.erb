@@ -3,29 +3,11 @@
   <ul class="navbar-nav  ml-auto">
 
     <li class="nav-item <%= active? root_path %>">
-        <%= link_to "Inicio", root_path, :class => 'nav-link js-scroll-trigger' %>
+      <%= link_to "Inicio", root_path, :class => 'nav-link js-scroll-trigger' %>
     </li>
     <li class="nav-item <%= active? requests_path %>">
       <%= link_to "Pedidos", requests_path, :class => 'nav-link js-scroll-trigger' %>
     </li>
-    <li class="nav-item <%= active? conversations_path %>">
-      <%= link_to "Mensajes", conversations_path, :class => 'nav-link js-scroll-trigger' %>
-    </li>
-
-    <li class="nav-item  mesages_" data-behavior="read-notifications">
-      <div class="dropdown">
-        <a class="nav-link js-scroll-trigger" data-behavior="notifications">Notificaciones(<span data-behavior="unread-count"></span>)</a>
-        <div class="dropdown-content">
-          <div class="tab-content">
-            <div data-behavior="notification-items">
-
-              <!-- notifications are built here -->
-
-            </div>
-          </div>
-        </div>
-        </div>
-        </li>
 
     <li class="nav-item my_dropdown_menu_top">
       <div class="dropdown">
@@ -41,7 +23,7 @@
             <li class="" href="#">
               <a >Mis Ofertas</a>
             </li>
-            <li  class="">
+            <li class="">
               <a class="promote" href="#">Promuevete</a>
             </li>
           </ul>
@@ -73,10 +55,29 @@
       </div>
     </li>
 
+    <li class="nav-item <%= active? conversations_path %>">
+      <%= link_to fa_icon("envelope", class: "fa-lg"), conversations_path, :class => 'nav-link js-scroll-trigger' %>
+    </li>
+
+    <li class="nav-item  mesages_" data-behavior="read-notifications">
+      <div class="dropdown">
+        <a class="nav-link js-scroll-trigger notification" data-behavior="notifications"><%= fa_icon "bell", class: "fa_inline fa-lg" %><span data-behavior="unread-count"></span></a>
+        <div class="dropdown-content">
+          <div class="tab-content">
+            <div data-behavior="notification-items">
+
+              <!-- notifications are built here -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+
     <li class="nav-item my_dropdown_menu my_image">
       <div class="dropdown">
         <label>
-          <%= link_to image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "nav-avatar"),user_path(current_user.slug) %>
+          <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "nav-avatar") %>
         </label>
         <div class="dropdown-content">
           <ul>
