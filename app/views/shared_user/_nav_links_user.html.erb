@@ -55,7 +55,7 @@
         <div class="dropdown-content">
           <ul>
             <li class="<%= active? user_path(current_user) %>">
-              <%= link_to "Mis Pedidos", user_path(current_user), class: "my-requests-btn" %>
+              <%= link_to "Mis Pedidos", my_requests_path, class: "my-requests-btn" %>
             </li>
             <li class="<%= active? new_request_path %>">
               <%= link_to "Nuevo Pedido", new_request_path, class: "new-requests-btn" %>

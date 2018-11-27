@@ -9,7 +9,7 @@ class RequestsController < ApplicationController
   before_action :validate_options_for_budget, only: [:create, :update]
 
   def my_requests
-    @requests = Request.includes(:user).friendly.where(user_id: current_user.id).order(:id).order(created_at: :desc)
+    @requests = Request.includes(:user).where(user: current_user)
   end
   # GET /requests/1
   def show

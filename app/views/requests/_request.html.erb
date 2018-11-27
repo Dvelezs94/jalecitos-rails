@@ -1,14 +1,24 @@
-<tr class="body_table" valign="middle" data-link="<%= request_path(request) %>">
-  <td class="buyer">
-    <h5>Busco a alguien <%=request.name%></h5>
-  </td>
-  <td>
-    <%=truncate(request.description.html_safe, length: 150)%>
-  </td>
-  <td><%=request.location%></td>
-  <td><%= request.budget %> MXN</td>
-  <td><%= request.offers.count %></td>
-  <td>
-    <span class="in_progress"><%= request.status %></span>
-  </td>
-</tr>
+<div class="col-lg-2 col-md-4 col-sm-6 col-12 single_gig">
+  <div class="get_pro_content">
+    <div class="get_pro_content_container">
+      <div class="gig_name_field">
+        <%=link_to "Busco a alguien " + truncate(request.name, length: 50)%>
+      </div>
+    </div>
+
+    <div class="favourites_and_price">
+      <div class="row">
+        <div class="col-lg-2 col-md-4 col-sm-3 col-3">
+          <%=request.location%>
+        </div>
+        <div class="col-lg-10 col-md-8 col-sm-9 col-9 lowest-price">
+          <span>Presupuesto:</span>
+          <strong>
+            <%= request.budget %>
+           </strong>
+          <span class="<%= request.status.downcase %>"><%= request.status %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
