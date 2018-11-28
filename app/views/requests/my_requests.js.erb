@@ -1,18 +1,8 @@
-<%= @current = params[:current] %>
-<% if @current == "r_open" %>
-  <% @collection = @r_open %>
-<% elsif @current == "r_in_progress" %>
-  <% @collection = @r_in_progress %>
-<% elsif @current == "r_completed" %>
-  <% @collection = @r_completed %>
-<% else %>
-  <% @collection = @r_closed %>
-<% end %>
+<%= @current %>
+$(".paginated_"+ '<%= j params[:current] %>').append('<%= j render partial: "requests/request", collection: instance_variable_get("@"+params[:current]) %>');
 
-$(".paginated_"+ '<%= j @current %>').append('<%= j render partial: "requests/request", collection: @collection %>');
-
-<% if @collection.next_page %>
-  $('.pagination:visible').replaceWith('<%= j paginate(@collection) %>');
+<% if instance_variable_get("@"+params[:current]).next_page %>
+  $('.pagination:visible').replaceWith('<%= j paginate(instance_variable_get("@"+params[:current])) %>');
 <% else %>
   $('.pagination:visible').remove();
 <% end %>

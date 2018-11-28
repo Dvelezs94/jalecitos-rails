@@ -36,7 +36,7 @@
                     <div class="row align_center paginated_r_open">
                       <%= render partial: "requests/request", collection: @r_open %>
                     </div>
-                    <div class="pagination-links r_open">
+                    <div class="pagination-links">
                       <%= paginate @r_open, param_name: :open_page, :params => {:current => "r_open"} %>
                     </div>
                   </div>
@@ -48,7 +48,7 @@
                     <div class="row align_center paginated_r_in_progress">
                       <%= render partial: "requests/request", collection: @r_in_progress %>
                     </div>
-                    <div class="pagination-links r_in_progress">
+                    <div class="pagination-links">
                       <%= paginate @r_in_progress, param_name: :in_progress_page, :params => {:current => "r_in_progress"} %>
                     </div>
                   </div>
@@ -60,7 +60,7 @@
                     <div class="row align_center paginated_r_completed">
                       <%= render partial: "requests/request", collection: @r_completed %>
                     </div>
-                    <div class="pagination-links r_completed">
+                    <div class="pagination-links">
                       <%= paginate @r_completed, param_name: :completed_page, :params => {:current => "r_completed"} %>
                     </div>
                   </div>
@@ -73,7 +73,7 @@
                     <div class="row align_center paginated_r_closed">
                       <%= render partial: "requests/request", collection: @r_closed %>
                     </div>
-                    <div class="pagination-links r_closed">
+                    <div class="pagination-links">
                       <%= paginate @r_closed, param_name: :closed_page, :params => {:current => "r_closed"} %>
                     </div>
                   </div>
