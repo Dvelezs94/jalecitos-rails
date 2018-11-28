@@ -2,7 +2,7 @@ document.addEventListener("turbolinks:load", function() {
   if (window.location.href.indexOf("finance") > -1 || $(".profile-container").length || $(".my_requests").length) {
     $(".tabContent").hide(); //Hides all tab content divs.
     //if user profile, then show published as default
-    if ($(".profile-container").length || $(".my_requests").length) {
+    if ($(".profile-container").length) {
       $(".tabs li:eq(0)").addClass("active").show(); //Adds the active class to the first tab li.
       $(".tabContent:eq(0)").show(); //Shows the first tab content div.
     }
@@ -56,6 +56,18 @@ document.addEventListener("turbolinks:load", function() {
       table = urlParams.get('table');
       if (table != null) {
         $("a[href='#" + table + "']").click();
+      }
+    }
+    //show the correct table of my requests
+    if($(".my_requests").length){
+      urlParams = new URLSearchParams(location.search);
+      current = urlParams.get('current');
+      if (current != null) {
+        $("a[href='#" + current + "']").click();
+      }
+      else{
+        $(".tabs li:eq(0)").addClass("active").show(); //Adds the active class to the first tab li.
+        $(".tabContent:eq(0)").show(); //Shows the first tab content div.
       }
     }
   }

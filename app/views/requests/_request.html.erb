@@ -1,22 +1,22 @@
-<div class="col-lg-2 col-md-4 col-sm-6 col-12 single_gig">
+<div class="col-lg-6 col-md-6 col-sm-12 col-12 single_gig">
   <div class="get_pro_content">
     <div class="get_pro_content_container">
       <div class="gig_name_field">
         <%=link_to "Busco a alguien " + truncate(request.name, length: 50)%>
+        <span class="lowest-price" style="float:right;"><%= request.status %></span>
       </div>
     </div>
 
     <div class="favourites_and_price">
       <div class="row">
-        <div class="col-lg-2 col-md-4 col-sm-3 col-3">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
           <%=request.location%>
         </div>
-        <div class="col-lg-10 col-md-8 col-sm-9 col-9 lowest-price">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6 lowest-price">
           <span>Presupuesto:</span>
           <strong>
             <%= request.budget %>
            </strong>
-          <span class="<%= request.status.downcase %>"><%= request.status %></span>
         </div>
       </div>
     </div>
