@@ -6,14 +6,14 @@
   "icons": [
   <% icon_sizes.map { |s| "#{s}x#{s}" }.each.with_index do |dim, i| %>
     {
-      "src": "<%= image_path "favicon.ico" %>",
+      "src": "<%= image_path "jalecitosicon192.png" %>",
       "sizes": "<%= dim %>",
-      "type": "image/x-icon"
+      "type": "image/png"
     }<%= i == (icon_sizes.length - 1) ? '' : ',' %>
   <% end %>
   ],
   "theme_color": "#000000",
   "background_color": "#FFFFFF",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait"
 }
