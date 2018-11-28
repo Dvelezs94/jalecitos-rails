@@ -9,9 +9,6 @@ class RequestsController < ApplicationController
   before_action :validate_options_for_budget, only: [:create, :update]
 
   def my_requests
-    if params[:current]
-      instance_variable_set("@"+params[:current],Request.search("*",includes: [:user], where: {status: params[:current] , user_id: current_user.id}, order: {created_at: :desc}, page: params[:open_page], per_page: 20 ))
-    else
       @open = Request.search "*",includes: [:user], where: {status: "open", user_id: current_user.id}, order: {created_at: :desc}, page: params[:open_page], per_page: 20
       @in_progress = Request.search "*",includes: [:user], where: {status: "in_progress", user_id: current_user.id}, order: {created_at: :desc}, page: params[:in_progress_page], per_page: 20
       @completed = Request.search "*",includes: [:user], where: {status: "completed", user_id: current_user.id}, order: {created_at: :desc}, page: params[:completed_page], per_page: 20
