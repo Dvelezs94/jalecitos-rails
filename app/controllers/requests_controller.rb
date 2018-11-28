@@ -13,7 +13,6 @@ class RequestsController < ApplicationController
       @in_progress = Request.search "*",includes: [:user], where: {status: "in_progress", user_id: current_user.id}, order: {created_at: :desc}, page: params[:in_progress_page], per_page: 20
       @completed = Request.search "*",includes: [:user], where: {status: "completed", user_id: current_user.id}, order: {created_at: :desc}, page: params[:completed_page], per_page: 20
       @closed = Request.search "*",includes: [:user], where: {status: "closed", user_id: current_user.id}, order: {created_at: :desc}, page: params[:closed_page], per_page: 20
-    end
   end
   # GET /requests/1
   def show
