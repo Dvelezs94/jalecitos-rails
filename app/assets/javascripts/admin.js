@@ -13,3 +13,5 @@
 //= require_tree ./main
 
 //= require_tree ./admin
+
+//= require serviceworker-companion

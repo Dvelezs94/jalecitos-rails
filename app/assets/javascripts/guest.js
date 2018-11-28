@@ -17,3 +17,5 @@
 //= require_tree ./main
 
 //= require_tree ./guest
+
+//= require serviceworker-companion
