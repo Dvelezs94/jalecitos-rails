@@ -26,3 +26,5 @@
 //= require_tree ./main
 
 //= require_tree ./logged
+
+//= require serviceworker-companion

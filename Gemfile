@@ -117,3 +117,5 @@ gem 'ratyrate', '~> 1.2.2.alpha'
 gem 'country_select', '~> 3.1'
 # Sendgrid API calls v3
 gem 'sendgrid-ruby', '~> 5.3'
+# PWA
+gem 'serviceworker-rails', '~> 0.5.5'
