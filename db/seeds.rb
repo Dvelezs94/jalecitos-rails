@@ -19,13 +19,14 @@ end
     user.password = "123456"
     # This is so we dont have to confirm the email on seeds
     user.confirmed_at = Time.now
-    10.times do |y|
+    200.times do |y|
       user.requests.new do |request|
         request.name = Faker::Company.industry + "#{x}#{y}"
         request.description = Faker::Lorem.paragraph(30, true)
         request.location = "#{Faker::Address.state}, México"
         request.category_id = Faker::Number.between(1, 10)
         request.budget = Faker::Number.between(100, 5000)
+        request.status = Faker::Number.between(0, 3)
       end
     end
     10.times do |x|

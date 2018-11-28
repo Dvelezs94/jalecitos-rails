@@ -1,0 +1,53 @@
+<div class="education_wrapper">
+  <div class="title row justify-content-center">
+    <h4>Mis Jales</h4>
+  </div>
+  <% if @user == current_user%>
+  <ul class="tabs nav nav-tabs user_prof justify-content-center">
+    <li>
+      <a href="#g_published">Publicados</a>
+    </li>
+      <li>
+        <a href="#g_draft">Borradores</a>
+      </li>
+      <li>
+        <a href="#g_banned">Suspendidos</a>
+      </li>
+
+  </ul>
+  <% else %>
+  <hr>
+  <% end %>
+  <div class="tabContainer gigs_collection">
+    <div id="g_published" class="tabContent">
+      <div class="row align_center">
+        <div class="col-lg-12 align_center">
+          <div class="row align_center">
+            <%= render partial: "gigs/gig", collection: @gigs.published %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% if @user == current_user%>
+      <div id="g_draft" class="tabContent">
+        <div class="row align_center">
+          <div class="col-lg-12 align_center">
+            <div class="row align_center">
+              <%= render partial: "gigs/gig", collection: @gigs.draft %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- .tabContent -->
+      <div id="g_banned" class="tabContent">
+        <div class="row align_center">
+          <div class="col-lg-12 align_center">
+            <div class="row align_center">
+              <%= render partial: "gigs/gig", collection: @gigs.banned %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+$(".paginated_"+ '<%= j params[:current] %>').append('<%= j render partial: "requests/request", collection: instance_variable_get("@"+params[:current]) %>');
+
+<% if instance_variable_get("@"+params[:current]).next_page %>
+  $('.pagination:visible').replaceWith('<%= j paginate(instance_variable_get("@"+params[:current])) %>');
+<% else %>
+  $('.pagination:visible').remove();
+<% end %>
+<% sleep 1 %>

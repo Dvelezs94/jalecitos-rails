@@ -1,31 +1,15 @@
 <main role="main">
   <% if @search.any? %>
 
+  <div class="container">
+    <div class="row paginated-elements">
+      <%= render partial: "requests/request", collection: @search %>
+    </div>
+  </div>
 
-      <div class="tabWrap ">
-        <div class="tabContainer">
-          <div class="tabContent">
-            <table class="table-responsive1">
-              <thead>
-                <tr class="head_table">
-                  <td >Pedido</td>
-                  <td>Descripcion</td>
-                  <td>Ubicacion</td>
-                  <td>Presupuesto</td>
-                  <td>Ofertas</td>
-                  <td>Estado</td>
-                </tr>
-              </thead>
-              <tbody class="paginated-elements">
-                <%= render partial: "requests/request", collection: @search %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="pagination-links">
-        <%= paginate @search %>
-      </div>
+    <div class="pagination-links">
+      <%= paginate @search %>
+    </div>
 
   </main>
 <% else %>

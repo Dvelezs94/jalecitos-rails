@@ -41,6 +41,9 @@ Rails.application.routes.draw do
 
    resources :requests, except: :index do
      resources :offers, except: [:index, :show]
+     collection do
+       get :my_requests, as: "my"
+     end
    end
 
   resources :withdrawals, only: :create
