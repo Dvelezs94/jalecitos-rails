@@ -23,7 +23,7 @@
                       <%= image_tag(avatar_display_helper(user.image_url(:thumb)), class: "nav-avatar") %></div>
 
                     <div class="users_txt">
-                      <h5><%= p "#{user.slug.first(15)}..." %></h5>
+                      <h5><%=  "#{user.slug.first(15)}..." %></h5>
                       <p>Activo hace:
                         <%= user.current_sign_in_at != nil ? distance_of_time_in_words_to_now(user.current_sign_in_at) : "nunca" %></p>
                     </div>
@@ -47,7 +47,7 @@
       <div class="col-lg-9  col-md-9  col-sm-12  right_inbox_view" id="conversation-list">
 
       <% if params[:user_id] && params[:user_id] != current_user.slug %>
-        <%= render 'conversations/conversation', conversation: @conversation, user: current_user, opposite_user: opposite_conversation_user(@conversation, current_user)  %>
+        <%= render 'conversations/conversation', conversation: @conversation, opposite_user: opposite_conversation_user(@conversation, current_user)  %>
       <% else %>
       <div id="empty_box">
         <div class="empty-state no-conversations text-center">
