@@ -1,7 +1,6 @@
 $(".message_view_box").prepend('<%= j render "conversations/conversation_content", messages: @messages.sort %>');
+$('.pagination').remove();
 <% if @messages.next_page %>
-  $('.pagination').replaceWith('<%= j paginate(@messages) %>');
-<% else %>
-  $('.pagination').remove();
+  $(".message_view_box").prepend('<%= j paginate(@messages) %>');
 <% end %>
 <% sleep 1 %>

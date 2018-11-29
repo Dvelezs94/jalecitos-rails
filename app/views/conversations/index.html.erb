@@ -47,7 +47,7 @@
       <div class="col-lg-9  col-md-9  col-sm-12  right_inbox_view" id="conversation-list">
 
       <% if params[:user_id] && params[:user_id] != current_user.slug %>
-        <%= render 'conversations/conversation', conversation: @conversation, user: current_user, opposite_user: opposite_conversation_user(@conversation, current_user)  %>
+        <%= render 'conversations/conversation', conversation: @conversation, opposite_user: opposite_conversation_user(@conversation, current_user)  %>
       <% else %>
       <div id="empty_box">
         <div class="empty-state no-conversations text-center">

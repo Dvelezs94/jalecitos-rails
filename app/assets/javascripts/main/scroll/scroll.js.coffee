@@ -10,7 +10,7 @@ $(document).on "turbolinks:load", ->
   #special pagination in messages
   else if $('.message_view_box').length
     $(".message_view_box").scroll ->
-      url = $('a.next-page:visible').attr('href')
+      url = $('a.next-page').attr('href')
       if url && $(".message_view_box").scrollTop() < 100
-        $('.pagination:visible').text("Cargando más mensajes")
+        $('.pagination').text("Cargando más mensajes")
         $.getScript(url)
