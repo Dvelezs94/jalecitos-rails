@@ -355,7 +355,7 @@ div#defaultOpen {
 .message_view_box {
     height: 68vh;
     overflow-y: auto;
-
+    padding-left: 25px;
 }
 
 @media only screen and (max-width:991px){

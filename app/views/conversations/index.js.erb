@@ -1,5 +1,4 @@
-$(".messages-list").prepend('<%= j render(@messages) %>');
-
+$(".message_view_box").prepend('<%= j render "conversations/conversation_content", messages: @messages.sort %>');
 <% if @messages.next_page %>
   $('.pagination').replaceWith('<%= j paginate(@messages) %>');
 <% else %>
