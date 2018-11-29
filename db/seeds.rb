@@ -19,7 +19,7 @@ end
     user.password = "123456"
     # This is so we dont have to confirm the email on seeds
     user.confirmed_at = Time.now
-    200.times do |y|
+    20.times do |y|
       user.requests.new do |request|
         request.name = Faker::Company.industry + "#{x}#{y}"
         request.description = Faker::Lorem.paragraph(30, true)
@@ -42,7 +42,7 @@ end
   end
 end
 
-200.times do |x|
+20.times do |x|
   3.times do |y|
     Package.create! do |package|
       package.name = Faker::Commerce.product_name + "#{x}#{y}"
