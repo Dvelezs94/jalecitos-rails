@@ -29,9 +29,9 @@
 
   <div class="row">
     <div class="col-lg-12 message_view_box messages-list">
-
+      <%= paginate @messages %>
       <ul class="messages-list">
-        <%= render 'conversations/conversation_content', messages: conversation.messages, user: user %>
+        <%= render 'conversations/conversation_content', messages: @messages.sort %>
       </ul>
 
     </div>
@@ -40,8 +40,8 @@
   <div class="row">
     <form class="new_message">
       <input name="conversation_id" type="hidden" value="<%= conversation.id %>">
-      <input name="user_id" type="hidden" value="<%= user.id %>">
-      <textarea name="body" class="form-control"></textarea>
+      <input name="user_id" type="hidden" value="<%= current_user.id %>">
+      <textarea name="body" id="message-content" class="form-control" autofocus></textarea>
       <%= button_tag( :class => "btn btn-success send-message") do %>
        <%= fa_icon "angle-right", class: "fa-2x" %>
      <% end %>
