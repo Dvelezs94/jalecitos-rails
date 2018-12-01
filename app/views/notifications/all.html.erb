@@ -1,0 +1,16 @@
+<div class="row">
+  <% if @notifications.count > 0 %>
+    <div class="container">
+      <div class="paginated-elements">
+        <%= render @notifications %>
+      </div>
+    </div>
+    <div class="pagination-links">
+      <%= paginate @notifications %>
+    </div>
+  <% else %>
+  <div class="container" style="text-align: center;">
+    No hay nada para mostrar
+  </div>
+  <% end %>
+</div>

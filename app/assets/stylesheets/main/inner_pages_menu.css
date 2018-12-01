@@ -318,14 +318,14 @@ button.strt_selling_Srch {
 
 .notifications-true {
   background-color: #EBF2F5;
-  display: inline-block;
+  display: -webkit-box;
   width: 100%;
   padding: 8px;
 }
 
 .notifications-false {
   background-color: #dfdfdf;
-  display: inline-block;
+  display: -webkit-box;
   width: 100%;
   padding: 8px;
 }

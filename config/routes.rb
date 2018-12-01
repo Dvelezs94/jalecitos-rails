@@ -47,9 +47,10 @@ Rails.application.routes.draw do
    end
 
   resources :withdrawals, only: :create
-  resources :notifications do
+  resources :notifications, only: [:index] do
     collection do
       post :mark_as_read
+      get :all
     end
   end
   resources :categories

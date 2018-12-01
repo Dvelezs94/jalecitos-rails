@@ -46,6 +46,9 @@ $(document).on "turbolinks:load", ->
 
       $("[data-behavior='unread-count']").text(unread_count)
       $("[data-behavior='notification-items']").html(items)
-
+      if items.length > 0
+        $("[data-behavior='notification-items']").append('<a href="/notifications/all" class="all-not-link" >Ver todas</a>')
+      else
+        $("[data-behavior='notification-items']").append('<div  class="all-not-link" >No hay nada para mostrar</div>')
   jQuery ->
     new Notifications
