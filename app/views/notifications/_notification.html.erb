@@ -1,28 +1,37 @@
 <% if notification.notifiable.class == Package %>
-<div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
-<a href='<%=finance_path(:table => "sales") %>'>
-  <div class='left'>
-    <div class='icon_notify'>
-      <img class='nav-avatar' src='<%=notification.user.image_url%>'>
-    </div>
-    <p><strong><%=notification.user.slug%></strong> <%=notification.action%> en el jale <%= notification.notifiable.name %> por el paquete <%= notification.notifiable.pack_type %><br>
-      <time><%=distance_of_time_in_words(notification.created_at, Time.now)%></time>
-    </p>
+  <div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
+    <a href='<%=finance_path(:table => "sales") %>'>
+      <div class='left'>
+        <div class='icon_notify'>
+          <img class='nav-avatar' src='<%=notification.user.image_url%>'>
+        </div>
+        <p>
+          <strong><%=notification.user.slug%></strong>
+          <%=notification.action%>
+          en el jale
+          <%= notification.notifiable.name %>
+          por el paquete
+          <%= notification.notifiable.pack_type %><br>
+          <time><%=distance_of_time_in_words(notification.created_at, Time.now)%></time>
+        </p>
+      </div>
+    </a>
   </div>
-</a>
-</div>
 <% else %>
-<div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
-<a href='<%=request_path(notification.notifiable.slug) %>'>
-  <div class='left'>
-    <div class='icon_notify'>
-      <img class='nav-avatar' src='<%=notification.user.image_url%>'>
-    </div>
-    <p><strong><%=notification.user.slug%></strong> <%=notification.action%> en el pedido  <%= notification.notifiable.name %><br>
-      <time><%=distance_of_time_in_words(notification.created_at, Time.now)%></time>
-    </p>
+  <div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
+    <a href='<%=request_path(notification.notifiable.slug) %>'>
+      <div class='left'>
+        <div class='icon_notify'>
+          <img class='nav-avatar' src='<%=notification.user.image_url%>'>
+        </div>
+        <p>
+          <strong><%=notification.user.slug%></strong>
+          <%=notification.action%>
+          en el pedido
+          <%= notification.notifiable.name %><br>
+          <time><%=distance_of_time_in_words(notification.created_at, Time.now)%></time>
+        </p>
+      </div>
+    </a>
   </div>
-</a>
-</div>
-
 <% end %>
