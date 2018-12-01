@@ -1,4 +1,3 @@
-
 json.array! @notifications do |notification|
   json.id notification.id
   json.user do

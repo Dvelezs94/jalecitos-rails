@@ -4,7 +4,5 @@ $(".message_view_box").prepend('<%= j render "conversations/conversation_content
 $('.pagination').remove();
 <% if @messages.next_page %>
   $(".message_view_box").prepend('<%= j paginate(@messages) %>');
-  //if the user is still scrolling up when loading, prevent on loading again more messages
-  $(".message_view_box").scroll()
 <% end %>
 <% sleep 1 %>

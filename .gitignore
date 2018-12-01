@@ -33,4 +33,3 @@
 /doc
 .DS_Store
 Gemfile.lock
-schema.rb

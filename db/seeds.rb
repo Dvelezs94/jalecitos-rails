@@ -83,7 +83,7 @@ User.create!(
  )
 puts "Created testing user2"
 
-reindex_list = [Gig, Request, Message]
+reindex_list = [Gig, Request, Message, Notification]
 reindex_list.each do |model|
   model.reindex
 end
