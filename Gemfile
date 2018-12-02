@@ -119,5 +119,3 @@ gem 'country_select', '~> 3.1'
 gem 'sendgrid-ruby', '~> 5.3'
 # PWA
 gem 'serviceworker-rails', '~> 0.5.5'
-# Push notifications
-gem 'fcm', '~> 0.0.6'
