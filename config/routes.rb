@@ -68,5 +68,7 @@ Rails.application.routes.draw do
   get 'requests', to: 'pages#request_index'
   get 'finance', to: 'pages#finance'
   get 'disputes', to: 'disputes#index'
+  # subscribe device to notifications
+  post 'subscribe', to: 'notifications#subscribe'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
