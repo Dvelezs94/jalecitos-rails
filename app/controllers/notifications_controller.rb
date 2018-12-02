@@ -5,7 +5,7 @@ class NotificationsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @notifications = Notification.search("*", where:{recipient_id: current_user.id}, order: {created_at: :desc}, includes: [:user, :notifiable], limit: 15)
+    @notifications = Notification.search("*", where:{recipient_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], includes: [:user, :notifiable], limit: 15)
   end
 
   def all
