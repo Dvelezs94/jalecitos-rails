@@ -1,0 +1,8 @@
+$(document).on('turbolinks:load', function() {
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('/serviceworker.js', {scope: './'})
+}
+else {
+  console.error('Service worker is not supported in this browser');
+}
+});

@@ -32,6 +32,9 @@ class User < ApplicationRecord
   has_many :purchases, class_name: :Order, foreign_key: :user
   has_many :sales, class_name: :Order, foreign_key: :receiver
 
+  #Push subscriptions reference
+  has_many :push_subscriptions
+
   #Define who can do the rating, which happens to be the user
   ratyrate_rater
 

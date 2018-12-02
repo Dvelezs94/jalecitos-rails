@@ -31,6 +31,9 @@ services:
       - OPENPAY_PUBLIC_KEY=pk_c958326b8eb44e8b8ace1001948cb0ab
       - ELASTICSEARCH_URL=http://elasticsearch:9200
       - SENDGRID_API_KEY=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
+      # Push notification keys
+      - VAPID_PUBLIC_KEY=BPlTPXN3MmaMYKFqc3xFD4V4CQZQc7FKZBSZWbJAPskPK-AR0gRkQ2bQkt4ye8U_i_ZXoZ7hLrQ_laXf6yZyzsE=
+      - VAPID_PRIVATE_KEY=jkyMkxB5Vqh5BOlWXc1_7xantHWH_H8w7WCXRDFxFD0=
 
 
     ports:
