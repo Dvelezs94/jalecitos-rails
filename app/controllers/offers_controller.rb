@@ -7,6 +7,7 @@ class OffersController < ApplicationController
   before_action :set_offer, only: [:edit, :update, :destroy]
   access all: [:show], user: :all
   before_action :check_offer_ownership, only:[:edit, :update, :destroy]
+  before_action :check_if_offered, only: :create
 
   # GET /offers/new
   def new
@@ -20,7 +21,6 @@ class OffersController < ApplicationController
 
   # POST /offers
   def create
-    check_if_offered
     @offer = Offer.new( sanitized_params( offer_params_create ) )
     if @offer.save
       create_notification(@offer.user, @offer.request.user, "oferto", @offer.request)

@@ -61,6 +61,24 @@ function onFetch(event) {
   );
 }
 
+
 self.addEventListener('install', onInstall);
 self.addEventListener('activate', onActivate);
 self.addEventListener('fetch', onFetch);
+self.addEventListener('push', event => {
+  object = JSON.parse(event.data.text())
+  var title = object.title || "Nueva Notificacion";
+  var body = object.body;
+  var icon = object.icon || "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png";
+  var tag = object.tag
+  var badge = object.badge
+
+  event.waitUntil(
+      self.registration.showNotification(title, {
+          body: body,
+          icon: icon,
+          tag: tag,
+          badge: badge
+      })
+  );
+});
