@@ -19,7 +19,8 @@
   display: block;
   position: fixed;
   z-index: 100000;
-  width: 100%;
+  width: auto;
+  right: 0;
 }
 
 .toast__cell{
