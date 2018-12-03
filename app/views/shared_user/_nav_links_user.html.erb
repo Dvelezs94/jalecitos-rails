@@ -61,13 +61,13 @@
 
     <li class="nav-item  mesages_" data-behavior="read-notifications">
       <div class="dropdown">
-        <a class="nav-link js-scroll-trigger notification" data-behavior="notifications"><%= fa_icon "bell", class: "fa_inline fa-lg" %><span data-behavior="unread-count"></span></a>
+        <a class="nav-link js-scroll-trigger notification" data-behavior="notifications"><%= fa_icon "bell", class: "fa_inline fa-lg" %><span data-behavior="unread-count" id="unread-count"></span></a>
         <div class="dropdown-content">
           <div class="tab-content">
-            <div data-behavior="notification-items">
+            <div data-behavior="notification-items" class="notification-items">
 
               <!-- notifications are built here -->
-                
+
             </div>
           </div>
         </div>

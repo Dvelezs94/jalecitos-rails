@@ -34,7 +34,9 @@ class NotificationRelayJob < ApplicationJob
     end
 
     # Render Website notification
-    html = ApplicationController.render partial: "notifications/flash/notification", locals: {notification: notification}, formats: [:html]
-    ActionCable.server.broadcast "notifications-#{notification.recipient_id}", html: html
+    html = {:fadeItem => ApplicationController.render(partial: "notifications/flash/notification", locals: {notification: notification}, formats: [:html]),
+            :listItem => ApplicationController.render(partial: "notifications/notification", locals: {notification: notification})
+      }
+    ActionCable.server.broadcast "notifications-#{notification.recipient_id}", html: html.to_json
   end
 end
