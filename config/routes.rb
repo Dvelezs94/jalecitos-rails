@@ -71,5 +71,6 @@ Rails.application.routes.draw do
   get 'disputes', to: 'disputes#index'
   # subscribe device to notifications
   post 'subscribe', to: 'notifications#subscribe'
+  delete 'subscribe', to: 'notifications#drop_subscribe'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
