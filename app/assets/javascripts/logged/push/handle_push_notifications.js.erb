@@ -1,3 +1,33 @@
+function fetchSubscription(subscription){
+  fetch("/subscribe", {
+    method: "POST",
+    headers: { 'Content-Type' : 'application/json'},
+    body: JSON.stringify(subscription)
+  });
+}
+function dropSubscription(subscription) {
+  fetch("/subscribe", {
+    method: "DELETE",
+    headers: { 'Content-Type' : 'application/json'},
+    body: JSON.stringify(subscription)
+  });
+}
+
+function createSWSubscription(registration){
+  <% @key = Base64.urlsafe_decode64(ENV.fetch('VAPID_PUBLIC_KEY')).bytes %>
+  const vapidPublicKey = new Uint8Array(<%= @key %>)
+  return registration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: vapidPublicKey
+  })
+  .then( res => res.toJSON() )
+  .then( subscription => {
+    fetchSubscription(subscription);
+  })
+ .then( new Notification("Ahora estaras al tanto de tus jales!"))
+}
+
+
 function enableNotifications(subscription){
   if (!("Notification" in window)) {
     console.error("Tu navegador no soporta notificaciones");
@@ -13,27 +43,31 @@ function enableNotifications(subscription){
     Notification.requestPermission(function (permission) {
       // If the user accepts, let's create a notification
       if (permission == "granted") {
-        <% @key = Base64.urlsafe_decode64(ENV.fetch('VAPID_PUBLIC_KEY')).bytes %>
-        const vapidPublicKey = new Uint8Array(<%= @key %>)
-
         navigator.serviceWorker.ready
           .then(function(registration) {
             console.log('Successfully registered!', ':^)');
-            return registration.pushManager.subscribe({
-              userVisibleOnly: true,
-              applicationServerKey: vapidPublicKey
-            })
-            .then( res => res.toJSON() )
-            .then( subscription => {
-              fetch("/subscribe", {
-                method: "POST",
-                headers: { 'Content-Type' : 'application/json'},
-                body: JSON.stringify(subscription)
-              });
-            })
-           .then( new Notification("Ahora estaras al tanto de tus jales!"))
+            createSWSubscription(registration);
           });
         }
      });
    }
+ }
+
+ function resetNotifications() {
+   navigator.serviceWorker.ready
+    .then((registration) => {
+      registration.pushManager.getSubscription()
+        .then((subscription) => {
+          if (!subscription) {
+            createSWSubscription(registration);
+            return;
+          }
+          dropSubscription(subscription);
+          subscription.unsubscribe()
+            .catch((e) => {
+              logger.error('Error thrown while unsubscribing from push messaging', e);
+            });
+          resetNotifications()
+        });
+    });
  }

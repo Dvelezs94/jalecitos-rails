@@ -1,7 +1,7 @@
 class NotificationsController < ApplicationController
   layout 'logged'
   before_action :authenticate_user!
-  before_action :subscribe_params, only: [:subscribe]
+  before_action :subscribe_params, only: [:subscribe, :drop_subscribe]
   skip_before_action :verify_authenticity_token
 
   def index
@@ -22,30 +22,6 @@ class NotificationsController < ApplicationController
     render json: {success: true}
   end
 
-  # create push notification
-  # def push
-  #
-  #   message = {
-  #     title: "title",
-  #     body: "body",
-  #     icon: "http://example.com/icon.pn"
-  #   }
-  #   Webpush.payload_send(
-  #   message: JSON.generate(message),
-  #   endpoint: params[:subscription][:endpoint],
-  #   p256dh: params[:subscription][:keys][:p256dh],
-  #   auth: params[:subscription][:keys][:auth],
-  #   vapid: {
-  #     subject: "mailto:sender@example.com",
-  #     public_key: ENV.fetch('VAPID_PUBLIC_KEY'),
-  #     private_key: ENV.fetch('VAPID_PRIVATE_KEY')
-  #   },
-  #     ssl_timeout: 5, # value for Net::HTTP#ssl_timeout=, optional
-  #     open_timeout: 5, # value for Net::HTTP#open_timeout=, optional
-  #     read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
-  #   )
-  # end
-
   def subscribe
     @subscription = PushSubscription.new(subscribe_params)
     @subscription.user = current_user
@@ -53,6 +29,15 @@ class NotificationsController < ApplicationController
       render json: { message: "Added subscription" }, status: :ok
     else
       render json: { message: "Failure when adding subscription" }, status: :not_implemented
+    end
+  end
+
+  def drop_subscribe
+    @subscription = subscribe_params[:auth]
+    if current_user.push_subscriptions.find_by_auth(@subscription).destroy
+      render json: { message: "Removed subscription" }, status: :ok
+    else
+      render json: { message: "Failure when removing subscription" }, status: :not_implemented
     end
   end
 
