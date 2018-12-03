@@ -29,7 +29,7 @@ end
         request.status = Faker::Number.between(0, 3)
       end
     end
-    10.times do |x|
+    10.times do
       user.gigs.new do |gig|
         gig.name = "#{Faker::Lorem.paragraph(2, true)}"
         gig.description = Faker::Lorem.paragraph(30, true)
@@ -42,7 +42,7 @@ end
   end
 end
 
-20.times do |x|
+200.times do |x|
   3.times do |y|
     Package.create! do |package|
       package.name = Faker::Commerce.product_name + "#{x}#{y}"
