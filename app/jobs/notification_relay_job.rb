@@ -1,14 +1,18 @@
 class NotificationRelayJob < ApplicationJob
+  include ApplicationHelper
+  include Rails.application.routes.url_helpers
   queue_as :default
 
   def perform(notification)
     # Create push notification
     @message = {
       title: "Jalecitos",
-      body: "message goes here",
+      body:  "#{notification.user.slug} #{notification.action} #{build_notifiable_type(notification.notifiable)}",
       icon: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png",
       badge: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png",
-      tag: "jalecios"
+      tag: "jalecios",
+      openUrl: url_generator_helper(notification, notification.notifiable),
+      vibrate: [125, 75, 125],
     }
 
     @vapid = {
