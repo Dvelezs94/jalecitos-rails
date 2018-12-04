@@ -27,47 +27,21 @@ function createSWSubscription(registration){
  .then( new Notification("Ahora estaras al tanto de tus jales!"))
 }
 
-
-function enableNotifications(subscription){
-  if (!("Notification" in window)) {
-    console.error("Tu navegador no soporta notificaciones");
-  }
-
-  // Let's check whether notification permissions have already been granted
-  else if (Notification.permission === "granted") {
-    new Notification("Tienes notificaciones habilitadas");
-  }
-
-  // Otherwise, we need to ask the user for permission
-  else if (Notification.permission !== "denied") {
-    Notification.requestPermission(function (permission) {
-      // If the user accepts, let's create a notification
-      if (permission == "granted") {
-        navigator.serviceWorker.ready
-          .then(function(registration) {
-            console.log('Successfully registered!', ':^)');
-            createSWSubscription(registration);
-          });
+function resetNotifications() {
+ navigator.serviceWorker.ready
+  .then((registration) => {
+    registration.pushManager.getSubscription()
+      .then((subscription) => {
+        if (!subscription) {
+          createSWSubscription(registration);
+          return;
         }
-     });
-   }
- }
-
- function resetNotifications() {
-   navigator.serviceWorker.ready
-    .then((registration) => {
-      registration.pushManager.getSubscription()
-        .then((subscription) => {
-          if (!subscription) {
-            createSWSubscription(registration);
-            return;
-          }
-          dropSubscription(subscription);
-          subscription.unsubscribe()
-            .catch((e) => {
-              logger.error('Error thrown while unsubscribing from push messaging', e);
-            });
-          resetNotifications()
-        });
-    });
- }
+        dropSubscription(subscription);
+        subscription.unsubscribe()
+          .catch((e) => {
+            logger.error('Error thrown while unsubscribing from push messaging', e);
+          });
+        resetNotifications()
+      });
+  });
+}
