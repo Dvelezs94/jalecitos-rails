@@ -10,7 +10,7 @@ class NotificationRelayJob < ApplicationJob
       body:  "#{notification.user.slug} #{notification.action} #{build_notifiable_type(notification.notifiable)}",
       icon: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png",
       badge: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png",
-      tag: "jalecios",
+      # tag: "jalecios",
       openUrl: url_generator_helper(notification, notification.notifiable),
       vibrate: [125, 75, 125],
     }
