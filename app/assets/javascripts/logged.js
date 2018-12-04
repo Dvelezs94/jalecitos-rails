@@ -28,3 +28,5 @@
 //= require_tree ./logged
 
 //= require serviceworker-companion
+
+//= require clipboard
