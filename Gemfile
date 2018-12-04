@@ -121,3 +121,5 @@ gem 'sendgrid-ruby', '~> 5.3'
 gem 'serviceworker-rails', '~> 0.5.5'
 # Push notifications
 gem 'webpush', '~> 0.3.4'
+# Copy items to clipboard using JS
+gem 'clipboard-rails', '~> 1.7', '>= 1.7.1'

@@ -10,12 +10,18 @@ $(document).on('turbolinks:load', function() {
 
     if (navigator.share) {
       navigator.share({
+          text: "Observa este jale! Creo es de tu interes.",
           url: url
       })
         .then(() => console.log('Successful share'))
         .catch((error) => console.log('Error sharing', error));
     } else {
-      console.log("sharing is not supported on this browser");
+      new Clipboard('#share', {
+        text: function() {
+          return url;
+        }
+      });
+      alert("La Direccion ha sido copiada en el portapapeles");
     }
     event.preventDefault();
   });
