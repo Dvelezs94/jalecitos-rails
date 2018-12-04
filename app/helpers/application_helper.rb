@@ -43,7 +43,7 @@ module ApplicationHelper
     if image.nil?
       "https://picsum.photos/600/400?image=#{Faker::Number.between(1, 500)}"
     else
-      image
+      image.url
     end
   end
 

@@ -1,6 +1,6 @@
 <div class="col-lg-2 col-md-4 col-sm-6 col-12 single_gig">
    <div class="get_pro_content">
-      <%= link_to image_tag( image_display_helper(gig.image_url), width: "100%", height: 150 ), user_gig_path(gig.user.slug,gig) %>
+      <%= link_to image_tag( image_display_helper(gig.images[0]), width: "100%", height: 150 ), user_gig_path(gig.user.slug,gig) %>
       <div class="get_pro_content_container">
          <div class="gig_avatar_">
            <%=link_to image_tag(avatar_display_helper(gig.user.image_url(:thumb)), class: "gig-thumb"), user_path(gig.user.slug) %>

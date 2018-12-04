@@ -1,20 +1,39 @@
 <div class="description">
   <div class="wrapper">
     <div id="product__slider">
-      <div class="product__slider-main">
-        <div class="slide"><%= link_to image_tag( image_display_helper(@gig.image_url), class: "img-responsive" ), user_gig_path(@gig.user.slug,@gig) %></div>
-        <div class="slide"><%= link_to image_tag( image_display_helper(@gig.image_url), class: "img-responsive" ), user_gig_path(@gig.user.slug,@gig) %></div>
-        <div class="slide"><%= link_to image_tag( image_display_helper(@gig.image_url), class: "img-responsive" ), user_gig_path(@gig.user.slug,@gig) %></div>
-        <div class="slide"><%= link_to image_tag( image_display_helper(@gig.image_url), class: "img-responsive" ), user_gig_path(@gig.user.slug,@gig) %></div>
-        <div class="slide"><%= link_to image_tag( image_display_helper(@gig.image_url), class: "img-responsive" ), user_gig_path(@gig.user.slug,@gig) %></div>
-      </div>
-      <div class="product__slider-thmb">
-        <div class="slide"><%= link_to image_tag( image_display_helper(@gig.image_url), class: "img-responsive" ), user_gig_path(@gig.user.slug,@gig) %></div>
-        <div class="slide"><%= link_to image_tag( image_display_helper(@gig.image_url), class: "img-responsive" ), user_gig_path(@gig.user.slug,@gig) %></div>
-        <div class="slide"><%= link_to image_tag( image_display_helper(@gig.image_url), class: "img-responsive" ), user_gig_path(@gig.user.slug,@gig) %></div>
-        <div class="slide"><%= link_to image_tag( image_display_helper(@gig.image_url), class: "img-responsive" ), user_gig_path(@gig.user.slug,@gig) %></div>
-        <div class="slide"><%= link_to image_tag( image_display_helper(@gig.image_url), class: "img-responsive" ), user_gig_path(@gig.user.slug,@gig) %></div>
+
+      <% if @gig.images.count > 1 %>
+        <div class="product__slider-main">
+          <% @gig.images.each do |image| %>
+            <div class='slide'>
+              <%= link_to( image_tag( image.url, class: 'img-responsive'), user_gig_path(@gig.user.slug,@gig) ) %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="product__slider-thmb">
+          <% @gig.images.each do |image| %>
+            <div class='slide'>
+              <%= link_to( image_tag( image.url, class: 'img-responsive'), user_gig_path(@gig.user.slug,@gig) ) %>
+            </div>
+          <% end %>
+        </div>
+        <% elsif @gig.images.count == 1 %>
+          <div class="product__slider-main">
+            <% @gig.images.each do |image| %>
+              <div class='slide'>
+                <%= link_to( image_tag( image.url, class: 'img-responsive'), user_gig_path(@gig.user.slug,@gig) ) %>
+              </div>
+            <% end %>
+          </div>
+
+        <% else %>
+          <div class="product__slider-main">
+            <%= link_to( image_tag( "https://picsum.photos/600/400?image=#{Faker::Number.between(1, 500)}", class: 'img-responsive'), user_gig_path(@gig.user.slug,@gig) ) %>
+          </div>
+
+        <% end %>
+
       </div>
     </div>
   </div>
-</div>
