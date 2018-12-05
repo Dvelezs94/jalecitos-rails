@@ -22,8 +22,8 @@
       <!--  -->
       <div class="favourites_and_price">
          <div class="row">
-            <div class="col-lg-2 col-md-4 col-sm-3 col-3">
-               <%= fa_icon("thumbs-up") %>
+            <div class="col-lg-2 col-md-4 col-sm-3 col-3" id="likes-<%= gig.slug %>">
+               <%= render "gigs/likes", gig: gig %>
             </div>
             <div class="col-lg-10 col-md-8 col-sm-9 col-9 lowest-price">
                <span>Desde</span><strong> <%= query_home_or_profile_helper(gig) %></strong>

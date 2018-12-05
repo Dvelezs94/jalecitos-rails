@@ -26,6 +26,7 @@ Rails.application.routes.draw do
               get :toggle_status
               get :ban_gig, as: 'ban'
          end
+         resource :like, only: [:create, :destroy]
          resources :packages, except: [:destroy,:show,:index, :edit, :update] do
            collection do
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_193235) do
+ActiveRecord::Schema.define(version: 2018_12_05_175540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2018_12_03_193235) do
   create_table "gigs", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.string "image"
     t.string "location"
     t.integer "order_count", default: 0
     t.datetime "created_at", null: false
@@ -89,6 +90,15 @@ ActiveRecord::Schema.define(version: 2018_12_03_193235) do
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true
     t.index ["user_id"], name: "index_gigs_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "gig_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gig_id"], name: "index_likes_on_gig_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -328,6 +338,8 @@ ActiveRecord::Schema.define(version: 2018_12_03_193235) do
   add_foreign_key "extras", "gigs", column: "gigs_id"
   add_foreign_key "gigs", "categories"
   add_foreign_key "gigs", "users"
+  add_foreign_key "likes", "gigs"
+  add_foreign_key "likes", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "notifications", "users"
