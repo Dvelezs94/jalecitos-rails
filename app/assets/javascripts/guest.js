@@ -19,3 +19,5 @@
 //= require_tree ./guest
 
 //= require serviceworker-companion
+
+//= require clipboard

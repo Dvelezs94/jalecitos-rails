@@ -121,3 +121,6 @@ gem 'serviceworker-rails', '~> 0.5.5'
 gem 'webpush', '~> 0.3.4'
 #user profile image
 gem 'jquery-fileupload-rails', '~> 1.0'
+# Copy items to clipboard using JS
+gem 'clipboard-rails', '~> 1.7', '>= 1.7.1'
+

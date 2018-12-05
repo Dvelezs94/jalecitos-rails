@@ -72,13 +72,42 @@ self.addEventListener('push', event => {
   var icon = object.icon || "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png";
   var tag = object.tag
   var badge = object.badge
+  var url = object.openUrl
 
   event.waitUntil(
       self.registration.showNotification(title, {
           body: body,
           icon: icon,
           tag: tag,
-          badge: badge
+          badge: badge,
+          data: {
+            url: url
+          }
       })
   );
+});
+self.addEventListener('notificationclick', e => {
+
+  const notification = e.notification;
+  console.log(notification);
+  const resp = clients.matchAll()
+  .then (tabs => {
+    //  only return tabs that are visible
+    let tab = tabs.find( t => {
+      return t.visibilityState === 'visible'
+    });
+    // navigate to the tab and focus it if is open
+    if (tab !== undefined) {
+      tab.navigate(notification.data.url);
+      tab.focus();
+      // otherwise open a new browser and go to the url
+    } else {
+      clients.openWindow(notification.data.url);
+    }
+
+    notification.close();
+  });
+
+  e.waitUntil(resp);
+
 });

@@ -1,6 +1,7 @@
 <div class="card" style="width: 70%; padding: 10px; margin: 20px auto;">
   <div class="card-body">
     <h5 class="card-title"><%= @request.name %></h5>
+    <%= link_to fa_icon("share", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
     <p class="card-text"><%= @request.description.html_safe %></p>
     <p class="card-text">Presupuesto: <%= @request.budget %> MXN</p>
     <p><small class="text-muted"><%=@request.location%></small></p>
