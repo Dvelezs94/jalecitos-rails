@@ -34,11 +34,14 @@ class Gig < ApplicationRecord
   before_update :erase_s3_img
 
   def erase_s3_img
-    #get the gig to obtain past images
-    @gig = Gig.find(self.id)
-    #delete each image from s3
-    @gig.images.each do |image|
-      image.remove!
+    #if the user uploaded new images
+    if images.size > 0
+      #get the gig to obtain past images
+      @gig = Gig.find(self.id)
+      #delete each image from s3
+      @gig.images.each do |image|
+        image.remove!
+      end
     end
   end
 
