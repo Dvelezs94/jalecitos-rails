@@ -121,5 +121,3 @@ gem 'serviceworker-rails', '~> 0.5.5'
 gem 'webpush', '~> 0.3.4'
 #user profile image
 gem 'jquery-fileupload-rails', '~> 1.0'
-#UI of file uploads
-gem 'bootstrap_file_input_rails', '~> 1.0'
