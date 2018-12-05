@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 2018_12_03_193235) do
   create_table "gigs", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.string "image"
     t.string "location"
     t.integer "order_count", default: 0
     t.datetime "created_at", null: false
