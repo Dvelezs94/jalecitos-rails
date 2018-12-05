@@ -23,8 +23,6 @@
 
 //= require jquery-fileupload/basic
 
-//= require bootstrap.file-input
-
 //= require_tree ./main
 
 //= require_tree ./logged
