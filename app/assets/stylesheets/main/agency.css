@@ -55,10 +55,8 @@ section h3.section-subheading {
   padding: 20px 40px;
 }
 
-.btn-primary:active, .btn-primary:focus, .btn-primary:hover {
-  background-color: #fec810 !important;
-  border-color: #fec810 !important;
-  color: white;
+.btn-primary:hover {
+  cursor: pointer;
 }
 
 .btn-primary:active, .btn-primary:focus {

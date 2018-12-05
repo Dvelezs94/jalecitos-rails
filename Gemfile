@@ -95,8 +95,6 @@ gem 'friendly_id', '~> 5.2', '>= 5.2.4'
 gem 'acts-as-taggable-on', '~> 6.0'
 # Edit in place
 gem 'best_in_place', '~> 3.1', '>= 3.1.1'
-# JQuery file upload
-gem 'jquery-fileupload-rails', '~> 0.4.7'
 # jquery easing
 gem 'jquery-easing-rails', '~> 0.0.2'
 #jquery form validation
@@ -121,5 +119,8 @@ gem 'sendgrid-ruby', '~> 5.3'
 gem 'serviceworker-rails', '~> 0.5.5'
 # Push notifications
 gem 'webpush', '~> 0.3.4'
+#user profile image
+gem 'jquery-fileupload-rails', '~> 1.0'
 # Copy items to clipboard using JS
 gem 'clipboard-rails', '~> 1.7', '>= 1.7.1'
+

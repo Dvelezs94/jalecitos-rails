@@ -1,6 +1,10 @@
-/* input[type="file"] {
-    display: none;
-} */
+.file-input,
+.field_with_errors {
+    width: 100%;
+}
+.each_current_img{
+  margin: 5px;
+}
 .custom-file-upload {
     border: 1px solid #ccc;
     display: inline-block;
@@ -322,9 +326,11 @@ section.plan.cf {
 #request_budget_hint{
   top: -200%;
 }
-#gig_tags_hint,
 #request_tags_hint{
   top: -130%;
+}
+#gig_tags_hint{
+  top: -25%;
 }
 /*end*/
 .form_block:hover .tooltiptext {
