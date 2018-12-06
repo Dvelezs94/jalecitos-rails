@@ -1,0 +1,48 @@
+<%= form_with(model: gig,url: user_gig_galleries_path(current_user.slug, gig), method: :post, :html => { :class => "current_form" }, local: true) do |form| %>
+<% if gig.errors.any? %>
+  <%gig.errors.full_messages.each do |error| %>
+    <%= notification_generator_helper error, :error %>
+  <% end %>
+<% end %>
+<!-- ---post request form -->
+<div class="container-fluid section request_post_form">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 col-md-12 centered-form">
+        <h3>Agrega tu galería de imágenes</h3>
+        <div class="form_box post_form_col">
+
+          <div class="col-lg-12  col-md-12">
+            <p>Imágenes a subir(<strong>Opcional</strong>):</p>
+          </div>
+          <div class="form_block row col-lg-12">
+              <%= form.file_field :images, multiple: true, id: "file-input"%>
+              <%= render 'shared_user/gigs/forms/hints/images_hint.html.erb' %>
+          </div>
+            <hr>
+
+          <!-- 3 end -->
+          <div class="row">
+
+            <div class="col-lg-12  col-md-12 end-buttons">
+              <div class="col-lg-6  col-md-6 ">
+                <%= link_to 'Cancelar', user_path(current_user.slug), :data => {:confirm => 'Tu progreso hasta ahora NO se guardará'}, class: "btn btn-danger" %>
+              </div>
+              <div class="col-lg-6  col-md-6 ">
+              <%= link_to 'Continuar', edit_user_gig_packages_path(current_user.slug, gig ), class: "btn btn-success" %>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- form box -->
+        <!-- -->
+      </div>
+      <!-- -->
+    </div>
+    <!-- col lg 7 -->
+  </div>
+</div>
+<!-- container fluid -->
+
+<% end %>

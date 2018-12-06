@@ -25,6 +25,8 @@ class GigsController < ApplicationController
 
   # GET /gigs/1/edit
   def edit
+    #here the current images are saved in the form (hidden for the user)
+    @images = []
   end
 
   # POST /gigs
@@ -32,7 +34,7 @@ class GigsController < ApplicationController
     @gig = Gig.new(sanitized_params(gig_params))
 
     if @gig.save
-      redirect_to new_user_gig_package_path(params[:user_id],@gig)
+      redirect_to user_gig_galleries_path(current_user.slug, @gig)
     else
       render :new
     end
@@ -42,7 +44,7 @@ class GigsController < ApplicationController
   def update
     if @gig.update(sanitized_params(gig_params))
       @package = Package.find_by_gig_id(@gig)
-      redirect_to edit_user_gig_packages_path(params[:user_id], @gig )
+      redirect_to user_gig_galleries_path(current_user.slug, @gig)
     else
       render :edit
     end

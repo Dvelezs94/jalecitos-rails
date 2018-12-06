@@ -31,19 +31,6 @@ class Gig < ApplicationRecord
   enum status: { draft: 0, published: 1, banned: 2}
   mount_uploaders :images, GigUploader
   #Actions
-  before_update :erase_s3_img
-
-  def erase_s3_img
-    #if the user uploaded new images
-    if images.size > 0
-      #get the gig to obtain past images
-      @gig = Gig.find(self.id)
-      #delete each image from s3
-      @gig.images.each do |image|
-        image.remove!
-      end
-    end
-  end
 
   def check_max_files
     if images.size > 5
