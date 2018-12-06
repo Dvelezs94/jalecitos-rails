@@ -27,6 +27,10 @@ class GigUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
+  # configure do |config|
+  #   config.remove_previously_stored_files_after_update = false
+  # end
+  
   # Process files as they are uploaded:
   # process scale: [200, 300]
   #

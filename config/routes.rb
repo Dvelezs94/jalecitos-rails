@@ -21,8 +21,10 @@ Rails.application.routes.draw do
      get 'configuration', to: 'users#configuration', as: 'config'
      resources :banks, only: [:create, :destroy]
      resources :cards, only: [:create, :destroy]
+
      resources :gigs, except: :index do
-         member do
+       resources :galleries, only: [:index, :create]
+       member do
               get :toggle_status
               get :ban_gig, as: 'ban'
          end

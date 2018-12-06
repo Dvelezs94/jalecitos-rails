@@ -1,0 +1,12 @@
+<div class="row current_images">
+  <%= render partial: "galleries/image", collection: @gig.images %>
+</div>
+
+<script id="template-upload" type="text/x-tmpl">
+<div class="upload">
+{%=o.name%}
+<div class="progress"><div class= "bar" style="width: 0%"></div></div>
+</div>
+</script>
+
+<%= render 'form', gig: @gig %>
