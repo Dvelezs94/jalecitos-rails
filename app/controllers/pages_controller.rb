@@ -30,6 +30,10 @@ class PagesController < ApplicationController
     @sales = current_user.sales.where.not(status: "denied").order(updated_at: :desc)
   end
 
+  def liked
+    @liked_gigs = Gig.find(current_user.likes.pluck(:gig_id))
+  end
+
   private
 
   def admin_redirect
