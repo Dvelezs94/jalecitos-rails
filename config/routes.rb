@@ -28,11 +28,13 @@ Rails.application.routes.draw do
               get :toggle_status
               get :ban_gig, as: 'ban'
          end
-       resources :packages, except: [:destroy,:show,:index, :edit, :update] do
-        collection do
-           get 'edit_packages', to: 'packages#edit_packages', as: 'edit'
-           patch 'update_packages', to: 'packages#update_packages', as: 'update'
-        end
+         resource :like, only: [:create, :destroy]
+         resources :packages, except: [:destroy,:show,:index, :edit, :update] do
+           collection do
+
+             get 'edit_packages', to: 'packages#edit_packages', as: 'edit'
+             patch 'update_packages', to: 'packages#update_packages', as: 'update'
+           end
            member do
              get :hire
            end
@@ -70,6 +72,7 @@ Rails.application.routes.draw do
   get 'requests', to: 'pages#request_index'
   get 'finance', to: 'pages#finance'
   get 'disputes', to: 'disputes#index'
+  get 'likes', to: 'pages#liked'
   # subscribe device to notifications
   post 'subscribe', to: 'notifications#subscribe'
   delete 'subscribe', to: 'notifications#drop_subscribe'

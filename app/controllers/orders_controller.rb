@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
   before_action :verify_order_owner, only: [:start, :complete]
   before_action :verify_owner_or_receiver, only: [:refund]
   before_action :verify_charge_response, except: [:create]
+  before_action :verify_order_limit, only: [:create]
 
 
   def create
@@ -214,6 +215,13 @@ class OrdersController < ApplicationController
           flash[:error] = "No se puede completar la transaccion"
           break
         end
+      end
+    end
+
+    def verify_order_limit
+      if current_user.purchases.pending.count >= 5
+        flash[:error] = "No puedes tener mas de 5 jales pendientes"
+        redirect_to finance_path(:table => "purchases")
       end
     end
 end

@@ -238,7 +238,7 @@
       float: left;
     }
 
-    a.continue_purchase {
+    .continue_purchase {
       background: #222;
       border-width: 0;
       margin-bottom: 15px;

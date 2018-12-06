@@ -43,6 +43,9 @@ class User < ApplicationRecord
 
   #withdrawals Relations
   has_many :withdrawals
+
+  # likes
+  has_many :likes
   ############################################################################################
   ## PeterGate Roles                                                                        ##
   ## The :user role is added by default and shouldn't be included in this list.             ##
@@ -123,6 +126,10 @@ class User < ApplicationRecord
        @order_ids << b.id
      end
      return {amount: @balance, order_ids: @order_ids}
+   end
+
+   def likes?(gig)
+     gig.likes.where(user: self).any?
    end
 
    private

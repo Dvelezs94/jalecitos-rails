@@ -2,7 +2,8 @@
   <div class="container-fluid">
     <div class="row ">
       <%= render "shared_user/hire/steps" %>
-      <div class="container section">
+      <%= render "shared_user/hire/disclaimer" %>
+      <div class="container">
         <%= form_for @order, url: orders_path do |f|  %>
         <div class="row">
           <div class="col-lg-8 checkout_cart">
