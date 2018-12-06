@@ -25,8 +25,6 @@ class GigsController < ApplicationController
 
   # GET /gigs/1/edit
   def edit
-    #here the current images are saved in the form (hidden for the user)
-    @images = []
   end
 
   # POST /gigs
