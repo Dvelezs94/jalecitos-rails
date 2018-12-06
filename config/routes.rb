@@ -70,6 +70,7 @@ Rails.application.routes.draw do
   get 'requests', to: 'pages#request_index'
   get 'finance', to: 'pages#finance'
   get 'disputes', to: 'disputes#index'
+  get 'likes', to: 'pages#liked'
   # subscribe device to notifications
   post 'subscribe', to: 'notifications#subscribe'
   delete 'subscribe', to: 'notifications#drop_subscribe'
