@@ -1,3 +1,7 @@
-<div class="img-thumbnail">
+<div class="current_img img-thumbnail">
   <%= image_tag(image.url, width: 250) %>
+  <%= link_to fa_icon("trash", class: "fa-lg gig_action_icon", title: "Eliminar"),
+      user_gig_gallery_path(current_user.slug, @gig.slug, image.file.filename),
+      method: :delete, data: {confirm: "¿Estás seguro de borrar este elemento?"},
+      remote: true%>
 </div>

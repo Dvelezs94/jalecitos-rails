@@ -12,12 +12,19 @@ class GigUploader < CarrierWave::Uploader::Base
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
+
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
   #single image size
   def size_range
     1..10.megabytes
+  end
+  def filename
+    "#{original_filename}" if original_filename
+  end
+  def extension_whitelist
+    %w(jpg jpeg gif png)
   end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
@@ -30,7 +37,7 @@ class GigUploader < CarrierWave::Uploader::Base
   # configure do |config|
   #   config.remove_previously_stored_files_after_update = false
   # end
-  
+
   # Process files as they are uploaded:
   # process scale: [200, 300]
   #
@@ -45,13 +52,8 @@ class GigUploader < CarrierWave::Uploader::Base
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  def extension_whitelist
-    %w(jpg jpeg gif png)
-  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+
 end

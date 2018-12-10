@@ -2,6 +2,9 @@
 .field_with_errors {
     width: 100%;
 }
+.bar{
+  background-color: green;
+}
 .each_current_img{
   margin: 5px;
 }

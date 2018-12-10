@@ -23,7 +23,7 @@ Rails.application.routes.draw do
      resources :cards, only: [:create, :destroy]
 
      resources :gigs, except: :index do
-       resources :galleries, only: [:index, :create]
+       resources :galleries, only: [:index, :create, :destroy]
        member do
               get :toggle_status
               get :ban_gig, as: 'ban'
