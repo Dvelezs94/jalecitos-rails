@@ -35,9 +35,6 @@ class Gig < ApplicationRecord
   enum status: { draft: 0, published: 1, banned: 2}
   mount_uploaders :images, GigUploader
   #Actions
-  puts "MODEL"*50
-  puts name
-
 
 
 end
