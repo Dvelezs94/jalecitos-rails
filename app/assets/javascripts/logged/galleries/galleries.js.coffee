@@ -1,10 +1,10 @@
 jQuery ->
-  if $("#file-input").length
-    $("#file-input").fileupload
+  if $("#new_image").length
+    $("#new_image").fileupload
       dataType: "script"
       add: (e, data) ->
         data.context = $(tmpl("template-upload", data.files[0]))
-        $("#file-input").append(data.context)
+        $("#uploads").append(data.context)
         data.submit()
       progress: (e, data) ->
         if data.context

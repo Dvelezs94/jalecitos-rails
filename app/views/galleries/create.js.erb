@@ -1,5 +1,5 @@
 <% if @success %>
   $(".current_images").append("<%= j render partial: 'galleries/image', collection: [@gig.images.last] %>");
 <% else %>
-alert("Algo salió mal");
+  alert("<%= j @gig.errors[:images][0].html_safe %>");
 <% end %>

@@ -77,7 +77,6 @@ class GigsController < ApplicationController
     def gig_params
       gig_params = params.require(:gig).permit(:name,
                                   :description,
-                                  {images: []},
                                   :location,
                                   :category_id,
                                   :tag_list

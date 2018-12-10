@@ -26,16 +26,15 @@ class Gig < ApplicationRecord
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
   validate :description_length, :count_without_html
   validate :location_syntax
-  validate :check_max_files
+  #Gallery validations
+  validates :images, length: {
+  maximum: 5,
+  message: 'no puedes tener más de 5 imágenes'
+  }
   #Custom fields
   enum status: { draft: 0, published: 1, banned: 2}
   mount_uploaders :images, GigUploader
   #Actions
 
-  def check_max_files
-    if images.size > 5
-      errors.add(:images, "no deben contener más de 5")
-    end
-  end
 
 end
