@@ -4,7 +4,6 @@ services:
     image: postgres
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
-    command: postgres -c 'wal_retrieve_retry_interval=15s'
 
   app:
     build: .
