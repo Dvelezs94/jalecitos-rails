@@ -31,3 +31,5 @@
 //= require serviceworker-companion
 
 //= require clipboard
+
+//= require jquery_ujs

@@ -21,4 +21,8 @@ class Conversation < ApplicationRecord
   def opposed_user(user)
     user == recipient ? sender : recipient
   end
+
+  def participants
+    [self.sender.id, self.recipient.id]
+  end
 end

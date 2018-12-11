@@ -5,6 +5,7 @@ class CreateMessages < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true
       t.references :conversation, foreign_key: true
       t.datetime :read_at
+      t.string :image
 
       t.timestamps
     end
