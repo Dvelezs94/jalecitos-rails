@@ -10,6 +10,7 @@ class GalleriesController < ApplicationController
   def create
     @uploaded = params[:gig][:images] #get uploaded image
     @uploaded[0].original_filename = SecureRandom.uuid + File.extname(@uploaded[0].original_filename) #generate a name (useful when duplicated)
+    begin
     @gig.with_lock do #one update at time
       @images = @gig.images #get current images
       @images.each do |image| #verify its unique
@@ -23,6 +24,15 @@ class GalleriesController < ApplicationController
       @images += @uploaded #append new image
       @gig.images = @images
       @success = true if @gig.save  #save all
+    end
+    rescue ActiveRecord::QueryCanceled => error
+      @retries ||= 0
+      if @retries < 2
+        @retries += 1
+        retry
+      else
+        raise error
+      end
     end
   end
 

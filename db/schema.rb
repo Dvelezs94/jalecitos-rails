@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 2018_12_05_175540) do
   create_table "gigs", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.string "image"
     t.string "location"
     t.integer "order_count", default: 0
     t.datetime "created_at", null: false
@@ -106,6 +105,7 @@ ActiveRecord::Schema.define(version: 2018_12_05_175540) do
     t.bigint "user_id"
     t.bigint "conversation_id"
     t.datetime "read_at"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"

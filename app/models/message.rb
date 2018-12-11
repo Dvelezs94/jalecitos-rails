@@ -6,8 +6,11 @@ class Message < ApplicationRecord
   belongs_to :conversation
   #Validations
   validates :body,
-    presence: true,
     length: {maximum: 500},
     on: :create
+
+  validates_presence_of :body, :unless => :image?
   after_create_commit { MessageBroadcastJob.perform_later(self) }
+
+  mount_uploader :image, MessageUploader
 end
