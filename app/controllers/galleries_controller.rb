@@ -35,7 +35,7 @@ class GalleriesController < ApplicationController
       if @images.count == 0 #if there is no image left...
         @gig.remove_images! #remove everything
       else
-        @gig.images = @images  #save changes
+        @gig.images = @images  #save with image removed
       end
       @success = true if @gig.save
     end

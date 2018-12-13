@@ -13,5 +13,8 @@
       <%= next_page_tag unless current_page.last? %>
       <%= last_page_tag unless current_page.last? %>
     </ul>
+    <div class="loading row justify-content-center" style="text-align: center; display: none;">
+      <%= image_tag('ajax-loader.gif') %>
+    </div>
   </nav>
 <% end %>
