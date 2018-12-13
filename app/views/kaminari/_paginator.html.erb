@@ -1,5 +1,5 @@
 <%= paginator.render do %>
-  <nav class="pag-and-loading">
+  <nav class="pag-and-load">
     <ul class="pagination">
       <%= first_page_tag unless current_page.first? %>
       <%= prev_page_tag unless current_page.first? %>
@@ -13,10 +13,8 @@
       <%= next_page_tag unless current_page.last? %>
       <%= last_page_tag unless current_page.last? %>
     </ul>
-    <% if current_page.first? || current_page?(conversations_path)  %>
     <div class="loading row justify-content-center" style="text-align: center; display: none;">
       <%= image_tag('loading.gif') %>
     </div>
-    <% end %>
   </nav>
 <% end %>

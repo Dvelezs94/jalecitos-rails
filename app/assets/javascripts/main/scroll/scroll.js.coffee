@@ -6,7 +6,7 @@ $(document).on "turbolinks:load", ->
       if url && $(window).scrollTop() > $(document).height() - $(window).height() - 600
         $('.pagination:visible').text("")
         $(".loading").show()
-        $.getScript url, -> $(".loading").hide()
+        $.getScript url
 
     $(window).scroll()
   #special pagination in messages
@@ -16,4 +16,4 @@ $(document).on "turbolinks:load", ->
       if url && $(".message_view_box").scrollTop() < 100
         $('.pagination:visible').text("")
         $(".loading").show()
-        $.getScript url, -> $(".loading").hide()
+        $.getScript url
