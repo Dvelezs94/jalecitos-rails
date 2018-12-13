@@ -22,7 +22,9 @@
               <%= form.file_field :images, multiple: true, id: "file-input"%>
               <%= render 'shared_user/gigs/forms/hints/images_hint.html.erb' %>
           </div>
-          <div id="uploads" class="container"></div>
+          <div class="loading row justify-content-center" style="text-align: center; display: none;">
+            <%= image_tag('loading.gif') %>
+          </div>
 
             <hr>
 
