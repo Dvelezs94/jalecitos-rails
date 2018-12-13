@@ -52,6 +52,11 @@ function logs() {
 
 function seed() {
   bash $0 run rails db:seed
+  bash $0 reindex
+}
+
+function reindex() {
+  bash $0 run rails reindex
 }
 
 case $1 in
@@ -79,7 +84,7 @@ case $1 in
     logs
   ;;
   fix-perms)
-    sudo chown -R $USER:$USER app/ db/ public/ config/
+    sudo chown -R $USER:$USER app/ db/ public/ config/ lib/
   ;;
   db_diag)
     generate_db_diagram
@@ -89,6 +94,9 @@ case $1 in
   ;;
   seed)
     seed
+  ;;
+  reindex)
+    reindex
   ;;
   *)
     echo "

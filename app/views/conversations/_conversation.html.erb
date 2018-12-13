@@ -43,7 +43,7 @@
     <%= f.text_area :body, rows: 1, class: "form-control", autofocus: true %>
     <label class="custom-file-upload" for="message_image">
       <%= fa_icon("paperclip", class: "fa-2x", title: "Adjuntar imagen")  %>
-      <%= f.file_field :image, style: "display: none;" %>
+      <%= f.file_field :image, accept: ".jpg, .jpeg, .png", style: "display: none;" %>
       <label id="file-name" title="borrar imagen"></label>
     </label>
 

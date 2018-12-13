@@ -6,7 +6,10 @@
           <%= @gig.name %></h3>
       </div>
       <% if current_user != @gig.user %>
-        <%= link_to fa_icon("share", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>  
+        <%= link_to fa_icon("share", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
+        <% if user_signed_in? %>
+        <%= fa_icon("exclamation-triangle", class: "fa-lg gig_action_icon cursor_pointer", title: "Reportar", id: "reportgigbtn") %>
+        <% end %>
       <% else %>
         <%= render "shared_user/gigs/show/gig_actions"   %>
       <% end %>

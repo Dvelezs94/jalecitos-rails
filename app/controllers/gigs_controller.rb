@@ -16,6 +16,7 @@ class GigsController < ApplicationController
   def show
     define_pack_names
     @show_packages = true
+    report_options
   end
 
   # GET /gigs/new
@@ -95,6 +96,10 @@ class GigsController < ApplicationController
 
     def check_gig_ownership
       (current_user.nil? || current_user.id != @gig.user_id) ? redirect_to(root_path) : nil
+    end
+
+    def report_options
+      @report_options = ["Uso de palabras ofensivas", "Contenido Sexual", "Violencia", "Spam", "Engaño o fraude", "Otro"]
     end
 
 end

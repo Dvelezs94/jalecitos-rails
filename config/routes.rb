@@ -18,11 +18,13 @@ Rails.application.routes.draw do
      confirmations: "users/confirmations"
    }
    resources :users, only: [:show, :edit, :update] do
+     resource :reports, only: [:create], as: "report"
      get 'configuration', to: 'users#configuration', as: 'config'
      resources :banks, only: [:create, :destroy]
      resources :cards, only: [:create, :destroy]
 
      resources :gigs, except: :index do
+       resource :reports, only: [:create], as: "report"
        resources :galleries, only: [:index, :create, :destroy]
        member do
               get :toggle_status
@@ -47,6 +49,7 @@ Rails.application.routes.draw do
      collection do
        get :my_requests, as: "my"
      end
+     resource :reports, only: [:create], as: "report"
    end
 
   resources :withdrawals, only: :create

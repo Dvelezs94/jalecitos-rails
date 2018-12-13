@@ -17,6 +17,9 @@ class User < ApplicationRecord
   # Avatar image
   mount_uploader :image, AvatarUploader
 
+  # reports
+  has_many :reports
+
   # Chat Relations
   has_many :messages
 
