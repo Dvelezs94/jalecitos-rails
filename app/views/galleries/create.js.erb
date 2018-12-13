@@ -1,4 +1,10 @@
-$(".loading").hide();
+//one response given
+window.sentImages-=1;
+//if is the last, hide loading
+if (window.sentImages == 0){
+  $(".loading").hide();
+}
+//do the render or error
 <% if @success %>
   $(".current_images").append("<%= j render partial: 'galleries/image', collection: [@gig.images.last] %>");
 <% else %>
