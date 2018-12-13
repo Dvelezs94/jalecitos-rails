@@ -19,7 +19,7 @@
             <%= render partial: "galleries/image", collection: @gig.images %>
           </div>
           <div class="form_block row col-lg-12">
-              <%= form.file_field :images, multiple: true, id: "file-input"%>
+              <%= form.file_field :images, multiple: true, id: "file-input", accept: ".png, .jpg, .jpeg"%>
               <%= render 'shared_user/gigs/forms/hints/images_hint.html.erb' %>
           </div>
           <div class="loading row justify-content-center" style="text-align: center; display: none;">
