@@ -243,7 +243,7 @@ ActiveRecord::Schema.define(version: 2018_12_12_215153) do
     t.bigint "user_id"
     t.string "reportable_type"
     t.integer "reportable_id"
-    t.integer "status"
+    t.integer "status", default: 0
     t.string "cause"
     t.string "comment"
     t.datetime "created_at", null: false
