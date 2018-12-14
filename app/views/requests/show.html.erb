@@ -2,6 +2,9 @@
   <div class="card-body">
     <h5 class="card-title"><%= @request.name %></h5>
     <%= link_to fa_icon("share", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
+    <% if user_signed_in? %>
+    <%= fa_icon("exclamation-triangle", class: "fa-lg gig_action_icon cursor_pointer", title: "Reportar", id: "reportrequestbtn") %>
+    <% end %>
     <p class="card-text"><%= @request.description.html_safe %></p>
     <p class="card-text">Presupuesto: <%= @request.budget %> MXN</p>
     <p><small class="text-muted"><%=@request.location%></small></p>
@@ -18,3 +21,4 @@
   </div>
 </div>
 <%= render @request.offers %>
+<%= render "reports/request"%>

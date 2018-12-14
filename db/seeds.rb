@@ -83,8 +83,4 @@ User.create!(
  )
 puts "Created testing user2"
 
-reindex_list = [Gig, Request, Message, Notification]
-reindex_list.each do |model|
-  model.reindex
-end
-puts "reindex has finished"
+# reindex has been moved to rake task, check jalecitos-cli

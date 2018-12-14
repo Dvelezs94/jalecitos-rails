@@ -1,0 +1,30 @@
+<!-- The Modal -->
+<div class="modal inmodal" id="reportGigModal">
+
+  <!-- Modal content -->
+  <div class="modal-content modal-configuration">
+    <!-- <span class="close">&times;</span> -->
+    <div class="container text-center">
+
+      <div class="row">
+
+        <div class="col-lg-12">
+
+          <h4>Reportar Jale</h4>
+
+          <div class="divi-new js-form-join-section" data-section="1"></div>
+          <%= form_with model: Report, url: user_gig_report_path(@gig.user.slug, @gig.slug), id: "ReportGigForm", remote: true do |f| %>
+            <%= f.select :cause, @report_options, class: "required", placeholder: "Cual es la causa del reporte" %>
+            <%= f.text_field :comment, placeholder: "(Opcional) Comentarios" %>
+            <br>
+            <%= f.submit 'Continuar', :class => 'btn btn-success' %>
+          <% end %>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+<br>

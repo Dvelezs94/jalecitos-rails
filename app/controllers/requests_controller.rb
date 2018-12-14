@@ -16,6 +16,7 @@ class RequestsController < ApplicationController
   end
   # GET /requests/1
   def show
+    report_options
   end
 
   # GET /requests/new
@@ -86,5 +87,9 @@ class RequestsController < ApplicationController
         flash[:error] = "No ingresaste una opcion valida"
         redirect_to root_path
       end
+    end
+
+    def report_options
+      @report_options = ["Uso de palabras ofensivas", "Contenido Sexual", "Violencia", "Spam", "Engaño o fraude", "Otro"]
     end
 end

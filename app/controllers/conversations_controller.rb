@@ -11,6 +11,7 @@ class ConversationsController < ApplicationController
     if params[:user_id] && params[:user_id] != current_user.slug
       @messages = Message.search("*", where: {conversation_id: @conversation.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 20)
     end
+    report_options
   end
 
   def create
@@ -57,5 +58,9 @@ class ConversationsController < ApplicationController
     conversations.each do |c|
         c.sender == current_user ? @users << c.recipient : @users << c.sender
     end
+  end
+
+  def report_options
+    @report_options = ["Uso de palabras ofensivas", "Contenido Sexual", "Violencia", "Spam", "Engaño o fraude", "Otro"]
   end
 end

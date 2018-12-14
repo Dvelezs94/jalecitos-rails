@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_05_175540) do
+ActiveRecord::Schema.define(version: 2018_12_12_215153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -239,6 +239,18 @@ ActiveRecord::Schema.define(version: 2018_12_05_175540) do
     t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "reportable_type"
+    t.integer "reportable_id"
+    t.integer "status"
+    t.string "cause"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_reports_on_user_id"
+  end
+
   create_table "requests", force: :cascade do |t|
     t.bigint "user_id"
     t.string "name"
@@ -353,6 +365,7 @@ ActiveRecord::Schema.define(version: 2018_12_05_175540) do
   add_foreign_key "push_subscriptions", "users"
   add_foreign_key "replies", "disputes"
   add_foreign_key "replies", "users"
+  add_foreign_key "reports", "users"
   add_foreign_key "requests", "categories"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "gigs", column: "gigs_id"

@@ -22,6 +22,7 @@
         <div id="menu">
           <ul>
             <li><%= link_to "Perfil", user_path(opposite_user) %></li>
+            <li><%= link_to "Reportar", {}, id: "reportuserbtn"%></li>
           </ul>
         </div>
       </div>
@@ -43,7 +44,7 @@
     <%= f.text_area :body, rows: 1, class: "form-control", autofocus: true %>
     <label class="custom-file-upload" for="message_image">
       <%= fa_icon("paperclip", class: "fa-2x", title: "Adjuntar imagen")  %>
-      <%= f.file_field :image, style: "display: none;" %>
+      <%= f.file_field :image, accept: ".jpg, .jpeg, .png", style: "display: none;" %>
       <label id="file-name" title="borrar imagen"></label>
     </label>
 
@@ -53,3 +54,4 @@
     <% end %>
   </div>
 </div>
+<%= render "reports/user", user: opposite_user %>
