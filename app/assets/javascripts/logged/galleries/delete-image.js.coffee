@@ -1,13 +1,13 @@
 $ ->
   $(document).on "ajax:send", "a[data-remote]", (event) ->
     #waiting 1 more response
-    window.sentImages+=1
+    ajaxSent()
     #show loading
     $(".loading").show()
 
   $(document).on "ajax:error", "a[data-remote]", (event) ->
     #recieved 1 response
-    window.sentImages-=1
+    ajaxRecieved()
     #if all responses recieved, hide loading
     if window.sentImages==0
       $(".loading").hide()
@@ -16,7 +16,7 @@ $ ->
 
   $(document).on "ajax:success", "a[data-remote]", (event) ->
     #recieved 1 response
-    window.sentImages-=1
+    ajaxRecieved()
     #if all responses recieved, hide loading
     if window.sentImages==0
       $(".loading").hide()
