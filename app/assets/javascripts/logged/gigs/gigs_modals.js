@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  if ($(".gig_header")) {
+  if ($("#reportgigbtn").length > 0 ) {
     // Get the modal
     var reportGigModal = document.getElementById('reportGigModal');
 

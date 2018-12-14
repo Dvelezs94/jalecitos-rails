@@ -22,6 +22,7 @@
         <div id="menu">
           <ul>
             <li><%= link_to "Perfil", user_path(opposite_user) %></li>
+            <li><%= link_to "Reportar", {}, id: "reportuserbtn"%></li>
           </ul>
         </div>
       </div>
@@ -53,3 +54,4 @@
     <% end %>
   </div>
 </div>
+<%= render "reports/user", user: opposite_user %>
