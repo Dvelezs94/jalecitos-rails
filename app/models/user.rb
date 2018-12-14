@@ -60,6 +60,7 @@ class User < ApplicationRecord
   has_many :withdrawals
   # likes
   has_many :likes
+  #find liked gigs
   def likes?(gig)
     gig.likes.where(user: self).any?
   end
