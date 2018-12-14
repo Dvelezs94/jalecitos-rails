@@ -1,5 +1,4 @@
 module DescriptionRestrictions
-  extend ActiveSupport::Concern
 
   def decodeHTMLEntities text
     entities = [

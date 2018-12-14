@@ -1,10 +1,31 @@
 class User < ApplicationRecord
+  #includes
+  #friendly_id
   extend FriendlyId
-  include OpenpayHelper
+
+  #validations
   include LocationValidation
+  #inspects
+  include AliasFunctions
+
+  #Define who can do the rating, which happens to be the user
+  ratyrate_rater
+  # Options to rate
+  ratyrate_rateable 'Employee', 'Employer'
+
+  #alias
   friendly_id :alias, use: :slugged
 
+  #if alias changes, also slug
+  def should_generate_new_friendly_id?
+    alias_changed?
+  end
+
+  #enum
   enum status: { active: 0, disabled: 1, blocked: 2}
+
+  # Create default values
+  after_initialize :set_alias
 
   # Validates uniqueness of id
   validates :email, :alias,  uniqueness: true
@@ -14,15 +35,15 @@ class User < ApplicationRecord
   validates_length_of :location, maximum: 100
   validate :location_syntax
   validates_length_of :bio, maximum: 500
+
   # Avatar image
   mount_uploader :image, AvatarUploader
 
+  # Associations
   # reports
   has_many :reports
-
   # Chat Relations
   has_many :messages
-
   # Request System
   has_many :requests
   has_many :offers
@@ -30,25 +51,27 @@ class User < ApplicationRecord
   has_many :gigs
   # Notifications
   has_many :notifications, as: :recipient
-
   # Orders and sales
   has_many :purchases, class_name: :Order, foreign_key: :user
   has_many :sales, class_name: :Order, foreign_key: :receiver
-
   #Push subscriptions reference
   has_many :push_subscriptions
-
-  #Define who can do the rating, which happens to be the user
-  ratyrate_rater
-
-  # Options to rate
-  ratyrate_rateable 'Employee', 'Employer'
-
   #withdrawals Relations
   has_many :withdrawals
-
   # likes
   has_many :likes
+  def likes?(gig)
+    gig.likes.where(user: self).any?
+  end
+  #conversations
+  def conversations
+    Conversation.where("sender_id = ? OR recipient_id = ?", self.id, self.id)
+  end
+  #disputes
+  def disputes
+    Dispute.where(order_id: Order.where(user_id: self.id)).or(Dispute.where(order_id: Order.where(receiver_id: self.id)))
+  end
+
   ############################################################################################
   ## PeterGate Roles                                                                        ##
   ## The :user role is added by default and shouldn't be included in this list.             ##
@@ -83,94 +106,15 @@ class User < ApplicationRecord
     end
    end
 
-   def should_generate_new_friendly_id?
-     alias_changed?
-   end
-
-   #  Deactivate user only instead of deleting
-   def destroy
-     @user_gigs = Gig.where(user_id: self.id)
-     @user_gigs.each do |gig|
-       (gig.published?)? gig.draft! : nil
-     end
-     @user_requests = Request.where(user_id: self.id)
-     @user_requests.each do |request|
-       request.closed!
-     end
-     disabled!
-     update_attributes(openpay_id: "0")
-   end
-
-   # Create default values
-   after_initialize :set_defaults
-   after_save :create_openpay_account
-
    # Override the method to support canceled accounts
    def active_for_authentication?
        super && self.active?
    end
 
-   def conversations
-     Conversation.where("sender_id = ? OR recipient_id = ?", self.id, self.id)
-   end
-
-   def disputes
-     Dispute.where(order_id: Order.where(user_id: self.id)).or(Dispute.where(order_id: Order.where(receiver_id: self.id)))
-   end
-
-   def balance
-     @balance = 0.0
-     @order_ids = []
-     @refunded = self.purchases.refunded.where(paid_at: nil)
-     @sales = self.sales.completed.where(paid_at: nil)
-     @join = @sales + @refunded
-     @join.each do |b|
-       @balance += b.total
-       @order_ids << b.id
-     end
-     return {amount: @balance, order_ids: @order_ids}
-   end
-
-   def likes?(gig)
-     gig.likes.where(user: self).any?
-   end
-
-   private
-
-   def set_defaults
-       # self.role ||= "user"
-       set_alias
-   end
-
-   def set_alias
-     if self.alias.nil?
-       login_part = self.email.split("@").first
-       hex = SecureRandom.hex(3)
-       self.alias = "#{ login_part }-#{ hex }"
-     end
-   end
-
-   def create_openpay_account
-     # Create openpay Account if not already there
-     if self.openpay_id.nil?
-       init_openpay("customer")
-
-       # Create default hash for new user
-       request_hash={
-         "name" => self.alias,
-         "last_name" => nil,
-         "email" => self.email,
-         "requires_account" => false
-       }
-
-       begin
-         response_hash = @customer.create(request_hash.to_hash)
-         self.openpay_id = response_hash['id']
-         save
-       rescue OpenpayTransactionException => e
-          puts "#{self.alias} issue: #{e.description}, so the user could not be created on openpay"
-       end
-     end
-   end
-
+   #ALL openpay stuff (DONT ERASE THIS!!!)
+   # after_save :create_openpay_account
+   # #openpay
+   # include OpenpayFunctions
+   # include OpenpayHelper
+   # THE INITIALIZER openpay.rb is also commented
 end
