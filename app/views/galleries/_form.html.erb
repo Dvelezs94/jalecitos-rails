@@ -19,10 +19,12 @@
             <%= render partial: "galleries/image", collection: @gig.images %>
           </div>
           <div class="form_block row col-lg-12">
-              <%= form.file_field :images, multiple: true, id: "file-input"%>
+              <%= form.file_field :images, multiple: true, id: "file-input", accept: ".png, .jpg, .jpeg"%>
               <%= render 'shared_user/gigs/forms/hints/images_hint.html.erb' %>
           </div>
-          <div id="uploads" class="container"></div>
+          <div class="loading row justify-content-center" style="text-align: center; display: none;">
+            <%= image_tag('loading.gif') %>
+          </div>
 
             <hr>
 
@@ -34,7 +36,8 @@
                 <%= link_to 'Cancelar', user_path(current_user.slug), :data => {:confirm => 'Tu progreso hasta ahora NO se guardará'}, class: "btn btn-danger" %>
               </div>
               <div class="col-lg-6  col-md-6 ">
-              <%= link_to 'Continuar', edit_user_gig_packages_path(current_user.slug, gig ), class: "btn btn-success" %>
+              <%= link_to 'Continuar', edit_user_gig_packages_path(current_user.slug, gig ), class: "btn btn-success",
+                  id: "continue-process", onclick: "return (window.sentImages==0)? true: false" %>
 
               </div>
             </div>

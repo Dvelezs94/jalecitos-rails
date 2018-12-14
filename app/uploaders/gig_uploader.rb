@@ -24,7 +24,7 @@ class GigUploader < CarrierWave::Uploader::Base
     "#{original_filename}" if original_filename
   end
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w(jpg jpeg png)
   end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)

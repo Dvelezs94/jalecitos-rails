@@ -513,3 +513,17 @@ div.error{
     text-align: center;
   }
 }
+
+.del-img-icon{
+  visibility: hidden;
+  position: absolute;
+  top: 28%;
+  right: 40%;
+  cursor: pointer;
+}
+.current_img:hover i{
+  visibility: visible;
+}
+.current_img:hover a{
+  opacity: 0.5;
+}

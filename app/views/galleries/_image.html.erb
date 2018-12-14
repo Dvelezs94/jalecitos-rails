@@ -1,7 +1,7 @@
-<div class="current_img img-thumbnail">
-  <%= image_tag(image.url, width: 250) %>
-  <%= link_to fa_icon("trash", class: "fa-lg gig_action_icon", title: "Eliminar"),
+<div class="current_img img-thumbnail", style="position: relative;">
+  <%= link_to image_tag(image.url, width: 250, class: "delete-image"),
       user_gig_gallery_path(current_user.slug, @gig.slug, image.file.filename),
       method: :delete, data: {confirm: "¿Estás seguro de borrar este elemento?"},
       remote: true%>
+      <%= fa_icon("trash", class: "del-img-icon fa-4x", onclick: "$(this).closest('div.current_img').find('img.delete-image').click();") %>
 </div>

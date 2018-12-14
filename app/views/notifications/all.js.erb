@@ -1,8 +1,8 @@
 $(".paginated-elements").append('<%= j render(@notifications) %>');
 
 <% if @notifications.next_page %>
-  $('.pagination').replaceWith('<%= j paginate(@notifications) %>');
+  $('.pag-and-load').replaceWith('<%= j paginate(@notifications) %>');
 <% else %>
-  $('.pagination').remove();
+  $('.pag-and-load').remove();
 <% end %>
 <% sleep 1 %>
