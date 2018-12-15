@@ -1,5 +1,5 @@
 module DescriptionRestrictions
-
+  private
   def decodeHTMLEntities text
     entities = [
         ['amp', '&'],
