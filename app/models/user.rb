@@ -117,5 +117,6 @@ class User < ApplicationRecord
    # #openpay
    # include OpenpayFunctions
    # include OpenpayHelper
-   # THE INITIALIZER openpay.rb is also commented
+   # THE INITIALIZER openpay.rb is commented
+   #the migration of openpay_id in user table is commented
 end
