@@ -2,7 +2,8 @@ class User < ApplicationRecord
   #includes
   #friendly_id
   extend FriendlyId
-
+  #Payments
+  include ConektaFunctions
   #validations
   include LocationValidation
   #inspects
@@ -112,6 +113,10 @@ class User < ApplicationRecord
        super && self.active?
    end
 
+
+   after_save :create_conekta_account
+
+
    #ALL openpay stuff (DONT ERASE THIS!!!)
    # after_save :create_openpay_account
    # #openpay
@@ -119,4 +124,6 @@ class User < ApplicationRecord
    # include OpenpayHelper
    # THE INITIALIZER openpay.rb is commented
    #the migration of openpay_id in user table is commented
+   #openpay_helper is not commented
+   #openpay gem is commented
 end

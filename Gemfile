@@ -102,7 +102,7 @@ gem 'jquery-validation-rails', '~> 1.16'
 #slick
 gem 'jquery-slick-rails', '~> 1.9'
 # Payments
-gem 'openpay', '~> 2.0'
+# gem 'openpay', '~> 2.0'
 gem 'conekta'
 #Search engine
 gem 'searchkick', '~> 3.1', '>= 3.1.2'

@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  include OpenpayHelper
+  #include OpenpayHelper
   include UsersHelper
   access user: :all
   before_action only: [:create] do

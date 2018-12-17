@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  include OpenpayHelper
+  #include OpenpayHelper
   include SetLayout
   include UsersHelper
   respond_to :html, :json
