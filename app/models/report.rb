@@ -3,5 +3,5 @@ class Report < ApplicationRecord
   belongs_to :reportable, polymorphic: true
   enum status: { open: 0, closed: 1 }
   validates :user_id, :uniqueness => { :scope => [:reportable_type, :reportable_id] }
-  after_create -> { BanJob.perform_later(self) }
+  after_commit -> { BanJob.perform_later(self) }, on: :create
 end

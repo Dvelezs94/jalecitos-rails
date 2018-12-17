@@ -8,7 +8,7 @@ class BanJob < ApplicationJob
     @reports = Report.where(["reportable_type = ? and reportable_id = ?", report.reportable_type, report.reportable_id]).open.count
     # Create Ban if the treshold has been reached
     if @reports >= ban_creation_count
-      Ban.create(baneable: report)
+      Ban.create(baneable: report.reportable)
     end
   end
 end
