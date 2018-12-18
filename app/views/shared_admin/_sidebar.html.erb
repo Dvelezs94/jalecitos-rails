@@ -8,19 +8,21 @@
            <%= link_to "Inicio", dashboard_admins_path %>
        </li>
        <li>
-           <%= link_to "Categorias", dashboard_admins_path %>
+           <%= link_to "Categorias", categories_admins_path %>
        </li>
        <li>
-           <%= link_to "Usuarios", dashboard_admins_path %>
+           <%= link_to "Usuarios", users_admins_path %>
        </li>
        <li>
-           <%= link_to "Disputas", dashboard_admins_path %>
+           <%= link_to "Disputas", disputes_admins_path %>
        </li>
        <li>
-           <%= link_to "Reportes Y Bloqueos", dashboard_admins_path %>
+           <%= link_to "Reportes Y Bloqueos", bans_admins_path %>
        </li>
-       <li>
-         <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-       </li>
+   </ul>
+   <ul class="list-unstyled components">
+     <li>
+       <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+     </li>
    </ul>
 </nav>

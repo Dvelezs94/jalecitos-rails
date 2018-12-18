@@ -22,7 +22,7 @@ class RepliesController < ApplicationController
         @reply.dispute.waiting_for_employee!
       elsif current_user == @reply.dispute.employee
         @reply.dispute.waiting_for_support!
-      elsif current_user.has_roles?(:admin)
+      elsif current_user.has_roles?(:admin) && ! (@reply.dispute.refunded? || @reply.dispute.proceeded?)
         @reply.dispute.waiting_for_employer!
       end
       redirect_to order_dispute_path(@reply.dispute.order.uuid, @reply.dispute), notice: 'Tu replica fue creada.'

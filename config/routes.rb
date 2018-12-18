@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   resources :admins, only: [] do
     collection do
       get :index_dashboard, as: 'dashboard'
+      get :categories
+      get :users
+      get :disputes
+      get :bans
     end
   end
 

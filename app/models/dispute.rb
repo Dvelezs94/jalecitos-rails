@@ -4,7 +4,7 @@ class Dispute < ApplicationRecord
 
   validates_uniqueness_of :order
   mount_uploader :image, DisputeUploader
-  enum status: { waiting_for_employee: 0, refunded: 1, proceeded: 2, waiting_for_support: 3, waiting_for_employer: 5}
+  enum status: { waiting_for_support: 0, waiting_for_employee: 1, waiting_for_employer: 2, refunded: 3, proceeded: 4}
 
   def employee
     self.order.receiver
