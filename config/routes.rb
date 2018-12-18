@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
   root to: "pages#home"
-  get 'admins/dashboard'
+  resources :admins, only: [] do
+    collection do
+      get :index_dashboard, as: 'dashboard'
+    end
+  end
 
   resources :conversations do
     member do

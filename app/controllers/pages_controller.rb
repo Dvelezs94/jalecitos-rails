@@ -37,7 +37,7 @@ class PagesController < ApplicationController
   private
 
   def admin_redirect
-    (current_user && current_user.has_role?(:admin)) ? redirect_to(:controller => 'admins', :action => 'dashboard') : nil
+    (current_user && current_user.has_role?(:admin)) ? redirect_to(dashboard_admins_path) : nil
   end
 
   def search model, includes, status

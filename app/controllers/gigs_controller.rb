@@ -71,7 +71,11 @@ class GigsController < ApplicationController
     end
 
     def check_published
-      ( @gig.user != current_user && (@gig.draft? || @gig.banned? ) )? redirect_to( user_path(@gig.user.slug), notice: "Este jale no está disponible" ) : nil
+      if @gig.draft? || @gig.banned?
+        if !(current_user) || (! current_user.has_roles?(:admin) &&  @gig.user != current_user)
+          redirect_to( user_path(@gig.user.slug), notice: "Este jale no está disponible" )
+        end
+      end
     end
 
     # Only allow a trusted parameter "white list" through.
