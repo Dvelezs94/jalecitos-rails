@@ -3,41 +3,18 @@ class CardsController < ApplicationController
   include UsersHelper
   before_action :authenticate_user!
   before_action :set_user, only: [:create, :destroy]
-  before_action only: [:create, :destroy] do
-    init_openpay("card")
-  end
   access user: [:create, :destroy]
   before_action :check_user_ownership, only:[:create, :destroy]
 
 
   def create
-    # address_hash = {
-    #   "line1" => card_params[:address_1],
-    #   "line2" => card_params[:address_2],
-    #   "state" => card_params[:state],
-    #   "city" => card_params[:city],
-    #   "postal_code" => card_params[:postal_code],
-    #   "country_code" => card_params[:country_code],
-    # }
-
-    request_hash = {
-      "holder_name" => card_params[:card_holder_name],
-      "card_number" => card_params[:card_number],
-      "cvv2" => card_params[:cvv2],
-      "expiration_month" => card_params[:expiration_month],
-      "expiration_year" => card_params[:expiration_year].last(2),
-      # "device_session_id" => card_params[:device_session_id],
-      # "address" => address_hash
-    }
-
     begin
-      @card.create(request_hash.to_hash, current_user.openpay_id)
+      customer = Conekta::Customer.find(current_user.conekta_id)
+      source  = customer.create_payment_source(type: "card", token_id: params[:conektaTokenId])
       flash[:success] = 'La tarjeta fue creada exitosamente.'
       redirect_to user_config_path
-    rescue OpenpayTransactionException => e
-        # e.http_code
-        # e.error_code
-        flash[:error] = "#{e.description}, por favor intentalo de nuevo."
+    rescue => e
+        flash[:error] = "#{e.message_to_purchaser}, por favor intentalo de nuevo."
         redirect_to user_config_path
     end
   end
@@ -45,11 +22,12 @@ class CardsController < ApplicationController
 
   def destroy
     begin
-      @card.delete(params[:id], current_user.openpay_id)
+      customer = Conekta::Customer.find(current_user.conekta_id)
+      source  = customer.payment_sources[params[:id].to_i].delete
       flash[:success] = 'La tarjeta fue borrada exitosamente.'
       redirect_to user_config_path
-    rescue OpenpayTransactionException => e
-      flash[:error] = "#{e.description}, por favor intentalo de nuevo."
+    rescue => e
+      flash[:error] = "#{e.message}, por favor intentalo de nuevo."
       redirect_to user_config_path
     end
   end

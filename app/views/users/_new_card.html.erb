@@ -14,14 +14,14 @@
 
           <div class="divi-new js-form-join-section" data-section="1"></div>
           <%= form_with url: user_cards_path(current_user), id: "cardForm" do |f| %>
-            <%= f.hidden_field :device_session_id, class: "required" %>
-            <%= f.text_field :card_holder_name, class: "required", placeholder: "Nombre del Titular" %>
-            <%= f.number_field :card_number, class: "required", placeholder: "Numero de tarjeta" %>
+            <span class="card-errors"></span>
+            <%= f.text_field :card_holder_name, class: "required", placeholder: "Nombre del Titular", :data => {:conekta => 'card[name]' } %>
+            <%= f.number_field :card_number, class: "required", placeholder: "Numero de tarjeta", :data => {:conekta => 'card[number]'} %>
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12">
-            <%= f.select :expiration_month, 1..12,{}, class: "required col-lg-3 col-md-3 col-sm-3 col-3" %>
-            <%= f.select :expiration_year, Date.today.year.. 8.years.from_now.year,{}, class: "required col-lg-3 col-md-3 col-sm-3 col-3" %>
-            <%= f.number_field :cvv2, class: "required col-lg-3 col-md-3 col-sm-3 col-3", placeholder: "CVV" %>
+            <%= f.select :expiration_month, 1..12,{}, class: "required col-lg-3 col-md-3 col-sm-3 col-3", :data => {:conekta => 'card[exp_month]'} %>
+            <%= f.select :expiration_year, Date.today.year.. 8.years.from_now.year,{}, class: "required col-lg-3 col-md-3 col-sm-3 col-3", :data => {:conekta => 'card[exp_year]'} %>
+            <%= f.number_field :cvv2, size: 4, class: "required col-lg-3 col-md-3 col-sm-3 col-3", placeholder: "CVV", size: 4, :data => {:conekta => 'card[cvc]'} %>
             </div>
             </div>
             <br>

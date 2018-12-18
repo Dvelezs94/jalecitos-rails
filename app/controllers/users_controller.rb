@@ -18,9 +18,9 @@ class UsersController < ApplicationController
   end
 
   def configuration
-    @openpay_id = @user.openpay_id
-    @user_banks = get_openpay_resource("bank", @openpay_id)
-    @user_cards = get_openpay_resource("card", @openpay_id)
+    @user_cards = Conekta::Customer.find(current_user.conekta_id).payment_sources
+
+    @user_banks = []
   end
 
   def show

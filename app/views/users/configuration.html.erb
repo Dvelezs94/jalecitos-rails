@@ -86,11 +86,11 @@
               <tr>
                 <th>Tarjeta</th>
                 <th>Tipo</th>
-                <th>Banco</th>
+                <th>Nombre</th>
               </tr>
             </thead>
             <tbody>
-              <%= render 'users/cards' %>
+              <%= render partial: 'users/card', collection: @user_cards %>
             </tbody>
           </table>
           <button class="btn btn-md butn" id="cardbtn">Nueva Tarjeta</button>

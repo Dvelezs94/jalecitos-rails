@@ -116,6 +116,18 @@ class User < ApplicationRecord
 
    after_save :create_conekta_account
 
+   def balance
+     @balance = 0.0
+     @order_ids = []
+     @refunded = self.purchases.refunded.where(paid_at: nil)
+     @sales = self.sales.completed.where(paid_at: nil)
+     @join = @sales + @refunded
+     @join.each do |b|
+       @balance += b.total
+       @order_ids << b.id
+     end
+     return {amount: @balance, order_ids: @order_ids}
+   end
 
    #ALL openpay stuff (DONT ERASE THIS!!!)
    # after_save :create_openpay_account

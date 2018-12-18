@@ -1,8 +1,0 @@
-<% @user_cards.each do |card| %>
-<tr>
-  <td><%= card["card_number"].last(4) %></td>
-  <td><%= card["type"].upcase %></td>
-  <td><%= card["bank_name"] %></td>
-  <td><%= link_to fa_icon("trash", class: "fa-lg"), user_card_path(current_user.slug, card["id"]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-</tr>
-<% end %>
