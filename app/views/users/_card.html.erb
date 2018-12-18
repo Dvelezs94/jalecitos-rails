@@ -2,5 +2,5 @@
   <td><%= card[1].last4 %></td>
   <td><%= card[1].brand %></td>
   <td><%= card[1].name.upcase %></td>
-  <td><%= link_to fa_icon("trash", class: "fa-lg"), user_card_path(current_user.slug, card[0]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <td><%= link_to fa_icon("trash", class: "fa-lg"), user_card_path(current_user.slug, card[1].id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 </tr>
