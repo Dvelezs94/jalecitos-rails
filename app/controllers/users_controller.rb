@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  #include OpenpayHelper
+  include OpenpayHelper
   include SetLayout
   include UsersHelper
   respond_to :html, :json
@@ -10,18 +10,11 @@ class UsersController < ApplicationController
   before_action :check_user_ownership, only:[:update, :configuration]
 
 
-
-  # GET /users/1
-  #al poner sitio/users da error, por eso esta ruta
-  def index
-    redirect_to root_path
-  end
-
   def configuration
-    @user_cards = Conekta::Customer.find(current_user.conekta_id).payment_sources
-
-    @user_banks = []
-  end
+      @openpay_id = @user.openpay_id
+      @user_banks = get_openpay_resource("bank", @openpay_id)
+      @user_cards = get_openpay_resource("card", @openpay_id)
+    end
 
   def show
     if @user == current_user

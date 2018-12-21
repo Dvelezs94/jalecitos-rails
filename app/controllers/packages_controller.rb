@@ -3,7 +3,7 @@ class PackagesController < ApplicationController
   include SanitizeParams
   include PackTypes
   include DescriptionRestrictions
-  #include OpenpayHelper
+  include OpenpayHelper
   before_action :set_gig_and_packages, only: [:new, :create, :edit_packages, :update_packages]
   before_action :check_gig_ownership, only: [:new, :create, :edit_packages, :update_packages]
   before_action :create_redirect, only: [:new, :create]

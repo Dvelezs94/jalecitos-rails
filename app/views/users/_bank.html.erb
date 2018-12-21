@@ -1,4 +1,3 @@
-<% @user_banks.each do |bank| %>
 <tr>
   <td><%= bank["clabe"].last(4) %></td>
   <td><%= bank["alias"] %></td>
@@ -6,4 +5,3 @@
   <td><%= link_to fa_icon("dollar", class: "fa-lg", title: "Disponer Dinero"), withdrawals_path(bank_id: bank["id"]), method: :post %></td>
   <td><%= link_to fa_icon("trash", class: "fa-lg"), user_bank_path(current_user.slug, bank["id"]), method: :delete, data: { confirm: 'Seguro quieres borrar esta cuenta?' } %></td>
 </tr>
-<% end %>

@@ -3,7 +3,8 @@ class User < ApplicationRecord
   #friendly_id
   extend FriendlyId
   #Payments
-  include ConektaFunctions
+  include OpenpayFunctions
+  include OpenpayHelper
   #validations
   include LocationValidation
   #inspects
@@ -27,6 +28,8 @@ class User < ApplicationRecord
 
   # Create default values
   after_initialize :set_alias
+  # Create openpay user
+  after_save :create_openpay_account
 
   # Validates uniqueness of id
   validates :email, :alias,  uniqueness: true
@@ -113,9 +116,6 @@ class User < ApplicationRecord
        super && self.active?
    end
 
-
-   after_save :create_conekta_account
-
    def balance
      @balance = 0.0
      @order_ids = []
@@ -128,14 +128,4 @@ class User < ApplicationRecord
      end
      return {amount: @balance, order_ids: @order_ids}
    end
-
-   #ALL openpay stuff (DONT ERASE THIS!!!)
-   # after_save :create_openpay_account
-   # #openpay
-   # include OpenpayFunctions
-   # include OpenpayHelper
-   # THE INITIALIZER openpay.rb is commented
-   #the migration of openpay_id in user table is commented
-   #openpay_helper is not commented
-   #openpay gem is commented
 end

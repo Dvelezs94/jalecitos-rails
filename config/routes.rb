@@ -17,7 +17,7 @@ Rails.application.routes.draw do
      omniauth_callbacks: "users/omniauth_callbacks",
      confirmations: "users/confirmations"
    }
-   resources :users, only: [:show, :edit, :update] do
+   resources :users, only: [:show, :update] do
      resource :reports, only: [:create], as: "report"
      get 'configuration', to: 'users#configuration', as: 'config'
      resources :banks, only: [:create, :destroy]

@@ -1,43 +1,59 @@
 class CardsController < ApplicationController
-  #include OpenpayHelper
+  include OpenpayHelper
   before_action :authenticate_user!
+  before_action only: [:create, :destroy] do
+    init_openpay("card")
+  end
   access user: [:create, :destroy]
 
 
   def create
+    # address_hash = {
+    #   "line1" => card_params[:address_1],
+    #   "line2" => card_params[:address_2],
+    #   "state" => card_params[:state],
+    #   "city" => card_params[:city],
+    #   "postal_code" => card_params[:postal_code],
+    #   "country_code" => card_params[:country_code],
+    # }
+
+    request_hash = {
+      :holder_name => card_params[:card_holder_name],
+      :card_number => card_params[:card_number],
+      :cvv2 => card_params[:cvv2],
+      :expiration_month => card_params[:expiration_month],
+      :expiration_year => card_params[:expiration_year].last(2),
+      # "device_session_id" => card_params[:device_session_id],
+      # "address" => address_hash
+    }
+
     begin
-      customer = Conekta::Customer.find(current_user.conekta_id)
-      source  = customer.create_payment_source(type: "card", token_id: card_token)
+      @card.create(request_hash, current_user.openpay_id)
       flash[:success] = 'La tarjeta fue creada exitosamente.'
-      redirect_to user_config_path
-    rescue => e
-        flash[:error] = "#{e.message_to_purchaser}, por favor intentalo de nuevo."
-        redirect_to user_config_path
+    rescue OpenpayTransactionException => e
+        # e.http_code
+        # e.error_code
+        flash[:error] = "#{e.description}, por favor intentalo de nuevo."
     end
+    redirect_to user_config_path
   end
 
 
   def destroy
     begin
-      customer = Conekta::Customer.find(current_user.conekta_id)
-       customer.payment_sources.each_with_index do |card, n|
-         #if is the card to erase and is the owner of it...
-         if card[1].id == params[:id] && card[1].parent_id == current_user.conekta_id
-           #try to delete
-            source  = customer.payment_sources[n].delete
-            flash[:success] = 'La tarjeta fue borrada exitosamente.'
-         end
-       end
-    rescue => e
-      flash[:error] = "#{e.message}, por favor intentalo de nuevo."
+      @card.delete(params[:id], current_user.openpay_id)
+      flash[:success] = 'La tarjeta fue borrada exitosamente.'
+    rescue OpenpayTransactionException => e
+      flash[:error] = "#{e.description}, por favor intentalo de nuevo."
     end
     redirect_to user_config_path
   end
 
   private
     # Only allow a trusted parameter "white list" through.
-    def card_token
-        params.permit(:conektaTokenId)[:conektaTokenId]
+    def card_params
+        params.permit(:card_holder_name, :card_number, :cvv2,
+                                     :expiration_month, :expiration_year)
     end
 
 end
