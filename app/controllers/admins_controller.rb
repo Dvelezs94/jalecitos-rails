@@ -2,11 +2,23 @@ class AdminsController < ApplicationController
   layout 'admin'
   access admin: :all
 
-  def dashboard
-    @gigs = Gig.order(status: :desc).page(params[:gig_page]).per(25)
-    @categories =  Category.order(:name).page(params[:category_page]).per(10)
+  def index_dashboard
+    @gigs = Gig.order(updated_at: :desc).page(params[:gig_page]).per(25)
+  end
+
+  def categories
+    @categories =  Category.order(:name).page(params[:category_page]).per(25)
+  end
+
+  def users
     @users =  User.order(:name).page(params[:user_page]).per(25)
   end
 
-  private
+  def disputes
+    @disputes = Dispute.order(status: :asc).page(params[:dispute_page]).per(25)
+  end
+
+  def bans
+    @bans = Ban.order(status: :asc).page(params[:ban_page]).per(25)
+  end
 end

@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
   root to: "pages#home"
-  get 'admins/dashboard'
+  resources :admins, only: [] do
+    collection do
+      get :index_dashboard, as: 'dashboard'
+      get :categories
+      get :users
+      get :disputes
+      get :bans
+    end
+  end
 
   resources :conversations do
     member do
@@ -60,6 +68,12 @@ Rails.application.routes.draw do
     end
   end
   resources :categories
+  resources :bans, only: [] do
+    member do
+      put :proceed
+      put :deny
+    end
+  end
   resources :orders, only: [:create] do
     member do
       put :refund

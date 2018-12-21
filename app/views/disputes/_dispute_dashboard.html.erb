@@ -1,0 +1,9 @@
+<tr>
+  <td><%= link_to "#{dispute_dashboard.order.receiver.alias}(#{dispute_dashboard.order.receiver.disputes.count})", user_path(dispute_dashboard.order.receiver), title: "Numero de disputas" %></td>
+  <td><%= link_to "#{dispute_dashboard.order.user.alias}(#{dispute_dashboard.order.user.disputes.count})", user_path(dispute_dashboard.order.user), title: "Numero de disputas" %></td>
+  <td><%= link_to dispute_dashboard.order.uuid %></td>
+  <td><%= dispute_dashboard.order.total %></td>
+  <td><%= dispute_dashboard.status %></td>
+  <td><%= dispute_dashboard.order.status %></td>
+  <td><%= link_to fa_icon("eye"), order_dispute_path(dispute_dashboard.order.id, dispute_dashboard) %></td>
+</tr>

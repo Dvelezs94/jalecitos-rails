@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 2018_12_17_192351) do
     t.index ["rater_id"], name: "index_average_caches_on_rater_id"
   end
 
+  create_table "bans", force: :cascade do |t|
+    t.integer "status", default: 0
+    t.string "baneable_type"
+    t.integer "baneable_id"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -248,6 +257,8 @@ ActiveRecord::Schema.define(version: 2018_12_17_192351) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "ban_id"
+    t.index ["ban_id"], name: "index_reports_on_ban_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
@@ -367,6 +378,7 @@ ActiveRecord::Schema.define(version: 2018_12_17_192351) do
   add_foreign_key "push_subscriptions", "users"
   add_foreign_key "replies", "disputes"
   add_foreign_key "replies", "users"
+  add_foreign_key "reports", "bans"
   add_foreign_key "reports", "users"
   add_foreign_key "requests", "categories"
   add_foreign_key "requests", "users"

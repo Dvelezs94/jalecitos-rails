@@ -24,7 +24,8 @@ class User < ApplicationRecord
   end
 
   #enum
-  enum status: { active: 0, disabled: 1, blocked: 2}
+  enum status: { active: 0, disabled: 1, banned: 2}
+
 
   # Create default values
   after_initialize :set_alias
