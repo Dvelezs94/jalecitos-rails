@@ -11,7 +11,7 @@ class Request < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
   #Enums
-  enum status: { open: 0, in_progress: 1, completed: 2, closed: 3}
+  enum status: { open: 0, in_progress: 1, completed: 2, closed: 3, banned: 4}
   #Associations
   belongs_to :user
   belongs_to :category

@@ -5,6 +5,7 @@ class RequestsController < ApplicationController
   before_action :authenticate_user!, except: :show
   before_action :set_request, only: [:show, :edit, :update, :destroy]
   access all: [:show], user: :all
+  before_action :check_request_ban, only: [:show]
   before_action :check_request_ownership, only:[:edit, :update, :destroy]
   before_action :validate_options_for_budget, only: [:create, :update]
 
@@ -13,6 +14,7 @@ class RequestsController < ApplicationController
       @in_progress = Request.search "*",includes: [:user], where: {status: "in_progress", user_id: current_user.id}, order: {created_at: :desc}, page: params[:in_progress_page], per_page: 20
       @completed = Request.search "*",includes: [:user], where: {status: "completed", user_id: current_user.id}, order: {created_at: :desc}, page: params[:completed_page], per_page: 20
       @closed = Request.search "*",includes: [:user], where: {status: "closed", user_id: current_user.id}, order: {created_at: :desc}, page: params[:closed_page], per_page: 20
+      @banned = Request.search "*",includes: [:user], where: {status: "banned", user_id: current_user.id}, order: {created_at: :desc}, page: params[:banned_page], per_page: 20
   end
   # GET /requests/1
   def show
@@ -87,6 +89,10 @@ class RequestsController < ApplicationController
         flash[:error] = "No ingresaste una opcion valida"
         redirect_to root_path
       end
+    end
+
+    def check_request_ban
+     (@request.banned?) ? flash[:error]='Este Pedido está baneado' : nil
     end
 
     def report_options
