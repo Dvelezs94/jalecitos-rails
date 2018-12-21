@@ -19,6 +19,6 @@ class AdminsController < ApplicationController
   end
 
   def bans
-    @bans = Ban.open.order(updated_at: :desc).page(params[:ban_page]).per(25)
+    @bans = Ban.order(status: :asc).page(params[:ban_page]).per(25)
   end
 end

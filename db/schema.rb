@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_14_213629) do
+ActiveRecord::Schema.define(version: 2018_12_18_224344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -257,6 +257,8 @@ ActiveRecord::Schema.define(version: 2018_12_14_213629) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "ban_id"
+    t.index ["ban_id"], name: "index_reports_on_ban_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
@@ -374,6 +376,7 @@ ActiveRecord::Schema.define(version: 2018_12_14_213629) do
   add_foreign_key "push_subscriptions", "users"
   add_foreign_key "replies", "disputes"
   add_foreign_key "replies", "users"
+  add_foreign_key "reports", "bans"
   add_foreign_key "reports", "users"
   add_foreign_key "requests", "categories"
   add_foreign_key "requests", "users"

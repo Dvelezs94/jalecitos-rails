@@ -4,7 +4,7 @@ class User < ApplicationRecord
   include LocationValidation
   friendly_id :alias, use: :slugged
 
-  enum status: { active: 0, disabled: 1, blocked: 2}
+  enum status: { active: 0, disabled: 1, banned: 2}
 
   # Validates uniqueness of id
   validates :email, :alias,  uniqueness: true

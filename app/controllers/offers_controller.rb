@@ -6,6 +6,7 @@ class OffersController < ApplicationController
   before_action :set_request, only: [:new, :create]
   before_action :set_offer, only: [:edit, :update, :destroy]
   access all: [:show], user: :all
+  before_action :check_banned, only: :create
   before_action :check_offer_ownership, only:[:edit, :update, :destroy]
   before_action :check_if_offered, only: :create
 
@@ -86,6 +87,13 @@ class OffersController < ApplicationController
     def check_if_offered
       if has_offered(current_user.id)
         redirect_to request_path(params[:request_id]), notice: 'You already offered on this request'
+      end
+    end
+
+    def check_banned
+      if @request.banned?
+        redirect_to root_path, notice: "No puedes ofertar en este pedido"
+        return
       end
     end
 end

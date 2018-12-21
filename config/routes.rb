@@ -68,6 +68,12 @@ Rails.application.routes.draw do
     end
   end
   resources :categories
+  resources :bans, only: [] do
+    member do
+      put :proceed
+      put :deny
+    end
+  end
   resources :orders, only: [:create] do
     member do
       put :refund

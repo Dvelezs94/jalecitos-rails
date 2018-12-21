@@ -1,6 +1,6 @@
 class Dispute < ApplicationRecord
   belongs_to :order
-  has_many :replies
+  has_many :replies, dependent: :delete_all
 
   validates_uniqueness_of :order
   mount_uploader :image, DisputeUploader
