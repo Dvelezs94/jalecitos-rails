@@ -17,11 +17,12 @@
         <%= render "shared_user/users/user_information" %>
       </div>
 
+      <% if @user.has_roles?(:employee) %>
       <div class="col-lg-12 dashboard_front_right">
         <div class="gap"></div>
         <%= render "shared_user/users/my_gigs" %>
       </div>
-
+      <% end %>
     </div>
   </div>
 </div>

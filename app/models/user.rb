@@ -9,29 +9,22 @@ class User < ApplicationRecord
   include LocationValidation
   #inspects
   include AliasFunctions
-
   #Define who can do the rating, which happens to be the user
   ratyrate_rater
   # Options to rate
   ratyrate_rateable 'Employee', 'Employer'
-
   #alias
   friendly_id :alias, use: :slugged
-
   #if alias changes, also slug
   def should_generate_new_friendly_id?
     alias_changed?
   end
-
   #enum
   enum status: { active: 0, disabled: 1, banned: 2}
-
-
   # Create default values
-  after_initialize :set_alias
+  after_commit :set_defaults, on: :create
   # Create openpay user
   after_save :create_openpay_account
-
   # Validates uniqueness of id
   validates :email, :alias,  uniqueness: true
   validates_numericality_of :age, greater_than: 17, less_than: 101, allow_blank: true
@@ -43,7 +36,6 @@ class User < ApplicationRecord
 
   # Avatar image
   mount_uploader :image, AvatarUploader
-
   # Associations
   # reports
   has_many :reports
@@ -77,7 +69,6 @@ class User < ApplicationRecord
   def disputes
     Dispute.where(order_id: Order.where(user_id: self.id)).or(Dispute.where(order_id: Order.where(receiver_id: self.id)))
   end
-
   ############################################################################################
   ## PeterGate Roles                                                                        ##
   ## The :user role is added by default and shouldn't be included in this list.             ##
@@ -85,15 +76,11 @@ class User < ApplicationRecord
   ## The multiple option can be set to true if you need users to have multiple roles.       ##
   petergate(roles: [:admin, :support], multiple: false)                                      ##
   ############################################################################################
-
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable, :trackable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
-
-
    # Custom methods for OmniAuth
    def self.new_with_session(params, session)
     super.tap do |user|
@@ -102,7 +89,6 @@ class User < ApplicationRecord
       end
     end
    end
-
    def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -111,12 +97,10 @@ class User < ApplicationRecord
       user.image = auth.info.image # assuming the user model has an image
     end
    end
-
    # Override the method to support canceled accounts
    def active_for_authentication?
        super && self.active?
    end
-
    def balance
      @balance = 0.0
      @order_ids = []
@@ -128,5 +112,10 @@ class User < ApplicationRecord
        @order_ids << b.id
      end
      return {amount: @balance, order_ids: @order_ids}
+   end
+
+   def set_defaults
+       self.roles = [:user, :employer]
+       set_alias
    end
 end
