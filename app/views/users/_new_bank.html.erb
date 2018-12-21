@@ -13,8 +13,8 @@
           <h4>Nuevo Banco</h4>
 
           <div class="divi-new js-form-join-section" data-section="1"></div>
-          <%= form_with url: user_banks_path(current_user) do |f| %>
-            <%= f.number_field :clabe, class: "required", placeholder: "CLABE" %>
+          <%= form_with url: user_banks_path(current_user), class: "new_bank" do |f| %>
+            <%= f.number_field :clabe, class: "required", placeholder: "CLABE", minlength: 18, maxlength: 18 %>
             <%= f.text_field :bank_holder_name, class: "required", placeholder: "Nombre del Titular" %>
             <%= f.text_field :alias, class: "required", placeholder: "Alias" %>
             <br>

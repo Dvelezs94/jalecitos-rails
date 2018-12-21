@@ -1,6 +1,5 @@
 module DescriptionRestrictions
-  extend ActiveSupport::Concern
-
+  private
   def decodeHTMLEntities text
     entities = [
         ['amp', '&'],

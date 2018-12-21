@@ -1,4 +1,9 @@
 $(document).on('turbolinks:load', function() {
-  $.validator.messages.required = '';
-  $(".banner-search").validate();
+  $(".banner-search").validate({
+    messages : {
+      "query" :{
+        required: ""
+      }
+    }
+  });
  });

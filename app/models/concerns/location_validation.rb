@@ -1,4 +1,5 @@
 module LocationValidation
+  private
   def location_syntax
     if location != nil
       valid = location.match(/, México/)

@@ -33,6 +33,7 @@ class User < ApplicationRecord
   validates_length_of :location, maximum: 100
   validate :location_syntax
   validates_length_of :bio, maximum: 500
+
   # Avatar image
   mount_uploader :image, AvatarUploader
   # Associations
