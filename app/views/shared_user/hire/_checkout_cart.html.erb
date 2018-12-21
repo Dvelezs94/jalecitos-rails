@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <%= render 'shared_user/hire/cards', f: f%>
+        <%= render partial: 'shared_user/hire/card', collection: @user_cards, locals:{ f: f }%>
       </tbody>
     </table>
 
