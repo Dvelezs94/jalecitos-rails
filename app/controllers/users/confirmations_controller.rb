@@ -19,7 +19,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
      set_flash_message!(:notice, :confirmed)
      redirect_to root_path
     else
-     redirect_to root_path, alert: "Algo ha salido mal con tu registro."
+     redirect_to root_path, notice: "Algo ha salido mal con tu registro."
     end
   end
 

@@ -90,7 +90,7 @@
               </tr>
             </thead>
             <tbody>
-              <%= render 'users/cards' %>
+              <%= render partial: 'users/card', collection: @user_cards  %>
             </tbody>
           </table>
           <button class="btn btn-md butn" id="cardbtn">Nueva Tarjeta</button>
@@ -118,7 +118,7 @@
               </tr>
             </thead>
             <tbody>
-              <%= render 'users/banks' %>
+              <%= render partial:'users/bank', collection: @user_banks %>
             </tbody>
           </table>
           <button class="btn btn-md butn" id="bankbtn">Nuevo Banco</button>

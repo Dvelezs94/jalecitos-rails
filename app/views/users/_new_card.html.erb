@@ -13,18 +13,20 @@
           <h4>Nueva Tarjeta</h4>
 
           <div class="divi-new js-form-join-section" data-section="1"></div>
-          <%= form_with url: user_cards_path(current_user), id: "cardForm" do |f| %>
-            <%= f.hidden_field :device_session_id, class: "required" %>
+          <%= form_with url: user_cards_path(current_user), id: "cardForm", class: "new_card" do |f| %>
+          <div class="row">
             <%= f.text_field :card_holder_name, class: "required", placeholder: "Nombre del Titular" %>
-            <%= f.number_field :card_number, class: "required", placeholder: "Numero de tarjeta" %>
+            <%= f.number_field :card_number, class: "required", placeholder: "Numero de tarjeta", minlength: 16, maxlength: 16  %>
+          </div>
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12">
             <%= f.select :expiration_month, 1..12,{}, class: "required col-lg-3 col-md-3 col-sm-3 col-3" %>
             <%= f.select :expiration_year, Date.today.year.. 8.years.from_now.year,{}, class: "required col-lg-3 col-md-3 col-sm-3 col-3" %>
-            <%= f.number_field :cvv2, class: "required col-lg-3 col-md-3 col-sm-3 col-3", placeholder: "CVV" %>
+            <%= f.number_field :cvv2, class: "required col-lg-3 col-md-3 col-sm-3 col-3", placeholder: "CVV", minlength: 3, maxlength: 4 %>
             </div>
             </div>
-            <br>
+
+
             <%= f.submit 'Continuar', :class => 'btn btn-success' %>
           <% end %>
 
