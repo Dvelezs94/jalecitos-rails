@@ -34,8 +34,22 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    flash[:success] = 'Your profile was successfully updated.' if @user.update_attributes(user_params)
-    respond_with(@user)
+    if @role = params[:user]["roles"]
+      case @role
+      when "employee"
+        @user.update_attributes(:roles => [:user, :employee])
+      when "employer"
+        @user.update_attributes(:roles => [:user, :employer])
+      when "employee_employer"
+        @user.update_attributes(:roles => [:user, :employer, :employee])
+      end
+    else
+      @user.update_attributes(user_params)
+    end
+    #flash[:success] = 'Your profile was successfully updated.'
+    respond_to do |format|
+        format.json { respond_with_bip(@user) }
+    end
   end
 
 
@@ -57,7 +71,8 @@ class UsersController < ApplicationController
                                    :bio,
                                    :age,
                                    :available,
-                                   :location)
+                                   :location,
+                                   :roles)
     end
     def check_user_ownership
       if ! my_profile

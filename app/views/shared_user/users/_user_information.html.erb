@@ -17,7 +17,7 @@
         <%= "Indefinido" if current_user != @user && @user.name.nil? %>
       </p>
     </div>
-
+    <% if @user.has_roles?(:employee) %>
     <div class="col-lg-3  col-md-3 col-sm-12 information-field">
       <p>
         <strong>Disponibilidad:</strong>
@@ -30,7 +30,7 @@
         <%= "Indefinido" if current_user != @user && @user.available.nil? %>
       </p>
     </div>
-
+    <% end %>
     <div class="col-lg-3 col-md-3 col-sm-12 information-field ">
       <p>
         <strong>Ubicación:</strong>
