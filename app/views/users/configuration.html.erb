@@ -34,7 +34,11 @@
         <div class="col-sm-4">
           <label for="">ROL</label>
         </div>
-        <div class="col-sm-6"><%= best_in_place_if my_profile, @user, :roles, :class => "form-control", as: :select, collection: {employer: "Comprador", employee: "Vendedor", employee_employer: "Ambos"}, :place_holder => "Elige tu rol!" %></div>
+        <div class="col-sm-6">
+
+          <%= best_in_place_if my_profile, @user, :roles, :class => "form-control", as: :select,
+           collection: {employee_employer: "Ambos", employer: "Comprador", employee: "Vendedor"},
+           :place_holder => (current_user.roles.count == 3)? "Ambos" : @roles[current_user.roles.last]%></div>
       </div>
 
       <br>

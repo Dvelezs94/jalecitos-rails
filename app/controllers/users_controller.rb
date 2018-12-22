@@ -14,6 +14,7 @@ class UsersController < ApplicationController
       @openpay_id = @user.openpay_id
       @user_banks = get_openpay_resource("bank", @openpay_id)
       @user_cards = get_openpay_resource("card", @openpay_id)
+      @roles = {:employee => "Vendedor", :employer => "Comprador"}
     end
 
   def show
