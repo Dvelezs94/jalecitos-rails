@@ -22,9 +22,9 @@ class User < ApplicationRecord
   #enum
   enum status: { active: 0, disabled: 1, banned: 2}
   # Create default values
-  after_commit :set_defaults, on: :create
+  after_create :set_defaults
   # Create openpay user
-  after_save :create_openpay_account
+  after_commit :create_openpay_account
   # Validates uniqueness of id
   validates :email, :alias,  uniqueness: true
   validates_numericality_of :age, greater_than: 17, less_than: 101, allow_blank: true
