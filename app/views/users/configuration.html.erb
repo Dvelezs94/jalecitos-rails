@@ -6,7 +6,6 @@
       <p style="float: right;">Necesitas actualizar tu perfil publico?
         <span><%= link_to "Ve a Mi Perfil", user_path(current_user.slug) %></span></p>
       <hr width="98%">
-
       <div class="row" id="account">
         <div class="col-sm-4">
           <label for="">NOMBRE COMPLETO</label>
@@ -14,7 +13,6 @@
         <div class="col-sm-6"><%= best_in_place_if my_profile,@user, :name, :class => "form-control" %></div>
       </div>
       <br>
-
       <div class="row">
         <div class="col-sm-4">
           <label for="">EMAIL</label>
@@ -22,7 +20,6 @@
         <div class="col-sm-6"><input type="text" id="sizing" placeholder="<%= @user.email %>" class="form-control" readonly="readonly"></div>
       </div>
       <br>
-
       <div class="row">
         <div class="col-sm-4">
           <label for="">CONTRASENA</label>
@@ -41,24 +38,20 @@
       </div>
 
       <br>
-
       <hr width="98%">
       <br>
       <!-- Notifications -->
       <div class="row">
         <div class="col-sm-4">
-          <label>NOTIFICACIONES
-            <span data-tooltip="Activa notificaciones en tus dispositivos. Esto se tendra que hacer por cada dispositivo conectado a la cuenta"><%= fa_icon("info-circle") %></span></label>
+          <label>NOTIFICACIONES <span data-tooltip="Activa notificaciones en tus dispositivos. Esto se tendra que hacer por cada dispositivo conectado a la cuenta"><%= fa_icon("info-circle") %></span></label>
         </div>
         <div class="col-sm-8">
           <button class="btn btn-md butn" onclick="resetNotifications()">Reiniciar Notificationes</button>
         </div>
       </div>
       <br>
-
-      <hr width="98%">
-      <br>
-
+        <hr width="98%">
+        <br>
       <!-- Deactivate accout -->
       <div class="row">
         <div class="col-sm-4">
@@ -68,44 +61,19 @@
           <p>
             <b>Que pasa cuando borro mi cuenta?</b>
           </p>
-
           <ul type="circle">
             <li>Tu perfil, tus Jales, y tus Pedidos ya no seran visibles en Jalecitos</li>
-            <li>Tus ordenes activas seran canceladas y el dinero no podra ser reembolsado.</li>
-            <li>Se Borraran tus tarjetas y bancos asociados a la cuenta.</li>
-          </li>
-          <li>Tu cuenta de correo ya no podra ser utilizada de nuevo para un nuevo registor en Jalecitos.</li>
-        </ul>
-        <%= link_to "Cancelar mi cuenta", registration_path(resource_name), class: "btn btn-md warn-butn", data: { confirm: "Una vez que aceptes, no podras utilizar este e-mail de nuevo. Estas Seguro?" }, method: :delete %>
+            <li>Tus ordenes activas seran canceladas y no seran reembolsara el dinero.</li>
+            <li>Se Borraran tus tarjetas y bancos asociados a la cuenta</li></li>
+            <li>Tu cuenta de correo ya no podra ser utilizada de nuevo para un nuevo registor en Jalecitos</li>
+          </ul>
+            <%= link_to "Cancelar mi cuenta", registration_path(resource_name), class: "btn btn-md warn-butn", data: { confirm: "Una vez que aceptes, no podras utilizar este e-mail de nuevo. Estas Seguro?" }, method: :delete %>
+        </div>
       </div>
-    </div>
-    <br>
-
-    <hr width="98%">
-    <br>
-
-    <!-- Tarjetas -->
-    <br>
-    <div class="row" id="card">
-      <div class="col-sm-4">
-        <label for="">TARJETAS BANCARIAS
-          <span data-tooltip="Las tarjetas registradas con las que podras pagar los jales."><%= fa_icon("info-circle") %></span></label>
-      </div>
-      <div class="col-sm-6">
-        <table class="table table-striped table-borderless">
-          <thead>
-            <tr>
-              <th>Tarjeta</th>
-              <th>Tipo</th>
-              <th>Banco</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render 'users/cards' %>
-          </tbody>
-        </table>
-        <button class="btn btn-md butn" id="cardbtn">Nueva Tarjeta</button>
-      </div>
+      <br>
+        <hr width="98%">
+        <br>
+      <!-- Tarjetas -->
       <br>
       <div class="row" id="card">
         <div class="col-sm-4">
@@ -128,10 +96,7 @@
         </div>
         <br>
         <br>
-        <label>DINERO DISPONIBLE:
-          <strong><%= number_to_currency(@user.balance[:amount]) %>
-            MXN</strong>
-        </label>
+        <hr width="98%">
       </div>
       <!-- -->
       <!-- Bancos -->
@@ -158,15 +123,12 @@
           <button class="btn btn-md butn" id="bankbtn">Nuevo Banco</button>
         </div>
       </div>
+      <!-- -->
+      <br>
     </div>
-    <!-- -->
-    <br>
-
   </div>
-</div>
-<!-- row -->
-<%= render 'users/new_bank' %>
-<%= render 'users/new_card' %>
-<%= render 'devise/passwords/edit' %>
-
+  <!-- row -->
+  <%= render 'users/new_bank' %>
+  <%= render 'users/new_card' %>
+  <%= render 'devise/passwords/edit' %>
 </div>
