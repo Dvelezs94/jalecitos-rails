@@ -34,6 +34,9 @@ class UsersController < ApplicationController
         @user.update_attributes(:roles => [:user, :employee])
       when "employer"
         @user.update_attributes(:roles => [:user, :employer])
+        @user.gigs.published.each do |g|
+          g.draft!
+        end
       when "employee_employer"
         @user.update_attributes(:roles => [:user, :employer, :employee])
       end
