@@ -19,7 +19,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   #   # For Rails 3.1+ asset pipeline compatibility:
   #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   #
-     "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/blank-profile-picture-973460_640.png"
+     "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/blank-profile-picture.png"
    end
 
   # Process files as they are uploaded:

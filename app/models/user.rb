@@ -115,7 +115,7 @@ class User < ApplicationRecord
    end
 
    def set_defaults
-       self.roles = [:user, :employer]
+       self.roles = [:user, :employer, :employee]
        set_alias
    end
 end
