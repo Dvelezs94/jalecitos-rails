@@ -5,5 +5,5 @@ class Notification < ApplicationRecord
   #search
   searchkick language: "spanish"
   # Trigger notification after it is created
-  after_commit -> { NotificationRelayJob.perform_later(self) }
+  after_commit -> { NotificationRelayJob.perform_later(self) }, on: :create
 end
