@@ -8,8 +8,8 @@ class Order < ApplicationRecord
   #Associations
   has_one :dispute
   has_many :reviews
-  has_many :employer_review, -> (employer) { where(user: employer).limit(1) }, class_name: 'Review'
-  has_many :employee_review, -> (employee) { where(user: employee).limit(1) }, class_name: 'Review'
+  has_one :employer_review, -> (employer) { where(user: employer) }, class_name: 'Review'
+  has_one :employee_review, -> (employee) { where(user: employee) }, class_name: 'Review'
 
   enum status: { pending: 0, denied: 1, in_progress: 2, disputed: 3, completed: 4, refunded: 5}
 
