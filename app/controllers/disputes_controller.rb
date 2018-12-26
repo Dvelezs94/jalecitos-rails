@@ -27,11 +27,18 @@ class DisputesController < ApplicationController
     if @dispute.order.in_progress?
       if @dispute.save
         @dispute.order.disputed!
-        create_notification(@dispute.order.employer, @dispute.order.employee, "Abrio una disputa", @dispute)
+        if current_user == @dispute.order.employee
+          create_notification(@dispute.order.employer, @dispute.order.employee, "Abrio una disputa", @dispute)
+        else
+          create_notification(@dispute.order.employee, @dispute.order.employer, "Abrio una disputa", @dispute)
+        end
         redirect_to order_dispute_path(@dispute.order.uuid, @dispute), notice: 'La disputa fue creada exitosamente.'
       else
         render :new
       end
+    else
+      @order = Order.find_by_uuid(params[:order_id])
+      redirect_to order_dispute_path( @order.uuid, @order.dispute), notice: 'La disputa ya existe.'
     end
   end
 

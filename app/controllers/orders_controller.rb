@@ -12,21 +12,22 @@ class OrdersController < ApplicationController
   before_action :verify_owner_or_employee, only: [:refund]
   before_action :verify_charge_response, except: [:create]
   before_action :verify_order_limit, only: [:create]
+  before_action :verify_refund_state, only: [:refund]
 
 
   def create
     @order = Order.new(order_params)
 
     # Validate if Gig is own, banned or draft
-    if @order.purchase.gig
-      @gig = @order.purchase.gig
+    @gig = @order.purchase.gig
+    if @gig
       if @gig.draft? || @gig.banned?
-        flash[:error] = "Este jale no esta disponible"
+        flash[:error] = "Este jale no está disponible"
         redirect_to root_path
         return
       end
     end
-
+    #prepare charge
     request_hash = {
       "method" => "card",
       "source_id" => order_params[:card_id],
@@ -37,118 +38,91 @@ class OrdersController < ApplicationController
     }
 
     if @order.save
+      #create charge on openpay
       begin
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.response_order_id = response["id"]
         @order.save
         create_notification(@order.employer, @order.employee, "te contrato", @order.purchase, "sales")
         flash[:success] = 'La orden fue creada exitosamente.'
-        redirect_to finance_path(:table => "purchases")
       rescue OpenpayTransactionException => e
         @order.denied!
-        flash[:error] = "#{e.description}, por favor intentalo de nuevo."
-        redirect_to finance_path(:table => "purchases")
+        flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
       end
-    else
-      puts "Orden fallida"
-      p @order
     end
-
-  end
+    redirect_to finance_path(:table => "purchases")
+  end #create end
 
   def request_start
-    if @order.employee == current_user
       @order.started_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
       if @order.employee == current_user
         if @order.save
-          flash[:success] = "La orden se actualizo correctamente"
-          create_notification(@order.employee, @order.employer, "solicito comenzar", @order.purchase, "purchases")
-          redirect_to finance_path(:table => "sales")
+          flash[:success] = "La orden se actualizó correctamente"
+          create_notification(@order.employee, @order.employer, "solicitó comenzar", @order.purchase, "purchases")
         else
           flash[:error] = "Hubo un error en tu  solicitud"
-          redirect_to finance_path(:table => "sales")
         end
+        redirect_to finance_path(:table => "sales")
       end
-    end
   end
 
   def request_complete
-    if @order.employee == current_user
       @order.completed_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
       if @order.save
-        flash[:success] = "La orden se actualizo correctamente"
-        create_notification(@order.employee, @order.employer, "solicito finalizar", @order.purchase, "purchases")
-        redirect_to finance_path(:table => "sales")
+        flash[:success] = "La orden se actualizó correctamente"
+        create_notification(@order.employee, @order.employer, "solicitó finalizar", @order.purchase, "purchases")
       else
         flash[:error] = "Hubo un error en tu  solicitud"
-        redirect_to finance_path(:table => "sales")
       end
-    end
+      redirect_to finance_path(:table => "sales")
   end
 
   def start
-    if @order.employer == current_user
       if @order.in_progress!
-        flash[:success] = "La orden ahora esta en progreso"
+        flash[:success] = "La orden ahora está en progreso"
         create_notification(@order.employer, @order.employee, "ha comenzado", @order.purchase, "sales")
-        redirect_to finance_path(:table => "purchases")
       else
         flash[:error] = "Hubo un error en tu solicitud"
-        redirect_to finance_path(:table => "purchases")
       end
-    end
+      redirect_to finance_path(:table => "purchases")
   end
 
   def complete
-    if @order.employer == current_user || current_user.has_roles?(:admin)
-      if @order.in_progress? || @order.disputed?
-        if @order.completed!
-          if @order.dispute
-            @order.dispute.proceeded!
-          end
-          # add 1 to gig order count
-          if @order.purchase_type == "Package"
-            @order.purchase.gig.increment!(:order_count)
-          end
-          flash[:success] = "La orden ahora esta finalizada"
-          create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales")
-          redirect_to finance_path(:table => "purchases")
-        else
-          flash[:error] = "Hubo un error en tu solicitud"
-          redirect_to finance_path(:table => "purchases")
+
+    #if the order is disputed just the admin can complete it
+    if @order.in_progress? ||( @order.disputed? && current_user.has_roles?(:admin) )
+      if @order.completed!
+        if @order.dispute
+          @order.dispute.proceeded!
         end
+          # add 1 to gig order count
+        if @order.purchase_type == "Package"
+          @order.purchase.gig.increment!(:order_count)
+        end
+        flash[:success] = "La orden ahora está finalizada"
+        create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales")
+      else
+        flash[:error] = "Hubo un error en tu solicitud"
       end
+      redirect_to finance_path(:table => "purchases")
     end
   end
 
 
   def refund
-    # check if is not admin
-    if ! current_user.has_roles?(:admin)
-      # Cancel transaction if the order is on any of these states
-      cancel_state(["completed", "disputed", "refunded"])
-      if @order.in_progress? && (current_user == @order.employer)
-        cancel_state(["in_progress"])
-      end
-    else
-      cancel_state(["completed", "refunded"])
-    end
-    if flash[:error]
-      redirect_to root_path
-      return
-    end
-    @user = @order.employer
-    if @user.save && @order.refunded!
+    #try to refund...
+    if  @order.refunded!
+      #if the order has a dispute (and obviously is disputed...)
       if @order.dispute
+        #change dispute status to refunded
         @order.dispute.refunded!
       end
       create_notification(@order.employer, @order.employer, "ha reembolsado", @order.purchase, "purchases")
       flash[:success] = "La compra ha sido reembolsada y el dinero sumado a la cuenta"
-      redirect_to user_config_path(current_user)
     else
       flash[:error] = "Algo salio mal reembolsando la orden"
-      redirect_to finance_path(:table => "purchases")
     end
+    redirect_to finance_path(:table => "purchases")
   end
 
   private
@@ -222,6 +196,26 @@ class OrdersController < ApplicationController
       if current_user.purchases.pending.count >= 5
         flash[:error] = "No puedes tener mas de 5 jales pendientes"
         redirect_to finance_path(:table => "purchases")
+      end
+    end
+
+    def verify_refund_state
+      # check if is not admin
+      if ! current_user.has_roles?(:admin)
+        # Cancel transaction if the order is on any of these states
+        cancel_state(["completed", "disputed", "refunded"])
+        #employer cant refund orders in progress
+        if @order.in_progress? && (current_user == @order.employer)
+          cancel_state(["in_progress"])
+        end
+      #if i am the admin...
+      else
+        cancel_state(["completed", "refunded"])
+      end
+      #if something is wrong
+      if flash[:error]
+        redirect_to root_path
+        return
       end
     end
 end
