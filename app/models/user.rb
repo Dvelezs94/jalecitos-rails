@@ -42,6 +42,7 @@ class User < ApplicationRecord
   # Request System
   has_many :requests
   has_many :offers
+  has_many :reviews
   # Gigs
   has_many :gigs
   # Notifications
