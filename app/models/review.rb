@@ -1,3 +1,3 @@
 class Review < ApplicationRecord
-  belongs_to :gigs
+  belongs_to :order
 end

@@ -7,9 +7,9 @@ class OrdersController < ApplicationController
     init_openpay("charge")
   end
   before_action :get_order, only: [:request_start, :start, :request_complete, :complete, :refund]
-  before_action :verify_order_receiver, only: [:request_start, :request_complete]
+  before_action :verify_order_employee, only: [:request_start, :request_complete]
   before_action :verify_order_owner, only: [:start, :complete]
-  before_action :verify_owner_or_receiver, only: [:refund]
+  before_action :verify_owner_or_employee, only: [:refund]
   before_action :verify_charge_response, except: [:create]
   before_action :verify_order_limit, only: [:create]
 
@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.response_order_id = response["id"]
         @order.save
-        create_notification(@order.user, @order.receiver, "te contrato", @order.purchase, "sales")
+        create_notification(@order.user, @order.employee, "te contrato", @order.purchase, "sales")
         flash[:success] = 'La orden fue creada exitosamente.'
         redirect_to finance_path(:table => "purchases")
       rescue OpenpayTransactionException => e
@@ -57,12 +57,12 @@ class OrdersController < ApplicationController
   end
 
   def request_start
-    if @order.receiver == current_user
+    if @order.employee == current_user
       @order.started_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-      if @order.receiver == current_user
+      if @order.employee == current_user
         if @order.save
           flash[:success] = "La orden se actualizo correctamente"
-          create_notification(@order.receiver, @order.user, "solicito comenzar", @order.purchase, "purchases")
+          create_notification(@order.employee, @order.user, "solicito comenzar", @order.purchase, "purchases")
           redirect_to finance_path(:table => "sales")
         else
           flash[:error] = "Hubo un error en tu  solicitud"
@@ -73,11 +73,11 @@ class OrdersController < ApplicationController
   end
 
   def request_complete
-    if @order.receiver == current_user
+    if @order.employee == current_user
       @order.completed_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
       if @order.save
         flash[:success] = "La orden se actualizo correctamente"
-        create_notification(@order.receiver, @order.user, "solicito finalizar", @order.purchase, "purchases")
+        create_notification(@order.employee, @order.user, "solicito finalizar", @order.purchase, "purchases")
         redirect_to finance_path(:table => "sales")
       else
         flash[:error] = "Hubo un error en tu  solicitud"
@@ -90,7 +90,7 @@ class OrdersController < ApplicationController
     if @order.user == current_user
       if @order.in_progress!
         flash[:success] = "La orden ahora esta en progreso"
-        create_notification(@order.user, @order.receiver, "ha comenzado", @order.purchase, "sales")
+        create_notification(@order.user, @order.employee, "ha comenzado", @order.purchase, "sales")
         redirect_to finance_path(:table => "purchases")
       else
         flash[:error] = "Hubo un error en tu solicitud"
@@ -111,7 +111,7 @@ class OrdersController < ApplicationController
             @order.purchase.gig.increment!(:order_count)
           end
           flash[:success] = "La orden ahora esta finalizada"
-          create_notification(@order.user, @order.receiver, "ha finalizado", @order.purchase, "sales")
+          create_notification(@order.user, @order.employee, "ha finalizado", @order.purchase, "sales")
           redirect_to finance_path(:table => "purchases")
         else
           flash[:error] = "Hubo un error en tu solicitud"
@@ -162,7 +162,7 @@ class OrdersController < ApplicationController
     def set_defaults parameters
       pack = Package.friendly.find(params[:order][:purchase])
       parameters[:user_id] = current_user.id
-      parameters[:receiver_id] = pack.gig.user_id
+      parameters[:employee_id] = pack.gig.user_id
       parameters[:purchase] = pack
       parameters[:total] = pack.price
       parameters
@@ -178,8 +178,8 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
     end
 
-    def verify_order_receiver
-      if @order.receiver != current_user
+    def verify_order_employee
+      if @order.employee != current_user
         flash[:error] = "No tienes permiso para acceder aqui"
         redirect_to root_path
         return
@@ -194,8 +194,8 @@ class OrdersController < ApplicationController
       end
     end
 
-    def verify_owner_or_receiver
-      if ! (@order.user != current_user ||  @order.receiver != current_user)
+    def verify_owner_or_employee
+      if ! (@order.user != current_user ||  @order.employee != current_user)
         flash[:error] = "No tienes permiso para acceder aqui"
         redirect_to root_path
         return

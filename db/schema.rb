@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_224344) do
+ActiveRecord::Schema.define(version: 2018_12_26_184903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_224344) do
     t.integer "status", default: 0
     t.string "payment_message"
     t.string "response_order_id"
-    t.integer "receiver_id"
+    t.integer "employee_id"
     t.datetime "started_at"
     t.datetime "completed_at"
     t.datetime "paid_at"
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(version: 2018_12_18_224344) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "withdrawal_id"
-    t.index ["user_id", "receiver_id"], name: "index_orders_on_user_id_and_receiver_id"
+    t.index ["user_id", "employee_id"], name: "index_orders_on_user_id_and_employee_id"
     t.index ["withdrawal_id"], name: "index_orders_on_withdrawal_id"
   end
 
@@ -280,12 +280,13 @@ ActiveRecord::Schema.define(version: 2018_12_18_224344) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.float "stars"
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "gigs_id"
+    t.bigint "order_id"
     t.index ["gigs_id"], name: "index_reviews_on_gigs_id"
+    t.index ["order_id"], name: "index_reviews_on_order_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -381,5 +382,6 @@ ActiveRecord::Schema.define(version: 2018_12_18_224344) do
   add_foreign_key "requests", "categories"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "gigs", column: "gigs_id"
+  add_foreign_key "reviews", "orders"
   add_foreign_key "withdrawals", "users"
 end

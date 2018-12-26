@@ -11,8 +11,6 @@ class User < ApplicationRecord
   include AliasFunctions
   #Define who can do the rating, which happens to be the user
   ratyrate_rater
-  # Options to rate
-  ratyrate_rateable 'Employee', 'Employer'
   #alias
   friendly_id :alias, use: :slugged
   #if alias changes, also slug
@@ -49,8 +47,8 @@ class User < ApplicationRecord
   # Notifications
   has_many :notifications, as: :recipient
   # Orders and sales
-  has_many :purchases, class_name: :Order, foreign_key: :user
-  has_many :sales, class_name: :Order, foreign_key: :receiver
+  has_many :purchases, class_name: :Order, foreign_key: :employer
+  has_many :sales, class_name: :Order, foreign_key: :employee
   #Push subscriptions reference
   has_many :push_subscriptions
   #withdrawals Relations
@@ -67,7 +65,7 @@ class User < ApplicationRecord
   end
   #disputes
   def disputes
-    Dispute.where(order_id: Order.where(user_id: self.id)).or(Dispute.where(order_id: Order.where(receiver_id: self.id)))
+    Dispute.where(order_id: Order.where(user_id: self.id)).or(Dispute.where(order_id: Order.where(employee_id: self.id)))
   end
   ############################################################################################
   ## PeterGate Roles                                                                        ##

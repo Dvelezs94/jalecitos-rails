@@ -16,7 +16,7 @@
             <h6><%= (current_user != @gig.user)? link_to(fa_icon("paper-plane", class: "fa-lg", title: "Contáctame"), conversations_path(:user_id => @gig.user.slug)) : nil %></h6>
           </div>
         </div>
-        <%= rating_for @gig.user, "Employee", readonly: true, half_show: true, stars: 5 %>
+         <!-- rating_for @gig.user, "Employee", readonly: true, half_show: true, stars: 5  -->
       </div>
     </div>
   </div>

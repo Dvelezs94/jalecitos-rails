@@ -16,7 +16,7 @@
     </div>
 
     <div class="row col-lg-10 col-md-10 col-sm-10 col-10">
-      <%= rating_for @gig.user, "Employer", readonly: true %>(<%= rating_for @gig.user, "Employer", number_only: true%>)
+      <!--  rating_for @gig.user, "Employer", readonly: true ( rating_for @gig.user, "Employer", number_only: true) -->
     </div>
     <div class="profile_management">
       <%=link_to image_tag(avatar_display_helper(@gig.user.image_url(:thumb)), class: "gig-thumb"), user_path(@gig.user.slug) %>

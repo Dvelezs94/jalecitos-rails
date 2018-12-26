@@ -7,7 +7,7 @@ class Dispute < ApplicationRecord
   enum status: { waiting_for_support: 0, waiting_for_employee: 1, waiting_for_employer: 2, refunded: 3, proceeded: 4}
 
   def employee
-    self.order.receiver
+    self.order.employee
   end
 
   def employer
