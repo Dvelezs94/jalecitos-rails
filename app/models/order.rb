@@ -7,14 +7,12 @@ class Order < ApplicationRecord
   belongs_to :withdrawal, optional: true
   #Associations
   has_one :dispute
-  has_many :employer_review, ->{ where(user: self_employer()).limit(1) }, class_name: 'Review'
-  has_many :employee_review, ->{ where(user: self.employee).limit(1) }, class_name: 'Review'
+  has_many :reviews
+  has_many :employer_review, -> (employer) { where(user: employer).limit(1) }, class_name: 'Review'
+  has_many :employee_review, -> (employee) { where(user: employee).limit(1) }, class_name: 'Review'
 
   enum status: { pending: 0, denied: 1, in_progress: 2, disputed: 3, completed: 4, refunded: 5}
 
-  def self_employer
-    self.employer
-  end
   private
 
    def set_access_uuid
