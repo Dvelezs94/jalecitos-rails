@@ -1,5 +1,5 @@
 <tr class="body_table" valign="middle">
-  <td class="buyer"><%= link_to dispute.order.user.slug, user_path(dispute.order.user.slug) %></td>
+  <td class="buyer"><%= link_to dispute.order.employer.slug, user_path(dispute.order.employer.slug) %></td>
   <td><%= link_to dispute.order.employee.slug, user_path(dispute.order.employee.slug) %></td>
   <% if dispute.order.purchase_type == "Package" %>
     <td><%= link_to dispute.order.uuid.first(4), user_gig_path(dispute.order.employee.slug, dispute.order.purchase.gig) %></td>

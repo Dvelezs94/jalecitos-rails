@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.response_order_id = response["id"]
         @order.save
-        create_notification(@order.user, @order.employee, "te contrato", @order.purchase, "sales")
+        create_notification(@order.employer, @order.employee, "te contrato", @order.purchase, "sales")
         flash[:success] = 'La orden fue creada exitosamente.'
         redirect_to finance_path(:table => "purchases")
       rescue OpenpayTransactionException => e
@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
       if @order.employee == current_user
         if @order.save
           flash[:success] = "La orden se actualizo correctamente"
-          create_notification(@order.employee, @order.user, "solicito comenzar", @order.purchase, "purchases")
+          create_notification(@order.employee, @order.employer, "solicito comenzar", @order.purchase, "purchases")
           redirect_to finance_path(:table => "sales")
         else
           flash[:error] = "Hubo un error en tu  solicitud"
@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
       @order.completed_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
       if @order.save
         flash[:success] = "La orden se actualizo correctamente"
-        create_notification(@order.employee, @order.user, "solicito finalizar", @order.purchase, "purchases")
+        create_notification(@order.employee, @order.employer, "solicito finalizar", @order.purchase, "purchases")
         redirect_to finance_path(:table => "sales")
       else
         flash[:error] = "Hubo un error en tu  solicitud"
@@ -87,10 +87,10 @@ class OrdersController < ApplicationController
   end
 
   def start
-    if @order.user == current_user
+    if @order.employer == current_user
       if @order.in_progress!
         flash[:success] = "La orden ahora esta en progreso"
-        create_notification(@order.user, @order.employee, "ha comenzado", @order.purchase, "sales")
+        create_notification(@order.employer, @order.employee, "ha comenzado", @order.purchase, "sales")
         redirect_to finance_path(:table => "purchases")
       else
         flash[:error] = "Hubo un error en tu solicitud"
@@ -100,7 +100,7 @@ class OrdersController < ApplicationController
   end
 
   def complete
-    if @order.user == current_user || current_user.has_roles?(:admin)
+    if @order.employer == current_user || current_user.has_roles?(:admin)
       if @order.in_progress? || @order.disputed?
         if @order.completed!
           if @order.dispute
@@ -111,7 +111,7 @@ class OrdersController < ApplicationController
             @order.purchase.gig.increment!(:order_count)
           end
           flash[:success] = "La orden ahora esta finalizada"
-          create_notification(@order.user, @order.employee, "ha finalizado", @order.purchase, "sales")
+          create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales")
           redirect_to finance_path(:table => "purchases")
         else
           flash[:error] = "Hubo un error en tu solicitud"
@@ -127,7 +127,7 @@ class OrdersController < ApplicationController
     if ! current_user.has_roles?(:admin)
       # Cancel transaction if the order is on any of these states
       cancel_state(["completed", "disputed", "refunded"])
-      if @order.in_progress? && (current_user == @order.user)
+      if @order.in_progress? && (current_user == @order.employer)
         cancel_state(["in_progress"])
       end
     else
@@ -137,12 +137,12 @@ class OrdersController < ApplicationController
       redirect_to root_path
       return
     end
-    @user = @order.user
+    @user = @order.employer
     if @user.save && @order.refunded!
       if @order.dispute
         @order.dispute.refunded!
       end
-      create_notification(@order.user, @order.user, "ha reembolsado", @order.purchase, "purchases")
+      create_notification(@order.employer, @order.employer, "ha reembolsado", @order.purchase, "purchases")
       flash[:success] = "La compra ha sido reembolsada y el dinero sumado a la cuenta"
       redirect_to user_config_path(current_user)
     else
@@ -187,7 +187,7 @@ class OrdersController < ApplicationController
     end
 
     def verify_order_owner
-      if @order.user != current_user && ! current_user.has_role?(:admin)
+      if @order.employer != current_user && ! current_user.has_role?(:admin)
         flash[:error] = "No tienes permiso para acceder aqui"
         redirect_to root_path
         return
@@ -195,7 +195,7 @@ class OrdersController < ApplicationController
     end
 
     def verify_owner_or_employee
-      if ! (@order.user != current_user ||  @order.employee != current_user)
+      if ! (@order.employer != current_user ||  @order.employee != current_user)
         flash[:error] = "No tienes permiso para acceder aqui"
         redirect_to root_path
         return

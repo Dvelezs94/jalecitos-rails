@@ -1,6 +1,6 @@
 <tr>
   <td><%= link_to "#{dispute_dashboard.order.employee.alias}(#{dispute_dashboard.order.employee.disputes.count})", user_path(dispute_dashboard.order.employee), title: "Numero de disputas" %></td>
-  <td><%= link_to "#{dispute_dashboard.order.user.alias}(#{dispute_dashboard.order.user.disputes.count})", user_path(dispute_dashboard.order.user), title: "Numero de disputas" %></td>
+  <td><%= link_to "#{dispute_dashboard.order.employer.alias}(#{dispute_dashboard.order.employer.disputes.count})", user_path(dispute_dashboard.order.employer), title: "Numero de disputas" %></td>
   <td><%= link_to dispute_dashboard.order.uuid %></td>
   <td><%= dispute_dashboard.order.total %></td>
   <td><%= dispute_dashboard.status %></td>

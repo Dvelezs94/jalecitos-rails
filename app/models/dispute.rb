@@ -11,6 +11,6 @@ class Dispute < ApplicationRecord
   end
 
   def employer
-    self.order.user
+    self.order.employer
   end
 end

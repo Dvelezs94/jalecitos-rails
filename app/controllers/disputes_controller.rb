@@ -27,7 +27,7 @@ class DisputesController < ApplicationController
     if @dispute.order.in_progress?
       if @dispute.save
         @dispute.order.disputed!
-        create_notification(@dispute.order.user, @dispute.order.employee, "Abrio una disputa", @dispute)
+        create_notification(@dispute.order.employer, @dispute.order.employee, "Abrio una disputa", @dispute)
         redirect_to order_dispute_path(@dispute.order.uuid, @dispute), notice: 'La disputa fue creada exitosamente.'
       else
         render :new
@@ -42,7 +42,7 @@ class DisputesController < ApplicationController
     end
 
     def check_dispute_ownership
-      if ! (current_user == @dispute.order.user || current_user == @dispute.order.employee || current_user.has_roles?(:admin))
+      if ! (current_user == @dispute.order.employer || current_user == @dispute.order.employee || current_user.has_roles?(:admin))
           redirect_to root_path, alert: "No puedes acceder aqui."
       end
     end

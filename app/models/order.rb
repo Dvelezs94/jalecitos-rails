@@ -7,8 +7,8 @@ class Order < ApplicationRecord
   after_create :set_access_uuid
   # Options to rate
   ratyrate_rateable 'Employee', 'Employer'
-  has_one :review, as: :employee_review
-  has_one :review, as: :employer_review
+  has_one :employee_review, through: :review
+  has_one :employer_review, through: :review
 
   enum status: { pending: 0, denied: 1, in_progress: 2, disputed: 3, completed: 4, refunded: 5}
 
