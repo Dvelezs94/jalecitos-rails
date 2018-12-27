@@ -23,15 +23,14 @@ class CardsController < ApplicationController
     redirect_to user_config_path
   end
 
-
   def destroy
     begin
       @card.delete(params[:id], current_user.openpay_id)
-      flash[:success] = 'La tarjeta fue borrada exitosamente.'
+      @success = 'La tarjeta fue borrada exitosamente.'
     rescue OpenpayTransactionException => e
-      flash[:error] = "#{e.description}, por favor intentalo de nuevo."
+      # @error = "#{e.description}, por favor intentalo de nuevo."
     end
-    redirect_to user_config_path
+    head :no_content #response with no content
   end
 
 end

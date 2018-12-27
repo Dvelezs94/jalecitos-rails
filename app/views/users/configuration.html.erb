@@ -97,6 +97,9 @@
               <%= render partial: 'users/card', collection: @user_cards  %>
             </tbody>
           </table>
+          <div class="loading row justify-content-center" style="text-align: center; display: none;">
+            <%= image_tag('loading.gif') %>
+          </div>
           <button class="btn btn-md butn" id="cardbtn">Nueva Tarjeta</button>
         </div>
         <br>
