@@ -11,22 +11,13 @@ class OrdersController < ApplicationController
   before_action :verify_order_owner, only: [:start, :complete]
   before_action :verify_owner_or_employee, only: [:refund]
   before_action :verify_charge_response, except: [:create]
+  before_action :verify_availability, only: [:create]
   before_action :verify_order_limit, only: [:create]
   before_action :verify_refund_state, only: [:refund]
 
 
   def create
     @order = Order.new(order_params)
-
-    # Validate if Gig is own, banned or draft
-    @gig = @order.purchase.gig
-    if @gig
-      if @gig.draft? || @gig.banned?
-        flash[:error] = "Este jale no está disponible"
-        redirect_to root_path
-        return
-      end
-    end
     #prepare charge
     request_hash = {
       "method" => "card",
@@ -43,7 +34,7 @@ class OrdersController < ApplicationController
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.response_order_id = response["id"]
         @order.save
-        create_notification(@order.employer, @order.employee, "te contrato", @order.purchase, "sales")
+        create_notification(@order.employer, @order.employee, "te contrató", @order.purchase, "sales")
         flash[:success] = 'La orden fue creada exitosamente.'
       rescue OpenpayTransactionException => e
         @order.denied!
@@ -72,14 +63,14 @@ class OrdersController < ApplicationController
         flash[:success] = "La orden se actualizó correctamente"
         create_notification(@order.employee, @order.employer, "solicitó finalizar", @order.purchase, "purchases")
       else
-        flash[:error] = "Hubo un error en tu  solicitud"
+        flash[:error] = "Hubo un error en tu solicitud"
       end
       redirect_to finance_path(:table => "sales")
   end
 
   def start
       if @order.in_progress!
-        flash[:success] = "La orden ahora está en progreso"
+        flash[:success] = "La orden está en progreso"
         create_notification(@order.employer, @order.employee, "ha comenzado", @order.purchase, "sales")
       else
         flash[:error] = "Hubo un error en tu solicitud"
@@ -99,7 +90,7 @@ class OrdersController < ApplicationController
         if @order.purchase_type == "Package"
           @order.purchase.gig.increment!(:order_count)
         end
-        flash[:success] = "La orden ahora está finalizada"
+        flash[:success] = "La orden ha finalizado"
         create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales")
       else
         flash[:error] = "Hubo un error en tu solicitud"
@@ -120,7 +111,7 @@ class OrdersController < ApplicationController
       create_notification(@order.employer, @order.employer, "ha reembolsado", @order.purchase, "purchases")
       flash[:success] = "La compra ha sido reembolsada y el dinero sumado a la cuenta"
     else
-      flash[:error] = "Algo salio mal reembolsando la orden"
+      flash[:error] = "Algo salió mal reembolsando la orden"
     end
     redirect_to finance_path(:table => "purchases")
   end
@@ -143,7 +134,7 @@ class OrdersController < ApplicationController
     end
     def check_user_ownership
       if ! my_profile
-        flash[:error] = "No tienes permisos para acceder aqui"
+        flash[:error] = "No tienes permisos para acceder aquí"
         redirect_to root_path
       end
     end
@@ -154,7 +145,7 @@ class OrdersController < ApplicationController
 
     def verify_order_employee
       if @order.employee != current_user
-        flash[:error] = "No tienes permiso para acceder aqui"
+        flash[:error] = "No tienes permiso para acceder aquí"
         redirect_to root_path
         return
       end
@@ -162,7 +153,7 @@ class OrdersController < ApplicationController
 
     def verify_order_owner
       if @order.employer != current_user && ! current_user.has_role?(:admin)
-        flash[:error] = "No tienes permiso para acceder aqui"
+        flash[:error] = "No tienes permiso para acceder aquí"
         redirect_to root_path
         return
       end
@@ -170,7 +161,7 @@ class OrdersController < ApplicationController
 
     def verify_owner_or_employee
       if ! (@order.employer != current_user ||  @order.employee != current_user)
-        flash[:error] = "No tienes permiso para acceder aqui"
+        flash[:error] = "No tienes permiso para acceder aquí"
         redirect_to root_path
         return
       end
@@ -178,7 +169,7 @@ class OrdersController < ApplicationController
 
     def verify_charge_response
       if @order.response_order_id.nil?
-        flash[:error] = "Esta orden no a sido procesada, y por lo tanto no puede ser empezada"
+        flash[:error] = "Esta orden no ha sido procesada y por lo tanto no puede comenzar"
         redirect_to root_path
       end
     end
@@ -186,7 +177,7 @@ class OrdersController < ApplicationController
     def cancel_state(state)
       state.each do |s|
         if @order.status == s
-          flash[:error] = "No se puede completar la transaccion"
+          flash[:error] = "No se puede completar la transacción"
           break
         end
       end
@@ -194,7 +185,7 @@ class OrdersController < ApplicationController
 
     def verify_order_limit
       if current_user.purchases.pending.count >= 5
-        flash[:error] = "No puedes tener mas de 5 jales pendientes"
+        flash[:error] = "No puedes tener más de 5 jales pendientes"
         redirect_to finance_path(:table => "purchases")
       end
     end
@@ -217,5 +208,15 @@ class OrdersController < ApplicationController
         redirect_to root_path
         return
       end
+    end
+
+    def verify_availability
+      # Validate if Gig is own, banned or draft
+      @package = Package.includes(gig: :user).friendly.find(params[:order][:purchase])
+        if (@package.gig.user == current_user || @package.gig.draft? || @package.gig.banned?)
+          flash[:error] = "Este jale no está disponible"
+          redirect_to root_path
+          return
+        end
     end
 end

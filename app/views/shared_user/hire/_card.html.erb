@@ -2,5 +2,5 @@
   <td><%= card["card_number"].last(4) %></td>
   <td><%= card["type"].upcase %></td>
   <td><%= card["bank_name"] %></td>
-  <td><%= f.radio_button :card_id, card["id"] %></td>
+  <td><%= f.radio_button :card_id, card["id"], required: true %></td>
 </tr>
