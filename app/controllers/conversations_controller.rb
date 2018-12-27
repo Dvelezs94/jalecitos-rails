@@ -10,6 +10,7 @@ class ConversationsController < ApplicationController
     @conversations = Conversation.includes(:recipient, :messages).where("sender_id = ? OR recipient_id = ?", current_user.id, current_user.id)
     if params[:user_id] && params[:user_id] != current_user.slug
       @messages = Message.search("*", where: {conversation_id: @conversation.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 20)
+      mark_as_read
     end
     report_options
   end
@@ -23,9 +24,8 @@ class ConversationsController < ApplicationController
   end
 
   def mark_as_read
-    @conversation = Conversation.find(param[:conversation_id])
-    @unread_messages = @conversation.messages.where(read_at: nil).update_all(read_at: Time.zone.now)
-    render json: {success: true}
+    # mark current_user messages as read on that conversation
+    @unread_messages = @conversation.messages.where(read_at: nil).where.not(user: current_user).update_all(read_at: Time.zone.now)
   end
 
   def close

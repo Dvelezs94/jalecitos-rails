@@ -9,6 +9,7 @@ class MessagesController < ApplicationController
     message.user = current_user
     message.conversation = @conversation
     message.save
+    @unread_messages = @conversation.messages.where(read_at: nil).where.not(user: current_user).update_all(read_at: Time.zone.now)
   end
 
   private
