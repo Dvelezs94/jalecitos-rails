@@ -1,15 +1,21 @@
 $ ->
   $(document).on "ajax:send", "a[data-remote]", (event) ->
+    #try to catch target to use in ajax functions
+    window.target = event.currentTarget
     #waiting 1 more response
     ajaxSent()
 
   $(document).on "ajax:error", "a[data-remote]", (event) ->
+    #try to catch target to use in ajax functions
+    window.target = event.currentTarget
     #recieved 1 response
-    ajaxRecieved()
+    ajaxRecieved(event.currentTarget)
     #notify error
     alert("Algo salió mal. Por favor, inténtalo de nuevo")
 
   $(document).on "ajax:success", "a[data-remote]", (event) ->
+    #try to catch target to use in ajax functions
+    window.target = event.currentTarget
     #recieved 1 response
     ajaxRecieved()
     #delete image element if galleries
