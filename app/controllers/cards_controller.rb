@@ -28,7 +28,7 @@ class CardsController < ApplicationController
     # }
     request_hash={
      :token_id => params[:token_id],
-     :device_session_id => "8VIoXj0hN5dswYHQ9X1mVCiB72M7FY9o"
+     :device_session_id => params[:device_id]
     }
     begin
       @card.create(request_hash, current_user.openpay_id)
