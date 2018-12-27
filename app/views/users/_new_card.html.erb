@@ -13,22 +13,24 @@
           <h4>Nueva Tarjeta</h4>
 
           <div class="divi-new js-form-join-section" data-section="1"></div>
+
           <%= form_with url: user_cards_path(current_user), id: "cardForm", class: "new_card" do |f| %>
+          <%= f.hidden_field :token_id %>
           <div class="row">
-            <%= f.text_field :card_holder_name, class: "required", placeholder: "Nombre del Titular" %>
-            <%= f.number_field :card_number, class: "required", placeholder: "Numero de tarjeta", minlength: 16, maxlength: 16  %>
+            <%= f.text_field nil, class: "required", placeholder: "Nombre del Titular", :data => { :openpay_card => "holder_name"} %>
+            <%= f.number_field nil, class: "required", placeholder: "Numero de tarjeta", minlength: 16, maxlength: 16, :data => { :openpay_card => "card_number"} %>
           </div>
-            <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12">
-            <%= f.select :expiration_month, 1..12,{}, class: "required col-lg-3 col-md-3 col-sm-3 col-3" %>
-            <%= f.select :expiration_year, Date.today.year.. 8.years.from_now.year,{}, class: "required col-lg-3 col-md-3 col-sm-3 col-3" %>
-            <%= f.number_field :cvv2, class: "required col-lg-3 col-md-3 col-sm-3 col-3", placeholder: "CVV", minlength: 3, maxlength: 4 %>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <%= f.select nil, options_for_select( (1..12).map {|month| [month, month.to_s.last(2)]} ),{},
+               class: "required col-lg-3 col-md-3 col-sm-3 col-3", :data => { :openpay_card => "expiration_month"} %>
+              <%= f.select nil, options_for_select( (Date.today.year..8.years.from_now.year).map {|year| [ year, year.to_s.last(2) ]} ),{},
+               class: "required col-lg-3 col-md-3 col-sm-3 col-3", :data => { :openpay_card => "expiration_year"} %>
+              <%= f.number_field nil, class: "required col-lg-3 col-md-3 col-sm-3 col-3", placeholder: "CVV", minlength: 3, maxlength: 4, :data => { :openpay_card => "cvv2"} %>
             </div>
-            </div>
-
-
-            <%= f.submit 'Continuar', :class => 'btn btn-success' %>
-          <% end %>
+          </div>
+          <%= f.submit 'Continuar', :class => 'btn btn-success', :id => "save-card" %>
+        <% end %>
 
       </div>
     </div>
