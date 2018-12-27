@@ -17,6 +17,23 @@
       </div>
     </a>
   </div>
+<% elsif notification.notifiable.class == Dispute %>
+  <div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
+    <a href='<%=order_dispute_path(notification.notifiable.order.uuid, notification.notifiable) %>'>
+      <div class='left'>
+        <div class='icon_notify'>
+          <img class='nav-avatar' src='<%=notification.user.image_url%>'>
+        </div>
+        <p>
+          <strong><%=notification.user.slug%></strong>
+          <%=notification.action%>
+          en la orden
+          <%= notification.notifiable.order.uuid %><br>
+          <time><%=distance_of_time_in_words(notification.created_at, Time.now)%></time>
+        </p>
+      </div>
+    </a>
+  </div>
 <% else %>
   <div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
     <a href='<%=request_path(notification.notifiable.slug) %>'>
