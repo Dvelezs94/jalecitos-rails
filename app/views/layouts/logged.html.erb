@@ -8,19 +8,17 @@
     <%= favicon_link_tag 'favicon' %>
 
     <%= stylesheet_link_tag 'logged', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <!-- Card Anti Fraud System -->
-    <!-- <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script> <script type="text/javascript" src="https://resources.openpay.mx/lib/openpay-data.v1.min.js"></script> -->
+
+    <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>
+    <script type='text/javascript' src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>
     <%= javascript_include_tag 'logged', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places&callback=activatePlacesSearch", :defer => true, :async => true %>
     <%= javascript_include_tag 'google_turbolink', 'data-turbolinks-track': 'reload', :defer => true, :async => true %>
 
-
     <!-- For PWA -->
-   <link rel="manifest" href="/manifest.json" />
-   <meta name="apple-mobile-web-app-capable" content="yes">
-   <!--  -->
-
-
+    <link rel="manifest" href="/manifest.json"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- -->
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,7 +35,7 @@
       <div class="gap"></div>
       <%= yield %>
     </div>
-      <%= render 'shared/main_footer' %>
+    <%= render 'shared/main_footer' %>
   </body>
 
 </html>

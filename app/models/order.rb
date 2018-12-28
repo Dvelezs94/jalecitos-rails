@@ -1,10 +1,15 @@
 class Order < ApplicationRecord
-  belongs_to :user, foreign_key: :user_id, class_name: "User"
-  belongs_to :receiver, foreign_key: :receiver_id, class_name: "User"
+  #Actions
+  after_create :set_access_uuid
+  belongs_to :employer, foreign_key: :user_id, class_name: "User"
+  belongs_to :employee, foreign_key: :employee_id, class_name: "User"
   belongs_to :purchase, polymorphic: true
   belongs_to :withdrawal, optional: true
+  #Associations
   has_one :dispute
-  after_create :set_access_uuid
+  has_many :reviews
+  has_one :employer_review, -> (employer) { where(user: employer) }, class_name: 'Review'
+  has_one :employee_review, -> (employee) { where(user: employee) }, class_name: 'Review'
 
   enum status: { pending: 0, denied: 1, in_progress: 2, disputed: 3, completed: 4, refunded: 5}
 

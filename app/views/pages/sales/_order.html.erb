@@ -1,6 +1,6 @@
 <tr class="body_table" valign="middle">
   <td class="buyer">
-    <h5><%= link_to order.user.slug, user_path(order.user.slug) %></h5>
+    <h5><%= link_to order.employer.slug, user_path(order.employer.slug) %></h5>
   </td>
   <td><%= link_to "Voy a #{order.purchase.gig.name}", user_gig_path(order.purchase.gig.user, order.purchase.gig)  %></td>
   <td> <%= order.purchase.pack_type %></td>

@@ -9,7 +9,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.integer :status, default: 0
       t.string :payment_message
       t.string :response_order_id
-      t.integer :receiver_id
+      t.integer :employee_id
       t.datetime :started_at
       t.datetime :completed_at
       t.datetime :paid_at
@@ -18,6 +18,6 @@ class CreateOrders < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :orders, [:user_id, :receiver_id]
+    add_index :orders, [:user_id, :employee_id]
   end
 end
