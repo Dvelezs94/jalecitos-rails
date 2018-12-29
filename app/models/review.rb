@@ -20,7 +20,7 @@ class Review < ApplicationRecord
   end
 
   # Run Gig average job to update score
-  after_commit :resource_average, on: :update
+  after_commit :resource_average, on: :update, if: :saved_changes_to_status?
 
   # method to average the gig and the user score
   def resource_average
