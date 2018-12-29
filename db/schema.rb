@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_26_203055) do
+ActiveRecord::Schema.define(version: 2018_12_28_235023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2018_12_26_203055) do
     t.integer "status", default: 0
     t.string "slug"
     t.json "images"
+    t.integer "score"
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true
     t.index ["user_id"], name: "index_gigs_on_user_id"
@@ -283,9 +284,11 @@ ActiveRecord::Schema.define(version: 2018_12_26_203055) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "gigs_id"
     t.bigint "order_id"
     t.bigint "user_id"
     t.integer "status", default: 0
+    t.index ["gigs_id"], name: "index_reviews_on_gigs_id"
     t.index ["order_id"], name: "index_reviews_on_order_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
@@ -382,6 +385,7 @@ ActiveRecord::Schema.define(version: 2018_12_26_203055) do
   add_foreign_key "reports", "users"
   add_foreign_key "requests", "categories"
   add_foreign_key "requests", "users"
+  add_foreign_key "reviews", "gigs", column: "gigs_id"
   add_foreign_key "reviews", "orders"
   add_foreign_key "reviews", "users"
   add_foreign_key "withdrawals", "users"
