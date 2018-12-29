@@ -91,6 +91,10 @@ class OrdersController < ApplicationController
           @order.purchase.gig.increment!(:order_count)
         end
         flash[:success] = "La orden ha finalizado"
+        # Create Reviews for employer and employee
+        create_reviews(@order, @order.employer)
+        create_reviews(@order, @order.employee)
+        
         create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales")
       else
         flash[:error] = "Hubo un error en tu solicitud"
@@ -218,5 +222,9 @@ class OrdersController < ApplicationController
           redirect_to root_path
           return
         end
+    end
+
+    def create_reviews(order, user)
+      Review.create(order: order, user: user)
     end
 end

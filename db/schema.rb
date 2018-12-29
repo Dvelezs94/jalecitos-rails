@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_26_203055) do
+ActiveRecord::Schema.define(version: 2018_12_29_065900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(version: 2018_12_26_203055) do
     t.integer "status", default: 0
     t.string "slug"
     t.json "images"
+    t.integer "score_average", default: 0
+    t.integer "score_times", default: 0
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true
     t.index ["user_id"], name: "index_gigs_on_user_id"
@@ -315,6 +317,17 @@ ActiveRecord::Schema.define(version: 2018_12_26_203055) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
+  create_table "user_scores", force: :cascade do |t|
+    t.bigint "user_id"
+    t.float "employer_score_average", default: 0.0
+    t.float "employee_score_average", default: 0.0
+    t.integer "employer_score_times", default: 0
+    t.integer "employee_score_times", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_scores_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -384,5 +397,6 @@ ActiveRecord::Schema.define(version: 2018_12_26_203055) do
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "orders"
   add_foreign_key "reviews", "users"
+  add_foreign_key "user_scores", "users"
   add_foreign_key "withdrawals", "users"
 end

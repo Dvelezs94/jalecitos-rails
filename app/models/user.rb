@@ -21,6 +21,10 @@ class User < ApplicationRecord
   enum status: { active: 0, disabled: 1, banned: 2}
   # Create default values
   after_create :set_defaults
+
+  # Create User Score
+  after_create :create_user_score
+
   # Create openpay user
   after_commit :create_openpay_account
   # Validates uniqueness of id
@@ -32,6 +36,8 @@ class User < ApplicationRecord
   validate :location_syntax
   validates_length_of :bio, maximum: 500
 
+  # User Score
+  has_one :user_score
   # Avatar image
   mount_uploader :image, AvatarUploader
   # Associations
@@ -116,5 +122,9 @@ class User < ApplicationRecord
    def set_defaults
        self.roles = [:user, :employer, :employee]
        set_alias
+   end
+
+   def create_user_score
+     UserScore.create(user: self)
    end
 end
