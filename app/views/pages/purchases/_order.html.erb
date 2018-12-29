@@ -31,4 +31,9 @@
           <%= link_to fa_icon("arrow-circle-right", title: "Ir al caso", class: "fa-lg"), order_dispute_path(order.uuid, order.dispute) %>
     <% end %>
       </td>
+      <td>
+        <% if order.completed? %>
+        <%= rating_for order.reviews.where.not(user: current_user).first, 'Employee' %>
+        <% end %>
+      </td>
     </tr>
