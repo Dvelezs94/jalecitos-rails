@@ -20,7 +20,7 @@ class Review < ApplicationRecord
   end
 
   # Run Gig average job to update score
-  after_commit :resource_average, on: :create, if: :rating
+  after_commit :resource_average, on: :update
 
   # method to average the gig and the user score
   def resource_average
@@ -28,12 +28,12 @@ class Review < ApplicationRecord
       if self.order.employee
         # Rate the Gig if the purchase class is package
         if self.order.purchase.class == Package
-          GigAverageJob.perform_later(self.rating.stars)
+          GigAverageJob.perform_later(self)
         end
-        EmployeeAverageJob.perform_later(self.rating.stars)
+        EmployeeAverageJob.perform_later(self)
       # Rate User for employer
       else
-        EmployerAverageJob.perform_later(self.rating.stars)
+        EmployerAverageJob.perform_later(self)
       end
   end
 end
