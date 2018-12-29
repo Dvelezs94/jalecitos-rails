@@ -95,7 +95,8 @@ ActiveRecord::Schema.define(version: 2018_12_28_235023) do
     t.integer "status", default: 0
     t.string "slug"
     t.json "images"
-    t.integer "score"
+    t.integer "score_average", default: 0
+    t.integer "score_times", default: 0
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true
     t.index ["user_id"], name: "index_gigs_on_user_id"
@@ -284,11 +285,9 @@ ActiveRecord::Schema.define(version: 2018_12_28_235023) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "gigs_id"
     t.bigint "order_id"
     t.bigint "user_id"
     t.integer "status", default: 0
-    t.index ["gigs_id"], name: "index_reviews_on_gigs_id"
     t.index ["order_id"], name: "index_reviews_on_order_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
@@ -385,7 +384,6 @@ ActiveRecord::Schema.define(version: 2018_12_28_235023) do
   add_foreign_key "reports", "users"
   add_foreign_key "requests", "categories"
   add_foreign_key "requests", "users"
-  add_foreign_key "reviews", "gigs", column: "gigs_id"
   add_foreign_key "reviews", "orders"
   add_foreign_key "reviews", "users"
   add_foreign_key "withdrawals", "users"
