@@ -230,7 +230,7 @@ class OrdersController < ApplicationController
         end
     end
 
-    def create_reviews(gig, order, giver)
-      Review.create(reviewable: gig, order: order, giver: giver)
+    def create_reviews(model, order, giver)
+      Review.create(reviewable: model, order: order, giver: giver)
     end
 end
