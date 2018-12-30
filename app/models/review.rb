@@ -4,13 +4,15 @@ class Review < ApplicationRecord
 
   def search_data
     {
-      user_id: user_id,
+      giver_id: giver_id,
+      receiver_id: receiver_id,
       status: status
     }
   end
 
   belongs_to :order
-  belongs_to :user
+  belongs_to :receiver, foreign_key: :receiver_id, class_name: "User"
+  belongs_to :giver, foreign_key: :giver_id, class_name: "User"
   # Options to rate
   ratyrate_rateable 'Employee', 'Employer'
   enum status: { pending: 0, completed: 1 }

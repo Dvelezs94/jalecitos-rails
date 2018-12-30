@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   include SetLayout
   before_action :admin_redirect, only: :home
+  before_action :review, only: [:home, :finance]
   layout :set_layout
   def home
     if params[:query]
@@ -50,6 +51,12 @@ class PagesController < ApplicationController
       model.search query,includes: includes, where: {status: status, location: params[:location]}, page: params[:page], per_page: 20
     else
       model.search query,includes: includes, where: {status: status}, page: params[:page], per_page: 20
+    end
+  end
+
+  def review
+    if params[:review]
+      @review = Review.pending.where(giver: current_user).last
     end
   end
 

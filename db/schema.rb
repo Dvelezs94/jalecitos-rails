@@ -283,13 +283,14 @@ ActiveRecord::Schema.define(version: 2018_12_29_065900) do
 
   create_table "reviews", force: :cascade do |t|
     t.string "comment"
+    t.integer "receiver_id"
+    t.integer "giver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "order_id"
-    t.bigint "user_id"
     t.integer "status", default: 0
     t.index ["order_id"], name: "index_reviews_on_order_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
+    t.index ["receiver_id", "giver_id"], name: "index_reviews_on_receiver_id_and_giver_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -396,7 +397,6 @@ ActiveRecord::Schema.define(version: 2018_12_29_065900) do
   add_foreign_key "requests", "categories"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "orders"
-  add_foreign_key "reviews", "users"
   add_foreign_key "user_scores", "users"
   add_foreign_key "withdrawals", "users"
 end

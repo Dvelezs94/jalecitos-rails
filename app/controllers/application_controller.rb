@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   UPDATE_LOGIN_PERIOD = 1.hours
 
   protected
-
  def configure_permitted_parameters
    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :password, :password_confirmation])
    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :country])
@@ -22,5 +21,9 @@ class ApplicationController < ActionController::Base
 
   def create_notification(user, recipient, message, model, query_url=nil)
     Notification.create!(recipient: recipient, user: user, action: message, notifiable: model, query_url: query_url)
+  end
+  #Devise redirects
+  def after_sign_in_path_for(resource)
+    request.referrer + "?review=true" || root_path
   end
 end

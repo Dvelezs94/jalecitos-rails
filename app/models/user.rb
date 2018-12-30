@@ -48,7 +48,6 @@ class User < ApplicationRecord
   # Request System
   has_many :requests
   has_many :offers
-  has_many :reviews
   # Gigs
   has_many :gigs
   # Notifications
@@ -56,6 +55,9 @@ class User < ApplicationRecord
   # Orders and sales
   has_many :purchases, class_name: :Order, foreign_key: :employer
   has_many :sales, class_name: :Order, foreign_key: :employee
+  #Reviews (giver and receiver)
+  has_many :receiver, class_name: :Review, foreign_key: :receiver_id
+  has_many :giver, class_name: :Review, foreign_key: :giver_id
   #Push subscriptions reference
   has_many :push_subscriptions
   #withdrawals Relations
