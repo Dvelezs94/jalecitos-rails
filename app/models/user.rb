@@ -23,7 +23,7 @@ class User < ApplicationRecord
   after_create :set_defaults
 
   # Create User Score
-  after_create :create_user_score
+  before_validation :create_user_score, on: :create
 
   # Create openpay user
   after_commit :create_openpay_account
@@ -37,7 +37,7 @@ class User < ApplicationRecord
   validates_length_of :bio, maximum: 500
 
   # User Score
-  has_one :user_score
+  belongs_to :score, foreign_key: :score_id, class_name: "UserScore"
   # Avatar image
   mount_uploader :image, AvatarUploader
   # Associations
@@ -55,8 +55,7 @@ class User < ApplicationRecord
   # Orders and sales
   has_many :purchases, class_name: :Order, foreign_key: :employer
   has_many :sales, class_name: :Order, foreign_key: :employee
-  #Reviews (giver and receiver)
-  has_many :receiver, class_name: :Review, foreign_key: :receiver_id
+  #Reviews (giver)
   has_many :giver, class_name: :Review, foreign_key: :giver_id
   #Push subscriptions reference
   has_many :push_subscriptions
@@ -127,6 +126,8 @@ class User < ApplicationRecord
    end
 
    def create_user_score
-     UserScore.create(user: self)
+     UserScore.create do |user_score|
+       self.score = user_score
+     end
    end
 end

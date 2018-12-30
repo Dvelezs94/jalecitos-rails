@@ -90,9 +90,14 @@ class OrdersController < ApplicationController
           @order.purchase.gig.increment!(:order_count)
         end
         flash[:success] = "La orden ha finalizado"
-        # Create Reviews for employer and employee
-        create_reviews(@order, @order.employer, @order.employee)
-        create_reviews(@order, @order.employee, @order.employer)
+        # Create Reviews for employer and employee with gig or request
+        if @order.purchase_type == "Package"
+          create_reviews(@order.purchase.gig, @order, @order.employer)
+          create_reviews(@order.purchase.gig, @order, @order.employee)
+        else
+          create_reviews(@order.purchase.request, @order, @order.employer)
+          create_reviews(@order.purchase.request, @order, @order.employee)
+        end
 
         create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales")
       else
@@ -225,7 +230,7 @@ class OrdersController < ApplicationController
         end
     end
 
-    def create_reviews(order, receiver, giver)
-      Review.create(order: order, receiver: receiver, giver: giver)
+    def create_reviews(gig, order, giver)
+      Review.create(reviewable: gig, order: order, giver: giver)
     end
 end
