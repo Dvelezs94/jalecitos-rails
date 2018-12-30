@@ -11,6 +11,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :reviews, only: [] do
+    member do
+      put :submit
+    end
+  end
+
   resources :conversations do
     member do
       post :close
