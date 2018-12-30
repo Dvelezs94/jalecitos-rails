@@ -79,7 +79,6 @@ class OrdersController < ApplicationController
   end
 
   def complete
-
     #if the order is disputed just the admin can complete it
     if @order.in_progress? ||( @order.disputed? && current_user.has_roles?(:admin) )
       if @order.completed!
@@ -91,16 +90,23 @@ class OrdersController < ApplicationController
           @order.purchase.gig.increment!(:order_count)
         end
         flash[:success] = "La orden ha finalizado"
-        # Create Reviews for employer and employee
-        create_reviews(@order, @order.employer)
-        create_reviews(@order, @order.employee)
-        
+        # Create Reviews for employer and employee with gig or request
+        if @order.purchase_type == "Package"
+          create_reviews(@order.purchase.gig, @order, @order.employer)
+          create_reviews(@order.purchase.gig, @order, @order.employee)
+        else
+          create_reviews(@order.purchase.request, @order, @order.employer)
+          create_reviews(@order.purchase.request, @order, @order.employee)
+        end
+
         create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales")
       else
         flash[:error] = "Hubo un error en tu solicitud"
       end
-      redirect_to finance_path(:table => "purchases")
+    else
+      flash[:error] = "Hubo un error en tu solicitud"
     end
+      redirect_to finance_path(:table => "purchases", :review => true)
   end
 
 
@@ -224,7 +230,7 @@ class OrdersController < ApplicationController
         end
     end
 
-    def create_reviews(order, user)
-      Review.create(order: order, user: user)
+    def create_reviews(model, order, giver)
+      Review.create(reviewable: model, order: order, giver: giver)
     end
 end

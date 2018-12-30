@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_29_065900) do
+ActiveRecord::Schema.define(version: 2018_12_30_225251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -283,13 +283,15 @@ ActiveRecord::Schema.define(version: 2018_12_29_065900) do
 
   create_table "reviews", force: :cascade do |t|
     t.string "comment"
+    t.integer "giver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "order_id"
-    t.bigint "user_id"
     t.integer "status", default: 0
+    t.integer "reviewable_id"
+    t.string "reviewable_type"
+    t.index ["giver_id"], name: "index_reviews_on_giver_id"
     t.index ["order_id"], name: "index_reviews_on_order_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -318,14 +320,12 @@ ActiveRecord::Schema.define(version: 2018_12_29_065900) do
   end
 
   create_table "user_scores", force: :cascade do |t|
-    t.bigint "user_id"
     t.float "employer_score_average", default: 0.0
     t.float "employee_score_average", default: 0.0
     t.integer "employer_score_times", default: 0
     t.integer "employee_score_times", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_user_scores_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -339,6 +339,7 @@ ActiveRecord::Schema.define(version: 2018_12_29_065900) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.integer "score_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "roles"
@@ -360,6 +361,7 @@ ActiveRecord::Schema.define(version: 2018_12_29_065900) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["score_id"], name: "index_users_on_score_id"
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
@@ -396,7 +398,5 @@ ActiveRecord::Schema.define(version: 2018_12_29_065900) do
   add_foreign_key "requests", "categories"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "orders"
-  add_foreign_key "reviews", "users"
-  add_foreign_key "user_scores", "users"
   add_foreign_key "withdrawals", "users"
 end

@@ -5,7 +5,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
-    auth_options = { :recall => 'pages#home', :scope => :user }
+    auth_options = { :recall => 'pages#home', :scope => :user}
     resource = warden.authenticate!(auth_options)
     super
   end
@@ -22,7 +22,6 @@ class Users::SessionsController < Devise::SessionsController
     super
   end
 
-  # protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
