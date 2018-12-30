@@ -4,13 +4,14 @@ class Review < ApplicationRecord
 
   def search_data
     {
-      user_id: user_id,
+      giver_id: giver_id,
       status: status
     }
   end
 
   belongs_to :order
-  belongs_to :user
+  belongs_to :giver, foreign_key: :giver_id, class_name: "User"
+  belongs_to :reviewable, polymorphic: true
   # Options to rate
   ratyrate_rateable 'Employee', 'Employer'
   enum status: { pending: 0, completed: 1 }
@@ -25,9 +26,9 @@ class Review < ApplicationRecord
   # method to average the gig and the user score
   def resource_average
       # Rate the Gig and User for employee
-      if self.order.employee
+      if self.giver == self.order.employer
         # Rate the Gig if the purchase class is package
-        if self.order.purchase.class == Package
+        if self.reviewable_type == "Gig"
           GigAverageJob.perform_later(self)
         end
         EmployeeAverageJob.perform_later(self)

@@ -34,6 +34,9 @@
       <%= render 'shared/main_nav_bar' %>
       <div class="gap"></div>
       <%= yield %>
+      <% if params[:review] && @review != nil %>
+        <%= render 'reviews/modal' %>
+      <% end %>
     </div>
     <%= render 'shared/main_footer' %>
   </body>

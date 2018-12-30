@@ -709,6 +709,14 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
 }
+.review-avatar {
+  display: block;
+  width: 70px;
+  height: 70px;
+  background: #E6E7ED;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+}
 
 .centered-form {
   margin: 0 auto;
