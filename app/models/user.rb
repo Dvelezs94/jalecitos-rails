@@ -9,8 +9,21 @@ class User < ApplicationRecord
   include LocationValidation
   #inspects
   include AliasFunctions
+  #search
+  searchkick language: "spanish"
+  # only send these fields to elasticsearch
+  def search_data
+    {
+      id: id,
+      tags: tags,
+      location: location,
+      roles: roles
+    }
+  end
   #Define who can do the rating, which happens to be the user
   ratyrate_rater
+  #Tags
+  acts_as_taggable
   #alias
   friendly_id :alias, use: :slugged
   #if alias changes, also slug
