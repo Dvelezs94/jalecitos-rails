@@ -70,7 +70,11 @@ module ApplicationHelper
     when object.class == Request
        request_path(object)
     when object.class == Package
+      if notification.action == "ha finalizado"
+       finance_path(:table => notification.query_url, :review => true)
+      else
        finance_path(:table => notification.query_url)
+     end
     when object.class == Dispute
        order_dispute_path(object.order.uuid, object)
     end
