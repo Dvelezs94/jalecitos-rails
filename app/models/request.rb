@@ -25,4 +25,7 @@ class Request < ApplicationRecord
 
   #Custom fields
   mount_uploader :image, RequestUploader
+
+  #notify users when new request is made
+  after_commit -> { NotifyNewRequestJob.perform_later(self) }, on: :create
 end
