@@ -1,5 +1,6 @@
 class RaterController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :validate_owner
   access user: :all
 
   def create
@@ -10,6 +11,15 @@ class RaterController < ApplicationController
       render :json => true
     else
       render :json => false
+    end
+  end
+
+  def validate_owner
+    #if a review is being rated
+    if params[:klass] == "Review"
+      @review = Review.find(params[:id])
+      #verify the owner
+      (@review.giver != current_user)? head(:no_content) : nil
     end
   end
 end
