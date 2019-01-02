@@ -24,8 +24,7 @@ class NotifyNewRequestJob < ApplicationJob
       public_key: ENV.fetch('VAPID_PUBLIC_KEY'),
       private_key: ENV.fetch('VAPID_PRIVATE_KEY')
     }
-    p "x" * 600
-    p @users
+
     #Loop through every subscription to send the push notification
     @users.each do |user|
       user.push_subscriptions.each do |subs|
