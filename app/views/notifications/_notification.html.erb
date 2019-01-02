@@ -7,14 +7,14 @@
       <p>
         <strong><%=notification.user.slug%></strong>
         <%=notification.action%>
-        <% if notification.notifiable.class == Package %>
+        <% if notification.notifiable_type == "Package" %>
 
           en el jale
           <%= notification.notifiable.name %>
           por el paquete
           <%= notification.notifiable.pack_type %><br>
 
-        <% elsif notification.notifiable.class == Dispute %>
+        <% elsif notification.notifiable_type == "Dispute" %>
 
             en la orden
             <%= notification.notifiable.order.uuid %><br>

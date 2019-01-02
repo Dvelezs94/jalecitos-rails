@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   include SetLayout
   before_action :admin_redirect, only: :home
-  before_action :review, only: [:home, :finance]
+  before_action :pending_review, only: [:home, :finance]
   layout :set_layout
   def home
     if params[:query]
@@ -54,9 +54,12 @@ class PagesController < ApplicationController
     end
   end
 
-  def review
+  def pending_review
     if params[:review]
-      @review = Review.pending.where(giver: current_user).last
+      #get the most recent pending review
+      @review = Review.search("*", where: { giver_id: current_user.id, status: "pending" }, order:{created_at: :desc}, limit: 1 )
+      puts "X"* 500
+      puts @review.results
     end
   end
 

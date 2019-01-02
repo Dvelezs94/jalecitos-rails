@@ -5,7 +5,8 @@ class Review < ApplicationRecord
   def search_data
     {
       giver_id: giver_id,
-      status: status
+      status: status,
+      created_at: created_at
     }
   end
 

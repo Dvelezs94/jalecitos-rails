@@ -35,7 +35,7 @@
       <div class="gap"></div>
       <%= yield %>
       <% if params[:review] && @review != nil %>
-        <%= render 'reviews/modal' %>
+        <%= render partial: 'reviews/review', collection: @review %>
       <% end %>
     </div>
     <%= render 'shared/main_footer' %>
