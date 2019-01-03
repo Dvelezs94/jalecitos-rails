@@ -125,6 +125,9 @@ class OrdersController < ApplicationController
         #change dispute status to refunded
         @order.dispute.refunded!
       end
+      if @order.purchase_type == "Offer"
+        @order.purchase.request.closed!
+      end
       create_notification(@order.employer, @order.employer, "ha reembolsado", @order.purchase, "purchases")
       flash[:success] = "La compra ha sido reembolsada y el dinero sumado a la cuenta"
     else
