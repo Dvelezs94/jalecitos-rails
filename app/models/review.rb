@@ -26,16 +26,19 @@ class Review < ApplicationRecord
 
   # method to average the gig and the user score
   def resource_average
-      # Rate the Gig and User for employee
+    #if the user rated the review and not pressed the cancel button
+    if self.rating.present? && self.rating.stars != 0
+      # if the user that rated is the employer rate the employee
       if self.giver == self.order.employer
         # Rate the Gig if the purchase class is package
         if self.reviewable_type == "Gig"
           GigAverageJob.perform_later(self)
         end
         EmployeeAverageJob.perform_later(self)
-      # Rate User for employer
+      # Rate the employer
       else
         EmployerAverageJob.perform_later(self)
       end
+    end
   end
 end

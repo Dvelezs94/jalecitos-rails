@@ -2,8 +2,9 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_review
   before_action :check_review_ownership
+  access user: :all, admin: :all, all: []
 
-  def submit
+  def update
     @review.comment = params.require(:review).permit(:comment)
     @review.save
     @review.completed!

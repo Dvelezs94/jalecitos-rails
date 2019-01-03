@@ -527,3 +527,7 @@ div.error{
 .current_img:hover a{
   opacity: 0.5;
 }
+/* hide ratyrate cancel button */
+.raty-cancel{
+  display: none;
+}

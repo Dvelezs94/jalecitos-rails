@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   before_action :pending_review, only: [:home, :finance]
   layout :set_layout
+  access user: :all, admin: :all, all: [:home]
   def home
     if params[:query]
       if (params[:model_name] == "requests")
@@ -26,7 +27,6 @@ class PagesController < ApplicationController
   end
 
   def finance
-    authenticate_user!
     @purchases = current_user.purchases.order(updated_at: :desc)
     @sales = current_user.sales.where.not(status: "denied").order(updated_at: :desc)
   end
@@ -58,8 +58,6 @@ class PagesController < ApplicationController
     if params[:review]
       #get the most recent pending review
       @review = Review.search("*", where: { giver_id: current_user.id, status: "pending" }, order:{created_at: :desc}, limit: 1 )
-      puts "X"* 500
-      puts @review.results
     end
   end
 
