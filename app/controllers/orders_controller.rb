@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   include OpenpayHelper
   include UsersHelper
+  include ApplicationHelper
   access user: :all
   before_action only: [:create] do
     init_openpay("charge")
@@ -24,7 +25,7 @@ class OrdersController < ApplicationController
       "source_id" => order_params[:card_id],
       "amount" => @order.purchase.price,
       "currency" => "MXN",
-      "description" => "Compraste #{@order.purchase_type} #{@order.purchase.name} por la cantidad de #{@order.purchase.price}",
+      "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.purchase.price}",
       "device_session_id" => "params[:device_session_id]"
     }
 
@@ -34,6 +35,10 @@ class OrdersController < ApplicationController
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.response_order_id = response["id"]
         @order.save
+        if @order.purchase_type == "Offer"
+          @order.purchase.request.update(employee: @order.purchase.user)
+          @order.purchase.request.in_progress!
+        end
         create_notification(@order.employer, @order.employee, "te contrató", @order.purchase, "sales")
         flash[:success] = 'La orden fue creada exitosamente.'
       rescue OpenpayTransactionException => e
@@ -88,6 +93,8 @@ class OrdersController < ApplicationController
           # add 1 to gig order count
         if @order.purchase_type == "Package"
           @order.purchase.gig.increment!(:order_count)
+        elsif @order.purchase_type == "Offer"
+          @order.purchase.request.completed!
         end
         flash[:success] = "La orden ha finalizado"
         # Create Reviews for employer and employee with gig or request
@@ -118,6 +125,9 @@ class OrdersController < ApplicationController
         #change dispute status to refunded
         @order.dispute.refunded!
       end
+      if @order.purchase_type == "Offer"
+        @order.purchase.request.closed!
+      end
       create_notification(@order.employer, @order.employer, "ha reembolsado", @order.purchase, "purchases")
       flash[:success] = "La compra ha sido reembolsada y el dinero sumado a la cuenta"
     else
@@ -130,17 +140,22 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      order_params = params.require(:order).permit(:card_id, :purchase)
+      order_params = params.require(:order).permit(:card_id, :purchase, :purchase_type)
       order_params = set_defaults(order_params)
     end
 
     def set_defaults parameters
-      pack = Package.friendly.find(params[:order][:purchase])
-      parameters[:user_id] = current_user.id
-      parameters[:employee_id] = pack.gig.user_id
-      parameters[:purchase] = pack
-      parameters[:total] = pack.price
-      parameters
+      if parameters[:purchase_type] == "Package"
+        pack = Package.friendly.find(params[:order][:purchase])
+        parameters[:employee_id] = pack.gig.user_id
+      elsif parameters[:purchase_type] == "Offer"
+        pack = Offer.find(params[:order][:purchase])
+        parameters[:employee_id] = pack.user_id
+      end
+        parameters[:user_id] = current_user.id
+        parameters[:purchase] = pack
+        parameters[:total] = cons_mult_helper(pack.price).round(2)
+        parameters
     end
     def check_user_ownership
       if ! my_profile
@@ -222,12 +237,25 @@ class OrdersController < ApplicationController
 
     def verify_availability
       # Validate if Gig is own, banned or draft
-      @package = Package.includes(gig: :user).friendly.find(params[:order][:purchase])
+      if params[:order][:purchase_type] == "Package"
+        @package = Package.includes(gig: :user).friendly.find(params[:order][:purchase])
         if (@package.gig.user == current_user || @package.gig.draft? || @package.gig.banned?)
-          flash[:error] = "Este jale no está disponible"
-          redirect_to root_path
-          return
+          cancel_execution
         end
+      elsif params[:order][:purchase_type] == "Offer"
+        @offer = Offer.includes(request: :user).find(params[:order][:purchase])
+        if (@offer.request.user != current_user || @offer.request.banned? )
+          cancel_execution
+        end
+      else
+        cancel_execution
+      end
+    end
+
+    def cancel_execution
+      flash[:error] = "Este jale no está disponible"
+      redirect_to root_path
+      return
     end
 
     def create_reviews(model, order, giver)

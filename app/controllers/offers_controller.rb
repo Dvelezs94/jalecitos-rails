@@ -2,18 +2,28 @@ class OffersController < ApplicationController
   layout 'logged'
   include SanitizeParams
   include OffersHelper
+  include OpenpayHelper
   before_action :authenticate_user!
-  before_action :set_request, only: [:new, :create]
-  before_action :set_offer, only: [:edit, :update, :destroy]
+  before_action :set_request
+  before_action :allow_owner, only: :hire
+  before_action :set_offer, only: [:edit, :update, :destroy, :hire]
   access all: [:show], user: :all
   before_action :check_banned, only: :create
   before_action :check_offer_ownership, only:[:edit, :update, :destroy]
   before_action :check_if_offered, only: :create
+  before_action :deny_owner, only: [:new, :create]
+  before_action :check_if_already_hired
 
   # GET /offers/new
   def new
     check_if_offered
     @offer = Offer.new
+  end
+
+  def hire
+    @openpay_id = current_user.openpay_id
+    @order = Order.new
+    @user_cards = get_openpay_resource("card", @openpay_id)
   end
 
   # GET /offers/1/edit
@@ -79,7 +89,7 @@ class OffersController < ApplicationController
     end
 
     def check_offer_ownership
-      if current_user.id != @offer.user_id
+      if current_user != @offer.user
         redirect_to root_path
       end
     end
@@ -93,6 +103,27 @@ class OffersController < ApplicationController
     def check_banned
       if @request.banned?
         redirect_to root_path, notice: "No puedes ofertar en este pedido"
+        return
+      end
+    end
+    # dont let the owner do certain things if the requester is he
+    def deny_owner
+      if current_user == @request.user
+        redirect_to root_path, notice: "No puedes ofertar en este pedido"
+        return
+      end
+    end
+
+    def allow_owner
+      if current_user != @request.user
+        redirect_to root_path, notice: "No puedes acceder a esta ruta"
+        return
+      end
+    end
+    # function to check if the request has already hired someone, so they cannnot make changes to offers after that
+    def check_if_already_hired
+      if @request.employee.present?
+        redirect_to root_path, notice: "No puedes acceder a esta ruta"
         return
       end
     end

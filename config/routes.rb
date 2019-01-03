@@ -59,7 +59,11 @@ Rails.application.routes.draw do
    end
 
    resources :requests, except: :index do
-     resources :offers, except: [:index, :show]
+     resources :offers, except: [:index, :show] do
+       member do
+         get :hire
+       end
+     end
      collection do
        get :my_requests, as: "my"
      end

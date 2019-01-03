@@ -68,11 +68,13 @@ module ApplicationHelper
   def url_generator_helper (notification, object)
     case
     when object.class == Request
-       request_path(object)
+       request_path(object.slug)
     when object.class == Package
        finance_path(:table => notification.query_url)
     when object.class == Dispute
        order_dispute_path(object.order.uuid, object)
+    when object.class == Offer
+       finance_path(:table => notification.query_url)
     end
   end
 
@@ -84,6 +86,8 @@ module ApplicationHelper
        "en el jale Voy a #{object.gig.name} por el paquete #{object.pack_type}"
      when object.class == Dispute
         "en la orden #{object.order.uuid}"
+     when object.class == Offer
+        "en el pedido #{object.request.name}"
     end
   end
 
