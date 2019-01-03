@@ -1,4 +1,9 @@
 <div class="card" style="width: 70%; padding: 10px; margin: 20px auto;">
+  <% if offer.user == offer.request.employee %>
+  <div class="card-header" style="background-color: #3BC27E;">
+    Contratado
+  </div>
+  <% end %>
   <div class="card-body">
     <h5 class="card-title"><%= link_to(offer.user.slug, user_path(offer.user.slug)) %></h5>
     <% if current_user == offer.user || current_user == offer.request.user %>
