@@ -9,15 +9,15 @@
   <div class="confirm_content">
     <div class="row">
       <div class="col-lg-2">
-        <%= image_tag(avatar_display_helper(@package.gig.user.image_url(:thumb)), class: "nav-avatar") %>
+        <%= (defined? @package) ? image_tag(avatar_display_helper(@package.gig.user.image_url(:thumb)), class: "nav-avatar") : nil %>
       </div>
       <div class="col-lg-10">
-        Voy a <%= @package.gig.name %>
+        <%= (defined? @package) ? "Voy a  #{@package.gig.name}"  : "Busco a alguien #{@offer.request.name}"%>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-12">
-        <strong><%= @package.description %></strong>
+        <strong><%= (defined? @package) ? @package.description : @offer.description %></strong>
 
       </div>
     </div>
@@ -30,12 +30,13 @@
       </div>
       <div class="col-lg-6 text-right">
 
-        <%= number_to_currency(@package.price, precision: 2)%> MXN
+        <%= (defined? @package) ? number_to_currency(cons_mult_helper(@package.price), precision: 2) : number_to_currency(cons_mult_helper(@offer.price), precision: 2) %> MXN
       </div>
     </div>
 
     <div class="row">
       <%= f.hidden_field :purchase, :value => params[:id] %>
+      <%= f.hidden_field :purchase_type, :value => (defined? @package) ? "Package" : "Offer" %>
 
       <div class="col-lg-12 text-center">
         <%= f.submit "Confirmar y Pagar",  class: "btn continue_purchase" %>

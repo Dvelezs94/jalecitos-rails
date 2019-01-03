@@ -34,9 +34,9 @@
       </div>
     </a>
   </div>
-<% else %>
+<% elsif notification.notifiable.class == Offer %>
   <div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
-    <a href='<%=request_path(notification.notifiable.slug) %>'>
+    <a href='<%=request_path(notification.notifiable.request.slug) %>'>
       <div class='left'>
         <div class='icon_notify'>
           <img class='nav-avatar' src='<%=notification.user.image_url%>'>
@@ -45,7 +45,22 @@
           <strong><%=notification.user.slug%></strong>
           <%=notification.action%>
           en el pedido
-          <%= notification.notifiable.name %><br>
+          <%= notification.notifiable.request.name %><br>
+          <time><%=distance_of_time_in_words(notification.created_at, Time.now)%></time>
+        </p>
+      </div>
+    </a>
+  </div>
+<% elsif notification.notifiable.class == Request %>
+  <div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
+    <a href='<%= request_path(notification.notifiable) %>'>
+      <div class='left'>
+        <div class='icon_notify'>
+          <img class='nav-avatar' src='<%=notification.user.image_url%>'>
+        </div>
+        <p>
+          <strong><%=notification.user.slug%></strong>
+          <%=notification.action%>  en el pedido <%= notification.notifiable.name %><br>
           <time><%=distance_of_time_in_words(notification.created_at, Time.now)%></time>
         </p>
       </div>

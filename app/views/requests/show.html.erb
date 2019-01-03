@@ -9,14 +9,15 @@
     <p class="card-text">Presupuesto: <%= @request.budget %> MXN</p>
     <p><small class="text-muted"><%=@request.location%></small></p>
     <p><small class="text-muted">Publicado hace <%= distance_of_time_in_words(@request.created_at, Time.now) %></small></p>
-    <% if current_user == @request.user %>
-     <hr>
-     <%= link_to 'Edit', edit_request_path(@request) %> |
-     <%= link_to 'Back', :back %>
-    <% elsif  current_user && has_offered(current_user.id)  %>
-     <p class="text-muted">Tu oferta esta postulada</p>
-    <% else %>
-     <%= link_to 'Postularse', new_request_offer_path(@request), class: "btn btn-primary" %>
+    <% if @hires_open %>
+      <% if current_user == @request.user %>
+       <hr>
+       <%= link_to 'Editar', edit_request_path(@request), class: "btn btn-primary" %>
+      <% elsif  current_user && has_offered(current_user.id)  %>
+       <p class="text-muted">Tu oferta esta postulada</p>
+      <% else %>
+       <%= link_to 'Postularse', new_request_offer_path(@request), class: "btn btn-primary" %>
+      <% end %>
     <% end %>
   </div>
 </div>

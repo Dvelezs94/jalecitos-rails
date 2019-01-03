@@ -1,14 +1,17 @@
 <div class="card" style="width: 70%; padding: 10px; margin: 20px auto;">
   <div class="card-body">
-    <h5 class="card-title"><%= offer.user.slug %></h5>
-    <% if current_user.id == offer.user_id || current_user.id == offer.request.user_id %>
+    <h5 class="card-title"><%= link_to(offer.user.slug, user_path(offer.user.slug)) %></h5>
+    <% if current_user == offer.user || current_user == offer.request.user %>
     <p class="card-text"><%=offer.description.html_safe %></p>
-    <p class="card-text">Hours: <%=offer.hours %></p>
+    <p class="card-text">Horas: <%=offer.hours %></p>
     <% end %>
     <p class="card-text"><%= number_to_currency(cons_mult_helper(offer.price), precision: 2) %> MXN</p>
-    <% if current_user.id == offer.user_id %>
-    <p class="card-text"><%= link_to 'Editar oferta', edit_request_offer_path(offer.request, offer) %></p>
-    <p class="card-text"><%= link_to "Borrar", request_offer_path(offer.request, offer), method: :delete, data: { confirm: '¿Estás seguro de querer borrar esta oferta?' } %></p>
+    <% if current_user.id == offer.user_id && @hires_open%>
+    <p class="card-text"><%= link_to 'Editar oferta', edit_request_offer_path(offer.request, offer), class: "btn btn-success" %>
+    <%= link_to "Borrar", request_offer_path(offer.request, offer), method: :delete, data: { confirm: '¿Estás seguro de querer borrar esta oferta?' }, class: "btn btn-danger" %></p>
+    <% end %>
+    <% if current_user == offer.request.user && @hires_open %>
+      <%= link_to link_to("Contratar", hire_request_offer_path(offer.request.slug, offer), class: "btn btn-success") %>
     <% end %>
   </div>
 </div>
