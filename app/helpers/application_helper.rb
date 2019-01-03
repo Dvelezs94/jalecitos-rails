@@ -96,6 +96,19 @@ module ApplicationHelper
     number
   end
 
+  def cons_mult_helper_times (credits_list, percent)
+    # p "x" * 600
+    # p numbers
+    calculated = []
+    credits_list.each do |l|
+      res = l["total"] / 11 * percent
+      calculated << {"id"=>l["id"], "total"=>res}
+    end
+    p "x" *500
+    p calculated
+    calculated
+  end
+
   def form_method_helper
     if params[:action] == "edit" || params[:action] == "update" || params[:action] == "edit_packages" ||params[:action] == "update_packages"
       :patch

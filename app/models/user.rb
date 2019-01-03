@@ -9,6 +9,7 @@ class User < ApplicationRecord
   include LocationValidation
   #inspects
   include AliasFunctions
+  include ApplicationHelper
   #search
   searchkick language: "spanish"
   # only send these fields to elasticsearch
@@ -123,12 +124,12 @@ class User < ApplicationRecord
    def balance
      @balance = 0.0
      @order_ids = []
-     @refunded = self.purchases.refunded.where(paid_at: nil)
-     @sales = self.sales.completed.where(paid_at: nil)
+     @refunded = cons_mult_helper_times(self.purchases.refunded.where(paid_at: nil).select(:id, :total), 11).as_json
+     @sales = cons_mult_helper_times(self.sales.completed.where(paid_at: nil).select(:id, :total), 10).as_json
      @join = @sales + @refunded
      @join.each do |b|
-       @balance += b.total
-       @order_ids << b.id
+       @balance += b["total"]
+       @order_ids << b["id"]
      end
      return {amount: @balance, order_ids: @order_ids}
    end
