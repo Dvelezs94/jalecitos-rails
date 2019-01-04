@@ -38,6 +38,11 @@ class OrdersController < ApplicationController
         if @order.purchase_type == "Offer"
           @order.purchase.request.update(employee: @order.purchase.user)
           @order.purchase.request.in_progress!
+          OrderMailer.new_request_order_to_employee(@order).deliver
+          OrderMailer.new_request_order_to_employer(@order).deliver
+        else
+          OrderMailer.new_gig_order_to_employee(@order).deliver
+          OrderMailer.new_gig_order_to_employer(@order).deliver
         end
         create_notification(@order.employer, @order.employee, "te contrató", @order.purchase, "sales")
         flash[:success] = 'La orden fue creada exitosamente.'
