@@ -23,7 +23,8 @@ class UserMailer  < Devise::Mailer
         }
       ],
       "from": {
-        "email": "noreply@jalecitos.com"
+        "email": "noreply@jalecitos.com",
+        "name": "Jalecitos"
       },
       "template_id": "d-9e56d320528d4578ae6b1e006ea88edd"
     }
@@ -48,7 +49,8 @@ class UserMailer  < Devise::Mailer
         }
       ],
       "from": {
-        "email": "noreply@jalecitos.com"
+        "email": "noreply@jalecitos.com",
+        "name": "Jalecitos"
       },
       "template_id": "d-038e9bd99cef4c7ebe128b90e6da69cb"
     }
