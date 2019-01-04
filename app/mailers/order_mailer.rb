@@ -10,6 +10,11 @@ class OrderMailer < ApplicationMailer
               "email": @order.employee.email
             }
           ],
+          "bcc": [
+            {
+              "email": "jalecitos.mails@gmail.com"
+            }
+          ],
           "dynamic_template_data": {
             "GIG_URL": user_gig_url(@order.purchase.gig.user, @order.purchase.gig),
             "GIG_NAME": @order.purchase.gig.name,
@@ -39,6 +44,11 @@ class OrderMailer < ApplicationMailer
           "to": [
             {
               "email": @order.employer.email
+            }
+          ],
+          "bcc": [
+            {
+              "email": "jalecitos.mails@gmail.com"
             }
           ],
           "dynamic_template_data": {
@@ -73,6 +83,11 @@ class OrderMailer < ApplicationMailer
               "email": @order.employee.email
             }
           ],
+          "bcc": [
+            {
+              "email": "jalecitos.mails@gmail.com"
+            }
+          ],
           "dynamic_template_data": {
             "REQUEST_URL": request_url(@order.purchase.request.slug),
             "REQUEST_NAME": @order.purchase.request.name,
@@ -103,6 +118,11 @@ class OrderMailer < ApplicationMailer
           "to": [
             {
               "email": @order.employer.email
+            }
+          ],
+          "bcc": [
+            {
+              "email": "jalecitos.mails@gmail.com"
             }
           ],
           "dynamic_template_data": {
