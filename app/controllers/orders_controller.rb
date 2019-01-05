@@ -91,22 +91,15 @@ class OrdersController < ApplicationController
         end
         flash[:success] = "La orden ha finalizado"
         # Create Reviews for employer and employee with gig or request
-        if @order.purchase_type == "Package"
-          create_reviews(@order.purchase.gig, @order, @order.employer)
-          create_reviews(@order.purchase.gig, @order, @order.employee)
-        else
-          create_reviews(@order.purchase.request, @order, @order.employer)
-          create_reviews(@order.purchase.request, @order, @order.employee)
-        end
-
-        create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales")
+        create_reviews
+        create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales", @other_review.id)
       else
         flash[:error] = "Hubo un error en tu solicitud"
       end
     else
       flash[:error] = "Hubo un error en tu solicitud"
     end
-      redirect_to finance_path(:table => "purchases", :review => true)
+      redirect_to finance_path(:table => "purchases", :review => true, :identifier => @my_review.id)
   end
 
 
@@ -230,7 +223,22 @@ class OrdersController < ApplicationController
         end
     end
 
-    def create_reviews(model, order, giver)
-      Review.create(reviewable: model, order: order, giver: giver)
+    def create_reviews
+      #this is useful for collecting the two reviews generated
+      @new_reviews = []
+      if @order.purchase_type == "Package"
+        create_review(@order.purchase.gig, @order, @order.employer)
+        create_review(@order.purchase.gig, @order, @order.employee)
+      else
+        create_review(@order.purchase.request, @order, @order.employer)
+        create_review(@order.purchase.request, @order, @order.employee)
+      end
+      #get the id of the user corresponding review and the one for use in the job
+      @my_review = @new_reviews.select{ |r| r.giver_id == current_user.id }.first
+      @other_review = @new_reviews.select{ |r| r.giver_id != current_user.id }.first
+    end
+
+    def create_review(model, order, giver)
+      @new_reviews << Review.create(reviewable: model, order: order, giver: giver)
     end
 end

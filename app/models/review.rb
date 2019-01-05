@@ -5,11 +5,14 @@ class Review < ApplicationRecord
   def search_data
     {
       giver_id: giver_id,
-      status: status,
       created_at: created_at
     }
   end
 
+  def should_index?
+    pending?# only index pending reviews
+  end
+  #Associations
   belongs_to :order
   belongs_to :giver, foreign_key: :giver_id, class_name: "User"
   belongs_to :reviewable, polymorphic: true
@@ -20,9 +23,11 @@ class Review < ApplicationRecord
   def rating
     Rate.where(rateable: self).first
   end
+  #validations
+  validates_length_of :comment, :maximum => 2000
 
   # Run Gig average job to update score
-  after_commit :resource_average, on: :update, if: :saved_changes_to_status?
+  after_commit :resource_average, on: :update
 
   # method to average the gig and the user score
   def resource_average

@@ -55,9 +55,18 @@ class PagesController < ApplicationController
   end
 
   def pending_review
-    if params[:review]
-      #get the most recent pending review
-      @review = Review.search("*", where: { giver_id: current_user.id, status: "pending" }, order:{created_at: :desc}, limit: 1 )
+    #if the review is specific...
+    if params[:review] && params[:identifier]
+      #find it and keep it in an array
+      @reviews = [ Review.find( params[:identifier] ) ]
+      #verify the review is pending to dispĺay it
+      @reviews = @reviews.select{ |r| r.pending? }
+    #or if its not specific
+    elsif params[:review]
+      #get the recent pending reviews (searchkick just index pending reviews)
+      @reviews = Review.search("*", where: { giver_id: current_user.id }, order:{created_at: :desc})
+      #verify the reviews that are pending (searchkick takes some time to update its records)
+      @reviews = @reviews.select{ |r| r.pending? }
     end
   end
 
