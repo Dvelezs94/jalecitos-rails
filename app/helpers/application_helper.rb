@@ -18,9 +18,7 @@ module ApplicationHelper
     msg = (flash[:alert] || flash[:error] || flash[:notice] || flash[:warning] || flash[:success] || flash[:progress])
     if msg
       case
-        when flash[:alert]
-          flash_type = :alert
-        when flash[:error]
+      when flash[:error] || flash[:alert]
           flash_type = :error
         when flash[:notice]
           flash_type = :notice
@@ -70,7 +68,11 @@ module ApplicationHelper
     when object.class == Request
        request_path(object.slug)
     when object.class == Package
+      if notification.action == "ha finalizado"
+       finance_path(:table => notification.query_url, :review => true)
+      else
        finance_path(:table => notification.query_url)
+     end
     when object.class == Dispute
        order_dispute_path(object.order.uuid, object)
     when object.class == Offer

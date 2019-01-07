@@ -1,8 +1,9 @@
 class PagesController < ApplicationController
   include SetLayout
   before_action :admin_redirect, only: :home
-  before_action :review, only: [:home, :finance]
+  before_action :pending_review, only: [:home, :finance]
   layout :set_layout
+  access user: :all, admin: :all, all: [:home]
   def home
     if params[:query]
       if (params[:model_name] == "requests")
@@ -26,7 +27,6 @@ class PagesController < ApplicationController
   end
 
   def finance
-    authenticate_user!
     @purchases = current_user.purchases.order(updated_at: :desc)
     @sales = current_user.sales.where.not(status: "denied").order(updated_at: :desc)
   end
@@ -54,9 +54,19 @@ class PagesController < ApplicationController
     end
   end
 
-  def review
-    if params[:review]
-      @review = Review.pending.where(giver: current_user).last
+  def pending_review
+    #if the review is specific...
+    if params[:review] && params[:identifier]
+      #find it and keep it in an array
+      @reviews = [ Review.find( params[:identifier] ) ]
+      #verify the review is pending to dispĺay it
+      @reviews = @reviews.select{ |r| r.pending? }
+    #or if its not specific
+    elsif params[:review]
+      #get the recent pending reviews (searchkick just index pending reviews)
+      @reviews = Review.search("*", where: { giver_id: current_user.id }, order:{created_at: :desc})
+      #verify the reviews that are pending (searchkick takes some time to update its records)
+      @reviews = @reviews.select{ |r| r.pending? }
     end
   end
 

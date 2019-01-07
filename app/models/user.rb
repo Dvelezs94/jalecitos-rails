@@ -70,7 +70,7 @@ class User < ApplicationRecord
   has_many :purchases, class_name: :Order, foreign_key: :employer
   has_many :sales, class_name: :Order, foreign_key: :employee
   #Reviews (giver)
-  has_many :giver, class_name: :Review, foreign_key: :giver_id
+  has_many :reviews, class_name: :Review, foreign_key: :giver_id
   #Push subscriptions reference
   has_many :push_subscriptions
   #withdrawals Relations

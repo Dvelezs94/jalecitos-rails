@@ -19,11 +19,21 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def create_notification(user, recipient, message, model, query_url=nil)
-    Notification.create!(recipient: recipient, user: user, action: message, notifiable: model, query_url: query_url)
+  def create_notification(user, recipient, message, model, query_url=nil, review_id=nil)
+    Notification.create!(recipient: recipient, user: user, action: message, notifiable: model, query_url: query_url, review_id: review_id)
   end
   #Devise redirects
   def after_sign_in_path_for(resource)
-    request.referrer + "?review=true" || root_path
+    #if i am in localhost/sign_in path, redirect to localhost, otherwise, it will throw a too many times redirect error
+    (Rails.application.routes.recognize_path(request.referrer)[:controller] == "users/sessions")? root_path : request.referrer + "?review=true"
+  end
+
+  #behave as request of "user"
+  def self.renderer_with_signed_in_user(user)
+    ActionController::Renderer::RACK_KEY_TRANSLATION['warden'] ||= 'warden'
+    proxy = Warden::Proxy.new({}, Warden::Manager.new({})).tap { |i|
+      i.set_user(user, scope: :user, store: false, run_callbacks: false)
+    }
+    renderer.new('warden' => proxy)
   end
 end

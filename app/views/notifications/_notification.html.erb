@@ -1,69 +1,37 @@
-<% if notification.notifiable.class == Package %>
-  <div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
-    <a href='<%=finance_path(:table => "sales") %>'>
-      <div class='left'>
-        <div class='icon_notify'>
-          <img class='nav-avatar' src='<%=notification.user.image_url%>'>
-        </div>
-        <p>
-          <strong><%=notification.user.slug%></strong>
-          <%=notification.action%>
+<div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
+  <a href='<%=url_generator_helper(notification, notification.notifiable) %>'>
+    <div class='left'>
+      <div class='icon_notify'>
+        <img class='nav-avatar' src='<%=notification.user.image_url%>'>
+      </div>
+      <p>
+        <strong><%=notification.user.slug%></strong>
+        <%=notification.action%>
+        <% if notification.notifiable_type == "Package" %>
+
           en el jale
           <%= notification.notifiable.name %>
           por el paquete
           <%= notification.notifiable.pack_type %><br>
+
+        <% elsif notification.notifiable_type == "Dispute" %>
+
+            en la orden
+            <%= notification.notifiable.order.uuid %><br>
+            
+        <% elsif notification.notifiable_type == "Request" %>
+
+            en el pedido
+            <%= notification.notifiable.name %><br>
+        
+        <% else %>
+
+            en el pedido
+            <<%= notification.notifiable.request.name %><br>
+
+        <% end %>
           <time><%=distance_of_time_in_words(notification.created_at, Time.now)%></time>
         </p>
       </div>
     </a>
   </div>
-<% elsif notification.notifiable.class == Dispute %>
-  <div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
-    <a href='<%=order_dispute_path(notification.notifiable.order.uuid, notification.notifiable) %>'>
-      <div class='left'>
-        <div class='icon_notify'>
-          <img class='nav-avatar' src='<%=notification.user.image_url%>'>
-        </div>
-        <p>
-          <strong><%=notification.user.slug%></strong>
-          <%=notification.action%>
-          en la orden
-          <%= notification.notifiable.order.uuid %><br>
-          <time><%=distance_of_time_in_words(notification.created_at, Time.now)%></time>
-        </p>
-      </div>
-    </a>
-  </div>
-<% elsif notification.notifiable.class == Offer %>
-  <div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
-    <a href='<%=request_path(notification.notifiable.request.slug) %>'>
-      <div class='left'>
-        <div class='icon_notify'>
-          <img class='nav-avatar' src='<%=notification.user.image_url%>'>
-        </div>
-        <p>
-          <strong><%=notification.user.slug%></strong>
-          <%=notification.action%>
-          en el pedido
-          <%= notification.notifiable.request.name %><br>
-          <time><%=distance_of_time_in_words(notification.created_at, Time.now)%></time>
-        </p>
-      </div>
-    </a>
-  </div>
-<% elsif notification.notifiable.class == Request %>
-  <div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
-    <a href='<%= request_path(notification.notifiable) %>'>
-      <div class='left'>
-        <div class='icon_notify'>
-          <img class='nav-avatar' src='<%=notification.user.image_url%>'>
-        </div>
-        <p>
-          <strong><%=notification.user.slug%></strong>
-          <%=notification.action%>  en el pedido <%= notification.notifiable.name %><br>
-          <time><%=distance_of_time_in_words(notification.created_at, Time.now)%></time>
-        </p>
-      </div>
-    </a>
-  </div>
-<% end %>

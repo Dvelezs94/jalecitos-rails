@@ -28,7 +28,7 @@ module GigStatus
   end
 
   def check_if_banned
-     (@gig.banned?) ? flash[:error]='Este Gig está baneado' : nil
+     (@gig.banned?) ? flash[:error]='Este Gig está suspendido' : nil
   end
 
 end

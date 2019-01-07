@@ -50,7 +50,7 @@ class DisputesController < ApplicationController
 
     def check_dispute_ownership
       if ! (current_user == @dispute.order.employer || current_user == @dispute.order.employee || current_user.has_roles?(:admin))
-          redirect_to root_path, alert: "No puedes acceder aqui."
+          redirect_to root_path, error: "No puedes acceder aqui."
       end
     end
 

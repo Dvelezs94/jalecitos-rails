@@ -23,7 +23,7 @@
       <div class="row align_center">
         <div class="col-lg-12 align_center">
           <div class="row align_center">
-            <%= render partial: "gigs/gig", collection: @gigs.published %>
+            <%= render partial: "gigs/gig", collection: @gigs.select {|gig| gig.published?} %>
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@
         <div class="row align_center">
           <div class="col-lg-12 align_center">
             <div class="row align_center">
-              <%= render partial: "gigs/gig", collection: @gigs.draft %>
+              <%= render partial: "gigs/gig", collection: @gigs.select {|gig| gig.draft?} %>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="row align_center">
           <div class="col-lg-12 align_center">
             <div class="row align_center">
-              <%= render partial: "gigs/gig", collection: @gigs.banned %>
+              <%= render partial: "gigs/gig", collection: @gigs.select {|gig| gig.banned?}  %>
             </div>
           </div>
         </div>

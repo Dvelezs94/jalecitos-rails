@@ -623,12 +623,6 @@ li.categories:hover p {
   float: left;
   width: 100%;
 }
-
-label.error {
-  float: left;
-  color: red;
-}
-
 .banner-submit {
   height: 50px;
 }
@@ -734,4 +728,10 @@ span.best_in_place form select:focus {
 
 .cursor_pointer{
   cursor: pointer;
+}
+//style of jquery errors
+label.error {
+  float: left;
+  color: red;
+  width: 100%;
 }

@@ -21,10 +21,9 @@ class UsersController < ApplicationController
 
   def show
     if @user == current_user
-      @gigs = Gig.includes(:packages, :user).where(user_id: @user)
-      @requests = Request.includes(:user).where(user_id: @user)
+      @gigs = Gig.search("*", includes: [:packages, :user], where: {user_id: @user.id} )
     else
-      @gigs = Gig.includes(:packages, :user).published.where(user_id: @user)
+      @gigs = Gig.search("*", includes: [:packages, :user], where: {user_id: @user.id, status: "published"} )
     end
   end
 
