@@ -9,18 +9,6 @@ $(document).on('turbolinks:load', function() {
    $(".new_bank").validate();
   }
   if($(".review_form").length > 0){
-    $(".review_form").validate({
-      ignore: "", // this allows score (hidden field) get validated
-      rules : {
-       'score' : {
-           required: true
-       }
-     },
-     messages: {
-       'score' : {
-         required : "Debes dar una calificación"
-       }
-     }
-   });
+    review_validation();
   }
 });

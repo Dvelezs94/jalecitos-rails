@@ -34,7 +34,7 @@
       <%= render 'shared/main_nav_bar' %>
       <div class="gap"></div>
       <%= yield %>
-      <% if params[:review] && @reviews.any? %>
+      <% if params[:review] && @reviews.present? %>
         <%= render partial: 'reviews/review', collection: [@reviews.first]%>
       <% end %>
     </div>

@@ -17,22 +17,10 @@ App.notifications = App.cable.subscriptions.create("NotificationsChannel", {
 
     //if a review modal is recieved
     if(data.reviewItem){
-      $("body").append(data.reviewItem);
-      modals('reviewModal', "closeReview", "none", true );
-      activate_ratyrate();
-      $(".review_form").validate({
-        ignore: "", // this allows score (hidden field) get validated
-        rules : {
-         'score' : {
-             required: true
-         }
-       },
-       messages: {
-         'score' : {
-           required : "Debes dar una calificación"
-         }
-       }
-     });
+      $("body").append(data.reviewItem); // gets the modal
+      modals('reviewModal', "closeReview", "none", true ); //shows the modal
+      activate_ratyrate(); //activates stars
+      review_validation(); //activates the validation of the form
     }
     //add 1 count to notifications
     $("#unread-count").html( parseInt($("#unread-count").text())+1)

@@ -1,13 +1,10 @@
-$(document).on('turbolinks:load', function() {
-  activate_ratyrate();
-});
 function activate_ratyrate(){
-  if ($(".star:has(img)").length == 0){
   $.fn.raty.defaults.half = false;
   $.fn.raty.defaults.halfShow = true;
   $.fn.raty.defaults.path = "/assets/main";
   $.fn.raty.defaults.cancel = false;
     $(".star").each(function() {
+      if ( $(this).find("img").length == 0 ) {
       var $readonly = ($(this).attr('data-readonly') == 'true');
       var $half     = ($(this).attr('data-enable-half') == 'true');
       var $halfShow = ($(this).attr('data-half-show') == 'true');
@@ -61,6 +58,6 @@ function activate_ratyrate(){
           });
         }
       });
+    }
     });
-  }
 }

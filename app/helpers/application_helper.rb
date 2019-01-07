@@ -18,9 +18,7 @@ module ApplicationHelper
     msg = (flash[:alert] || flash[:error] || flash[:notice] || flash[:warning] || flash[:success] || flash[:progress])
     if msg
       case
-        when flash[:alert]
-          flash_type = :alert
-        when flash[:error]
+      when flash[:error] || flash[:alert]
           flash_type = :error
         when flash[:notice]
           flash_type = :notice
