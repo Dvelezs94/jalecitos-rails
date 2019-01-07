@@ -75,6 +75,8 @@ class User < ApplicationRecord
   has_many :push_subscriptions
   #withdrawals Relations
   has_many :withdrawals
+  # Billing info (Invoices Profiles relation)
+  has_many :billing_profiles
   # likes
   has_many :likes
   #find liked gigs

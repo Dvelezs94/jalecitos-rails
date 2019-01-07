@@ -1,0 +1,6 @@
+<tr class="<%= billing_profile.id%>">
+  <td><%= billing_profile.name %></td>
+  <td><%= billing_profile.rfc %></td>
+  <td><%= billing_profile.zip_code %></td>
+  <td><%= link_to fa_icon("trash", class: "fa-lg"), user_billing_profile_path(current_user.slug, billing_profile.id), method: :delete, data: { confirm: 'Estas seguro?' }, remote: true %></td>
+</tr>
