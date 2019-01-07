@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_02_225549) do
+ActiveRecord::Schema.define(version: 2019_01_07_191119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,18 @@ ActiveRecord::Schema.define(version: 2019_01_02_225549) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "billing_profiles", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.string "rfc"
+    t.integer "zip_code"
+    t.integer "status", default: 0
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_billing_profiles_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -375,6 +387,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_225549) do
     t.index ["user_id"], name: "index_withdrawals_on_user_id"
   end
 
+  add_foreign_key "billing_profiles", "users"
   add_foreign_key "disputes", "orders"
   add_foreign_key "extras", "gigs", column: "gigs_id"
   add_foreign_key "gigs", "categories"

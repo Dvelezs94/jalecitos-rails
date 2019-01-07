@@ -36,6 +36,7 @@ Rails.application.routes.draw do
      get 'configuration', to: 'users#configuration', as: 'config'
      resources :banks, only: [:create, :destroy]
      resources :cards, only: [:create, :destroy]
+     resources :billing_profiles, only: [:create, :destroy]
 
      resources :gigs, except: :index do
        resource :reports, only: [:create], as: "report"
