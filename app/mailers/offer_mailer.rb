@@ -20,7 +20,8 @@ class OfferMailer < ApplicationMailer
         }
       ],
       "from": {
-        "email": "noreply@jalecitos.com"
+        "email": "noreply@jalecitos.com",
+        "name": "Jalecitos"
       },
       "template_id": "d-0786709333f0406d86f9eca1fec0bdac"
     }

@@ -1,0 +1,20 @@
+<section class="design-process-section menuu" id="process-tab">
+  <div class="container-fluid">
+    <div class="row ">
+      <%= render "shared_user/hire/steps" %>
+      <%= render "shared_user/hire/disclaimer" %>
+      <div class="container">
+        <%= form_for @order, url: orders_path do |f|  %>
+        <div class="row">
+          <div class="col-lg-8 checkout_cart">
+          <%= render "shared_user/hire/checkout_cart", f: f%>
+          </div>
+          <div class="col-lg-4 confirm ">
+            <%= render "shared_user/hire/summary", f: f %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -19,6 +19,7 @@ class RequestsController < ApplicationController
   # GET /requests/1
   def show
     report_options
+    @hires_open = (@request.employee.nil?) ? true : false
   end
 
   # GET /requests/new

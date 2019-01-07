@@ -1,0 +1,31 @@
+<!-- The Modal -->
+<div class="modal inmodal" id="billingProfileModal">
+
+  <!-- Modal content -->
+  <div class="modal-content modal-configuration">
+    <!-- <span class="close">&times;</span> -->
+    <div class="container text-center">
+
+      <div class="row">
+
+        <div class="col-lg-12">
+
+          <h4>Nuevo Perfil Tributario</h4>
+
+          <div class="divi-new js-form-join-section" data-section="1"></div>
+          <%= form_with model: @billing_profile, url: user_billing_profiles_path(current_user) do |f| %>
+            <%= f.text_field :name, class: "required", placeholder: "Razon Social" %>
+            <%= f.text_field :rfc, class: "required", placeholder: "RFC" %>
+            <%= f.text_field :address, class: "required", placeholder: "Direccion Calle y Numero" %>
+            <%= f.number_field :zip_code, class: "required", placeholder: "Codigo Postal", maxlength: 5 %>
+            <br>
+            <%= f.submit 'Continuar', :class => 'btn btn-success' %>
+          <% end %>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>

@@ -3,5 +3,6 @@ $(document).on('turbolinks:load', function() {
     modals('cardModal', "cardbtn");
     modals('bankModal', "bankbtn");
     modals('changePasswordModal', "changepassbtn");
+    modals('billingProfileModal', "billingprofilebtn");
   }
 });

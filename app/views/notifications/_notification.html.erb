@@ -18,11 +18,16 @@
 
             en la orden
             <%= notification.notifiable.order.uuid %><br>
-
-        <% else %>
+            
+        <% elsif notification.notifiable_type == "Request" %>
 
             en el pedido
             <%= notification.notifiable.name %><br>
+        
+        <% else %>
+
+            en el pedido
+            <<%= notification.notifiable.request.name %><br>
 
         <% end %>
           <time><%=distance_of_time_in_words(notification.created_at, Time.now)%></time>

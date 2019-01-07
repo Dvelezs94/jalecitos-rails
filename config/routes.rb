@@ -32,6 +32,7 @@ Rails.application.routes.draw do
      get 'configuration', to: 'users#configuration', as: 'config'
      resources :banks, only: [:create, :destroy]
      resources :cards, only: [:create, :destroy]
+     resources :billing_profiles, only: [:create, :destroy]
 
      resources :gigs, except: :index do
        resource :reports, only: [:create], as: "report"
@@ -55,7 +56,11 @@ Rails.application.routes.draw do
    end
 
    resources :requests, except: :index do
-     resources :offers, except: [:index, :show]
+     resources :offers, except: [:index, :show] do
+       member do
+         get :hire
+       end
+     end
      collection do
        get :my_requests, as: "my"
      end

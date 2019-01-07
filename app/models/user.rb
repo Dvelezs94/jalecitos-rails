@@ -9,8 +9,22 @@ class User < ApplicationRecord
   include LocationValidation
   #inspects
   include AliasFunctions
+  include ApplicationHelper
+  #search
+  searchkick language: "spanish"
+  # only send these fields to elasticsearch
+  def search_data
+    {
+      id: id,
+      tags: tags,
+      location: location,
+      roles: roles
+    }
+  end
   #Define who can do the rating, which happens to be the user
   ratyrate_rater
+  #Tags
+  acts_as_taggable
   #alias
   friendly_id :alias, use: :slugged
   #if alias changes, also slug
@@ -61,6 +75,8 @@ class User < ApplicationRecord
   has_many :push_subscriptions
   #withdrawals Relations
   has_many :withdrawals
+  # Billing info (Invoices Profiles relation)
+  has_many :billing_profiles
   # likes
   has_many :likes
   #find liked gigs
@@ -110,12 +126,12 @@ class User < ApplicationRecord
    def balance
      @balance = 0.0
      @order_ids = []
-     @refunded = self.purchases.refunded.where(paid_at: nil)
-     @sales = self.sales.completed.where(paid_at: nil)
+     @refunded = cons_mult_helper_times(self.purchases.refunded.where(paid_at: nil).select(:id, :total), 11).as_json
+     @sales = cons_mult_helper_times(self.sales.completed.where(paid_at: nil).select(:id, :total), 10).as_json
      @join = @sales + @refunded
      @join.each do |b|
-       @balance += b.total
-       @order_ids << b.id
+       @balance += b["total"]
+       @order_ids << b["id"]
      end
      return {amount: @balance, order_ids: @order_ids}
    end

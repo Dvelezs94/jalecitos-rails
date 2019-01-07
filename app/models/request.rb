@@ -16,6 +16,7 @@ class Request < ApplicationRecord
   belongs_to :user
   belongs_to :category
   has_many :offers
+  belongs_to :employee, class_name: "User", optional: true
   #Validations
   validates_presence_of :name, :description, :location, :budget, :category_id
   validate  :tag_length, :no_spaces_in_tag, :maximum_amount_of_tags
@@ -25,4 +26,7 @@ class Request < ApplicationRecord
 
   #Custom fields
   mount_uploader :image, RequestUploader
+
+  #notify users when new request is made
+  after_commit -> { NotifyNewRequestJob.perform_later(self) }, on: :create
 end

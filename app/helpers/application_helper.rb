@@ -66,7 +66,7 @@ module ApplicationHelper
   def url_generator_helper (notification, object)
     case
     when object.class == Request
-       request_path(object)
+       request_path(object.slug)
     when object.class == Package
       if notification.action == "ha finalizado"
        finance_path(:table => notification.query_url, :review => true)
@@ -75,6 +75,8 @@ module ApplicationHelper
      end
     when object.class == Dispute
        order_dispute_path(object.order.uuid, object)
+    when object.class == Offer
+       finance_path(:table => notification.query_url)
     end
   end
 
@@ -86,12 +88,27 @@ module ApplicationHelper
        "en el jale Voy a #{object.gig.name} por el paquete #{object.pack_type}"
      when object.class == Dispute
         "en la orden #{object.order.uuid}"
+     when object.class == Offer
+        "en el pedido #{object.request.name}"
     end
   end
 
   def cons_mult_helper number
     number = number * 1.1
     number
+  end
+
+  def cons_mult_helper_times (credits_list, percent)
+    # p "x" * 600
+    # p numbers
+    calculated = []
+    credits_list.each do |l|
+      res = l["total"] / 11 * percent
+      calculated << {"id"=>l["id"], "total"=>res}
+    end
+    p "x" *500
+    p calculated
+    calculated
   end
 
   def form_method_helper
