@@ -10,11 +10,16 @@
 
         <div class="col-lg-12">
 
-          <h4>Califica al usuario</h4>
+          <%= (current_page?(root_path))? "<h4>Calificación pendiente</h4>".html_safe : "<h4>Califica al usuario</h4>".html_safe %>
 
           <%= form_with(model: review, url: review_path(review), method: :patch, :html => { class: "review_form" }) do |f| %>
           <div class="row justify-content-center">
-            <%= image_tag(avatar_display_helper(review.giver.image_url(:thumb)), class: "review-avatar") %>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 justify-content-center row">
+              <%= image_tag(avatar_display_helper(review.giver.image_url(:thumb)), class: "review-avatar") %>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+              <%= review.giver.alias %>
+            </div>
           </div>
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -26,6 +31,7 @@
               </div>
             </div>
             <div class="gap"></div>
+
             <%= f.submit 'Enviar', :class => 'btn btn-success', :onclick => '$(".review_form").valid()? $("#reviewModal").fadeOut("fast", function() { $(this).remove(); } ) : null;' %>
             <br>
           <% end %>

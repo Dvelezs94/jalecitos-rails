@@ -69,7 +69,7 @@ module ApplicationHelper
        request_path(object.slug)
     when object.class == Package
       if notification.action == "ha finalizado"
-       finance_path(:table => notification.query_url, :review => true)
+       finance_path(:table => notification.query_url, :review => true, :notification => notification.id)
       else
        finance_path(:table => notification.query_url)
      end
