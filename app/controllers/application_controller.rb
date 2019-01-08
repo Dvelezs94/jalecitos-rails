@@ -36,4 +36,8 @@ class ApplicationController < ActionController::Base
     }
     renderer.new('warden' => proxy)
   end
+
+  def is_number? string
+    true if Float(string) rescue false
+  end
 end

@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   include SetLayout
   before_action :admin_redirect, only: :home
-  before_action :pending_review, only: [:home, :finance]
+  before_action :pending_review, only: [:home, :finance], :if => :signed_and_rev
   layout :set_layout
   access user: :all, admin: :all, all: [:home]
   def home
@@ -55,19 +55,33 @@ class PagesController < ApplicationController
   end
 
   def pending_review
-    #if the review is specific...
-    if params[:review] && params[:identifier]
+    #if the review is specific... (when employer finishes work)
+    if params[:identifier] && is_number?(params[:identifier])
       #find it and keep it in an array
       @reviews = [ Review.find( params[:identifier] ) ]
-      #verify the review is pending to dispĺay it
-      @reviews = @reviews.select{ |r| r.pending? }
+      #verify its own and pending
+      (@reviews.present? )? @reviews = @reviews.select{ |r| r.pending? && r.giver_id == current_user.id  } : nil
+    #if employee clicked a notification of finished work
+    elsif params[:notification]  && is_number?(params[:notification])
+      #get the reviews of the user
+      @reviews = Review.search('*', where: { giver_id: current_user.id }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
+      #get the notification
+      notification = Notification.find(params[:notification])
+      #get the gig or request
+      (notification.notifiable.class == Package )? object = notification.notifiable.gig : object = notification.notifiable.request
+      #obtain the one that we are looking and check if its still pending
+      (@reviews.present? )? @reviews = @reviews.select{ |r| r.pending? && r.reviewable_id == object.id && r.reviewable_type == object.class.to_s } : nil
     #or if its not specific
-    elsif params[:review]
+    else
       #get the recent pending reviews (searchkick just index pending reviews)
-      @reviews = Review.search("*", where: { giver_id: current_user.id }, order:{created_at: :desc})
+      @reviews = Review.search("*", where: { giver_id: current_user.id }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
       #verify the reviews that are pending (searchkick takes some time to update its records)
-      @reviews = @reviews.select{ |r| r.pending? }
+      (@reviews.present? )? @reviews = @reviews.select{ |r| r.pending? } : nil
     end
+  end
+
+  def signed_and_rev
+    (:signed_in? && params[:review] == "true")? true : false
   end
 
 end
