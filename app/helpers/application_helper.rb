@@ -67,7 +67,7 @@ module ApplicationHelper
     case
     when object.class == Request
        request_path(object.slug)
-    when object.class == Package
+    when object.class == ( Package || Offer )
       if notification.action == "ha finalizado"
        finance_path(:table => notification.query_url, :review => true, :notification => notification.id)
       else
@@ -75,8 +75,6 @@ module ApplicationHelper
      end
     when object.class == Dispute
        order_dispute_path(object.order.uuid, object)
-    when object.class == Offer
-       finance_path(:table => notification.query_url)
     end
   end
 
@@ -112,7 +110,7 @@ module ApplicationHelper
   end
 
   def form_method_helper
-    if params[:action] == "edit" || params[:action] == "update" || params[:action] == "edit_packages" ||params[:action] == "update_packages"
+    if params[:action] == ("edit" || "update" || "edit_packages" || "update_packages")
       :patch
     else
       :post

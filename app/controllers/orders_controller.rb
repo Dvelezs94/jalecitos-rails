@@ -260,18 +260,19 @@ class OrdersController < ApplicationController
       #this is useful for collecting the two reviews generated
       @new_reviews = []
       if @order.purchase_type == "Package"
-        create_review(@order.purchase.gig, @order, @order.employer)
-        create_review(@order.purchase.gig, @order, @order.employee)
+        #useful when i want to obtain reviews of gig
+        create_review( @order, @order.employer, @order.purchase.gig)
+        create_review( @order, @order.employee)
       else
-        create_review(@order.purchase.request, @order, @order.employer)
-        create_review(@order.purchase.request, @order, @order.employee)
+        create_review(@order, @order.employer)
+        create_review(@order, @order.employee)
       end
       #get the id of the user corresponding review and the one for use in the job
       @my_review = @new_reviews.select{ |r| r.giver_id == current_user.id }.first
       @other_review = @new_reviews.select{ |r| r.giver_id != current_user.id }.first
     end
 
-    def create_review(model, order, giver)
-      @new_reviews << Review.create(reviewable: model, order: order, giver: giver)
+    def create_review(order, giver, gig=nil)
+      @new_reviews << Review.create( order: order, giver: giver, gig: gig)
     end
 end

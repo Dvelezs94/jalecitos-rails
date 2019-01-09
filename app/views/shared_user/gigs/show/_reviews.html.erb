@@ -5,35 +5,12 @@
   <hr>
 
   <div class="row padding_row">
-    <div class="col-lg-12">
-      <img src="img/8.jpg">
-      <strong>cirby88<i class="fa fa-star"></i>
-      </strong>
+    <% if @reviews.present? %>
+      <%= render partial: "shared_user/reviews/review", collection: @reviews %>
+    <% else %>
+    <div class="container">
+      No hay nada para mostrar
     </div>
-
-    <div class="col-lg-12">
-
-      <p>They did a great job at communicating, and provided an excellent product!
-      </p>
-      <p>
-        5 months ago</p>
-      <hr>
-    </div>
-    <!-- -->
-
-    <div class="col-lg-12">
-      <img src="img/8.jpg">
-      <strong>cirby88<i class="fa fa-star"></i>
-      </strong>
-    </div>
-
-    <div class="col-lg-12">
-
-      <p>They did a great job at communicating, and provided an excellent product!
-      </p>
-      <p>
-        5 months ago</p>
-    </div>
-    <!-- -->
+    <% end %>
   </div>
 </div>

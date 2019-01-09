@@ -6,7 +6,13 @@ class ReviewsController < ApplicationController
   access user: :all, admin: :all, all: []
 
   def update
-    @review.update(review_params)
+    #get the params
+    fields = review_params
+    #if comment is empty, save as nil for saving space
+    (fields[:comment] == "")? fields[:comment] = nil : nil
+    #remove comment if its not valid
+    (allow_comment)? nil : fields[:comment] = nil
+    @review.update(fields)
     head :no_content
   end
 
@@ -21,6 +27,11 @@ class ReviewsController < ApplicationController
 
   def review_once
     (@review.pending?)? nil : head(:no_content)
+  end
+
+  def allow_comment
+    #order of a gig and i am the employer...
+    (@review.order.purchase_type == "Package" && @review.order.employer == current_user)? true: false
   end
 
   def review_params

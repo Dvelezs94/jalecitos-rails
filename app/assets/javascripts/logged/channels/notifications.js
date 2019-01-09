@@ -15,9 +15,9 @@ App.notifications = App.cable.subscriptions.create("NotificationsChannel", {
     //add that notification to the list
     $(".notification-items").prepend(data.listItem);
 
-    //if a review modal is recieved
-    if(data.reviewItem){
-      $("body").append(data.reviewItem); // gets the modal
+    //if a review modal is recieved and the user doesnt have displayed other
+    if(data.reviewItem && $("#reviewModal").length == 0){
+      $("body").prepend(data.reviewItem); // gets the modal
       modals('reviewModal', "closeReview", "none", true ); //shows the modal
       activate_ratyrate(); //activates stars
       review_validation(); //activates the validation of the form

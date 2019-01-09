@@ -9,12 +9,13 @@ class PagesController < ApplicationController
       if (params[:model_name] == "requests")
         includes = [:user]
         status = "open"
-        @search = search(Request, includes, status)
+        model = Request
       else
         includes = [:search_gigs_packages, :user]
         status = "published"
-        @search = search(Gig, includes, status)
+        model = Gig
       end
+      @search = search(model, includes, status)
     elsif current_user
         @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 1}, order: {created_at: :desc}, limit: 5)
         @recommended_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 2}, order: {created_at: :desc}, limit: 5)
@@ -42,7 +43,7 @@ class PagesController < ApplicationController
   end
 
   def search model, includes, status
-    (params[:query] == "")? query = "*" : query = params[:query]
+    query = (params[:query] == "")?  "*" : params[:query]
     if params[:category_id] != "" && params[:location] != ""
       model.search query,includes: includes, where: {status: status, category_id: params[:category_id], location: params[:location]}, page: params[:page], per_page: 20
     elsif params[:category_id] != ""
@@ -60,23 +61,23 @@ class PagesController < ApplicationController
       #find it and keep it in an array
       @reviews = [ Review.find( params[:identifier] ) ]
       #verify its own and pending
-      (@reviews.present? )? @reviews = @reviews.select{ |r| r.pending? && r.giver_id == current_user.id  } : nil
+      @reviews = (@reviews.present? )? @reviews.select{ |r| r.pending? && r.giver_id == current_user.id  } : nil
     #if employee clicked a notification of finished work
     elsif params[:notification]  && is_number?(params[:notification])
       #get the reviews of the user
-      @reviews = Review.search('*', where: { giver_id: current_user.id }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
+      @reviews = Review.search('*', where: { giver_id: current_user.id, status: "pending" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
       #get the notification
       notification = Notification.find(params[:notification])
       #get the gig or request
-      (notification.notifiable.class == Package )? object = notification.notifiable.gig : object = notification.notifiable.request
+      object = (notification.notifiable.class == Package )? notification.notifiable.gig : notification.notifiable.request
       #obtain the one that we are looking and check if its still pending
-      (@reviews.present? )? @reviews = @reviews.select{ |r| r.pending? && r.reviewable_id == object.id && r.reviewable_type == object.class.to_s } : nil
+      @reviews = (@reviews.present? )? @reviews.select{ |r| r.pending? && r.reviewable_id == object.id && r.reviewable_type == object.class.to_s } : nil
     #or if its not specific
     else
       #get the recent pending reviews (searchkick just index pending reviews)
-      @reviews = Review.search("*", where: { giver_id: current_user.id }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
+      @reviews = Review.search("*", where: { giver_id: current_user.id, status: "pending" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
       #verify the reviews that are pending (searchkick takes some time to update its records)
-      (@reviews.present? )? @reviews = @reviews.select{ |r| r.pending? } : nil
+      @reviews = (@reviews.present? )? @reviews.select{ |r| r.pending? } : nil
     end
   end
 

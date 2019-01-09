@@ -16,6 +16,7 @@ class GigsController < ApplicationController
   def show
     define_pack_names
     @show_packages = true
+    get_reviews
     report_options
   end
 
@@ -85,13 +86,8 @@ class GigsController < ApplicationController
                                   :location,
                                   :category_id,
                                   :tag_list
-                                )
-      gig_params = set_owner(gig_params)
-    end
+                                ).merge(:user_id => current_user.id)
 
-    def set_owner parameters
-      parameters[:user_id] = current_user.id
-      parameters
     end
 
     def max_gigs
@@ -104,6 +100,13 @@ class GigsController < ApplicationController
 
     def report_options
       @report_options = ["Uso de palabras ofensivas", "Contenido Sexual", "Violencia", "Spam", "Engaño o fraude", "Otro"]
+    end
+
+    def get_reviews
+      #get the associated reviews
+      @reviews = Review.search("*", where: { gig_id: @gig.id, status: "completed" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
+      #select only the rated reviews (the review can be completed with rating score of 0, so be careful)
+      @reviews = @reviews.select{|r| r.rating.present? && r.rating.stars.between?(1,5)}
     end
 
 end
