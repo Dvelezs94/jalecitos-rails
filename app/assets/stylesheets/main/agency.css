@@ -728,3 +728,7 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 .pagination-links{
   width: 100%;
 }
+/*hidden stuff*/
+.hidden{
+  display: none;
+}

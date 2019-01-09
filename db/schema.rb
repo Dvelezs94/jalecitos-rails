@@ -305,8 +305,7 @@ ActiveRecord::Schema.define(version: 2019_01_07_233816) do
     t.datetime "updated_at", null: false
     t.bigint "order_id"
     t.integer "status", default: 0
-    t.integer "reviewable_id"
-    t.string "reviewable_type"
+    t.integer "gig_id"
     t.index ["giver_id"], name: "index_reviews_on_giver_id"
     t.index ["order_id"], name: "index_reviews_on_order_id"
   end
