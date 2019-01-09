@@ -18,5 +18,18 @@
     </table>
 
   </div>
-
+  <div class="payment_method">Facturacion</div>
+  <%= link_to "Administrar Factura", user_config_path(current_user, anchor: "billingprofile"), class: "btn btn-secondary butn pay-butn" %>
+  <table class="table table-striped table-borderless">
+    <thead>
+      <tr>
+        <th>Razon Social</th>
+        <th>RFC</th>
+        <th>Codigo Postal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'shared_user/hire/billing_profile', collection: @billing_profiles, locals:{ f: f }  %>
+    </tbody>
+  </table>
 </div>

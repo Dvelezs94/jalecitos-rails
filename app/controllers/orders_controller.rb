@@ -15,17 +15,20 @@ class OrdersController < ApplicationController
   before_action :verify_availability, only: [:create]
   before_action :verify_order_limit, only: [:create]
   before_action :verify_refund_state, only: [:refund]
-
+  before_action :check_billing_profile, only: :create
 
   def create
     @order = Order.new(order_params)
+    # Add IVA
+    @order.total = (@order.total * 1.16).round(2) if @order.billing_profile_id
+
     #prepare charge
     request_hash = {
       "method" => "card",
       "source_id" => order_params[:card_id],
-      "amount" => @order.purchase.price,
+      "amount" => @order.total,
       "currency" => "MXN",
-      "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.purchase.price}",
+      "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}",
       "device_session_id" => "params[:device_session_id]"
     }
 
@@ -101,6 +104,8 @@ class OrdersController < ApplicationController
         elsif @order.purchase_type == "Offer"
           @order.purchase.request.completed!
         end
+        # Generate invoice if requested and if order changed to completed state
+        OrderInvoiceGeneratorJob.perform_later(@order) if @order.billing_profile_id
         flash[:success] = "La orden ha finalizado"
         # Create Reviews for employer and employee with gig or request
         create_reviews
@@ -138,7 +143,7 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      order_params = params.require(:order).permit(:card_id, :purchase, :purchase_type)
+      order_params = params.require(:order).permit(:card_id, :purchase, :purchase_type, :billing_profile_id)
       order_params = set_defaults(order_params)
     end
 
@@ -273,5 +278,12 @@ class OrdersController < ApplicationController
 
     def create_review(model, order, giver)
       @new_reviews << Review.create(reviewable: model, order: order, giver: giver)
+    end
+
+    # Make sure the billing profile is legit
+    def check_billing_profile
+      if order_params[:billing_profile_id] != nil
+        (current_user.billing_profiles.find_by_status("enabled").id != order_params[:billing_profile_id].to_i) ? cancel_execution : nil
+      end
     end
 end

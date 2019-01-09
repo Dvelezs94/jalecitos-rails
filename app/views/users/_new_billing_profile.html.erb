@@ -13,7 +13,7 @@
           <h4>Nuevo Perfil Tributario</h4>
 
           <div class="divi-new js-form-join-section" data-section="1"></div>
-          <%= form_with model: @billing_profile, url: user_billing_profiles_path(current_user) do |f| %>
+          <%= form_with model: @billing_profile, url: user_billing_profiles_path(current_user), class: "new_billing_profile" do |f| %>
             <%= f.text_field :name, class: "required", placeholder: "Razon Social" %>
             <%= f.text_field :rfc, class: "required", placeholder: "RFC" %>
             <%= f.text_field :address, class: "required", placeholder: "Direccion Calle y Numero" %>

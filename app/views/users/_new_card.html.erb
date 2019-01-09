@@ -19,7 +19,7 @@
           <div class="row">
             <%= f.text_field :holder_name, class: "required", id: "holder_name", placeholder: "Nombre del Titular", :data => { :openpay_card => "holder_name"} %>
             <%= f.number_field :card_number, class: "required", id: "card_number", placeholder: "Numero de tarjeta",
-                minlength: 16, maxlength: 16, :data => { :openpay_card => "card_number"} %>
+                min: 16, maxlength: 16, :data => { :openpay_card => "card_number"} %>
           </div>
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
