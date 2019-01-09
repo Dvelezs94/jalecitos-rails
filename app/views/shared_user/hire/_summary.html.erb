@@ -32,10 +32,10 @@
 
         <%= (defined? @package) ? number_to_currency(cons_mult_helper(@package.price), precision: 2) : number_to_currency(cons_mult_helper(@offer.price), precision: 2) %> MXN
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-6 tax">
         IVA
       </div>
-      <div class="col-lg-6 text-right tax">
+      <div class="col-lg-6 text-right tax tax-val">
         $0 MXN
       </div>
       <div class="col-lg-6">
