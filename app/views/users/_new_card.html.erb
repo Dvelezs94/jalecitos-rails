@@ -18,8 +18,8 @@
           <%= f.hidden_field :token_id %>
           <div class="row">
             <%= f.text_field :holder_name, class: "required", id: "holder_name", placeholder: "Nombre del Titular", :data => { :openpay_card => "holder_name"} %>
-            <%= f.number_field :card_number, class: "required", id: "card_number", placeholder: "Numero de tarjeta",
-                min: 16, maxlength: 16, :data => { :openpay_card => "card_number"} %>
+            <%= f.text_field :card_number, class: "required", id: "card_number", placeholder: "Numero de tarjeta",
+                minlength: 16, maxlength: 16, :data => { :openpay_card => "card_number"} %>
           </div>
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -28,7 +28,7 @@
               <%= f.select :exp_year, options_for_select( (Date.today.year..8.years.from_now.year).map {|year| [ year, year.to_s.last(2) ]} ),{include_blank: "Año"},
                class: "required col-lg-3 col-md-3 col-sm-3 col-3", id: "exp_year", :data => { :openpay_card => "expiration_year"} %>
               <%= f.number_field :card_cvv, class: "required col-lg-3 col-md-3 col-sm-3 col-3",
-               placeholder: "CVV", minlength: 3, maxlength: 4, :data => { :openpay_card => "cvv2"} %>
+               placeholder: "CVV", min:100, max:9999, minlength: 3, maxlength: 4, :data => { :openpay_card => "cvv2"} %>
             </div>
           </div>
           <%= f.submit 'Continuar', :class => 'btn btn-success', :id => "save-card" %>

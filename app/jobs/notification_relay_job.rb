@@ -42,7 +42,7 @@ class NotificationRelayJob < ApplicationJob
     html = {:fadeItem => ApplicationController.render(partial: "notifications/flash/notification", locals: {notification: notification}, formats: [:html]),
             :listItem => ApplicationController.render(partial: "notifications/notification", locals: {notification: notification})
       }
-      #if its present i have to check if its still pending
+    #if its present i have to check if its still pending
     if review_id.present?
       review = Review.find(review_id)
       #if its pending, i have to pass the review modal to the employee
