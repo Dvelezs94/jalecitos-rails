@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_07_191119) do
+ActiveRecord::Schema.define(version: 2019_01_07_233816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,6 +178,10 @@ ActiveRecord::Schema.define(version: 2019_01_07_191119) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "withdrawal_id"
+    t.bigint "billing_profile_id"
+    t.integer "invoice_status"
+    t.string "invoice_id"
+    t.index ["billing_profile_id"], name: "index_orders_on_billing_profile_id"
     t.index ["user_id", "employee_id"], name: "index_orders_on_user_id_and_employee_id"
     t.index ["withdrawal_id"], name: "index_orders_on_withdrawal_id"
   end
@@ -399,6 +403,7 @@ ActiveRecord::Schema.define(version: 2019_01_07_191119) do
   add_foreign_key "notifications", "users"
   add_foreign_key "offers", "requests"
   add_foreign_key "offers", "users"
+  add_foreign_key "orders", "billing_profiles"
   add_foreign_key "orders", "withdrawals"
   add_foreign_key "packages", "gigs"
   add_foreign_key "payments", "offers"

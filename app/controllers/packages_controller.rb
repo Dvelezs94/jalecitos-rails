@@ -18,6 +18,7 @@ def hire
   @openpay_id = current_user.openpay_id
   @order = Order.new
   @user_cards = get_openpay_resource("card", @openpay_id)
+  @billing_profiles = current_user.billing_profiles.enabled
 end
 
   def new

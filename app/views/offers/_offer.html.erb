@@ -11,7 +11,7 @@
     <p class="card-text">Horas: <%=offer.hours %></p>
     <% end %>
     <p class="card-text"><%= number_to_currency(cons_mult_helper(offer.price), precision: 2) %> MXN</p>
-    <% if current_user.id == offer.user_id && @hires_open%>
+    <% if current_user == offer.user && @hires_open%>
     <p class="card-text"><%= link_to 'Editar oferta', edit_request_offer_path(offer.request, offer), class: "btn btn-success" %>
     <%= link_to "Borrar", request_offer_path(offer.request, offer), method: :delete, data: { confirm: '¿Estás seguro de querer borrar esta oferta?' }, class: "btn btn-danger" %></p>
     <% end %>
