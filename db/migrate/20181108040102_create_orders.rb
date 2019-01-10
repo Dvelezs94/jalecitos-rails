@@ -1,7 +1,7 @@
 class CreateOrders < ActiveRecord::Migration[5.2]
   def change
     create_table :orders do |t|
-      t.integer :user_id
+      t.integer :employer_id
       t.float :total
       t.integer :card_id
       t.string :purchase_type
@@ -18,6 +18,6 @@ class CreateOrders < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :orders, [:user_id, :employee_id]
+    add_index :orders, [:employer_id, :employee_id]
   end
 end

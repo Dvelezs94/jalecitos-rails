@@ -155,7 +155,7 @@ class OrdersController < ApplicationController
         pack = Offer.find(params[:order][:purchase])
         parameters[:employee_id] = pack.user_id
       end
-        parameters[:user_id] = current_user.id
+        parameters[:employer_id] = current_user.id
         parameters[:purchase] = pack
         parameters[:total] = cons_mult_helper(pack.price).round(2)
         parameters
