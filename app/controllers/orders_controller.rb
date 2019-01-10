@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   include UsersHelper
   include ApplicationHelper
   access user: :all
-  before_action only: [:create] do
+  before_action only: [:create, :refund] do
     init_openpay("charge")
   end
   before_action :get_order, only: [:request_start, :start, :request_complete, :complete, :refund]
@@ -121,6 +121,19 @@ class OrdersController < ApplicationController
 
 
   def refund
+    # Create hash for refund
+    request_hash = {
+      "description" => "Monto de la orden #{@order.uuid} devuelto por la cantidad de #{@order.total}",
+      "amount" => @order.total
+    }
+    begin
+      response = @charge.refund(@order.response_order_id ,request_hash, current_user.openpay_id)
+      @order.response_refund_id = response["id"]
+      @order.save
+    rescue OpenpayTransactionException => e
+      flash[:error] = "#{e}"
+      redirect_to finance_path(:table => "purchases")
+    end
     #try to refund...
     if  @order.refunded!
       #if the order has a dispute (and obviously is disputed...)
@@ -132,7 +145,7 @@ class OrdersController < ApplicationController
         @order.purchase.request.closed!
       end
       create_notification(@order.employer, @order.employer, "ha reembolsado", @order.purchase, "purchases")
-      flash[:success] = "La compra ha sido reembolsada y el dinero sumado a la cuenta"
+      flash[:success] = "La compra ha sido reembolsada, ten en cuenta que puede tardar hasta 48 hrs para aparecer en tu cuenta bancaria"
     else
       flash[:error] = "Algo salió mal reembolsando la orden"
     end

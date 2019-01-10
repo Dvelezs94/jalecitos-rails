@@ -126,9 +126,9 @@ class User < ApplicationRecord
    def balance
      @balance = 0.0
      @order_ids = []
-     @refunded = cons_mult_helper_times(self.purchases.refunded.where(paid_at: nil).select(:id, :total), 11).as_json
+     #@refunded = cons_mult_helper_times(self.purchases.refunded.where(paid_at: nil).select(:id, :total), 11).as_json
      @sales = cons_mult_helper_times(self.sales.completed.where(paid_at: nil).select(:id, :total), 10).as_json
-     @join = @sales + @refunded
+     @join = @sales #+ @refunded
      @join.each do |b|
        @balance += b["total"]
        @order_ids << b["id"]
