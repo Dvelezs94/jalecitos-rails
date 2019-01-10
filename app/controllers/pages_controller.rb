@@ -28,8 +28,8 @@ class PagesController < ApplicationController
   end
 
   def finance
-    @purchases = current_user.purchases.order(updated_at: :desc)
-    @sales = current_user.sales.where.not(status: "denied").order(updated_at: :desc)
+    @purchases = Order.search("*", where: {employer_id: current_user.id}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}])
+    @sales = Order.search("*", where: {employee_id: current_user.id, status: {not: "denied"}}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}])
   end
 
   def liked

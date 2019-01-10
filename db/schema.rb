@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(version: 2019_01_10_192557) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "employer_id"
     t.float "total"
     t.integer "card_id"
     t.string "purchase_type"
@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 2019_01_10_192557) do
     t.string "invoice_id"
     t.string "response_refund_id"
     t.index ["billing_profile_id"], name: "index_orders_on_billing_profile_id"
-    t.index ["user_id", "employee_id"], name: "index_orders_on_user_id_and_employee_id"
+    t.index ["employer_id", "employee_id"], name: "index_orders_on_employer_id_and_employee_id"
     t.index ["withdrawal_id"], name: "index_orders_on_withdrawal_id"
   end
 

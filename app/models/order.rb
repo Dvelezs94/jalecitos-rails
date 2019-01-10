@@ -1,7 +1,18 @@
 class Order < ApplicationRecord
+  #search
+  searchkick language: "spanish"
+
+  def search_data
+    {
+      employer_id: employer_id,
+      employee_id: employee_id,
+      status: status,
+      updated_at: updated_at
+     }
+  end
   #Actions
   after_create :set_access_uuid
-  belongs_to :employer, foreign_key: :user_id, class_name: "User"
+  belongs_to :employer, foreign_key: :employer_id, class_name: "User"
   belongs_to :employee, foreign_key: :employee_id, class_name: "User"
   belongs_to :purchase, polymorphic: true
   belongs_to :withdrawal, optional: true
