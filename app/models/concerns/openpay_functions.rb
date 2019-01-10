@@ -26,7 +26,7 @@ module OpenpayFunctions
         "name" => self.alias,
         "last_name" => nil,
         "email" => self.email,
-        "requires_account" => false
+        "requires_account" => true
       }
 
       begin

@@ -17,6 +17,8 @@ module OpenpayHelper
         @payout = @openpay.create(:payouts)
       when resource == "transfer"
         @transfer = @openpay.create(:transfers)
+      when resource == "fee"
+        @fee = @openpay.create(:fees)
       end
     end
 

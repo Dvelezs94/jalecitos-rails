@@ -172,7 +172,6 @@ ActiveRecord::Schema.define(version: 2019_01_10_192557) do
     t.integer "employee_id"
     t.datetime "started_at"
     t.datetime "completed_at"
-    t.datetime "paid_at"
     t.string "response_paid_id"
     t.string "uuid"
     t.datetime "created_at", null: false
@@ -182,6 +181,8 @@ ActiveRecord::Schema.define(version: 2019_01_10_192557) do
     t.integer "invoice_status"
     t.string "invoice_id"
     t.string "response_refund_id"
+    t.string "response_completion_id"
+    t.string "response_fee_id"
     t.index ["billing_profile_id"], name: "index_orders_on_billing_profile_id"
     t.index ["user_id", "employee_id"], name: "index_orders_on_user_id_and_employee_id"
     t.index ["withdrawal_id"], name: "index_orders_on_withdrawal_id"

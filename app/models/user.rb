@@ -124,19 +124,6 @@ class User < ApplicationRecord
        super && self.active?
    end
    def balance
-     @balance = 0.0
-     @order_ids = []
-     #@refunded = cons_mult_helper_times(self.purchases.refunded.where(paid_at: nil).select(:id, :total), 11).as_json
-     @sales = cons_mult_helper_times(self.sales.completed.where(paid_at: nil).select(:id, :total), 10).as_json
-     @join = @sales #+ @refunded
-     @join.each do |b|
-       @balance += b["total"]
-       @order_ids << b["id"]
-     end
-     return {amount: @balance, order_ids: @order_ids}
-   end
-
-   def openpay_balance
      init_openpay("customer")
      @customer.get(self.openpay_id)["balance"]
    end

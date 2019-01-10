@@ -10,6 +10,9 @@ class OrdersController < ApplicationController
   before_action only: [:create, :complete, :refund] do
     init_openpay("transfer")
   end
+  before_action only: [:complete] do
+    init_openpay("fee")
+  end
   before_action :get_order, only: [:request_start, :start, :request_complete, :complete, :refund]
   before_action :verify_order_employee, only: [:request_start, :request_complete]
   before_action :verify_order_owner, only: [:start, :complete]
@@ -141,6 +144,8 @@ class OrdersController < ApplicationController
         elsif @order.purchase_type == "Offer"
           @order.purchase.request.completed!
         end
+        #Charge the fee
+        charge_fee(@order, @fee)
         # Generate invoice if requested and if order changed to completed state
         OrderInvoiceGeneratorJob.perform_later(@order) if @order.billing_profile_id
         flash[:success] = "La orden ha finalizado"
@@ -352,6 +357,25 @@ class OrdersController < ApplicationController
     def check_billing_profile
       if order_params[:billing_profile_id] != nil
         (current_user.billing_profiles.find_by_status("enabled").id != order_params[:billing_profile_id].to_i) ? cancel_execution : nil
+      end
+    end
+
+    def charge_fee(order, fee)
+      @fee_charge = (order.total - order.purchase.price).round(2)
+      request_fee_hash={"customer_id" => ENV.fetch("OPENPAY_HOLD_CLIENT"),
+                     "amount" => @fee_charge,
+                     "description" => "Cobro de Comisión por la orden #{order.uuid}",
+                     "order_id" => "#{order.uuid}-fee"
+                    }
+      response_fee=fee.create(request_fee_hash)
+
+      begin
+        response_fee=fee.create(request_fee_hash)
+        order.response_fee_id = response["id"]
+        order.save
+      rescue
+        order.response_fee_id = "failed"
+        order.save
       end
     end
 end
