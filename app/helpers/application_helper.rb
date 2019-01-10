@@ -104,8 +104,6 @@ module ApplicationHelper
       res = l["total"] / 11 * percent
       calculated << {"id"=>l["id"], "total"=>res}
     end
-    p "x" *500
-    p calculated
     calculated
   end
 

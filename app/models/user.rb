@@ -136,6 +136,11 @@ class User < ApplicationRecord
      return {amount: @balance, order_ids: @order_ids}
    end
 
+   def openpay_balance
+     init_openpay("customer")
+     @customer.get(self.openpay_id)["balance"]
+   end
+
    def set_defaults
        self.roles = [:user, :employer, :employee]
        set_alias
