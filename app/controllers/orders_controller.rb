@@ -125,9 +125,9 @@ class OrdersController < ApplicationController
         "order_id" => "#{@order.uuid}-complete"
       }
       begin
-        @transfer.create(request_hash, ENV.fetch("OPENPAY_HOLD_CLIENT"))
-        # @order.response_completion_id = response["id"]
-        # @order.save
+        response = @transfer.create(request_hash, ENV.fetch("OPENPAY_HOLD_CLIENT"))
+        @order.response_completion_id = response["id"]
+        @order.save
       rescue OpenpayTransactionException => e
         flash[:error] = "#{e}"
         redirect_to finance_path(:table => "purchases")
@@ -171,9 +171,9 @@ class OrdersController < ApplicationController
       "order_id" => "#{@order.uuid}-refund"
     }
     begin
-      @transfer.create(request_transfer_hash_hold, ENV.fetch("OPENPAY_HOLD_CLIENT"))
-      # @order.response_completion_id = response["id"]
-      # @order.save
+      response = @transfer.create(request_transfer_hash_hold, ENV.fetch("OPENPAY_HOLD_CLIENT"))
+      @order.response_refund_id = response["id"]
+      @order.save
     rescue OpenpayTransactionException => e
       flash[:error] = "#{e}"
       redirect_to finance_path(:table => "purchases")
