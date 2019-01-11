@@ -1,7 +1,7 @@
 class GigAverageWorker
   include Sidekiq::Worker
 
-  def perform(review)
+  def perform(review_id)
     review = Review.find(review_id)
     @gig = review.order.purchase.gig
     @gig.with_lock do

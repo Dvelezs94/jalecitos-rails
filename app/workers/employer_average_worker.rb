@@ -1,7 +1,7 @@
 class EmployerAverageWorker
   include Sidekiq::Worker
 
-  def perform(review)
+  def perform(review_id)
     review = Review.find(review_id)
     @employer = review.order.employer.score
     @employer.with_lock do
