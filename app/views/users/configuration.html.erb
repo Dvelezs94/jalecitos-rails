@@ -151,7 +151,7 @@
         <div class="col-sm-4">
           <label>RETIRAR FONDOS <span data-tooltip="CLABES interbancarias en las cuales se podra depositar el dinero una vez que tengas fondos en tu cuenta."><%= fa_icon("info-circle") %></span></label>
           <br>
-          <label>DINERO DISPONIBLE: <strong><%= number_to_currency(@user.balance[:amount]) %> MXN</strong></label>
+          <label>DINERO DISPONIBLE: <strong><%= number_to_currency(@user.balance || 0) %> MXN</strong></label>
         </div>
         <div class="col-sm-6">
           <table class="table table-striped table-borderless">

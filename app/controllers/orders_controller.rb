@@ -7,6 +7,12 @@ class OrdersController < ApplicationController
   before_action only: [:create, :refund] do
     init_openpay("charge")
   end
+  before_action only: [:create, :complete, :refund] do
+    init_openpay("transfer")
+  end
+  before_action only: [:complete] do
+    init_openpay("fee")
+  end
   before_action :get_order, only: [:request_start, :start, :request_complete, :complete, :refund]
   before_action :verify_order_employee, only: [:request_start, :request_complete]
   before_action :verify_order_owner, only: [:start, :complete]
@@ -38,6 +44,23 @@ class OrdersController < ApplicationController
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.response_order_id = response["id"]
         @order.save
+        ###### transfer money to hold account ######
+        request_transfer_hash = {
+          "customer_id" => ENV.fetch("OPENPAY_HOLD_CLIENT"),
+          "amount" => @order.total,
+          "description" => "transferencia de orden #{@order.uuid} por la cantidad de #{@order.total}",
+          "order_id" => "#{@order.uuid}-hold"
+        }
+        begin
+          @transfer.create(request_transfer_hash, current_user.openpay_id)
+          # @order.response_completion_id = response["id"]
+          # @order.save
+        rescue OpenpayTransactionException => e
+          flash[:error] = "#{e}"
+          redirect_to finance_path(:table => "purchases")
+          return false
+        end
+        ###########
         if @order.purchase_type == "Offer"
           @order.purchase.request.update(employee: @order.purchase.user)
           @order.purchase.request.in_progress!
@@ -94,6 +117,23 @@ class OrdersController < ApplicationController
   def complete
     #if the order is disputed just the admin can complete it
     if @order.in_progress? ||( @order.disputed? && current_user.has_roles?(:admin) )
+      #Openpay call to transfer the fee to the Employee
+      request_hash = {
+        "customer_id" => @order.employee.openpay_id,
+        "amount" => @order.purchase.price,
+        "description" => "Pago de orden #{@order.uuid} por la cantidad de #{@order.purchase.price}",
+        "order_id" => "#{@order.uuid}-complete"
+      }
+      begin
+        response = @transfer.create(request_hash, ENV.fetch("OPENPAY_HOLD_CLIENT"))
+        @order.response_completion_id = response["id"]
+        @order.save
+      rescue OpenpayTransactionException => e
+        flash[:error] = "#{e}"
+        redirect_to finance_path(:table => "purchases")
+        return false
+      end
+      # End openpay call
       if @order.completed!
         if @order.dispute
           @order.dispute.proceeded!
@@ -104,6 +144,8 @@ class OrdersController < ApplicationController
         elsif @order.purchase_type == "Offer"
           @order.purchase.request.completed!
         end
+        #Charge the fee
+        charge_fee(@order, @fee)
         # Generate invoice if requested and if order changed to completed state
         OrderInvoiceGeneratorJob.perform_later(@order) if @order.billing_profile_id
         flash[:success] = "La orden ha finalizado"
@@ -121,18 +163,35 @@ class OrdersController < ApplicationController
 
 
   def refund
-    # Create hash for refund
-    request_hash = {
-      "description" => "Monto de la orden #{@order.uuid} devuelto por la cantidad de #{@order.total}",
-      "amount" => @order.total
+    # Move money from hold account to employer account
+    request_transfer_hash_hold = {
+      "customer_id" => @order.employer.openpay_id,
+      "amount" => @order.total,
+      "description" => "reembolso de orden #{@order.uuid} por la cantidad de #{@order.total}",
+      "order_id" => "#{@order.uuid}-refund"
     }
     begin
-      response = @charge.refund(@order.response_order_id ,request_hash, current_user.openpay_id)
+      response = @transfer.create(request_transfer_hash_hold, ENV.fetch("OPENPAY_HOLD_CLIENT"))
       @order.response_refund_id = response["id"]
       @order.save
     rescue OpenpayTransactionException => e
       flash[:error] = "#{e}"
       redirect_to finance_path(:table => "purchases")
+      return false
+    end
+    # Refund money to card from employer openpay account
+    request_hash = {
+      "description" => "Monto de la orden #{@order.uuid} devuelto por la cantidad de #{@order.total}",
+      "amount" => @order.total
+    }
+    begin
+      response = @charge.refund(@order.response_order_id ,request_hash, @order.employer.openpay_id)
+      @order.response_refund_id = response["id"]
+      @order.save
+    rescue OpenpayException => e
+      flash[:error] = "#{e}"
+      redirect_to finance_path(:table => "purchases")
+      return false
     end
     #try to refund...
     if  @order.refunded!
@@ -298,6 +357,25 @@ class OrdersController < ApplicationController
     def check_billing_profile
       if order_params[:billing_profile_id] != nil
         (current_user.billing_profiles.find_by_status("enabled").id != order_params[:billing_profile_id].to_i) ? cancel_execution : nil
+      end
+    end
+
+    def charge_fee(order, fee)
+      @fee_charge = (order.total - order.purchase.price).round(2)
+      request_fee_hash={"customer_id" => ENV.fetch("OPENPAY_HOLD_CLIENT"),
+                     "amount" => @fee_charge,
+                     "description" => "Cobro de Comisión por la orden #{order.uuid}",
+                     "order_id" => "#{order.uuid}-fee"
+                    }
+      response_fee=fee.create(request_fee_hash)
+
+      begin
+        response_fee=fee.create(request_fee_hash)
+        order.response_fee_id = response["id"]
+        order.save
+      rescue
+        order.response_fee_id = "failed"
+        order.save
       end
     end
 end
