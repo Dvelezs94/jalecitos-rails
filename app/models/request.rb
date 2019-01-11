@@ -4,7 +4,7 @@ class Request < ApplicationRecord
   include DescriptionRestrictions
   include LocationValidation
   #search
-  searchkick language: "spanish"
+  searchkick language: "spanish", word_start: [:name, :description]
   #Tags
   acts_as_taggable
   #Slugs

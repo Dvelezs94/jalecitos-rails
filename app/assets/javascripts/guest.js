@@ -21,3 +21,5 @@
 //= require serviceworker-companion
 
 //= require clipboard
+
+//= require twitter/typeahead
