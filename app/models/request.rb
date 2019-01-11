@@ -39,5 +39,5 @@ class Request < ApplicationRecord
   mount_uploader :image, RequestUploader
 
   #notify users when new request is made
-  after_commit -> { NotifyNewRequestJob.perform_later(self) }, on: :create
+  after_commit -> { NotifyNewRequestWorker.perform_async(self.id) }, on: :create
 end

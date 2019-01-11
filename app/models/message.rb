@@ -10,7 +10,7 @@ class Message < ApplicationRecord
     on: :create
 
   validates_presence_of :body, :unless => :image?
-  after_create_commit { [MessageBroadcastJob.perform_later(self),  MessageNotificationJob.set(wait: 10.seconds).perform_later(self)] }
+  after_create_commit { [MessageBroadcastWorker.perform_async(self.id),  MessageNotificationWorker.perform_in(10.seconds, self.id)] }
 
   mount_uploader :image, MessageUploader
 end

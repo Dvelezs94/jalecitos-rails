@@ -11,36 +11,24 @@ services:
 #    command: tail -f /var/log/dpkg.log
     volumes:
       - .:/jalecitos
-    environment:
-      - RAILS_ENV=development
-      - ENVNAME=local
-      - SECRET_KEY_BASE=dumapaikqwdkqmwuqcb287deuivk3837nmvk92wn1kwnkelleo
-      - REDIS_URL=redis://redis:6379/1
-      - DEVISE_SECRET_KEY=qowndkqwdkqmwuqcb287dbwe9220192wn1kwnso1i
-      - GOOGLE_MAP_API=AIzaSyCISaREiwuF3yhIceGw2Rohlj9OnoRJukk
-      - FACEBOOK_ID=307778330022720
-      - FACEBOOK_SECRET=0486dbcf6b932519e4f14c10e421c4c3
-      - FACEBOOK_CALLBACK=http://local.jalecitos.com/users/auth/facebook/callback
-      - S3_BUCKET_NAME=local.jalecitos.com
-      - AWS_ACCESS_KEY_ID=AKIAI7WWMNOBVY4IKSBQ
-      - AWS_SECRET_ACCESS_KEY=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
-      - AWS_REGION=us-east-2
-      - OPENPAY_PROD=false
-      - OPENPAY_MERCHANT_ID=mgaglakzbv6gzvpnzp6g
-      - OPENPAY_PRIVATE_KEY=sk_4c6a3e0b2c9c406b91fd6fbe5eddaeeb
-      - OPENPAY_PUBLIC_KEY=pk_c958326b8eb44e8b8ace1001948cb0ab
-      - OPENPAY_HOLD_CLIENT=a56w8iqjqhf7eocipnz8
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
-      - SENDGRID_API_KEY=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
-      # Push notification keys
-      - VAPID_PUBLIC_KEY=BPlTPXN3MmaMYKFqc3xFD4V4CQZQc7FKZBSZWbJAPskPK-AR0gRkQ2bQkt4ye8U_i_ZXoZ7hLrQ_laXf6yZyzsE=
-      - VAPID_PRIVATE_KEY=jkyMkxB5Vqh5BOlWXc1_7xantHWH_H8w7WCXRDFxFD0=
-
-
+    env_file:
+      - .env
     ports:
       - "80:3000"
     depends_on:
       - db
+
+  sidekiq:
+    image: jalecitos-rails_app:latest
+    command: bash -c "rm -f tmp/pids/server.pid && bundle install && bundle exec sidekiq"
+    depends_on:
+      - redis
+      - db
+      - app
+    volumes:
+      - .:/jalecitos
+    env_file:
+      - .env
 
   adminer:
     image: adminer

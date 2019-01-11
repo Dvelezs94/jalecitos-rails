@@ -1,8 +1,9 @@
-class NotifyNewRequestJob < ApplicationJob
+class NotifyNewRequestWorker
+  include Sidekiq::Worker
   include Rails.application.routes.url_helpers
-  queue_as :default
 
-  def perform(request)
+  def perform(request_id)
+    request = Request.find(request_id)
     # check if tags are set
     if (@tags = Request.last.tag_list.to_s) == ""
       return
