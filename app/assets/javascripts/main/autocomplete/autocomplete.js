@@ -6,8 +6,8 @@ $(document).on('turbolinks:load', function() {
       url: '/autocomplete?query=%QUERY',
       replace: function(url, uriEncodedQuery) {
         model = $('#model_name').val();
-        category = $("#category-select").val();
-        loc = $("#search_autocomplete").val();
+        category = ($("#category-select").val() != undefined)? $("#category-select").val() : "";
+        loc = ($("#search_autocomplete").val() != undefined)? $("#search_autocomplete").val() : "";
 
         return url.replace("%QUERY", uriEncodedQuery) + '&model_name=' + model + '&category_id=' + category + '&location=' + loc
       },
