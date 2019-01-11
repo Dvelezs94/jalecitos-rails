@@ -5,6 +5,17 @@ class Gig < ApplicationRecord
   include LocationValidation
   #search
   searchkick language: "spanish", word_start: [:name, :description]
+  def search_data
+    {
+      name: no_special_chars(name).downcase,
+      #remove html, multi spaces (IS REQUIRED REPLACING THE HTML WITH SPACE) and remove entities (also strip spaces from beginning and end), then remove special chars amd strip (removes leading and trailing spaces) and make it downcase
+      description: no_special_chars( decodeHTMLEntities(  no_double_spaces( no_html(description, true) ), false ) ).strip.downcase,
+      location: location,
+      category_id: category_id,
+      status: status,
+      user_id: user_id
+     }
+  end
   #Tags
   acts_as_taggable
   #Slugs
@@ -35,6 +46,5 @@ class Gig < ApplicationRecord
   enum status: { draft: 0, published: 1, banned: 2}
   mount_uploaders :images, GigUploader
   #Actions
-
 
 end

@@ -1,7 +1,8 @@
 module GigsHelper
 
   def gig_form_url_helper
-    ( params[:action] == ("edit" ||  "update") )? user_gig_path(current_user.slug,@gig) : user_gigs_path(current_user.slug)
+    actions = ["edit", "update"]
+    ( actions.include?(params[:action]) )? user_gig_path(current_user.slug,@gig) : user_gigs_path(current_user.slug)
   end
 
    def status_text_helper gig

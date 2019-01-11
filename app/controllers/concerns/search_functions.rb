@@ -19,10 +19,14 @@ module SearchFunctions
   end
 
   def filter_query
-    #if query doesnt have nothing
-    query = (params[:query] == "")?  "*" : params[:query]
+    #if query  have just asterisk
+    query = ( params[:query] == "*" )?  "" : params[:query]
+    #if query doesnt have nothing search for all
+     ( params[:query] == "" )?  query = "*" : nil
     #if query has "Voy a" at the beginning, cut it
     query = ( query.start_with?("voy a", "Voy a") )? query.sub(/^Voy a /, '').sub(/^voy a /, '') : query
+    #same with requests...
+    query = ( query.start_with?("busco a alguien", "Busco a alguien") )? query.sub(/^Busco a alguien /, '').sub(/^busco a alguien /, '') : query
   end
 
   def init_search_options

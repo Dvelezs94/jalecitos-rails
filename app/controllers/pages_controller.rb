@@ -4,15 +4,15 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   before_action :pending_review, only: [:home, :finance], :if => :signed_and_rev
   layout :set_layout
-  access user: :all, admin: :all, all: [:home]
+  access user: :all, admin: :all, all: [:home, :autocomplete]
   def home
     if params[:query]
       options = init_search_options
       @search = search(options[:model], options[:includes], options[:status])
     elsif current_user
-        @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 1}, order: {created_at: :desc}, limit: 5)
-        @recommended_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 2}, order: {created_at: :desc}, limit: 5)
-        @featured_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 3}, order: {created_at: :desc}, limit: 5)
+      @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 1}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 5)
+      @recommended_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 2}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 5)
+      @featured_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 5)
     end
   end
 
@@ -40,10 +40,14 @@ class PagesController < ApplicationController
       load: false,
       misspellings: {below: 5},
       where: where_filter(options[:status])
-    }).map{|x| "Voy a " + x.name}
+    }).map{|x| pre_text(options[:model]) + x.name}
   end
 
   private
+
+  def pre_text model
+    ( model == Gig)? "Voy a " : "Busco a alguien "
+  end
 
   def admin_redirect
     (current_user && current_user.has_role?(:admin)) ? redirect_to(dashboard_admins_path) : nil
