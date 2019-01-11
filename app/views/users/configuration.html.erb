@@ -55,6 +55,26 @@
         </div>
       </div>
       <br>
+      <div class="row">
+        <div class="col-sm-4">
+          <label>EMAILS <span data-tooltip="Recibe Emails de tus transacciones importantes, incluyendo compras, ventas y recibos"><%= fa_icon("info-circle") %></span></label>
+        </div>
+        <div class="col-sm-6">
+          <%= best_in_place_if my_profile,@user, :transactional_emails, as: :select,
+          collection: {true: "Activado", false: "Desactivado"}, :class => "form-control" %>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-4">
+          <label>ULTIMAS NOTICIAS<span data-tooltip="Recibe las ultimas noticias por Email"><%= fa_icon("info-circle") %></span></label>
+        </div>
+        <div class="col-sm-6">
+          <%= best_in_place_if my_profile,@user, :marketing_emails, as: :select,
+          collection: {true: "Activado", false: "Desactivado"}, :class => "form-control" %>
+        </div>
+      </div>
+      <br>
       <% if current_user.has_roles?(:employee) %>
       <div class="row" id="account">
         <div class="col-sm-4">

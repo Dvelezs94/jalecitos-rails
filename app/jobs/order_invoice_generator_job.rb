@@ -14,6 +14,7 @@ class OrderInvoiceGeneratorJob < ApplicationJob
                 }
     concept = [{"identificador": "Orden #{order.uuid}",
                "cantidad": 1,
+               "unidad": "Orden",
                "valor_unitario": subtotal,
                "descripcion": "Servicios profesionales para la orden #{order.uuid}",
                "importe": subtotal,
@@ -38,13 +39,17 @@ class OrderInvoiceGeneratorJob < ApplicationJob
                  "total": order.total,
                  "subtotal": subtotal,
                  "forma_pago": "04",
+                 "hide_total_items": true,
+                 "hide_total_taxes": true,
                  "metodo_pago": "PUE",
                  "lugar_expedicion": "#{zip_code}",
                  "moneda": "MXN",
                  "tipo_de_cambio": 1,
                  "receptor": recipient,
                  "conceptos": concept,
-                 "impuestos_traslado": impuestos_traslado
+                 "impuestos_traslado": impuestos_traslado,
+                 "total_trasladados": concept[0][:traslados][0][:importe],
+                 "impuestos_retencion": []
                  }
 
       # Curl HTTP Call
