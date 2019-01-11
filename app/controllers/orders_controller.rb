@@ -147,7 +147,7 @@ class OrdersController < ApplicationController
         #Charge the fee
         charge_fee(@order, @fee)
         # Generate invoice if requested and if order changed to completed state
-        OrderInvoiceGeneratorJob.perform_later(@order) if @order.billing_profile_id
+        OrderInvoiceGeneratorWorker.perform_async(@order.id) if @order.billing_profile_id
         flash[:success] = "La orden ha finalizado"
         # Create Reviews for employer and employee with gig or request
         create_reviews

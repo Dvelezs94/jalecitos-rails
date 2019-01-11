@@ -1,8 +1,9 @@
-class OrderInvoiceGeneratorJob < ApplicationJob
+class OrderInvoiceGeneratorWorker
+  include Sidekiq::Worker
   require 'net/http'
-  queue_as :default
 
   def perform(order)
+    order = Order.find(order_id)
     zip_code = 25204
     iva = 0.16
     subtotal = ((order.total/116) * 100).round(2)

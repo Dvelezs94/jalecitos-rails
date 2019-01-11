@@ -1,5 +1,5 @@
-class BanJob < ApplicationJob
-  queue_as :default
+class BanWorker
+  include Sidekiq::Worker
 
   def perform(report)
     # number of reports needed to create a ban record
