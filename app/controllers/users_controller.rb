@@ -79,7 +79,9 @@ class UsersController < ApplicationController
                                    :available,
                                    :location,
                                    :roles,
-                                   :tag_list)
+                                   :tag_list,
+                                   :transactional_emails,
+                                   :marketing_emails)
     end
     def check_user_ownership
       if ! my_profile
