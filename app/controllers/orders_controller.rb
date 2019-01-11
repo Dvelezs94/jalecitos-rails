@@ -367,8 +367,6 @@ class OrdersController < ApplicationController
                      "description" => "Cobro de Comisión por la orden #{order.uuid}",
                      "order_id" => "#{order.uuid}-fee"
                     }
-      response_fee=fee.create(request_fee_hash)
-
       begin
         response_fee=fee.create(request_fee_hash)
         order.response_fee_id = response["id"]
