@@ -2,7 +2,7 @@ class OrderInvoiceGeneratorWorker
   include Sidekiq::Worker
   require 'net/http'
 
-  def perform(order)
+  def perform(order_id)
     order = Order.find(order_id)
     zip_code = 25204
     iva = 0.16
