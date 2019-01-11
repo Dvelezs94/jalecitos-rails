@@ -1,10 +1,12 @@
-class MessageNotificationJob < ApplicationJob
+class MessageNotificationWorker
+  include Sidekiq::Worker
+
   include ApplicationHelper
   include Rails.application.routes.url_helpers
-  queue_as :low_priority
 
   #Message (user, recipient, body, conversation_id)
-  def perform(message)
+  def perform(message_id)
+    message = Message.find(message_id)
     # Check if message has been read already
     if message.read_at?
       # Return true to finish operation if condition is met

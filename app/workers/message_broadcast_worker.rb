@@ -1,7 +1,8 @@
-class MessageBroadcastJob < ApplicationJob
-  queue_as :default
+class MessageBroadcastWorker
+  include Sidekiq::Worker
 
-  def perform(message)
+  def perform(message_id)
+    message = Message.find(message_id)
     sender = message.user
     recipient = message.conversation.opposed_user(sender)
 
