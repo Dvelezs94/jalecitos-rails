@@ -1,7 +1,8 @@
 class BanWorker
   include Sidekiq::Worker
 
-  def perform(report)
+  def perform(report_id)
+    report = Report.find(report_id)
     # number of reports needed to create a ban record
     report_creation_count = 20
     # Get Similar Open reports made
