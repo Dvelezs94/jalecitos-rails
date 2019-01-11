@@ -108,7 +108,8 @@ module ApplicationHelper
   end
 
   def form_method_helper
-    if params[:action] == ("edit" || "update" || "edit_packages" || "update_packages")
+    actions = ["edit", "update", "edit_packages", "update_packages"]
+    if actions.include?(params[:action])
       :patch
     else
       :post

@@ -105,6 +105,8 @@ gem 'jquery-slick-rails', '~> 1.9'
 gem 'openpay', '~> 2.0'
 #Search engine
 gem 'searchkick', '~> 3.1', '>= 3.1.2'
+#search autocomplete
+gem 'twitter-typeahead-rails', '~> 0.11.1'
 # Install event machine for DNs resolution
 gem 'eventmachine', '~> 1.2', '>= 1.2.7'
 # Better DNS resolution

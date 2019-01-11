@@ -22,7 +22,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%= ( @gig.present? && current_page?( user_gig_path(@gig.user, @gig) ) )? "<meta name='description' content=''>".html_safe : nil %>
+    <%= ( @gig.present? && !@gig.new_record? && current_page?( user_gig_path(@gig.user, @gig) ) )? "<meta name='description' content=''>".html_safe : nil %>
     <meta name="author" content="">
     <title>Jalecitos</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">

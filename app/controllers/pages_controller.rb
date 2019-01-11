@@ -1,25 +1,18 @@
 class PagesController < ApplicationController
   include SetLayout
+  include SearchFunctions
   before_action :admin_redirect, only: :home
   before_action :pending_review, only: [:home, :finance], :if => :signed_and_rev
   layout :set_layout
-  access user: :all, admin: :all, all: [:home]
+  access user: :all, admin: :all, all: [:home, :autocomplete]
   def home
     if params[:query]
-      if (params[:model_name] == "requests")
-        includes = [:user]
-        status = "open"
-        model = Request
-      else
-        includes = [:search_gigs_packages, :user]
-        status = "published"
-        model = Gig
-      end
-      @search = search(model, includes, status)
+      options = init_search_options
+      @search = search(options[:model], options[:includes], options[:status])
     elsif current_user
-        @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 1}, order: {created_at: :desc}, limit: 5)
-        @recommended_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 2}, order: {created_at: :desc}, limit: 5)
-        @featured_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 3}, order: {created_at: :desc}, limit: 5)
+      @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 1}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 5)
+      @recommended_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 2}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 5)
+      @featured_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 5)
     end
   end
 
@@ -36,24 +29,31 @@ class PagesController < ApplicationController
     @liked_gigs = Gig.find(current_user.likes.pluck(:gig_id))
   end
 
+  def autocomplete
+    query = filter_query
+    #init the filter params
+    options = init_search_options
+    render json: options[:model].search(query, {
+      fields: ["name", "description"],
+      match: :word_start,
+      limit: 10,
+      load: false,
+      misspellings: {below: 5},
+      where: where_filter(options[:status])
+    }).map{|x| pre_text(options[:model]) + x.name}
+  end
+
   private
+
+  def pre_text model
+    ( model == Gig)? "Voy a " : "Busco a alguien "
+  end
 
   def admin_redirect
     (current_user && current_user.has_role?(:admin)) ? redirect_to(dashboard_admins_path) : nil
   end
 
-  def search model, includes, status
-    query = (params[:query] == "")?  "*" : params[:query]
-    if params[:category_id] != "" && params[:location] != ""
-      model.search query,includes: includes, where: {status: status, category_id: params[:category_id], location: params[:location]}, page: params[:page], per_page: 20
-    elsif params[:category_id] != ""
-      model.search query,includes: includes, where: {status: status, category_id: params[:category_id]}, page: params[:page], per_page: 20
-    elsif  params[:location] != ""
-      model.search query,includes: includes, where: {status: status, location: params[:location]}, page: params[:page], per_page: 20
-    else
-      model.search query,includes: includes, where: {status: status}, page: params[:page], per_page: 20
-    end
-  end
+
 
   def pending_review
     #if the review is specific... (when employer finishes work)
@@ -81,8 +81,11 @@ class PagesController < ApplicationController
     end
   end
 
+
   def signed_and_rev
     (:signed_in? && params[:review] == "true")? true : false
   end
+
+
 
 end

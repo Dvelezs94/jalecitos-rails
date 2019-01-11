@@ -32,3 +32,5 @@
 //= require clipboard
 
 //= require jquery_ujs
+
+//= require twitter/typeahead

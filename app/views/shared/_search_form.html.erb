@@ -1,6 +1,5 @@
 <%= form_with url: root_path, method: :get,:html =>{class: "search-form nav-search"} , local: true do |f|%>
 <%= f.text_field :query, class: "js-search-input js-report-to-aux-data strt_selling_Srch1", value: params[:query], placeholder: "Buscar" %>
-
 <div class="btn-group" role="group">
   <div class="dropdown dropdown-lg">
     <button type="button" class="btn-default dropdown-toggle button-dropdown search-options" data-toggle="dropdown" aria-expanded="false">
