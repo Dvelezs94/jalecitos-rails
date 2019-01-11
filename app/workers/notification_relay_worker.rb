@@ -1,9 +1,10 @@
-class NotificationRelayJob < ApplicationJob
+class NotificationRelayWorker
+  include Sidekiq::Worker
   include ApplicationHelper
   include Rails.application.routes.url_helpers
-  queue_as :default
 
-  def perform(notification, review_id)
+  def perform(notification_id, review_id)
+    notification = Notification.find(notification_id)
 
     # Create push notification
     @message = {

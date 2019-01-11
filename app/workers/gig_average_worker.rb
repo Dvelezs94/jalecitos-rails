@@ -1,7 +1,8 @@
-class GigAverageJob < ApplicationJob
-  queue_as :default
+class GigAverageWorker
+  include Sidekiq::Worker
 
   def perform(review)
+    review = Review.find(review_id)
     @gig = review.order.purchase.gig
     @gig.with_lock do
       @gig.score_average = ((@gig.score_average * @gig.score_times) + review.rating.stars) / (@gig.score_times + 1)

@@ -125,3 +125,5 @@ gem 'webpush', '~> 0.3.4'
 gem 'jquery-fileupload-rails', '~> 1.0'
 # Copy items to clipboard using JS
 gem 'clipboard-rails', '~> 1.7', '>= 1.7.1'
+# sidekiq for background job processing
+gem 'sidekiq', '~> 5.2', '>= 5.2.5'

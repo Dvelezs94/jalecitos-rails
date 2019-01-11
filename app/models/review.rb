@@ -36,12 +36,12 @@ class Review < ApplicationRecord
       if self.giver == self.order.employer
         # Rate the Gig if the purchase class is package
         if self.reviewable_type == "Gig"
-          GigAverageJob.perform_later(self)
+          GigAverageWorker.perform_async(self.id)
         end
-        EmployeeAverageJob.perform_later(self)
+        EmployeeAverageWorker.perform_async(self.id)
       # Rate the employer
       else
-        EmployerAverageJob.perform_later(self)
+        EmployerAverageWorker.perform_async(self.id)
       end
     end
   end
