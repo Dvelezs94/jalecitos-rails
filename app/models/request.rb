@@ -13,7 +13,8 @@ class Request < ApplicationRecord
       location: location,
       category_id: category_id,
       status: status,
-      user_id: user_id
+      user_id: user_id,
+      created_at: created_at
      }
   end
   #Tags
