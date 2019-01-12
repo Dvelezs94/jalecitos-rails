@@ -64,14 +64,14 @@ class PagesController < ApplicationController
       @reviews = (@reviews.present? )? @reviews.select{ |r| r.pending? && r.giver_id == current_user.id  } : nil
     #if employee clicked a notification of finished work
     elsif params[:notification]  && is_number?(params[:notification])
-      #get the reviews of the user
-      @reviews = Review.search('*', where: { giver_id: current_user.id, status: "pending" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
       #get the notification
       notification = Notification.find(params[:notification])
       #get the gig or request
       object = (notification.notifiable.class == Package )? notification.notifiable.gig : notification.notifiable.request
+      #get the reviews of the user with object attributes (if a work has done 2 times, they can be more than 1 review)
+      @reviews = Review.search('*', where: { giver_id: current_user.id, reviewable_id: object.id, reviewable_type: object.class.to_s, status: "pending" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
       #obtain the one that we are looking and check if its still pending
-      @reviews = (@reviews.present? )? @reviews.select{ |r| r.pending? && r.reviewable_id == object.id && r.reviewable_type == object.class.to_s } : nil
+      @reviews = (@reviews.present? )? @reviews.select{ |r| r.pending? } : nil
     #or if its not specific
     else
       #get the recent pending reviews (searchkick just index pending reviews)
