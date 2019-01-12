@@ -103,8 +103,8 @@ class GigsController < ApplicationController
     end
 
     def get_reviews
-      #get the associated reviews
-      @reviews = Review.search("*", where: { gig_id: @gig.id, status: "completed" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
+      #get the associated reviews that doesnt belong to gig owner
+      @reviews = Review.search("*", where: { reviewable_id: @gig.id, reviewable_type: "Gig", giver_id: {not: @gig.user.id}, status: "completed" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
       #select only the rated reviews (the review can be completed with rating score of 0, so be careful)
       @reviews = @reviews.select{|r| r.rating.present? && r.rating.stars.between?(1,5)}
     end
