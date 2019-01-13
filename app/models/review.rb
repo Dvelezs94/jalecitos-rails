@@ -15,7 +15,7 @@ class Review < ApplicationRecord
   #Associations
   belongs_to :order
   belongs_to :giver, foreign_key: :giver_id, class_name: "User"
-  belongs_to :reviewable, :polymorphic => true
+  belongs_to :reviewable, :polymorphic => true, optional: true
   # Options to rate
   ratyrate_rateable 'Employee', 'Employer'
   enum status: { pending: 0, completed: 1 }
