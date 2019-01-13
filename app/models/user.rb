@@ -79,6 +79,8 @@ class User < ApplicationRecord
   has_many :billing_profiles
   # likes
   has_many :likes
+  #verifications
+  has_many :verifications
   #find liked gigs
   def likes?(gig)
     gig.likes.where(user: self).any?

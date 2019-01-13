@@ -93,6 +93,7 @@ Rails.application.routes.draw do
       resources :replies, only: [:create]
     end
   end
+  resources :verifications, only: [:new, :create]
   get 'requests', to: 'pages#request_index'
   get 'finance', to: 'pages#finance'
   get 'disputes', to: 'disputes#index'
