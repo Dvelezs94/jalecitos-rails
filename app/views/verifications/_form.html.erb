@@ -1,0 +1,97 @@
+<%= form_with(model: verification, url: verifications_path, :html => { :class=> "current_form" }, local: true) do |form| %>
+<% if verification.errors.any? %>
+  <%verification.errors.full_messages.each do |error| %>
+    <%= notification_generator_helper error, :error %>
+  <% end %>
+<% end %>
+
+<!-- ---post verification form -->
+<div class="container-fluid section request_post_form">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 col-md-12 centered-form">
+        <h3>Verifica tu perfil y aumenta tus ventas!</h3> <small><a href="#">¿Para que me sirve verificar mi perfil?</a></small>
+        <div class="form_box post_form_col">
+          <div class="col-lg-12  col-md-12">
+            <p>IFE/INE (Ambos Lados) o Acta de Nacimiento
+            </p>
+          </div>
+          <div class="form_block row ">
+            <div class="row file_upload">
+              <div class="col-lg-8">
+                <label  class="custom-file-upload">
+
+                  <i class="fa fa-paperclip"></i>
+                  <%= form.file_field :identification, class: 'form-control', required: true %>
+                </label>
+                <small class="attach-limit">Tamano Maximo por archivo 10MB</small>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <!-- -->
+          <div class="col-lg-12  col-md-12">
+            <p>CURP:
+            </p>
+          </div>
+          <div class="form_block row ">
+            <div class="row col-lg-11 col-md-11 col-sm-11 col-11">
+              <%= form.text_field :curp, class: 'text_box required', required: true %>
+            </div>
+          </div>
+          <hr>
+          <!--  -->
+          <div class="col-lg-12  col-md-12">
+            <p>Comprobante de Domicilio
+            </p>
+          </div>
+          <div class="form_block row ">
+            <div class="row file_upload">
+              <div class="col-lg-8">
+                <label  class="custom-file-upload">
+
+                  <i class="fa fa-paperclip"></i>
+                  <%= form.file_field :address, class: 'form-control', required: true %>
+                </label>
+                <small class="attach-limit">Tamano Maximo por archivo 10MB</small>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <!--  -->
+          <div class="col-lg-12  col-md-12">
+            <p>Carta de No antecedentes Penales
+            </p>
+          </div>
+          <div class="form_block row ">
+            <div class="row file_upload">
+              <div class="col-lg-8">
+                <label  class="custom-file-upload">
+
+                  <i class="fa fa-paperclip"></i>
+                  <%= form.file_field :criminal_letter, class: 'form-control', required: true %>
+                </label>
+                <small class="attach-limit">Tamano Maximo por archivo 10MB</small>
+              </div>
+            </div>
+          </div>
+          <hr>
+        <!-- -->
+        <div class="col-lg-12  col-md-12 end-buttons">
+          <div class="col-lg-6  col-md-6 ">
+            <%= link_to 'Cancelar', root_path(current_user.slug), :data => {:confirm => 'Tu progreso NO se guardará'}, class: "btn btn-danger" %>
+          </div>
+          <div class="col-lg-6  col-md-6 ">
+            <%= form.submit "Continuar", class: "post" %>
+          </div>
+        </div>
+        <!--  -->
+      </div>
+      <!-- -->
+    </div>
+    <!-- col lg 7 -->
+  </div>
+</div>
+<!-- container fluid -->
+
+<% end %>
