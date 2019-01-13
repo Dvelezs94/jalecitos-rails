@@ -340,7 +340,7 @@ class OrdersController < ApplicationController
         create_review( @order, @order.employer, @order.purchase.gig)
         create_review( @order, @order.employee, @order.purchase.gig)
       else
-        create_review(@order, @order.employer, @order.purchase.request)
+        create_review(@order, @order.employer)
         create_review(@order, @order.employee, @order.purchase.request)
       end
       #get the id of the user corresponding review and the one for use in the job
