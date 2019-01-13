@@ -20,9 +20,7 @@
             <div class="row file_upload">
               <div class="col-lg-8">
                 <label  class="custom-file-upload">
-
-                  <i class="fa fa-paperclip"></i>
-                  <%= form.file_field :identification, class: 'form-control', required: true %>
+                  <%= form.file_field :identification, class: 'form-control', required: true, accept: ".png, .jpg, .jpeg" %>
                 </label>
                 <small class="attach-limit">Tamano Maximo por archivo 10MB</small>
               </div>
@@ -49,9 +47,7 @@
             <div class="row file_upload">
               <div class="col-lg-8">
                 <label  class="custom-file-upload">
-
-                  <i class="fa fa-paperclip"></i>
-                  <%= form.file_field :address, class: 'form-control', required: true %>
+                  <%= form.file_field :address, class: 'form-control', required: true, accept: ".png, .jpg, .jpeg" %>
                 </label>
                 <small class="attach-limit">Tamano Maximo por archivo 10MB</small>
               </div>
@@ -67,9 +63,7 @@
             <div class="row file_upload">
               <div class="col-lg-8">
                 <label  class="custom-file-upload">
-
-                  <i class="fa fa-paperclip"></i>
-                  <%= form.file_field :criminal_letter, class: 'form-control', required: true %>
+                  <%= form.file_field :criminal_letter, class: 'form-control', required: true, accept: ".png, .jpg, .jpeg" %>
                 </label>
                 <small class="attach-limit">Tamano Maximo por archivo 10MB</small>
               </div>
