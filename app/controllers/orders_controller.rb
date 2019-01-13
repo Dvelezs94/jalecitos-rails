@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
       "amount" => @order.total,
       "currency" => "MXN",
       "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}",
-      "device_session_id" => "params[:device_session_id]"
+      "device_session_id" => params[:device_id]
     }
 
     if @order.save
