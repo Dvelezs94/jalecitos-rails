@@ -389,11 +389,12 @@ ActiveRecord::Schema.define(version: 2019_01_13_005639) do
 
   create_table "verifications", force: :cascade do |t|
     t.bigint "user_id"
-    t.json "identification"
+    t.string "identification"
     t.string "curp"
     t.string "address"
     t.string "criminal_letter"
     t.integer "status", default: 0
+    t.string "denial_details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_verifications_on_user_id"
