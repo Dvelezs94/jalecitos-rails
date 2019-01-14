@@ -1,6 +1,6 @@
 <div class="search_banner">
       <%= form_with url: root_path, method: :get,:html =>{class: "search-form banner-search"} , local: true do |f|%>
-      <%= f.text_field :query, class: "js-search-input js-report-to-aux-data required", value: params[:query], placeholder: "¿Qué servicio buscas?" %>
+      <%= f.text_field :query, class: "js-search-input js-report-to-aux-data", value: params[:query], placeholder: "¿Qué servicio buscas?" %>
       <%= f.hidden_field :model_name, :value =>"" %>
       <%= f.hidden_field :location, :value =>"" %>
       <%= f.hidden_field :category_id, :value =>"" %>
