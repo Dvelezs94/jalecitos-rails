@@ -48,4 +48,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+  # Permissions for file upload
+  def aws_acl
+    "public-read"
+  end
 end
