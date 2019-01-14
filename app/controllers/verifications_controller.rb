@@ -2,7 +2,8 @@ class VerificationsController < ApplicationController
   layout 'logged'
   before_action :authenticate_user!
   before_action :check_current_verifications
-  access user: :all
+  before_action :set_verification, only: [:approve, :deny]
+  access user: [:new, :create], admin: [:approve, :deny]
 
   def new
     @verification = Verification.new
@@ -17,7 +18,23 @@ class VerificationsController < ApplicationController
     end
   end
 
+
+  def approve
+    @verification.granted!
+    redirect_to root_path, notice: "El usuario ha sido aprovado"
+  end
+
+  def deny
+    @verification.denied!
+    redirect_to root_path, notice: "El usuario ha sido denegado y notificado"
+  end
+
   private
+
+  def set_verification
+    @verification = Verification.find(params[:id])
+  end
+
   def verification_params
     verification_params = params.require(:verification).permit(:identification,
                                 :curp,

@@ -21,4 +21,8 @@ class AdminsController < ApplicationController
   def bans
     @bans = Ban.order(status: :asc).page(params[:ban_page]).per(25)
   end
+
+  def verifications
+    @verifications = Verification.order(status: :asc).page(params[:ban_page]).per(25)
+  end
 end

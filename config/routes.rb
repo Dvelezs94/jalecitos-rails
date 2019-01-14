@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get :users
       get :disputes
       get :bans
+      get :verifications
     end
   end
 
@@ -93,7 +94,12 @@ Rails.application.routes.draw do
       resources :replies, only: [:create]
     end
   end
-  resources :verifications, only: [:new, :create]
+  resources :verifications, only: [:new, :create] do
+    member do
+      put :approve
+      put :deny
+    end
+  end
   get 'requests', to: 'pages#request_index'
   get 'finance', to: 'pages#finance'
   get 'disputes', to: 'disputes#index'
