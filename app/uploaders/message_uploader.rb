@@ -16,6 +16,17 @@ class MessageUploader < CarrierWave::Uploader::Base
   def size_range
     1..10.megabytes
   end
+  # Permissions for file upload
+  def aws_acl
+    "private"
+  end
+
+  def aws_attributes
+    {
+      expires: 10.year.from_now.httpdate,
+      cache_control: 'max-age=31557600'
+    }
+  end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
   #   # For Rails 3.1+ asset pipeline compatibility:

@@ -2,10 +2,9 @@ class VerificationUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
-
   # Choose what kind of storage to use for this uploader:
   storage :aws
-  # storage :fog
+
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -15,6 +14,10 @@ class VerificationUploader < CarrierWave::Uploader::Base
 
   def size_range
     1..10.megabytes
+  end
+
+  def aws_acl
+    "private"
   end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)

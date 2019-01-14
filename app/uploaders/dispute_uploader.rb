@@ -16,6 +16,17 @@ class DisputeUploader < CarrierWave::Uploader::Base
   def size_range
     1..10.megabytes
   end
+
+  def aws_acl
+    "private"
+  end
+
+  def aws_attributes
+    {
+      expires: 4.week.from_now.httpdate,
+      cache_control: 'max-age=2419200'
+    }
+  end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
   #   # For Rails 3.1+ asset pipeline compatibility:
@@ -39,7 +50,7 @@ class DisputeUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w(jpg jpeg png)
   end
 
   # Override the filename of the uploaded files:
