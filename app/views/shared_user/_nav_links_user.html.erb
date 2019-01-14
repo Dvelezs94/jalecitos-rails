@@ -87,6 +87,11 @@
             <li>
               <%= link_to "Mi Perfil", user_path(current_user.slug), class: "profile-button" %>
             </li>
+            <% if ! current_user.verified %>
+            <li>
+              <%= link_to "Verificar Perfil",new_verification_path, class: "profile-button" %>
+            </li>
+            <% end %>
             <li>
               <%= link_to "Configuracion", user_config_path(current_user.slug), class: "config-btn" %>
             </li>

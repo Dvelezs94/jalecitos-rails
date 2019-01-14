@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_11_192555) do
+ActiveRecord::Schema.define(version: 2019_01_13_005639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -379,11 +379,25 @@ ActiveRecord::Schema.define(version: 2019_01_11_192555) do
     t.string "location"
     t.boolean "transactional_emails", default: true
     t.boolean "marketing_emails", default: true
+    t.boolean "verified", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["score_id"], name: "index_users_on_score_id"
     t.index ["slug"], name: "index_users_on_slug", unique: true
+  end
+
+  create_table "verifications", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "identification"
+    t.string "curp"
+    t.string "address"
+    t.string "criminal_letter"
+    t.integer "status", default: 0
+    t.string "denial_details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_verifications_on_user_id"
   end
 
   create_table "withdrawals", force: :cascade do |t|
@@ -421,5 +435,6 @@ ActiveRecord::Schema.define(version: 2019_01_11_192555) do
   add_foreign_key "requests", "categories"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "orders"
+  add_foreign_key "verifications", "users"
   add_foreign_key "withdrawals", "users"
 end

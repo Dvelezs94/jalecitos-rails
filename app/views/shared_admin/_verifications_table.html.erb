@@ -1,0 +1,21 @@
+<div class="col-md-12">
+  <h2>Verificaciones</h2>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>CURP</th>
+          <th>Identificacion</th>
+          <th>Comprobante de Domicilio</th>
+          <th>Carta no ancedentes</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+          <%= render partial: 'verifications/verification_dashboard', collection: @verifications %>
+      </tbody>
+    </table>
+    <%= paginate @verifications, param_name: :verification_page %>
+  </div>
+</div>
