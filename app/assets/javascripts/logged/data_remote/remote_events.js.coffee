@@ -24,3 +24,11 @@ $ ->
     #delete card element if configuration
     if $("#cardForm").length > 0
       $(event.currentTarget).closest("tr").fadeOut 500, -> @remove()
+
+  # $('.change_user_alias').bind("ajax:success", (data) ->
+  #    console.log(this)
+  #    )
+
+  $(document).on "ajax:success", ".change_user_alias", (event, data) ->
+    data = JSON.parse(data);
+    window.location.replace(data.redirect);
