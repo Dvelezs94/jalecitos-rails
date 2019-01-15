@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   include OpenpayHelper
   include SetLayout
   include UsersHelper
-  respond_to :html, :json
+  respond_to :html, :json, :js
   layout :set_layout
   before_action :set_user, only: [:show, :update]
   before_action :set_user_config, only: [:configuration]
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
         @user.update_attributes(:roles => [:user, :employer, :employee])
       end
     # best in place for tags, split them to make a list and grab the first 10
-  elsif params[:user]["tag_list"]
+    elsif params[:user]["tag_list"]
       @tag_list = params[:user]["tag_list"].downcase.split(" ")
       # @user.tag_list = @tag_list.first(10)
       # @user.save
@@ -52,10 +52,16 @@ class UsersController < ApplicationController
     else
       @user.update_attributes(user_params)
     end
-    #flash[:success] = 'Your profile was successfully updated.'
+
     respond_to do |format|
+      if params[:user]["alias"]
+        # flash[:success] = 'Tu alias ha sido actualizado.'
+        format.json  { render :json => { :redirect => user_path(@user) } }
+      else
         format.json { respond_with_bip(@user) }
+      end
     end
+
   end
 
 
