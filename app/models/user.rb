@@ -49,8 +49,8 @@ class User < ApplicationRecord
   validates_length_of :location, maximum: 100
   validate :location_syntax
   validates_length_of :bio, maximum: 500
-  validates_presence_of :alias
-  validates :alias, format: { :with => /\A[a-zA-Z0-9-_]+\z/ }
+  validates_presence_of :alias, on: :update
+  validates :alias, format: { :with => /\A[a-zA-Z0-9\-\_]+\z/ }, on: :update
   # User Score
   belongs_to :score, foreign_key: :score_id, class_name: "UserScore"
   # Avatar image
