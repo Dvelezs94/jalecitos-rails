@@ -195,3 +195,6 @@ fieldset[disabled] .twitter-typeahead .tt-input {
 .tt-menu .tt-suggestion p {
   margin: 0;
 }
+.twitter-typeahead{
+  width: 100%;
+}
