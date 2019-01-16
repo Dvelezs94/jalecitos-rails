@@ -19,10 +19,16 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%= ( @gig.present? && current_page?( user_gig_path(@gig.user, @gig) ) )? "<meta name='description' content=''>".html_safe : nil %>
-    <meta name="author" content="">
-    <title>Jalecitos</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
+    <% if @gig.present? && current_page?( user_gig_path(@gig.user, @gig) ) %>
+      <title><%= "#{@gig.profession} en #{@gig.location} para #{@gig.name}"%></title>
+      <meta name="description" content="<%= "#{@gig.profession} en #{@gig.location} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos" %>" >
+      <meta name="keywords" content="<%= "#{@gig.tag_list.join(",")},#{@gig.location},#{@gig.profession}" %>" >
+      <meta name='category' content= <%= "#{@gig.category.name}" %> >
+    <% else %>
+      <title>"Jalecitos"</title>
+      <meta name="description" content=" " >
+      <meta name="keywords" content="" >
+    <% end %>
   </head>
 
   <body id="page-top">

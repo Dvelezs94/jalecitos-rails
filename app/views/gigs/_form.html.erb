@@ -12,6 +12,21 @@
         <h3>Ofrece Tus Servicios Por Medio De Un Nuevo Jale</h3>
         <div class="form_box post_form_col">
           <div class="col-lg-12  col-md-12">
+            <p>¿Qué oficio/profesión estás ejerciendo en este jale?</p>
+          </div>
+          <div class="form_block row">
+            <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
+              <%= fa_icon "folder-open", class: "fa-2x" %>
+            </div>
+            <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
+              <div class="input-box">
+                <%= form.text_field :profession, class: "form-control", required: true, maxlength: 50, placeholder: "Ej: Fotógrafo" %>
+              </div>
+            </div>
+            <%= render 'shared_user/gigs/forms/hints/profession_hint.html.erb' %>
+          </div>
+
+          <div class="col-lg-12  col-md-12">
             <p>¿Qué estás ofreciendo?</p>
           </div>
           <div class="form_block row ">
@@ -21,7 +36,7 @@
             </div>
             <div class="row col-lg-11 col-md-11 col-sm-11 col-11">
               Voy a...
-              <%= form.text_area :name, class: 'name-class name-0 js-br-description required', placeholder: "arreglar el sistema eléctrico de tu casa.", value: gig.name, maxlength: 100 %>
+              <%= form.text_area :name, class: 'name-class name-0 js-br-description required', placeholder: "realizarte una sesión de fotografías.", value: gig.name, maxlength: 100 %>
             </div>
 
             <%= render 'shared_user/gigs/forms/hints/name_hint.html.erb' %>

@@ -104,7 +104,8 @@ Rails.application.routes.draw do
   get 'finance', to: 'pages#finance'
   get 'disputes', to: 'disputes#index'
   get 'likes', to: 'pages#liked'
-  get 'autocomplete', to: 'pages#autocomplete'
+  get 'autocomplete_search', to: 'pages#autocomplete_search'
+  get 'autocomplete_profession', to: 'pages#autocomplete_profession'
   # subscribe device to notifications
   post 'subscribe', to: 'notifications#subscribe'
   delete 'subscribe', to: 'notifications#drop_subscribe'

@@ -32,9 +32,10 @@ class Gig < ApplicationRecord
   has_many :gigs_packages, ->{ limit(15).order(id: :asc) }, class_name: 'Package'
   has_many :search_gigs_packages, ->{ limit(60).order(id: :asc) }, class_name: 'Package'
   #Validations
-  validates_presence_of :name, :description, :location
+  validates_presence_of :name, :profession, :description, :location
   validate :maximum_amount_of_tags, :no_spaces_in_tag, :tag_length
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
+  validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
   validate :description_length, :count_without_html
   validate :location_syntax
   #Gallery validations
@@ -47,4 +48,25 @@ class Gig < ApplicationRecord
   mount_uploaders :images, GigUploader
   #Actions
 
+  #capitalize before save
+  def profession=(val)
+    write_attribute(:profession, val.capitalize)
+  end
+  def description=(val)
+    write_attribute(:description, remove_uris(val))
+  end
+  def name=(val)
+    write_attribute(:name, remove_uris(val))
+  end
+
+
+  #functions
+  def remove_uris(text)
+  uri_regex = %r"((?:(?:[^ :/?#]+):)(?://(?:[^ /?#]*))(?:[^ ?#]*)(?:\?(?:[^ #]*))?(?:#(?:[^ ]*))?)"
+    text.split(uri_regex).collect do |s|
+      unless s =~ uri_regex
+        s
+      end
+    end.join
+  end
 end
