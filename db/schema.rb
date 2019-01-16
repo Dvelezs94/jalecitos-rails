@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_13_005639) do
+ActiveRecord::Schema.define(version: 2019_01_16_193518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_005639) do
     t.json "images"
     t.integer "score_average", default: 0
     t.integer "score_times", default: 0
+    t.string "profession"
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true
     t.index ["user_id"], name: "index_gigs_on_user_id"
@@ -221,6 +222,12 @@ ActiveRecord::Schema.define(version: 2019_01_13_005639) do
     t.index ["offer_id"], name: "index_payments_on_offer_id"
     t.index ["package_id"], name: "index_payments_on_package_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "professions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "push_subscriptions", force: :cascade do |t|
