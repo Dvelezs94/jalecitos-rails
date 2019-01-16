@@ -14,7 +14,7 @@ class Order < ApplicationRecord
   after_create :set_access_uuid
   belongs_to :employer, foreign_key: :employer_id, class_name: "User"
   belongs_to :employee, foreign_key: :employee_id, class_name: "User"
-  belongs_to :purchase, polymorphic: true
+  belongs_to :purchase, polymorphic: true, optional: true
   belongs_to :withdrawal, optional: true
   #Associations
   has_one :dispute

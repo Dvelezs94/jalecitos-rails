@@ -109,4 +109,7 @@ Rails.application.routes.draw do
   post 'subscribe', to: 'notifications#subscribe'
   delete 'subscribe', to: 'notifications#drop_subscribe'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  # LEAVE THIS AT THE END!!
+  match '*path' => redirect('/'), via: :get
 end

@@ -29,8 +29,8 @@
                 <hr>
                 <p><strong>Numero de Orden: </strong><%= @dispute.order.uuid %></p>
                 <% if @dispute.order.purchase_type == "Package" %>
-                <p><strong>Jale: </strong><%= link_to "Voy a #{@dispute.order.purchase.gig.name}", user_gig_path(@dispute.order.purchase.gig.user.slug, @dispute.order.purchase.gig.slug) %></p>
-                <p><strong>Paquete: </strong><%= @dispute.order.purchase.pack_type %></p>
+                <p><strong>Jale: </strong><%= @dispute.order.purchase ? link_to("Voy a #{@dispute.order.purchase.gig.name}", user_gig_path(@dispute.order.purchase.gig.user.slug), @dispute.order.purchase.gig.slug) : "Borrado" %></p>
+                <p><strong>Paquete: </strong><%= @dispute.order.purchase ? @dispute.order.purchase.pack_type : "Borrado" %></p>
                 <% else %>
                 <p><strong>Pedido: </strong>Busco a <%= @dispute.order.purchase.offer.name %></p>
                 <% end %>
