@@ -24,6 +24,11 @@
             en el pedido
             <%= notification.notifiable.name %><br>
 
+        <% elsif notification.notifiable_type == "Order" %>
+
+            la orden
+            <%= notification.notifiable.uuid %><br>
+
         <% else %>
 
             en el pedido

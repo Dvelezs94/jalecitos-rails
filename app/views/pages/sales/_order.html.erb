@@ -1,10 +1,10 @@
 <tr class="body_table" valign="middle">
   <% if order.purchase_type == "Package" %>
   <td class="buyer">
-    <h5><%= link_to order.employer.slug, user_path(order.employer.slug) %></h5>
+    <h5><%= order.purchase ? link_to(order.employer.slug, user_path(order.employer.slug)) : "Borrado" %></h5>
   </td>
-  <td><%= link_to "Voy a #{order.purchase.gig.name}", user_gig_path(order.purchase.gig.user, order.purchase.gig)  %></td>
-  <td> <%= order.purchase.pack_type %></td>
+  <td><%= order.purchase ? link_to("Voy a #{order.purchase.gig.name}", user_gig_path(order.purchase.gig.user, order.purchase.gig)) : "Borrado" %></td>
+  <td><%= order.purchase ? order.purchase.pack_type : "Borrado" %></td>
   <% else %>
   <td class="buyer">
   <h5><%= link_to order.purchase.request.user.slug, user_path(order.purchase.request.user.slug) %></h5>
