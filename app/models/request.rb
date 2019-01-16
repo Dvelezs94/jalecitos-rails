@@ -27,7 +27,7 @@ class Request < ApplicationRecord
   #Associations
   belongs_to :user
   belongs_to :category
-  has_many :offers
+  has_many :offers, dependent: :destroy
   belongs_to :employee, class_name: "User", optional: true
   #Validations
   validates_presence_of :name, :description, :location, :budget, :category_id

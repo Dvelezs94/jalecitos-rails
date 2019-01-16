@@ -8,6 +8,7 @@ class RequestsController < ApplicationController
   before_action :check_request_ban, only: [:show]
   before_action :check_request_ownership, only:[:edit, :update, :destroy]
   before_action :validate_options_for_budget, only: [:create, :update]
+  before_action :verify_no_employee, only: [:edit, :update, :destroy]
 
   def my_requests
       @open = Request.search "*",includes: [:user], where: {status: "open", user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:open_page], per_page: 20
@@ -35,7 +36,7 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new( sanitized_params(request_params) )
     if @request.save
-      redirect_to request_path(@request), notice: 'Request was successfully created.'
+      redirect_to request_path(@request), notice: 'Tu pedido fue creado.'
     else
       render :new
     end
@@ -44,7 +45,7 @@ class RequestsController < ApplicationController
   # PATCH/PUT /requests/1
   def update
     if @request.update(request_params)
-      redirect_to request_path(@request), notice: 'Request was successfully updated.'
+      redirect_to request_path(@request), notice: 'El pedido ha sido actualizado.'
     else
       render :edit
     end
@@ -53,7 +54,7 @@ class RequestsController < ApplicationController
   # DELETE /requests/1
   def destroy
     @request.destroy
-    redirect_to my_request_path, notice: 'Request was successfully destroyed.'
+    redirect_to root_path, notice: 'El pedido ha sido eliminado.'
   end
 
   private
@@ -98,5 +99,10 @@ class RequestsController < ApplicationController
 
     def report_options
       @report_options = ["Uso de palabras ofensivas", "Contenido Sexual", "Violencia", "Spam", "Engaño o fraude", "Otro"]
+    end
+
+    #check if there is no empoyee yet, so we can edit or delete the gig
+    def verify_no_employee
+      (@request.employee) ? redirect_to(request_path(@request), notice: 'El pedido ya no puede ser borrado o editado') : true
     end
 end
