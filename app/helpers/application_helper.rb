@@ -75,6 +75,9 @@ module ApplicationHelper
      end
     when object.class == Dispute
        order_dispute_path(object.order.uuid, object)
+
+    when object.class == Order
+       finance_path(:table => notification.query_url)
     end
   end
 
@@ -88,6 +91,8 @@ module ApplicationHelper
         "en la orden #{object.order.uuid}"
      when object.class == Offer
         "en el pedido #{object.request.name}"
+      when object.class == Order
+         "la orden #{object.uuid} por la cantidad de $#{object.total} MXN"
     end
   end
 
