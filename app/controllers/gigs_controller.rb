@@ -86,7 +86,8 @@ class GigsController < ApplicationController
                                   :description,
                                   :location,
                                   :category_id,
-                                  :tag_list
+                                  :tag_list,
+                                  :profession
                                 ).merge(:user_id => current_user.id)
 
     end

@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   before_action :pending_review, only: [:home, :finance], :if => :signed_and_rev
   layout :set_layout
-  access user: :all, admin: :all, all: [:home, :autocomplete]
+  access user: :all, admin: :all, all: [:home, :autocomplete_search]
   def home
     if params[:query]
       options = init_search_options
@@ -29,7 +29,7 @@ class PagesController < ApplicationController
     @liked_gigs = Gig.find(current_user.likes.pluck(:gig_id))
   end
 
-  def autocomplete
+  def autocomplete_search
     query = filter_query
     #init the filter params
     options = init_search_options
@@ -41,6 +41,18 @@ class PagesController < ApplicationController
       misspellings: {below: 5},
       where: where_filter(options[:status])
     }).map{|x| pre_text(options[:model]) + x.name}
+  end
+
+  def autocomplete_profession
+    query = params[:query]
+    #init the filter params
+    render json: Profession.search(query, {
+      fields: ["name"],
+      match: :word_start,
+      limit: 10,
+      load: false,
+      misspellings: {below: 2}
+    }).map(&:name)
   end
 
   private

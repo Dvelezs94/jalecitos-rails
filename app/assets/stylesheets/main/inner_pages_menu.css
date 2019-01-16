@@ -461,10 +461,6 @@ button.search-options {
   z-index: 10000;
 }
 
-.search-form.nav-search {
-  width: 45vw;
-}
-
 @media screen and (min-width: 781px) {
   .complete-logo {
     display: block;
