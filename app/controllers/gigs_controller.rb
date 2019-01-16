@@ -9,6 +9,7 @@ class GigsController < ApplicationController
   before_action :check_published, only: :show
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status]
   before_action :max_gigs, only: [:new, :create]
+  before_action :check_running_orders, only: :destroy
   access user: { except: [:ban_gig] }, admin: [:ban_gig], all: [:show]
   layout :set_layout
 
@@ -107,6 +108,16 @@ class GigsController < ApplicationController
       @reviews = Review.search("*", where: { reviewable_id: @gig.id, reviewable_type: "Gig", giver_id: {not: @gig.user.id}, status: "completed" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
       #select only the rated reviews (the review can be completed with rating score of 0, so be careful)
       @reviews = @reviews.select{|r| r.rating.present? && r.rating.stars.between?(1,5)}
+    end
+
+    # Check if there are running orders before destroying
+    def check_running_orders
+      order_count = 0
+      packages = @gig.packages
+      packages.each do |p|
+        order_count += p.orders.where(status: "pending").or(p.orders.where(status: "in_progress")).or(p.orders.where(status: "disputed")).count
+      end
+      (order_count > 0) ? redirect_to(root_path, notice: "Tienes transacciones pendientes en este Jale") : true
     end
 
 end
