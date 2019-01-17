@@ -20,6 +20,7 @@ if ENV.fetch("RAILS_ENV") == "development"
           request.category_id = Faker::Number.between(1, 10)
           request.budget = Faker::Number.between(100, 5000)
           request.status = Faker::Number.between(0, 3)
+          request.profession = Profession.find( Faker::Number.between(1, 20) ).name
         end
       end
       10.times do
@@ -29,7 +30,7 @@ if ENV.fetch("RAILS_ENV") == "development"
           gig.location = "#{Faker::Address.state}, México"
           gig.category_id = Faker::Number.between(1, 5)
           gig.status = Faker::Number.between(0, 2)
-          gig.profession = Category.find( Faker::Number.between(1, 20) ).name
+          gig.profession = Profession.find( Faker::Number.between(1, 20) ).name
         end
       end
       puts user.email

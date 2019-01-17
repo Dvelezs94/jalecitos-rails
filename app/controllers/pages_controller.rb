@@ -58,7 +58,7 @@ class PagesController < ApplicationController
   private
 
   def pre_text model
-    ( model == Gig)? "Voy a " : "Busco a alguien "
+    ( model == Gig)? "Voy a " : "Busco un "
   end
 
   def admin_redirect
