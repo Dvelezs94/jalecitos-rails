@@ -14,7 +14,7 @@ class NotifyNewRequestWorker
     #build notification
     @message = {
       title: "Jalecitos",
-      body:  "Encontramos un pedido en tu zona que puede interesarte! - Busco un #{request.profession} #{request.name}",
+      body:  "Encontramos un pedido en tu zona que puede interesarte! - #{request.title}",
       icon: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png",
       openUrl: request_path(request.slug),
       vibrate: [125, 75, 125],
