@@ -19,21 +19,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <% if @gig.present? && current_page?( user_gig_path(@gig.user, @gig) ) %>
-      <title><%= "#{@gig.profession} en #{@gig.location} para #{@gig.name}"%></title>
-      <meta name="description" content="<%= "#{@gig.profession} en #{@gig.location} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos" %>" >
-      <meta name="keywords" content="<%= "#{@gig.location},#{@gig.profession},#{@gig.tag_list.join(",")}" %>" >
-      <meta name='category' content= <%= "#{@gig.category.name}" %> >
-    <% elsif @request.present? && current_page?( request_path(@request) ) %>
-      <title><%= "Trabajo de #{@request.profession} en #{@request.location} | Encontrar trabajo de #{@request.profession} por internet."%></title>
-      <meta name="description" content="<%= "Se solicita #{@request.profession} en #{@request.location} para #{@request.name}. Registrate hoy en Jalecitos para encontrar trabajo." %>" >
-      <meta name="keywords" content="<%= "#{@request.location},#{@request.profession},#{@request.tag_list.join(",")}" %>" >
-      <meta name='category' content= <%= "#{@request.category.name}" %> >
-    <% else %>
-      <title>Jalecitos</title>
-      <meta name="description" content=" " >
-      <meta name="keywords" content="" >
-    <% end %>
+    <%= meta_tags %>
   </head>
 
   <body id="page-top">
