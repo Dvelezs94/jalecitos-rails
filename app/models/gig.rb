@@ -46,11 +46,11 @@ class Gig < ApplicationRecord
   #Custom fields
   enum status: { draft: 0, published: 1, banned: 2}
   mount_uploaders :images, GigUploader
-  #Actions  
+  #Actions
 
   #capitalize before save
   def profession=(val)
-    write_attribute(:profession, val.capitalize)
+    write_attribute(:profession, no_double_spaces(val.strip.capitalize))
   end
   def description=(val)
     write_attribute(:description, remove_uris(val))
