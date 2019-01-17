@@ -120,4 +120,25 @@ module ApplicationHelper
       :post
     end
   end
+
+  def meta_tags
+  if @gig.present? && current_page?( user_gig_path(@gig.user, @gig) )
+      "<title>#{@gig.profession} en #{@gig.location} para #{@gig.name}</title>
+      <meta name='description' content='#{@gig.profession} en #{@gig.location} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos.'>
+      <meta name='keywords' content='#{@gig.location},#{@gig.profession},#{@gig.tag_list.join(',')}'>
+      <meta name='category' content='#{@gig.category.name}'>".html_safe
+  elsif @request.present? && current_page?( request_path(@request) )
+      "<title>Trabajo de #{@request.profession} en #{@request.location} | Encontrar trabajo de #{@request.profession} por internet.</title>
+      <meta name='description' content='Se solicita #{@request.profession} en #{@request.location} para #{@request.name}. Registrate hoy en Jalecitos para encontrar trabajo.'>
+      <meta name='keywords' content='#{@request.location},#{@request.profession},#{@request.tag_list.join(',')}'>
+      <meta name='category' content='#{@request.category.name}'>".html_safe
+  elsif current_page?( root_path ) && params[:query]
+      "<title>Encuentra las mejores oportunidades de trabajo o Expertos para contratar  en línea utilizando Jalecitos</title>
+      <meta name='description' content='Necesitas trabajo o encontrar a un experto para alguna necesidad? Utiliza Jalecitos para encontrar empleo o expertos.'>
+      <meta name='keywords' content='encontrar, trabajo, empleos, expertos, internet'>
+      <meta name='category' content='Trabajo, Empleo'>".html_safe
+  else
+      "<title>Jalecitos</title>".html_safe
+  end
+  end
 end
