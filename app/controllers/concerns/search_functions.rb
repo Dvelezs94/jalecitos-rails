@@ -25,7 +25,7 @@ module SearchFunctions
     #if query has "Voy a" at the beginning, cut it
     query = ( query.start_with?("voy a", "Voy a") )? query.sub(/^Voy a /, '').sub(/^voy a /, '') : query
     #same with requests...
-    query = ( query.start_with?("busco a alguien", "Busco a alguien") )? query.sub(/^Busco a alguien /, '').sub(/^busco a alguien /, '') : query
+    query = ( query.start_with?("busco un", "Busco un") )? query.sub(/^Busco un /, '').sub(/^busco un /, '') : query
   end
 
   def init_search_options
