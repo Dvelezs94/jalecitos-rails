@@ -1,7 +1,7 @@
 class RequestsController < ApplicationController
-  layout 'logged'
   include SanitizeParams
   include RequestsHelper
+  include SetLayout
   before_action :authenticate_user!, except: :show
   before_action :set_request, only: [:show, :edit, :update, :destroy]
   access all: [:show], user: :all
@@ -9,6 +9,7 @@ class RequestsController < ApplicationController
   before_action :check_request_ownership, only:[:edit, :update, :destroy]
   before_action :validate_options_for_budget, only: [:create, :update]
   before_action :verify_no_employee, only: [:edit, :update, :destroy]
+  layout :set_layout
 
   def my_requests
       @open = Request.search "*",includes: [:user], where: {status: "open", user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:open_page], per_page: 20
