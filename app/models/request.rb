@@ -30,9 +30,10 @@ class Request < ApplicationRecord
   has_many :offers, dependent: :destroy
   belongs_to :employee, class_name: "User", optional: true
   #Validations
-  validates_presence_of :name, :description, :location, :budget, :category_id
+  validates_presence_of :name, :description, :location, :budget, :category_id, :profession
   validate  :tag_length, :no_spaces_in_tag, :maximum_amount_of_tags
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
+  validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
   validate :description_length, :count_without_html
   validate :location_syntax
 
@@ -41,4 +42,13 @@ class Request < ApplicationRecord
 
   #notify users when new request is made
   after_commit -> { NotifyNewRequestWorker.perform_async(self.id) }, on: :create
+
+  #functions
+  def profession=(val)
+    write_attribute(:profession, val.capitalize)
+  end
+
+  def title
+    "Busco un #{self.profession} #{self.name}"
+  end
 end

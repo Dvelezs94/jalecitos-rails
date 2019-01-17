@@ -1,6 +1,6 @@
 <div class="card" style="width: 70%; padding: 10px; margin: 20px auto;">
   <div class="card-body">
-    <h5 class="card-title"><%= @request.name %></h5>
+    <h5 class="card-title"><%= @request.title %></h5>
     <%= link_to fa_icon("share", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
     <% if user_signed_in? %>
     <%= fa_icon("exclamation-triangle", class: "fa-lg gig_action_icon cursor_pointer", title: "Reportar", id: "reportrequestbtn") %>

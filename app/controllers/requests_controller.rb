@@ -70,7 +70,8 @@ class RequestsController < ApplicationController
                                   :location,
                                   :category_id,
                                   :budget,
-                                  :tag_list
+                                  :tag_list,
+                                  :profession
                                 )
       request_params = set_owner(request_params)
     end
