@@ -1,9 +1,26 @@
 <div class="search_banner">
       <%= form_with url: root_path, method: :get,:html =>{class: "search-form banner-search"} , local: true do |f|%>
       <%= f.text_field :query, class: "js-search-input js-report-to-aux-data", required: true, value: params[:query], placeholder: "¿Qué servicio buscas?" %>
-      <%= f.hidden_field :model_name, :value =>"" %>
-      <%= f.hidden_field :location, :value =>"" %>
-      <%= f.hidden_field :category_id, :value =>"" %>
+      <div class="btn-group" role="group">
+        <div class="dropdown dropdown-lg">
+          <button type="button" class="btn-default dropdown-toggle button-dropdown search-options" data-toggle="dropdown" aria-expanded="false">
+            <span class="caret"></span></button>
+          <div class="dropdown-menu dropdown-menu-right" role="menu" id="search-dropdown">
+            <div class="form-group">
+              <label for="filter">Buscar</label>
+              <%= select_tag 'model_name', options_for_select([ ["Jales", "gigs"], ["Pedidos", "requests"]], selected: params[:model_name]), class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <label for="contain">Categoría</label>
+              <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Todas", :selected => params[:category_id] }, class: 'form-control', id: "category-select") %>
+            </div>
+            <div class="form-group">
+              <label for="contain">Ubicación</label>
+              <%= f.text_field :location, class: 'text_box form-control', id: "search_autocomplete", size: 50, placeholder: "Cualquier lugar en México", value: params[:location] %>
+            </div>
+          </div>
+        </div>
+      </div>
       <%= f.submit "Buscar", class: "btn-lrg-standard btn-submit js-search-submit banner-submit", placeholoder: "Buscar"  %>
       <% end %>
 </div>
