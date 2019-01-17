@@ -43,9 +43,10 @@ class Request < ApplicationRecord
   #notify users when new request is made
   after_commit -> { NotifyNewRequestWorker.perform_async(self.id) }, on: :create
 
-  #functions
+  #Actions
+  #capitalize before save
   def profession=(val)
-    write_attribute(:profession, val.capitalize)
+    write_attribute(:profession, no_double_spaces(val.strip.capitalize))
   end
 
   def title
