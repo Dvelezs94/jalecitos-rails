@@ -12,7 +12,7 @@
         <%= (defined? @package) ? image_tag(avatar_display_helper(@package.gig.user.image_url(:thumb)), class: "nav-avatar") : nil %>
       </div>
       <div class="col-lg-10">
-        <%= (defined? @package) ? "Voy a  #{@package.gig.name}"  : "Busco un #{@offer.request.profession} #{@offer.request.name}"%>
+        <%= (defined? @package) ? "Voy a  #{@package.gig.name}"  : @offer.request.title%>
       </div>
     </div>
     <div class="row">
