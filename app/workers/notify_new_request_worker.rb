@@ -4,11 +4,7 @@ class NotifyNewRequestWorker
 
   def perform(request_id)
     request = Request.find(request_id)
-    # check if tags are set
-    if (@tags = Request.last.tag_list.to_s) == ""
-      return
-    end
-    @users = User.search @tags, operator: "or", where: {location: request.location}
+    @users = Gig.search(request.profession, where: {location: request.location}).results.map(&:user_id)
 
 
     #build notification
@@ -28,7 +24,7 @@ class NotifyNewRequestWorker
 
     #Loop through every subscription to send the push notification
     @users.each do |user|
-      user.push_subscriptions.each do |subs|
+      User.find(user).push_subscriptions.each do |subs|
         begin
           Webpush.payload_send(
             endpoint: subs.endpoint,
