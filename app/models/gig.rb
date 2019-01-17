@@ -13,6 +13,7 @@ class Gig < ApplicationRecord
       location: location,
       category_id: category_id,
       status: status,
+      profession: profession,
       user_id: user_id
      }
   end

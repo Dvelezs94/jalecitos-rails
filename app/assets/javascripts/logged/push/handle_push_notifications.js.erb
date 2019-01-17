@@ -27,6 +27,19 @@ function createSWSubscription(registration){
  .then( new Notification("Ahora estaras al tanto de tus jales!"))
 }
 
+function validateSWSubscription(){
+  navigator.serviceWorker.ready
+   .then((registration) => {
+     registration.pushManager.getSubscription()
+       .then((subscription) => {
+         if (!subscription) {
+           createSWSubscription(registration);
+           return;
+         }
+       });
+   });
+}
+
 function resetNotifications() {
  navigator.serviceWorker.ready
   .then((registration) => {
