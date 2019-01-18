@@ -33,7 +33,7 @@ function validateSWSubscription(){
      registration.pushManager.getSubscription()
        .then((subscription) => {
          if (!subscription) {
-           createSWSubscription(registration);
+           console.log("Activa las notificaciones en configuracion")
            return;
          }
        });
