@@ -1,6 +1,7 @@
 class AdminsController < ApplicationController
   layout 'admin'
   access admin: :all
+  before_action :set_vars
 
   def index_dashboard
     @gigs = Gig.order(updated_at: :desc).page(params[:gig_page]).per(25)
@@ -24,5 +25,12 @@ class AdminsController < ApplicationController
 
   def verifications
     @verifications = Verification.order(status: :asc).page(params[:ban_page]).per(25)
+  end
+
+  private
+  def set_vars
+    @pending_verifications = Verification.pending.count
+    @pending_bans = Ban.pending.count
+    @pending_disputes = Dispute.waiting_for_support.count
   end
 end

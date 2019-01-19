@@ -14,13 +14,13 @@
            <%= link_to "Usuarios", users_admins_path %>
        </li>
        <li>
-           <%= link_to "Verificaciones", verifications_admins_path %>
+           <%= link_to "Verificaciones (#{@pending_verifications})", verifications_admins_path %>
        </li>
        <li>
-           <%= link_to "Disputas", disputes_admins_path %>
+           <%= link_to "Disputas (#{@pending_disputes})", disputes_admins_path %>
        </li>
        <li>
-           <%= link_to "Reportes Y Bloqueos", bans_admins_path %>
+           <%= link_to "Reportes Y Bloqueos (#{@pending_bans})", bans_admins_path %>
        </li>
    </ul>
    <ul class="list-unstyled components">
