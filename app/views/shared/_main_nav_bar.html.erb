@@ -1,18 +1,59 @@
-<nav class="navbar navbar-expand-lg fixed-top jalecitos" id="mainNav">
-  <div class="container">
-    <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png', size: '90x45'), root_path, :class => 'navbar-brand js-scroll-trigger complete-logo', id: "jalecitos-logo" %>
-    <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png', size: '36x36'), root_path, :class => 'navbar-brand js-scroll-trigger small-logo', id: "jalecitos-logo" %>
+<div class="header-toparea">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-10 col-12">
+        <div class="row headertop-left align-items-center justify-content-center">
+          <div class="header-logo">
+            <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png', size: "138x32"), root_path %>
+          </div>
 
-    <%= render "shared/search_form" if current_user %>
-<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-  <i class="fa fa-th-large"></i>
-</button>
+          <div class="headerlogo768">
+            <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png'), root_path %>
+          </div>
 
-<%= nav_links_helper %>
+          <%= form_with url: root_path, method: :get,:html =>{ class: "search-form"} , local: true do |f|%>
+          <div class="search-form-div searchpage3s">
+            <%= f.text_field :query, value: params[:query], placeholder: "¿Qué estás buscando?", class: "query" %>
+            <a href="">
+              <i class="fa fa-search"></i>
+            </a>
+          </div>
+          <div class="headertop-location">
+            <li>
+              <i class="fa fa-map-marker middle"></i>
+              <%= f.text_field :location, id: "search_autocomplete", placeholder: "Cualquier lugar en México", value: (params[:location].nil? && current_user)? current_user.location : params[:location] %>
+            </li>
+          </div>
+          <% end %>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-2">
+      <%= nav_links_helper %>
+    </div>
+  </div>
+
+  <div class="headertop">
+    <div class="row">
+      <div class="col-8">
+        <div class="headertop-location ex">
+          <li>
+            <i class="fa fa-map-marker"></i>
+            <a href="">Elige tu ciudad</a>
+          </li>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="bellposition2 ex">
+          <span></span>
+          <a href="#">
+            <i class="fa fa-bell"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
 </div>
-</nav>
-<div class="gap"></div>
-<div class="gap"></div>
-
+</div>
 <div id="notifications"></div>
