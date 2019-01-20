@@ -170,17 +170,6 @@
     right: -26px;
   }
 
-  .catagori-slidewrap .owl-controls .owl-nav div {
-    position: absolute;
-    left: -5px;
-    top: 50%;
-    margin-top: -50px;
-  }
-
-  .catagori-slidewrap .owl-controls .owl-nav .owl-next {
-    left: auto;
-    right: -3px;
-  }
 
   .clickred i {
     bottom: 0;
@@ -977,14 +966,6 @@
     height: 115px;
     line-height: 120px;
     font-size: 50px;
-  }
-
-  .catagori-slidewrap .owl-controls .owl-nav div {
-    left: -6px;
-  }
-
-  .catagori-slidewrap .owl-controls .owl-nav .owl-next {
-    right: -7px;
   }
 
   .catagori-title h1 {

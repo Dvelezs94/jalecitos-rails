@@ -219,19 +219,15 @@ a.authorclick {
   padding: 60px 0;
 }
 
-.catagori-slidewrap .owl-controls .owl-nav div {
+.catagorislide-area .owl-controls .owl-nav div {
   position: absolute;
   left: -17px;
   top: 50%;
   margin-top: -50px;
 }
 
-.catagori-slidewrap .owl-controls .owl-nav .owl-next {
-  left: auto;
-  right: -17px;
-}
 
-.catagori-slidewrap .owl-nav div i {
+.owl-nav i {
   font-size: 45px;
   color: #39C27B;
   font-weight: 700;
@@ -240,7 +236,6 @@ a.authorclick {
   border-radius: 50%;
   background: #fff;
   line-height: 38px;
-  padding-left: 12px;
   box-shadow: 2px 2px #C4C5C6;
 }
 
@@ -1500,7 +1495,18 @@ button:focus {
   display: block;
 }
 
-/*custom */
+/*MAURICIO */
 .nav-avatar{
   border-radius: 50%;
+}
+/*Sliders*/
+.catagorislide-area button.owl-prev {
+  position: absolute;
+  top: 20%;
+}
+
+.catagorislide-area button.owl-next {
+  position: absolute;
+  right: 0;
+  top: 20%;
 }
