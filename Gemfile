@@ -127,3 +127,5 @@ gem 'jquery-fileupload-rails', '~> 1.0'
 gem 'clipboard-rails', '~> 1.7', '>= 1.7.1'
 # sidekiq for background job processing
 gem 'sidekiq', '~> 5.2', '>= 5.2.5'
+#carousels
+gem 'owlcarousel-rails', '~> 2.2', '>= 2.2.3.5'
