@@ -1,117 +1,100 @@
-<div class="collapse navbar-collapse" id="navbarResponsive">
+<div class="headertop-right">
+  <div class="bellposition align-items-center justify-content-end">
+    <a href="">
+      <i class="fa fa-envelope"></i><br>
+      inicio
+    </a>
+    <a href="">
+      <i class="fa fa-exchange" aria-hidden="true"></i><br>
+      Transacciones
+    </a>
+    <a href="">
+      <i class="fa fa-envelope"></i><br>
+      Mensajes
+    </a>
 
-  <ul class="navbar-nav  ml-auto">
+    <a href="#" class="redbell1">
+      <span></span>
+      <i class="fa fa-bell"></i><br>
+      Notificaciones
+    </a>
 
-    <li class="nav-item <%= active? root_path %>">
-      <%= link_to "Jales", root_path, :class => 'nav-link js-scroll-trigger' %>
-    </li>
-    <li class="nav-item <%= active? requests_path %>">
-      <%= link_to "Pedidos", requests_path, :class => 'nav-link js-scroll-trigger' %>
-    </li>
+    <a href="" class="authorclick">
+      <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "nav-avatar") %>
+    </a>
+  </div>
 
-    <% if current_user.has_roles?(:employee) %>
-    <li class="nav-item my_dropdown_menu_top">
-      <div class="dropdown">
-        <a class="nav-link js-scroll-trigger">Vender</a>
-        <div class="dropdown-content">
-          <ul>
-            <li class="<%= active? user_path(current_user) %>">
-              <%= link_to "Mis Jales", user_path(current_user), class: "my-gigs-btn" %>
-            </li>
-            <li class="<%= active? new_user_gig_path(current_user) %>">
-              <%= link_to "Nuevo Jale", new_user_gig_path(current_user), class: "new-gig-btn" %>
-            </li>
-            <li class="" href="#">
-              <a >Mis Postulaciones</a>
-            </li>
-            <li class="">
-              <a class="promote" href="#">Promuevete</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </li>
-    <% end %>
-    <% if current_user.has_roles?(:employer) %>
-    <li class="nav-item my_dropdown_menu_top">
-      <div class="dropdown">
-        <a class="nav-link js-scroll-trigger">Comprar</a>
-        <div class="dropdown-content">
-          <ul>
-            <li class="<%= active? user_path(current_user) %>">
-              <%= link_to "Mis Pedidos", my_requests_path, class: "my-requests-btn" %>
-            </li>
-            <li class="<%= active? new_request_path %>">
-              <%= link_to "Nuevo Pedido", new_request_path, class: "new-requests-btn" %>
-            </li>
+  <div class="bellposition2">
+    <span></span>
+    <a href="#">
+      <i class="fa fa-bell"></i>
+    </a>
+  </div>
+</div>
 
-            <li class="">
-              <a class="how-it-works-btn" href="https://blog.jalecitos.com/blog/" target="_blank">Cómo funciona</a>
-            </li>
-            <li class="">
-              <%= link_to "Jales Gustados", likes_path, class: "saved-btn" %>
-            </li>
+<div class="belldropdownarea">
+  <div class="belldropdown-box">
+    <div class="sameicon">
+      <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+    </div>
+    <div class="belldropdown-text">
+      <p class="greens1">NUEVO JALE</p>
+      <p class="greensbold">Te han contratado para el paquete “ Voy a limpiar tu casa”</p>
+    </div>
+    <div class="timer">
+      <span>
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        9:34am</span>
+    </div>
+  </div>
 
-          </ul>
-        </div>
-      </div>
-    </li>
-    <% end %>
+  <div class="belldropdown-box">
+    <div class="sameicon">
+      <i class="fa fa-comment-o" aria-hidden="true"></i>
+    </div>
 
-    <li class="nav-item <%= active? conversations_path %>">
-      <%= link_to fa_icon("envelope", class: "fa-lg"), conversations_path, :class => 'nav-link js-scroll-trigger' %>
-    </li>
+    <div class="belldropdown-text">
+      <p class="greens1">NUEVO JALE</p>
+      <p class="greensbold">Review en tu perfil</p>
+      <p class="quam1">vel quam elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor</p>
+    </div>
+    <div class="timer">
+      <span>
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        9:34am</span>
+    </div>
+  </div>
 
-    <li class="nav-item  mesages_" data-behavior="read-notifications">
-      <div class="dropdown">
-        <a class="nav-link js-scroll-trigger notification" data-behavior="notifications"><%= fa_icon "bell", class: "fa_inline fa-lg" %><span data-behavior="unread-count" id="unread-count"></span></a>
-        <div class="dropdown-content">
-          <div class="tab-content">
-            <div data-behavior="notification-items" class="notification-items">
+  <div class="belldropdown-box">
 
-              <!-- notifications are built here -->
+    <div class="sameicon">
+      <i class="fa fa-check"></i>
+    </div>
 
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
+    <div class="belldropdown-text">
+      <p class="greens1">NUEVO JALE</p>
+      <p class="greensbold">Te han contratado para el paquete “ Voy a limpiar tu casa”</p>
+    </div>
+    <div class="timer">
+      <span>
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        9:34am</span>
+    </div>
+  </div>
 
-    <li class="nav-item my_dropdown_menu my_image">
-      <div class="dropdown">
-        <label>
-          <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "nav-avatar") %>
-        </label>
-        <div class="dropdown-content">
-          <ul>
-            <li>
-              <%= link_to "Mi Perfil", user_path(current_user.slug), class: "profile-button" %>
-            </li>
-            <% if ! current_user.verified %>
-            <li>
-              <%= link_to "Verificar Perfil",new_verification_path, class: "profile-button" %>
-            </li>
-            <% end %>
-            <li>
-              <%= link_to "Configuracion", user_config_path(current_user.slug), class: "config-btn" %>
-            </li>
-            <li>
-              <%= link_to "Transacciones", finance_path(:table => "purchases"), class: "transctions-btn" %>
-            </li>
-            <li>
-              <%= link_to "Disputas", disputes_path, class: "disputes-btn" %>
-            </li>
-            <li>
-              <a class="help-btn" href="https://blog.jalecitos.com/blog/" target="_blank">Ayuda</a>
-            </li>
-            <li>
-              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "logout-btn" %>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </li>
+  <div class="belldropdown-box">
+    <div class="sameicon">
+      <i class="fa fa-external-link" aria-hidden="true"></i>
+    </div>
 
-  </ul>
-
+    <div class="belldropdown-text">
+      <p class="greens1">NUEVO JALE</p>
+      <p class="greensbold">Te han contratado para el paquete “ Voy a limpiar tu casa”</p>
+    </div>
+    <div class="timer">
+      <span>
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        9:34am</span>
+    </div>
+  </div>
 </div>

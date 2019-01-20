@@ -429,18 +429,9 @@ button.strt_selling_Srch {
   }
 }
 
-.search-form {
+.search-form-div {
   display: flex;
   height: 30px;
-}
-
-form.search-form .btn-submit {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  background-color: #00b22d;
-  cursor: pointer;
-  border: 1px solid #00b22d;
-  color: white;
 }
 
 input.js-search-input.js-report-to-aux-data.strt_selling_Srch1 {
