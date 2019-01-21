@@ -3,7 +3,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     #@user = User.from_omniauth(request.env["omniauth.auth"])
     @auth = request.env["omniauth.auth"]
 
-    if @user = User.find_by_email(@auth.info.email)
+    if ! @user = User.find_by_email(@auth.info.email)
       @user = User.find_or_initialize_by(provider: @auth.provider, email: @auth.info.email, password: Devise.friendly_token[0,20], name: @auth.info.name, image: @auth.info.image)
       @user.skip_confirmation!
       @user.save
