@@ -1,6 +1,14 @@
 class Message < ApplicationRecord
   #search
   searchkick language: "spanish"
+
+  def search_data
+    {
+      id: id,
+      user_id: user_id,
+      conversation_id: conversation_id
+     }
+  end
   #Associations
   belongs_to :user
   belongs_to :conversation
