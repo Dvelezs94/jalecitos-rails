@@ -71,7 +71,7 @@ gem 'railroady', '~> 1.5', '>= 1.5.3', group: :development
 gem 'petergate', '~> 1.9', '>= 1.9.1'
 
 #Facebook login
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '~> 5.0'
 #Notifications
 gem 'gritter', '~> 1.2'
 #Store images
