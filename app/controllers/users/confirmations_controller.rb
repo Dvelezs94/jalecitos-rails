@@ -16,6 +16,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     yield resource if block_given?
 
     if resource.errors.empty?
+     sign_in(resource)
      set_flash_message!(:notice, :confirmed)
      redirect_to root_path
     else
