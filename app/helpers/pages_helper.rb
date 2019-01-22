@@ -28,13 +28,13 @@ module PagesHelper
 
   def query_home_or_profile_helper gig
     if params[:query]
-      link_to number_to_currency(cons_mult_helper(gig.search_gigs_packages.first.price), precision: 2), user_gig_path(gig.user.slug,gig)
+      number_to_currency(cons_mult_helper(gig.search_gigs_packages.first.price), precision: 2)
     elsif params[:controller]=="pages" && gig.gigs_packages.first.present?
-      link_to number_to_currency(cons_mult_helper(gig.gigs_packages.first.price), precision: 2), user_gig_path(gig.user.slug,gig)
+      number_to_currency(cons_mult_helper(gig.gigs_packages.first.price), precision: 2)
     elsif params[:controller]=="users" && gig.packages.first.present?
-      link_to number_to_currency(cons_mult_helper(gig.packages.first.price), precision: 2), user_gig_path(gig.user.slug,gig)
+      number_to_currency(cons_mult_helper(gig.packages.first.price), precision: 2)
     else
-      link_to "Indefinido", edit_user_gig_path(gig.user.slug,gig)
+      "Indefinido"
     end
   end
 
