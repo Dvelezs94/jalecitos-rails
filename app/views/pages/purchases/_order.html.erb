@@ -22,20 +22,20 @@
   <td>
     <% if order.pending? %>
       <% if order.started_at? %>
-        <%= link_to fa_icon("undo", title: "Solicitar Reembolso", class: "fa-lg"), refund_order_path(order.id), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
-        <%= link_to fa_icon("check", title: "Comenzar Trabajo", class: "fa-lg"), start_order_path(order.id), method: :put, :data => {:confirm => 'Seguro que quieres comenzar la orden?'} %>
+        <%= link_to icon("fas","undo", title: "Solicitar Reembolso", class: "fa-lg"), refund_order_path(order.id), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
+        <%= link_to icon("fas","check", title: "Comenzar Trabajo", class: "fa-lg"), start_order_path(order.id), method: :put, :data => {:confirm => 'Seguro que quieres comenzar la orden?'} %>
       <% else %>
-        <%= link_to fa_icon("undo", title: "Solicitar Reembolso", class: "fa-lg"), refund_order_path(order.id), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
+        <%= link_to icon("fas","undo", title: "Solicitar Reembolso", class: "fa-lg"), refund_order_path(order.id), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
       <% end %>
     <% elsif order.in_progress? %>
         <% if order.completed_at? %>
-          <%= link_to fa_icon("exclamation-circle", title: "Abrir Disputa", class: "fa-lg"), new_order_dispute_path(order.uuid) %>
-          <%= link_to fa_icon("check-circle", title: "Finalizar Orden", class: "fa-lg"), complete_order_path(order.id), :method => :put, :data => {:confirm => 'Seguro que quieres finalizar la orden?'} %>
+          <%= link_to icon("fas","exclamation-circle", title: "Abrir Disputa", class: "fa-lg"), new_order_dispute_path(order.uuid) %>
+          <%= link_to icon("fas","check-circle", title: "Finalizar Orden", class: "fa-lg"), complete_order_path(order.id), :method => :put, :data => {:confirm => 'Seguro que quieres finalizar la orden?'} %>
         <% else %>
-          <%= link_to fa_icon("exclamation-circle", title: "Abrir Disputa", class: "fa-lg"), new_order_dispute_path(order.uuid) %>
+          <%= link_to icon("fas","exclamation-circle", title: "Abrir Disputa", class: "fa-lg"), new_order_dispute_path(order.uuid) %>
         <% end %>
     <% elsif order.disputed? %>
-          <%= link_to fa_icon("arrow-circle-right", title: "Ir al caso", class: "fa-lg"), order_dispute_path(order.uuid, order.dispute) %>
+          <%= link_to icon("fas","arrow-circle-right", title: "Ir al caso", class: "fa-lg"), order_dispute_path(order.uuid, order.dispute) %>
     <% end %>
       </td>
     </tr>

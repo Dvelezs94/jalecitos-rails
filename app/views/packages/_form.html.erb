@@ -38,7 +38,7 @@
                 <div class="row will-earn justify-content-center col-lg-6 col-md-6 col-sm-12 col-12">
                   <strong class="price-text">Lo que ganaré:</strong>
                   <div class="row justify-content-center">
-                                  <%= fa_icon "dollar", class: "fa-2x", id: "price-symbol" %>
+                                  <%= icon "fas","dollar", class: "fa-2x", id: "price-symbol" %>
                     <%= pa.number_field :price, options ={min: 100, step:".01", class: "price-input price-input-#{n} form_fields_#{n} form-control"} %>
                   </div>
                 </div>
@@ -56,10 +56,10 @@
       <% n += 1  %><% end %>
       <div class="row remove-add-container justify-content-center">
         <div class="remove-add pack-minus-container">
-          <%= fa_icon("minus", class: "fa-5x", id: "pack-minus", title: "Remover paquete", style: "display: none;")%>
+          <%= icon("fas","minus", class: "fa-5x", id: "pack-minus", title: "Remover paquete", style: "display: none;")%>
         </div>
         <div class="remove-add pack-plus-container">
-          <%= fa_icon("plus", class: "fa-5x", id: "pack-plus", title: "Agregar paquete", style: "display: none;") %>
+          <%= icon("fas","plus", class: "fa-5x", id: "pack-plus", title: "Agregar paquete", style: "display: none;") %>
         </div>
       </div>
       <div class="form-group submit-button submit-pack-buttons">

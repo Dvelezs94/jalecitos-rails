@@ -539,7 +539,7 @@
   }
 
   p.greensbold {
-    font-family: Avenirbold;
+    font-family: ;
     color: #202020;
     font-size: 19px;
     margin: 0;
@@ -1189,7 +1189,7 @@
   }
 
   p.greensbold {
-    font-family: Avenirbold;
+    font-family: ;
     color: #202020;
     font-size: 13px;
     margin: 0;
@@ -1234,7 +1234,7 @@
     color: #000;
     font-size: 15px;
     margin-bottom: 6px !important;
-    font-family: Avenirbold;
+    font-family: ;
   }
 
   .ultimo-singleslide {

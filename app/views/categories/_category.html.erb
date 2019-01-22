@@ -1,5 +1,4 @@
-<tr>
-  <td><%= category.name %></td>
-  <td><%= link_to content_tag("span", "", class: "fe fe-edit"), edit_category_path(category) %></td>
-  <td><%= link_to content_tag("span", "", class: "fe fe-trash"), category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-</tr>
+<div class="catagorisingle-slide">
+  <%= icon('fas', category.icon) %>
+  <p><%= category.name %></p>
+</div>

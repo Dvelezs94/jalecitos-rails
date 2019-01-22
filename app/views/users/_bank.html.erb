@@ -2,6 +2,6 @@
   <td><%= bank["clabe"].last(4) %></td>
   <td><%= bank["alias"] %></td>
   <td><%= bank["bank_name"] %></td>
-  <td><%= link_to fa_icon("dollar", class: "fa-lg", title: "Disponer Dinero"), withdrawals_path(bank_id: bank["id"]), method: :post %></td>
-  <td><%= link_to fa_icon("trash", class: "fa-lg"), user_bank_path(current_user.slug, bank["id"]), method: :delete, data: { confirm: 'Seguro quieres borrar esta cuenta?' } %></td>
+  <td><%= link_to icon("fas","dollar", class: "fa-lg", title: "Disponer Dinero"), withdrawals_path(bank_id: bank["id"]), method: :post %></td>
+  <td><%= link_to icon("fas","trash", class: "fa-lg"), user_bank_path(current_user.slug, bank["id"]), method: :delete, data: { confirm: 'Seguro quieres borrar esta cuenta?' } %></td>
 </tr>

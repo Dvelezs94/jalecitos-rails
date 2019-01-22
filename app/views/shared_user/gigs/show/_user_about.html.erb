@@ -13,7 +13,7 @@
             <h6><%= link_to @gig.user.alias, user_path(@gig.user.slug) %></h6>
           </div>
           <div class="align-right col-lg-2 col-md-2 col-sm-2 col-3">
-            <h6><%= (current_user != @gig.user)? link_to(fa_icon("paper-plane", class: "fa-lg", title: "Contáctame"), conversations_path(:user_id => @gig.user.slug)) : nil %></h6>
+            <h6><%= (current_user != @gig.user)? link_to(icon("fas","paper-plane", class: "fa-lg", title: "Contáctame"), conversations_path(:user_id => @gig.user.slug)) : nil %></h6>
           </div>
         </div>
          <!-- rating_for @gig.user, "Employee", readonly: true, half_show: true, stars: 5  -->
