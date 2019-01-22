@@ -44,8 +44,7 @@ $(document).on('turbolinks:load', function() {
           margin: 10
         }
       }
-      // nav: true,
-      // navText : ["<i class='fas fa-angle-left'></i>","<i class='fas fa-angle-right'></i>"]
+
     });
     $(".requests-carousel").owlCarousel({
       items: 6,
@@ -63,7 +62,5 @@ $(document).on('turbolinks:load', function() {
           margin: 10
         }
       }
-      // nav: true,
-      // navText : ["<i class='fas fa-angle-left'></i>","<i class='fas fa-angle-right'></i>"]
     });
 });
