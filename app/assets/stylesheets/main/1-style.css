@@ -1489,6 +1489,9 @@ button:focus {
 .gigs-carousel .owl-item img {
   border-radius: 5px;
 }
+.owl-stage {
+    padding-left: 0 !important;
+}
 /* gritter close notifications */
 .gritter-close{
   width: 100%;
