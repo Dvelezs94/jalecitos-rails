@@ -31,12 +31,16 @@
   <body id="page-top">
     <div class="main_container">
       <%= notification_helper %>
-      <%= render 'shared/main_nav_bar' %>
+      <%= render 'shared/menu/main_nav_bar' %>
       <div class="gap"></div>
       <%= yield %>
       <% if params[:review] && @reviews.present? %>
         <%= render partial: 'reviews/review', collection: [@reviews.first]%>
       <% end %>
+    </div>
+    <%= render 'shared_user/menu/phone_menu' %>
+    <div class="plusarea">
+      <a href=""><i class="fa fa-plus"></i></a>
     </div>
     <%= render 'shared/main_footer' %>
   </body>
