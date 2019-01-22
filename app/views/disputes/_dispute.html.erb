@@ -5,5 +5,5 @@
     <td><%= link_to dispute.order.uuid.first(4), user_gig_path(dispute.order.employee.slug, dispute.order.purchase.gig) %></td>
   <% end %>
   <td><%=  dispute.status.split('_').join(' ') %></td>
-  <td><%= link_to fa_icon("arrow-circle-right", title: "Ir al caso", class: "fa-lg"), order_dispute_path(dispute.order.uuid, dispute.order.dispute) %></td>
+  <td><%= link_to icon("fas","arrow-circle-right", title: "Ir al caso", class: "fa-lg"), order_dispute_path(dispute.order.uuid, dispute.order.dispute) %></td>
 </tr>

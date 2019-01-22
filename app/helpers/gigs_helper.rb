@@ -6,7 +6,7 @@ module GigsHelper
   end
 
    def status_text_helper gig
-     (gig.published?)? fa_icon("eye-slash", class: "fa-lg gig_action_icon",title: "Ocultar") : fa_icon("eye", class: "fa-lg gig_action_icon",title: "Publicar")
+     (gig.published?)? icon("fas","eye-slash", class: "fa-lg gig_action_icon",title: "Ocultar") : icon("fas","eye", class: "fa-lg gig_action_icon",title: "Publicar")
    end
 
    def checked_helper option_status

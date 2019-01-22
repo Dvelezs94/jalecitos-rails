@@ -55,9 +55,9 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'bootstrap'
+gem 'bootstrap', '~> 4.2', '>= 4.2.1'
 gem 'jquery-rails'
-gem 'font-awesome-rails'
+gem 'font-awesome-sass', '~> 5.6', '>= 5.6.1'
 #gem 'simple-line-icons-rails', github: 'hi5dev/simple-line-icons-rails', branch: 'railties-5.2'
 gem "autoprefixer-rails"
 #gem 'therubyracer'

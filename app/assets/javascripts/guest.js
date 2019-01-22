@@ -23,3 +23,5 @@
 //= require clipboard
 
 //= require twitter/typeahead
+
+//= require owl.carousel

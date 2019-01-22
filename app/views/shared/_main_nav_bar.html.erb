@@ -20,7 +20,7 @@
           </div>
           <div class="headertop-location">
             <li>
-              <i class="fa fa-map-marker middle"></i>
+              <%= icon("fas", "map-marker-alt") %></i>
               <%= f.text_field :location, id: "search_autocomplete", placeholder: "Cualquier lugar en México", value: (params[:location].nil? && current_user)? current_user.location : params[:location] %>
             </li>
           </div>

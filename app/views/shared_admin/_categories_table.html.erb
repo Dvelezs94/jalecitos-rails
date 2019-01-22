@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-          <%= render @categories %>
+          <%= render partial: "category_admin", collection: @categories %>
       </tbody>
     </table>
     <%= paginate @categories, param_name: :category_page %>
