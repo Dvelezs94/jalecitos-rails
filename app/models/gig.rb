@@ -70,4 +70,8 @@ class Gig < ApplicationRecord
       end
     end.join
   end
+
+  def title
+    "Voy a #{self.name}"
+  end
 end

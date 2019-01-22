@@ -16,7 +16,7 @@
           </div>
           <div class="form_block row">
             <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-              <%= fa_icon "sticky-note", class: "fa-2x" %>
+              <%= icon "fas","sticky-note", class: "fa-2x" %>
             </div>
             <div class="row col-lg-11 col-md-11 col-sm-11 col-11">
               <%= form.text_field :description, class: 'form-control', id: "description", type: "hidden" %>
@@ -31,7 +31,7 @@
 
           <div class="form_block row">
             <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-              <%= fa_icon "hourglass-end", class: "fa-2x" %>
+              <%= icon "fas","hourglass-end", class: "fa-2x" %>
             </div>
             <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
               <%= form.number_field :hours, class: 'form-control', min: 1, step: 1 %>
@@ -42,7 +42,7 @@
             <div class="row will-earn justify-content-center col-lg-6 col-md-6 col-sm-12 col-12">
               <strong class="price-text">Lo que ganaré:</strong>
               <div class="row justify-content-center">
-                <%= fa_icon "dollar", class: "fa-2x", id: "price-symbol" %>
+                <%= icon "fas","dollar", class: "fa-2x", id: "price-symbol" %>
                 <%= form.number_field :price, options ={min: 100, step:".01", class: "price-input price-input-0 form-control required"} %>
               </div>
             </div>

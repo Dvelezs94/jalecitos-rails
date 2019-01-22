@@ -3,5 +3,5 @@
       user_gig_gallery_path(current_user.slug, @gig.slug, image.file.filename),
       method: :delete, data: {confirm: "¿Estás seguro de borrar este elemento?"},
       remote: true%>
-      <%= fa_icon("trash", class: "del-img-icon fa-4x", onclick: "$(this).closest('div.current_img').find('img.delete-image').click();") %>
+      <%= icon("fas","trash", class: "del-img-icon fa-4x", onclick: "$(this).closest('div.current_img').find('img.delete-image').click();") %>
 </div>
