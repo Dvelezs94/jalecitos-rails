@@ -92,7 +92,7 @@ class User < ApplicationRecord
   end
   #disputes
   def disputes
-    Dispute.where(order_id: Order.where(user_id: self.id)).or(Dispute.where(order_id: Order.where(employee_id: self.id)))
+    Dispute.where(order_id: Order.where(employer_id: self.id)).or(Dispute.where(order_id: Order.where(employee_id: self.id)))
   end
   ############################################################################################
   ## PeterGate Roles                                                                        ##
