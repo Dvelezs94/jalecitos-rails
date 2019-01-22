@@ -11,11 +11,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
       sign_in(@user)
-      if @user.last_sign_in_at?
-        flash[:notice] = "Bienvenid@ de nuevo!"
-      else
-        flash[:notice] = "Tu registro con Facebook fue exitoso."
-      end
+      flash[:notice] = "Bienvenid@!"
       redirect_to root_path
       # sign_in_and_redirect @user, :event => :authentication
       # set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
