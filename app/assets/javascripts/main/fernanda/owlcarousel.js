@@ -45,4 +45,26 @@ $(document).on('turbolinks:load', function() {
       // nav: true,
       // navText : ["<i class='fas fa-angle-left'></i>","<i class='fas fa-angle-right'></i>"]
     });
+    $(".requests-carousel").owlCarousel({
+      items: 6,
+      loop: true,
+      autoplay: false,
+      responsive: {
+        0: {
+          items: 2.4,
+          margin: 10
+
+        },
+        768: {
+          items: 4.4,
+          margin: 10
+        },
+        1000: {
+          items: 3.3,
+          margin: 10
+        }
+      }
+      // nav: true,
+      // navText : ["<i class='fas fa-angle-left'></i>","<i class='fas fa-angle-right'></i>"]
+    });
 });

@@ -1,24 +1,7 @@
-<div class="col-lg-6 col-md-6 col-sm-12 col-12 single_gig">
-  <div class="get_pro_content">
-    <div class="get_pro_content_container">
-      <div class="gig_name_field">
-        <%= link_to truncate(request.title, length: 50), request_path(request)%>
-        <span class="lowest-price" style="float:right;"><%= request.status %></span>
-      </div>
-    </div>
-
-    <div class="favourites_and_price">
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-          <%=request.location%>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-6 lowest-price">
-          <span>Presupuesto:</span>
-          <strong>
-            <%= request.budget %>
-           </strong>
-        </div>
-      </div>
-    </div>
-  </div>
+<a href="<%= request_path(request) %>">
+<div class="ultimo-singleslide">
+  <p class="COAH"><%= request.location %>.</p>
+  <p class="COAH2"><%= truncate(request.title, length: 50) %></p>
+  <p class="COAH3">Presupuesto: <%= request.budget %> MXN</p>
 </div>
+</a>

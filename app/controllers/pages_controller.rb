@@ -11,8 +11,8 @@ class PagesController < ApplicationController
       @search = search(options[:model], options[:includes], options[:status])
     elsif current_user
       @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 1}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 5)
-      @recommended_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 2}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 5)
       @popular_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 5)
+      @recent_requests = Request.search("*", where: {status: "open", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 5)
     end
   end
 
