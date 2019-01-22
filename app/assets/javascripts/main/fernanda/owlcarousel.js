@@ -4,18 +4,19 @@ $(document).on('turbolinks:load', function() {
       items: 6,
       loop: true,
       autoplay: false,
+      stagePadding: 20,
       responsive: {
         0: {
-          items: 2.4,
+          items: 2,
           margin: 10,
 
         },
         768: {
-          items: 4.3,
+          items: 4,
 
         },
         1000: {
-          items: 6.3,
+          items: 6,
 
         }
       }
@@ -25,20 +26,21 @@ $(document).on('turbolinks:load', function() {
 
     $(".gigs-carousel").owlCarousel({
       items: 6,
-      loop: true,
+      loop: false,
       autoplay: false,
+      stagePadding: 20,
       responsive: {
         0: {
-          items: 2.4,
+          items: 2,
           margin: 10
 
         },
         768: {
-          items: 4.4,
+          items: 4,
           margin: 10
         },
         1000: {
-          items: 3.3,
+          items: 3,
           margin: 10
         }
       }
@@ -47,20 +49,17 @@ $(document).on('turbolinks:load', function() {
     });
     $(".requests-carousel").owlCarousel({
       items: 6,
-      loop: true,
+      loop: false,
       autoplay: false,
+      stagePadding: 20,
       responsive: {
         0: {
-          items: 2.4,
+          items: 2,
           margin: 10
 
         },
-        768: {
-          items: 4.4,
-          margin: 10
-        },
         1000: {
-          items: 3.3,
+          items: 3,
           margin: 10
         }
       }
