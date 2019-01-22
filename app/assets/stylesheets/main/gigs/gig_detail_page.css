@@ -394,3 +394,27 @@ a.continue_purchase {
 .tags-text{
   padding: 0 20px;
 }
+
+.medium-icon {
+  font-size: 24px;
+}
+
+/* hearts inside a tag */
+.block {
+  position:relative;
+}
+
+.block .overlay {
+  position:absolute;
+  left:0; top:0; bottom:0; right:0;
+}
+
+.block .inner {
+  position:relative;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.block .inner a {
+  pointer-events: all;
+}
