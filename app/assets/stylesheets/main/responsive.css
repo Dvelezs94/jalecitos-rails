@@ -435,7 +435,7 @@
     top: 10px;
   }
 
-  .phone-menu {
+  .phone-bottom-menu {
     display: block;
     padding: 30px 0;
     position: fixed;
@@ -1054,7 +1054,7 @@
     color: #fff;
   }
 
-  .phone-menu {
+  .phone-bottom-menu {
     display: block;
     padding: 30px 0;
     position: fixed;
