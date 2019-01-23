@@ -1,13 +1,7 @@
 <%= render 'categories/category_carousel' %>
 
-<%= render 'shared_user/root/gig_popular_carousel' %>
+<%= render 'shared/gigs/carousel', title: "Jales Populares", gigs: @popular_gigs %>
 
-<%= render 'shared_user/root/request_recent_carousel' %>
+<%= render 'shared/requests/carousel', title: "Pedidos Recientes", requests: @recent_requests %>
 
-<%= render 'shared_user/root/gig_verified_carousel' %>
-
-<%# render 'shared_user/root/gig_verified_list' %>
-
-<%# render 'shared_user/root/gig_recommended_list' %>
-
-<%# render 'shared_user/root/gig_featured_list' %>
+<%= render 'shared/gigs/carousel', title: "Jales Verificados", gigs: @verified_gigs %>

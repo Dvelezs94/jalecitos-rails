@@ -16,9 +16,9 @@ class GigsController < ApplicationController
   # GET /gigs/1
   def show
     define_pack_names
-    @show_packages = true
     get_reviews
     report_options
+    @related_gigs = Gig.search("*", where: { category_id: @gig.category_id }, limit: 5)
   end
 
   # GET /gigs/new

@@ -1,0 +1,16 @@
+<div class="reviews padding_row">
+
+  <h3>Reseñas</h3>
+
+  <hr>
+
+  <div class="row padding_row">
+    <% if @reviews.present? %>
+      <%= render partial: "shared_user/reviews/review", collection: @reviews %>
+    <% else %>
+    <div class="container">
+      No hay nada para mostrar
+    </div>
+    <% end %>
+  </div>
+</div>

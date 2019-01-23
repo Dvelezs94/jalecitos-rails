@@ -2,7 +2,7 @@
 <% @gig.gig_packages.each_with_index do |package, n|  %>
   <% if package.name != "" && package.description != "" && package.price != nil%>
     <li class="nav-item">
-      <a class="nav-link show <%= "active" if package.pack_type == "basic" %>" id="<%= package.pack_type %>-tab" data-toggle="tab" href="#<%= "#{package.pack_type}#{number}"%>" role="tab" aria-controls="<%= package.pack_type %>" aria-selected="<%=package.pack_type == "basic"? "true" : "false" %>"><%= @types[n] %></a>
+      <a class="nav-link show <%= "active" if package.pack_type == "basic" %>" id="<%= package.pack_type %>-tab" data-toggle="tab" href="#<%= "#{package.pack_type}#{device}"%>" role="tab" aria-selected="<%=package.pack_type == "basic"? "true" : "false" %>"><%= @types[n] %></a>
     </li>
   <% else %>
     <% break %>
