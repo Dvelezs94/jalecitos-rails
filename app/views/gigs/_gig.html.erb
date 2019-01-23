@@ -14,7 +14,7 @@
         </p>
       </div>
       <div class="page3slide-stard">
-        <%= display_stars_helper( gig.score_average ) %>
+        <%= star_display_helper( gig.score_average ) %>
         <%= (gig.score_times > 0)? "<li>(#{gig.score_times})</li>".html_safe : nil%>
       </div>
     </div>
