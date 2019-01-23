@@ -25,16 +25,14 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    # Add IVA
-    @order.total = (@order.total * 1.16).round(2) if @order.billing_profile_id
 
     #prepare charge
     request_hash = {
       "method" => "card",
       "source_id" => order_params[:card_id],
-      "amount" => @order.total,
+      "amount" => purchase_order_total(@order.total),
       "currency" => "MXN",
-      "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}",
+      "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{purchase_order_total(@order.total)}",
       "device_session_id" => params[:device_id]
     }
 
@@ -47,8 +45,8 @@ class OrdersController < ApplicationController
         ###### transfer money to hold account ######
         request_transfer_hash = {
           "customer_id" => ENV.fetch("OPENPAY_HOLD_CLIENT"),
-          "amount" => @order.total,
-          "description" => "transferencia de orden #{@order.uuid} por la cantidad de #{@order.total}",
+          "amount" => purchase_order_total(@order.total),
+          "description" => "transferencia de orden #{@order.uuid} por la cantidad de #{purchase_order_total(@order.total)}",
           "order_id" => "#{@order.uuid}-hold"
         }
         begin
@@ -120,8 +118,8 @@ class OrdersController < ApplicationController
       #Openpay call to transfer the fee to the Employee
       request_hash = {
         "customer_id" => @order.employee.openpay_id,
-        "amount" => @order.purchase.price,
-        "description" => "Pago de orden #{@order.uuid} por la cantidad de #{@order.purchase.price}",
+        "amount" => get_order_earning(@order.purchase.price),
+        "description" => "Pago de orden #{@order.uuid} por la cantidad de #{get_order_earning(@order.purchase.price)}",
         "order_id" => "#{@order.uuid}-complete"
       }
       begin
@@ -146,6 +144,8 @@ class OrdersController < ApplicationController
         end
         #Charge the fee
         charge_fee(@order, @fee)
+        #charge tax
+        charge_tax(@order, @fee)
         # Generate invoice if requested and if order changed to completed state
         OrderInvoiceGeneratorWorker.perform_async(@order.id) if @order.billing_profile_id
         flash[:success] = "La orden ha finalizado"
@@ -166,8 +166,8 @@ class OrdersController < ApplicationController
     # Move money from hold account to employer account
     request_transfer_hash_hold = {
       "customer_id" => @order.employer.openpay_id,
-      "amount" => @order.total,
-      "description" => "reembolso de orden #{@order.uuid} por la cantidad de #{@order.total}",
+      "amount" => purchase_order_total(@order.total),
+      "description" => "reembolso de orden #{@order.uuid} por la cantidad de #{purchase_order_total(@order.total)}",
       "order_id" => "#{@order.uuid}-refund"
     }
     begin
@@ -181,8 +181,8 @@ class OrdersController < ApplicationController
     end
     # Refund money to card from employer openpay account
     request_hash = {
-      "description" => "Monto de la orden #{@order.uuid} devuelto por la cantidad de #{@order.total}",
-      "amount" => @order.total
+      "description" => "Monto de la orden #{@order.uuid} devuelto por la cantidad de #{purchase_order_total(@order.total)}",
+      "amount" => purchase_order_total(@order.total)
     }
     begin
       response = @charge.refund(@order.response_order_id ,request_hash, @order.employer.openpay_id)
@@ -229,7 +229,7 @@ class OrdersController < ApplicationController
       end
         parameters[:employer_id] = current_user.id
         parameters[:purchase] = pack
-        parameters[:total] = cons_mult_helper(pack.price).round(2)
+        parameters[:total] = purchase_order_total(pack.price).round(2)
         parameters
     end
     def check_user_ownership
@@ -360,18 +360,33 @@ class OrdersController < ApplicationController
     end
 
     def charge_fee(order, fee)
-      @fee_charge = (order.total - order.purchase.price).round(2)
       request_fee_hash={"customer_id" => ENV.fetch("OPENPAY_HOLD_CLIENT"),
-                     "amount" => @fee_charge,
+                     "amount" => get_order_fee(order.purchase.price),
                      "description" => "Cobro de Comisión por la orden #{order.uuid}",
                      "order_id" => "#{order.uuid}-fee"
                     }
       begin
-        response_fee=fee.create(request_fee_hash)
-        order.response_fee_id = response["id"]
+        response_fee = fee.create(request_fee_hash)
+        order.response_fee_id = response_fee["id"]
         order.save
       rescue
         order.response_fee_id = "failed"
+        order.save
+      end
+    end
+
+    def charge_tax(order, fee)
+      request_tax_hash={"customer_id" => ENV.fetch("OPENPAY_HOLD_CLIENT"),
+                     "amount" => order_tax(order.purchase.price),
+                     "description" => "Cobro de impuesto por la orden #{order.uuid}",
+                     "order_id" => "#{order.uuid}-tax"
+                    }
+      begin
+        response_tax = fee.create(request_tax_hash)
+        order.response_tax_id = response_tax["id"]
+        order.save
+      rescue
+        order.response_tax_id = "failed"
         order.save
       end
     end
