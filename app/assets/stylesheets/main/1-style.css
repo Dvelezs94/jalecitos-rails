@@ -49,7 +49,7 @@ body {
 }
 
 a:hover {
-  text-decoration: none
+  text-decoration: none;
 }
 
 /* headertop-area start */
@@ -1117,8 +1117,9 @@ p.limpi2 {
   color: #000;
 }
 
-.mentos-title2 span img {
+.mentos-title2 h1 span i {
   padding-left: 10px;
+  color: #39C27B;
 }
 
 .mentos-title2 {
@@ -1486,8 +1487,21 @@ button:focus {
 .gigs-carousel .owl-item img {
   border-radius: 5px;
 }
+.owl-carousel .owl-item .page3slide-stard img {
+  width: auto !important;
+  height: 16px;
+}
+.page3slide-stard {
+  display: flex;
+}
+
+page3slide-stard
 .owl-stage {
     padding-left: 0 !important;
+}
+
+.owl-carousel a:hover{
+  color: #007bff;
 }
 /* gritter close notifications */
 .gritter-close{

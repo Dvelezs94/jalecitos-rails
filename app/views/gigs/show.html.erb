@@ -1,21 +1,14 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-7 details">
-      <div class="gig_header">
-        <%= render "shared_user/gigs/show/overview" %>
-        <%= render "shared_user/gigs/show/slider" %>
+<div class="catagorislide-area innerpages3-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-7">
+        <%= render 'shared/gigs/show/inner_left' %>
       </div>
-      <%= render "shared_user/gigs/show/gig_info" %>
-    </div>
-    <div class="col-lg-5">
-      <div class="packages_of_gig">
-        <div class="tab">
-          <%= render "shared_user/gigs/show/package_label" %>
-        </div>
-        <%= render @gig.gig_packages %>
+      <div class="col-lg-4 col-md-5">
+        <%= render 'shared/gigs/show/package_info' %>
+
+        <%= render 'shared/gigs/show/user_card_info' %>
       </div>
-      <%= render "shared_user/gigs/show/user_about" %>
-      <%= render "shared_user/gigs/show/reviews" %>
     </div>
   </div>
 </div>
