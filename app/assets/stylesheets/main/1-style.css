@@ -1,8 +1,22 @@
-/* Base CSS */
+/* Custom Fonts */
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@font-face {
+  font-family: "Gilroy-Extra-Bold";
+  src: url('/assets/gilroy_extra_bold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/assets/gilroy_extra_bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/assets/gilroy_extra_bold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/assets/gilroy_extra_bold.woff') format('font-woff'), /* Pretty Modern Browsers */
+       url('/assets/gilroy_extra_bold.ttf')  format('truetype') /* Safari, Android, iOS */
+}
 
+
+/* Base CSS */
 body {
   font-family: 'Nunito', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Gilroy-Extra-Bold', sans-serif;
 }
 
 .alignleft {
@@ -231,7 +245,6 @@ a.authorclick {
 .catagori-title h1 {
   color: #000;
   font-size: 34px;
-  font-weight: 700;
   margin-bottom: 44px;
 }
 
