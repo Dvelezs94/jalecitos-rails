@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_21_202428) do
+ActiveRecord::Schema.define(version: 2019_01_23_003743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 2019_01_21_202428) do
     t.string "response_refund_id"
     t.string "response_completion_id"
     t.string "response_fee_id"
+    t.string "response_tax_id"
     t.index ["billing_profile_id"], name: "index_orders_on_billing_profile_id"
     t.index ["employer_id", "employee_id"], name: "index_orders_on_employer_id_and_employee_id"
     t.index ["withdrawal_id"], name: "index_orders_on_withdrawal_id"
