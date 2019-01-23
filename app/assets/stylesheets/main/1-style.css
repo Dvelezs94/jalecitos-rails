@@ -1324,6 +1324,7 @@ p.cold3 {
 
 .page3slides-contentrd {
   margin-top: 10px;
+  min-height: 94px;
 }
 
 .catagorislide-area.innerpages3-area {
@@ -1399,7 +1400,7 @@ p.cold3 {
 .hearted1 {
   position: absolute;
   right: 15px;
-  bottom: 10px;
+  bottom: 140px;
 }
 
 .singleslidepd {
