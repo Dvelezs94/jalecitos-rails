@@ -19,7 +19,7 @@
       Notificaciones
     </a>
 
-    <a href="" class="authorclick">
+    <a href="<%= user_path(current_user) %>" class="authorclick">
       <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "nav-avatar") %>
     </a>
   </div>

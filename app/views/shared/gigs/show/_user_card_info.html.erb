@@ -1,0 +1,26 @@
+<div class="mentos-areapag3">
+  <div class="mentos-authors">
+    <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "nav-avatar", style: "width: 100px;") %>
+    <div class="mentos-title2">
+      <h1><%= @gig.user.alias %>
+        <%= (@gig.user.verified)? "<span> #{icon("fas", "check-square", title: "Verificado")} </span>".html_safe: nil %>
+      </h1>
+      <p class="hace2"><%= (@gig.user.location.present?)? @gig.user.location : "Ciudad indefinida" %></p>
+      <div class="mentosstar-list">
+        <%= display_stars_helper(@gig.user.score.employee_score_average) %>
+        <p class="hace1">Activo(a) hace <%= distance_of_time_in_words_to_now(@gig.user.current_sign_in_at) %></p>
+      </div>
+    </div>
+
+    <div class="page3-comment">
+      <%=link_to( icon("fas", "comment", title: "Contactar"), conversations_path( user_id: @gig.user.slug) )%>
+    </div>
+  </div>
+  <div class="mentosdates">
+    <p class="datesin">Miembro desde <%= distance_of_time_in_words_to_now(@gig.user.created_at) %></p>
+    <p class="edadd1">Edad: <%= (@gig.user.age.present?)? @gig.user.age : "Indefinido" %></p>
+    <div class="mentoslong-content">
+      <p class="elit55"><%= (@gig.user.bio.present?)? @gig.user.bio : "Sin descripción." %></p>
+    </div>
+  </div>
+</div>
