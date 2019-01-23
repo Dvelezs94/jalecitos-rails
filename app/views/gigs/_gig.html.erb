@@ -1,21 +1,25 @@
-<a href="<%= user_gig_path(gig.user.slug, gig) %>">
-  <div class="page3single-slidersd">
-    <div class="singleslidepd">
-      <%= image_tag( image_display_helper(gig.images[0]) ) %>
-      <div class="hearted1"  id="likes-<%= gig.slug %>">
-        <%= render "gigs/likes", gig: gig %>
+<div class="">
+  <a href="<%= user_gig_path(gig.user.slug, gig) %>">
+    <div class="page3single-slidersd">
+      <div class="singleslidepd">
+        <%= image_tag( image_display_helper(gig.images[0]) ) %>
+      </div>
+      <div class="page3slides-contentrd">
+        <p class="cold1"><%= gig.location %>.</p>
+        <p class="cold2"><%= truncate(gig.title, length: 50) %>
+        </p>
+        <p class="cold3">Desde
+          <%= query_home_or_profile_helper(gig) %>
+          MXN
+        </p>
+      </div>
+      <div class="page3slide-stard">
+        <%= display_stars_helper( gig.score_average ) %>
+        <%= (gig.score_times > 0)? "<li>(#{gig.score_times})</li>".html_safe : nil%>
       </div>
     </div>
-    <div class="page3slides-contentrd">
-      <p class="cold1"><%= gig.location %>.</p>
-      <p class="cold2"><%= truncate(gig.title, length: 50) %>
-      </p>
-      <p class="cold3">Desde <%= query_home_or_profile_helper(gig) %> MXN
-      </p>
-    </div>
-    <div class="page3slide-stard">
-      <%= display_stars_helper( gig.score_average ) %>
-      <%= (gig.score_times > 0)? "<li>(#{gig.score_times})</li>".html_safe : nil%>
-    </div>
+  </a>
+  <div class="hearted1" id="likes-<%= gig.slug %>">
+    <%= render "gigs/likes", gig: gig %>
   </div>
-</a>
+</div>
