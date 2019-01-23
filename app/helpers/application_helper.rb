@@ -97,8 +97,27 @@ module ApplicationHelper
   end
 
   def cons_mult_helper number
-    number = number * 1.1
+    number = number * 1
     number
+  end
+
+  # Earning for the worker
+  def get_order_earning price
+    (price * 0.90).round(2)
+  end
+
+  def get_order_fee price
+    (price * 0.10).round(2)
+  end
+
+  def order_tax price
+    (price * 0.16).round(2)
+  end
+
+  # Get toal price of order, with taxes included
+  def purchase_order_total price
+    iva = order_tax(price)
+    (price + iva).round(2)
   end
 
   def cons_mult_helper_times (credits_list, percent)
