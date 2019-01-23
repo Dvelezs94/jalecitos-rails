@@ -1,12 +1,13 @@
 class OrderInvoiceGeneratorWorker
   include Sidekiq::Worker
+  include ApplicationHelper
   require 'net/http'
 
   def perform(order_id)
     order = Order.find(order_id)
     zip_code = 25204
     iva = 0.16
-    subtotal = ((order.total/116) * 100).round(2)
+    subtotal = order.purchase.price.round(2)
     total = order.total
     recipient = {"nombre": "#{order.billing_profile.name}",
                 "rfc": "#{order.billing_profile.rfc}",
@@ -27,7 +28,7 @@ class OrderInvoiceGeneratorWorker
                        "base": subtotal,
                        "tipo_factor": "Tasa",
                        "tasa": iva,
-                       "importe": (subtotal * iva).round(2)
+                       "importe": order_tax(subtotal)
                    }
                ]
               }]
@@ -37,7 +38,7 @@ class OrderInvoiceGeneratorWorker
                               "tipo_factor": "Tasa"
                             }]
       invoice = {"invoice_id": "#{order.uuid}",
-                 "total": order.total,
+                 "total": total,
                  "subtotal": subtotal,
                  "forma_pago": "04",
                  "hide_total_items": true,
