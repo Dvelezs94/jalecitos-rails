@@ -2,13 +2,19 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-7">
-        <%= render 'shared/gigs/show/inner_left' %>
+        <div class="innerpage-leftside">
+        <%= render 'shared/gigs/show/gig_info' %>
+        <%= render 'shared/gigs/show/package_info', device: "phone-tablet" %>
+        <%= render 'shared/gigs/show/reviews' %>
+        <%= (@related_gigs.present?)? render('shared/gigs/carousel', title: "Jales Relacionados", gigs: @related_gigs) : nil %>
+        </div>
       </div>
       <div class="col-lg-4 col-md-5">
-        <%= render 'shared/gigs/show/package_info' %>
-
+        <!-- only in computer -->
+        <%= render 'shared/gigs/show/package_info', device: "computer" %>
         <%= render 'shared/gigs/show/user_card_info' %>
       </div>
     </div>
   </div>
-</div><%= render 'reports/gig', collection: @gig %>
+</div>
+<%= render 'reports/gig', collection: @gig %>

@@ -161,7 +161,8 @@ module ApplicationHelper
     end
   end
 
-  def display_stars_helper number
+  def star_display_helper number
+    decimal = number % 1
     if number == 0
       "Sin calificaciones"
     else
@@ -171,11 +172,13 @@ module ApplicationHelper
         html << image_tag("star-on", title: number)
       end
       #if has decimal...
-      ( (number % 1).between?( 0, 0.29999 ) )? image_tag("star-off", title: number) : nil
+      if decimal > 0
+        ( decimal < 0.25 ) ? html << image_tag("star-off", title: number) : nil
 
-      ( (number % 1).between?( 0.3, 0.7999 ) )? image_tag("star-half", title: number) : nil
+        ( decimal.between?( 0.25, 0.75 ) )? html << image_tag("star-half", title: number) : nil
 
-      ( (number % 1).between?( 0.8, 1 ) )? html << image_tag("star-on", title: number) : nil
+        ( decimal > 0.75 )? html << image_tag("star-on", title: number) : nil
+      end
       #stars that doesnt have
       ( (5-number).to_i ).times do
         html << image_tag("star-off", title: number)

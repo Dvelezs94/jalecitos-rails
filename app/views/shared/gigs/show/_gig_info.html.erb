@@ -1,14 +1,124 @@
-<div class="seller_info">
-  <h3>Acerca del Jale</h3>
-  <div class="seller_info_para">
-    <%= @gig.description.html_safe %>
+<div class="innerpage-leftsidejata">
+  <div class="verificos-title">
+    <h3><%= @gig.title %></h3>
   </div>
 
-  <div class="tags-text">
-    <% @gig.tags.each do |tag| %>
-      <small id="tag-text">"<%= tag.name %>"</small>
+  <div class="gig-images-container">
+    <div class="owl-carousel gig-show-carousel">
+      <% if @gig.images.count > 0 %>
+        <% @gig.images.each do |image| %>
+          <div class=''>
+            <%= image_tag( image.url, class: 'img-responsive') %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="">
+          <%= image_tag( "https://picsum.photos/600/400?image=#{Faker::Number.between(1, 500)}", class: 'img-responsive')%>
+        </div>
+        <div class="">
+          <%= image_tag( "https://picsum.photos/600/400?image=#{Faker::Number.between(1, 500)}", class: 'img-responsive')%>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="pacificobg-socialicon">
+      <% if current_user != @gig.user %>
+        <div class="hearted1" id="likes-<%= @gig.slug %>">
+          <%= render "gigs/likes", gig: @gig %>
+        </div>
+        <%= link_to icon("fas", "share"), {}, id: "share" %>
+        <% if user_signed_in? %>
+          <%= icon("fas", "flag", class: "fa-lg gig_action_icon cursor_pointer", title: "Reportar", id: "reportgigbtn") %>
+        <% end %>
+      <% else %>
+        <%= render "shared/gigs/show/gig_actions" %>
+      <% end %>
+    </div>
+    <% if @gig.user.verified %>
+      <div class="varificado-btn3">
+        <a href="">VERIFICADO</a>
+      </div>
     <% end %>
 
+    <div class="arroweee">
+      <a href="">
+        <%= link_to icon("fas", "arrow-left"), 'javascript:history.go(-1);' %>
+      </a>
+    </div>
   </div>
 
+  <div class="perfil-area">
+    <div class="profileview1">
+      <div class="profileview-total">
+        <img src="assets/img/jaman.png" alt="">
+        <span><%= @gig.user.alias %></span>
+        <%= (@gig.user.verified)? "#{icon("fas", "check-square", title: "Verificado")}".html_safe: nil %>
+        <%= link_to "Ver perfil", user_path(@gig.user.slug) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="sedcontent-wrap">
+    <div class="sed-content">
+      <h3><%= @gig.title %></h3>
+      <p><%= @gig.description.html_safe %></p>
+    </div>
+
+    <div class="loadingggaro">
+
+      <ul id="myList">
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur sit.</li>
+      </ul>
+      <div id="loadMore">Ver más
+        <i class="fa fa-angle-down"></i>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- for768 -->
+
+  <div class="califico-about nulla">
+    <p>Descripción. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+    <div class="vewmorebtns11">
+      <a href="">Ver más
+        <i class="fa fa-angle-down"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- for992 -->
+
+<div class="califico-about">
+  <p><%= @gig.description.html_safe %></p>
 </div>
