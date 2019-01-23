@@ -1,0 +1,7 @@
+<% @gig.gig_packages.each_with_index do |package, n|  %>
+  <% if package.name != "" && package.description != "" && package.price != nil%>
+    <button class="tablinks link-<%= n %>" onclick="openCity(event, '<%= package.pack_type %>')"><%= @types[n] %></button>
+  <% else %>
+    <% break %>
+  <% end %>
+<% end  %>

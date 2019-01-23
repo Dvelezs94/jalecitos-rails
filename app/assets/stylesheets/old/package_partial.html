@@ -1,0 +1,25 @@
+<% if @show_packages == true  && package.name != "" && package.description != "" && package.price != nil%>
+  <div class="tabcontent" id="<%= package.pack_type %>" style="display: none;" >
+    <div class="row ">
+      <div class="col-lg-8">
+        <strong><%= package.name %></strong>
+      </div>
+      <div class="col-lg-4">
+        <strong><%=number_to_currency(cons_mult_helper(package.price), precision: 2) %>
+          MXN</strong>
+      </div>
+    </div>
+    <div class="row padding_row package-content">
+      <p><%= package.description.html_safe %></p>
+
+    </div>
+    <div class="row padding_row">
+
+      <div class="col-lg-12 text-center">
+        <%= link_to ("Continuar (#{number_to_currency(cons_mult_helper(package.price), precision: 2)} MXN)" ), hire_user_gig_package_path(@gig.user, @gig, package), class: "continue_purchase" %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <% @show_packages = false %>
+<% end  %>

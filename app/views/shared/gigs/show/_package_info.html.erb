@@ -1,69 +1,7 @@
 <div class="innerpage3-rightsidetabs">
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-<li class="nav-item">
-<a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Básico</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"> Éstandar</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Premium</a>
-</li>
-</ul>
+<%= render 'shared/gigs/show/package_label', number: 2 %>
 
 <div class="tab-content" id="myTabContent">
-<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-<div class="earnlist-mewrapt">
-  <div class="earnlist-me">
-    <p class="limpi1">Mantenimiento + Limpieza</p>
-    <p class="limpi2">$270.00 <sub>MXN</sub></p>
-    <p class="limpi3">Descripción. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
-  </div>
-  <div class="check-listpage3">
-    <p><i class="fa fa-check"></i>Type something</p>
-    <p><i class="fa fa-check"></i>Type something</p>
-    <p><i class="fa fa-check"></i>Type something</p>
-  </div>
-  <div class="page3-btn">
-    <a href="">Contratar</a>
-  </div>
-</div>
-</div>
-<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-<div class="earnlist-mewrapt">
-  <div class="earnlist-me">
-    <p class="limpi1">Mantenimiento + Limpieza</p>
-    <p class="limpi2">$270.00 <sub>MXN</sub></p>
-    <p class="limpi3">Descripción. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
-  </div>
-  <div class="check-listpage3">
-    <p><i class="fa fa-check"></i>Type something</p>
-    <p><i class="fa fa-check"></i>Type something</p>
-    <p><i class="fa fa-check"></i>Type something</p>
-  </div>
-  <div class="page3-btn">
-    <a href="">Contratar</a>
-  </div>
-</div>
-
-</div>
-<div class="tab-pane fade active show" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-<div class="earnlist-mewrapt">
-  <div class="earnlist-me">
-    <p class="limpi1">Mantenimiento + Limpieza</p>
-    <p class="limpi2">$270.00 <sub>MXN</sub></p>
-    <p class="limpi3">Descripción. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
-  </div>
-  <div class="check-listpage3">
-    <p><i class="fa fa-check"></i>Type something</p>
-    <p><i class="fa fa-check"></i>Type something</p>
-    <p><i class="fa fa-check"></i>Type something</p>
-  </div>
-  <div class="page3-btn">
-    <a href="">Contratar</a>
-  </div>
-</div>
-
-</div>
+<%= render @gig.gig_packages, number: 2 %>
 </div>
 </div>
