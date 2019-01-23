@@ -4,7 +4,7 @@ $(document).on('turbolinks:load', function() {
       items: 6,
       loop: true,
       autoplay: false,
-      stagePadding: 20,
+      stagePadding: 30,
       responsive: {
         0: {
           items: 2,
@@ -62,5 +62,10 @@ $(document).on('turbolinks:load', function() {
           margin: 10
         }
       }
+    });
+    $(".gig-show-carousel").owlCarousel({
+      items: 1,
+      loop: true,
+      autoplay: true
     });
 });

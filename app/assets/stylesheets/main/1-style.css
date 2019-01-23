@@ -969,14 +969,6 @@ p {}
 
 /*innerpage2*/
 /*innerpage3*/
-.pacificost-bg {
-  background: url(../img/pllo.jpg);
-  height: 480px;
-  background-position: center;
-  background-size: cover;
-  margin-top: 30px;
-  position: relative;
-}
 
 .pacificobg-socialicon i {
   color: #fff;
@@ -988,6 +980,7 @@ p {}
   position: absolute;
   right: 20px;
   top: 20px;
+  z-index: 1;
 }
 
 .singleslidep {}
@@ -1054,11 +1047,13 @@ p.limpi1 {
 .varificado-btn3 {
   position: absolute;
   right: 20px;
-  bottom: 20px;
+  top: 84%;
+  z-index: 1;
 }
 
 .arroweee {
   display: none;
+  z-index: 1;
 }
 
 .check-listpage3 i {
@@ -1119,6 +1114,10 @@ p.limpi2 {
 
 .mentos-title2 h1 span i {
   padding-left: 10px;
+  color: #39C27B;
+}
+
+.profileview-total i{
   color: #39C27B;
 }
 
@@ -1496,13 +1495,15 @@ button:focus {
   display: flex;
 }
 
-page3slide-stard
 .owl-stage {
     padding-left: 0 !important;
 }
 
 .owl-carousel a:hover{
   color: #007bff;
+}
+.gig-images-container{
+  position: relative;
 }
 /* gritter close notifications */
 .gritter-close{
