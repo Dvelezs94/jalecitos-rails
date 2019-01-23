@@ -989,6 +989,7 @@ p {}
   color: #fff;
   font-size: 18px;
   margin: 4px;
+  line-height: 0.75em;
 }
 
 .pacificobg-socialicon {
@@ -996,6 +997,7 @@ p {}
   right: 20px;
   top: 20px;
   z-index: 1;
+  display: flex;
 }
 
 .singleslidep {}
@@ -1411,7 +1413,7 @@ p.cold3 {
   font-weight: 700;
 }
 
-.hearted1 {
+.gigs-carousel .hearted1 {
   position: absolute;
   right: 15px;
   bottom: 140px;
@@ -1528,4 +1530,18 @@ button:focus {
 
 .cursor_pointer{
   cursor: pointer;
+}
+/*rating and reviews*/
+.icon-review {
+  width: 72px;
+  border-radius: 50%;
+}
+.rating-score {
+  color: #ffc107;
+  vertical-align: middle;
+}
+.single-star {
+  margin-left: 12px;
+  position: relative;
+  bottom: 1px;
 }

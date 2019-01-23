@@ -1,7 +1,8 @@
-<div class="innerpage3-rightsidetabs">
-<%= render 'shared/gigs/show/package_label', number: 2 %>
+<div class="innerpage3-rightsidetabs <%= "tab-two" if device == "phone-tablet" %>">
+<%= render 'shared/gigs/show/package_label', device: device %>
 
 <div class="tab-content" id="myTabContent">
-<%= render @gig.gig_packages, number: 2 %>
+<% @show_packages = true %>
+<%= render @gig.gig_packages, device: device %>
 </div>
 </div>

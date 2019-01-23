@@ -1,10 +1,18 @@
-<div class="reviews padding_row">
+<div class="servico-wrap">
+  <div class="servico-title">
+    <h3>Caliﬁcaciones
+      <%= star_display_helper(5) %>
+    </h3>
+    <div class="doopli">
+      <button>
+        <a class="digit2" href="#">
+          <i class="fa fa-angle-down"></i>
+        </a>
+      </button>
 
-  <h3>Reseñas</h3>
-
-  <hr>
-
-  <div class="row padding_row">
+    </div>
+  </div>
+  <div class="servicoteam-wrap">
     <% if @reviews.present? %>
       <%= render partial: "shared_user/reviews/review", collection: @reviews %>
     <% else %>
@@ -13,4 +21,11 @@
     </div>
     <% end %>
   </div>
+
+  <div class="page3-viewmore">
+    <a href="#">Ver más
+      <i class="fa fa-angle-down"></i>
+    </a>
+  </div>
+
 </div>
