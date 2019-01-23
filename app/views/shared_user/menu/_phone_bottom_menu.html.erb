@@ -4,11 +4,11 @@
       <div class="col-lg-12">
         <div class="headertop-right">
           <div class="bellposition bellpositionblock">
-            <a href="">
-              <%= icon("fas", "envelope") %><br>
+            <a href="<%= root_path %>">
+              <%= icon("fas", "home") %><br>
               inicio
             </a>
-            <a href="">
+            <a href="<%= finance_path %>">
               <%= icon("fas", "exchange-alt") %><br>
               Transacciones
             </a>
@@ -20,7 +20,7 @@
               <%= icon("fas", "bell") %><br>
               Mensajes
             </a>
-            <a href="" class="redbell1">
+            <a href="<%= user_path(current_user.slug) %>">
               <%= icon("fas", "user") %><br>
               Perfil
             </a>

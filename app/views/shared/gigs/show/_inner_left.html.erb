@@ -9,23 +9,28 @@
         <% if @gig.images.count > 0 %>
           <% @gig.images.each do |image| %>
             <div class=''>
-              <%= link_to( image_tag( image.url, class: 'img-responsive'), user_gig_path(@gig.user.slug,@gig) ) %>
+              <%= image_tag( image.url, class: 'img-responsive') %>
             </div>
           <% end %>
         <% else %>
           <div class="">
-            <%= link_to( image_tag( "https://picsum.photos/600/400?image=#{Faker::Number.between(1, 500)}", class: 'img-responsive'), user_gig_path(@gig.user.slug,@gig) ) %>
+            <%= image_tag( "https://picsum.photos/600/400?image=#{Faker::Number.between(1, 500)}", class: 'img-responsive')%>
           </div>
           <div class="">
-            <%= link_to( image_tag( "https://picsum.photos/600/400?image=#{Faker::Number.between(1, 500)}", class: 'img-responsive'), user_gig_path(@gig.user.slug,@gig) ) %>
+            <%= image_tag( "https://picsum.photos/600/400?image=#{Faker::Number.between(1, 500)}", class: 'img-responsive')%>
           </div>
         <% end %>
       </div>
 
       <div class="pacificobg-socialicon">
-        <%= icon("fas", "heart") %>
-        <%= icon("fas", "share") %>
-        <%= icon("fas", "flag") %>
+        <% if current_user != @gig.user %>
+          <%= link_to icon("fas", "share"), {}, id: "share" %>
+        <% if user_signed_in? %>
+          <%= icon("fas", "flag", class: "fa-lg gig_action_icon cursor_pointer", title: "Reportar", id: "reportgigbtn") %>
+        <% end %>
+      <% else %>
+        <%= render "shared/gigs/show/gig_actions"   %>
+      <% end %>
       </div>
       <% if @gig.user.verified %>
         <div class="varificado-btn3">
@@ -35,7 +40,7 @@
 
       <div class="arroweee">
         <a href="">
-          <i class="fa fa-arrow-left"></i>
+          <%= link_to icon("fas", "arrow-left"), :back %>
         </a>
       </div>
     </div>
