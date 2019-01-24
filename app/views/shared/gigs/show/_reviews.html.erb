@@ -1,15 +1,10 @@
 <div class="servico-wrap">
-  <div class="servico-title">
+  <div class="servico-title" onclick="display_reviews()">
     <h3>Caliﬁcaciones
-      <%= star_display_helper(5) %>
+      <%= star_display_helper(@gig.score_average) %>
     </h3>
     <div class="doopli">
-      <button>
-        <a class="digit2" href="#">
-          <i class="fa fa-angle-down"></i>
-        </a>
-      </button>
-
+        <%= icon("fas", "angle-down", class: "reviews_dropdown") %>
     </div>
   </div>
   <div class="servicoteam-wrap">
@@ -20,12 +15,12 @@
       No hay nada para mostrar
     </div>
     <% end %>
+    <div class="page3-viewmore">
+      <a href="#">Ver más
+        <i class="fa fa-angle-down"></i>
+      </a>
+    </div>
   </div>
 
-  <div class="page3-viewmore">
-    <a href="#">Ver más
-      <i class="fa fa-angle-down"></i>
-    </a>
-  </div>
 
 </div>

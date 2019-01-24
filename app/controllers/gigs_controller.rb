@@ -18,7 +18,7 @@ class GigsController < ApplicationController
     define_pack_names
     get_reviews
     report_options
-    @related_gigs = Gig.search("*", where: { category_id: @gig.category_id }, limit: 5)
+    @related_gigs = Gig.search("*", where: { category_id: @gig.category_id, status: "published" }, limit: 5)
   end
 
   # GET /gigs/new
