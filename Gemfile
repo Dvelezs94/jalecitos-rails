@@ -131,3 +131,5 @@ gem 'sidekiq', '~> 5.2', '>= 5.2.5'
 gem 'owlcarousel-rails', '~> 2.2', '>= 2.2.3.5'
 # Track button clicks
 gem 'google-tag-manager-rails', '~> 0.1.3'
+# Google analytics
+gem 'google-analytics-rails', '~> 1.1', '>= 1.1.1'
