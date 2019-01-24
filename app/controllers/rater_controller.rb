@@ -20,18 +20,18 @@ class RaterController < ApplicationController
     #if a review is being rated
     @review = Review.find(params[:id])
     #verify the owner
-    (@review.giver == current_user)? nil : head(:no_content)
+    head(:no_content) if @review.giver != current_user
   end
 
   def validate_klass
     #permitted classes for rating
     permitted = ["Review"]
     #if is not included, end execution
-    ( permitted.include?( params[:klass] ) )? nil : head(:no_content)
+    head(:no_content) if (! permitted.include?( params[:klass] ) )
   end
 
   def validate_score
     #check score between 1 and 5 stars
-    ( params[:score].to_f.between?(1,5) )? nil : head(:no_content)
+    head(:no_content) if (! params[:score].to_f.between?(1,5) )
   end
 end

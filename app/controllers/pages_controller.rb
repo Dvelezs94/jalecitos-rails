@@ -62,7 +62,7 @@ class PagesController < ApplicationController
   end
 
   def admin_redirect
-    (current_user && current_user.has_role?(:admin)) ? redirect_to(dashboard_admins_path) : nil
+    redirect_to(dashboard_admins_path) if (current_user && current_user.has_role?(:admin))
   end
 
 
@@ -73,7 +73,7 @@ class PagesController < ApplicationController
       #find it and keep it in an array
       @reviews = [ Review.find( params[:identifier] ) ]
       #verify its own and pending
-      @reviews = (@reviews.present? )? @reviews.select{ |r| r.pending? && r.giver_id == current_user.id  } : nil
+      @reviews = @reviews.select{ |r| r.pending? && r.giver_id == current_user.id  } if @reviews.present?
     #if employee clicked a notification of finished work
     elsif params[:notification]  && is_number?(params[:notification])
       #get the notification
@@ -83,13 +83,13 @@ class PagesController < ApplicationController
       #get the reviews of the user with object attributes (if a work has done 2 times, they can be more than 1 review)
       @reviews = Review.search('*', where: { giver_id: current_user.id, reviewable_id: object.id, reviewable_type: object.class.to_s, status: "pending" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
       #obtain the one that we are looking and check if its still pending
-      @reviews = (@reviews.present? )? @reviews.select{ |r| r.pending? } : nil
+      @reviews = @reviews.select{ |r| r.pending? } if @reviews.present?
     #or if its not specific
     else
       #get the recent pending reviews (searchkick just index pending reviews)
       @reviews = Review.search("*", where: { giver_id: current_user.id, status: "pending" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
       #verify the reviews that are pending (searchkick takes some time to update its records)
-      @reviews = (@reviews.present? )? @reviews.select{ |r| r.pending? } : nil
+      @reviews = @reviews.select{ |r| r.pending? } if @reviews.present? 
     end
   end
 

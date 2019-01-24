@@ -9,9 +9,9 @@ class ReviewsController < ApplicationController
     #get the params
     fields = review_params
     #if comment is empty, save as nil for saving space
-    (fields[:comment] == "")? fields[:comment] = nil : nil
+    fields[:comment] = nil if fields[:comment] == ""
     #remove comment if its not valid
-    (allow_comment)? nil : fields[:comment] = nil
+    fields[:comment] = nil if (! allow_comment)
     @review.update(fields)
     head :no_content
   end
@@ -22,11 +22,11 @@ class ReviewsController < ApplicationController
   end
 
   def check_review_ownership
-    (current_user == @review.giver) ? nil : head(:no_content)
+    head(:no_content) if (current_user != @review.giver)
   end
 
   def review_once
-    (@review.pending?)? nil : head(:no_content)
+    head(:no_content) if (! @review.pending?)
   end
 
   def allow_comment

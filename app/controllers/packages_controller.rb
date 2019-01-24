@@ -76,21 +76,21 @@ end
   end
 
   def create_redirect
-    (@gig.gig_packages.any?) ? redirect_to( edit_user_gig_packages_path(params[:user_id],@gig) ) : nil
+    redirect_to( edit_user_gig_packages_path(params[:user_id],@gig) ) if (@gig.gig_packages.any?)
   end
 
   def update_redirect
-    (@gig.gig_packages.none?) ? redirect_to( new_user_gig_package_path(params[:user_id], @gig) ) : nil
+    redirect_to( new_user_gig_package_path(params[:user_id], @gig) ) if (@gig.gig_packages.none?)
   end
 
 
   def check_gig_ownership
     @gig = Gig.friendly.find(params[:gig_id])
-    (current_user.nil? || current_user.id != @gig.user_id) ? redirect_to(root_path) : nil
+    redirect_to(root_path) if (current_user.nil? || current_user.id != @gig.user_id)
   end
 
   def check_no_ownership
-    (current_user == @package.gig.user )? redirect_to( user_gig_path(current_user, @package.gig), notice: "No puedes contratarte a ti mismo." ) : nil
+    redirect_to( user_gig_path(current_user, @package.gig), notice: "No puedes contratarte a ti mismo." ) if (current_user == @package.gig.user )
   end
 
   def validate_create

@@ -355,7 +355,7 @@ class OrdersController < ApplicationController
     # Make sure the billing profile is legit
     def check_billing_profile
       if order_params[:billing_profile_id] != nil
-        (current_user.billing_profiles.find_by_status("enabled").id != order_params[:billing_profile_id].to_i) ? cancel_execution : nil
+        cancel_execution if (current_user.billing_profiles.find_by_status("enabled").id != order_params[:billing_profile_id].to_i)
       end
     end
 

@@ -21,7 +21,7 @@ module SearchFunctions
   def filter_query
     query = params[:query]
     #if query doesnt have nothing search for all
-    ( query == "" )?  query = "*" : nil
+    query = "*" if ( query == "" )
     #if query has "Voy a" at the beginning, cut it
     query = ( query.start_with?("voy a", "Voy a") )? query.sub(/^Voy a /, '').sub(/^voy a /, '') : query
     #same with requests...

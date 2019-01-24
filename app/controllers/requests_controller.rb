@@ -96,7 +96,7 @@ class RequestsController < ApplicationController
     end
 
     def check_request_ban
-     (@request.banned?) ? flash[:error]='Este Pedido está baneado' : nil
+     flash[:error]='Este Pedido está baneado' if @request.banned?
     end
 
     def report_options

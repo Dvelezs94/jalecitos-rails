@@ -5,7 +5,7 @@ module OpenpayFunctions
   def destroy
     @user_gigs = Gig.where(user_id: self.id)
     @user_gigs.each do |gig|
-      (gig.published?)? gig.draft! : nil
+      gig.draft! if gig.published?
     end
     @user_requests = Request.where(user_id: self.id)
     @user_requests.each do |request|
