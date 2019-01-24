@@ -23,12 +23,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Jalecitos</title>
+    <%= analytics_init if GoogleAnalytics.valid_tracker? %>
 
   </head>
   <div class="transparentoverlay"></div>
 
 
   <body id="page-top">
+    <%= google_tag_manager %>
     <div class="main_container">
       <%= notification_helper %>
       <%= render 'shared/menu/main_nav_bar' %>
