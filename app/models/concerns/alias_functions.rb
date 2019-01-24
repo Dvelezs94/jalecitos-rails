@@ -10,7 +10,7 @@ module AliasFunctions
 
   def set_location
     begin
-      location = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{request.location.latitude},#{request.location.longitude}"
+      location = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{request.safe_location.latitude},#{request.safe_location.longitude}"
       self.location = [location.city, location.state, location.country].join(", ") if location.present?
     rescue
       true
