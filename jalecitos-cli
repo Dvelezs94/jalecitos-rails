@@ -58,6 +58,9 @@ function seed() {
 function reindex() {
   bash $0 run rails reindex
 }
+function expose() {
+  ngrok http 80
+}
 
 case $1 in
   build)
@@ -98,6 +101,9 @@ case $1 in
   reindex)
     reindex
   ;;
+  expose)
+    expose
+  ;;
   *)
     echo "
     Usage:
@@ -110,6 +116,7 @@ case $1 in
     $0 fix-perms           Experimental - fix code permission issues
     $0 db_diag             Export DB diagram
     $0 seed                Seed DB
-    $0 reindex             reindex DB"
+    $0 reindex             reindex DB
+    $0 expose              expose with ngrok on port 80"
   ;;
 esac
