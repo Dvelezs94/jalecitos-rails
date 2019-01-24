@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :request
+  attr_accessor :lat, :lon
   #includes
   #friendly_id
   extend FriendlyId
@@ -34,6 +34,7 @@ class User < ApplicationRecord
   end
   #enum
   enum status: { active: 0, disabled: 1, banned: 2}
+  before_create :set_location
   # Create default values
   after_create :set_defaults
 
@@ -135,7 +136,6 @@ class User < ApplicationRecord
    def set_defaults
        self.roles = [:user, :employer, :employee]
        set_alias
-       set_location if ENV.fetch("RAILS_ENV") != "development"
    end
 
    def create_user_score
