@@ -9,8 +9,8 @@ function getLocation() {
 function showPosition(position) {
   if ($("#sign_up_lat").length > 0) {
     console.log(position.coords.latitude, position.coords.longitude);
-    $("#sign_up_lat").html(position.coords.latitude);
-    $("#sign_up_lon").html(position.coords.longitude)
+    $("#sign_up_lat").val(position.coords.latitude);
+    $("#sign_up_lon").val(position.coords.longitude);
   }
 }
 
