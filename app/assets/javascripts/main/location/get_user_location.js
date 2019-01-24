@@ -1,5 +1,3 @@
-var x = document.getElementById("coordinates");
-
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -9,7 +7,11 @@ function getLocation() {
 }
 
 function showPosition(position) {
-  console.log(position.coords.latitude, position.coords.longitude);
+  if ($("#sign_up_lat").length > 0) {
+    console.log(position.coords.latitude, position.coords.longitude);
+    $("#sign_up_lat").html(position.coords.latitude);
+    $("#sign_up_lon").html(position.coords.longitude)
+  }
 }
 
 function showError(error) {

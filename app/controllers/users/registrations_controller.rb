@@ -11,7 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    build_resource(sign_up_params.merge(request: request))
+    build_resource(sign_up_params.merge(lat: params[:sign_up_lat], lon: params[:sign_up_lon]))
     resource.save
     yield resource if block_given?
     if resource.persisted?
