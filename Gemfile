@@ -129,3 +129,5 @@ gem 'clipboard-rails', '~> 1.7', '>= 1.7.1'
 gem 'sidekiq', '~> 5.2', '>= 5.2.5'
 #carousels
 gem 'owlcarousel-rails', '~> 2.2', '>= 2.2.3.5'
+# Track button clicks
+gem 'google-tag-manager-rails', '~> 0.1.3'
