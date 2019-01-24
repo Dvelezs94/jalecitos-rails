@@ -98,6 +98,9 @@
     display: block;
     margin-right: 15px;
   }
+  .servicoteam-wrap {
+    display: block !important;
+  }
 }
 
 /* LG Device :992px. */
@@ -295,6 +298,9 @@
 
   .header-logo.page3s img {
     width: 84px;
+  }
+  .servicoteam-wrap {
+    display: block !important;
   }
 }
 
@@ -916,6 +922,9 @@
     /* Microsoft Edge */
     color: #fff;
   }
+  .servicoteam-wrap {
+    display: block !important;
+  }
 }
 
 /* SM Small Device :320px. */
@@ -1421,6 +1430,7 @@
   .servico-title {
     margin-top: 0;
     position: relative;
+    cursor: pointer;
   }
 
   .servico-wrap {
@@ -1452,11 +1462,8 @@
     font-size: 7px;
   }
 
-  .page3-viewmore {
-    display: none;
-  }
 
-  .servico-title a i {
+  .servico-title i.reviews_dropdown{
     color: #7F7F7F;
     font-size: 15px;
     font-weight: 700;
