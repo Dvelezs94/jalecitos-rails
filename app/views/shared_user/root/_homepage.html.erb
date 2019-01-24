@@ -1,7 +1,7 @@
 <%= render 'categories/category_carousel' %>
 
-<%= render 'shared/gigs/carousel', title: "Jales Populares", gigs: @popular_gigs %>
+<%= render('shared/gigs/carousel', title: "Jales Populares", gigs: @popular_gigs) if @popular_gigs.present? %>
 
-<%= render 'shared/requests/carousel', title: "Pedidos Recientes", requests: @recent_requests %>
+<%= render('shared/requests/carousel', title: "Pedidos Recientes", requests: @recent_requests) if @recent_requests.present? %>
 
-<%= render 'shared/gigs/carousel', title: "Jales Verificados", gigs: @verified_gigs %>
+<%= render('shared/gigs/carousel', title: "Jales Verificados", gigs: @verified_gigs) if @verified_gigs.present? %>
