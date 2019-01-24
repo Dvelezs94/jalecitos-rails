@@ -52,7 +52,7 @@
       <div class="profileview-total">
         <img src="assets/img/jaman.png" alt="">
         <span><%= @gig.user.alias %></span>
-        <%= (@gig.user.verified)? "#{icon("fas", "check-square", title: "Verificado")}".html_safe: nil %>
+        <%= "#{icon("fas", "check-square", title: "Verificado")}".html_safe if @gig.user.verified %>
         <%= link_to "Ver perfil", user_path(@gig.user.slug) %>
       </div>
     </div>

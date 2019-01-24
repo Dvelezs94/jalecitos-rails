@@ -93,11 +93,11 @@ class GigsController < ApplicationController
     end
 
     def max_gigs
-      (Gig.where(user_id: current_user.id).count > 19)? redirect_to( user_path(current_user.slug), notice: "Sólo puedes tener como máximo 20 Jales" ) : nil
+      redirect_to( user_path(current_user.slug), notice: "Sólo puedes tener como máximo 20 Jales" ) if Gig.where(user_id: current_user.id).count > 19
     end
 
     def check_gig_ownership
-      (current_user.nil? || current_user.id != @gig.user_id) ? redirect_to(root_path) : nil
+      redirect_to(root_path) if (current_user.nil? || current_user.id != @gig.user_id)
     end
 
     def report_options

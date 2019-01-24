@@ -173,11 +173,11 @@ module ApplicationHelper
       end
       #if has decimal...
       if decimal > 0
-        ( decimal < 0.25 ) ? html << image_tag("star-off", title: number) : nil
+        html << image_tag("star-off", title: number) if decimal < 0.25
 
-        ( decimal.between?( 0.25, 0.75 ) )? html << image_tag("star-half", title: number) : nil
+        html << image_tag("star-half", title: number) if decimal.between?( 0.25, 0.75 )
 
-        ( decimal > 0.75 )? html << image_tag("star-on", title: number) : nil
+        html << image_tag("star-on", title: number) if decimal > 0.75 
       end
       #stars that doesnt have
       ( (5-number).to_i ).times do

@@ -58,7 +58,7 @@ class GalleriesController < ApplicationController
   end
 
   def check_gig_ownership
-    (current_user.nil? || current_user.id != @gig.user_id) ? redirect_to(root_path) : nil
+    redirect_to(root_path) if (current_user.nil? || current_user.id != @gig.user_id)
   end
 
   def gig_params

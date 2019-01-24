@@ -9,7 +9,7 @@
   <div class="confirm_content">
     <div class="row">
       <div class="col-lg-2">
-        <%= (defined? @package) ? image_tag(avatar_display_helper(@package.gig.user.image_url(:thumb)), class: "nav-avatar") : nil %>
+        <%= image_tag(avatar_display_helper(@package.gig.user.image_url(:thumb)), class: "nav-avatar") if defined? @package %>
       </div>
       <div class="col-lg-10">
         <%= (defined? @package) ? "Voy a  #{@package.gig.name}"  : @offer.request.title%>

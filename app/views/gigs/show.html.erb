@@ -6,7 +6,7 @@
         <%= render 'shared/gigs/show/gig_info' %>
         <%= render 'shared/gigs/show/package_info', device: "phone-tablet" %>
         <%= render 'shared/gigs/show/reviews' %>
-        <%= (@related_gigs.present?)? render('shared/gigs/carousel', title: "Jales Relacionados", gigs: @related_gigs) : nil %>
+        <%= render('shared/gigs/carousel', title: "Jales Relacionados", gigs: @related_gigs) if @related_gigs.present? %>
         </div>
       </div>
       <div class="col-lg-4 col-md-5">

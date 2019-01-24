@@ -20,7 +20,7 @@ module GigStatus
   private
 
   def check_first_package
-    (@gig.gig_first_pack[0].nil? || @gig.gig_first_pack[0].name == "" || @gig.gig_first_pack[0].description == "" || @gig.gig_first_pack[0].price == nil || @gig.gig_first_pack[0].price < 100)  ? flash[:error]='Este Gig no contiene ningún paquete' : nil
+    flash[:error]='Este Gig no contiene ningún paquete' if (@gig.gig_first_pack[0].nil? || @gig.gig_first_pack[0].name == "" || @gig.gig_first_pack[0].description == "" || @gig.gig_first_pack[0].price == nil || @gig.gig_first_pack[0].price < 100) 
   end
 
   def change_status
@@ -28,7 +28,7 @@ module GigStatus
   end
 
   def check_if_banned
-     (@gig.banned?) ? flash[:error]='Este Gig está suspendido' : nil
+    flash[:error]='Este Gig está suspendido' if @gig.banned?
   end
 
 end
