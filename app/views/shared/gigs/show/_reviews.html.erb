@@ -1,31 +1,24 @@
 <div class="servico-wrap">
-  <div class="servico-title">
+  <div class="servico-title" onclick="display_reviews()">
     <h3>Caliﬁcaciones
-      <%= star_display_helper(5) %>
+      <%= star_display_helper(@gig.score_average) %>
     </h3>
     <div class="doopli">
-      <button>
-        <a class="digit2" href="#">
-          <i class="fa fa-angle-down"></i>
-        </a>
-      </button>
-
+        <%= icon("fas", "angle-down", class: "reviews_dropdown") %>
     </div>
   </div>
   <div class="servicoteam-wrap">
     <% if @reviews.present? %>
-      <%= render partial: "shared_user/reviews/review", collection: @reviews %>
-    <% else %>
-    <div class="container">
-      No hay nada para mostrar
+    <div class="paginated_reviews">
+      <%= render partial: "shared/reviews/review", collection: @reviews %>
     </div>
+      <div class="page3-viewmore">
+          <%= link_to_next_page(@reviews, "Ver más#{icon("fas", "angle-down")}".html_safe,class: "review_paginator" ,remote: true) %>
+      </div>
+    <% else %>
+      No hay nada para mostrar
     <% end %>
   </div>
 
-  <div class="page3-viewmore">
-    <a href="#">Ver más
-      <i class="fa fa-angle-down"></i>
-    </a>
-  </div>
 
 </div>

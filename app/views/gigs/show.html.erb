@@ -6,7 +6,6 @@
         <%= render 'shared/gigs/show/gig_info' %>
         <%= render 'shared/gigs/show/package_info', device: "phone-tablet" %>
         <%= render 'shared/gigs/show/reviews' %>
-        <%= render('shared/gigs/carousel', title: "Jales Relacionados", gigs: @related_gigs) if @related_gigs.present? %>
         </div>
       </div>
       <div class="col-lg-4 col-md-5">
@@ -15,6 +14,7 @@
         <%= render 'shared/gigs/show/user_card_info' %>
       </div>
     </div>
+    <%= render('shared/gigs/carousel', title: "Jales Relacionados", gigs: @related_gigs) if @related_gigs.present? %>
   </div>
 </div>
 <%= render 'reports/gig', collection: @gig %>

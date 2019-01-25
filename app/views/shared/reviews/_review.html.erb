@@ -1,9 +1,9 @@
 <div class="servico-singleteam">
   <div class="servico-authoristd">
-    <%= image_tag(avatar_display_helper(review.giver.image_url(:thumb)), class: "icon-review") %>
+    <%= link_to image_tag(avatar_display_helper(review.giver.image_url(:thumb)), class: "icon-review"), user_path(review.giver.slug) %>
   </div>
   <div class="authoristed-contents1">
-    <p class="loyed1"> <strong><%= review.giver.alias %></strong>
+    <p class="loyed1"> <strong><%= link_to review.giver.alias, user_path(review.giver.slug), style:"color: black;" %></strong>
       <%= image_tag("star-on", title: review.rating.stars, class: "single-star") %>
       <span class="rating-score"><%= review.rating.stars %></span>
     </p>
