@@ -1388,6 +1388,9 @@ p.cold3 {
 
 .servico-title span {
   padding-left: 8px;
+  font-size: 14px;
+  color: grey;
+  vertical-align: middle;
 }
 
 .arroweee i {
