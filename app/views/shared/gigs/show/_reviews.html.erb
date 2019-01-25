@@ -1,7 +1,7 @@
 <div class="servico-wrap">
   <div class="servico-title" onclick="display_reviews()">
     <h3>Caliﬁcaciones
-      <%= star_display_helper(@gig.score_average) %>
+    <span> <%= star_display_helper(@gig.score_average) %> <span>
     </h3>
     <div class="doopli">
         <%= icon("fas", "angle-down", class: "reviews_dropdown") %>
