@@ -13,7 +13,7 @@
           <h4>Únete a Jalecitos</h4>
 
           <div class="fb_sign_in">
-            <%= link_to "Continuar con facebook", user_facebook_omniauth_authorize_path(), class: 'loginBtn loginBtn--facebook' %>
+            <%= link_to "Continuar con facebook", user_facebook_omniauth_authorize_path(lat:"latitude", lon:"longitude"), class: 'loginBtn loginBtn--facebook' %>
           </div>
 
           <!-- <div class="google_signin">
