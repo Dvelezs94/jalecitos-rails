@@ -1,4 +1,4 @@
-<div class="servico-singleteam">
+<div class="servico-singleteam single-review">
   <div class="servico-authoristd">
     <%= link_to image_tag(avatar_display_helper(review.giver.image_url(:thumb)), class: "icon-review"), user_path(review.giver.slug) %>
   </div>
@@ -7,7 +7,18 @@
       <%= image_tag("star-on", title: review.rating.stars, class: "single-star") %>
       <span class="rating-score"><%= review.rating.stars %></span>
     </p>
-    <p class="loyed2"><%= review.comment %></p>
+    <p class="loyed2">
+      <% if review.comment.present? %>
+      <% splitted_words = review.comment.split  %>
+        <span class='truncated-text' style='display: inline;'><%=review.comment.truncate_words(50)%></span>
+        <% if splitted_words.size > 50 %>
+          <span class='complete-text' style='display: none;'><%= splitted_words[50..-1].join(' ') %></span>
+          <div >
+            <%= link_to('Ver más', '#', onclick: 'toggleReviewText(event)') %>
+          </div>
+        <% end %>
+      <% end %>
+    </p>
     <p class="loyed3"><%= distance_of_time_in_words_to_now(review.updated_at) %></p>
   </div>
 </div>
