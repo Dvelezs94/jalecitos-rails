@@ -13,7 +13,7 @@
           <h4>Iniciar sesión</h4>
 
           <div class="fb_sign_in">
-            <%= link_to "Continuar con facebook", user_facebook_omniauth_authorize_path(lat:"latitude", lon:"longitude"), class: 'loginBtn loginBtn--facebook' %>
+            <%= link_to "Continuar con facebook", user_facebook_omniauth_authorize_path(lat:"latitude", lon:"longitude"), class: 'loginBtn loginBtn--facebook', method: :post %>
           </div>
           <!-- <div class="google_signin">
             <%= icon "fas","google" %>
