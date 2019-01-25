@@ -1241,6 +1241,7 @@ p.limpi2 sub {
 .servico-authoristd {
   position: absolute;
   left: 0;
+  top: 0;
 }
 
 .servico-singleteam {}
