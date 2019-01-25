@@ -685,6 +685,7 @@ p {}
 
 .tabpicc1 img {
   width: 100%;
+  border-radius: 5px;
 }
 
 .tabstar-no i {
@@ -720,7 +721,7 @@ p {}
   color: #39C27B !important;
 }
 
-.rightsidetab-content a#profile-tab {
+.rightsidetab-content a#reviews-tab {
   text-align: right;
   margin-left: 333px;
 }
@@ -1547,4 +1548,19 @@ button:focus {
   margin-left: 12px;
   position: relative;
   bottom: 1px;
+}
+/*user profile*/
+.gig-status {
+  border-radius: 4px;
+  color: white;
+  padding: 1px 5px;
+}
+.draft {
+  background-color: #0067F3;
+}
+.banned {
+  background-color: red;
+}
+.published {
+  background-color: #39C27B;
 }

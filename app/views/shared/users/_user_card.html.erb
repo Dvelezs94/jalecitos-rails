@@ -1,0 +1,30 @@
+<div class="col-lg-4 col-md-12">
+  <div class="author2total">
+    <div class="author2">
+      <%=  image_tag(avatar_display_helper(@user.image_url(:thumb)), class: "nav-avatar", style: "width: 176px;") %>
+    </div>
+    <div class="activotext">
+      <h1><%= @user.alias %></h1>
+      <p><%= (@user.location.nil?)? "Ciudad Indefinida" : @user.location %></p>
+      <div class="innersocial-list">
+        <%= star_display_helper( score_average(@user.score) ) %>
+      </div>
+      <div class="contactars">
+        <p>Activo(a) hace <%= distance_of_time_in_words_to_now(@user.current_sign_in_at) %></p>
+      </div>
+      <div class="inner-comment">
+        <%=link_to( " #{icon('fas', 'comment')}Contactar ".html_safe, conversations_path( user_id: @user.slug) )%>
+      </div>
+      <div class="innerdate">
+        <p>Miembro desde <br> <%= time_ago_in_words(@user.created_at) %></p>
+      </div>
+      <div class="inner-reportarcontent">
+        <p class="edad1">Edad: <%= (@user.age.nil?)? "Indefinida" : @user.age %></p>
+        <p class="edad11"><%= (@user.bio.nil?)? "Sin descripción" : @user.bio %></p>
+      </div>
+      <div class="reportar-btn">
+        <%=link_to( " #{icon('fas', 'flag')}Reportar ".html_safe, "#", id: "reportuserbtn" )%>
+      </div>
+    </div>
+  </div>
+</div>

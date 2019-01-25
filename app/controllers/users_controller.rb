@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   include OpenpayHelper
   include SetLayout
   include UsersHelper
+  include ReportFunctions
   respond_to :html, :json
   layout :set_layout
   before_action :set_user, only: [:show, :update]
@@ -20,6 +21,7 @@ class UsersController < ApplicationController
     end
 
   def show
+    report_options
     if @user == current_user
       @gigs = Gig.search("*", includes: [:packages, :user], where: {user_id: @user.id} )
     else

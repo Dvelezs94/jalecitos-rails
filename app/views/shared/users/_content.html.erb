@@ -1,0 +1,120 @@
+<div class="rightsidetab-total">
+  <div class="rightsidetab-content">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="gigs-tab" data-toggle="tab" href="#gigs" role="tab" aria-controls="gigs" aria-selected="true"><%= @gigs.count %> Jales</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">53 Calificaciones</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="gigs" role="tabpanel" aria-labelledby="gigs-tab">
+        <%= render partial: 'shared/users/gig', collection: @gigs %>
+      </div>
+
+      <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="maintabroll3">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-2 col-md-2 col-2 padingminus">
+                <div class="tabpicc1 covico">
+                  <img src="assets/img/covi1.png" alt="">
+                </div>
+              </div>
+              <div class="col-lg-10 col-md-10 col-10">
+                <div class="tabbigissue1-totalwrap">
+                  <div class="tabbigissue1-total">
+                    <li>Leonetta Lloyd
+                      <span>
+                        <i class="fa fa-star"></i>5</span>
+                    </li>
+                    <p class="coa2">Excelente servicio de reparación, se presentó a tiempo y fue muy amable.</p>
+                    <p>Hace 2 semanas</p>
+                    <p class="coa3 tj">Jale: Voy a reparar el refrigerador</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="maintabroll3">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-2 col-md-2 col-2 padingminus">
+                <div class="tabpicc1 covico">
+                  <img src="assets/img/covi2.png" alt="">
+                </div>
+              </div>
+              <div class="col-lg-10 col-md-10 col-10">
+                <div class="tabbigissue1-totalwrap">
+                  <div class="tabbigissue1-total">
+                    <li>Sampson Totton
+                      <span>
+                        <i class="fa fa-star"></i>5</span>
+                    </li>
+                    <p class="coa2">Excelente servicio de reparación, se presentó a tiempo y fue muy amable.</p>
+                    <p>Hace 2 semanas</p>
+                    <p class="coa3 chi1">Pedido: Busco a alguien que repare mi refrigerador.
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="maintabroll3">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-2 col-md-2 col-2 padingminus">
+                <div class="tabpicc1 covico">
+                  <img src="assets/img/covi3.png" alt="">
+                </div>
+              </div>
+              <div class="col-lg-10 col-md-10 col-10">
+                <div class="tabbigissue1-totalwrap">
+                  <div class="tabbigissue1-total">
+                    <li>Gleb Ivanovich
+                      <span>
+                        <i class="fa fa-star"></i>5</span></li>
+                    <p class="coa2">Excelente servicio de reparación, se presentó a tiempo y fue muy amable.</p>
+                    <p>Hace 2 semanas</p>
+                    <p class="coa3 tj">Jale: Voy a reparar el refrigerador</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="maintabroll3">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-2 col-md-2 col-2 padingminus">
+                <div class="tabpicc1 covico">
+                  <img src="assets/img/covi4.png" alt="">
+                </div>
+              </div>
+              <div class="col-lg-10 col-md-10 col-10">
+                <div class="tabbigissue1-totalwrap">
+                  <div class="tabbigissue1-total">
+                    <li>Chikanso Chima
+                      <span>
+                        <i class="fa fa-star"></i>5</span></li>
+                    <p class="coa2">Excelente servicio de reparación, se presentó a tiempo y fue muy amable.</p>
+                    <p>Hace 2 semanas</p>
+                    <p class="coa3 chi1">Pedido: Busco a alguien que repare mi refrigerador.
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
