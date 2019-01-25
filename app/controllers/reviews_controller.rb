@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_review
   before_action :check_review_ownership
+  before_action :check_rated
   # before_action :review_once
   access user: :all, admin: :all, all: []
 
@@ -23,6 +24,11 @@ class ReviewsController < ApplicationController
 
   def check_review_ownership
     head(:no_content) if (current_user != @review.giver)
+  end
+
+  def check_rated
+    #update only the rated reviews (if this isnt validated, the review can be completed with rating score of any number (i think) or not scored, so be careful)
+    head(:no_content) if ( @review.rating.nil? || ! @review.rating.stars.between?(1,5) )
   end
 
   def review_once

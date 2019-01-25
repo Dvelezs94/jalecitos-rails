@@ -15,10 +15,14 @@ class GigsController < ApplicationController
 
   # GET /gigs/1
   def show
-    define_pack_names
-    get_reviews
-    report_options
-    @related_gigs = Gig.search("*", where: { category_id: @gig.category_id, status: "published" }, limit: 5)
+    if params[:page]
+      get_reviews
+    else
+      define_pack_names
+      get_reviews
+      report_options
+      @related_gigs = Gig.search("*", where: { category_id: @gig.category_id, status: "published" }, limit: 5)
+    end
   end
 
   # GET /gigs/new
@@ -106,9 +110,7 @@ class GigsController < ApplicationController
 
     def get_reviews
       #get the associated reviews that doesnt belong to gig owner
-      @reviews = Review.search("*", where: { reviewable_id: @gig.id, reviewable_type: "Gig", giver_id: {not: @gig.user.id}, status: "completed" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
-      #select only the rated reviews (the review can be completed with rating score of 0, so be careful)
-      @reviews = @reviews.select{|r| r.rating.present? && r.rating.stars.between?(1,5)}
+      @reviews = Review.search("*", where: { reviewable_id: @gig.id, reviewable_type: "Gig", giver_id: {not: @gig.user.id}, status: "completed" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 1)
     end
 
     # Check if there are running orders before destroying
