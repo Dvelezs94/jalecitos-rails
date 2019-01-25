@@ -1,4 +1,5 @@
 class ConversationsController < ApplicationController
+  include ReportFunctions
   layout 'logged'
   before_action :authenticate_user!
   before_action :set_recipient, only: [:index, :create]
@@ -58,9 +59,5 @@ class ConversationsController < ApplicationController
     conversations.each do |c|
         c.sender == current_user ? @users << c.recipient : @users << c.sender
     end
-  end
-
-  def report_options
-    @report_options = ["Uso de palabras ofensivas", "Contenido Sexual", "Violencia", "Spam", "Engaño o fraude", "Otro"]
   end
 end
