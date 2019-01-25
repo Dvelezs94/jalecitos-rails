@@ -33,18 +33,6 @@ module Jalecitos
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     # compress content
     config.middleware.use Rack::Deflater
-
-    # CORS
-    Rails.application.config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins '*'
-        
-        resource '*',
-          headers: :any,
-          methods: [:get, :post, :put, :patch, :delete, :options, :head]
-      end
-    end
-
   end
 
 end
