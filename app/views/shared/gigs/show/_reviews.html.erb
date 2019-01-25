@@ -9,17 +9,15 @@
   </div>
   <div class="servicoteam-wrap">
     <% if @reviews.present? %>
-      <%= render partial: "shared_user/reviews/review", collection: @reviews %>
+    <div class="paginated_reviews">
+      <%= render partial: "shared/reviews/review", collection: @reviews %>
+    </div>
+      <div class="page3-viewmore">
+          <%= link_to_next_page(@reviews, "Ver más#{icon("fas", "angle-down")}".html_safe,class: "review_paginator" ,remote: true) %>
+      </div>
     <% else %>
-    <div class="container">
       No hay nada para mostrar
-    </div>
     <% end %>
-    <div class="page3-viewmore">
-      <a href="#">Ver más
-        <i class="fa fa-angle-down"></i>
-      </a>
-    </div>
   </div>
 
 

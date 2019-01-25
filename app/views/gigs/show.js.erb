@@ -1,0 +1,11 @@
+$(".paginated_reviews").append('<%= j render(partial: "shared/reviews/review", collection: @reviews) %>');
+
+<% if @reviews.next_page %>
+  //remove text
+  $(".page3-viewmore").text("");
+
+  $(".page3-viewmore").append('<%= j link_to_next_page(@reviews, "Ver más#{icon("fas", "angle-down")}".html_safe,class: "review_paginator" ,remote: true) %>');
+<% else %>
+  $(".page3-viewmore").remove();
+<% end %>
+<% sleep 1 %>
