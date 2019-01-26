@@ -460,7 +460,7 @@ p.COAH3 {
   color: #fff;
 }
 
-.plusarea a {
+.plusarea a.plus {
   background: #39C27B;
   display: inline-block;
   width: 60px;
@@ -681,9 +681,7 @@ p {}
   padding-bottom: 5px;
 }
 
-.tabpicc1 img {}
-
-.tabpicc1 img {
+.gig-image-profile img {
   width: 100%;
   border-radius: 5px;
 }
@@ -797,10 +795,6 @@ p {}
   list-style: none;
 }
 
-.tabbigissue1-total span {
-  color: #F9B732;
-  padding-left: 3px;
-}
 
 .tabbigissue1-total span i {
   padding-right: 2px;
@@ -1563,4 +1557,17 @@ button:focus {
 }
 .published {
   background-color: #39C27B;
+}
+/*Plus button*/
+.dropup-content {
+  display: none;
+  position: absolute;
+  bottom: 50px;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropup:hover .dropup-content {
+  display: block;
 }

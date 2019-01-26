@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
   def show
     report_options
+    @reviews = Review.search("*", where: {receiver_id: @user.id, status: "completed"})
     if @user == current_user
       @gigs = Gig.search("*", includes: [:packages, :user], where: {user_id: @user.id} )
     else

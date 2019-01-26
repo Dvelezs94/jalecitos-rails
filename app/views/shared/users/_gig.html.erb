@@ -1,8 +1,9 @@
+<%= link_to user_gig_path(gig.user.slug, gig.slug) do %>
 <div class="maintabroll3">
   <div class="container">
     <div class="row">
       <div class="col-lg-3 col-md-3 col-2 padingminus1">
-        <div class="tabpicc1">
+        <div class="tabpicc1 gig-image-profile">
           <%= image_tag( image_display_helper(gig.images[0])) %>
         </div>
       </div>
@@ -24,3 +25,4 @@
     </div>
   </div>
 </div>
+<% end %>
