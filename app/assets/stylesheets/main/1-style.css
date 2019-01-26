@@ -460,7 +460,7 @@ p.COAH3 {
   color: #fff;
 }
 
-.plusarea a.plus {
+.plusarea a {
   background: #39C27B;
   display: inline-block;
   width: 60px;
@@ -483,15 +483,6 @@ p.COAH3 {
 
 .ex {
   display: none;
-}
-
-/*plus area*/
-/*notification dropdown*/
-.belldropdown-box {
-  border-bottom: 1px solid #ddd;
-  padding: 18px;
-  position: relative;
-  transition: .4s;
 }
 
 .belldropdown-box:hover {
