@@ -3,6 +3,7 @@ class GigsController < ApplicationController
   include GigStatus
   include PackTypes
   include SetLayout
+  include ReportFunctions
   before_action :set_gig, only: [:edit, :update, :destroy, :ban_gig]
   before_action :set_gig_with_first_pack, only: :toggle_status
   before_action :set_gig_with_all_asc, only: :show
@@ -104,13 +105,10 @@ class GigsController < ApplicationController
       redirect_to(root_path) if (current_user.nil? || current_user.id != @gig.user_id)
     end
 
-    def report_options
-      @report_options = ["Uso de palabras ofensivas", "Contenido Sexual", "Violencia", "Spam", "Engaño o fraude", "Otro"]
-    end
 
     def get_reviews
       #get the associated reviews that doesnt belong to gig owner
-      @reviews = Review.search("*", where: { reviewable_id: @gig.id, reviewable_type: "Gig", giver_id: {not: @gig.user.id}, status: "completed" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 3)
+      @reviews = Review.search("*", where: { reviewable_id: @gig.id, reviewable_type: "Gig", receiver_id: @gig.user.id, status: "completed" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 3)
     end
 
     # Check if there are running orders before destroying

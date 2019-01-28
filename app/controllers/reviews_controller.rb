@@ -11,8 +11,6 @@ class ReviewsController < ApplicationController
     fields = review_params
     #if comment is empty, save as nil for saving space
     fields[:comment] = nil if fields[:comment] == ""
-    #remove comment if its not valid
-    fields[:comment] = nil if (! allow_comment)
     @review.update(fields)
     head :no_content
   end
@@ -33,11 +31,6 @@ class ReviewsController < ApplicationController
 
   def review_once
     head(:no_content) if (! @review.pending?)
-  end
-
-  def allow_comment
-    #order of a gig and i am the employer...
-    (@review.order.purchase_type == "Package" && @review.order.employer == current_user)? true: false
   end
 
   def review_params

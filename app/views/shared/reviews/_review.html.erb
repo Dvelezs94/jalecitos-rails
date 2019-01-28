@@ -10,7 +10,7 @@
     <p class="loyed2">
       <% if review.comment.present? %>
       <% splitted_words = review.comment.split  %>
-        <span class='truncated-text' style='display: inline;'><%=splitted_words[0..49].join(' ') %>...</span>
+        <span class='truncated-text' style='display: inline;'><%=review.comment.truncate_words(50) %></span>
         <% if splitted_words.size > 50 %>
           <span class='complete-text' style='display: none;'><%= splitted_words[50..-1].join(' ') %></span>
           <div>

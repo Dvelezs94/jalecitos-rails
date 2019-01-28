@@ -177,7 +177,7 @@ module ApplicationHelper
 
         html << image_tag("star-half", title: number) if decimal.between?( 0.25, 0.75 )
 
-        html << image_tag("star-on", title: number) if decimal > 0.75 
+        html << image_tag("star-on", title: number) if decimal > 0.75
       end
       #stars that doesnt have
       ( (5-number).to_i ).times do
@@ -185,6 +185,18 @@ module ApplicationHelper
       end
       #return it
       html.html_safe
+    end
+  end
+
+  def score_average userScore
+    if userScore.employee_score_times == 0 && userScore.employer_score_times == 0
+      0
+    elsif userScore.employer_score_times == 0
+      userScore.employee_score_average
+    elsif userScore.employee_score_times == 0
+      userScore.employer_score_average
+    else
+      score_average = ( (employee_score_average*employee_score_times)+(employer_score_average*employer_score_times) ) / (employer_score_times + employee_score_times )
     end
   end
 

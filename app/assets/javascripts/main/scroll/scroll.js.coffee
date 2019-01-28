@@ -1,6 +1,6 @@
 $(document).on "turbolinks:load", ->
   #pagination in most pages
-  if $('.pagination').length && ! $('.message_view_box').length && ! $('.gig-show-carousel').length
+  if $('.pagination').length && ! $('.message_view_box').length
     $(window).scroll ->
       url = $('a.next-page:visible').attr('href')
       if url && $(window).scrollTop() > $(document).height() - $(window).height() - 600

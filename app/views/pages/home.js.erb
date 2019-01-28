@@ -1,4 +1,4 @@
-$(".paginated-elements").append('<%= j render(@search) %>');
+$(".paginated-reviews").append('<%= j render(@search) %>');
 
 <% if @search.next_page %>
   $('.pag-and-load').replaceWith('<%= j paginate(@search) %>');
