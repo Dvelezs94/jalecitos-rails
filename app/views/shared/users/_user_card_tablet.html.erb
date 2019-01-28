@@ -9,7 +9,7 @@
                 <%= notification_generator_helper error, :error %>
               <% end %>
             <% end %>
-              <%= image_tag(avatar_display_helper(@user.image_url(:thumb)), class: "nav-avatar", style: "width: 176px;height:176px;cursor:pointer;", onclick: "$('#user_image').click()") %>
+              <%= image_tag(avatar_display_helper(@user.image_url(:thumb)), class: "nav-avatar", style: "cursor:pointer;", onclick: "$('#user_image').click()") %>
               <%= form.file_field :image, class: 'form-control' %>
           <% end %>
       </div>
