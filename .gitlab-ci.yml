@@ -6,13 +6,14 @@ variables:
   ECS_SERVICE: rails
   ECS_SERVICE_SIDEKIQ: sidekiq
   AWS_REGION: us-east-2
+  DOCKER_IMAGE_CI: $REPOSITORY_URL:${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}
 
 services:
 - docker:dind
 
 before_script:
   - apk add --no-cache curl jq python py-pip
-  - pip install awscli
+  - pip install awscli ecs-deploy
 
 stages:
   - build
@@ -23,19 +24,22 @@ build:
   script:
     - $(aws ecr get-login --no-include-email --region $AWS_REGION)
     - rm -f .env
-    - docker build -t $REPOSITORY_URL .
-    - docker push $REPOSITORY_URL
+    - docker build -t $DOCKER_IMAGE_CI .
+    - docker push $DOCKER_IMAGE_CI
   only:
     - master
+    - development
+    - staging
   tags:
     - docker
 
 deploy:
   stage: deploy
   script:
-    - aws ecs stop-task --cluster $ECS_CLUSTER --task $(aws ecs list-tasks --cluster $ECS_CLUSTER --service $ECS_SERVICE --output text --query taskArns[0] --region $AWS_REGION) --region $AWS_REGION
-    - aws ecs stop-task --cluster $ECS_CLUSTER --task $(aws ecs list-tasks --cluster $ECS_CLUSTER --service $ECS_SERVICE_SIDEKIQ --output text --query taskArns[0] --region $AWS_REGION) --region $AWS_REGION
+    - bash -x ./ecs-deploy.sh
   only:
     - master
+    - development
+    - staging
   tags:
     - docker
