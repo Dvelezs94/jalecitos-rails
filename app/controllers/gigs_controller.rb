@@ -108,7 +108,7 @@ class GigsController < ApplicationController
 
     def get_reviews
       #get the associated reviews that doesnt belong to gig owner
-      @reviews = Review.search("*", where: { reviewable_id: @gig.id, reviewable_type: "Gig", giver_id: {not: @gig.user.id}, status: "completed" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 3)
+      @reviews = Review.search("*", where: { reviewable_id: @gig.id, reviewable_type: "Gig", receiver_id: @gig.user.id, status: "completed" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 3)
     end
 
     # Check if there are running orders before destroying
