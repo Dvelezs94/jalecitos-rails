@@ -337,19 +337,19 @@ class OrdersController < ApplicationController
       #this is useful for collecting the two reviews generated
       @new_reviews = []
       if @order.purchase_type == "Package"
-        create_review( @order, @order.employer, @order.purchase.gig)
-        create_review( @order, @order.employee, @order.purchase.gig)
+        create_review( @order, @order.employer, @order.employee, @order.purchase.gig)
+        create_review( @order, @order.employee, @order.employer, @order.purchase.gig)
       else
-        create_review(@order, @order.employer)
-        create_review(@order, @order.employee, @order.purchase.request)
+        create_review(@order, @order.employer, @order.employee, @order.purchase.request)
+        create_review(@order, @order.employee, @order.employer, @order.purchase.request)
       end
       #get the id of the user corresponding review and the one for use in the job
       @my_review = @new_reviews.select{ |r| r.giver_id == current_user.id }.first
       @other_review = @new_reviews.select{ |r| r.giver_id != current_user.id }.first
     end
 
-    def create_review(order, giver, object)
-      @new_reviews << Review.create( order: order, giver: giver, reviewable: object)
+    def create_review(order, giver, receiver, object)
+      @new_reviews << Review.create( order: order, giver: giver, receiver: receiver, reviewable: object)
     end
 
     # Make sure the billing profile is legit

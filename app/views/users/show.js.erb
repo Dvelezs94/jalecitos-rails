@@ -1,0 +1,8 @@
+$(".paginated-reviews").append('<%= j render(partial: "shared/users/review", collection: @reviews) %>');
+
+<% if @reviews.next_page %>
+  $('.pag-and-load').replaceWith('<%= j paginate(@reviews) %>');
+<% else %>
+  $('.pag-and-load').remove();
+<% end %>
+<% sleep 1 %>

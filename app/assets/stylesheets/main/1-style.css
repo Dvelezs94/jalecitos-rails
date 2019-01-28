@@ -485,15 +485,6 @@ p.COAH3 {
   display: none;
 }
 
-/*plus area*/
-/*notification dropdown*/
-.belldropdown-box {
-  border-bottom: 1px solid #ddd;
-  padding: 18px;
-  position: relative;
-  transition: .4s;
-}
-
 .belldropdown-box:hover {
   background: #ededed;
 }
@@ -637,7 +628,6 @@ p.quam1 {
 .activotext h1 {
   margin-bottom: 5px;
   font-size: 40px;
-  font-weight: 700;
   color: #000;
 }
 
@@ -681,10 +671,9 @@ p {}
   padding-bottom: 5px;
 }
 
-.tabpicc1 img {}
-
-.tabpicc1 img {
+.gig-image-profile img {
   width: 100%;
+  border-radius: 5px;
 }
 
 .tabstar-no i {
@@ -720,7 +709,7 @@ p {}
   color: #39C27B !important;
 }
 
-.rightsidetab-content a#profile-tab {
+.rightsidetab-content a#reviews-tab {
   text-align: right;
   margin-left: 333px;
 }
@@ -796,10 +785,6 @@ p {}
   list-style: none;
 }
 
-.tabbigissue1-total span {
-  color: #F9B732;
-  padding-left: 3px;
-}
 
 .tabbigissue1-total span i {
   padding-right: 2px;
@@ -1547,4 +1532,32 @@ button:focus {
   margin-left: 12px;
   position: relative;
   bottom: 1px;
+}
+/*user profile*/
+.gig-status {
+  border-radius: 4px;
+  color: white;
+  padding: 1px 5px;
+}
+.draft {
+  background-color: #0067F3;
+}
+.banned {
+  background-color: red;
+}
+.published {
+  background-color: #39C27B;
+}
+/*Plus button*/
+.dropup-content {
+  display: none;
+  position: absolute;
+  bottom: 50px;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropup:hover .dropup-content {
+  display: block;
 }

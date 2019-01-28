@@ -5,6 +5,7 @@ class Review < ApplicationRecord
   def search_data
     {
       giver_id: giver_id,
+      receiver_id: receiver_id,
       reviewable_type: reviewable_type,
       reviewable_id: reviewable_id,
       status: status,
@@ -15,7 +16,8 @@ class Review < ApplicationRecord
   #Associations
   belongs_to :order
   belongs_to :giver, foreign_key: :giver_id, class_name: "User"
-  belongs_to :reviewable, :polymorphic => true, optional: true
+  belongs_to :receiver, foreign_key: :receiver_id, class_name: "User"
+  belongs_to :reviewable, :polymorphic => true
   # Options to rate
   ratyrate_rateable 'Employee', 'Employer'
   enum status: { pending: 0, completed: 1 }

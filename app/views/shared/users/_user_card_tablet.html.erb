@@ -1,0 +1,48 @@
+<div class="innerpage768area">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="authorise-wrap">
+        <div class="authorinpic">
+          <%= form_with(model: @user, local: true) do |form| %>
+            <% if @user.errors.any? %>
+              <%@user.errors.full_messages.each do |error| %>
+                <%= notification_generator_helper error, :error %>
+              <% end %>
+            <% end %>
+              <%= image_tag(avatar_display_helper(@user.image_url(:thumb)), class: "nav-avatar", style: "width: 176px;height:176px;cursor:pointer;", onclick: "$('#user_image').click()") %>
+              <%= form.file_field :image, class: 'form-control' %>
+          <% end %>
+      </div>
+      <div class="authorisescontent">
+        <h1><%= @user.alias %></h1>
+        <p><%= (@user.location.nil?)? "Ciudad Indefinida" : @user.location %></p>
+      </div>
+      <div class="authorisesstar">
+        <%= star_display_helper( score_average(@user.score) ) %>
+        <p>Activo(a) hace
+          <%= distance_of_time_in_words_to_now(@user.current_sign_in_at) %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="authorlock">
+      <%=link_to( " #{icon('fas', 'comment')}Contactar ".html_safe, conversations_path( user_id: @user.slug) )%>
+    </div>
+    <div class="authorlock authorlock2">
+      <%=link_to( " #{icon('fas', 'flag')}Reportar ".html_safe, "#", id: "reportuserbtntablet" )%>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="authorttest">
+      <h3>Miembro desde
+        <%= time_ago_in_words(@user.created_at) %></h3>
+      <p class="fr">Edad:
+        <%= (@user.age.nil?)? "Indefinida" : @user.age %></p>
+      <p class="tr"><%= (@user.bio.nil?)? "Sin descripción" : @user.bio %></p>
+    </div>
+  </div>
+</div>
+</div>
