@@ -17,7 +17,7 @@ class WithdrawalsController < ApplicationController
     @amount = current_user.balance[:amount].to_f - 8
     if @amount < 100.0
       flash[:error] = "Debes tener arriba de $100 MXN para poder disponer."
-      redirect_to user_config_path(current_user)
+      redirect_to configuration_path
       return
     end
     @order_ids = current_user.balance[:order_ids]
@@ -37,11 +37,11 @@ class WithdrawalsController < ApplicationController
        end
        response = @payout.create(request_hash, current_user.openpay_id)
        flash[:success] = "La cantidad de #{@amount} fue depositada exitosamente"
-       redirect_to user_config_path(current_user)
+       redirect_to configuration_path
      rescue OpenpayException => e
        @withdrawal.denied!
        flash[:error] = "#{e.description}, por favor intentalo de nuevo mas tarde."
-       redirect_to user_config_path(current_user)
+       redirect_to configuration_path
      end
     end
 

@@ -20,7 +20,7 @@ class CardsController < ApplicationController
         # e.error_code
         flash[:error] = "#{e.description}, por favor intentalo de nuevo."
     end
-    redirect_to "#{user_config_path}#card"
+    redirect_to "#{configuration_path}#card"
   end
 
   def destroy
