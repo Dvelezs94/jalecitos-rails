@@ -6,11 +6,31 @@
       <p style="float: right;">Necesitas actualizar tu perfil publico?
         <span><%= link_to "Ve a Mi Perfil", user_path(current_user.slug) %></span></p>
       <hr width="98%">
-      <div class="row" id="account">
+      <div class="row">
         <div class="col-sm-4">
           <label for="">NOMBRE COMPLETO</label>
         </div>
         <div class="col-sm-6"><%= best_in_place_if my_profile,@user, :name, :class => "form-control" %></div>
+      </div>
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-sm-4">
+          <label for="">IMAGEN DE PERFIL</label>
+        </div>
+        <div class="col-sm-6">
+          <%= form_with(model: @user, local: true) do |form| %>
+            <% if @user.errors.any? %>
+              <% @user.errors.full_messages.each do |error| %>
+                <%= notification_generator_helper error, :error %>
+              <% end %>
+            <% end %>
+            <label class="profile-container">
+              <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar")%>
+              <%= form.file_field :image, class: 'form-control', accept: ".png, .jpg, .jpeg" %>
+            </label>
+          <% end %>
+        </div>
       </div>
       <br>
       <div class="row">
@@ -18,6 +38,50 @@
           <label for="">EMAIL</label>
         </div>
         <div class="col-sm-6"><input type="text" id="sizing" placeholder="<%= @user.email %>" class="form-control" readonly="readonly"></div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-4">
+          <label for="">ALIAS</label>
+        </div>
+        <div class="col-sm-6"><%= best_in_place_if my_profile,@user, :alias, :class => "form-control change_user_alias" %></div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-4">
+          <label for="">DISPONIBILIDAD</label>
+        </div>
+        <div class="col-sm-6">
+          <%= best_in_place_if my_profile,@user, :available, :as => :select, :collection => { "Tiempo completo" => "Tiempo completo", "Medio tiempo" => "Medio tiempo", "Fin de semana" => "Fin de semana", "Esporádico" => "Esporádico" }, :place_holder => "Edítame" %>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-4">
+          <label for="">UBICACION</label>
+        </div>
+        <div class="col-sm-6">
+          <%= best_in_place_if my_profile,@user, :location, as: :input, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :inner_class =>
+        "best_google_input", :class => "google-span", :html_attrs => {:maxlength => 30} %>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-4">
+          <label for="">EDAD</label>
+        </div>
+        <div class="col-sm-6">
+          <%= best_in_place_if my_profile,@user, :age, :as => :select, :collection => (18..100).map { |i| [i, "#{i} años"]}, :place_holder => "Edítame" %>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-4">
+          <label for="">SOBRE MI</label>
+        </div>
+        <div class="col-sm-6">
+          <%= best_in_place_if my_profile,@user, :bio, as: :textarea, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :html_attrs => {:maxlength => 500} %>
+        </div>
       </div>
       <br>
       <div class="row">

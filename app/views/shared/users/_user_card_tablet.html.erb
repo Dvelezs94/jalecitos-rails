@@ -3,16 +3,8 @@
     <div class="col-md-9">
       <div class="authorise-wrap">
         <div class="authorinpic">
-          <%= form_with(model: @user, local: true) do |form| %>
-            <% if @user.errors.any? %>
-              <%@user.errors.full_messages.each do |error| %>
-                <%= notification_generator_helper error, :error %>
-              <% end %>
-            <% end %>
-              <%= image_tag(avatar_display_helper(@user.image_url(:thumb)), class: "nav-avatar", style: "cursor:pointer;", onclick: "$('#user_image').click()") %>
-              <%= form.file_field :image, class: 'form-control' %>
-          <% end %>
-      </div>
+          <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar") %>
+        </div>
       <div class="authorisescontent">
         <h1><%= @user.alias %></h1>
         <p><%= (@user.location.nil?)? "Ciudad Indefinida" : @user.location %></p>
@@ -25,12 +17,21 @@
     </div>
   </div>
   <div class="col-md-3">
+    <% if my_profile %>
+    <div class="authorlock">
+      <%=link_to( " #{icon('fas', 'cogs')}Configuracion ".html_safe, user_config_path(@user.slug) )%>
+    </div>
+    <div class="authorlock authorlock2">
+      <%=link_to( " #{icon('fas', 'sign-out-alt')}Cerrar sesion ".html_safe, destroy_user_session_path, method: :delete)%>
+    </div>
+    <% else %>
     <div class="authorlock">
       <%=link_to( " #{icon('fas', 'comment')}Contactar ".html_safe, conversations_path( user_id: @user.slug) )%>
     </div>
     <div class="authorlock authorlock2">
       <%=link_to( " #{icon('fas', 'flag')}Reportar ".html_safe, "#", id: "reportuserbtntablet" )%>
     </div>
+    <% end %>
   </div>
 </div>
 
