@@ -1,3 +1,4 @@
+<% if current_user %>
 <div class="header-toparea">
   <div class="container-fluid">
     <div class="row align-items-center">
@@ -10,7 +11,6 @@
           <div class="headerlogo768">
             <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png'), root_path %>
           </div>
-
           <%= form_with url: root_path, method: :get,:html =>{ class: "search-form"} , local: true do |f|%>
           <div class="search-form-div searchpage3s">
             <%= f.text_field :query, value: params[:query], placeholder: "¿Qué estás buscando?", class: "query" %>
@@ -20,7 +20,7 @@
           </div>
           <div class="headertop-location">
             <li>
-              <%= icon("fas", "map-marker-alt") %></i>
+              <%= icon("fas", "map-marker-alt") %>
               <%= f.text_field :location, id: "search_autocomplete", placeholder: "Cualquier lugar en México", value: (params[:location].nil? && current_user)? current_user.location : params[:location] %>
             </li>
           </div>
@@ -56,4 +56,33 @@
 
 </div>
 </div>
+<% else %>
+<div class="headerd-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-2 col-12">
+        <div class="headerd-logo">
+            <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png', size: "138x32"), root_path %>
+        </div>
+        <div class="mobile-menu"></div>
+      </div>
+      <div class="col-lg-9 col-md-10 col-0">
+        <div class="headerd-mainmenu">
+          <nav id="mobile-menu">
+            <ul>
+              <li><a href="#">¿Cómo funciona? </a></li>
+              <li><a href="#">Soy un experto</a></li>
+              <li><a href="https://blog.jalecitos.com/blog" target="_blank">Blog</a></li>
+              <li><a href="#" id="sign_in">Iniciar sesión</a></li>
+              <li><a href="#" id="sign_up">regístrate</a></li>
+            </ul>
+          </nav>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
 <div id="notifications"></div>

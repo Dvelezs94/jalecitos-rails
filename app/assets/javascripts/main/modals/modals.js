@@ -14,6 +14,7 @@ function modals (modalId, buttonId, buttonBehaviour="block", display=false) {
     event.preventDefault();
     modal.style.display = buttonBehaviour;
     closeOtherModals(modalId);
+    closeMenu();
   }
   // When the user clicks anywhere outside of the modal, close it
   modal.onclick = function(event) {
@@ -31,4 +32,8 @@ function closeOtherModals(modalId){
       $(".modal")[i].style.display = "none";
     }
   }
+}
+
+function closeMenu() {
+  $(".meanclose").click();
 }
