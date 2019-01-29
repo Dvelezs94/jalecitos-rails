@@ -93,7 +93,7 @@
             </li>
             <% end %>
             <li>
-              <%= link_to "Configuracion", user_config_path(current_user.slug), class: "config-btn" %>
+              <%= link_to "Configuracion", configuration_path, class: "config-btn" %>
             </li>
             <li>
               <%= link_to "Transacciones", finance_path(:table => "purchases"), class: "transctions-btn" %>

@@ -19,7 +19,7 @@
   <div class="col-md-3">
     <% if my_profile %>
     <div class="authorlock">
-      <%=link_to( " #{icon('fas', 'cogs')}Configuracion ".html_safe, user_config_path(@user.slug) )%>
+      <%=link_to( " #{icon('fas', 'cogs')}Configuracion ".html_safe, configuration_path )%>
     </div>
     <div class="authorlock authorlock2">
       <%=link_to( " #{icon('fas', 'sign-out-alt')}Cerrar sesion ".html_safe, destroy_user_session_path, method: :delete)%>
