@@ -1221,7 +1221,7 @@
   }
 
   .hero-darea::after {
-    background: url(../img/herokl.png);
+    background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/main_banner2.png");
     background-position: center;
     background-size: cover;
     height: 100%;
@@ -1245,7 +1245,6 @@
   }
 
   .contacd-icon i {
-    color: #006AF8;
     font-size: 35px;
   }
 
@@ -1325,7 +1324,7 @@
   }
 
   .hero-darea::after {
-    background: url(../img/herokl.png);
+    background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/main_banner2.png");
     background-position: 23% 100%;
     background-size: cover;
     height: 100%;
@@ -1338,7 +1337,6 @@
   }
 
   .contacd-icon i {
-    color: #006AF8;
     font-size: 28px;
   }
 
@@ -2143,8 +2141,15 @@
 
   .singlemobiled.text-center {
     position: absolute;
-    top: -225px;
-    right: -95px;
+    top: -190px;
+    right: -44px;
+  }
+  .singlemobiled img{
+    max-width: 185px;
+  }
+
+  .mobileprice {
+    display: none;
   }
 
   .contactd-heading {
