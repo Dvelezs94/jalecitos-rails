@@ -1,7 +1,7 @@
 <div class="col-lg-4 col-md-12">
   <div class="author2total">
     <div class="author2">
-      <%=  image_tag(avatar_display_helper(@user.image_url(:thumb)), class: "nav-avatar") %>
+      <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar")%>
     </div>
     <div class="activotext">
       <h1><%= @user.alias %></h1>
@@ -13,7 +13,11 @@
         <p>Activo(a) hace <%= distance_of_time_in_words_to_now(@user.current_sign_in_at) %></p>
       </div>
       <div class="inner-comment">
+      <% if my_profile %>
+        <%=link_to( " #{icon('fas', 'cogs')}Configuracion ".html_safe, user_config_path(@user.slug) )%>
+      <% else %>
         <%=link_to( " #{icon('fas', 'comment')}Contactar ".html_safe, conversations_path( user_id: @user.slug) )%>
+      <% end %>
       </div>
       <div class="innerdate">
         <p>Miembro desde <br> <%= time_ago_in_words(@user.created_at) %></p>
@@ -23,7 +27,11 @@
         <p class="edad11"><%= (@user.bio.nil?)? "Sin descripción" : @user.bio %></p>
       </div>
       <div class="reportar-btn">
+      <% if my_profile %>
+        <%=link_to( " #{icon('fas', 'sign-out-alt')}Cerrar sesion ".html_safe, destroy_user_session_path, method: :delete)%>
+      <% else %>
         <%=link_to( " #{icon('fas', 'flag')}Reportar ".html_safe, "#", id: "reportuserbtn" )%>
+      <% end %>
       </div>
     </div>
   </div>

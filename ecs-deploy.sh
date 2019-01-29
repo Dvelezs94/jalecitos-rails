@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/sh
 
 echo "Deploying commit $CI_COMMIT_SHORT_SHA on branch $CI_COMMIT_REF_NAME"
 case $CI_COMMIT_REF_NAME in
