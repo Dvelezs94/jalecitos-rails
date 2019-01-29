@@ -59,7 +59,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if params[:user]["alias"]
         # flash[:success] = 'Tu alias ha sido actualizado.'
-        format.json  { render :json => { :redirect => user_path(@user) } }
+        format.json  { render :json => { :redirect => user_config_path(@user) } }
       else
         format.json { respond_with_bip(@user) }
       end

@@ -36,7 +36,7 @@ build:
 deploy:
   stage: deploy
   script:
-    - bash -x ./ecs-deploy.sh
+    - sh ecs-deploy.sh
   only:
     - master
     - development
