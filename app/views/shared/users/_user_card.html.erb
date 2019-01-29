@@ -29,7 +29,7 @@
       <div class="reportar-btn">
       <% if my_profile %>
         <%=link_to( " #{icon('fas', 'sign-out-alt')}Cerrar sesion ".html_safe, destroy_user_session_path, method: :delete)%>
-      <% else %>
+      <% elsif user_signed_in? %>
         <%=link_to( " #{icon('fas', 'flag')}Reportar ".html_safe, "#", id: "reportuserbtn" )%>
       <% end %>
       </div>
