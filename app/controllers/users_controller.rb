@@ -8,7 +8,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update]
   before_action :set_user_config, only: [:configuration]
   access all: [:show, :index], user: [:update, :configuration]
-  before_action :check_user_ownership, only:[:update, :configuration]
 
 
   def configuration
@@ -59,7 +58,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if params[:user]["alias"]
         # flash[:success] = 'Tu alias ha sido actualizado.'
-        format.json  { render :json => { :redirect => user_config_path(@user) } }
+        format.json  { render :json => { :redirect => configuration_path } }
       else
         format.json { respond_with_bip(@user) }
       end
@@ -75,7 +74,7 @@ class UsersController < ApplicationController
     end
 
     def set_user_config
-      @user = User.friendly.find(params[:user_id])
+      @user = current_user
     end
 
     # Only allow a trusted parameter "white list" through.
@@ -91,11 +90,5 @@ class UsersController < ApplicationController
                                    :tag_list,
                                    :transactional_emails,
                                    :marketing_emails)
-    end
-    def check_user_ownership
-      if ! my_profile
-        flash[:error] = "No tienes permisos para acceder aquí"
-        redirect_to root_path
-      end
     end
 end

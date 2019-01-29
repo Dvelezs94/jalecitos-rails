@@ -30,7 +30,6 @@ Rails.application.routes.draw do
    }
    resources :users, only: [:show, :update] do
      resource :reports, only: [:create], as: "report"
-     get 'configuration', to: 'users#configuration', as: 'config'
      resources :banks, only: [:create, :destroy]
      resources :cards, only: [:create, :destroy]
      resources :billing_profiles, only: [:create, :destroy]
@@ -100,6 +99,7 @@ Rails.application.routes.draw do
       put :deny
     end
   end
+  get 'configuration', to: 'users#configuration'
   get 'requests', to: 'pages#request_index'
   get 'finance', to: 'pages#finance'
   get 'disputes', to: 'disputes#index'
