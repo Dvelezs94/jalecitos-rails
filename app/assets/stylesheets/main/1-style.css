@@ -2008,17 +2008,6 @@ button:focus {
   display: block;
 }
 
-/*headerd*/
-@font-face {
-  font-family: giloryExtraBold;
-  src: url(../fonts/Gilroy-ExtraBold.otf);
-}
-
-@font-face {
-  font-family: giloryLight;
-  src: url(../fonts/Gilroy-Light.otf);
-}
-
 .headerd-mainmenu ul {
   margin: 0;
   padding: 0;
@@ -2093,7 +2082,6 @@ button:focus {
   color: #000;
   font-size: 68px;
   line-height: 79px;
-  font-family: giloryLight;
   margin-bottom: 23px;
 }
 
@@ -2204,9 +2192,9 @@ button:focus {
 }
 
 .contactd-heading h2 {
-  font-family: giloryLight;
   font-size: 52px;
   color: #000;
+  font-family: Gilroy-Extra-Bold;
 }
 
 .singlecontactd-box {
@@ -2279,7 +2267,7 @@ button:focus {
 
 .oferta h4 {
   font-size: 18px;
-  font-family: giloryExtraBold;
+  font-weight: bold;
   margin-bottom: 8px;
 }
 
