@@ -1,5 +1,6 @@
 jQuery ->
   if $("#user_image").length
+    $(".best_in_place").best_in_place();
     #initialize file upload
     $("#user_image").fileupload(
       dataType: "script"
