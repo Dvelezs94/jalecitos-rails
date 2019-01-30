@@ -104,11 +104,16 @@ Rails.application.routes.draw do
   get 'finance', to: 'pages#finance'
   get 'disputes', to: 'disputes#index'
   get 'likes', to: 'pages#liked'
-  get 'autocomplete_search', to: 'pages#autocomplete_search'
-  get 'autocomplete_profession', to: 'pages#autocomplete_profession'
   # subscribe device to notifications
   post 'subscribe', to: 'notifications#subscribe'
   delete 'subscribe', to: 'notifications#drop_subscribe'
+  # search routes
+  get 'guest_search', to: 'queries#guest_search'
+  get 'guest_autocomplete_search', to: 'queries#guest_autocomplete_search'
+
+  get 'user_search', to: 'queries#user_search'
+  get 'user_autocomplete_search', to: 'queries#user_autocomplete_search'
+  get 'autocomplete_profession', to: 'queries#autocomplete_profession'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # LEAVE THIS AT THE END!!

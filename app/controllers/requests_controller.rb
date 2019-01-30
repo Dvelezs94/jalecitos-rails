@@ -12,7 +12,7 @@ class RequestsController < ApplicationController
   layout :set_layout
 
   def my_requests
-      @open = Request.search "*",includes: [:user], where: {status: "open", user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:open_page], per_page: 20
+      @published = Request.search "*",includes: [:user], where: {status: "published", user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:published_page], per_page: 20
       @in_progress = Request.search "*",includes: [:user], where: {status: "in_progress", user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:in_progress_page], per_page: 20
       @completed = Request.search "*",includes: [:user], where: {status: "completed", user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:completed_page], per_page: 20
       @closed = Request.search "*",includes: [:user], where: {status: "closed", user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:closed_page], per_page: 20

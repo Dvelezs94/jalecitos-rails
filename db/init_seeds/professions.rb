@@ -5,7 +5,7 @@ module InitProfessions
     [
      "Abogado", "Actor", "Agente de viajes", "Albañil", "Ama de casa", "Arqueólogo", "Arquitecto", "Asesor, Consultor", "Astronauta", "Azafata",
      "Bailarín", "Basurero", "Bibliotecario", "Biólogo", "Bombero", "Cajero", "Camarero, mesero", "Camionero", "Cantante", "Carnicero", "Carpintero",
-     "Cartero", "Cazador", "Científico", "Cirujano", "Cocinero", "Conductor de autobús", "Conserje", "Contador", "Cura", "Decorador", "Dentista",
+     "Cartero", "Cazador", "Científico", "Cirujano", "Cocinero", "Conductor", "Conserje", "Contador", "Cura", "Decorador", "Dentista",
      "Dependiente de una tienda", "Diseñador", "Economista", "Electricista", "Empresario", "Enfermero", "Escritor", "Farmaceútico", "Florista",
      "Fontanero", "Fotógrafo", "Frutero", "Físico", "Granjero, Agricultor", "Ingeniero", "Investigador", "Jardinero", "Joyero", "Juez", "Limpiacristales",
      "Marinero", "Mecánico", "Meteorólogo", "Minero", "Modelo", "Modista", "Monje", "Médico", "Niñera", "Obrero", "Oficinista", "Panadero", "Pastelero, repostero",

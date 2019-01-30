@@ -2088,7 +2088,6 @@ button:focus {
 }
 
 .hero-darea {
-  margin-top: 88px;
   position: relative;
 }
 
@@ -2491,7 +2490,7 @@ button:focus {
   position: relative;
 }
 
-.mail-form i.fa.fa-search {
+.mail-form i.fas.fa-search {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -2501,7 +2500,7 @@ button:focus {
   cursor: pointer;
 }
 
-.mail-form i.fa.fa-arrow-right {
+.mail-form i.fas.fa-arrow-right {
   position: absolute;
   right: 33px;
   top: 50%;
@@ -2510,7 +2509,7 @@ button:focus {
   cursor: pointer;
 }
 
-.mail-form i.fa.fa-search:after {
+.mail-form i.fas.fa-search:after {
   position: absolute;
   content: "";
   width: 2px;
