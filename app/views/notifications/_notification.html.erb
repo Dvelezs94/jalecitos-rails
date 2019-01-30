@@ -1,42 +1,42 @@
-<div class='notifications-<%=(notification.read_at.nil?)? "false": "true"%>'>
-  <a href='<%=url_generator_helper(notification, notification.notifiable) %>'>
-    <div class='left'>
-      <div class='icon_notify'>
-        <img class='nav-avatar' src='<%=notification.user.image_url%>'>
-      </div>
-      <p>
-        <strong><%=notification.user.slug%></strong>
-        <%=notification.action%>
-        <% if notification.notifiable_type == "Package" %>
-
-          en el jale
-          <%= notification.notifiable.name %>
-          por el paquete
-          <%= notification.notifiable.pack_type %><br>
-
-        <% elsif notification.notifiable_type == "Dispute" %>
-
-            en la orden
-            <%= notification.notifiable.order.uuid %><br>
-
-        <% elsif notification.notifiable_type == "Request" %>
-
-            en el pedido
-            <%= notification.notifiable.name %><br>
-
-        <% elsif notification.notifiable_type == "Order" %>
-
-            la orden
-            <%= notification.notifiable.uuid %><br>
-
-        <% else %>
-
-            en el pedido
-            <%= notification.notifiable.request.name %><br>
-
-        <% end %>
-          <time><%=distance_of_time_in_words(notification.created_at, Time.now)%></time>
-        </p>
-      </div>
-    </a>
+<div class="belldropdown-box relative">
+  <a href="<%=url_generator_helper(notification, notification.notifiable) %>", style="display: flex;">
+  <div>
+    <%= image_tag(notification.user.image_url(:thumb), class: "notif-avatar") %>
   </div>
+  <div class="notif-text">
+    <p class="greensbold"><strong><%=notification.user.slug%></strong>
+    <%=notification.action%>
+    <% if notification.notifiable_type == "Package" %>
+
+      en el jale
+      <%= notification.notifiable.name %>
+      por el paquete
+      <%= notification.notifiable.pack_type %><br>
+
+    <% elsif notification.notifiable_type == "Dispute" %>
+
+        en la orden
+        <%= notification.notifiable.order.uuid %><br>
+
+    <% elsif notification.notifiable_type == "Request" %>
+
+        en el pedido
+        <%= notification.notifiable.name %><br>
+
+    <% elsif notification.notifiable_type == "Order" %>
+
+        la orden
+        <%= notification.notifiable.uuid %><br>
+
+    <% else %>
+
+        en el pedido
+        <%= notification.notifiable.request.name %><br>
+
+    <% end %></p>
+  </div>
+  <div class="">
+    <span<%= icon("fas","clock") %> <%=distance_of_time_in_words(notification.created_at, Time.now)%></span>
+  </div>
+</a>
+</div>
