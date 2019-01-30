@@ -1,5 +1,5 @@
-jQuery ->
-  if $("#user_image").length
+$(document).on "turbolinks:load", ->
+  if $("#user_image").length > 0
     $(".best_in_place").best_in_place();
     #initialize file upload
     $("#user_image").fileupload(

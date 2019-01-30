@@ -1,7 +1,7 @@
 $(document).on "turbolinks:load", ->
   class Notifications
     constructor: ->
-      @notifications = $("[data-behavior='notifications']")
+      @notifications = $("[data-behavior='notification-items']")
       @setup() if @notifications.length > 0
 
     setup: ->
@@ -30,18 +30,20 @@ $(document).on "turbolinks:load", ->
 
       items = $.map data, (notification) ->
         "
-        <div class='notifications-#{notification.seen}'>
         <a href='#{notification.redirect.path}'>
-          <div class='left'>
-            <div class='icon_notify'>
-              <img class='nav-avatar' src='#{notification.user.image_url}'>
-            </div>
-            <p><strong>#{notification.user.slug}</strong> #{notification.action} #{notification.notifiable.type}<br>
-              <time>#{notification.date}</time>
-            </p>
+        <div class='belldropdown-box notifications-#{notification.seen}'>
+          <div class='sameicon'>
+            <img class='nav-avatar' src='#{notification.user.image_url}'>
           </div>
-        </a>
+          <div class='belldropdown-text'>
+            <p class='greens1'>NUEVO JALE</p>
+            <p class='greensbold'><strong>#{notification.user.slug}</strong> #{notification.action} #{notification.notifiable.type}</p>
+          </div>
+          <div class='timer'>
+            <span><i class='fa fa-clock-o' aria-hidden='true'></i>#{notification.date}</span>
+          </div>
         </div>
+        </a>
         "
 
       $("[data-behavior='unread-count']").text(unread_count)
