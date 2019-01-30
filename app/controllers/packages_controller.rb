@@ -36,7 +36,7 @@ end
       end
       @gig.published! if @gig.gig_packages[0].present? && @gig.gig_packages[0].name != "" && @gig.gig_packages[0].description != "" && @gig.gig_packages[0].price != nil && @gig.gig_packages[0].price >= 100
     end
-    redirect_to user_gig_path(params[:user_id], @gig), notice: 'Tu Gig se ha publicado exitosamente'
+    redirect_to user_gig_path(params[:user_id], @gig), notice: 'Tu Jale se ha publicado exitosamente'
   end
 
   def edit_packages
@@ -48,9 +48,13 @@ end
     @gig.gig_packages.each do |record|
       pack = params[:packages]["#{record.slug}"]
       pack = sanitized_params( package_params(pack) )
-      record.update(pack)
+      if record.update(pack)
+        flash[:notice] = 'Tu Jale se ha actualizado exitosamente.'
+      else
+        flash[:alert] = 'Tus paquetes no pudieron ser actualizados ya que hay ordenes en activo.'
+      end
     end
-    redirect_to user_gig_path(params[:user_id], @gig), notice: 'Tu Gig se ha actualizado exitosamente'
+    redirect_to user_gig_path(params[:user_id], @gig)
   end
 
   private
