@@ -5,7 +5,7 @@ class Gig < ApplicationRecord
   include LocationValidation
   require "i18n"
   #search
-  searchkick language: "spanish", word_start: [:name, :description], suggest: [:name, :description]
+  searchkick language: "spanish", word_start: [:name, :description], suggest: [:name, :description, :profession]
   def search_data
     {
       name: no_special_chars(name).downcase,

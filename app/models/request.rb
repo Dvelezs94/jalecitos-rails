@@ -5,7 +5,7 @@ class Request < ApplicationRecord
   include LocationValidation
   require "i18n"
   #search
-  searchkick language: "spanish", word_start: [:name, :description], suggest: [:name, :description]
+  searchkick language: "spanish", word_start: [:name, :description], suggest: [:name, :description, :profession]
   def search_data
     {
       name: no_special_chars(name).downcase,
@@ -15,6 +15,7 @@ class Request < ApplicationRecord
       category_id: category_id,
       status: status,
       user_id: user_id,
+      profession: profession,
       created_at: created_at
      }
   end
