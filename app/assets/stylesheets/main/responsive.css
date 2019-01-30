@@ -1024,10 +1024,6 @@
     width: 100%;
   }
 
-  .hero-darea {
-    margin-top: 0;
-  }
-
   .maild-form {
     width: 85%;
     margin-left: 73px;
@@ -2097,7 +2093,6 @@
   }
 
   .hero-darea {
-    margin-top: 0;
     position: relative;
   }
 
@@ -2329,12 +2324,6 @@
     margin-bottom: 22px;
     margin-left: 0;
   }
-}
-
-/* SM Small Device :550px. */
-@media only screen and (min-width: 576px) and (max-width: 767px) {
-
-
   .headerd-mainmenu ul li {
     padding-left: 6px;
   }

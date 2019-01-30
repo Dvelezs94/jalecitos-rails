@@ -17,9 +17,9 @@ function showPosition(position) {
       $(this).attr("href", newLon);
     });
   }
-  if ($("#guest_lat").length > 0) {
-    $("#guest_lat").val(position.coords.latitude);
-    $("#guest_lon").val(position.coords.longitude);
+  if ($("#lat").length > 0) {
+    $("#lat").val(position.coords.latitude);
+    $("#lon").val(position.coords.longitude);
   }
 }
 
