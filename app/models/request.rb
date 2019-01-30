@@ -3,17 +3,19 @@ class Request < ApplicationRecord
   include TagRestrictions
   include DescriptionRestrictions
   include LocationValidation
+  require "i18n"
   #search
-  searchkick language: "spanish", word_start: [:name, :description, :tags]
+  searchkick language: "spanish", word_start: [:name, :description], suggest: [:name, :description, :profession]
   def search_data
     {
       name: no_special_chars(name).downcase,
       #remove html, multi spaces (IS REQUIRED REPLACING THE HTML WITH SPACE) and remove entities (also strip spaces from beginning and end), then remove special chars amd strip (removes leading and trailing spaces) and make it downcase
       description: "#{no_special_chars( decodeHTMLEntities(  no_double_spaces( no_html(description, true) ), false ) ).strip.downcase} #{tag_list.join(" ")}",
-      location: location,
+      location: I18n.transliterate(location),
       category_id: category_id,
       status: status,
       user_id: user_id,
+      profession: profession,
       created_at: created_at
      }
   end
@@ -23,7 +25,7 @@ class Request < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
   #Enums
-  enum status: { open: 0, in_progress: 1, completed: 2, closed: 3, banned: 4}
+  enum status: { published: 0, in_progress: 1, completed: 2, closed: 3, banned: 4}
   #Associations
   belongs_to :user
   belongs_to :category

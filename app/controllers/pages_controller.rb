@@ -1,23 +1,19 @@
 class PagesController < ApplicationController
   include SetLayout
-  include SearchFunctions
   before_action :admin_redirect, only: :home
   before_action :pending_review, only: [:home, :finance], :if => :signed_and_rev
   layout :set_layout
   access user: :all, admin: :all, all: [:home, :autocomplete_search]
   def home
-    if params[:query]
-      options = init_search_options
-      @search = search(options[:model], options[:includes], options[:status])
-    elsif current_user
+    if current_user
       @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 1}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 10)
       @popular_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 10)
-      @recent_requests = Request.search("*", where: {status: "open", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 10)
+      @recent_requests = Request.search("*", where: {status: "published", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 10)
     end
   end
 
   def request_index
-    @requests = Request.includes(:user).open.order(created_at: :desc).page(params[:page])
+    @requests = Request.includes(:user).published.order(created_at: :desc).page(params[:page])
   end
 
   def finance
@@ -29,37 +25,7 @@ class PagesController < ApplicationController
     @liked_gigs = Gig.find(current_user.likes.pluck(:gig_id))
   end
 
-  def autocomplete_search
-    query = filter_query
-    #init the filter params
-    options = init_search_options
-    render json: options[:model].search(query, {
-      fields: ["name", "description"],
-      match: :word_start,
-      limit: 10,
-      load: false,
-      misspellings: {below: 5},
-      where: where_filter(options[:status])
-    }).map{|x| pre_text(options[:model]) + x.name}
-  end
-
-  def autocomplete_profession
-    query = params[:query]
-    #init the filter params
-    render json: Profession.search(query, {
-      fields: ["name"],
-      match: :word_start,
-      limit: 10,
-      load: false,
-      misspellings: {below: 2}
-    }).map(&:name)
-  end
-
   private
-
-  def pre_text model
-    ( model == Gig)? "Voy a " : "Busco un "
-  end
 
   def admin_redirect
     redirect_to(dashboard_admins_path) if (current_user && current_user.has_role?(:admin))
@@ -89,7 +55,7 @@ class PagesController < ApplicationController
       #get the recent pending reviews (searchkick just index pending reviews)
       @reviews = Review.search("*", where: { giver_id: current_user.id, status: "pending" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
       #verify the reviews that are pending (searchkick takes some time to update its records)
-      @reviews = @reviews.select{ |r| r.pending? } if @reviews.present? 
+      @reviews = @reviews.select{ |r| r.pending? } if @reviews.present?
     end
   end
 

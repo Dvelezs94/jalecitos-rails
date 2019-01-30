@@ -1,19 +1,5 @@
-<main role="main">
-  <% if @search.any? %>
-
-  <div class="container">
-    <div class="row paginated-elements">
-      <%= render partial: "requests/request", collection: @search %>
-    </div>
+<div class="container">
+  <div class="row paginated-elements">
+    <%= render partial: "requests/request", collection: @requests %>
   </div>
-
-    <div class="pagination-links">
-      <%= paginate @search %>
-    </div>
-
-  </main>
-<% else %>
-  <div class="container row">
-    Ninguna coincidencia para tu búsqueda
-  </div>
-<% end  %>
+</div>

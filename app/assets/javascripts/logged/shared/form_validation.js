@@ -14,4 +14,10 @@ $(document).on('turbolinks:load', function() {
   if($(".new_billing_profile").length > 0){
    $(".new_billing_profile").validate();
   }
+  if($(".new_billing_profile").length > 0){
+   $(".new_billing_profile").validate();
+  }
+  if($(".search-form-guest").length > 0){
+   $(".search-form-guest").validate();
+  }
 });
