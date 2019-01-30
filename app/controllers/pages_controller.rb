@@ -8,12 +8,12 @@ class PagesController < ApplicationController
     if current_user
       @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 1}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 10)
       @popular_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 10)
-      @recent_requests = Request.search("*", where: {status: "open", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 10)
+      @recent_requests = Request.search("*", where: {status: "published", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 10)
     end
   end
 
   def request_index
-    @requests = Request.includes(:user).open.order(created_at: :desc).page(params[:page])
+    @requests = Request.includes(:user).published.order(created_at: :desc).page(params[:page])
   end
 
   def finance

@@ -32,7 +32,7 @@ module SearchFunctions
     filters = Hash.new
     if (params[:model_name] == "requests")
       filters[:includes] = [:user]
-      filters[:status] = "open"
+      filters[:status] = "published"
       filters[:model] = Request
     else
       filters[:includes] = [:search_gigs_packages, :user]

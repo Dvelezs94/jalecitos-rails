@@ -34,10 +34,10 @@
                 <div class="row align_center">
                   <div class="col-lg-12 align_center">
                     <div class="row align_center paginated_open">
-                      <%= render partial: "requests/request", collection: @open %>
+                      <%= render partial: "requests/request", collection: @published %>
                     </div>
                     <div class="pagination-links">
-                      <%= paginate @open, param_name: :open_page, :params => {:current => "open"} %>
+                      <%= paginate @published, param_name: :published_page, :params => {:current => "published"} %>
                     </div>
                   </div>
                 </div>
