@@ -9,10 +9,10 @@ class QueriesController < ApplicationController
     location = get_location(params[:lat], params[:lon]) if params[:lat].present? && params[:lon].present?
     if location.present?
       @gigs = Gig.search(params[:query], where: {status: "published", location: location}, limit: 5, execute: false)
-      @requests = Request.search(params[:query], where: {status: "open",location: location}, limit: 5, execute: false)
+      @requests = Request.search(params[:query], where: {status: "published",location: location}, limit: 5, execute: false)
     else
       @gigs = Gig.search(params[:query], where: {status: "published"}, limit: 5, execute: false)
-      @requests = Request.search(params[:query], where: {status: "open"}, limit: 5, execute: false)
+      @requests = Request.search(params[:query], where: {status: "published"}, limit: 5, execute: false)
     end
     Searchkick.multi_search([@gigs, @requests])
   end
@@ -21,7 +21,7 @@ class QueriesController < ApplicationController
     render json: Searchkick.search(params[:query], {
       index_name: [Gig, Request],
       suggest: [:name, :description, :profession],
-      where:  { _or: [{status: "open"}, {status: "published"}] }
+      where:  { status: "published" }
     }).suggestions
   end
 
@@ -29,10 +29,10 @@ class QueriesController < ApplicationController
     location = get_location(params[:lat], params[:lon]) if params[:lat].present? && params[:lon].present?
     if location.present?
       @gigs = Gig.search(params[:query], where: {status: "published", location: location}, limit: 5, execute: false)
-      @requests = Request.search(params[:query], where: {status: "open",location: location}, limit: 5, execute: false)
+      @requests = Request.search(params[:query], where: {status: "published",location: location}, limit: 5, execute: false)
     else
       @gigs = Gig.search(params[:query], where: {status: "published"}, limit: 5, execute: false)
-      @requests = Request.search(params[:query], where: {status: "open"}, limit: 5, execute: false)
+      @requests = Request.search(params[:query], where: {status: "published"}, limit: 5, execute: false)
     end
     Searchkick.multi_search([@gigs, @requests])
   end
