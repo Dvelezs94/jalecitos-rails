@@ -13,9 +13,9 @@
       Mensajes
     </a>
 
-    <a href="#" class="redbell1">
+    <a href="#" class="redbell1" onclick="toggleNotifications(event);" data-behavior='read-notifications'>
       <span></span>
-      <%= icon("fas", "bell") %><br>
+      <%= icon("fas","bell") %><br>
       Notificaciones
     </a>
 
@@ -26,75 +26,12 @@
 
   <div class="bellposition2">
     <span></span>
-    <a href="#">
-      <i class="fa fa-bell"></i>
+    <a href="#" onclick="toggleNotifications(event);" data-behavior='read-notifications'>
+      <%= icon("fas","bell") %>
     </a>
   </div>
 </div>
 
-<div class="belldropdownarea">
-  <div class="belldropdown-box">
-    <div class="sameicon">
-      <i class="fa fa-bookmark-o" aria-hidden="true"></i>
-    </div>
-    <div class="belldropdown-text">
-      <p class="greens1">NUEVO JALE</p>
-      <p class="greensbold">Te han contratado para el paquete “ Voy a limpiar tu casa”</p>
-    </div>
-    <div class="timer">
-      <span>
-        <i class="fa fa-clock-o" aria-hidden="true"></i>
-        9:34am</span>
-    </div>
-  </div>
-
-  <div class="belldropdown-box">
-    <div class="sameicon">
-      <i class="fa fa-comment-o" aria-hidden="true"></i>
-    </div>
-
-    <div class="belldropdown-text">
-      <p class="greens1">NUEVO JALE</p>
-      <p class="greensbold">Review en tu perfil</p>
-      <p class="quam1">vel quam elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor</p>
-    </div>
-    <div class="timer">
-      <span>
-        <i class="fa fa-clock-o" aria-hidden="true"></i>
-        9:34am</span>
-    </div>
-  </div>
-
-  <div class="belldropdown-box">
-
-    <div class="sameicon">
-      <i class="fa fa-check"></i>
-    </div>
-
-    <div class="belldropdown-text">
-      <p class="greens1">NUEVO JALE</p>
-      <p class="greensbold">Te han contratado para el paquete “ Voy a limpiar tu casa”</p>
-    </div>
-    <div class="timer">
-      <span>
-        <i class="fa fa-clock-o" aria-hidden="true"></i>
-        9:34am</span>
-    </div>
-  </div>
-
-  <div class="belldropdown-box">
-    <div class="sameicon">
-      <i class="fa fa-external-link" aria-hidden="true"></i>
-    </div>
-
-    <div class="belldropdown-text">
-      <p class="greens1">NUEVO JALE</p>
-      <p class="greensbold">Te han contratado para el paquete “ Voy a limpiar tu casa”</p>
-    </div>
-    <div class="timer">
-      <span>
-        <i class="fa fa-clock-o" aria-hidden="true"></i>
-        9:34am</span>
-    </div>
-  </div>
+<div class="belldropdownarea notification-items" data-behavior='notification-items'>
+<!-- notifications heere -->
 </div>

@@ -606,6 +606,21 @@ p.quam1 {
   display: block;
 }
 
+.notifarea {
+  background: #F4F5F7;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 20px
+}
+
+.notif-avatar {
+  height: 50%;
+}
+
+.notif-text {
+  padding-left: 40px;
+  padding-right: 15px;
+}
 .clickred i {
   position: absolute;
   right: 25px;
@@ -766,6 +781,11 @@ p {}
   content: "";
   left: 0;
   top: 46px;
+}
+
+.relative {
+  position: relative;
+  max-height: 80px;
 }
 
 .rightsidetab-content .nav-tabs .nav-link.active {
@@ -2111,6 +2131,11 @@ button:focus {
 .herod-leftmenu-wrap ul li {
   display: inline-block;
   padding-right: 15px;
+}
+
+.row_new {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .herod-leftmenu-wrap ul li a {
