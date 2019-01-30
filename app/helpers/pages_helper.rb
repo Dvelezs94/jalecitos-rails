@@ -17,12 +17,10 @@ module PagesHelper
   end
 
   def homepage_content_helper
-    if params[:query]
-        render 'shared/query/homepage_query'
-    elsif has_role?(:user)
+    if has_role?(:user)
        render 'shared_user/root/homepage'
     else
-       render 'shared_guest/guest_page'
+       render 'shared_guest/root/homepage'
     end
   end
 

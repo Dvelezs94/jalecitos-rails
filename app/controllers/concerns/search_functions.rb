@@ -41,4 +41,8 @@ module SearchFunctions
     end
     return filters
   end
+
+  def pre_text model
+    ( model == Gig)? "Voy a " : "Busco un "
+  end
 end
