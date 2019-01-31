@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <h3 class="container">Resultados de búsqueda
+      </h3>
+    </div>
+  </div>
+    <%= render 'shared/query/gig_search_list' if @gigs.any?%>
+    <%= render 'shared/query/request_search_list' if @requests.any?%>
+</div>

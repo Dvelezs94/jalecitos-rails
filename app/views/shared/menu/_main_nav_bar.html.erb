@@ -11,7 +11,7 @@
             <div class="headerlogo768">
               <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png'), root_path %>
             </div>
-            <%= form_with url: root_path, method: :get,:html =>{ class: "search-form"} , local: true do |f|%>
+            <%= form_with url: user_search_path, method: :get,:html =>{ class: "search-form"} , local: true do |f|%>
             <div class="search-form-div searchpage3s">
               <%= f.text_field :query, value: params[:query], placeholder: "¿Qué estás buscando?", class: "query" %>
               <a href="">
@@ -24,6 +24,7 @@
                 <%= f.text_field :location, id: "search_autocomplete", placeholder: "Cualquier lugar en México", value: (params[:location].nil? && current_user)? current_user.location : params[:location] %>
               </li>
             </div>
+            <%= f.submit "Continuar", class: "submit-query",style: "display: none;" %>
           <% end %>
         </div>
       </div>
