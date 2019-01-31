@@ -99,6 +99,8 @@ Rails.application.routes.draw do
       put :deny
     end
   end
+  get 'mobile_sign_in', to: 'mobiles#sign_in'
+  get 'mobile_sign_up', to: 'mobiles#sign_up'
   get 'configuration', to: 'users#configuration'
   get 'requests', to: 'pages#request_index'
   get 'finance', to: 'pages#finance'

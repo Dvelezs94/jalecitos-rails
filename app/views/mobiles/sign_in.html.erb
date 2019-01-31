@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="content-container">
+    <%= form_for(:user, :html => { :class => "sign_in_form" }, :url => session_path(:user)) do |f| %>
+      <div class="information">
+        <label for="email">E-mail</label><br>
+        <%= f.email_field :email, class: "required", value: "", autofocus: true, onfocus: "getLocation();" %>
+        <label for="password">Contraseña</label><br>
+        <%= f.password_field :password, class: "required" %>
+        <%= hidden_field_tag :from_mobile, value = 'true' %>
+      </div>
+      <%= f.check_box :remember_me, :checked => true, :style => 'display: none' %>
+      <%= f.submit 'Continuar', class: "login" %>
+      <%= link_to icon("fab", "facebook-square"), user_facebook_omniauth_authorize_path(lat:"latitude", lon:"longitude"), class: 'media fb loginBtn loginBtn--facebook', method: :post %>
+      <%= link_to "Olvidé mi contraseña", new_password_path(:user) %>
+    <% end %>
+    <%= link_to "Registrarme", mobile_sign_up_path %>
+  </div>
+</div>
