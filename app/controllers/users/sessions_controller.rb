@@ -5,14 +5,14 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
-    auth_options = { :recall => 'pages#home', :scope => :user}
+    auth_options = { :recall => redirect_validation, :scope => :user}
     resource = warden.authenticate!(auth_options)
     super
   end
 
   # POST /resource/sign_in
   def create
-    auth_options = { :recall => 'pages#home', :scope => :user }
+    auth_options = { :recall => redirect_validation, :scope => :user }
     resource = warden.authenticate!(auth_options)
     super
   end
@@ -27,4 +27,8 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  def redirect_validation
+    params[:from_mobile].present? ? "mobiles#sign_in" : 'pages#home'
+  end
 end
