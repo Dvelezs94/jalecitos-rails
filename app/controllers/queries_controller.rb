@@ -38,14 +38,11 @@ class QueriesController < ApplicationController
   end
 
   def user_autocomplete_search
-    render json: options[:model].search(query, {
-      fields: ["name", "description"],
-      match: :word_start,
-      limit: 10,
-      load: false,
-      misspellings: {below: 5},
-      where: where_filter(options[:status])
-    }).map{|x| pre_text(options[:model]) + x.name}
+    render json: Searchkick.search(params[:query], {
+      index_name: [Gig, Request],
+      suggest: [:name, :description, :profession],
+      where:  { status: "published" }
+    }).suggestions
   end
 
   def autocomplete_profession

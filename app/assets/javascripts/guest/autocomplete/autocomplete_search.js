@@ -3,14 +3,7 @@ $(document).on('turbolinks:load', function() {
     datumTokenizer: Bloodhound.tokenizers.whitespace,
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     remote: {
-      url: '/guest_autocomplete_search?query=%QUERY',
-      replace: function(url, uriEncodedQuery) {
-
-        lat = $('#lat').val();
-        lon = $('#lon').val();
-
-        return url.replace("%QUERY", uriEncodedQuery) + '&lat=' + lat + '&lon=' + lon
-      },
+      url: '/user_autocomplete_search?query=%QUERY',
       wildcard: '%QUERY'
     }
   });
