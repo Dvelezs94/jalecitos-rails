@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= favicon_link_tag 'favicon' %>
+    <%= stylesheet_link_tag 'mobile', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- Card Anti Fraud System -->
+    <!-- <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script> <script type="text/javascript" src="https://resources.openpay.mx/lib/openpay-data.v1.min.js"></script> -->
+    <%= javascript_include_tag 'guest', 'data-turbolinks-track': 'reload' %>
+
+    <!-- For PWA -->
+   <link rel="manifest" href="/manifest.json" />
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <!--  -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= analytics_init if GoogleAnalytics.valid_tracker? %>
+    <%= meta_tags %>
+  </head>
+
+  <body id="page-top">
+    <%= google_tag_manager %>
+    <div class="main_container">
+      <%= notification_helper %>
+      <%= yield %>
+    </div>
+  </body>
+</html>
