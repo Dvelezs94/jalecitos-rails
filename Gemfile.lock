@@ -845,6 +845,8 @@ GEM
     jquery-slick-rails (1.9.0)
       railties (>= 3.1)
     jquery-validation-rails (1.16.0)
+    js_cookie_rails (2.2.0)
+      railties (>= 3.1)
     json (1.8.6)
     jwt (2.1.0)
     kaminari (1.1.1)
@@ -1090,6 +1092,7 @@ DEPENDENCIES
   jquery-rails
   jquery-slick-rails (~> 1.9)
   jquery-validation-rails (~> 1.16)
+  js_cookie_rails (~> 2.2)
   kaminari (~> 1.1, >= 1.1.1)
   listen (>= 3.0.5, < 3.2)
   mini_magick (~> 4.9, >= 4.9.2)

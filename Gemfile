@@ -135,3 +135,5 @@ gem 'google-tag-manager-rails', '~> 0.1.3'
 gem 'google-analytics-rails', '~> 1.1', '>= 1.1.1'
 # Geocoder, get user current location
 gem 'geokit-rails', '~> 2.3', '>= 2.3.1'
+# Manipulate cookies
+gem 'js_cookie_rails', '~> 2.2'

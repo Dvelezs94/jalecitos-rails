@@ -25,3 +25,5 @@
 //= require twitter/typeahead
 
 //= require owl.carousel
+
+//= require js.cookie
