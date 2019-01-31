@@ -11,6 +11,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
       sign_in(@user)
+      cookies.permanent.signed[:lg] = rand
       # flash[:notice] = "Te damos la bienvenida!"
       redirect_to root_path
       #sign_in_and_redirect @user, :event => :authentication
