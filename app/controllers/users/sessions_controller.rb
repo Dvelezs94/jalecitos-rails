@@ -40,4 +40,12 @@ class Users::SessionsController < Devise::SessionsController
   def set_cookie
     cookies.permanent.signed[:lg] = rand
   end
+
+  def after_sign_out_path_for(resource)
+    if params[:device] == "mobile"
+      mobile_sign_in_path
+    else
+      root_path
+    end
+  end
 end
