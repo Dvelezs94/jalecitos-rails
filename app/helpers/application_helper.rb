@@ -158,6 +158,7 @@ module ApplicationHelper
         <meta name='category' content='Trabajo, Empleo'>".html_safe
     else
         "<title>Jalecitos</title>".html_safe
+        "<meta name='description' content='Expertos en oficios | Hogar y Oficina'>".html_safe
     end
   end
 
