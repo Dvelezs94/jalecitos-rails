@@ -2,6 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  after_action :set_cookie, only: :create
 
   # GET /resource/sign_in
   def new
@@ -20,6 +21,7 @@ class Users::SessionsController < Devise::SessionsController
   # DELETE /resource/sign_out
   def destroy
     super
+    cookies.delete :lg
   end
 
 
@@ -27,8 +29,15 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  private
 
   def redirect_validation
     params[:from_mobile].present? ? "mobiles#sign_in" : 'pages#home'
+  end
+
+  # method used to set a cookie after successful sign in
+  # lg stands for logged
+  def set_cookie
+    cookies.permanent.signed[:lg] = rand
   end
 end
