@@ -48,4 +48,8 @@ class Users::SessionsController < Devise::SessionsController
       root_path
     end
   end
+
+  def after_sign_in_path_for resource
+    params[:from_mobile].present? ? root_path(notifications: "enable") : root_path
+  end
 end
