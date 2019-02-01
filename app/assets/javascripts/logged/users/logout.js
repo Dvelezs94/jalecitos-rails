@@ -8,4 +8,34 @@ $(document).on('turbolinks:load', function() {
      $("#destroy_session").attr("href", outUrl);
      $("#destroy_session_tab").attr("href", outUrl);
   }
+
+  // Destroy push subscriptions on closing session
+  $("#destroy_session").on('click', function (event) {
+    event.preventDefault();
+    navigator.serviceWorker.ready
+    .then((registration) => {
+      registration.pushManager.getSubscription()
+        .then((subscription) => {
+          if (subscription) {
+            dropSubscription(subscription);
+            subscription.unsubscribe();
+          }
+        });
+    });
+  });
+
+  $("#destroy_session_tab").on('click', function (event) {
+    event.preventDefault();
+    navigator.serviceWorker.ready
+    .then((registration) => {
+      registration.pushManager.getSubscription()
+        .then((subscription) => {
+          if (subscription) {
+            dropSubscription(subscription);
+            subscription.unsubscribe();
+          }
+        });
+    });
+  });
+
 });

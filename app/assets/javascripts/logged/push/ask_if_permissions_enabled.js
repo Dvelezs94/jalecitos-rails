@@ -1,9 +1,27 @@
 $(document).on('turbolinks:load', function() {
-  if (location.pathname == "/") {
-    if (Notification.permission === "granted") {
-      navigator.serviceWorker.ready.then(() => {
-        validateSWSubscription();
-      });
+  var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
     }
+  };
+
+  if (getUrlParameter('notifications') == "enable") {
+    Notification.requestPermission(function(status) {
+      if (Notification.permission === "granted") {
+        navigator.serviceWorker.ready.then(() => {
+          resetNotifications();
+        });
+      }
+    });
+
   }
 });
