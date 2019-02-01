@@ -22,7 +22,7 @@
       <%=link_to( " #{icon('fas', 'cogs')}Configuracion ".html_safe, configuration_path )%>
     </div>
     <div class="authorlock authorlock2">
-      <%=link_to( " #{icon('fas', 'sign-out-alt')}Cerrar sesion ".html_safe, destroy_user_session_path, method: :delete)%>
+      <%=link_to( " #{icon('fas', 'sign-out-alt')}Cerrar sesion ".html_safe, destroy_user_session_path(device: "pending"), method: :delete, id: "destroy_session_tab")%>
     </div>
     <% else %>
     <div class="authorlock">
