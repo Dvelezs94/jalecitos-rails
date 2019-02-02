@@ -96,7 +96,7 @@ class OffersController < ApplicationController
 
     def check_if_offered
       if has_offered(current_user.id)
-        redirect_to request_path(params[:request_id]), notice: 'You already offered on this request'
+        redirect_to request_path(params[:request_id]), notice: 'Ya ofertaste en este pedido.'
       end
     end
 
