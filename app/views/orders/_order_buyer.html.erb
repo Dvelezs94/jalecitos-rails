@@ -30,7 +30,7 @@
           <% if order_buyer.pending? %>
             <% if order_buyer.started_at? %>
               <%= link_to "reembolso", refund_order_path(order_buyer.id), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
-              <%= link_to "comenzar Trabajo", start_order_path(order_buyer.id), method: :put, :data => {:confirm => 'Seguro que quieres comenzar la orden?'} %>
+              <%= link_to "comenzar", start_order_path(order_buyer.id), method: :put, :data => {:confirm => 'Seguro que quieres comenzar la orden?'} %>
             <% else %>
               <%= link_to "reembolso", refund_order_path(order_buyer.id), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
             <% end %>

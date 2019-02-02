@@ -1,61 +1,82 @@
 <% if current_user %>
-  <div class="header-toparea">
-    <div class="container-fluid">
-      <div class="row align-items-center">
-        <div class="col-lg-6 col-md-10 col-12">
-          <div class="row headertop-left align-items-center justify-content-center">
-            <div class="header-logo">
-              <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png', size: "138x32"), root_path %>
-            </div>
+<div class="header-to-area">
+   <div class="container">
+     <div class="row">
+            <div class="col-lg-7 col-md-7">
+            <div class="header-left-content">
+                <div class="logo">
+                    <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png'), root_path %>
+                </div>
+                <div class="input-area">
+                    <div class="form">
+                        <form action="">
+                        <a><%= icon("fa", "search") %></a>
+                        <input type="text" placeholder="Busca algo">
+                        </form>
+                    </div>
+                </div>
+                <div class="button-area">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                      <a class="navbar-brand" href="#">Ubicación</a>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
 
-            <div class="headerlogo768">
-              <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png'), root_path %>
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Categoría
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Another action</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </nav>
+                </div>
             </div>
-            <%= form_with url: user_search_path, method: :get,:html =>{ class: "search-form"} , local: true do |f|%>
-            <div class="search-form-div searchpage3s">
-              <%= f.text_field :query, value: params[:query], placeholder: "¿Qué estás buscando?", class: "query" %>
-              <a href="">
-                <i class="fa fa-search"></i>
-              </a>
-            </div>
-            <div class="headertop-location">
-              <li>
-                <%= icon("fas", "map-marker-alt") %>
-                <%= f.text_field :location, id: "search_autocomplete", placeholder: "Cualquier lugar en México", value: (params[:location].nil? && current_user)? current_user.location : params[:location] %>
-              </li>
-            </div>
-            <%= f.submit "Continuar", class: "submit-query",style: "display: none;" %>
-          <% end %>
         </div>
-      </div>
-      <div class="col-lg-6 col-md-2">
-        <%= nav_links_helper %>
-      </div>
+
+        <div class="col-lg-5 col-md-5">
+            <%= nav_links_helper %>
+        </div>
+        </div>
     </div>
+</div>
+<!-- Header top End -->
 
-    <div class="headertop">
-      <div class="row">
-        <div class="col-8">
-          <div class="headertop-location ex">
-            <li>
-              <i class="fa fa-map-marker"></i>
-              <a href="">Elige tu ciudad</a>
-            </li>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="bellposition2 ex">
-            <span></span>
-            <a href="#">
-              <i class="fa fa-bell"></i>
-            </a>
-          </div>
-        </div>
+<!-- Tablet mobile top ber Start -->
+<div class="tablet-mobile-top-ber">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="tablet-mobile-input">
 
-      </div>
+                  <div class="mobile-input-icon">
+                    <%= link_to icon("fa", "search"), root_path %>
+                  </div>
+                </div>
+            </div>
+            <div class="col-6 text-center">
+                <div class="map-marker">
+                    <a href="#"><span><%= icon("fa", "map-marker") %></span>Saltillo, Coah.</a>
+                </div>
+            </div>
+            <div class="col-3 text-right">
+                <div class="tablet-mobile-user">
+                  <a href="<%= user_path(current_user) %>">
+                    <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "nav-avatar") %>
+                  </a>
+                </div>
+            </div>
+        </div>
     </div>
-
-  </div>
 </div>
 <% else %>
 <div class="headerd-area">

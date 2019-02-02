@@ -31,7 +31,7 @@
             <% if order_seller.started_at? %>
             <%= link_to "denegar", refund_order_path(order_seller.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
             <% else %>
-              <%= link_to "denegar Trabajo", refund_order_path(order_seller.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
+              <%= link_to "denegar", refund_order_path(order_seller.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
               <%= link_to "solicitar inicio", request_start_order_path(order_seller.id), :method => :put %>
             <% end %>
           <% elsif order_seller.in_progress? %>
