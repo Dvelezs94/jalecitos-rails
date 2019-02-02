@@ -60,7 +60,7 @@ class GigsController < ApplicationController
   # DELETE /gigs/1
   def destroy
     @gig.destroy
-    redirect_to user_path(params[:user_id]), notice: 'Gig was successfully destroyed.'
+    redirect_to user_path(params[:user_id]), notice: 'El Jale fue destruido.'
   end
 
   private
