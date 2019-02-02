@@ -1,5 +1,5 @@
 class MessageMailer < ApplicationMailer
-  def new_message(message)
+  def new_message(message, receiver)
     @message = message
 
     data = {
@@ -7,7 +7,7 @@ class MessageMailer < ApplicationMailer
         {
           "to": [
             {
-              "email": @message.conversation.opposed_user(@message.user).email
+              "email": receiver
             }
           ],
           "dynamic_template_data": {
