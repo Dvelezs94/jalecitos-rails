@@ -346,7 +346,6 @@ body {
 	margin-top: -35px;
 }
 .pendiente-text h5 {
-	color: #F9B732;
 	font-weight: 700;
 	text-transform: uppercase;
 	font-size: 14px;
@@ -355,6 +354,32 @@ body {
 	padding: 5px 10px;
 	border-radius: 3px;
 }
+
+/* colors for transactions status */
+.in_progress{
+  color: #0067f4;
+}
+
+.pending{
+  color: #f9b732;
+}
+
+.completed{
+  color: #39c27b;
+}
+
+.refunded{
+  color: #8e8e93;
+}
+
+.denied{
+  color: #ef2235;
+}
+
+.disputed{
+  color: #ef2235;
+}
+/* end */
 .pendiente-text p {
 	color: #8E8E93;
 	font-size: 19px;
