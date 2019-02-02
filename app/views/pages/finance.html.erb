@@ -1,69 +1,46 @@
-<div class="container-fluid sales_manage">
-  <div class="section container">
-    <!-- -->
+<div class="transacciones-secsion">
+  <div class="container">
     <div class="row">
-
-      <div class="col-lg-12  col-md-12">
-        <h3>Mis Transacciones</h3>
-      </div>
-    </div>
-    <!-- -->
-
-    <div class="row">
-
-      <div class="col-lg-12  col-md-12">
-
-        <ul class="tabs nav nav-tabs">
-          <li>
-            <a href="#purchases">Compras</a>
-          </li>
-          <li>
-            <a href="#sales">Ventas</a>
-          </li>
-
-        </ul>
-        <!-- .tabs -->
-        <div class="section1"></div>
-        <div class="tabWrap">
-          <div class="tabContainer">
-<!-- New -->
-            <div id="purchases" class="tabContent">
-              <table class="table-responsive1">
-
-                <tr class="heading_table">
-                  <td colspan="100%">Compras</td>
-                </tr>
-                <%= render 'pages/purchases/table_head' %>
-                <%= render partial: 'pages/purchases/order', collection: @purchases %>
-
-              </table>
-            </div>
-            <!-- .tabContent -->
-
-            <!-- Active -->
-            <div id="sales" class="tabContent">
-              <table class="table-responsive1">
-
-                <tr class="heading_table">
-                  <td colspan="100%">Ventas</td>
-                </tr>
-                <%= render 'pages/sales/table_head' %>
-                <%= render partial: 'pages/sales/order', collection: @sales %>
-
-
-              </table>
-            </div>
-            <!-- .tabContent -->
-
-
-          </div>
-          <!-- .tabContainer -->
+      <div class="col-lg-12">
+        <div class="transacciones-text">
+          <span>
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+          </span>
+          <h1>Transacciones</h1>
         </div>
-        <!-- .tabWrap -->
-
       </div>
-
     </div>
+  </div>
+</div>
+<!-- Transacciones secsion End -->
 
+<!-- Transacciones tab secsion Start -->
+<div class="Transacciones-tab-secsion">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="Transacciones-tab-area">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#Shah-Home" role="tab" aria-controls="nav-home" aria-selected="true">Compras</a>
+              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#Shah-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Ventas</a>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="Shah-Home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                  <div class="transacciones-tab-content row">
+                    <%= render partial: 'orders/order_buyer', collection: @purchases %>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="Shah-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                  <div class="transacciones-tab-content row">
+                    <%= render partial: 'orders/order_seller', collection: @sales %>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
