@@ -1,8 +1,15 @@
-$(".paginated-reviews").append('<%= j render(@search) %>');
-
-<% if @search.next_page %>
-  $('.pag-and-load').replaceWith('<%= j paginate(@search) %>');
-<% else %>
-  $('.pag-and-load').remove();
+ carousel = $('.owl-carousel.'+'<%= j params[:current] %>')
+<% collection = instance_variable_get("@"+params[:current]) %>
+//remove paginator
+indexToRemove = carousel.find(".owl-stage").children().length -1
+carousel.trigger( 'remove.owl.carousel',  indexToRemove )
+//add items
+<% collection.each do |item| %>
+   carousel.trigger('add.owl.carousel', "<%= j render item %>").trigger('refresh.owl.carousel');
 <% end %>
-<% sleep 1 %>
+//if next page add new paginator
+<% if collection.next_page %>
+<% link = link_to_next_page(collection, "Oculto".html_safe, class: "carousel-paginator" , param_name: params[:current], :params => {:current => params[:current]}, remote: true, style: "display: none;") %>
+  carousel.trigger('add.owl.carousel', "<%=j link %>").trigger('refresh.owl.carousel');
+<% end %>
+<% sleep 5 %>

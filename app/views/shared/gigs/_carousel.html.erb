@@ -5,9 +5,10 @@
       <h3><%= title %></h3>
     </div>
 
-    <div class="page3slides-wrapd owl-carousel gigs-carousel popular-gigs-carousel">
+    <div class="page3slides-wrapd owl-carousel gigs-carousel <%= param_name %>">
 
       <%= render gigs %>
+      <%= link_to_next_page(gigs, "Oculto".html_safe, class: "carousel-paginator" , param_name: param_name, :params => {:current => param_name}, remote: true, style: "display: none;") %>
     </div>
   </div>
 </div>
