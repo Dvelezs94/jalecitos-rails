@@ -7,12 +7,17 @@ class MessageEmailWorker
   #Message (user, recipient, body, conversation_id)
   def perform(message_id)
     message = Message.find(message_id)
+    receiver = message.conversation.opposed_user(message)
     # Check if message has been read already
     if message.read_at?
       # Return true to finish operation if condition is met
       return true
     end
-    MessageMailer.new_message(message).deliver
+    if receiver.transactional_emails
+      MessageMailer.new_message(message, receiver.email).deliver
+    else
+      return true
+    end
   end
 
 end
