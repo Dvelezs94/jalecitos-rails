@@ -6,9 +6,13 @@ class PagesController < ApplicationController
   access user: :all, admin: :all, all: [:home, :autocomplete_search]
   def home
     if current_user
-      @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 1}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 10)
-      @popular_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 10)
-      @recent_requests = Request.search("*", where: {status: "published", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 10)
+      @popular_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:popular_gigs], per_page: 5)
+      @recent_requests = Request.search("*", where: {status: "published", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:recent_requests], per_page: 5)
+      @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 1}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:verified_gigs], per_page: 5)
+      puts "X"* 500
+      puts @popular_gigs.count
+      puts @recent_requests.count
+      puts @verified_gigs.count
     end
   end
 
