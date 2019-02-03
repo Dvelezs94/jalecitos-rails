@@ -1,12 +1,13 @@
-<li>
-  <div class="row">
-    <div class="<%= user == message.user ? 'message-sent' : 'message-received' %>">
-      <%= message.body %>
-      <% if message.image? %>
-      <div class="">
-        <%= link_to(image_tag(message.image_url, height: '350', width: '350'), message.image_url) %>
-      </div>
-      <% end %>
-  </div>
+<div class="<%= user == message.user ? 'chat-left-side-chat-write' : 'chat-right-side-chat-write' %>">
+    <div class="single-<%= user == message.user ? '' : 'right-' %>chat-write">
+        <%= image_tag(message.user.image_url(:thumb), class: "message-avatar") %>
+        <div class="chat-<%= user == message.user ? '' : 'right-' %>write-text">
+            <p><%= message.body %>
+            <% if message.image? %>
+              <%= link_to(image_tag(message.image_url, class: "message-img"), message.image_url ) %>
+            </p>
+            <% end %>
+            <!-- <span>14:36</span> -->
+        </div>
+    </div>
 </div>
-</li>

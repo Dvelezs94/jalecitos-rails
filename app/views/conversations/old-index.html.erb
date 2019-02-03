@@ -1,0 +1,64 @@
+<div class="container-fluid section main_bg">
+
+  <div class="container main_inbox">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-12 left_inbox_view">
+
+        <!-- tabs-->
+
+        <div class="user_conversations">
+
+          <div class="tablinks" onclick="openCity(event, 'empty_box')" id="defaultOpen"></div>
+          <!-- -->
+          <% @users.each do |user| %>
+
+            <!-- -->
+            <%= link_to conversations_path(user_id: user.slug) do %>
+            <div class="chats_inbox_list tablinks" onclick="openCity(event, 'conversation-list')" >
+              <div class="row in_row">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-12">
+
+                  <div class="users">
+                    <div class="users_img">
+                      <%= image_tag(avatar_display_helper(user.image_url(:thumb)), class: "nav-avatar") %></div>
+
+                    <div class="users_txt">
+                      <h5><%=  "#{user.slug.first(15)}..." %></h5>
+                      <p>Activo hace:
+                        <%= user.current_sign_in_at != nil ? distance_of_time_in_words_to_now(user.current_sign_in_at) : "nunca" %></p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <% end  %>
+            <!-- -->
+
+          <% end %>
+          <!-- -->
+
+        </div>
+
+        <!-- tabs -->
+
+      </div>
+
+      <div class="col-lg-9  col-md-9  col-sm-12  right_inbox_view" id="conversation-list">
+
+      <% if params[:user_id] && params[:user_id] != current_user.slug %>
+        <%= render 'conversations/conversation', conversation: @conversation, opposite_user: opposite_conversation_user(@conversation, current_user)  %>
+      <% else %>
+      <div id="empty_box">
+        <div class="empty-state no-conversations text-center">
+              <%= icon "fas","comments", class: "fa-5x" %>
+              <h4>Nada que ver aquí</h4>
+              <small>Abre una conversacion para mostrarla aquí</small>
+            </div>
+        </div>
+      <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
