@@ -169,15 +169,6 @@
     overflow-y: auto;
 }
 
-.empty-state.no-conversations {
-    color: #555555;
-
-    position: absolute;
-    margin: 0px auto;
-    width: 100%;
-    top: 37%;
-}
-
 .users img {
     float: left;
     border-radius: 50% !important;
