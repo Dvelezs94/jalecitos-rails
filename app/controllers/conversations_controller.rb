@@ -8,8 +8,7 @@ class ConversationsController < ApplicationController
 
   # GET /conversations
   def index
-    p "x" * 500
-    p get_opposite_user(current_user.conversations.order(updated_at: :desc))
+    get_opposite_user(current_user.conversations.order(updated_at: :desc))
     # @conversations = Conversation.includes(:recipient, :messages).where("sender_id = ? OR recipient_id = ?", current_user.id, current_user.id)
     if params[:user_id] && params[:user_id] != current_user.slug
       @messages = Message.search("*", where: {conversation_id: @conversation.id}, order: [{ id: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 25)
