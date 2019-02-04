@@ -1,7 +1,7 @@
 <div class="col-lg-6">
 <div class="transacciones-tab-text">
   <div class="pendiente-text">
-      <h5 class="<%= order_seller.status %>"><%= order_seller.status %></h5>
+      <h5 class="<%= order_seller.status %>"><%= t "orders.status.#{order_seller.status}" %></h5>
       <h4>ID: <%= order_seller.uuid %></h4>
       <% if order_seller.purchase_type == "Package"%>
       <p><%= order_seller.purchase.gig.title %></p>
@@ -17,7 +17,7 @@
       </div>
         <div class="Paquete-Básico">
             <% if order_seller.purchase_type == "Package"%>
-            <h5><%="Paquete #{order_seller.purchase.pack_type}"%></h5>
+            <h5>Paquete <%= t "gigs.packages.#{order_seller.purchase.pack_type}"%></h5>
             <% else %>
             <h5>Pedido</h5>
             <% end %>
