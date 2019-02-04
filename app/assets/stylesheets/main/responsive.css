@@ -1,5 +1,9 @@
 /* XL Device :1200px. */
 @media (min-width: 1200px) {
+
+  .container {
+    min-width: 1200px;
+  }
   .bellposition i {
     font-size: 30px;
   }
@@ -1576,6 +1580,10 @@
 
   .plusred {
     position: relative;
+  }
+
+  .bellposition a {
+    color: #9B9B9B;
   }
 
   .redbell1 span::after {

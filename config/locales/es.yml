@@ -1,5 +1,24 @@
 ---
 es:
+  gigs:
+    status:
+      draft: "Borrador"
+      published: "Publicado"
+      banned: "Bloqueado"
+    packages:
+      basic: "basico"
+      standard: "estandar"
+      premium: "premium"
+
+  orders:
+    status:
+      pending: "Pendiente"
+      denied: "Denegado"
+      in_progress: "En Progreso"
+      disputed: "Disputado"
+      completed: "Completado"
+      refunded: "Reembolsado"
+  # Default content
   activerecord:
     errors:
       messages:

@@ -341,3 +341,8 @@
       padding: 0px;
       list-style-type: none;
     }
+
+    .checkout-button {
+      float: right;
+      margin: 0 20px;
+    }
