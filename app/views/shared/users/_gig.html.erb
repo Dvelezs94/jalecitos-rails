@@ -12,7 +12,7 @@
           <div class="tabbigissue1-total">
             <p class="coa1"><%= gig.location %></p>
             <p class="coa2"><%= gig.title %></p>
-            <p class="coa3">Desde <%= number_to_currency(purchase_order_total(gig.packages.first.price)) %></p>
+            <p class="coa3">Desde <%= number_to_currency(purchase_order_total(gig.packages.first.price)) %> MXN</p>
           </div>
           <div class="tabstar-no">
             <%= star_display_helper(gig.score_average) %>

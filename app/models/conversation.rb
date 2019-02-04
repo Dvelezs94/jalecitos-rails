@@ -25,4 +25,8 @@ class Conversation < ApplicationRecord
   def participants
     [self.sender.id, self.recipient.id]
   end
+
+  def unread_messages?(user)
+    self.messages.where(read_at: nil).where(user: user).present?
+  end
 end

@@ -110,7 +110,7 @@
   padding: 14px 16px;
   width: 95%;
 }
-.chat-single-box.ex {
+.chat-single-box.ef {
 	background: #fff;
 }
 .chat-single-box img {
@@ -140,7 +140,6 @@
 	width: 10px;
 	height: 10px;
 	content: "";
-	background: #0167F3;
 	border-radius: 50%;
 	margin-top: 3px;
 }
