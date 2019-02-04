@@ -1,0 +1,286 @@
+/* messages page Start*/
+
+.nopadding {
+  padding: 0;
+}
+
+.message-img {
+    position: relative !important;
+    width: 190px !important;
+    height: 190px !important;
+    border-radius: 0px !important;
+}
+
+.empty-state {
+  padding-top: 100px;
+}
+
+.empty-state.no-conversations {
+    color: #555555;
+    position: absolute;
+    margin: 0px auto;
+    width: 100%;
+    top: 37%;
+}
+
+.messages-box-area {
+  position: relative;
+}
+.messages-box-area::after {
+	position: absolute;
+	left: 0;
+	top: 65px;
+	width: 100%;
+	height: 2px;
+	content: "";
+	background: #F5F6F7;
+}
+.messages-box-area::before {
+	position: absolute;
+	left: 39%;
+	top: 0;
+	width: 2px;
+	height: 100%;
+	content: "";
+	background: #F5F6F7;
+}
+
+
+.mensajes-chat {
+	position: relative;
+	margin-top: 15px;
+}
+.mensajes-chat h2 {
+  font-size: 28px;
+  margin-left: 25px;
+}
+.mensajes-chat h2 span {
+	background: #0368F4;
+	width: 20px;
+	height: 20px;
+	color: #fff;
+	font-size: 14px;
+	display: inline-block;
+	text-align: center;
+	border-radius: 50%;
+	line-height: 20px;
+	position: absolute;
+	top: 8px;
+	margin-left: 20px;
+}
+
+
+.mensajes-chat i {
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  left: 0;
+  color: #000;
+  font-size: 15px;
+}
+
+.conversación-input input {
+  border: none;
+  font-size: 17px;
+  background: none;
+  margin-left: 26px;
+}
+.conversación-input {
+	background: #F5F6F7;
+	padding: 10px;
+	border-radius: 4px;
+	position: relative;
+	margin-top: 44px;
+	margin-bottom: 20px;
+	width: 85%;
+}
+.conversación-input i {
+  position: absolute;
+  top: 50%;
+  margin-top: -8px;
+  font-size: 16px;
+}
+
+
+
+.chat-single-box {
+  position: relative;
+  background: #F5F6F7;
+  border-radius: 4px;
+  padding: 14px 16px;
+  width: 95%;
+}
+.chat-single-box.ex {
+	background: #fff;
+}
+.chat-single-box img {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+.single-box-text {
+  margin-left: 50px;
+}
+.single-box-text h5 {
+  font-size: 17px;
+  color: #000000;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.single-box-text p {
+  font-size: 15px;
+  margin-bottom: 0;
+    position: relative;
+}
+.single-box-text p::after {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 10px;
+	height: 10px;
+	content: "";
+	background: #0167F3;
+	border-radius: 50%;
+	margin-top: 3px;
+}
+
+
+.single-box-text h5 span {
+  float: right;
+  font-size: 11px;
+  color: #8E8E93;
+}
+
+
+
+.Harold-Bates-text h3 {
+  font-size: 22px;
+}
+.Harold-Bates-text h3 i {
+  color: #000;
+  display: none;
+}
+.Harold-Bates-text h3 span {
+  font-size: 13px;
+  color: #8E8E93;
+  font-weight: 500;
+  margin-left: 25px;
+}
+.chat-right-side-text {
+  padding: 10px;
+}
+.Harold-Bates-text {
+	padding: 10px 0;
+}
+
+.chat-right-side-date {
+  text-align: center;
+  padding: 20px 0;
+}
+.chat-right-side-date span {
+	font-weight: 700;
+	font-size: 13px;
+	background: #F5F6F7;
+	padding: 4px 20px;
+	border-radius: 30px;
+}
+
+.single-chat-write {
+  position: relative;
+  padding: 5px;
+  display: flex;
+}
+.single-chat-write img {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  left: 0;
+}
+
+.chat-write-text p {
+	font-size: 17px;
+	background: #F5F6F7;
+	padding: 10px;
+	border-radius: 5px;
+	margin-bottom: 8px;
+  max-width: 350px;
+}
+.chat-write-text span {
+	font-size: 12px;
+}
+/* .chat-box-man {
+	height: 650px;
+} */
+.chat-right-side-chat-write {
+  text-align: right;
+}
+.single-right-chat-write {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+}
+
+.chat-write {
+  word-break: break-all;
+}
+
+.chat-right-side {
+	position: relative;
+}
+
+.chat-right-write-text p {
+	color: #fff;
+	font-size: 17px;
+	background: #39C27B;
+	max-width: 350px;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.single-right-chat-write img {
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+}
+.bottom-chat-write {
+	background: #F5F5F5;
+	padding: 15px;
+	border-radius: 5px;
+	position: relative;
+}
+.bottom-chat-write input {
+  width: 90%;
+	background: none;
+	border: none;
+	font-size: 16px;
+	margin-left: 5px;
+}
+.bottom-chat-write i {
+	color: #C1C1C4;
+	font-weight: 700;
+	font-size: 20px;
+	transform: rotate(70deg);
+  padding: 0 20px;
+}
+
+.bottom-chat-write label {
+  display: flex;
+  cursor: pointer;
+  margin-bottom: 0rem;
+}
+
+.submit-btn input {
+	color: #39C27B;
+	font-weight: 700;
+	font-size: 18px;
+	position: absolute;
+	top: 50%;
+	right: 5px;
+	margin-top: -13px;
+	cursor: pointer;
+}
+
+
+/* messages page End*/

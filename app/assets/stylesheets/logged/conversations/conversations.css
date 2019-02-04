@@ -1,0 +1,291 @@
+/* XL Device :1200px. */
+@media (min-width: 1200px) and (max-width: 1449px) {
+
+.messages-box-area::before {
+	left: 33%;
+}
+.chat-box-man {
+	margin-top: 27px;
+}
+
+.mensajes-chat h2 {
+	margin-bottom: 40px;
+}
+
+
+
+
+}
+
+/* LG Device :992px. */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+   .messages-box-area::before {
+	left: 34%;
+}
+
+
+    .logo a img {
+	border-radius: 50%;
+	width: 45px;
+}
+
+.logo {
+	padding-right: 10px;
+}
+.form {
+	width: auto;
+    padding: 6px 10px;
+}
+.form i.fa {
+	padding-right: 0px;
+}
+
+.user-bar a i.fa {
+	font-size: 23px;
+}
+.user-bar li a {
+	font-size: 14px;
+}
+.user-bar li {
+	padding: 0px 10px;
+}
+.user-pic img {
+	margin-top: -30px;
+	width: 40px;
+}
+.navbar-brand {
+	padding: 6px 13px;
+	margin-right: 10px;
+	margin-left: -10px;
+}
+ #navbarDropdown {
+	padding: 6px 10px;
+}
+
+
+
+
+
+
+}
+
+
+
+/* MD Device :768px. */
+@media (min-width: 768px) and (max-width: 991px) {
+
+.chat-box-man {
+	margin-top: 20px;
+}
+ .mensajes-chat {
+	margin-bottom: 35px;
+}
+
+.messages-box-area .container {
+	max-width: 100%
+}
+
+.chat-single-box {
+  width: 100%;
+}
+
+.messages-box-area::before {
+	display: none;
+}
+
+.chat-right-side {
+	display: none;
+}
+
+
+.conversación-input {
+	margin: 0 auto;
+}
+
+
+.header-to-area {
+	display: none;
+}
+.footer-fixed-area {
+	display: block;
+}
+
+.tablet-mobile-top-ber {
+	display: block;
+}
+.Transacciones-tab-secsion {
+	margin-bottom: 80px;
+}
+
+.toggle-menu input {
+	width: auto;
+	z-index: 9;
+}
+  .footer-icon-box .fa.fa-plus {
+	background: #39C27B;
+	color: #fff;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 36px;
+	font-size: 25px;
+}
+
+
+
+
+.chat-box {
+	display: none;
+}
+
+
+
+}
+
+
+
+/* SM Small Device :320px. */
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+.messages-box-area::before {
+	display: none;
+}
+
+.messages-box-area .container {
+	max-width: 100%
+}
+
+.chat-single-box {
+  width: 100%;
+}
+
+.conversación-input {
+	margin: 0 auto;
+}
+
+.chat-right-side {
+	display: none;
+}
+
+.header-to-area {
+	display: none;
+}
+.footer-fixed-area {
+	display: block;
+}
+ .tablet-mobile-top-ber {
+	display: block;
+}
+.Transacciones-tab-secsion {
+	margin-bottom: 80px;
+}
+ .map-marker a {
+	font-size: 16px;
+}
+.toggle-menu input {
+	background: #fff;
+	border: 1px solid #35B077;
+	position: absolute;
+	top: 42px;
+	border-radius: 20px;
+	padding: 7px 16px;
+	width: auto;
+	font-size: 16px;
+	color: #260d0d;
+	transition: .8s;
+	z-index: 9;
+}
+.mobile-input-icon i.fa {
+	z-index: 99;
+}
+.pendiente-text h4 {
+	top: 40%;
+	font-size: 18px;
+	margin-top: -20px;
+}
+ .pendiente-text p {
+	font-size: 11px;
+}
+ .transacciones-tab-content::after {
+	top: 80px;
+}
+.diego-user h5 {
+	margin-left: 35px;
+	margin-bottom: 0;
+	font-size: 15px;
+}
+.diego-user img {
+	margin-top: 0px;
+}
+.Paquete-Básico h5 {
+	font-size: 11px;
+}
+.Paquete-Básico span {
+	font-size: 11px;
+}
+.diego-velez-btn a {
+	font-size: 15px;
+	padding: 6px 10px;
+	margin-bottom: 10px;
+}
+
+ .footer-icon-box {
+	float: left;
+	width: 23%;
+}
+ .chat-box {
+	display: none;
+}
+
+ .footer-icon-box .fa.fa-plus {
+	background: #39C27B;
+	color: #fff;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 36px;
+	font-size: 25px;
+}
+
+.chat-box-man {
+	margin-top: 20px;
+}
+ .mensajes-chat {
+	margin-bottom: 34px;
+}
+.single-box-text p {
+	font-size: 12px;
+}
+.single-box-text h5 {
+	font-size: 14px;
+}
+.chat-single-box img {
+	width: 30px;
+	height: 30px;
+}
+
+.single-box-text {
+	margin-left: 40px;
+}
+
+
+
+
+}
+
+
+
+
+/* SM Small Device :550px. */
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+
+
+
+
+
+
+
+}
