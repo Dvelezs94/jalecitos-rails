@@ -1,6 +1,7 @@
+<div class="col-lg-6">
 <div class="transacciones-tab-text">
   <div class="pendiente-text">
-      <h5><%= order_seller.status %></h5>
+      <h5 class="<%= order_seller.status %>"><%= order_seller.status %></h5>
       <h4>ID: <%= order_seller.uuid %></h4>
       <% if order_seller.purchase_type == "Package"%>
       <p><%= order_seller.purchase.gig.title %></p>
@@ -11,7 +12,7 @@
 
     <div class="diego-velez-text">
       <div class="diego-user">
-          <a href=""><%= image_tag(order_seller.employer.image_url(:thumb)), alt: "" %></a>
+          <a href=""><%= image_tag(order_seller.employer.image_url(:thumb))%></a>
           <h5><%= order_seller.employer.alias %></h5>
       </div>
         <div class="Paquete-Básico">
@@ -30,20 +31,21 @@
             <% if order_seller.started_at? %>
             <%= link_to "denegar", refund_order_path(order_seller.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
             <% else %>
-              <%= link_to "denegar Trabajo", refund_order_path(order_seller.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
+              <%= link_to "denegar", refund_order_path(order_seller.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
               <%= link_to "solicitar inicio", request_start_order_path(order_seller.id), :method => :put %>
             <% end %>
-          <% elsif order.in_progress? %>
-            <% if order.completed_at? %>
+          <% elsif order_seller.in_progress? %>
+            <% if order_seller.completed_at? %>
               <%= link_to "disputa", new_order_dispute_path(order_seller.uuid) %>
               <%= link_to "reembolsar", refund_order_path(order_seller.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
             <% else %>
               <%= link_to "reembolsar", refund_order_path(order_seller.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
               <%= link_to "solicitar finalizar", request_complete_order_path(order_seller.id), :method => :put %>
             <% end %>
-          <% elsif order.disputed? %>
+          <% elsif order_seller.disputed? %>
             <%= link_to "ir al caso", order_dispute_path(order_seller.uuid, order_seller.dispute) %>
           <% end %>
         </div>
     </div>
   </div>
+</div>
