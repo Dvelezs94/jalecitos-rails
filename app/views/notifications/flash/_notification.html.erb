@@ -3,7 +3,7 @@
 <div class="toast">
   <%= link_to url_generator_helper(notification, notification.notifiable) do %>
   <div class="toast__icon">
-      <%= image_tag(notification.user.image_url(:thumb), class: "nav-avatar") %>
+      <%= image_tag(notification.user.image_url(:thumb)) %>
   </div>
   <div class="toast__content">
 
