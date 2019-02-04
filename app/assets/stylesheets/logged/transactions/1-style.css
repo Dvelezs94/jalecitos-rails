@@ -1,0 +1,545 @@
+/* Base CSS */
+
+
+.alignleft {
+    float: left;
+    margin-right: 15px;
+}
+.alignright {
+    float: right;
+    margin-left: 15px;
+}
+.aligncenter {
+    display: block;
+    margin: 0 auto 15px;
+}
+a:focus { outline: 0 solid }
+img {
+    max-width: 100%;
+    height: auto;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 13px;
+  color: #222222;
+
+
+}
+body {
+  color: #9B9B9B;
+  font-weight: 400;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+}
+
+@font-face {
+    font-family:Avenirbold;
+    src: url(../fonts/AvenirNextLTPro-Bold.otf);
+}
+
+
+
+.form input[type="text"]::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #757575;
+  opacity: 1; /* Firefox */
+}
+
+.form input[type="text"]:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #757575;
+}
+
+.form input[type="text"]::-ms-input-placeholder { /* Microsoft Edge */
+  color: #757575;
+}
+
+
+
+
+/* Header top Start */
+.header-to-area {
+	background: #39C27B;
+	padding: 12px 0;
+}
+.logo {
+	display: inline-block;
+	padding-right: 25px;
+}
+
+.logo a img {
+	border-radius: 50%;
+	width: 60px;
+}
+.input-area {
+	display: inline-block;
+}
+
+
+.form {
+	background: #fff;
+	padding: 10px 19px;
+	border-radius: 3px;
+	width: 300px;
+}
+
+.form input[type="text"] {
+	border: none;
+	background: none;
+	font-weight: 600;
+	font-size: 16px;
+}
+.form i.fa {
+	color: #D4D4D7;
+	padding-right: 8px;
+    font-size: 16px;
+}
+
+
+.button-area {
+  display: inline-block;
+}
+.bg-light {
+	background-color: transparent !important;
+}
+.navbar-light .navbar-brand {
+	color: #fff;
+}
+.navbar-brand {
+	display: inline-block;
+	font-size: 16px;
+	white-space: nowrap;
+	border: 1px solid #88DBB0;
+	padding: 5px 15px;
+	border-radius: 3px;
+	background: #35B575;
+}
+#navbarDropdown {
+	border: 1px solid #88DBB0;
+	border-radius: 3px;
+	padding: 5px 15px;
+}
+.navbar-light .navbar-nav .nav-link {
+	color: #fff;
+}
+
+.dropdown-toggle::after {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: .255em;
+	vertical-align: middle;
+	content: "";
+	border-top: .3em solid;
+	border-right: .3em solid transparent;
+	border-bottom: 0;
+	border-left: .3em solid transparent;
+}
+
+
+.header-right-content {
+  text-align: right;
+}
+
+.user-bar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.user-bar li {
+	display: inline-block;
+	text-align: center;
+	padding: 0px 20px;
+}
+.user-bar li a {
+  font-size: 16px;
+  color: #fff;
+  font-weight: 700;
+}
+.user-bar li a span {
+  display: block;
+}
+.user-pic img {
+	margin-top: -30px;
+}
+.user-bar a i.fa {
+	font-size: 30px;
+}
+
+.toggle-menu input {
+	background: none;
+	border: 1px solid #35B077;
+	position: absolute;
+	top: 1px;
+	border-radius: 20px;
+	padding: 7px 45px;
+	width: 100%;
+	font-size: 16px;
+	color: #fff;
+	transition: .8s;
+}
+.mobile-input-icon {
+  position: relative;
+}
+
+.toggle-menu {
+	opacity: 0;
+	visibility: hidden;
+    transition: .9s;
+}
+.toggle-menu.activee {
+	opacity: 1;
+	visibility: visible;
+}
+
+
+.bell {
+  position: relative;
+}
+.bell:after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 9px;
+  height: 9px;
+  content: "";
+  background: red;
+  border-radius: 50%;
+}
+
+
+
+/* Header top End */
+
+
+/* tablet-mobile-top-ber Start */
+.tablet-mobile-top-ber {
+	display: none;
+}
+.tablet-mobile-top-ber {
+	background: #000;
+}
+.mobile-input-icon i.fa {
+	color: #fff;
+	font-size: 18px;
+	position: relative;
+	z-index: 1;
+	padding-left: 11px;
+	padding-top: 10px;
+}
+
+
+.mobile-input-icon i.fa::after {
+	position: absolute;
+	left: 0px;
+	top: 0;
+	content: "";
+	width: 40px;
+	height: 40px;
+	background: #32A375;
+	z-index: -1;
+	opacity: .6;
+	border-radius: 50%;
+}
+
+.map-marker a {
+	color: #fff;
+	font-weight: 700;
+	font-size: 17px;
+	position: relative;
+	padding-left: 25px;
+}
+.map-marker span {
+	font-size: 22px;
+	position: absolute;
+	left: 0;
+	top: -6px;
+}
+
+.tablet-mobile-user img {
+	width: 40px;
+  height: 40px
+}
+.tablet-mobile-top-ber {
+	background: #39C27B;
+	padding: 15px 0;
+}
+.map-marker {
+	margin-top: 7px;
+}
+.belldropdownarea {
+	opacity: 0;
+	visibility: hidden;
+}
+
+
+/* tablet-mobile-top-ber End */
+
+
+
+
+/* Transacciones secsion Start */
+.transacciones-text {
+	position: relative;
+	padding: 20px 0;
+}
+.transacciones-text span {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	margin-top: -9px;
+	color: #000;
+}
+.transacciones-text h1 {
+	font-size: 30px;
+	margin-left: 20px;
+    margin-bottom: 0;
+}
+.transacciones-text span i.fa {
+	font-size: 15px;
+}
+/* Transacciones secsion End */
+
+
+
+
+/* Transacciones tab secsion Start */
+
+.Transacciones-tab-secsion {
+	position: relative;
+}
+
+.Transacciones-tab-secsion::after {
+	position: absolute;
+	left: 0;
+	top: 29px;
+	content: "";
+	width: 100%;
+	height: 3px;
+	background: #F5F6F7;
+	z-index: -1;
+}
+
+
+.transacciones-tab-content {
+	position: relative;
+}
+
+
+.transacciones-tab-text {
+	border: 2px solid #F5F6F7;
+	border-radius: 3px;
+	margin-bottom: 25px;
+	margin-top: 50px;
+}
+.pendiente-text {
+	position: relative;
+	padding: 10px;
+}
+.pendiente-text h4 {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	font-weight: 700;
+	font-size: 22px;
+	margin-top: -35px;
+}
+.pendiente-text h5 {
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 14px;
+	border: 1px solid;
+	display: inline-block;
+	padding: 5px 10px;
+	border-radius: 3px;
+}
+
+/* colors for transactions status */
+.in_progress{
+  color: #0067f4;
+}
+
+.pending{
+  color: #f9b732;
+}
+
+.completed{
+  color: #39c27b;
+}
+
+.refunded{
+  color: #8e8e93;
+}
+
+.denied{
+  color: #ef2235;
+}
+
+.disputed{
+  color: #ef2235;
+}
+/* end */
+.pendiente-text p {
+	color: #8E8E93;
+	font-size: 19px;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.diego-user {
+	position: relative;
+	margin-top: 15px;
+}
+.diego-user img {
+	position: absolute;
+	left: 10px;
+	width: 20px;
+	margin-top: 3px;
+  border-radius: 50%;
+}
+.diego-user h5 {
+	margin-left: 40px;
+	margin-bottom: 0;
+	font-size: 19px;
+}
+.Paquete-Básico {
+	padding: 10px;
+}
+.Paquete-Básico h5 {
+	color: #8E8E93;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 15px;
+	letter-spacing: 1px;
+	margin-bottom: 7px;
+}
+
+.Paquete-Básico span {
+	font-size: 13px;
+	color: #8E8E93;
+	font-weight: 400;
+}
+.Paquete-Básico h4 {
+	font-size: 23px;
+	color: #39C27B;
+	font-weight: 700;
+	margin-top: 12px;
+	margin-bottom: 0;
+}
+.diego-velez-text {
+	position: relative;
+}
+.diego-velez-btn {
+	position: absolute;
+	bottom: 12px;
+	right: 10px;
+}
+.diego-velez-btn a {
+	display: block;
+	background: #39C27B;
+	text-align: center;
+	color: #fff;
+	font-weight: 700;
+	font-size: 20px;
+	margin-bottom: 14px;
+	padding: 6px 12px;
+	border-radius: 4px;
+}
+.diego-velez-btn a:first-child {
+	background: #C7C7CC;
+}
+.diego-velez-btn a:last-child {
+	margin-bottom: 0;
+}
+.Transacciones-tab-area .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+	color: #39C27B !important;
+	background-color: #fff;
+	border-bottom: 3px solid #39C27B !important;
+}
+
+.Transacciones-tab-area .nav-tabs .nav-link {
+	border: none;
+	padding: 0;
+	font-size: 19px;
+	font-weight: 700;
+	color: #C7C7CC;
+}
+.Transacciones-tab-area .nav-tabs .nav-link:last-child {
+	margin-left: 30px;
+}
+.Transacciones-tab-area .nav-tabs {
+	border-bottom: none;
+}
+
+/* Transacciones tab secsion End */
+
+/* footer-fixed-area Start */
+
+.footer-fixed-area {
+	background: #F5F5F5;
+	padding: 20px 0;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+
+.footer-icon-box {
+  float: left;
+  width: 24%;
+}
+.footer-icon-box i.fa {
+	color: #CACACE;
+	font-size: 30px;
+}
+.footer-icon-box:last-child {
+  width: 0%;
+}
+
+.footer-icon-box i.fa:hover {
+	color: #0166F3;
+    transition: .5s;
+}
+
+.footer-icon-box .fa.fa-home{
+	color: #0166F3;
+    transition: .5s;
+}
+
+.footer-fixed-area {
+	display: none;
+}
+
+
+
+/* footer-fixed-area End */
+
+
+
+
+
+
+
+/* chat-box Start*/
+.chat-box {
+	position: relative;
+}
+.chat-box i.fa {
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+	background: #39C27B;
+	font-size: 27px;
+	color: #fff;
+	width: 60px;
+	height: 60px;
+	text-align: center;
+	border-radius: 50%;
+	line-height: 60px;
+	box-shadow: 0px 4px 8px 1px #9CE0BD;
+}
+
+
+/* chat-box End*/
