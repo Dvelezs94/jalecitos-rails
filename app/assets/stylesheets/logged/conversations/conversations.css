@@ -25,7 +25,6 @@
 }
 
 
-
     .logo a img {
 	border-radius: 50%;
 	width: 45px;
@@ -81,6 +80,14 @@
 }
  .mensajes-chat {
 	margin-bottom: 35px;
+}
+
+.messages-box-area .container {
+	max-width: 100%
+}
+
+.chat-single-box {
+  width: 100%;
 }
 
 .messages-box-area::before {
@@ -144,6 +151,14 @@
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 .messages-box-area::before {
 	display: none;
+}
+
+.messages-box-area .container {
+	max-width: 100%
+}
+
+.chat-single-box {
+  width: 100%;
 }
 
 .conversación-input {
@@ -251,6 +266,7 @@
 	width: 30px;
 	height: 30px;
 }
+
 .single-box-text {
 	margin-left: 40px;
 }
