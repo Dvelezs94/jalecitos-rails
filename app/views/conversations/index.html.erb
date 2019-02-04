@@ -15,7 +15,7 @@
 
           <% @users.each do |user| %>
             <%= link_to conversations_path(user_id: user.slug) do %>
-            <div class="chat-box-man">
+            <div class="chat-box-man nicescroll">
               <div class="chat-single-box">
                 <%= image_tag(avatar_display_helper(user.image_url(:thumb))) %>
                 <div class="single-box-text">

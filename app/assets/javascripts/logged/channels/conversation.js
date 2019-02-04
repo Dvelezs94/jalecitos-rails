@@ -7,6 +7,6 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
 
     var messages_list = conversation.find('.messages-list');
     var height = messages_list[0].scrollHeight;
-    messages_list.scrollTop(height);
+    $('.message_view_box').scrollTop(height);
   },
 });

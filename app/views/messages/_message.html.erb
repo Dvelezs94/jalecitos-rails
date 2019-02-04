@@ -3,10 +3,11 @@
     <div class="single-chat-write">
         <%= image_tag(message.user.image_url(:thumb), class: "message-avatar") %>
         <div class="chat-write-text">
-            <p><%= message.body %>
+            <% if message.body? %>
+              <p><%= message.body %></p>
+            <% end %>
             <% if message.image? %>
-              <%= link_to(image_tag(message.image_url, class: "message-img"), message.image_url ) %>
-            </p>
+              <p><%= link_to(image_tag(message.image_url, class: "message-img"), message.image_url ) %></p>
             <% end %>
             <!-- <span>14:36</span> -->
         </div>

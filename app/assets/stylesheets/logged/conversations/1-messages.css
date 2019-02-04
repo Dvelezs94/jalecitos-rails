@@ -153,7 +153,6 @@
 
 .Harold-Bates-text h3 {
   font-size: 22px;
-  font-weight: 700;
 }
 .Harold-Bates-text h3 span {
   font-size: 13px;
@@ -182,7 +181,8 @@
 
 .single-chat-write {
   position: relative;
-  padding: 5px
+  padding: 5px;
+  display: flex;
 }
 .single-chat-write img {
   position: absolute;
@@ -257,11 +257,13 @@
 	font-weight: 700;
 	font-size: 20px;
 	transform: rotate(70deg);
+  padding: 0 20px;
 }
 
 .bottom-chat-write label {
   display: flex;
   cursor: pointer;
+  margin-bottom: 0rem;
 }
 
 .submit-btn input {
