@@ -16,13 +16,16 @@ class GigsController < ApplicationController
 
   # GET /gigs/1
   def show
-    if params[:page]
+    if params[:reviews]
       get_reviews
+    elsif params[:related_gigs]
+      get_related_gigs
+      render template: "shared/carousels/add_items_carousel.js.erb"
     else
       define_pack_names
       get_reviews
       report_options
-      @related_gigs = Gig.search("*", where: { category_id: @gig.category_id, status: "published" }, limit: 5)
+      get_related_gigs
     end
   end
 
@@ -105,10 +108,13 @@ class GigsController < ApplicationController
       redirect_to(root_path) if (current_user.nil? || current_user.id != @gig.user_id)
     end
 
+    def get_related_gigs
+      @related_gigs = Gig.search("*", where: { category_id: @gig.category_id, status: "published" }, page: params[:related_gigs], per_page: 5)
+    end
 
     def get_reviews
       #get the associated reviews that doesnt belong to gig owner
-      @reviews = Review.search("*", where: { reviewable_id: @gig.id, reviewable_type: "Gig", receiver_id: @gig.user.id, status: "completed" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 3)
+      @reviews = Review.search("*", where: { reviewable_id: @gig.id, reviewable_type: "Gig", receiver_id: @gig.user.id, status: "completed" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:reviews], per_page: 3)
     end
 
     # Check if there are running orders before destroying

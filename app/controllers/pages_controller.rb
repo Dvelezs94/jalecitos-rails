@@ -5,14 +5,19 @@ class PagesController < ApplicationController
   layout :set_layout
   access user: :all, admin: :all, all: [:home, :autocomplete_search]
   def home
-    if current_user
-      @popular_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:popular_gigs], per_page: 5)
-      @recent_requests = Request.search("*", where: {status: "published", category_id: 3}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:recent_requests], per_page: 5)
-      @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: {status: "published", category_id: 1}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:verified_gigs], per_page: 5)
-      puts "X"* 500
-      puts @popular_gigs.count
-      puts @recent_requests.count
-      puts @verified_gigs.count
+    if params[:current]
+      if params[:popular_gigs]
+        @popular_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:popular_gigs], per_page: 5)
+      elsif params[:recent_requests]
+        @recent_requests = Request.search("*", where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:recent_requests], per_page: 5)
+      elsif params[:verified_gigs]
+        @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: conditions("verified"), order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:verified_gigs], per_page: 5)
+      end
+      render template: "shared/carousels/add_items_carousel.js.erb"
+    elsif current_user
+        @popular_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:popular_gigs], per_page: 5)
+        @recent_requests = Request.search("*", where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:recent_requests], per_page: 5)
+        @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:verified_gigs], per_page: 5)
     end
   end
 
@@ -60,6 +65,18 @@ class PagesController < ApplicationController
       @reviews = Review.search("*", where: { giver_id: current_user.id, status: "pending" }, order: [{ created_at: { order: :desc, unmapped_type: :long}}])
       #verify the reviews that are pending (searchkick takes some time to update its records)
       @reviews = @reviews.select{ |r| r.pending? } if @reviews.present?
+    end
+  end
+
+  def conditions string=nil
+    if current_user.location && string == "verified"
+      {status: "published", location: I18n.transliterate(current_user.location), verified: true}
+    elsif current_user.location
+      {status: "published", location: I18n.transliterate(current_user.location)}
+    elsif string == "verified"
+      {status: "published", verified: true}
+    else
+      {status: "published"}
     end
   end
 
