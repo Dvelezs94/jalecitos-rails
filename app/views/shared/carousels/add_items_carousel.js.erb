@@ -12,4 +12,4 @@ carousel.trigger( 'remove.owl.carousel',  indexToRemove )
 <% link = link_to_next_page(collection, "Oculto".html_safe, class: "carousel-paginator" , param_name: params[:current], :params => {:current => params[:current]}, remote: true, style: "display: none;") %>
   carousel.trigger('add.owl.carousel', "<%=j link %>").trigger('refresh.owl.carousel');
 <% end %>
-<% sleep 5 %>
+<% sleep 0.5 %>
