@@ -956,6 +956,8 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    recaptcha (4.13.1)
+      json
     redis (4.1.0)
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
@@ -1106,6 +1108,7 @@ DEPENDENCIES
   railroady (~> 1.5, >= 1.5.3)
   rails (~> 5.2.1)
   ratyrate (~> 1.2.2.alpha)
+  recaptcha (~> 4.13, >= 4.13.1)
   redis (~> 4.0)
   sanitize (~> 4.6, >= 4.6.6)
   sass-rails (~> 5.0)

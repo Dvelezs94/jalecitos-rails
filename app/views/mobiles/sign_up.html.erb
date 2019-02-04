@@ -13,6 +13,7 @@
       <%= hidden_field_tag :sign_up_lat, value = '' %>
       <%= hidden_field_tag :sign_up_lon, value = '' %>
       <%= hidden_field_tag :from_mobile, value = 'true' %>
+      <%= recaptcha_tags %>
       <br>
       <%= f.submit 'Continuar', :class => 'login' %>
       <br>

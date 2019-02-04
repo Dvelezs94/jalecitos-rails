@@ -32,6 +32,7 @@
             <%= f.password_field :password_confirmation, placeholder: "Confirmar contraseña", id: "user_password_conf_new", class: "required", autocomplete: "new-password" %>
             <%= hidden_field_tag :sign_up_lat, value = '' %>
             <%= hidden_field_tag :sign_up_lon, value = '' %>
+            <%= recaptcha_tags %>
             <br>
             <%= f.submit 'Continuar', :class => 'btn btn-success' %>
             <br>
