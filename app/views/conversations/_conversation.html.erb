@@ -24,7 +24,7 @@
         <%= f.file_field :image, accept: ".jpg, .jpeg, .png", style: "display: none;" %>
         <label id="file-name" title="borrar imagen"></label>
       </label>
-      <%= f.text_field :body, autofocus: true %>
+      <%= f.text_field :body, autofocus: true, size: 499 %>
       <%= button_tag( :class => "btn btn-success send-message", id: "send-message") do %>
       <%= "enviar" %>
         <% end %>
