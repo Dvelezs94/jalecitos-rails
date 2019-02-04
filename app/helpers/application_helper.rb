@@ -67,7 +67,7 @@ module ApplicationHelper
     case
     when object.class == Request
        request_path(object.slug)
-    when object.class == ( Package || Offer )
+    when object.class ==  Offer || object.class ==  Package
       if notification.action == "ha finalizado"
        finance_path(:table => notification.query_url, :review => true, :notification => notification.id)
       else
