@@ -1,5 +1,6 @@
 class ConversationsController < ApplicationController
   include ReportFunctions
+  include ConversationsHelper
   layout 'logged'
   before_action :authenticate_user!
   before_action :set_recipient, only: [:index, :create]
@@ -7,8 +8,9 @@ class ConversationsController < ApplicationController
 
   # GET /conversations
   def index
-    get_opposite_user(current_user.conversations.order(updated_at: :desc))
-    @conversations = Conversation.includes(:recipient, :messages).where("sender_id = ? OR recipient_id = ?", current_user.id, current_user.id)
+    p "x" * 500
+    p get_opposite_user(current_user.conversations.order(updated_at: :desc))
+    # @conversations = Conversation.includes(:recipient, :messages).where("sender_id = ? OR recipient_id = ?", current_user.id, current_user.id)
     if params[:user_id] && params[:user_id] != current_user.slug
       @messages = Message.search("*", where: {conversation_id: @conversation.id}, order: [{ id: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 25)
       mark_as_read
@@ -39,25 +41,4 @@ class ConversationsController < ApplicationController
     end
   end
 
-  private
-
-  def set_recipient
-    if params[:user_id]
-      @remote_user = User.friendly.find(params[:user_id]).id
-      if ! @conversation = Conversation.where("(sender_id = ? OR recipient_id = ?) AND( sender_id = ? OR recipient_id = ?)", current_user.id, current_user.id, @remote_user , @remote_user).first
-          #  Create conversation if not found. this can be refactored later
-          Conversation.create!(sender_id: current_user.id, recipient_id: @remote_user)
-          set_recipient
-      end
-    else
-      @conversation = nil
-    end
-  end
-
-  def get_opposite_user(conversations)
-    @users = []
-    conversations.each do |c|
-        c.sender == current_user ? @users << c.recipient : @users << c.sender
-    end
-  end
 end
