@@ -47,7 +47,6 @@
 	margin-top: 15px;
 }
 .mensajes-chat h2 {
-  font-weight: 700;
   font-size: 28px;
   margin-left: 25px;
 }
@@ -153,6 +152,10 @@
 
 .Harold-Bates-text h3 {
   font-size: 22px;
+}
+.Harold-Bates-text h3 i {
+  color: #000;
+  display: none;
 }
 .Harold-Bates-text h3 span {
   font-size: 13px;
