@@ -169,15 +169,6 @@
     overflow-y: auto;
 }
 
-.empty-state.no-conversations {
-    color: #555555;
-
-    position: absolute;
-    margin: 0px auto;
-    width: 100%;
-    top: 37%;
-}
-
 .users img {
     float: left;
     border-radius: 50% !important;
@@ -356,6 +347,7 @@ div#defaultOpen {
     height: 68vh;
     overflow-y: auto;
     padding-left: 25px;
+    overflow-x: hidden;
 }
 
 @media only screen and (max-width:991px){

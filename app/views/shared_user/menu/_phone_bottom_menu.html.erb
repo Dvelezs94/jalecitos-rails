@@ -15,9 +15,8 @@
             <a href="" class="plusred" id="newelementmodalphonetablet">
               <%= icon("fas", "plus") %><br>
             </a>
-            <a href="" class="redbell1">
-              <span></span>
-              <%= icon("fas", "bell") %><br>
+            <a href="<%= conversations_path %>" class="redbell1">
+              <%= icon("fas", "envelope") %><br>
               Mensajes
             </a>
             <a href="<%= user_path(current_user.slug) %>">

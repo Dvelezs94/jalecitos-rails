@@ -1,0 +1,57 @@
+<div data-conversation-id="<%= conversation.id %>">
+
+  <!-- header -->
+  <div class="view_box_header">
+
+    <!-- messenegr name and time -->
+    <div class="row messenegr_row_header">
+
+      <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+        <p><%= opposite_user.slug %></p>
+        <small>
+          <span>
+            Activo hace:
+            <%= opposite_user.current_sign_in_at != nil ? distance_of_time_in_words_to_now(opposite_user.current_sign_in_at) : "nunca" %>
+          </span>
+        </small>
+      </div>
+      <div class="col-lg-3  col-md-6 col-sm-6 col-6 about_messenger text-right">
+        <a id="toggle" onclick="toggleVisibility()">
+          <span></span></a>
+
+        <div id="menu">
+          <ul>
+            <li><%= link_to "Perfil", user_path(opposite_user) %></li>
+            <li><%= link_to "Reportar", {}, id: "reportuserbtn"%></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 message_view_box messages-list">
+      <%= paginate @messages %>
+      <ul class="messages-list">
+        <%= render 'conversations/conversation_content', messages: @messages.sort %>
+      </ul>
+
+    </div>
+
+  </div>
+  <div class="row">
+    <%= form_for [@conversation, Message.new], remote: true do |f| %>
+    <%= f.text_area :body, rows: 1, class: "form-control", autofocus: true %>
+    <label class="custom-file-upload" for="message_image">
+      <%= icon("fas","paperclip", class: "fa-2x", title: "Adjuntar imagen")  %>
+      <%= f.file_field :image, accept: ".jpg, .jpeg, .png", style: "display: none;" %>
+      <label id="file-name" title="borrar imagen"></label>
+    </label>
+
+    <%= button_tag( :class => "btn btn-success send-message", id: "send-message") do %>
+    <%= icon "fas","angle-right", class: "fa-2x" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<%= render "reports/user", user: opposite_user %>

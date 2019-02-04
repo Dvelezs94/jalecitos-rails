@@ -137,3 +137,7 @@ gem 'google-analytics-rails', '~> 1.1', '>= 1.1.1'
 gem 'geokit-rails', '~> 2.3', '>= 2.3.1'
 # Manipulate cookies
 gem 'js_cookie_rails', '~> 2.2'
+# captcha for signup
+gem 'recaptcha', '~> 4.13', '>= 4.13.1'
+# nice scroll
+gem 'nicescroll-rails', '~> 3.5', '>= 3.5.4.1'

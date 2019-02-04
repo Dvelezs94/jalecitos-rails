@@ -14,6 +14,8 @@
 
 //= require jquery.slick
 
+//= require jquery.nicescroll.js
+
 //= require_tree ./main
 
 //= require_tree ./guest
