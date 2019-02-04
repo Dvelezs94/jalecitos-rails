@@ -1,32 +1,37 @@
-<div class="header-right-content">
-  <div class="user-bar">
-    <ul>
-      <li>
-      <a href="<%= finance_path %>">
-        <%= icon("fa", "exchange-alt") %><br>
-        Transacciones
-      </a>
-      </li>
-      <li>
-      <a href="<%= conversations_path %>">
-        <%= icon("fa", "envelope") %><br>
-        Mensajes
-      </a>
-      </li>
-      <li>
-      <a href="#" class="redbell1" onclick="toggleNotifications(event);" data-behavior='read-notifications'>
-        <!-- <span></span> -->
-        <%= icon("fa","bell") %><br>
-        Notificaciones
-      </a>
-      </li>
-      <a href="<%= user_path(current_user) %>" class="authorclick">
-        <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "nav-avatar") %>
-      </a>
-    </ul>
+<div class="headertop-right">
+  <div class="bellposition align-items-center justify-content-end">
+    <a href="<%= root_path %>">
+      <%= icon("fas", "home") %><br>
+      inicio
+    </a>
+    <a href="<%= finance_path %>">
+      <%= icon("fas", "exchange-alt") %><br>
+      Transacciones
+    </a>
+    <a href="<%= conversations_path %>">
+      <%= icon("fas", "envelope") %><br>
+      Mensajes
+    </a>
+
+    <a href="#" class="redbell1" onclick="toggleNotifications(event);" data-behavior='read-notifications'>
+      <span></span>
+      <%= icon("fas","bell") %><br>
+      Notificaciones
+    </a>
+
+    <a href="<%= user_path(current_user) %>" class="authorclick">
+      <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "nav-avatar") %>
+    </a>
+  </div>
+
+  <div class="bellposition2">
+    <span></span>
+    <a href="#" onclick="toggleNotifications(event);" data-behavior='read-notifications'>
+      <%= icon("fas","bell") %>
+    </a>
   </div>
 </div>
 
 <div class="belldropdownarea notification-items" data-behavior='notification-items'>
-  <!-- notifications heere -->
+<!-- notifications heere -->
 </div>
