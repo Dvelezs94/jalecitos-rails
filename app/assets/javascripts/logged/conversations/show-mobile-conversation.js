@@ -7,6 +7,8 @@ $(document).on('turbolinks:load', function() {
     $('.headertop-right').hide();
     $('.phone-bottom-menu').hide();
     $('.chat-right-side').show();
-    $('.Harold-Bates-text h3 i').show();
+    $('.Harold-Bates-text h3 i').show(0, () => {
+      scrollBottomMessages();
+    });
   }
 });

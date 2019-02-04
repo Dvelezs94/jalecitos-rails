@@ -194,9 +194,7 @@
   border-radius: 50%;
   left: 0;
 }
-.chat-write-text {
-  margin-left: 50px;
-}
+
 .chat-write-text p {
 	font-size: 17px;
 	background: #F5F6F7;
