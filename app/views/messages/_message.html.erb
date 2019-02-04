@@ -1,7 +1,7 @@
 <% if user == message.user %>
 <div class="chat-left-side-chat-write chat-write">
     <div class="single-chat-write">
-        <%= image_tag(message.user.image_url(:thumb), class: "message-avatar") %>
+        <!-- <%= image_tag(message.user.image_url(:thumb), class: "message-avatar") %> -->
         <div class="chat-write-text">
             <% if message.body? %>
               <p><%= message.body %></p>
@@ -24,7 +24,7 @@
             <% end %>
             <!-- <span>14:36</span> -->
         </div>
-        <%= image_tag(message.user.image_url(:thumb), class: "message-avatar") %>
+        <!-- <%= image_tag(message.user.image_url(:thumb), class: "message-avatar") %> -->
     </div>
 </div>
 <% end %>
