@@ -212,23 +212,19 @@
   text-align: right;
 }
 .single-right-chat-write {
-  position: relative;
+  display: flex;
+  justify-content: flex-end;
   padding: 5px;
 }
-.chat-right-write-text {
-  position: absolute;
-  right: 57px;
-  top: 0;
+
+.chat-write {
+  word-break: break-all;
 }
 
 .chat-right-side {
 	position: relative;
 }
-.right-bottom-chat-write {
-	position: fixed;
-	bottom: 0;
-	width: 43%;
-}
+
 .chat-right-write-text p {
 	color: #fff;
 	font-size: 17px;

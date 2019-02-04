@@ -1,7 +1,7 @@
 //if scroll is at top, move bottom 1 space to stay in current message
 $(".message_view_box").scrollTop(1)
 //add items
-$(".message_view_box").prepend('<%= j render "conversations/conversation_content", messages: @messages.sort %>');
+$(".message_view_box ul.messages-list").prepend('<%= j render "conversations/conversation_content", messages: @messages.sort %>');
 //remove old pagination
 $('.pag-and-load').remove();
 // check if puts new pagination
