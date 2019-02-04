@@ -14,7 +14,7 @@
         <%= render 'shared/gigs/show/user_card_info' %>
       </div>
     </div>
-    <%= render('shared/gigs/carousel', title: "Jales Relacionados", gigs: @related_gigs) if @related_gigs.present? %>
+    <%= render('shared/gigs/carousel', title: "Jales Relacionados", gigs: @related_gigs, param_name: :related_gigs) if @related_gigs.present? %>
   </div>
 </div>
 <%= render 'reports/gig', collection: @gig %>
