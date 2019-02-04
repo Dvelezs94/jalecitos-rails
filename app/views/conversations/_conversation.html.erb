@@ -7,7 +7,7 @@
         <span>Febrero 18</span>
     </div>
 -->
-<div class="message_view_box">
+<div class="message_view_box nicescroll">
   <%= paginate @messages %>
   <ul class="messages-list">
   <%= render 'conversations/conversation_content', messages: @messages.sort %>
@@ -20,7 +20,7 @@
     <div class="bottom-chat-write">
       <%= form_for [@conversation, Message.new], remote: true do |f| %>
       <label for="message_image">
-        <%= icon("fas","paperclip", class: "fa-2x", title: "Adjuntar imagen")  %>
+        <%= icon("fas","paperclip", class: "fa-2x", title: "Adjuntar imagen", id: "attach-i")  %>
         <%= f.file_field :image, accept: ".jpg, .jpeg, .png", style: "display: none;" %>
         <label id="file-name" title="borrar imagen"></label>
       </label>
