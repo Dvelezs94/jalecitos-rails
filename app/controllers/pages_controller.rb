@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   include SetLayout
+  require "i18n"
   before_action :admin_redirect, only: :home
   before_action :pending_review, only: [:home, :finance], :if => :signed_and_rev
   layout :set_layout
