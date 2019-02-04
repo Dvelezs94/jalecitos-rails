@@ -3,7 +3,6 @@ class Gig < ApplicationRecord
   include TagRestrictions
   include DescriptionRestrictions
   include LocationValidation
-  require "i18n"
   #search
   searchkick language: "spanish", word_start: [:name, :description], suggest: [:name, :description, :profession]
   def search_data
@@ -15,7 +14,8 @@ class Gig < ApplicationRecord
       category_id: category_id,
       status: status,
       profession: profession,
-      user_id: user_id
+      user_id: user_id,
+      verified: user.verified
      }
   end
   #Tags
