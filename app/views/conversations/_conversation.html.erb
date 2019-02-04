@@ -7,7 +7,7 @@
         <span>Febrero 18</span>
     </div>
 -->
-<div class="message_view_box nicescroll">
+<div class="message_view_box">
   <%= paginate @messages %>
   <ul class="messages-list">
   <%= render 'conversations/conversation_content', messages: @messages.sort %>

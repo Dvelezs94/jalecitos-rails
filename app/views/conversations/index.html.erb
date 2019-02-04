@@ -15,7 +15,7 @@
 
           <% @users.each do |user| %>
             <%= link_to conversations_path(user_id: user.slug) do %>
-            <div class="chat-box-man nicescroll">
+            <div class="chat-box-man">
               <div class="chat-single-box">
                 <%= image_tag(avatar_display_helper(user.image_url(:thumb))) %>
                 <div class="single-box-text">
@@ -29,7 +29,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-lg-8" id="conversation-list">
+    <div class="col-lg-8 nopadding" id="conversation-list">
       <div class="chat-right-side">
         <% if params[:user_id] && params[:user_id] != current_user.slug %>
           <%= render 'conversations/conversation', conversation: @conversation, opposite_user: opposite_conversation_user(@conversation, current_user) %>
