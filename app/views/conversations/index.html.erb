@@ -10,12 +10,12 @@
           </div>
           <div class="conversación-input">
             <i class="fa fa-search" aria-hidden="true"></i>
-            <input type="text" placeholder="Buscar conversación">
+            <input type="text" placeholder="Buscar conversación" id="filter-conversation">
           </div>
-
+          <div id="contacts-list">
           <% @users.each do |user| %>
             <%= link_to conversations_path(user_id: user.slug) do %>
-            <div class="chat-box-man">
+            <div class="chat-box-man" id="<%= user.alias %>">
               <div class="chat-single-box">
                 <%= image_tag(avatar_display_helper(user.image_url(:thumb))) %>
                 <div class="single-box-text">
@@ -27,6 +27,7 @@
             </div>
           <% end %>
         <% end %>
+        </div>
       </div>
     </div>
     <div class="col-lg-8 nopadding" id="conversation-list">
