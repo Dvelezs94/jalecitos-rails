@@ -101,6 +101,7 @@
     fill:#878787;
     transform: translateY(-50%);
 }
+.no-notifications,
 .all-not-link{
   text-align: center;
 }
