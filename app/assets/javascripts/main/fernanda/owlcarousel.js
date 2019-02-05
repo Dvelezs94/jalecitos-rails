@@ -36,11 +36,15 @@ $(document).on('turbolinks:load', function() {
 
         },
         768: {
-          items: 4,
+          items: 3,
           margin: 10
         },
         1000: {
-          items: 3,
+          items: 4,
+          margin: 10
+        },
+        1200: {
+          items: 5,
           margin: 10
         }
       }

@@ -917,7 +917,7 @@
     padding-bottom: 138px;
   }
 
-  p.cold2 {
+  p.gig-title {
     font-size: 12px;
     line-height: 16px;
   }
@@ -1294,6 +1294,9 @@
     margin-bottom: 85px;
     margin-top: 15px;
   }
+  .modal-content {
+    width: 400px;
+  }
 }
 
 /* SM Small Device :320px. */
@@ -1301,6 +1304,11 @@
   .todoo1 img {
     display: none;
   }
+
+  .modal-content {
+    width: 320px;
+  }
+
 
   .todoo1-gg img {
     width: 100%;
@@ -1412,7 +1420,7 @@
     padding-left: 7px;
   }
 
-  p.cold2 {
+  p.gig-title {
     font-size: 11px;
   }
 
