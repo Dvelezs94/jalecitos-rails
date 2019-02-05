@@ -21,7 +21,7 @@ class OrderInvoiceGeneratorWorker
                "descripcion": "Servicios profesionales para la orden #{order.uuid}",
                "importe": subtotal,
                "clave": "#{order.id}",
-               "clave_unidad": "ACT",
+               "clave_unidad": "E48",
                "traslados": [
                    {
                        "impuesto": "002",
