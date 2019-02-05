@@ -16,7 +16,9 @@ class MessageNotificationWorker
     @message = {
       title: "Jalecitos",
       body:  "#{message.user.slug}: #{message.body}",
+      badge: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo_Jalecitos-01.png",
       icon: avatar_display_helper(message.user.image_url(:thumb)),
+      renotify: true,
       tag: "jalecios-message-#{@receiver.slug}",
       openUrl: conversations_path(:user_id => message.user.slug),
       vibrate: [125, 75, 125],
