@@ -4,7 +4,7 @@
   <!-- Modal content -->
   <div class="modal-content">
     <!-- <span class="close">&times;</span> -->
-    <div class="container text-center">
+    <div class="text-center">
 
       <div class="row">
 
@@ -32,7 +32,9 @@
             <%= f.password_field :password_confirmation, placeholder: "Confirmar contraseña", id: "user_password_conf_new", class: "required", autocomplete: "new-password" %>
             <%= hidden_field_tag :sign_up_lat, value = '' %>
             <%= hidden_field_tag :sign_up_lon, value = '' %>
-            <%= recaptcha_tags %>
+            <div class="row justify-content-center">
+              <%= recaptcha_tags %>
+            </div>
             <br>
             <%= f.submit 'Continuar', :class => 'btn btn-success' %>
             <br>
