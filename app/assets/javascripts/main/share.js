@@ -10,7 +10,8 @@ $(document).on('turbolinks:load', function() {
 
     if (navigator.share) {
       navigator.share({
-          text: "Observa este jale! Creo es de tu interes.",
+          title: document.title,
+          text: "Observa esta liga! Creo es de tu interes.",
           url: url
       })
         .then(() => console.log('Successful share'))
