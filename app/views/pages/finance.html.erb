@@ -22,18 +22,18 @@
         <div class="Transacciones-tab-area">
           <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#Shah-Home" role="tab" aria-controls="nav-home" aria-selected="true">Compras</a>
-              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#Shah-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Ventas</a>
+              <a class="nav-item nav-link <%= "active" if params[:table] == "purchases" %>" id="nav-home-tab" data-toggle="tab" href="#Shah-Home" role="tab" aria-controls="nav-home" aria-selected="true">Compras</a>
+              <a class="nav-item nav-link <%= "active" if params[:table] == "sales" %>" id="nav-profile-tab" data-toggle="tab" href="#Shah-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Ventas</a>
             </div>
           </nav>
           <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="Shah-Home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="tab-pane fade <%= "show active" if params[:table] == "purchases" %>" id="Shah-Home" role="tabpanel" aria-labelledby="nav-home-tab">
 
                   <div class="transacciones-tab-content row">
                     <%= render partial: 'orders/order_buyer', collection: @purchases %>
               </div>
             </div>
-            <div class="tab-pane fade" id="Shah-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="tab-pane fade <%= "show active" if params[:table] == "sales" %>" id="Shah-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                   <div class="transacciones-tab-content row">
                     <%= render partial: 'orders/order_seller', collection: @sales %>
                   </div>
