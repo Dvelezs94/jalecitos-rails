@@ -225,6 +225,7 @@
 
   .author2 img {
     width: 158px;
+    height: 158px;
   }
 
   .tabbigissue1-total p {
@@ -648,11 +649,6 @@
     padding-right: 13px;
   }
 
-  p.greensbold {
-    color: #202020;
-    font-size: 19px;
-    margin: 0;
-  }
 
   .clickred i {
     bottom: 0;
@@ -1660,11 +1656,6 @@
     padding-right: 13px;
   }
 
-  p.greensbold {
-    color: #202020;
-    font-size: 13px;
-    margin: 0;
-  }
 
   .belldropdownarea.activee {
     visibility: visible;

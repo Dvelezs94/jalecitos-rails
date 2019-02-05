@@ -524,7 +524,7 @@ p.COAH3 {
 
 p.greensbold {
   color: #202020;
-  font-size: 20px;
+  font-size: 14px;
   margin: 0;
 }
 
@@ -532,12 +532,6 @@ p.greensbold {
   color: #51C88B;
   font-size: 14px;
   margin-bottom: 12px;
-}
-
-.timer {
-  position: absolute;
-  right: 20px;
-  top: 20px;
 }
 
 .timer span {
@@ -564,14 +558,8 @@ p.greensbold {
   color: #fff;
 }
 
-.sameicon {
-  position: absolute;
-  left: 15px;
-  top: 15px;
-}
-
 .belldropdown-text {
-  padding-left: 86px;
+  padding-left: 70px;
   padding-right: 13px;
 }
 
@@ -613,7 +601,9 @@ p.quam1 {
 }
 
 .notif-avatar {
-  height: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 .notif-text {
@@ -2633,4 +2623,30 @@ label.error,
 span.error,
 div.error{
   color: red;
+}
+/*dont display menu in front of bottom content*/
+.main_container{
+  margin-bottom: 10vh;
+}
+/*Notifications*/
+.head-notif {
+  display: flex;
+}
+.timer {
+  margin-left: auto;
+}
+.belldropdown-box {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 5px 0;
+}
+.sameicon {
+  position: absolute;
+  left: 5px;
+  top: 15px;
+}
+.notif-avatar-mobile {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
