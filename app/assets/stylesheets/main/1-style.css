@@ -215,12 +215,12 @@ form.search-form input {
 /*catagorislide-area end */
 .catagorisingle-slide i {
   background: #F4F5F7;
-  width: 140px;
-  height: 140px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  line-height: 137px;
+  line-height: 100px;
   color: #0067F4;
-  font-size: 58px;
+  font-size: 34px;
 }
 
 .catagorisingle-slide {

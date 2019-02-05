@@ -7,12 +7,12 @@ $(document).on('turbolinks:load', function() {
       stagePadding: 30,
       responsive: {
         0: {
-          items: 2,
+          items: 4,
           margin: 10,
 
         },
         768: {
-          items: 4,
+          items: 5,
 
         },
         1000: {
