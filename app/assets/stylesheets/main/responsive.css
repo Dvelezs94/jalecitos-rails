@@ -1399,22 +1399,6 @@
 
   .singlefooterdn {}
 
-  form input[type="text"]::placeholder {
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #fff;
-    opacity: 1;
-    /* Firefox */
-  }
-
-  form input[type="text"]:-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: #fff;
-  }
-
-  form input[type="text"]::-ms-input-placeholder {
-    /* Microsoft Edge */
-    color: #fff;
-  }
 
   .califico-about.nulla {
     display: none;
