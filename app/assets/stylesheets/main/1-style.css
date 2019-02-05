@@ -597,7 +597,8 @@ p.quam1 {
   background: #F4F5F7;
   border-radius: 8px;
   box-sizing: border-box;
-  padding: 20px
+  padding: 20px;
+  width: 100%;
 }
 
 .notif-avatar {
