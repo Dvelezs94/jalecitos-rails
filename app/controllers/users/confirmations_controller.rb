@@ -18,7 +18,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     if resource.errors.empty?
      sign_in(resource)
      set_flash_message!(:notice, :confirmed)
-     redirect_to root_path
+     redirect_to configuration_path(wizard: "true")
     else
      redirect_to root_path, notice: "Algo ha salido mal con tu registro."
     end
