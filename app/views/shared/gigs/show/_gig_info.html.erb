@@ -1,3 +1,4 @@
+<% gig_description = @gig.description.html_safe %>
 <div class="innerpage-leftsidejata">
   <div class="verificos-title">
     <h3><%= @gig.title %></h3>
@@ -61,7 +62,7 @@
   <div class="sedcontent-wrap">
     <div class="sed-content">
       <h3><%= @gig.title %></h3>
-      <p><%= @gig.description.html_safe %></p>
+      <p><%= gig_description %></p>
     </div>
 
   </div>
@@ -69,12 +70,12 @@
   <!-- for768 -->
 
   <div class="califico-about nulla">
-    <p><%= @gig.description.html_safe %></p>
+    <p><%= gig_description %></p>
   </div>
 </div>
 
 <!-- for992 -->
 
 <div class="califico-about">
-  <p><%= @gig.description.html_safe %></p>
+  <p><%= gig_description %></p>
 </div>
