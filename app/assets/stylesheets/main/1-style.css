@@ -1440,15 +1440,6 @@ p.cold3 {
   display: none;
 }
 
-.vewmorebtns11 {
-  text-align: right;
-}
-
-.vewmorebtns11 a {
-  color: #0067F4;
-  font-size: 15px;
-  font-weight: 700;
-}
 
 .gigs-carousel .hearted1 {
   position: absolute;
@@ -1476,10 +1467,6 @@ button:focus {
   padding-right: 6px;
 }
 
-#myList li {
-  display: none;
-}
-
 #loadMore {
   color: green;
   cursor: pointer;
@@ -1498,28 +1485,8 @@ button:focus {
   color: black;
 }
 
-.loadingggaro li {
-  list-style: none;
-  font-size: 14px;
-}
-
-.loadingggaro ul {
-  padding-left: 0;
-}
-
-.loadingggaro #loadMore {
-  text-align: right;
-  padding-right: 4px;
-  color: #0067F4;
-  font-weight: 700;
-}
-
 .sed-content p {
   margin: 0;
-}
-
-.loadingggaro.dada1 {
-  display: block;
 }
 /*innerpage3*/
 .pacificost-bg {
@@ -1939,16 +1906,6 @@ p.cold3 {
   display: none;
 }
 
-.vewmorebtns11 {
-  text-align: right;
-}
-
-.vewmorebtns11 a {
-  color: #0067F4;
-  font-size: 15px;
-  font-weight: 700;
-}
-
 .singleslidepd {
   position: relative;
 }
@@ -1973,50 +1930,8 @@ button:focus {
   padding-right: 6px;
 }
 
-#myList li {
-  display: none;
-}
-
-#loadMore {
-  color: green;
-  cursor: pointer;
-}
-
-#loadMore:hover {
-  color: black;
-}
-
-#showLess {
-  color: red;
-  cursor: pointer;
-}
-
-#showLess:hover {
-  color: black;
-}
-
-.loadingggaro li {
-  list-style: none;
-  font-size: 14px;
-}
-
-.loadingggaro ul {
-  padding-left: 0;
-}
-
-.loadingggaro #loadMore {
-  text-align: right;
-  padding-right: 4px;
-  color: #0067F4;
-  font-weight: 700;
-}
-
 .sed-content p {
   margin: 0;
-}
-
-.loadingggaro.dada1 {
-  display: block;
 }
 
 .headerd-mainmenu ul {
