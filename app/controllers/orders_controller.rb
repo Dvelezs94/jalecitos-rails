@@ -203,8 +203,11 @@ class OrdersController < ApplicationController
       if @order.purchase_type == "Offer"
         @order.purchase.request.closed!
       end
-      create_notification(@order.employer, @order.employer, "se ha reembolsado", @order, "purchases")
-      flash[:success] = "La compra ha sido reembolsada, ten en cuenta que puede tardar hasta 48 hrs para aparecer en tu cuenta bancaria"
+      if current_user == @order.employer
+        flash[:success] = "La compra ha sido reembolsada, ten en cuenta que puede tardar hasta 72 hrs para aparecer en tu cuenta bancaria"
+      else
+        create_notification(@order.employee, @order.employer, "te ha reembolsado", @order, "purchases")
+      end
     else
       flash[:error] = "Algo salió mal reembolsando la orden"
     end

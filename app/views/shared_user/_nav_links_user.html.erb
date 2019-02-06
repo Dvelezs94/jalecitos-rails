@@ -11,11 +11,15 @@
             <span>Mensajes</span></a>
         </li>
         <li>
-          <a href="#"><%= icon("fas", "bell") %>
+          <a href="#" onclick="toggleNotifications(event);" data-behavior='read-notifications'><%= icon("fas", "bell") %>
             <span>Notificaciones</span></a>
         </li>
         <%=link_to image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "user_pic"), user_path(current_user)%>
       </ul>
     </div>
   </div>
+</div>
+
+<div class="belldropdownarea notification-items" data-behavior='notification-items'>
+<!-- notifications heere -->
 </div>

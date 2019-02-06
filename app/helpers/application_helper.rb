@@ -92,7 +92,7 @@ module ApplicationHelper
      when object.class == Offer
         "en el pedido #{object.request.name}"
       when object.class == Order
-         "la orden #{object.uuid} por la cantidad de $#{object.total} MXN"
+         "la orden #{object.uuid} por la cantidad de $#{object.total} MXN. Ten en cuenta que puede tardar hasta 72 hrs para aparecer en tu cuenta bancaria."
     end
   end
 
