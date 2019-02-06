@@ -1296,7 +1296,7 @@
 }
 
 /* SM Small Device :320px. */
-@media only screen and (min-width: 320px) and (max-width: 767px) {
+@media only screen and (min-width: 480px) and (max-width: 767px) {
   .todoo1 img {
     display: none;
   }
@@ -1692,15 +1692,14 @@
     top: 15px;
   }
 
-  p.COAH2 {
+  p.req_title {
     color: #000;
     font-size: 15px;
     margin-bottom: 6px !important;
   }
 
-  .ultimo-singleslide {
+  .single-request {
     background: #F4F5F7;
-    padding: 23px 40px;
     border-radius: 6px;
   }
 
@@ -2329,5 +2328,38 @@
   }
   .headerlogo img {
     display: none;
+  }
+}
+/*Carousel*/
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+  .single-gig,
+  .single-request {
+    width: 150px;
+  }
+  .plusarea a {
+    display: none;
+  }
+  .owl-stage{
+    padding-left: 5px !important;
+  }
+  .page3slides-contentrd p.location,
+  p.req_location {
+    min-height: 42px;
+  }
+  p.gig-title {
+    min-height: 63px;
+  }
+  p.req_title {
+    min-height: 108px;
+  }
+  .gigs-carousel .hearted1 {
+    left: 120px;
+    top: 68px;
+  }
+  p.verified{
+    top: 68px;
+  }
+  p.gig-price {
+    font-size: 13px;
   }
 }

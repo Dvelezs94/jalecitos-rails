@@ -32,6 +32,12 @@ $(document).on('turbolinks:load', function() {
       responsive: {
         0: {
           items: 2,
+          margin: 5,
+          stagePadding: 5
+
+        },
+        480: {
+          items: 2,
           margin: 10
 
         },
@@ -63,11 +69,25 @@ $(document).on('turbolinks:load', function() {
       responsive: {
         0: {
           items: 2,
+          margin: 5,
+          stagePadding: 5
+
+        },
+        480: {
+          items: 2,
           margin: 10
 
         },
-        1000: {
+        768: {
           items: 3,
+          margin: 10
+        },
+        1000: {
+          items: 4,
+          margin: 10
+        },
+        1200: {
+          items: 5,
           margin: 10
         }
       }
