@@ -141,7 +141,7 @@ body {
 }
 
 .user-bar ul {
-  margin: 0;
+  margin: 5px 0px 0px 0px;
   padding: 0;
   list-style: none;
 }
@@ -212,12 +212,6 @@ body {
 
 
 /* tablet-mobile-top-ber Start */
-.tablet-mobile-top-ber {
-	display: none;
-}
-.tablet-mobile-top-ber {
-	background: #000;
-}
 .mobile-input-icon i.fa {
 	color: #fff;
 	font-size: 18px;
@@ -253,22 +247,6 @@ body {
 	position: absolute;
 	left: 0;
 	top: -6px;
-}
-
-.tablet-mobile-user img {
-	width: 40px;
-  height: 40px
-}
-.tablet-mobile-top-ber {
-	background: #39C27B;
-	padding: 15px 0;
-}
-.map-marker {
-	margin-top: 7px;
-}
-.belldropdownarea {
-	opacity: 0;
-	visibility: hidden;
 }
 
 
