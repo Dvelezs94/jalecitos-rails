@@ -1,7 +1,11 @@
 <a href="<%= request_path(request) %>">
-<div class="ultimo-singleslide">
-  <p class="COAH"><%= request.location %>.</p>
-  <p class="COAH2"><%= truncate(request.title, length: 50) %></p>
-  <p class="COAH3">Presupuesto: <%= request.budget %> MXN</p>
+<div class="single-request">
+  <div class="req_info">
+    <p class="req_location"><%= truncate(request.location, length: 25)%></p>
+    <p class="req_title"><%= truncate(request.title, length: 50) %></p>
+  </div>
+  <div class="req_budget">
+    <p class="COAH3"><%= request.budget %> MXN</p>
+  </div>
 </div>
 </a>
