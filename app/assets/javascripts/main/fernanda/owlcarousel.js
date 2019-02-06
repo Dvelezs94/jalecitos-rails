@@ -70,7 +70,7 @@ $(document).on('turbolinks:load', function() {
         0: {
           items: 2,
           margin: 5,
-          stagePadding: 5
+          stagePadding: 0
 
         },
         480: {
@@ -80,7 +80,8 @@ $(document).on('turbolinks:load', function() {
         },
         768: {
           items: 3,
-          margin: 10
+          margin: 10,
+          stagePadding: 0
         },
         1000: {
           items: 4,

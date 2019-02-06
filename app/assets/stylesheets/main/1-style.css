@@ -122,22 +122,12 @@ form.search-form input {
   background-color: transparent;
 }
 
-.bellposition a {}
-
 .bellposition {
-  text-align: right;
+  text-align: center;
   position: relative;
-  padding-right: 73px;
 }
 
-.bellposition a {
-  display: inline-block;
-  text-align: center;
-  font-weight: 400;
-  font-size: 14px;
-  padding-left: 48px;
-  transition: .4s;
-}
+
 
 .bellposition a:hover {
   color: #0067F4;
@@ -2666,4 +2656,8 @@ p.req_location {
 }
 .single-request {
   width: 200px;
+}
+/*mobile menu*/
+.bellposition.bellpositionblock {
+  justify-content: space-between;
 }
