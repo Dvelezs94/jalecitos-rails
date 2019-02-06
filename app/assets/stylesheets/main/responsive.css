@@ -4,19 +4,13 @@
   .container {
     min-width: 1200px;
   }
-  .bellposition i {
+  .phone_links i {
     font-size: 30px;
   }
 
   .authorclick img {
     width: 45px;
     height: 45px;
-  }
-
-
-
-  .bellposition {
-    padding-right: 53px;
   }
 
   .authorclick img {
@@ -99,7 +93,7 @@
 
 /* LG Device :992px. */
 @media (min-width: 992px) and (max-width: 1199px) {
-  .bellposition i {
+  .phone_links i {
     font-size: 21px;
   }
 
@@ -108,28 +102,12 @@
     height: 45px;
   }
 
-  .bellposition a {
-    font-size: 14px;
-    padding-left: 27px;
-  }
-
-  .bellposition {
-    padding-right: 53px;
-  }
-
   .authorclick img {
     width: 42px;
     height: 42px;
   }
 
-  .bellposition a {
-    display: inline-block;
-    text-align: center;
-    color: #9B9B9B;
-    font-weight: 400;
-    font-size: 12px;
-    padding-left: 27px;
-  }
+
 
   .search-form-div i {
     color: #9B9B9B;
@@ -455,11 +433,11 @@
     color: #fff;
   }
 
-  .bellposition {
+  .phone_links {
     display: none;
   }
 
-  .bellposition a {
+  .phone_links a {
     display: inline-block;
     text-align: center;
     color: #9B9B9B;
@@ -468,7 +446,7 @@
     padding-left: 12px;
   }
 
-  .bellposition i {
+  .phone_links i {
     font-size: 16px;
   }
 
@@ -538,7 +516,7 @@
     display: none;
   }
 
-  .bellposition.bellpositionblock i {
+  .phone_links i {
     font-size: 40px;
   }
 
@@ -1472,13 +1450,11 @@
     color: #fff;
   }
 
-  .bellposition.bellpositionblock {}
-
   .plusarea {
     display: none;
   }
 
-  .bellposition.bellpositionblock i {
+  .phone_links i {
     font-size: 22px;
   }
 
@@ -1486,10 +1462,6 @@
     width: 37px;
     height: 36px;
     line-height: 37px;
-  }
-
-  .bellposition a {
-    color: #9B9B9B;
   }
 
   .redbell1 span::after {
@@ -1503,7 +1475,7 @@
     border-radius: 50%;
   }
 
-  .bellposition {
+  .phone_links {
     display: none;
   }
 
@@ -2279,9 +2251,7 @@
   .catagorisingle-slide p {
     font-size: 12px;
   }
-  .bellposition.bellpositionblock i {
-    font-size: 18px;
-  }
+
   .plusred i {
     width: 37px;
     height: 36px;
@@ -2304,11 +2274,11 @@
     color: #fff;
     border-radius: 50%;
   }
-  .bellposition a {
+  .phone_links a {
     color: #9B9B9B;
   }
 
-  .bellposition.bellpositionblock {
+  .phone_links{
     display: flex;
   }
 }

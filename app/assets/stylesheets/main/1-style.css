@@ -127,12 +127,6 @@ form.search-form input {
   position: relative;
 }
 
-
-
-.bellposition a:hover {
-  color: #0067F4;
-}
-
 .header-toparea {
   padding: 22px 0;
   border-bottom: 1px solid #979797;
@@ -195,10 +189,6 @@ form.search-form input {
 
 .bellposition2 {
   display: none;
-}
-
-.bellposition a:last-child {
-  padding-left: 0;
 }
 
 /*contactusarea end */
@@ -858,11 +848,6 @@ p {}
   border-color: transparent;
   border: none;
 }
-
-.karinasp-drop .bellposition a:hover {
-  color: #000;
-}
-
 .karinasp-drop {
   position: absolute;
   right: 0;
@@ -2658,6 +2643,7 @@ p.req_location {
   width: 200px;
 }
 /*mobile menu*/
-.bellposition.bellpositionblock {
+.phone_links {
   justify-content: space-between;
+  text-align: center;
 }
