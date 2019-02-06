@@ -2727,3 +2727,9 @@ p.req_location {
 .tablet-mobile-top-ber {
 	display: none;
 }
+/*flash notifications*/
+.toast__icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
