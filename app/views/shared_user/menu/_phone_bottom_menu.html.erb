@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="headertop-right">
-          <div class="bellposition bellpositionblock">
+          <div class="phone_links">
             <a href="<%= root_path %>">
               <%= icon("fas", "home") %><br>
               inicio
@@ -19,8 +19,8 @@
               <%= icon("fas", "envelope") %><br>
               Mensajes
             </a>
-            <a href="<%= user_path(current_user.slug) %>">
-              <%= icon("fas", "user") %><br>
+            <a href="<%= all_notifications_path %>">
+              <%= icon("fas", "bell") %><br>
               Perfil
             </a>
           </div>

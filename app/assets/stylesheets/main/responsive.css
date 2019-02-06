@@ -4,7 +4,7 @@
   .container {
     min-width: 1200px;
   }
-  .bellposition i {
+  .phone_links i {
     font-size: 30px;
   }
 
@@ -13,32 +13,14 @@
     height: 45px;
   }
 
-  .bellposition a {
-    font-size: 14px;
-    padding-left: 27px;
-  }
-
-  .bellposition {
-    padding-right: 53px;
-  }
-
   .authorclick img {
     width: 50px;
     height: 50px;
   }
 
-  .bellposition a {
-    display: inline-block;
-    text-align: center;
-    color: #9B9B9B;
-    font-weight: 400;
-    font-size: 12px;
-    padding-left: 40px;
-  }
 
-  .bellposition a:last-child {
-    padding-left: 0;
-  }
+
+
 
   .search-form-div i {
     color: #9B9B9B;
@@ -111,7 +93,7 @@
 
 /* LG Device :992px. */
 @media (min-width: 992px) and (max-width: 1199px) {
-  .bellposition i {
+  .phone_links i {
     font-size: 21px;
   }
 
@@ -120,28 +102,12 @@
     height: 45px;
   }
 
-  .bellposition a {
-    font-size: 14px;
-    padding-left: 27px;
-  }
-
-  .bellposition {
-    padding-right: 53px;
-  }
-
   .authorclick img {
     width: 42px;
     height: 42px;
   }
 
-  .bellposition a {
-    display: inline-block;
-    text-align: center;
-    color: #9B9B9B;
-    font-weight: 400;
-    font-size: 12px;
-    padding-left: 27px;
-  }
+
 
   .search-form-div i {
     color: #9B9B9B;
@@ -225,6 +191,7 @@
 
   .author2 img {
     width: 158px;
+    height: 158px;
   }
 
   .tabbigissue1-total p {
@@ -411,10 +378,10 @@
     top: 76%;
   }
   .catagorisingle-slide i {
-    width: 110px;
-    height: 110px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    line-height: 115px;
+    line-height: 90px;
     font-size: 42px;
   }
 
@@ -466,11 +433,11 @@
     color: #fff;
   }
 
-  .bellposition {
+  .phone_links {
     display: none;
   }
 
-  .bellposition a {
+  .phone_links a {
     display: inline-block;
     text-align: center;
     color: #9B9B9B;
@@ -479,7 +446,7 @@
     padding-left: 12px;
   }
 
-  .bellposition i {
+  .phone_links i {
     font-size: 16px;
   }
 
@@ -545,62 +512,23 @@
     top: 10px;
   }
 
-  .phone-bottom-menu {
-    display: block;
-    padding: 15px 0;
-    position: fixed;
-    bottom: 0;
-    z-index: 9;
-    width: 100%;
-    background: #F4F5F7;
-  }
-
-  .bellposition.bellpositionblock {
-    display: block;
-    padding-right: 0;
-  }
-
-  .bellposition.bellpositionblock {}
-
   .plusarea {
     display: none;
   }
 
-  .bellposition.bellpositionblock a {
-    margin: 0px 40px;
-    padding-left: 0;
-  }
-
-  .bellposition.bellpositionblock {
-    display: block;
-    padding-right: 0;
-    text-align: center;
-  }
-
-  .bellposition.bellpositionblock i {
+  .phone_links i {
     font-size: 40px;
   }
 
   .plusred i {
-    position: absolute;
-    bottom: 2px;
-    background: #39C27B;
     width: 52px;
     height: 52px;
-    text-align: center;
     line-height: 53px;
-    border-radius: 50%;
-    left: -24px;
-    color: #fff;
     transition: .4s;
   }
 
   .plusred i:hover {
     color: #0067F4;
-  }
-
-  .plusred {
-    position: relative;
   }
 
   .popular-area.populararea2 {
@@ -648,11 +576,6 @@
     padding-right: 13px;
   }
 
-  p.greensbold {
-    color: #202020;
-    font-size: 19px;
-    margin: 0;
-  }
 
   .clickred i {
     bottom: 0;
@@ -917,7 +840,7 @@
     padding-bottom: 138px;
   }
 
-  p.cold2 {
+  p.gig-title {
     font-size: 12px;
     line-height: 16px;
   }
@@ -1294,13 +1217,28 @@
     margin-bottom: 85px;
     margin-top: 15px;
   }
+  .modal-content {
+    width: 400px;
+  }
 }
 
 /* SM Small Device :320px. */
-@media only screen and (min-width: 320px) and (max-width: 767px) {
+@media only screen and (min-width: 480px) and (max-width: 767px) {
   .todoo1 img {
     display: none;
   }
+
+  .modal-content {
+    width: 320px;
+  }
+
+  .catagorisingle-slide i {
+    width: 58px;
+    height: 58px;
+    line-height: 58px;
+    font-size: 32px;
+  }
+
 
   .todoo1-gg img {
     width: 100%;
@@ -1412,7 +1350,7 @@
     padding-left: 7px;
   }
 
-  p.cold2 {
+  p.gig-title {
     font-size: 11px;
   }
 
@@ -1420,11 +1358,11 @@
     font-size: 11px;
   }
 
-  .catagorisingle-slide i {
-    width: 115px;
-    height: 115px;
-    line-height: 120px;
-    font-size: 50px;
+  .catagorisingle-slide p {
+    font-size: 10px;
+  }
+  h3 {
+    font-size: 1.2rem
   }
 
   .catagori-title h1 {
@@ -1512,62 +1450,18 @@
     color: #fff;
   }
 
-  .phone-bottom-menu {
-    display: block;
-    padding: 15px 0;
-    position: fixed;
-    bottom: 0;
-    z-index: 9;
-    width: 100%;
-    background: #F4F5F7;
-  }
-
-  .bellposition.bellpositionblock {
-    display: block;
-    padding-right: 0;
-  }
-
-  .bellposition.bellpositionblock {}
-
   .plusarea {
     display: none;
   }
 
-  .bellposition.bellpositionblock a {
-    margin: 0px;
-    padding-left: 22px;
-    font-size: 11px;
-  }
-
-  .bellposition.bellpositionblock {
-    display: block;
-    padding-right: 0;
-    text-align: center;
-  }
-
-  .bellposition.bellpositionblock i {
+  .phone_links i {
     font-size: 22px;
   }
 
   .plusred i {
-    position: absolute;
-    bottom: 4px;
-    background: #39C27B;
     width: 37px;
     height: 36px;
-    text-align: center;
     line-height: 37px;
-    border-radius: 50%;
-    left: 4px;
-    color: #fff;
-  }
-
-  .plusred {
-    position: relative;
-  }
-
-  .bellposition a {
-    color: #9B9B9B;
   }
 
   .redbell1 span::after {
@@ -1581,7 +1475,7 @@
     border-radius: 50%;
   }
 
-  .bellposition {
+  .phone_links {
     display: none;
   }
 
@@ -1624,10 +1518,6 @@
     margin-top: 20px;
   }
 
-  .bellposition.bellpositionblock a:first-child {
-    padding-left: 0;
-  }
-
   .header-logo {
     display: none;
   }
@@ -1646,11 +1536,6 @@
     padding-right: 13px;
   }
 
-  p.greensbold {
-    color: #202020;
-    font-size: 13px;
-    margin: 0;
-  }
 
   .belldropdownarea.activee {
     visibility: visible;
@@ -1687,15 +1572,14 @@
     top: 15px;
   }
 
-  p.COAH2 {
+  p.req_title {
     color: #000;
     font-size: 15px;
     margin-bottom: 6px !important;
   }
 
-  .ultimo-singleslide {
+  .single-request {
     background: #F4F5F7;
-    padding: 23px 40px;
     border-radius: 6px;
   }
 
@@ -2324,5 +2208,76 @@
   }
   .headerlogo img {
     display: none;
+  }
+}
+/*Carousel*/
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+  .single-gig,
+  .single-request {
+    width: 150px;
+  }
+  .plusarea a {
+    display: none;
+  }
+  .owl-stage{
+    padding-left: 5px !important;
+  }
+  .page3slides-contentrd p.location,
+  p.req_location {
+    min-height: 42px;
+  }
+  p.gig-title {
+    min-height: 63px;
+  }
+  p.req_title {
+    min-height: 108px;
+  }
+  .gigs-carousel .hearted1 {
+    left: 120px;
+    top: 68px;
+  }
+  p.verified{
+    top: 68px;
+  }
+  p.gig-price {
+    font-size: 13px;
+  }
+  .catagorisingle-slide i {
+    width: 58px;
+    height: 58px;
+    line-height: 58px;
+    font-size: 32px;
+  }
+  .catagorisingle-slide p {
+    font-size: 12px;
+  }
+
+  .plusred i {
+    width: 37px;
+    height: 36px;
+    line-height: 37px;
+  }
+}
+/*mobile menu*/
+@media only screen and (min-width: 320px) and (max-width: 991px) {
+  .phone-bottom-menu {
+    display: block;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    z-index: 9;
+    width: 100%;
+    background: #F4F5F7;
+  }
+  .plusred i {
+    background: #39C27B;
+    color: #fff;
+    border-radius: 50%;
+  }
+  .phone_links a {
+    color: #9B9B9B;
+  }
+  .phone_links{
+    display: flex;
   }
 }

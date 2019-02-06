@@ -16,9 +16,10 @@ class PagesController < ApplicationController
       end
       render template: "shared/carousels/add_items_carousel.js.erb"
     elsif current_user
-        @popular_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:popular_gigs], per_page: 5)
-        @recent_requests = Request.search("*", where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:recent_requests], per_page: 5)
-        @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: conditions("verified"), order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:verified_gigs], per_page: 5)
+        @popular_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:popular_gigs], per_page: 15, execute: false)
+        @recent_requests = Request.search("*", where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:recent_requests], per_page: 15, execute: false)
+        @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: conditions("verified"), order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:verified_gigs], per_page: 15, execute: false)
+        Searchkick.multi_search([@popular_gigs, @recent_requests, @verified_gigs])
     end
   end
 

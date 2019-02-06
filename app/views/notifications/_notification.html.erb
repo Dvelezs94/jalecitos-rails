@@ -1,7 +1,7 @@
 <div class="belldropdown-box relative">
   <a href="<%=url_generator_helper(notification, notification.notifiable) %>", style="display: flex;">
   <div>
-    <%= image_tag(notification.user.image_url(:thumb), class: "notif-avatar") %>
+    <%= image_tag(notification.user.image_url(:thumb), class: "notif-avatar-mobile") %>
   </div>
   <div class="notif-text">
     <p class="greensbold"><strong><%=notification.user.slug%></strong>
@@ -34,9 +34,9 @@
         <%= notification.notifiable.request.name %><br>
 
     <% end %></p>
-  </div>
-  <div class="">
-    <span<%= icon("fas","clock") %> <%=distance_of_time_in_words(notification.created_at, Time.now)%></span>
+    <div class="time-ago-mobile">
+      <span><%= icon("fas","clock") %> <%=distance_of_time_in_words(notification.created_at, Time.now)%></span>
+    </div>
   </div>
 </a>
 </div>

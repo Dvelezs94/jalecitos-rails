@@ -6,9 +6,9 @@ es:
       published: "Publicado"
       banned: "Bloqueado"
     packages:
-      basic: "basico"
-      standard: "estandar"
-      premium: "premium"
+      basic: "Básico"
+      standard: "Estándar"
+      premium: "Premium"
 
   orders:
     status:
