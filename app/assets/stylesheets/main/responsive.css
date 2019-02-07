@@ -21,7 +21,9 @@
     width: 600px;
   }
 
-
+  .profile_review_content {
+      margin-left: -100px;
+  }
 
 
 
@@ -206,11 +208,6 @@
 
   .activotext {
     margin-top: 23px;
-  }
-
-  .rightsidetab-content a#reviews-tab {
-    text-align: right;
-    margin-left: 255px;
   }
 
   .header-logo.page2logo img {
@@ -1216,12 +1213,18 @@
   .modal-content {
     width: 400px;
   }
+  #profile_tabs a {
+    font-size: 14px;
+  }
 }
 
 /* SM Small Device :320px. */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
   .todoo1 img {
     display: none;
+  }
+  #profile_tabs a {
+    font-size: 14px;
   }
 
   .catagorisingle-slide i {
@@ -1609,11 +1612,6 @@
   .search-form-div.page2forms i {
     color: #fff;
     font-size: 17px;
-  }
-
-  .rightsidetab-content a#reviews-tab {
-    text-align: right;
-    margin-left: 57px;
   }
 
   .rightsidetab-content .nav-link {
@@ -2199,6 +2197,9 @@
   .single-gig,
   .single-request {
     width: 150px;
+  }
+  #profile_tabs a {
+    font-size: 12px;
   }
   .modal-content {
     width: 300px;

@@ -165,7 +165,7 @@ module ApplicationHelper
   def star_display_helper number
     decimal = number % 1
     if number == 0
-      "Sin calificaciones"
+      "Sin reseñas"
     else
       html = ""
       #number of complete stars
