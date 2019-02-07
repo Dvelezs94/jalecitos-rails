@@ -1,51 +1,35 @@
-<!-- The Modal -->
-<div class="modal upmodal" id="upModal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <!-- <span class="close">&times;</span> -->
-    <div class="text-center">
-
-      <div class="row">
-
-        <div class="col-lg-12">
-
-          <h4>Únete a Jalecitos</h4>
-
-          <div class="fb_sign_in">
-            <%= link_to "Continuar con facebook", user_facebook_omniauth_authorize_path(lat:"latitude", lon:"longitude"), class: 'loginBtn loginBtn--facebook', method: :post %>
-          </div>
-
-          <!-- <div class="google_signin">
-            <%= icon "fas","google" %>
-            <span>Continue with Google</span>
-          </div> -->
-          <div class="divi-new js-form-join-section" data-section="1">
-            <span>O</span></div>
-          <%= form_for(resource, :as => resource_name, :html => { :class => "sign_up_form" }, :url => registration_path(resource_name)) do |f| %>
-            <%= devise_error_messages! %>
-            <%= f.email_field :email, placeholder: "Correo", id: "user_email_new", class: "required", autocomplete: "email" %>
-            <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %><br />
-            <%= f.password_field :password, placeholder: "Nueva contraseña", id: "user_password_new", class: "required", autocomplete: "new-password" %>
-            <%= f.password_field :password_confirmation, placeholder: "Confirmar contraseña", id: "user_password_conf_new", class: "required", autocomplete: "new-password" %>
-            <%= hidden_field_tag :sign_up_lat, value = '' %>
-            <%= hidden_field_tag :sign_up_lon, value = '' %>
-            <div class="row justify-content-center">
-              <%= recaptcha_tags %>
-            </div>
-            <br>
-            <%= f.submit 'Continuar', :class => 'btn btn-success' %>
-            <br>
-          <% end %>
-        <p>Al unirme, acepto recibir correos de Jalecitos.
-        </p>
-        </p>
+<div class="modal" id="upModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+         <div class="sign-up">
+           <div class="modal-logo">
+               <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png" alt="">
+           </div>
+             <div class="sign-up-form">
+                 <div class="nueva">
+                     <h3>Crea una nueva cuenta</h3>
+                     <%= link_to icon("fab", "facebook")+" facebook", user_facebook_omniauth_authorize_path(lat:"latitude", lon:"longitude"), class: 'facebook-login', method: :post %>
+                 </div>
+                 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+                   <%= devise_error_messages! %>
+                   <%= f.email_field :email, placeholder: "Correo", id: "user_email_new", class: "required", autocomplete: "email", autofocus: true, onfocus: "getLocation();" %>
+                   <% if @minimum_password_length %>
+                   <em>(<%= @minimum_password_length %> characters minimum)</em>
+                   <% end %>
+                   <%= f.password_field :password, placeholder: "Nueva contraseña", id: "user_password_new", class: "required", autocomplete: "new-password" %>
+                   <%= f.password_field :password_confirmation, placeholder: "Confirmar contraseña", id: "user_password_conf_new", class: "required", autocomplete: "new-password" %>
+                   <%= hidden_field_tag :sign_up_lat, value = '' %>
+                   <%= hidden_field_tag :sign_up_lon, value = '' %>
+                   <%= hidden_field_tag :from_mobile, value = 'true' %>
+                   <div class="row justify-content-center">
+                     <%= recaptcha_tags %>
+                   </div>
+                   <%= f.submit 'Continuar' %>
+                 <% end %>
+             </div>
+         </div>
       </div>
     </div>
   </div>
-
-</div>
-
 </div>
