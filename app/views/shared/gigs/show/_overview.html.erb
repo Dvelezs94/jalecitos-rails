@@ -6,7 +6,7 @@
           <%= @gig.name %></h3>
       </div>
       <% if current_user != @gig.user %>
-        <%= link_to icon("fas","share", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
+        <%= link_to icon("fas","share-alt", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
         <% if user_signed_in? %>
         <%= icon("fas","exclamation-triangle", class: "fa-lg gig_action_icon cursor_pointer", title: "Reportar", id: "reportgigbtn") %>
         <% end %>
