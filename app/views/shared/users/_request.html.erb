@@ -1,7 +1,10 @@
 <a href="<%= request_path(request.slug) %>">
   <div class="riktos-wrapper">
     <div class="singleriktos">
-      <p class="fof"><%= request.location %></p>
+      <div style="display: flex; justify-content: space-between;">
+        <p class="fof"><%= request.location %></p>
+        <h5 class="req-status req-<%= request.status %>"><%= t "requests.status.#{request.status}" %></h5>
+      </div>
       <p class="jkl"><%= truncate(request.title, length: 50) %></p>
       <p class="jhh"><%= truncate(request.description, length: 100) %></p>
       <span><%= request.offers.count %> ofertas</span>

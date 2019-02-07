@@ -1,12 +1,12 @@
 <div class="maintabroll3">
   <div class="container">
     <div class="row single-review">
-      <div class="col-lg-2 col-md-2 col-3 padingminus">
+      <div class="col-xl-1 col-lg-2 col-md-2 col-3 padingminus">
         <div class="tabpicc1 covico">
           <%=link_to image_tag(avatar_display_helper(review.giver.image_url(:thumb)), class: "icon-review"), user_path(review.giver.slug) %>
         </div>
       </div>
-      <div class="col-lg-10 col-md-10 col-9 profile_review_content">
+      <div class="col-xl-7 col-lg-10 col-md-10 col-9 profile_review_content">
         <div class="tabbigissue1-totalwrap">
           <div class="tabbigissue1-total">
             <li> <strong><%= link_to review.giver.alias, user_path(review.giver.slug), style: "color: black;vertical-align:middle;" %></strong>
@@ -31,7 +31,8 @@
               <%= link_to "Jale: #{truncate(review.reviewable.title, length: 50)}", user_gig_path(review.reviewable.user, review.reviewable), class:"coa3 tj"  %>
             <% else %>
             <p class="coa3 chi1">
-              Pedido: <%= truncate(review.reviewable.title, length: 50) %>
+              <%= link_to "Pedido: #{truncate(review.reviewable.title, length: 50)}", request_path(review.reviewable)  %>
+
             <% end %>
             </p>
           </div>
