@@ -29,12 +29,12 @@
                 <hr>
                 <p><strong>Numero de Orden: </strong><%= @dispute.order.uuid %></p>
                 <% if @dispute.order.purchase_type == "Package" %>
-                <p><strong>Jale: </strong><%= @dispute.order.purchase ? link_to("Voy a #{@dispute.order.purchase.gig.name}", user_gig_path(@dispute.order.purchase.gig.user.slug), @dispute.order.purchase.gig.slug) : "Borrado" %></p>
+                <p><strong>Jale: </strong><%= @dispute.order.purchase ? link_to(@dispute.order.purchase.gig.title, user_gig_path(@dispute.order.purchase.gig.user.slug, @dispute.order.purchase.gig.slug)) : "Borrado" %></p>
                 <p><strong>Paquete: </strong><%= @dispute.order.purchase ? @dispute.order.purchase.pack_type : "Borrado" %></p>
                 <% else %>
-                <p><strong>Pedido: </strong>Busco a <%= @dispute.order.purchase.offer.name %></p>
+                <p><strong>Pedido: </strong><%= link_to(@dispute.order.purchase.request.title, request_path(@dispute.order.purchase.request.slug)) %></p>
                 <% end %>
-                <p><strong>Estado: </strong> <%= @dispute.status.split('_').map(&:capitalize).join(' ') %></p>
+                <p><strong>Estado: </strong> <%= t "disputes.status.#{@dispute.status}" %></p>
               </div>
               <div class="col-lg-12  col-md-12">
                 <% if @dispute.status == "waiting_for_employee" && @dispute.employee == current_user %>

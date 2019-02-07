@@ -212,7 +212,8 @@ a.authorclick {
 }
 
 .catagorislide-area {
-  padding: 60px 0;
+  padding-top: 30px;
+  padding-bottom: 20px;
 }
 
 .catagorislide-area .owl-controls .owl-nav div {
@@ -540,6 +541,8 @@ p.quam1 {
   opacity: 0;
   right: 13%;
   cursor: pointer;
+  overflow-y: scroll;
+  max-height: 50vh;
 }
 
 .belldropdownarea.activee {

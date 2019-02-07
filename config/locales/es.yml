@@ -18,6 +18,14 @@ es:
       disputed: "Disputado"
       completed: "Completado"
       refunded: "Reembolsado"
+
+  disputes:
+    status:
+      waiting_for_support: "Esperando a Soporte"
+      waiting_for_employee: "Esperando al Empleado"
+      waiting_for_employer: "Esperando al empleador"
+      refunded: "Reembolsado"
+      proceeded: "Procesado"
   # Default content
   activerecord:
     errors:

@@ -1,4 +1,5 @@
 class RepliesController < ApplicationController
+  include RepliesHelper
   before_action :authenticate_user!
   access user: :all, admin: :all
 
@@ -25,6 +26,7 @@ class RepliesController < ApplicationController
       elsif current_user.has_roles?(:admin) && ! (@reply.dispute.refunded? || @reply.dispute.proceeded?)
         @reply.dispute.waiting_for_employer!
       end
+      reply_notification(@reply, @reply.user)
       redirect_to order_dispute_path(@reply.dispute.order.uuid, @reply.dispute), notice: 'Tu replica fue creada.'
     else
       redirect_to order_dispute_path(@reply.dispute.order.uuid, @reply.dispute), error: 'Tu replica no pudo ser creada.'

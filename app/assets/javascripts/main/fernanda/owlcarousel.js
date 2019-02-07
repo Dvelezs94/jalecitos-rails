@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function() {
 
+  if ($(".page3slides-area3").length > 0) {
     $(".category-carousel").owlCarousel({
       items: 6,
       loop: true,
@@ -103,7 +104,7 @@ $(document).on('turbolinks:load', function() {
       }
 
     });
-    
+
     owl_requests.on('dragged.owl.carousel', function() {
       fillCarousel(this);
     });
@@ -113,8 +114,9 @@ $(document).on('turbolinks:load', function() {
       loop: true,
       autoplay: true
     });
-
+    }
 });
+
 
 function fillCarousel(carousel) {
   if ($(carousel).find(".owl-stage div:last").prev().hasClass("active")) {

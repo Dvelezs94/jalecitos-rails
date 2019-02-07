@@ -89,7 +89,7 @@ Rails.application.routes.draw do
       put :request_start
       put :start
     end
-    resources :disputes, only: [:index, :new, :create, :show] do
+    resources :disputes, only: [:new, :create, :show] do
       resources :replies, only: [:create]
     end
   end
