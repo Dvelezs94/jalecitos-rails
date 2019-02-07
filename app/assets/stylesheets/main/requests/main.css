@@ -62,11 +62,6 @@
 .refrigerador-content {
   position: relative;
 }
-.Postularme-btn {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
 
 #more {display: none;}
 
@@ -188,4 +183,10 @@
 }
 .chosen-offer {
 	background: #EBF7F1 !important;
+}
+
+.Postularme-btn a {
+	padding: 7px 20px;
+	font-size: 14px;
+	float: right;
 }
