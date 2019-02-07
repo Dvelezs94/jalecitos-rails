@@ -27,7 +27,7 @@
         <div class="hearted1" id="likes-<%= @gig.slug %>">
           <%= render "gigs/likes", gig: @gig %>
         </div>
-        <%= link_to icon("fas", "share"), {}, id: "share" %>
+        <%= link_to icon("fas", "share-alt"), {}, id: "share" %>
         <% if user_signed_in? %>
           <%= icon("fas", "flag", class: "fa-lg gig_action_icon cursor_pointer", title: "Reportar", id: "reportgigbtn") %>
         <% end %>

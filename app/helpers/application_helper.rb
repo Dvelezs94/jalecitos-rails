@@ -177,11 +177,11 @@ module ApplicationHelper
       end
       #if has decimal...
       if decimal > 0
-        html << image_tag("star-off", title: number) if decimal < 0.25
+        html << image_tag("star-off", title: number.round(1)) if decimal < 0.25
 
-        html << image_tag("star-half", title: number) if decimal.between?( 0.25, 0.75 )
+        html << image_tag("star-half", title: number.round(1)) if decimal.between?( 0.25, 0.75 )
 
-        html << image_tag("star-on", title: number) if decimal > 0.75
+        html << image_tag("star-on", title: number.round(1)) if decimal > 0.75
       end
       #stars that doesnt have
       ( (5-number).to_i ).times do
@@ -192,15 +192,15 @@ module ApplicationHelper
     end
   end
 
-  def score_average userScore
-    if userScore.employee_score_times == 0.0 && userScore.employer_score_times == 0.0
+  def score_average us
+    if us.employee_score_times == 0.0 && us.employer_score_times == 0.0
       0.0
-    elsif userScore.employer_score_times == 0.0
-      userScore.employee_score_average
-    elsif userScore.employee_score_times == 0.0
-      userScore.employer_score_average
+    elsif us.employer_score_times == 0.0
+      us.employee_score_average
+    elsif us.employee_score_times == 0.0
+      us.employer_score_average
     else
-      score_average = ( (employee_score_average*employee_score_times)+(employer_score_average*employer_score_times) ) / (employer_score_times + employee_score_times )
+      score_average = ( ( us.employee_score_average* us.employee_score_times)+( us.employer_score_average* us.employer_score_times) ) / (us.employer_score_times + us.employee_score_times )
     end
   end
 

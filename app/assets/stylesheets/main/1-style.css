@@ -697,10 +697,6 @@ p {}
   margin: 0;
 }
 
-.tabbigissue1-total p {
-  margin: 0;
-}
-
 .coa3.tj {
   color: #39C27B !important;
 }
@@ -787,7 +783,7 @@ p {}
   padding-right: 2px;
 }
 
-.coa3.chi1 {
+.coa3.chi1 a{
   color: #27825F;
 }
 
@@ -2475,20 +2471,47 @@ p.gig-score-times {
   border-radius: 50%;
 }
 /*user profile*/
-.gig-status {
+.gig-status,
+.req-status {
   border-radius: 4px;
   color: white;
   padding: 1px 5px;
 }
-.draft {
+.gig-draft {
   background-color: #0067F3;
 }
-.banned {
+.gig-banned {
   background-color: red;
 }
-.published {
+
+.gig-published {
   background-color: #39C27B;
 }
+.req-published {
+  color: #F9B732;
+  border: 1px solid #F9B732;
+}
+
+.req-in_progress {
+  color: #0067F4;
+  border: 1px solid #0067F4;
+}
+
+.req-completed {
+  color: #39C27B;
+  border: 1px solid #39C27B;
+}
+
+.req-banned {
+  color: #EF2235;
+  border: 1px solid #EF2235;
+}
+
+.req-closed {
+  color: #8E8E93;
+  border: 1px solid #8E8E93;
+}
+
   /*requests of profile*/
   .riktos-wrapper {
     background: #F5F5F5;
