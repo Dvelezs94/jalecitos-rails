@@ -75,9 +75,10 @@ module ApplicationHelper
      end
     when object.class == Dispute
        order_dispute_path(object.order.uuid, object)
-
     when object.class == Order
        finance_path(:table => notification.query_url)
+    when object.class == Reply
+       order_dispute_path(object.dispute.order.uuid, object.dispute)
     end
   end
 
@@ -87,12 +88,14 @@ module ApplicationHelper
        "en el pedido #{object.name}"
     when object.class == Package
        "en el jale Voy a #{object.gig.name} por el paquete #{object.pack_type}"
-     when object.class == Dispute
+    when object.class == Dispute
         "en la orden #{object.order.uuid}"
-     when object.class == Offer
+    when object.class == Offer
         "en el pedido #{object.request.name}"
-      when object.class == Order
-         "la orden #{object.uuid} por la cantidad de $#{object.total} MXN. Ten en cuenta que puede tardar hasta 72 hrs para aparecer en tu cuenta bancaria."
+    when object.class == Order
+        "la orden #{object.uuid} por la cantidad de $#{object.total} MXN. Ten en cuenta que puede tardar hasta 72 hrs para aparecer en tu cuenta bancaria."
+    when object.class == Reply
+        "en la disputa de la orden #{object.dispute.order.uuid}"
     end
   end
 
