@@ -10,6 +10,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     if @user.persisted?
+      @user.remember_me = true
       sign_in(@user)
       cookies.permanent.signed[:lg] = rand
       # flash[:notice] = "Te damos la bienvenida!"
