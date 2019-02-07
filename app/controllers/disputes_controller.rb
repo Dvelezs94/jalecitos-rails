@@ -5,11 +5,6 @@ class DisputesController < ApplicationController
   layout 'logged'
   access user: :all, admin: :all
 
-  # GET /disputes
-  def index
-    @disputes = current_user.disputes.order(updated_at: :desc)
-  end
-
   # GET /disputes/1
   def show
     @replies = @dispute.replies.order(created_at: :desc)

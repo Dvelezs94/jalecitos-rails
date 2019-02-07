@@ -27,7 +27,10 @@
 
         la orden
         <%= notification.notifiable.uuid %><br>
+    <% elsif notification.notifiable_type == "Reply" %>
 
+        la disputa de la orden
+        <%= notification.notifiable.dispute.order.uuid %><br>
     <% else %>
 
         en el pedido
