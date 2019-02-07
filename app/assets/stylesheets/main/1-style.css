@@ -2713,3 +2713,7 @@ p.req_location {
   height: 40px;
   border-radius: 50%;
 }
+/*user profile*/
+.author2total {
+  text-align: center;
+}
