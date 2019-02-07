@@ -10,6 +10,14 @@ es:
       standard: "Estándar"
       premium: "Premium"
 
+  requests:
+    status:
+      published: "Publicado"
+      completed: "Completado"
+      in_progress: "En progreso"
+      banned: "Bloqueado"
+      closed: "Cerrado"
+
   orders:
     status:
       pending: "Pendiente"

@@ -20,7 +20,7 @@ if ENV.fetch("RAILS_ENV") == "development"
           request.location = "#{Faker::Address.state}, México"
           request.category_id = Faker::Number.between(1, 10)
           request.budget = Faker::Number.between(100, 5000)
-          request.status = Faker::Number.between(0, 3)
+          request.status = Faker::Number.between(0, 4)
           request.profession = Profession.find( Faker::Number.between(1, 20) ).name
         end
       end

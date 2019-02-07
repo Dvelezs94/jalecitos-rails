@@ -19,7 +19,7 @@
 
             <span>(<%= gig.score_times %>)</span>
           </div>
-          <%= "<span class='gig-status #{gig.status}'> #{t "gigs.status."+gig.status}</span>".html_safe if gig.user == current_user %>
+          <%= "<span class='gig-status gig-#{gig.status}'> #{t "gigs.status."+gig.status}</span>".html_safe if gig.user == current_user %>
         </div>
       </div>
     </div>

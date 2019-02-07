@@ -1,11 +1,27 @@
-$(".paginated_reviews").append('<%= j render(partial: "shared/reviews/review", collection: @reviews) %>');
+<% if params[:reviews].present? %>
 
-<% if @reviews.next_page %>
-  //remove text
-  $(".page3-viewmore").text("");
+  $(".paginated_reviews").append('<%= j render(partial: "shared/reviews/review", collection: @reviews) %>');
 
-  $(".page3-viewmore").append('<%= j link_to_next_page(@reviews, "Ver más#{icon("fas", "angle-down")}".html_safe,class: "review_paginator" ,remote: true) %>');
+  <% if @reviews.next_page %>
+
+    $(".page3-viewmore").append('<%= j link_to_next_page(@reviews, "Ver más#{icon("fas", "angle-down")}".html_safe,class: "review_paginator" ,remote: true) %>');
+  <% else %>
+    $(".page3-viewmore").remove();
+  <% end %>
+
 <% else %>
-  $(".page3-viewmore").remove();
+
+  $(".paginated_requests").append('<%= j render(partial: "shared/reviews/request", collection: @requests) %>');
+
+  <% if @requests.next_page %>
+
+    $(".page3-viewmore").append('<%= j link_to_next_page(@reviews, "Ver más#{icon("fas", "angle-down")}".html_safe,class: "review_paginator" ,remote: true) %>');
+  <% else %>
+    $(".page3-viewmore").remove();
+  <% end %>
+
 <% end %>
+
+
+
 <% sleep 1 %>
