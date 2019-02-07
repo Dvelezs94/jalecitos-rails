@@ -679,7 +679,7 @@ p {}
 }
 
 .coa2 {
-  color: #4A4A4A;
+  color: black;
 }
 
 .rightsidetab-content .nav-tabs {
@@ -713,6 +713,9 @@ p {}
   color: #000;
   padding-left: 3px;
 }
+.tabstar-no {
+  color: black;
+}
 
 .rightsidetab-content {
   position: relative;
@@ -735,6 +738,7 @@ p {}
 
 .tabpicc1.covico img {
   width: 90px;
+  margin-top: -10px;
 }
 
 .col-lg-2.padingminus {
@@ -2394,7 +2398,9 @@ button:focus {
 .single-gig {
   width: 200px;
 }
-.page3slides-contentrd p.location {
+.page3slides-contentrd p.location,
+.coa1,
+p.fof {
   font-size: 14px;
   color: #BFBFBF;
   font-weight: 700;
@@ -2480,6 +2486,51 @@ p.gig-score-times {
 .published {
   background-color: #39C27B;
 }
+  /*requests of profile*/
+  .riktos-wrapper {
+    background: #F5F5F5;
+    padding: 5px 7px;
+    margin: 24px 0;
+    position: relative;
+  }
+  .singleriktos span {
+    color: #39C27A;
+    padding-right: 11px;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .singleriktos p {
+    margin: 0;
+  }
+  p.fof {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  p.jkl {
+    color: #000;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  p.jhh {
+    color: #000;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  p.yii {
+    font-size: 12px;
+    color: #BFBFBF;
+  }
+  .points p {
+    background: #39C27A;
+    color: #fff;
+    display: inline-block;
+    font-size: 13px;
+    padding: 4px 0;
+    width: 178px;
+    text-align: center;
+    border-radius: 4px;
+  }
 /*Plus button*/
 .dropup-content {
   display: none;
@@ -2594,6 +2645,7 @@ p.req_location {
 .phone_links {
   justify-content: space-between;
   text-align: center;
+  align-items: center;
 }
 
 
@@ -2654,6 +2706,13 @@ p.req_location {
   width: 40px;
   margin-top: -30px;
   border-radius: 50%;
+}
+#profile_tabs {
+  justify-content: space-between;
+}
+#profile_tabs a {
+  color: black;
+  font-size: 16px;
 }
 /*MENU*/
 .tablet-mobile-user img {

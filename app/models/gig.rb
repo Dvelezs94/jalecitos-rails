@@ -15,7 +15,8 @@ class Gig < ApplicationRecord
       status: status,
       profession: profession,
       user_id: user_id,
-      verified: user.verified
+      verified: user.verified,
+      updated_at: updated_at
      }
   end
   #Tags

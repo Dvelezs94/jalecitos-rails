@@ -8,7 +8,7 @@ function review_validation () {
    },
    messages: {
      'score' : {
-       required : "Debes dar una calificación"
+       required : "Debes dar una valoración"
      }
    }
  });
