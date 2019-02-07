@@ -24,9 +24,7 @@
   .ipsum-text p {
   	font-size: 14px;
   }
-  .Postularme-btn {
-  	bottom: -10px;
-  }
+
   .postulados-text h2 {
   	font-size: 20px;
   }
@@ -37,10 +35,6 @@
   }
   .fernanda-user-box-text {
   	margin-left: 35px;
-  }
-  .Postularme-btn a {
-  	padding: 7px 20px;
-  	font-size: 14px;
   }
    .fernanda-user-box-text h5 span {
   	font-size: 11px;
@@ -73,5 +67,5 @@
   }
   .modal-content {
   	width: 96%;
-  } 
+  }
 }
