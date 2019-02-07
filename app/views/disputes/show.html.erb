@@ -34,7 +34,7 @@
                 <% else %>
                 <p><strong>Pedido: </strong><%= link_to(@dispute.order.purchase.request.title, request_path(@dispute.order.purchase.request.slug)) %></p>
                 <% end %>
-                <p><strong>Estado: </strong> <%= @dispute.status.split('_').map(&:capitalize).join(' ') %></p>
+                <p><strong>Estado: </strong> <%= t "disputes.status.#{@dispute.status}" %></p>
               </div>
               <div class="col-lg-12  col-md-12">
                 <% if @dispute.status == "waiting_for_employee" && @dispute.employee == current_user %>
