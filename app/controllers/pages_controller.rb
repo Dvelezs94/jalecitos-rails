@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   before_action :pending_review, only: [:home, :finance], :if => :signed_and_rev
   layout :set_layout
-  access user: :all, admin: :all, all: [:home, :autocomplete_search]
+  access user: :all, admin: [:home], all: [:home, :autocomplete_search]
   def home
     if params[:current]
       if params[:popular_gigs]
