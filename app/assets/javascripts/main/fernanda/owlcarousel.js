@@ -36,6 +36,11 @@ $(document).on('turbolinks:load', function() {
           stagePadding: 5
 
         },
+        350: {
+          items: 2,
+          margin: 10
+
+        },
         480: {
           items: 2,
           margin: 10
@@ -70,7 +75,12 @@ $(document).on('turbolinks:load', function() {
         0: {
           items: 2,
           margin: 5,
-          stagePadding: 0
+          stagePadding: 5
+
+        },
+        350: {
+          items: 2,
+          margin: 10
 
         },
         480: {
@@ -80,8 +90,7 @@ $(document).on('turbolinks:load', function() {
         },
         768: {
           items: 3,
-          margin: 10,
-          stagePadding: 0
+          margin: 10
         },
         1000: {
           items: 4,
@@ -92,7 +101,9 @@ $(document).on('turbolinks:load', function() {
           margin: 10
         }
       }
+
     });
+    
     owl_requests.on('dragged.owl.carousel', function() {
       fillCarousel(this);
     });
