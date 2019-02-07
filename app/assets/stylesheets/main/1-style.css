@@ -628,9 +628,7 @@ p.quam1 {
 }
 
 /*innerpage one*/
-.container.for1160width {
-  width: 1140px;
-}
+
 
 .activotext {
   margin-top: 30px;
@@ -720,10 +718,7 @@ p {}
   color: #39C27B !important;
 }
 
-.rightsidetab-content a#reviews-tab {
-  text-align: right;
-  margin-left: 333px;
-}
+
 
 .maintabroll3 {
   margin-top: 27px;
@@ -2569,22 +2564,7 @@ p.gig-score-times {
   color: #28a745;
   cursor: pointer;
 }
-@media only screen and (min-width:1075px){
-    .modal-content {
 
-        width: 32vw;
-    }
-}
-
-
-
-@media only screen and (max-width:1074px){
-    .modal-content {
-
-        width: 500px;
-
-    }
-}
 
 /*error*/
 label.error,
