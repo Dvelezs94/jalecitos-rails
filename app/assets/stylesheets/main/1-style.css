@@ -64,28 +64,12 @@ a:hover {
 }
 
 /* headertop-area start */
-
-form.search-form {
-  display: flex;
-  position: relative;
-  text-align: center;
-  margin-left: 10px;
-  margin-right: 10px;
-  align-items: center;
-}
-
 .headertop-location {
   display: inline-block;
 }
 
 .header-logo {
   display: inline-block;
-}
-
-.search-form a {
-  position: absolute;
-  top: 15px;
-  left: 23px;
 }
 
 form.search-form .query {
@@ -1173,10 +1157,6 @@ p.limpi2 sub {
   padding-left: 8px;
 }
 
-.innerpage3-rightsidetabs .nav-link {
-  display: block;
-  margin-right: 26px;
-}
 
 .innerpage3-rightsidetabs.tab-two {
   display: none;
@@ -1475,16 +1455,6 @@ button:focus {
 
 .singleslidep {}
 
-.innerpage3-rightsidetabs .nav-tabs .nav-link.active {
-  border-bottom: 2px solid #39C27B !important;
-  border-color: transparent;
-}
-
-.innerpage3-rightsidetabs .nav-tabs .nav-link {
-  font-size: 18px;
-  color: #9B9B9B;
-}
-
 .innerpage3-rightsidetabs .nav-tabs {
   border-bottom: 1px solid #F2F2F2;
 }
@@ -1659,7 +1629,6 @@ p.limpi2 sub {
 
 .innerpage3-rightsidetabs .nav-link {
   display: block;
-  margin-right: 26px;
 }
 
 .innerpage3-rightsidetabs.tab-two {
@@ -2715,4 +2684,64 @@ p.req_location {
 /*user profile*/
 .author2total {
   text-align: center;
+}
+/*search-form*/
+.form i.fas {
+  color: #D4D4D7;
+  font-size: 16px;
+}
+form.search-form {
+  display: flex;
+  position: relative;
+}
+
+.search-form a {
+  position: absolute;
+  top: 3px;
+  left: -4px;
+}
+
+form.search-form #query {
+  padding-left: 15px;
+}
+div.form {
+  height: 40px;
+  margin: auto 0;
+  background: #fff;
+  padding: 8px 19px;
+  border-radius: 3px;
+  width: 300px;
+}
+.filters input {
+  margin-right: 10px;
+}
+
+.filters input,
+.filters select {
+  color: #fff;
+	font-size: 14px;
+	white-space: nowrap;
+	border: 1px solid #88DBB0;
+	padding: 5px 15px;
+	border-radius: 3px;
+	background: #35B575;
+  margin-top: 3px;
+}
+.filters input:focus,
+.filters select:focus {
+  background: #35B575;
+  outline: none;
+  color: #fff;
+}
+
+.filters input::placeholder {
+  color: #fff;
+}
+/*category carousel*/
+.catagorisingle-slide p {
+  word-break: break-all;
+}
+/*gig show*/
+.package_names {
+  justify-content: space-between;
 }
