@@ -1,44 +1,35 @@
-<!-- The Modal -->
-<div class="modal inmodal" id="cardModal">
+<div class="modal" id="cardModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+         <div class="sign-up">
+             <div class="sign-up-form">
+               <h3>Nueva Tarjeta</h3>
 
-  <!-- Modal content -->
-  <div class="modal-content modal-configuration">
-    <!-- <span class="close">&times;</span> -->
-    <div class="text-center">
+               <div class="divi-new js-form-join-section" data-section="1"></div>
 
-      <div class="row">
+               <%= form_with url: user_cards_path(current_user), id: "cardForm", class: "new_card" do |f| %>
+               <%= f.hidden_field :token_id %>
 
-        <div class="col-lg-12">
-
-          <h4>Nueva Tarjeta</h4>
-
-          <div class="divi-new js-form-join-section" data-section="1"></div>
-
-          <%= form_with url: user_cards_path(current_user), id: "cardForm", class: "new_card" do |f| %>
-          <%= f.hidden_field :token_id %>
-
-            <%= f.text_field :holder_name, class: "required", id: "holder_name", placeholder: "Nombre del Titular", :data => { :openpay_card => "holder_name"} %>
-            <%= f.text_field :card_number, class: "required", id: "card_number", placeholder: "Numero de tarjeta",
-                minlength: 16, maxlength: 16, :data => { :openpay_card => "card_number"} %>
+                 <%= f.text_field :holder_name, class: "required", id: "holder_name", placeholder: "Nombre del Titular", :data => { :openpay_card => "holder_name"} %>
+                 <%= f.text_field :card_number, class: "required", id: "card_number", placeholder: "Numero de tarjeta",
+                     minlength: 16, maxlength: 16, :data => { :openpay_card => "card_number"} %>
 
 
-            <div class="col-lg-12 col-md-12 col-sm-12">
-              <%= f.select :exp_month, options_for_select( (1..12).map {|month| [month, month.to_s.last(2)]} ),{include_blank: "Mes"},
-               class: "required col-lg-3 col-md-3 col-sm-3 col-3", id: "exp_month", :data => { :openpay_card => "expiration_month"} %>
-              <%= f.select :exp_year, options_for_select( (Date.today.year..8.years.from_now.year).map {|year| [ year, year.to_s.last(2) ]} ),{include_blank: "Año"},
-               class: "required col-lg-3 col-md-3 col-sm-3 col-3", id: "exp_year", :data => { :openpay_card => "expiration_year"} %>
-              <%= f.number_field :card_cvv, class: "required col-lg-3 col-md-3 col-sm-3 col-3",
-               placeholder: "CVV", min:100, max:9999, minlength: 3, maxlength: 4, :data => { :openpay_card => "cvv2"} %>
-            </div>
+                 <div class="col-lg-12 col-md-12 col-sm-12">
+                   <%= f.select :exp_month, options_for_select( (1..12).map {|month| [month, month.to_s.last(2)]} ),{include_blank: "Mes"},
+                    class: "custom-select required col-lg-3 col-md-3 col-sm-3 col-3", id: "exp_month", :data => { :openpay_card => "expiration_month"} %>
+                   <%= f.select :exp_year, options_for_select( (Date.today.year..8.years.from_now.year).map {|year| [ year, year.to_s.last(2) ]} ),{include_blank: "Año"},
+                    class: "custom-select required col-lg-3 col-md-3 col-sm-3 col-3", id: "exp_year", :data => { :openpay_card => "expiration_year"} %>
+                   <%= f.number_field :card_cvv, class: "required col-lg-3 col-md-3 col-sm-3 col-3",
+                    placeholder: "CVV", min:100, max:9999, minlength: 3, maxlength: 4, :data => { :openpay_card => "cvv2"} %>
+                 </div>
 
-          <%= f.submit 'Continuar', :class => 'btn btn-success', :id => "save-card" %>
-        <% end %>
-
+               <%= f.submit 'Continuar', :class => 'btn btn-success', :id => "save-card" %>
+             <% end %>
+             </div>
+         </div>
       </div>
     </div>
   </div>
-
 </div>
-
-</div>
-<br>
