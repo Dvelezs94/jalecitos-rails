@@ -17,6 +17,9 @@
     width: 50px;
     height: 50px;
   }
+  .modal-content {
+    width: 600px;
+  }
 
 
 
@@ -95,6 +98,9 @@
 @media (min-width: 992px) and (max-width: 1199px) {
   .phone_links i {
     font-size: 21px;
+  }
+  .modal-content {
+    width: 500px;
   }
 
   .authorclick img {
@@ -1227,7 +1233,6 @@
   .todoo1 img {
     display: none;
   }
-
   .modal-content {
     width: 320px;
   }
@@ -2211,6 +2216,9 @@
   .single-gig,
   .single-request {
     width: 150px;
+  }
+  .modal-content {
+    width: 300px;
   }
   .plusarea a {
     display: none;
