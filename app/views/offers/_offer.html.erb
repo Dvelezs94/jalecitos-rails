@@ -1,22 +1,30 @@
-<div class="card" style="width: 70%; padding: 10px; margin: 20px auto;">
-  <% if offer.user == offer.request.employee %>
-  <div class="card-header" style="background-color: #3BC27E;">
-    Contratado
+<div class="fernanda-single-box <%= offer.user == offer.request.employee ? 'chosen-offer' : nil %>">
+  <%= image_tag(offer.user.image_url) %>
+  <div class="fernanda-user-box-text">
+    <h5><%= link_to(offer.user.alias, user_path(offer.user.slug)) %>
+      <span>
+        <i class="fa fa-star"></i>
+        <%= score_average(offer.user.score) %></span></h5>
+    <p>Horas estimadas:
+      <%= offer.hours %>
+      <strong><%= number_to_currency(cons_mult_helper(offer.price), precision: 2) %>
+        MXN</strong>
+    </p>
   </div>
+  <% if current_user == offer.user || current_user == offer.request.user %>
+    <div class="ipsum-text">
+      <p><%=offer.description.html_safe %></p>
+    </div>
   <% end %>
-  <div class="card-body">
-    <h5 class="card-title"><%= link_to(offer.user.slug, user_path(offer.user.slug)) %></h5>
-    <% if current_user == offer.user || current_user == offer.request.user %>
-    <p class="card-text"><%=offer.description.html_safe %></p>
-    <p class="card-text">Horas: <%=offer.hours %></p>
-    <% end %>
-    <p class="card-text"><%= number_to_currency(cons_mult_helper(offer.price), precision: 2) %> MXN</p>
-    <% if current_user == offer.user && @hires_open%>
-    <p class="card-text"><%= link_to 'Editar oferta', edit_request_offer_path(offer.request, offer), class: "btn btn-success" %>
-    <%= link_to "Borrar", request_offer_path(offer.request, offer), method: :delete, data: { confirm: '¿Estás seguro de querer borrar esta oferta?' }, class: "btn btn-danger" %></p>
-    <% end %>
-    <% if current_user == offer.request.user && @hires_open %>
-      <%= link_to link_to("Contratar", hire_request_offer_path(offer.request.slug, offer), class: "btn btn-success") %>
-    <% end %>
-  </div>
+  <% if current_user == offer.user && @hires_open%>
+    <div class="Borrar-btn">
+      <%= link_to 'Editar', edit_request_offer_path(offer.request, offer), class: "Editar-b" %>
+      <%= link_to "Borrar", request_offer_path(offer.request, offer), method: :delete, data: { confirm: '¿Estás seguro de querer borrar esta oferta?' }, class: "Borrar-b" %>
+    </div>
+  <% end %>
+  <% if current_user == offer.request.user && @hires_open %>
+    <div class="Borrar-btn">
+      <%= link_to("Contratar", hire_request_offer_path(offer.request.slug, offer), class: "Contratar-b") %>
+    </div>
+  <% end %>
 </div>

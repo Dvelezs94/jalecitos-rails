@@ -1,9 +1,7 @@
   <% if @notifications.count > 0 %>
-
       <div class="paginated-elements notifarea">
         <%= render @notifications %>
       </div>
-
     <div class="pagination-links">
       <%= paginate @notifications %>
     </div>

@@ -37,7 +37,7 @@
             <div class="tab-pane fade <%= "show active" if params[:table] == "sales" %>" id="Shah-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                   <div class="transacciones-tab-content row">
                     <%= render partial: 'orders/order_seller', collection: @sales %>
-                    <%= "No hay nada para mostrar" if @purchases.count == 0 %>
+                    <%= "No hay nada para mostrar" if @sales.count == 0 %>
                   </div>
             </div>
           </div>

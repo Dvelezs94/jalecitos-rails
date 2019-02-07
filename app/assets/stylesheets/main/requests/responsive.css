@@ -1,0 +1,77 @@
+@media (min-width: 768px) and (max-width: 991px) {
+  .fernanda-area {
+  	margin-bottom: 100px;
+  }
+  .Borrar-btn {
+  	text-align: left;
+  	position: relative;
+  	padding: 10px 0;
+  }
+   .Editar-b {
+  	position: absolute;
+  	right: 0;
+  }
+
+  .chat-box {
+  	display: none;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  .arreglar-title h3 {
+  	font-size: 19px;
+  }
+  .ipsum-text p {
+  	font-size: 14px;
+  }
+  .Postularme-btn {
+  	bottom: -10px;
+  }
+  .postulados-text h2 {
+  	font-size: 20px;
+  }
+   .fernanda-single-box img {
+  	left: 10px;
+  	width: 30px;
+  	height: 30px;
+  }
+  .fernanda-user-box-text {
+  	margin-left: 35px;
+  }
+  .Postularme-btn a {
+  	padding: 7px 20px;
+  	font-size: 14px;
+  }
+   .fernanda-user-box-text h5 span {
+  	font-size: 11px;
+  }
+  .fernanda-user-box-text h5 {
+  	font-size: 12px;
+  	margin-bottom: 3px;
+  }
+  .fernanda-user-box-text p {
+  	font-size: 11px;
+  }
+  .fernanda-user-box-text p strong {
+  	font-size: 12px;
+  }
+  .Borrar-btn a {
+  	font-size: 14px;
+  	padding: 6px 30px;
+  }
+  .fernanda-area {
+  	margin-bottom: 100px;
+  }
+  .Borrar-btn {
+  	text-align: left;
+  	position: relative;
+  	padding: 10px 0;
+  }
+   .Editar-b {
+  	position: absolute;
+  	right: 0;
+  }
+  .modal-content {
+  	width: 96%;
+  } 
+}
