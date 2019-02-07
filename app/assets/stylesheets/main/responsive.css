@@ -2239,6 +2239,10 @@
   p.verified{
     top: 68px;
   }
+
+  .phone_links i {
+    font-size: 25px;
+  }
   p.gig-price {
     font-size: 13px;
   }
