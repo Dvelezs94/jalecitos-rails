@@ -70,16 +70,9 @@ body {
 	border-radius: 50%;
 	width: 60px;
 }
+.header-left-content,
 .input-area {
-	display: inline-block;
-}
-
-
-.form {
-	background: #fff;
-	padding: 10px 19px;
-	border-radius: 3px;
-	width: 300px;
+	display: flex;
 }
 
 .form input[type="text"] {
@@ -101,18 +94,7 @@ body {
 .bg-light {
 	background-color: transparent !important;
 }
-.navbar-light .navbar-brand {
-	color: #fff;
-}
-.navbar-brand {
-	display: inline-block;
-	font-size: 16px;
-	white-space: nowrap;
-	border: 1px solid #88DBB0;
-	padding: 5px 15px;
-	border-radius: 3px;
-	background: #35B575;
-}
+
 #navbarDropdown {
 	border: 1px solid #88DBB0;
 	border-radius: 3px;
