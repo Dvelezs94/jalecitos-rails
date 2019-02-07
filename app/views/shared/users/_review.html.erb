@@ -1,19 +1,19 @@
 <div class="maintabroll3">
   <div class="container">
     <div class="row single-review">
-      <div class="col-lg-2 col-md-2 col-2 padingminus">
+      <div class="col-lg-2 col-md-2 col-3 padingminus">
         <div class="tabpicc1 covico">
           <%=link_to image_tag(avatar_display_helper(review.giver.image_url(:thumb)), class: "icon-review"), user_path(review.giver.slug) %>
         </div>
       </div>
-      <div class="col-lg-10 col-md-10 col-10">
+      <div class="col-lg-10 col-md-10 col-9 profile_review_content">
         <div class="tabbigissue1-totalwrap">
           <div class="tabbigissue1-total">
             <li> <strong><%= link_to review.giver.alias, user_path(review.giver.slug), style: "color: black;vertical-align:middle;" %></strong>
                 <%= image_tag("star-on", title: review.rating.stars, class: "single-star") %>
                 <span class="rating-score"><%= review.rating.stars %></span>
             </li>
-            <p class="coa2">
+            <p class="profile_review_rext" style="color: black;">
               <% if review.comment.present? %>
               <% splitted_words = review.comment.split  %>
                 <span class='truncated-text' style='display: inline;'><%=review.comment.truncate_words(50) %></span>
