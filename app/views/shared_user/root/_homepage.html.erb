@@ -5,3 +5,5 @@
 <%= render('shared/requests/carousel', title: "Pedidos Recientes", requests: @recent_requests, param_name: :recent_requests) if @recent_requests.present? %>
 
 <%= render('shared/gigs/carousel', title: "Jales Verificados", gigs: @verified_gigs, param_name: :verified_gigs) if @verified_gigs.present? %>
+
+<%= render('shared_user/gigs/liked_carousel', title: "Jales Gustados", gigs: @liked_gigs_items, param_name: :liked_gigs) if @liked_gigs.present? %>
