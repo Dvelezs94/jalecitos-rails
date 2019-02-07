@@ -38,7 +38,7 @@ button.strt_selling_Srch {
 }
 
 .my_dropdown_menu .dropbtn {
-  outline: none;
+  
   background-color: #d5d0d0;
   color: white;
   font-size: 16px;
@@ -97,7 +97,7 @@ button.strt_selling_Srch {
 /* categories menu */
 /* drop downmenu */
 .categories_drop .dropbtn {
-  outline: none;
+  
   background-color: #ffffff00;
   color: #a59e9e;
   font-size: 15px;
@@ -172,7 +172,7 @@ button.strt_selling_Srch {
 /*selling dropdown  */
 /* drop downmenu */
 .my_dropdown_menu_top .dropbtn {
-  outline: none;
+  
   background-color: white;
   color: #101010;
   font-size: 14px;
@@ -251,7 +251,7 @@ button.strt_selling_Srch {
 /* messages dropdown */
 /* drop downmenu */
 .mesages_ .dropbtn {
-  outline: none;
+  
   background-color: white;
   color: #101010;
   font-size: 14px;

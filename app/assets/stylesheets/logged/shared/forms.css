@@ -54,7 +54,6 @@
     height: 70px;
     border: 1px #b2b2b2 solid;
     border-radius: 4px;
-    outline: none;
 }
 
 .custom-file-upload {
@@ -138,7 +137,6 @@ ul.dropdown-menu {
 .input-box select {
     border: 1px #b2b2b2 solid;
     border-radius: 4px;
-    outline: none;
     width: 49%;
     height: 33px;
     font-size: 14px;
@@ -149,7 +147,6 @@ ul.dropdown-menu {
 
     border: 1px #b2b2b2 solid;
     border-radius: 4px;
-    outline: none;
     width: 49%;
     height: 33px;
     padding: 0px 9px;
@@ -161,7 +158,6 @@ ul.dropdown-menu {
     font-size: 12px;
     text-align: center;
     cursor: pointer;
-    outline: none;
 
     background-color: white;
     border: none;
@@ -224,7 +220,6 @@ ul.dropdown-menu {
     font-size: 12px;
     text-align: center;
     cursor: pointer;
-    outline: none;
     background-color: white;
     text-align: center;
     display: inline-block;
@@ -256,7 +251,6 @@ section.plan.cf {
     border: 1px #b2b2b2 solid;
     border-radius: 4px;
     margin-top: 5px;
-    outline: none;
     width: 25%;
     height: 34px;
     margin-left: 10px;
