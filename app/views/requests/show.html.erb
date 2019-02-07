@@ -1,26 +1,72 @@
-<div class="card" style="width: 70%; padding: 10px; margin: 20px auto;">
-  <div class="card-body">
-    <h5 class="card-title"><%= @request.title %></h5>
-    <%= link_to icon("fas","share", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
-    <% if user_signed_in? %>
-    <%= icon("fas","exclamation-triangle", class: "fa-lg gig_action_icon cursor_pointer", title: "Reportar", id: "reportrequestbtn") %>
-    <% end %>
-    <p class="card-text"><%= @request.description.html_safe %></p>
-    <p class="card-text">Presupuesto: <%= @request.budget %> MXN</p>
-    <p><small class="text-muted"><%=@request.location%></small></p>
-    <p><small class="text-muted">Publicado hace <%= distance_of_time_in_words(@request.created_at, Time.now) %></small></p>
-    <% if @hires_open %>
-      <% if current_user == @request.user %>
-       <hr>
-       <%= link_to 'Editar', edit_request_path(@request), class: "btn btn-primary" %>
-       <%= link_to 'Borrar', request_path(@request), class: "btn btn-danger", method: :delete, :data => {:confirm => 'Confirma que quieres borrar este pedido'}  %>
-      <% elsif  current_user && has_offered(current_user.id)  %>
-       <p class="text-muted">Tu oferta esta postulada</p>
-      <% else %>
-       <%= link_to 'Postularse', new_request_offer_path(@request), class: "btn btn-primary" %>
-      <% end %>
-    <% end %>
-  </div>
+<div class="refrigerador-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="refrigerador-content">
+                    <div class="icon-areas">
+                        <i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.go(-1);"></i>
+                        <div class="icon-link">
+                          <% if user_signed_in? && (@request.user != current_user) %>
+                          <%= link_to icon("fa","flag", title: "Reportar"), {}, id: "reportrequestbtn" %>
+                          <% end %>
+                          <%= link_to icon("fa","share-alt", title: "Compartir"), {}, id: "share" %>
+                        </div>
+                    </div>
+                    <div class="arreglar-title">
+                        <h3><%= @request.title %></h3>
+                    </div>
+                    <div class="Saltillo">
+                        <a href=""><%= @request.location %></a>
+                        <span>Publicado hace <%= distance_of_time_in_words(@request.created_at, Time.now) %></span>
+                    </div>
+
+                    <div class="ipsum-text">
+                     <p><%= @request.description.html_safe %></span></p>
+                     <!-- <a onclick="myFunction()" id="myBtn" href="#">Ver más <i class="fa fa-angle-down" aria-hidden="true"></i></a> -->
+                     </div>
+
+                     <div class="Postularme-btn">
+                     <% if @hires_open %>
+                       <% if current_user == @request.user %>
+                        <%= link_to 'Editar', edit_request_path(@request), class: "btn btn-primary" %>
+                        <%= link_to 'Borrar', request_path(@request), class: "btn btn-danger", method: :delete, :data => {:confirm => 'Confirma que quieres borrar este pedido'}  %>
+                       <% elsif  current_user && has_offered(current_user.id)  %>
+                        <p class="text-muted">Tu oferta esta postulada</p>
+                       <% else %>
+                        <%= link_to 'Postularme', new_request_offer_path(@request), class: "btn btn-success postularme-offer" %>
+                       <% end %>
+                     <% end %>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<%= render @request.offers %>
+<div class="postulados-area">
+   <div class="container">
+       <div class="row">
+           <div class="col-lg-12">
+               <div class="postulados-text">
+                   <h2>Postulados</h2>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+
+<div class="fernanda-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="fernanda-content">
+                    <div class="fernanda-user-box">
+                        <%= render @request.offers %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <%= render "reports/request"%>
