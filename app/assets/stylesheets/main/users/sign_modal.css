@@ -1,0 +1,86 @@
+
+.sign-up {
+	text-align: center;
+}
+
+.sign-up {
+  text-align: center;
+}
+.modal-logo h3 {
+  font-size: 40px;
+  font-weight: 800;
+}
+.modal-logo h3 span {
+  display: block;
+  font-size: 12px;
+}
+.nueva h3 {
+  font-size: 15px;
+  font-weight: 700;
+}
+.nueva {
+	padding: 40px 0;
+}
+
+
+.nueva a {
+	background: #0067F4;
+	display: inline-block;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 700;
+	width: 100%;
+	padding: 13px;
+	border-radius: 5px;
+}
+.nueva a sapn i.fa {
+	font-size: 20px;
+	margin-right: 10px;
+	transform: translateY(2px);
+}
+.modal-header {
+	border-bottom: none;
+	position: absolute;
+	right: 0;
+}
+.modal-content {
+	width: 75%;
+	margin: 0 auto;
+	border: none;
+	border-radius: 0;
+	padding: 0 35px;
+}
+
+.sign-up-form input[type="text"] {
+	border: none;
+	text-align: center;
+	background: #F7F7F7;
+	margin-bottom: 10px;
+	padding: 13px;
+	color: #8E8E93;
+	font-size: 14px;
+	font-weight: 700;
+	width: 100%;
+	border-radius: 5px;
+}
+.sign-up-form input[type="submit"] {
+	background: #39C27B;
+	color: #fff;
+	font-weight: 700;
+	width: 100%;
+	border: none;
+	cursor: pointer;
+	padding: 13px;
+	border-radius: 5px;
+}
+
+.una {
+	margin-top: 20px;
+	font-size: 12px;
+	color: #000;
+}
+.una {
+	margin-top: 20px;
+	font-size: 12px;
+	color: #000;
+}

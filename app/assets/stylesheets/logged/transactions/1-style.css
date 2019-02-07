@@ -363,6 +363,13 @@ body {
 	margin-bottom: 0;
 }
 
+.order-title {
+	color: #8E8E93;
+	font-size: 19px;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
 .diego-user {
 	position: relative;
 	margin-top: 15px;
@@ -371,7 +378,6 @@ body {
 	position: absolute;
 	left: 10px;
 	width: 20px;
-	margin-top: 3px;
   border-radius: 50%;
 }
 .diego-user h5 {

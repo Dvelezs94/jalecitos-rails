@@ -4,16 +4,18 @@
       <h5 class="<%= order_buyer.status %>"><%= t "orders.status.#{order_buyer.status}" %></h5>
       <h4>ID: <%= order_buyer.uuid %></h4>
       <% if order_buyer.purchase_type == "Package"%>
-      <p><%= order_buyer.purchase.gig.title %></p>
+      <p><%= link_to order_buyer.purchase.gig.title, user_gig_path(order_buyer.purchase.gig.user.slug, order_buyer.purchase.gig.slug), class: "order-title" %></p>
       <% else %>
-      <p><%= order_buyer.purchase.request.title %>.</p>
+      <p><%= link_to order_buyer.purchase.request.title, request_path(order_buyer.purchase.request.slug), class: "order-title" %>.</p>
       <% end %>
    </div>
 
     <div class="diego-velez-text">
         <div class="diego-user">
-            <a href=""><%= image_tag(order_buyer.employee.image_url(:thumb)) %></a>
+          <%= link_to user_path(order_buyer.employee.slug) do %>
+            <%= image_tag(order_buyer.employee.image_url(:thumb))%>
             <h5><%= order_buyer.employee.alias %></h5>
+          <% end %>
         </div>
         <div class="Paquete-Básico">
             <% if order_buyer.purchase_type == "Package"%>

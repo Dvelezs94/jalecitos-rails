@@ -190,11 +190,11 @@ module ApplicationHelper
   end
 
   def score_average userScore
-    if userScore.employee_score_times == 0 && userScore.employer_score_times == 0
-      0
-    elsif userScore.employer_score_times == 0
+    if userScore.employee_score_times == 0.0 && userScore.employer_score_times == 0.0
+      0.0
+    elsif userScore.employer_score_times == 0.0
       userScore.employee_score_average
-    elsif userScore.employee_score_times == 0
+    elsif userScore.employee_score_times == 0.0
       userScore.employer_score_average
     else
       score_average = ( (employee_score_average*employee_score_times)+(employer_score_average*employer_score_times) ) / (employer_score_times + employee_score_times )
