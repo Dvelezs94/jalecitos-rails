@@ -21,7 +21,7 @@
   font-size: 15px;
 }
 .nueva {
-	padding: 40px 0;
+	padding: 25px 0;
 }
 
 
@@ -59,7 +59,7 @@
 	padding: 0 10px;
 }
 
-.sign-up-form input[type="email"], .sign-up-form input[type="password"] {
+.sign-up-form input[type="email"], .sign-up-form input[type="password"], .sign-up-form input[type="text"], .sign-up-form input[type="number"] {
 	border: none;
 	text-align: center;
 	background: #F7F7F7;

@@ -679,7 +679,7 @@ ul.social-buttons li a {
   transition: all 0.3s;
   color: white;
   border-radius: 100%;
-  outline: none;
+  
   background-color: #212529;
 }
 
