@@ -33,7 +33,9 @@ class NotificationRelayWorker
           vapid: @vapid
         )
       # If the subscription is gone(deleted), destroy it from DB
-      rescue Webpush::InvalidSubscription => e
+      rescue Webpush::InvalidSubscription
+        subs.destroy
+      rescue Webpush::ExpiredSubscription
         subs.destroy
       end
     end
