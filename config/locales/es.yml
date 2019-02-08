@@ -20,6 +20,7 @@ es:
 
   orders:
     status:
+      waiting_for_bank_approval: "Esperando aprobacion"
       pending: "Pendiente"
       denied: "Denegado"
       in_progress: "En Progreso"
