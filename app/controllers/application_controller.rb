@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :update_sign_in_at_periodically
   UPDATE_LOGIN_PERIOD = 1.hours
+  include ApplicationHelper
 
   protected
  def configure_permitted_parameters
@@ -19,9 +20,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def create_notification(user, recipient, message, model, query_url=nil, review_id=nil)
-    Notification.create!(recipient: recipient, user: user, action: message, notifiable: model, query_url: query_url, review_id: review_id)
-  end
   #Devise redirects
   def after_sign_in_path_for(resource)
     #if i am in localhost/sign_in path, redirect to localhost, otherwise, it will throw a too many times redirect error
