@@ -7,6 +7,9 @@ class TransferFundsAfterThreeDWorker
     init_openpay("transfer")
 
     @order = Order.find_by_response_order_id(response)
+    if ! @order.waiting_for_bank_approval?
+      return true
+    end
     ###### transfer money to hold account ######
     request_transfer_hash = {
       "customer_id" => ENV.fetch("OPENPAY_HOLD_CLIENT"),
