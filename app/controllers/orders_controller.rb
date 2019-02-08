@@ -33,7 +33,9 @@ class OrdersController < ApplicationController
       "amount" => purchase_order_total(@order.total),
       "currency" => "MXN",
       "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{purchase_order_total(@order.total)}",
-      "device_session_id" => params[:device_id]
+      "device_session_id" => params[:device_id],
+      "use_3d_secure" => true,
+      "redirect_url" => finance_url(:table => "purchases")
     }
 
     if @order.save
@@ -42,40 +44,16 @@ class OrdersController < ApplicationController
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.response_order_id = response["id"]
         @order.save
-        ###### transfer money to hold account ######
-        request_transfer_hash = {
-          "customer_id" => ENV.fetch("OPENPAY_HOLD_CLIENT"),
-          "amount" => purchase_order_total(@order.total),
-          "description" => "transferencia de orden #{@order.uuid} por la cantidad de #{purchase_order_total(@order.total)}",
-          "order_id" => "#{@order.uuid}-hold"
-        }
-        begin
-          @transfer.create(request_transfer_hash, current_user.openpay_id)
-          # @order.response_completion_id = response["id"]
-          # @order.save
-        rescue OpenpayTransactionException => e
-          flash[:error] = "#{e}"
-          redirect_to finance_path(:table => "purchases")
-          return false
-        end
-        ###########
-        if @order.purchase_type == "Offer"
-          @order.purchase.request.update(employee: @order.purchase.user)
-          @order.purchase.request.in_progress!
-          OrderMailer.new_request_order_to_employee(@order).deliver if @order.employee.transactional_emails
-          OrderMailer.new_request_order_to_employer(@order).deliver if @order.employer.transactional_emails
-        else
-          OrderMailer.new_gig_order_to_employee(@order).deliver if @order.employee.transactional_emails
-          OrderMailer.new_gig_order_to_employer(@order).deliver if @order.employer.transactional_emails
-        end
-        create_notification(@order.employer, @order.employee, "te contrató", @order.purchase, "sales")
-        flash[:success] = 'La orden fue creada exitosamente.'
+        puts "x" * 500
+        puts response
+        redirect_to response["payment_method"]["url"]
       rescue OpenpayTransactionException => e
         @order.denied!
         flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
+        redirect_to finance_path(:table => "purchases")
       end
     end
-    redirect_to finance_path(:table => "purchases")
+
   end #create end
 
   def request_start

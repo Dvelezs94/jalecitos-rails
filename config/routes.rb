@@ -93,6 +93,11 @@ Rails.application.routes.draw do
       resources :replies, only: [:create]
     end
   end
+  resources :order_webhooks, only: [] do
+    collection do
+      post :handle
+    end
+  end
   resources :verifications, only: [:new, :create] do
     member do
       put :approve

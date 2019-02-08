@@ -10,6 +10,10 @@ module ApplicationHelper
     end
   end
 
+  def create_notification(user, recipient, message, model, query_url=nil, review_id=nil)
+    Notification.create!(recipient: recipient, user: user, action: message, notifiable: model, query_url: query_url, review_id: review_id)
+  end
+
   def active? path
     "active" if current_page? path
   end
