@@ -26,14 +26,8 @@ class QueriesController < ApplicationController
   end
 
   def user_search
-    location = get_location(params[:lat], params[:lon]) if params[:lat].present? && params[:lon].present?
-    if location.present?
-      @gigs = Gig.search(params[:query], where: {status: "published", location: location}, limit: 5, execute: false)
-      @requests = Request.search(params[:query], where: {status: "published",location: location}, limit: 5, execute: false)
-    else
-      @gigs = Gig.search(params[:query], where: {status: "published"}, limit: 5, execute: false)
-      @requests = Request.search(params[:query], where: {status: "published"}, limit: 5, execute: false)
-    end
+    @gigs = Gig.search(params[:query], where: where_filter, page: params[:gigs], per_page: 15, execute: false)
+    @requests = Request.search(params[:query], where: where_filter, page: params[:gigs], per_page: 15, execute: false)
     Searchkick.multi_search([@gigs, @requests])
   end
 

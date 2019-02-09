@@ -1,10 +1,43 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8">
-      <h3 class="container">Resultados de búsqueda
-      </h3>
+<div class="transacciones-secsion">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="transacciones-text">
+          <h1>Resultados de Búsqueda</h1>
+        </div>
+      </div>
     </div>
   </div>
-    <%= render 'shared/query/gig_search_list' if @gigs.any?%>
-    <%= render 'shared/query/request_search_list' if @requests.any?%>
+</div>
+
+<div class="Transacciones-tab-secsion">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="Transacciones-tab-area">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-gigs-tab" data-toggle="tab" href="#query-gigs" role="tab" aria-controls="nav-gigs" aria-selected="true">Jales</a>
+              <a class="nav-item nav-link" id="nav-requests-tab" data-toggle="tab" href="#query-requests" role="tab" aria-controls="nav-requests" aria-selected="false">Pedidos</a>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="query-gigs" role="tabpanel" aria-labelledby="nav-gigs-tab">
+
+                  <div class="transacciones-tab-content row">
+                    <%= render partial: 'shared/queries/gig', collection: @gigs %>
+                    <%= "No hay nada para mostrar" if @gigs.total_count == 0 %>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="query-requests" role="tabpanel" aria-labelledby="nav-requests-tab">
+                  <div class="transacciones-tab-content row">
+                    <%= render partial: 'shared/queries/request', collection: @requests %>
+                    <%= "No hay nada para mostrar" if @requests.total_count == 0 %>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
