@@ -29,7 +29,7 @@
 
         <% else %>
           <div class="product__slider-main">
-            <%= link_to( image_tag( "https://picsum.photos/600/400?image=#{Faker::Number.between(1, 500)}", class: 'img-responsive'), user_gig_path(@gig.user.slug,@gig) ) %>
+            <%= link_to( image_tag( "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/app_images/gig-no-image-2.png", class: 'img-responsive'), user_gig_path(@gig.user.slug,@gig) ) %>
           </div>
 
         <% end %>
