@@ -43,7 +43,7 @@ module ApplicationHelper
 
   def image_display_helper image
     if image.nil?
-      "https://picsum.photos/600/400?image=#{Faker::Number.between(1, 500)}"
+      "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/app_images/gig-no-image-2.png"
     else
       image.url
     end
@@ -57,7 +57,7 @@ module ApplicationHelper
 
   def avatar_display_helper image
     if image.nil?
-      "https://picsum.photos/100/100?image=#{Faker::Number.between(1, 500)}"
+      "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/app_images/gig-no-image-2.png"
     else
       image
     end

@@ -23,6 +23,11 @@ input:focus {
  outline: none;
 }
 
+/* disable turbolinks progress bar */
+.turbolinks-progress-bar {
+  visibility: hidden;
+}
+
 .alignleft {
   float: left;
   margin-right: 15px;

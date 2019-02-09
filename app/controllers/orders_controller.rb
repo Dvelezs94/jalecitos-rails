@@ -44,8 +44,6 @@ class OrdersController < ApplicationController
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.response_order_id = response["id"]
         @order.save
-        puts "x" * 500
-        puts response
         redirect_to response["payment_method"]["url"]
       rescue OpenpayTransactionException => e
         @order.denied!

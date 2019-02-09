@@ -365,6 +365,9 @@
     right: 10px;
     top: 76%;
   }
+  .servicoteam-wrap {
+    display: none;
+  }
   .catagorisingle-slide i {
     width: 90px;
     height: 90px;
@@ -2192,6 +2195,9 @@
   .single-request {
     width: 150px;
   }
+  .servicoteam-wrap {
+    display: none;
+  }
   #profile_tabs a {
     font-size: 12px;
   }
@@ -2262,6 +2268,10 @@
     z-index: 9;
     width: 100%;
     background: #F4F5F7;
+    box-shadow: 0 -5px 20px 0 rgba(0, 0, 0, 0.1);
+  }
+  .servicoteam-wrap {
+    display: none;
   }
   .plusred i {
     background: #39C27B;
