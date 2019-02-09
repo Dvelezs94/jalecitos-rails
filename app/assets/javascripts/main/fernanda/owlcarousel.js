@@ -10,6 +10,7 @@ $(document).on('turbolinks:load', function() {
         0: {
           items: 4,
           margin: 10,
+          stagePadding: 10
 
         },
         768: {

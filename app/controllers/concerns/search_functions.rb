@@ -6,15 +6,15 @@ module SearchFunctions
     model.search query,includes: includes, where: where_filter(status), page: params[:page], per_page: 20, match: :word_start
   end
 
-  def where_filter status
+  def where_filter
     if params[:category_id] != "" && params[:location] != ""
-      {status: status, category_id: params[:category_id], location: params[:location]}
+      {status: "published", category_id: params[:category_id], location: params[:location]}
     elsif params[:category_id] != ""
-      {status: status, category_id: params[:category_id]}
+      {status: "published", category_id: params[:category_id]}
     elsif  params[:location] != ""
-      {status: status, location: params[:location]}
+      {status: "published", location: params[:location]}
     else
-      {status: status}
+      {status: "published"}
     end
   end
 

@@ -7,7 +7,7 @@ module InitProfessions
      "Bailarín", "Basurero", "Bibliotecario", "Biólogo", "Bombero", "Cajero", "Camarero, mesero", "Camionero", "Cantante", "Carnicero", "Carpintero",
      "Cartero", "Cazador", "Científico", "Cirujano", "Cocinero", "Conductor", "Conserje", "Contador", "Cura", "Decorador", "Dentista",
      "Dependiente de una tienda", "Diseñador", "Economista", "Electricista", "Empresario", "Enfermero", "Escritor", "Farmaceútico", "Florista",
-     "Fontanero", "Fotógrafo", "Frutero", "Físico", "Granjero, Agricultor", "Ingeniero", "Investigador", "Jardinero", "Joyero", "Juez", "Limpiacristales",
+     "Fontanero", "Fotógrafo", "Frutero", "Físico", "Granjero, Agricultor", "Ingeniero", "Investigador", "Jardinero", "Joyero", "Juez", "Locutor", "Limpiacristales",
      "Marinero", "Mecánico", "Meteorólogo", "Minero", "Modelo", "Modista", "Monje", "Médico", "Niñera", "Obrero", "Oficinista", "Panadero", "Pastelero, repostero",
      "Payaso", "Peluquero", "Periodista", "Persona de limpieza", "Pescador", "Pintor", "Plomero", "Policía", "Político", "Portero, conserje", "Profesor",
      "Programador", "Psicólogo", "Psiquiatra", "Químico, farmaceútico", "Recepcionista", "Secretario", "Socorrista", "Taxista", "Telefonista",
