@@ -2188,6 +2188,7 @@
   .headerlogo img {
     display: none;
   }
+
 }
 /*Carousel*/
 @media only screen and (min-width: 320px) and (max-width: 479px) {
@@ -2241,7 +2242,7 @@
     font-size: 32px;
   }
   .catagorisingle-slide p {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .plusred i {
@@ -2256,6 +2257,21 @@
   /*gig show*/
   .innerpage3-rightsidetabs .nav-tabs .nav-link {
     font-size: 16px;
+  }
+  /*search sizes of partials gig ans request*/
+  .gig-query .coa1,
+  .req-query p.fof {
+    font-size: 13px;
+  }
+  .gig-query .coa2,
+  .req-query p.jhh {
+    font-size: 12px;
+  }
+  .gig-query .coa3 {
+    font-size: 12px;
+  }
+  .gig-query .tabstar-no {
+    font-size: 12px;
   }
 }
 /*mobile menu*/
@@ -2284,6 +2300,11 @@
   .phone_links{
     display: flex;
   }
+  /*search*/
+  .gig-query .gig-query-content {
+    margin-top: 20px;
+    margin-bottom: 0px;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -2295,5 +2316,9 @@
   }
   div.form {
     width: auto;
+  }
+  /*search results*/
+  .gig-query .gig-image-profile img {
+    border-radius: 0;
   }
 }

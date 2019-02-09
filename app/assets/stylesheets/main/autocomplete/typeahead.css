@@ -142,7 +142,7 @@ select[multiple].input-group.input-group-lg .twitter-typeahead .tt-hint {
 .twitter-typeahead .tt-input[readonly],
 fieldset[disabled] .twitter-typeahead .tt-input {
   cursor: not-allowed;
-  background-color: #eeeeee !important;
+  background: transparent !important;
 }
 .tt-dropdown-menu,
 .tt-menu {
