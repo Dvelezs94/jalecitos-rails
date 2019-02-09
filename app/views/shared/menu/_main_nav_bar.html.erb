@@ -1,66 +1,70 @@
 <% if current_user %>
-<div class="header-to-area">
-   <div class="container">
-     <div class="row">
-            <div class="col-lg-7 col-md-7">
-            <div class="header-left-content">
-                <div class="logo">
-                  <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png'), root_path %>
-                </div>
-                <div class="input-area">
-                    <div class="form">
-                        <%= form_with url: user_search_path, method: :get ,:html => {class: "search-form"} , local: true do |f|%>
-                        <%= link_to icon("fas", "search"), "#" %>
-                        <%= f.text_field :query, value: params[:query], class: " desktop-query", placeholder: "Busca algo" %>
-                </div>
-                <div class="button-area">
-                    <nav class="filters navbar navbar-expand-lg navbar-light bg-light">
-                      <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Ubicación", value: (params[:location].nil?)? current_user.location : params[:location] %>
-                      <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría", :selected => params[:category_id] }, class: 'form-control', id: "category-select") %>
-                    </nav>
-                </div>
-
-
-                <% end %>
+  <div class="header-to-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 col-md-7">
+          <div class="header-left-content">
+            <div class="logo">
+              <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png'), root_path %>
+            </div>
+            <div class="input-area">
+              <div class="form">
+                <%= form_with url: user_search_path, method: :get ,:html => {class: "search-form"} , local: true do |f|%>
+                <%= icon("fas", "search", onclick: "$('#query-search').click()", style: "cursor: pointer;") %>
+                <%= f.text_field :query, value: params[:query], class: " desktop-query", placeholder: "Busca algo" %>
+                <%= f.submit "Continuar", style: "display: none;", id: "query-search" %>
+              </div>
+              <div class="button-area">
+                <nav class="filters navbar navbar-expand-lg navbar-light bg-light">
+                  <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Ubicación", value: (params[:location].nil?)? current_user.location : params[:location] %>
+                  <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría", :selected => params[:category_id] }, class: 'form-control', id: "category-select") %>
+                </nav>
               </div>
 
-            </div>
+            <% end %>
+          </div>
+
         </div>
-        <%= nav_links_helper %>
-        </div>
+      </div>
+      <%= nav_links_helper %>
     </div>
+  </div>
 </div>
 <!-- Header top End -->
 
 <!-- Tablet mobile top ber Start -->
 <div class="tablet-mobile-top-ber">
-    <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <div class="tablet-mobile-input">
-                  <div class="mobile-input-icon">
-                     <a class="menu-open" href="#"><i class="fa fa-search"></i>
-                      </a>
-                      <div class="toggle-menu">
-                          <form action="">
-                           <input type="text" placeholder="Busca algo">
-                          </form>
-                      </div>
-                  </div>
-                </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <div class="tablet-mobile-input">
+          <div class="mobile-input-icon">
+            <a class="menu-open" href="#">
+              <i class="fa fa-search"></i>
+            </a>
+            <div class="toggle-menu">
+              <form action="">
+                <input type="text" placeholder="Busca algo">
+              </form>
             </div>
-            <div class="col-6 text-center">
-                <div class="map-marker">
-                    <a href="#"><span><i class="fa fa-map-marker"></i></span>Saltillo, Coah.</a>
-                </div>
-            </div>
-            <div class="col-3 text-right">
-                <div class="tablet-mobile-user">
-                  <%=link_to image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "user_pic"), user_path(current_user)%>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
+      <div class="col-6 text-center">
+        <div class="map-marker">
+          <a href="#">
+            <span>
+              <i class="fa fa-map-marker"></i>
+            </span>Saltillo, Coah.</a>
+        </div>
+      </div>
+      <div class="col-3 text-right">
+        <div class="tablet-mobile-user">
+          <%=link_to image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "user_pic"), user_path(current_user)%>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 <!-- Tablet mobile top ber End -->
 <% else %>
