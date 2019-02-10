@@ -6,7 +6,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
-    auth_options = { :recall => redirect_validation, :scope => :user}
+    auth_options = { :recall => redirect_validation, :scope => :user }
     resource = warden.authenticate!(auth_options)
     super
   end
@@ -38,11 +38,12 @@ class Users::SessionsController < Devise::SessionsController
   # method used to set a cookie after successful sign in
   # lg stands for logged
   def set_cookie
+    # cookie to know if the user is signed in
     cookies.permanent.signed[:lg] = rand
   end
 
   def after_sign_out_path_for(resource)
-    if params[:device] == "mobile"
+    if cookies.signed[:mb]
       mobile_sign_in_path
     else
       root_path

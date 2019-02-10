@@ -1,9 +1,11 @@
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "¿Olvidaste tu contraseña?", new_password_path(resource_name) %><br />
+  <%= link_to "¿Olvidaste tu contraseña?", new_password_path(resource_name) %><br/>
+  <%= link_to "Volver al inicio", platform_redirect_root_path %>
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
- <%= link_to "¿No recibiste las instrucciones de confirmación?", new_confirmation_path(resource_name) %> <br />
+ <%= link_to "¿No recibiste las instrucciones de confirmación?", new_confirmation_path(resource_name) %> <br/>
+ <%= link_to "Volver al inicio", platform_redirect_root_path %>
 <% end -%>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>

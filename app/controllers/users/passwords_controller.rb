@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Users::PasswordsController < Devise::PasswordsController
-  layout "guest"
+  layout :set_layout
 
   def after_sending_reset_password_instructions_path_for(resource_name)
-    return root_path
+    return platform_redirect_root_path
   end
   # GET /resource/password/new
   # def new
@@ -25,7 +25,10 @@ class Users::PasswordsController < Devise::PasswordsController
   # def update
   #   super
   # end
-
+  private
+  def set_layout
+    cookies.signed[:mb] ? "mobile" : "guest"
+  end
   # protected
 
   # def after_resetting_password_path_for(resource)
