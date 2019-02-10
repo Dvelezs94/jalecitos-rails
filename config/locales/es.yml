@@ -35,6 +35,11 @@ es:
       waiting_for_employer: "Esperando al empleador"
       refunded: "Reembolsado"
       proceeded: "Procesado"
+
+  cards:
+    types:
+      debit: "Débito"
+      credit: "Crédito"
   # Default content
   activerecord:
     errors:
