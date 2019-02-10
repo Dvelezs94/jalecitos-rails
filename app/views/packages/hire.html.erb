@@ -1,20 +1,28 @@
-<section class="design-process-section menuu" id="process-tab">
-  <div class="container-fluid">
-    <div class="row ">
-      <%= render "shared_user/hire/steps" %>
-      <%= render "shared_user/hire/disclaimer" %>
-      <div class="container">
-        <%= form_for @order, url: orders_path do |f|  %>
-        <div class="row">
-          <div class="col-lg-8 checkout_cart">
-          <%= render "shared_user/hire/checkout_cart", f: f%>
-          </div>
-          <div class="col-lg-4 confirm ">
-            <%= render "shared_user/hire/summary", f: f %>
-          </div>
+<div class="pedido-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="pedido-text">
+          <h2>
+            <span>
+              <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </span>Tu pedido está casi listo…</h2>
         </div>
-        <% end %>
+        <div class="cualquier-text del-ex">
+          <%= render "shared_user/hire/disclaimer" %>
+        </div>
       </div>
     </div>
   </div>
-</section>
+</div>
+<%= form_for @order, url: orders_path do |f| %>
+<div class="checkout-all-area">
+  <div class="container">
+    <div class="row">
+      <%= render "shared_user/hire/checkout_cart", f: f%>
+      <%= render "shared_user/hire/summary_package", f: f  %>
+    </div>
+  </div>
+</div>
+<%= render "shared_user/hire/mobile_bottom_pay" %>
+<% end %>
