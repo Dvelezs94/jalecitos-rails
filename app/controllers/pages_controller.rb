@@ -50,6 +50,8 @@ class PagesController < ApplicationController
 
 
   def pending_review
+    puts "X"* 500
+    puts "PENDING"
     #if the review is specific... (when employer finishes work)
     if params[:identifier] && is_number?(params[:identifier])
       #find it and keep it in an array
@@ -89,7 +91,8 @@ class PagesController < ApplicationController
 
 
   def signed_and_rev
-    (:signed_in? && params[:review] == "true")? true : false
+    #format html helps to not query pending reviews when pagination triggers
+    (:signed_in? && params[:review] == "true" && request.format.html?)? true : false
   end
 
 
