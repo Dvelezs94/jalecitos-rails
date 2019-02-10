@@ -26,9 +26,15 @@ class QueriesController < ApplicationController
   end
 
   def user_search
-    @gigs = Gig.search(params[:query], where: where_filter, page: params[:gigs], per_page: 15, execute: false)
-    @requests = Request.search(params[:query], where: where_filter, page: params[:gigs], per_page: 15, execute: false)
+    if params[:gigs]
+      @gigs = Gig.search(params[:query], where: where_filter, page: params[:gigs], per_page: 20)
+    elsif params[:requests]
+      @requests = Request.search(params[:query], where: where_filter, page: params[:requests], per_page: 20)
+    else
+    @gigs = Gig.search(params[:query], where: where_filter, page: params[:gigs], per_page: 20, execute: false)
+    @requests = Request.search(params[:query], where: where_filter, page: params[:requests], per_page: 20, execute: false)
     Searchkick.multi_search([@gigs, @requests])
+    end
   end
 
   def user_autocomplete_search

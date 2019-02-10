@@ -26,7 +26,8 @@ Rails.application.routes.draw do
      registrations: 'users/registrations',
      sessions: 'users/sessions',
      omniauth_callbacks: "users/omniauth_callbacks",
-     confirmations: "users/confirmations"
+     confirmations: "users/confirmations",
+     passwords: "users/passwords"
    }
    resources :users, only: [:show, :update] do
      resource :reports, only: [:create], as: "report"
@@ -60,9 +61,6 @@ Rails.application.routes.draw do
        member do
          get :hire
        end
-     end
-     collection do
-       get :my_requests, as: "my"
      end
      resource :reports, only: [:create], as: "report"
    end

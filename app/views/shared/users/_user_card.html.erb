@@ -20,7 +20,7 @@
       <% end %>
       </div>
       <div class="innerdate">
-        <p>Miembro desde <br> <%= time_ago_in_words(@user.created_at) %></p>
+        <p>Miembro desde hace <br> <%= time_ago_in_words(@user.created_at) %></p>
       </div>
       <div class="inner-reportarcontent">
         <p class="edad1">Edad: <%= (@user.age.nil?)? "Indefinida" : @user.age %></p>

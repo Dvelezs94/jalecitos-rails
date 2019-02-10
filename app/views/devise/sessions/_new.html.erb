@@ -8,7 +8,7 @@
            </div>
              <div class="sign-up-form">
                  <div class="nueva">
-                     <h3>Crea una nueva cuenta</h3>
+                     <h3>Inicia sesión</h3>
                      <%= link_to icon("fab", "facebook")+" facebook", user_facebook_omniauth_authorize_path(lat:"latitude", lon:"longitude"), class: 'facebook-login', method: :post %>
                  </div>
                  <%= form_for(:user, :html => { :class => "sign_in_form" }, :url => session_path(:user)) do |f| %>
