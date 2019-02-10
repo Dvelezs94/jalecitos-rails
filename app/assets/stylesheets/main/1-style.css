@@ -1012,12 +1012,16 @@ p.limpi1 {
 
 .page3-btn a {
   background: #39C27B;
-  width: 100%;
-  display: inline-block;
-  text-align: center;
-  padding: 8px 0;
-  border-radius: 24px;
   color: #fff;
+  display: inline-block;
+  display: inline-block;
+  padding: 10px 60px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 5px;
+  border-color: transparent;
+  width: 100%;
+  text-align: center;
 }
 
 .verificos-title h3 {
@@ -1481,17 +1485,6 @@ p.limpi1 {
 
 .earnlist-mewrapt {
   padding: 15px 17px;
-}
-
-.page3-btn a {
-  background: #39C27B;
-  width: 100%;
-  display: inline-block;
-  text-align: center;
-  padding: 8px 0;
-  border-radius: 24px;
-  color: #fff;
-  font-family: Avenirbold;
 }
 
 .verificos-title h3 {
