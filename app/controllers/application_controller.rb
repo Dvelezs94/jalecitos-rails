@@ -21,10 +21,6 @@ class ApplicationController < ActionController::Base
   end
 
   #Devise redirects
-  def after_sign_in_path_for(resource)
-    #if i am in localhost/sign_in path, redirect to localhost, otherwise, it will throw a too many times redirect error
-    (Rails.application.routes.recognize_path(request.referrer)[:controller] == "users/sessions")? root_path : request.referrer + "?review=true"
-  end
 
   #behave as request of "user"
   def self.renderer_with_signed_in_user(user)
