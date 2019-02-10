@@ -1,21 +1,12 @@
-<% if params[:reviews].present? %>
+<% name = (params[:reviews].present?)? "review" : "request" %>
+<% collection = instance_variable_get("@"+name+"s") %>
 
-  $(".paginated-reviews").append('<%= j render(partial: "shared/users/review", collection: @reviews) %>');
-  $('.paginated-reviews').closest(".paginator-container").find('.pag-and-load').remove();
+paginator_container = $('.paginated-'+'<%= j name %>'+"s").closest(".paginator-container");
+$(".paginated-"+'<%= j name %>'+"s").append('<%= j render(partial: "shared/users/#{name}", collection: collection) %>');
+paginator_container.find('.pag-and-load').remove();
 
-  <% if @reviews.next_page %>
-    $('.paginated-reviews').closest(".paginator-container").append('<%= j paginate(@reviews, param_name: :reviews) %>');
-  <% end %>
-
-<% elsif @user == current_user %>
-
-  $(".paginated-requests").append('<%= j render(partial: "shared/users/request", collection: @requests) %>');
-  $('.paginated-requests').closest(".paginator-container").find('.pag-and-load').remove();
-
-  <% if @requests.next_page %>
-    $('.paginated-requests').closest(".paginator-container").append('<%= j paginate(@requests, param_name: :requests) %>');
-  <% end %>
-
+<% if collection.next_page %>
+  paginator_container.append("<%= j paginate(collection, param_name: name+'s') %>");
 <% end %>
 
 <% sleep 1 %>
