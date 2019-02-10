@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::ConfirmationsController < Devise::ConfirmationsController
-  layout "guest"
+  layout :set_layout
   # GET /resource/confirmation/new
   # def new
   #   super
@@ -25,13 +25,18 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     end
   end
 
+  private
+  def set_layout
+    cookies.signed[:mb] ? "mobile" : "guest"
+  end
+
   protected
 
     def after_resending_confirmation_instructions_path_for(resource_name)
-      root_path
+      platform_redirect_root_path
     end
 
     def after_confirmation_path_for(resource_name, resource)
-      root_path
+      platform_redirect_root_path
     end
 end
