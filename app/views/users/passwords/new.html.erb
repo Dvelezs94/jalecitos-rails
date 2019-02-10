@@ -1,16 +1,21 @@
-<h2>Forgot your password?</h2>
+<div class="row" style="height: 60vh;align-items:center;">
+  <div class="modal-content" style="text-align:center;height:auto;max-width:400px;border:2px solid #e5e5e5;padding:10px;">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+    <h3>¿Olvidaste tu contraseña?</h3>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="field form-group">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", required: true %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Enviar instrucciones", class: "btn btn-success form-control" %>
+    </div>
+    <hr>
+    <% end %>
+    <%= render "users/shared/links" %>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>

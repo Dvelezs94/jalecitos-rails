@@ -11,13 +11,7 @@ class RequestsController < ApplicationController
   before_action :verify_no_employee, only: [:edit, :update, :destroy]
   layout :set_layout
 
-  def my_requests
-      @published = Request.search "*",includes: [:user], where: {status: "published", user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:published_page], per_page: 20
-      @in_progress = Request.search "*",includes: [:user], where: {status: "in_progress", user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:in_progress_page], per_page: 20
-      @completed = Request.search "*",includes: [:user], where: {status: "completed", user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:completed_page], per_page: 20
-      @closed = Request.search "*",includes: [:user], where: {status: "closed", user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:closed_page], per_page: 20
-      @banned = Request.search "*",includes: [:user], where: {status: "banned", user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:banned_page], per_page: 20
-  end
+
   # GET /requests/1
   def show
     report_options
