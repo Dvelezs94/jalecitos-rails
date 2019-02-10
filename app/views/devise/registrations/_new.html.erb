@@ -21,7 +21,6 @@
                    <%= f.password_field :password_confirmation, placeholder: "Confirmar contraseña", id: "user_password_conf_new", class: "required", autocomplete: "new-password" %>
                    <%= hidden_field_tag :sign_up_lat, value = '' %>
                    <%= hidden_field_tag :sign_up_lon, value = '' %>
-                   <%= hidden_field_tag :from_mobile, value = 'true' %>
                    <div class="row justify-content-center">
                      <%= recaptcha_tags %>
                    </div>

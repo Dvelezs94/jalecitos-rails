@@ -4,6 +4,8 @@ class MobilesController < ApplicationController
   before_action :verify_logged
 
   def sign_in
+    # cookie to know if the user is signing in from a mobile
+    cookies.permanent.signed[:mb] = rand
   end
 
   def sign_up
