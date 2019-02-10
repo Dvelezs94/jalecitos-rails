@@ -6,13 +6,22 @@ module SearchFunctions
     model.search query,includes: includes, where: where_filter(status), page: params[:page], per_page: 20, match: :word_start
   end
 
-  def where_filter
+  def user_where_filter
     if params[:category_id] != "" && params[:location] != ""
       {status: "published", category_id: params[:category_id], location: params[:location]}
     elsif params[:category_id] != ""
       {status: "published", category_id: params[:category_id]}
     elsif  params[:location] != ""
       {status: "published", location: params[:location]}
+    else
+      {status: "published"}
+    end
+  end
+
+  def guest_where_filter
+    if params[:lon] != "" && params[:lat] != ""
+      location = get_location(params[:lat], params[:lon])
+      {status: "published", location: location}
     else
       {status: "published"}
     end

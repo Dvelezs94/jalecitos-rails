@@ -2855,3 +2855,61 @@ div.form {
 .gig-query .gig-query-content {
   min-height: 120px;
 }
+/* Transacciones secsion Start */
+
+.Transacciones-tab-secsion {
+	position: relative;
+}
+.transacciones-text {
+	position: relative;
+	padding: 20px 0;
+}
+.transacciones-text span {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	margin-top: -9px;
+	color: #000;
+}
+.transacciones-text h1 {
+	font-size: 30px;
+	margin-left: 20px;
+    margin-bottom: 0;
+}
+.transacciones-text span i.fa {
+	font-size: 15px;
+}
+/*tabs*/
+.transacciones-tab-content {
+	position: relative;
+}
+
+.Transacciones-tab-area .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+	color: #39C27B !important;
+	background-color: #fff;
+	border-bottom: 3px solid #39C27B !important;
+}
+
+.Transacciones-tab-area .nav-tabs .nav-link {
+	border: none;
+	padding: 0;
+	font-size: 19px;
+	font-weight: 700;
+	color: #C7C7CC;
+}
+.Transacciones-tab-area .nav-tabs .nav-link:last-child {
+	margin-left: 30px;
+}
+.Transacciones-tab-area .nav-tabs {
+	border-bottom: none;
+}
+.Transacciones-tab-secsion::after {
+	position: absolute;
+	left: 0;
+	top: 29px;
+	content: "";
+	width: 100%;
+	height: 3px;
+	background: #F5F6F7;
+	z-index: -1;
+}
