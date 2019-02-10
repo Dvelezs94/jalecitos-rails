@@ -1,19 +1,21 @@
-<a href="<%= request_path(request.slug) %>">
-  <div class="riktos-wrapper">
-    <div class="singleriktos">
-      <div style="display: flex; justify-content: space-between;">
-        <p class="fof"><%= request.location %></p>
-        <h5 class="req-status req-<%= request.status %>"><%= t "requests.status.#{request.status}" %></h5>
-      </div>
-      <p class="jkl"><%= truncate(request.title, length: 50) %></p>
-      <p class="jhh"><%= truncate(request.description, length: 100) %></p>
-      <span><%= request.offers.count %> ofertas</span>
-      <div style="display: flex; justify-content: space-between;">
-        <p class="yii">Publicado hace <%= distance_of_time_in_words_to_now(request.created_at) %></p>
-        <div class="points">
-          <p><%= request.budget %></p>
+<div class="col-xl-6 col-lg-6">  
+  <a href="<%= request_path(request.slug) %>">
+    <div class="riktos-wrapper">
+      <div class="singleriktos">
+        <div style="display: flex; justify-content: space-between;">
+          <p class="fof"><%= request.location %></p>
+          <h5 class="req-status req-<%= request.status %>"><%= t "requests.status.#{request.status}" %></h5>
+        </div>
+        <p class="jkl"><%= truncate(request.title, length: 50) %></p>
+        <p class="jhh"><%= truncate(request.description, length: 100) %></p>
+        <span><%= request.offers.count %> ofertas</span>
+        <div style="display: flex; justify-content: space-between;">
+          <p class="yii">Publicado hace <%= distance_of_time_in_words_to_now(request.created_at) %></p>
+          <div class="points">
+            <p><%= request.budget %></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</a>
+  </a>
+</div>

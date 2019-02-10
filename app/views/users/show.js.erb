@@ -1,19 +1,19 @@
 <% if params[:reviews].present? %>
 
   $(".paginated-reviews").append('<%= j render(partial: "shared/users/review", collection: @reviews) %>');
-  $('.paginated-reviews .pag-and-load').remove();
+  $('.paginated-reviews').closest(".paginator-container").find('.pag-and-load').remove();
 
   <% if @reviews.next_page %>
-    $(".paginated-reviews").append('<%= j paginate(@reviews, param_name: :reviews) %>');
+    $('.paginated-reviews').closest(".paginator-container").append('<%= j paginate(@reviews, param_name: :reviews) %>');
   <% end %>
 
 <% elsif @user == current_user %>
 
   $(".paginated-requests").append('<%= j render(partial: "shared/users/request", collection: @requests) %>');
-  $('.paginated-requests .pag-and-load').remove();
+  $('.paginated-requests').closest(".paginator-container").find('.pag-and-load').remove();
 
   <% if @requests.next_page %>
-    $(".paginated-requests").append('<%= j paginate(@requests, param_name: :requests) %>');
+    $('.paginated-requests').closest(".paginator-container").append('<%= j paginate(@requests, param_name: :requests) %>');
   <% end %>
 
 <% end %>

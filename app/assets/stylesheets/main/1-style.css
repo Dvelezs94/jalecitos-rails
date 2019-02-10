@@ -2481,14 +2481,17 @@ p.gig-score-times {
   padding: 1px 5px;
 }
 .gig-draft {
-  background-color: #0067F3;
+  color: #0067F4;
+  border: 1px solid #0067F4;
 }
 .gig-banned {
-  background-color: red;
+  color: #EF2235;
+  border: 1px solid #EF2235;
 }
 
 .gig-published {
-  background-color: #39C27B;
+  color: #39C27B;
+  border: 1px solid #39C27B;
 }
 .req-published {
   color: #F9B732;
