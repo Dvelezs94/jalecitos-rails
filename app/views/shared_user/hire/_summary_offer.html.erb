@@ -1,0 +1,29 @@
+<div class="col-lg-4">
+    <div class="checkout-right-content">
+        <div class="cualquier-text">
+            <%= render "shared_user/hire/disclaimer" %>
+        </div>
+        <div class="paquete-text">
+          <strong><%= number_to_currency(purchase_order_total(@offer.price), precision: 2) %> MXN</strong>
+            <h4>Pedido</h4>
+        </div>
+        <div class="mantenimiento-text">
+          <div>
+              <h4>Oferta de <%= @offer.user.alias %></h4>
+          </div>
+           <p><%= @offer.description.html_safe %></p>
+        </div>
+        <div class="total-a">
+            <h5>Subtotal<span><%= number_to_currency(cons_mult_helper(@offer.price), precision: 2) %> MXN</span></h5>
+            <h5>IVA<span><%= number_to_currency(order_tax(@offer.price), precision: 2) %> MXN</span></h5>
+            <h5>Total<span><%= number_to_currency(purchase_order_total(@offer.price), precision: 2) %> MXN</span></h5>
+        </div>
+        <div class="continuars-btn">
+          <%= f.hidden_field :purchase, :value => params[:id] %>
+          <%= f.hidden_field :purchase_type, :value => "Offer" %>
+          <div class="continuars-btn">
+              <%= f.submit "Continuar", id: "purchase" %>
+          </div>
+        </div>
+    </div>
+</div>

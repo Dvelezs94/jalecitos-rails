@@ -1,0 +1,140 @@
+/* MD Device :768px. */
+@media (min-width: 768px) and (max-width: 991px) {
+  .cualquier-text.del-ex {
+  	display: block;
+  	text-align: center;
+  }
+  .pagar-area-for-tablet-mobile {
+  	display: block;
+  }
+  .cualquier-text {
+  	display: none;
+  }
+
+  .continuars-btn {
+  	display: none;
+  }
+  .checkout-all-area {
+  	padding-bottom: 30px;
+  }
+  .checkout-right-content {
+  	border: none;
+  	padding: 0;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+
+  .checkout-all-area {
+  	padding-bottom: 20px;
+  }
+
+  .checkout-right-content {
+  	border: none;
+  	padding: 0;
+  }
+
+  .cualquier-text.del-ex {
+  	display: block;
+  	text-align: center;
+  }
+  .pagar-area-for-tablet-mobile {
+  	display: block;
+  }
+  .cualquier-text {
+  	display: none;
+  }
+   .continuars-btn {
+  	display: none;
+  }
+  .pedido-text h2 {
+  	font-size: 22px;
+  	margin-bottom: 10px;
+  }
+  .consectetur-text img {
+  	width: 70px;
+  }
+  .consectetur-text h4 {
+  	font-size: 15px;
+  	margin-left: 75px;
+  }
+  .metodo-text h4 {
+  	font-size: 14px;
+  }
+  .metodo-text h4 a {
+  	font-size: 13px;
+  }
+  .metodo-text h4 a i {
+  	margin-left: 3px;
+  }
+  .checkmark-area {
+  	margin-top: 15px;
+  	margin-left: 13px;
+  }
+  .check-btn {
+  	padding-left: 32px;
+  	font-size: 14px;
+  }
+  .check-btn img {
+  	margin-top: -5px;
+  }
+  .Razon-Social {
+  	margin-top: 14px;
+  	margin-left: 14px;
+  }
+   .Razon-Social .check-btn {
+  	margin-bottom: 0;
+  	font-size: 16px;
+  }
+  .Razon-Social p {
+  	font-size: 12px;
+  	margin-left: 32px;
+  }
+   .Postal-sec h5 {
+  	font-size: 14px;
+  }
+  .Postal-sec h4 {
+  	font-size: 14px;
+  	color: #8E8E93;
+  }
+  .Código-Postal {
+  	float: right;
+  	width: 40%;
+  }
+  .mantenimiento-text h4 br {
+  	display: none;
+  }
+  .mantenimiento-text h4 {
+  	font-size: 14px;
+  }
+  .paquete-text h4 {
+  	font-size: 16px;
+  	margin-bottom: -7px;
+  }
+  .mantenimiento-text strong {
+  	font-size: 13px;
+  }
+  .mantenimiento-text p {
+  	font-size: 12px;
+  }
+  .chech-list li {
+  	font-size: 14px;
+  }
+  .total-a h5 {
+  	font-size: 14px;
+  	margin-bottom: 4px;
+  }
+  .total-a-ex h5 span {
+  	margin-left: 17px;
+  	font-weight: 500;
+  	font-size: 14px;
+  }
+  .total-a-ex h5 {
+  	font-size: 18px;
+  	margin-top: 8px;
+  }
+  .total-a-ex a {
+  	font-size: 15px;
+  	padding: 7px 30px;
+  }
+}

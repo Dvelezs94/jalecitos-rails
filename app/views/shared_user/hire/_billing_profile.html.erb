@@ -1,6 +1,18 @@
-<tr>
-  <td><%= billing_profile.name %></td>
-  <td><%= billing_profile.rfc %></td>
-  <td><%= billing_profile.zip_code %></td>
-  <td><%= f.check_box :billing_profile_id, {}, billing_profile.id, nil  %></td>
-</tr>
+<div class="Razon-Social">
+   <label class="check-btn">Razón Social
+     <%= f.check_box :billing_profile_id, {}, billing_profile.id, nil  %>
+    <span class="checkmark"></span>
+   </label>
+  <p><%= billing_profile.name %></p>
+</div>
+
+<div class="Postal-sec">
+   <div class="RFC-text">
+       <h5>RFC</h5>
+       <h4><%= billing_profile.rfc %></h4>
+   </div>
+   <div class="Código-Postal">
+       <h5>Código Postal</h5>
+       <h4><%= billing_profile.zip_code %></h4>
+   </div>
+</div>
