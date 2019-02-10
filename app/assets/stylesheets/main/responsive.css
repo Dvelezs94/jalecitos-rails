@@ -2273,6 +2273,10 @@
   .gig-query .tabstar-no {
     font-size: 12px;
   }
+  /*profile*/
+  .gig-profile .gig-loc-sta {
+    display: block !important;
+  }
 }
 /*mobile menu*/
 @media only screen and (min-width: 320px) and (max-width: 991px) {

@@ -709,6 +709,7 @@ p {}
 .maintabroll3 {
   margin-top: 27px;
   margin-bottom: 42px;
+  min-width: 100%;
 }
 
 .tabstar-no span {
@@ -2471,6 +2472,8 @@ p.gig-score-times {
   border-radius: 4px;
   color: white;
   padding: 1px 5px;
+  max-height: 28px;
+  font-size: 14px;
 }
 .gig-draft {
   color: #0067F4;
