@@ -1,6 +1,4 @@
-<tr>
-  <td><%= card["card_number"].last(4) %></td>
-  <td><%= card["type"].upcase %></td>
-  <td><%= card["bank_name"] %></td>
-  <td><%= f.radio_button :card_id, card["id"], required: true %></td>
-</tr>
+<label class="check-btn">**** **** **** <%= card["card_number"].last(4) %> <p><%= t "cards.types.#{card["type"].downcase}" %></p> <%= image_tag ("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/card_logos/#{card["brand"]}.png") %>
+   <%= f.radio_button :card_id, card["id"], required: true %>
+  <span class="checkmark"></span>
+</label>
