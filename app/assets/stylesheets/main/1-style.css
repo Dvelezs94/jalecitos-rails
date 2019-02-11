@@ -2107,7 +2107,6 @@ button:focus {
 }
 
 .contactd-heading {
-  width: 500px;
   margin: 0 auto;
   margin-bottom: 28px;
 }
@@ -2195,10 +2194,6 @@ button:focus {
   font-weight: 500;
 }
 
-.greend-left {
-  padding-left: 60px;
-  padding-top: 54px;
-}
 
 .greend-right a {
   background: #FFFFFF;
@@ -2207,13 +2202,9 @@ button:focus {
   text-align: center;
   color: #39C27B;
   padding: 8px 0;
-  margin: 67px;
+  margin: 67px 67px 67px 0px;
   border-radius: 5px;
   font-family: 'Nunito', sans-serif;
-}
-
-.greend-right {
-  text-align: right;
 }
 
 .maingreenbgd {
