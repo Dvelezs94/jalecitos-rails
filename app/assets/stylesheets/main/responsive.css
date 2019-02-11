@@ -1156,9 +1156,6 @@
     font-size: 35px;
   }
 
-  .greend-left {
-    padding-left: 15px;
-  }
 
   .search-form-div.page2forms form input[type="text"]::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -1202,7 +1199,6 @@
   }
 
   .contactd-heading {
-    width: 500px;
     margin: 0 auto;
     margin-bottom: 85px;
     margin-top: 15px;
@@ -2026,12 +2022,6 @@
     text-align: right;
   }
 
-  .greend-left {
-    padding-left: 12px;
-    padding-top: 0;
-    text-align: left;
-  }
-
   .greenbgd-area {
     margin-bottom: 38px;
   }
@@ -2070,7 +2060,6 @@
 
   .greend-left h4 {
     font-size: 15px;
-    margin: 0;
   }
 
   .greend-right a {
@@ -2276,6 +2265,41 @@
   /*profile*/
   .gig-profile .gig-loc-sta {
     display: block !important;
+  }
+  /*banner*/
+  .hero-darea::after {
+    background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/main_banner2.png");
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    content: "";
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+  }
+  /*hire experts*/
+  .contactd-content {
+    padding: 0;
+  }
+  /*talent reach*/
+  .singlemobiled.text-right {
+    padding-left: 0;
+  }
+  .singlemobiled.mobileds.sony {
+    padding-right: 0;
+  }
+  /*ready to be*/
+  .greend-right a {
+    margin: 0;
+  }
+  .greend-left h4 {
+    font-size: 18px;
+  }
+  .maingreenbgd .ready_to {
+    display: block !important;
+    text-align: center;
+    padding: 40px;
   }
 }
 /*mobile menu*/
