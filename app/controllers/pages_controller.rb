@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   before_action :pending_review, only: [:home, :finance], :if => :signed_and_rev
   layout :set_layout
-  access user: :all, admin: [:home], all: [:home, :autocomplete_search]
+  access user: :all, admin: [:home], all: [:home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules]
   def home
     if params[:current]
       if params[:popular_gigs]
@@ -39,6 +39,19 @@ class PagesController < ApplicationController
 
   def liked
     @liked_gigs = Gig.find(current_user.likes.pluck(:gig_id))
+  end
+
+  def terms_and_conditions
+  end
+
+  def privacy_policy
+  end
+
+  def sales_conditions
+  end
+
+  def employer_employee_rules
+
   end
 
   private

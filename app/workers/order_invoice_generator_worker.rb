@@ -20,7 +20,7 @@ class OrderInvoiceGeneratorWorker
                "valor_unitario": subtotal,
                "descripcion": "Servicios profesionales para la orden #{order.uuid}",
                "importe": subtotal,
-               "clave": "#{order.id}",
+               "clave": "80141600",
                "clave_unidad": "E48",
                "traslados": [
                    {
