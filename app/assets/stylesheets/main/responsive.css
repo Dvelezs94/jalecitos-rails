@@ -2185,6 +2185,9 @@
   .single-request {
     width: 150px;
   }
+  .legal-document {
+    width: 90%;
+  }
   .servicoteam-wrap {
     display: none;
   }
