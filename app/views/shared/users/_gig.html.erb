@@ -13,7 +13,7 @@
           </div>
           <p class="coa2"><%= truncate(gig.title, length: 50 )%></p>
           <p class="coa3">Desde
-            <%= number_to_currency(purchase_order_total(gig.packages.first.price)) %>
+            <%= query_home_or_profile_helper gig %>
             MXN</p>
         </div>
         <div class="tabstar-no" style="display:flex;align-items:center;">

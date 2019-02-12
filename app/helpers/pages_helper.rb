@@ -27,9 +27,9 @@ module PagesHelper
   def query_home_or_profile_helper gig
     if params[:query]
       number_to_currency(purchase_order_total(gig.search_gigs_packages.first.price), precision: 2)
-    elsif params[:controller]=="pages" && gig.gigs_packages.first.present?
+    elsif params[:controller]=="pages" && ! gig.gigs_packages.first.nil?
       number_to_currency(purchase_order_total(gig.gigs_packages.first.price), precision: 2)
-    elsif params[:controller]=="users" && gig.packages.first.present?
+    elsif params[:controller]=="users" && ! gig.packages.first.nil?
       number_to_currency(purchase_order_total(gig.packages.first.price), precision: 2)
     else
       "Indefinido"
