@@ -119,6 +119,10 @@ Rails.application.routes.draw do
   get 'user_search', to: 'queries#user_search'
   get 'user_autocomplete_search', to: 'queries#user_autocomplete_search'
   get 'autocomplete_profession', to: 'queries#autocomplete_profession'
+  get 'terminos-y-condiciones', to: 'pages#terms_and_conditions'
+  get 'aviso-de-privacidad', to: 'pages#privacy_policy'
+  get 'condiciones-de-venta', to: 'pages#sales_conditions'
+  get 'reglas-prestador-empleador', to: 'pages#employer_employee_rules'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # LEAVE THIS AT THE END!!
