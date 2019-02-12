@@ -6,10 +6,11 @@ class OrderWebhooksController < ApplicationController
   def handle
     @object = params
     @object_type = @object["type"]
-    @object_id = @object["transaction"]["id"] if @object_type != "verification"
+
     begin
       case
       when @object_type == "charge.succeeded"
+        @object_id = @object["transaction"]["id"]
         TransferFundsAfterThreeDWorker.perform_async(@object_id)
       when @object_type == "invoice.created"
         NotifyInvoiceGenerationWorker.perform_async(@object)
