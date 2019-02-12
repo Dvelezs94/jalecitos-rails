@@ -231,4 +231,16 @@ module ApplicationHelper
     cookies.signed[:mb] ? mobile_sign_in_path : root_path
   end
 
+  def get_invoice uuid
+    openpay_url = ENV.fetch("RAILS_ENV") == "production" ? "api.openpay.mx" : "sandbox-api.openpay.mx"
+    uri = URI("https://#{openpay_url}/v1/#{ENV.fetch("OPENPAY_MERCHANT_ID")}/invoices/v33/#{uuid}")
+    header = {"Content-Type" => "application/json"}
+    https = Net::HTTP.new(uri.host,uri.port)
+    https.use_ssl = true
+    req = Net::HTTP::Get.new(uri.path, header)
+    req.basic_auth ENV.fetch("OPENPAY_PRIVATE_KEY"), ''
+    res = https.request(req)
+    JSON.parse(res.body)
+  end
+
 end

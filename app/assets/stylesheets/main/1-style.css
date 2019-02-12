@@ -2416,7 +2416,8 @@ p.fof {
   padding: 15px 5px;
 }
 p.gig-score-times {
-  color: black;
+  color: gray;
+  font-weight: 600;
   margin-left: 10px;
   margin-top: -2px;
 }
