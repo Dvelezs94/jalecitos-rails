@@ -11,6 +11,8 @@ class OrderWebhooksController < ApplicationController
       case
       when @object_type == "charge.succeeded"
         TransferFundsAfterThreeDWorker.perform_async(@object_id)
+      when @object_type == "invoice.created"
+        NotifyInvoiceGenerationWorker.perform_async(@object)
       when @object_type == "verification"
         OpenpayVerificationMailer.new_verification(ENV.fetch("RAILS_ENV"), @object["verification_code"]).deliver
       end
