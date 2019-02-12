@@ -23,6 +23,20 @@ input:focus {
  outline: none;
 }
 
+.legal-document {
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.legal-document h3 {
+  text-align: center;
+}
+
+.legal-document p {
+  text-align: justify;
+  font-size: 17px;
+}
 /* disable turbolinks progress bar */
 .turbolinks-progress-bar {
   visibility: hidden;
