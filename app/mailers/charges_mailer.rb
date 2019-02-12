@@ -1,18 +1,17 @@
-class NotifyInvoiceGenerationMailer < ApplicationMailer
-  def invoice_ready(user, pdf_link, xml_link, order_id)
+class ChargesMailer < ApplicationMailer
+  def charge_denied(order, error_message)
     data = {
       "personalizations": [
         {
           "to": [
             {
-              "email": user.email
+              "email": order.employer.email
             }
           ],
           "dynamic_template_data": {
-            "ALIAS": user.alias,
-            "PDF_LINK": pdf_link,
-            "XML_LINK": xml_link,
-            "ORDER_ID": order_id
+            "ALIAS": order.employer.alias,
+            "ORDER_ID": order.uuid,
+            "ERROR_MESSAGE": error_message
           }
         }
       ],
@@ -20,7 +19,7 @@ class NotifyInvoiceGenerationMailer < ApplicationMailer
         "email": "noreply@jalecitos.com",
         "name": "Jalecitos"
       },
-      "template_id": "d-a429eb88402e4c9fb58c0ada5de294c5"
+      "template_id": "d-4ca7e27879db47da876f01e06c708d80"
     }
 
     sendgrid_client.client.mail._("send").post(request_body: (data))
