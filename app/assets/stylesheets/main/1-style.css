@@ -2755,9 +2755,6 @@ p.req_location {
 	background: #39C27B;
 	padding: 15px 0;
 }
-.map-marker {
-	margin-top: 7px;
-}
 .belldropdownarea {
 	opacity: 0;
 	visibility: hidden;
@@ -2918,4 +2915,14 @@ div.form {
 	height: 3px;
 	background: #F5F6F7;
 	z-index: -1;
+}
+/*mobile search menu*/
+.map-marker span {
+	font-size: 14px;
+}
+.map-marker {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: white;
 }
