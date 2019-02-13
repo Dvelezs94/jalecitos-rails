@@ -109,22 +109,37 @@ module ApplicationHelper
   end
 
   # Earning for the worker
-  def get_order_earning price
-    (price * 0.90).round(2)
-  end
-
-  def get_order_fee price
-    (price * 0.10).round(2)
+  def get_order_earning base
+    # Constant Increment to keep our loss at minimum
+    ci = 10
+    # Formula to get earnings based on the base  price (package or offer number)
+    ((ci - 2.9) - (ci * 0.0390224) - (0.0390224 * base) + get_order_fee(base) - 0.01).round(2)
   end
 
   def order_tax price
     (price * 0.16).round(2)
   end
+  ###### These two should always sum 1
+  def get_order_fee price
+    # Get our fee of base price
+    (price * 0.10).round(2)
+  end
+
+  def calc_employee_earning base
+    base * 0.9
+  end
+  ######
+
+  # wip
+  def calc_refund base
+    openpay_earning = purchase_order_total(base) * 0.03364 + 2.9
+  end
 
   # Get toal price of order, with taxes included
   def purchase_order_total price
-    iva = order_tax(price)
-    (price + iva).round(2)
+    const_added = price + 10
+    iva = order_tax(const_added)
+    (const_added + iva).round(2)
   end
 
   def cons_mult_helper_times (credits_list, percent)
@@ -136,6 +151,16 @@ module ApplicationHelper
       calculated << {"id"=>l["id"], "total"=>res}
     end
     calculated
+  end
+
+  def print_earnings base
+    ci = 10
+    jalecitos_earning =  (ci - 2.9) - (ci * 0.0390224) - (0.0390224 * base) + get_order_fee(base)
+    openpay_earning = purchase_order_total(base) * 0.03364 + 2.9
+    p "base + iva = #{purchase_order_total(base)}"
+    p "openpay = #{openpay_earning}"
+    p "jalecitos = #{jalecitos_earning}"
+    return true
   end
 
   def form_method_helper

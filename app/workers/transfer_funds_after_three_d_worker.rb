@@ -13,8 +13,8 @@ class TransferFundsAfterThreeDWorker
     ###### transfer money to hold account ######
     request_transfer_hash = {
       "customer_id" => ENV.fetch("OPENPAY_HOLD_CLIENT"),
-      "amount" => purchase_order_total(@order.total),
-      "description" => "transferencia de orden #{@order.uuid} por la cantidad de #{purchase_order_total(@order.total)}",
+      "amount" => @order.total,
+      "description" => "transferencia de orden #{@order.uuid} por la cantidad de #{@order.total}",
       "order_id" => "#{@order.uuid}-hold"
     }
     begin
