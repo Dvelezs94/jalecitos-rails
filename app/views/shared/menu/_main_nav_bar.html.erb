@@ -50,12 +50,12 @@
           </div>
         </div>
       </div>
-      <div class="col-6 text-center">
+      <div class="col-6 justify-content-center text-center" style="display:flex;align-items:center;">
         <div class="map-marker">
-          <a href="#">
-            <span>
-              <i class="fa fa-map-marker"></i>
-            </span>Saltillo, Coah.</a>
+          <%= icon("fas", "map-marker-alt",class: "mobile-location-item") %>
+          <%= best_in_place current_user, :location, as: :input, id: "mobile_autocomplete",
+          :inner_class => "mobile_google_input", :class => "mobile-google-span",
+          :place_holder => "Sin ubicación" %>
         </div>
       </div>
       <div class="col-3 text-right">

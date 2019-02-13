@@ -217,19 +217,6 @@ body {
 	border-radius: 50%;
 }
 
-.map-marker a {
-	color: #fff;
-	font-weight: 700;
-	font-size: 17px;
-	position: relative;
-	padding-left: 25px;
-}
-.map-marker span {
-	font-size: 22px;
-	position: absolute;
-	left: 0;
-	top: -6px;
-}
 
 
 /* tablet-mobile-top-ber End */
