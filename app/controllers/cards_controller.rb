@@ -4,6 +4,7 @@ class CardsController < ApplicationController
   before_action only: [:create, :destroy] do
     init_openpay("card")
   end
+  before_action :validate_max_cards, only: :create
   access user: [:create, :destroy]
 
 
@@ -31,6 +32,19 @@ class CardsController < ApplicationController
       # @error = "#{e.description}, por favor intentalo de nuevo."
     end
     head :no_content #response with no content
+  end
+
+  private
+  # Each user can have a max of 3 cards
+  def validate_max_cards
+    @current_avail_cards = get_openpay_resource("card", current_user.openpay_id).count
+    if @current_avail_cards < 3
+      return true
+    else
+      flash[:error] = "Solo puedes tener un maximo de 3 tarjetas. Elimina una para poder proceder."
+      redirect_to "#{configuration_path}#card"
+      return false
+    end
   end
 
 end

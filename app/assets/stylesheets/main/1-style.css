@@ -29,6 +29,18 @@ input:focus {
   padding: 20px 0;
 }
 
+.contact-us p {
+  text-align: left;
+}
+
+.contact-us span {
+  float: right;
+  font-weight: 600;
+}
+
+.openpay-logo {
+  width: 70px;
+}
 .legal-document h3 {
   text-align: center;
 }
@@ -2260,14 +2272,14 @@ button:focus {
 /*footerd start*/
 .footerd-social a {
   background: #0067F3;
-  color: #000;
+  color: #FFF;
   width: 40px;
   display: inline-block;
   height: 40px;
   border-radius: 50%;
   text-align: center;
   line-height: 45px;
-  margin-right: 26px;
+  margin-right: 12px;
 }
 
 .footerd-social a i {
