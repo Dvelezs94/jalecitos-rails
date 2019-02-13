@@ -24,7 +24,7 @@ class Order < ApplicationRecord
   belongs_to :billing_profile, optional: true
 
   # Order status
-  enum status: { waiting_for_bank_approval: 0, pending: 1, denied: 2, in_progress: 3, disputed: 4, completed: 5, refunded: 6}
+  enum status: { waiting_for_bank_approval: 0, pending: 1, denied: 2, in_progress: 3, disputed: 4, completed: 5, refund_in_progress: 6, refunded: 7}
   # Invoice status, in case there is any
   enum invoice_status: { invoice_pending: 0, invoice_completed: 1, invoice_error: 2, platform_error: 3}
 

@@ -142,8 +142,8 @@ class OrdersController < ApplicationController
     # Move money from hold account to employer account
     request_transfer_hash_hold = {
       "customer_id" => @order.employer.openpay_id,
-      "amount" => purchase_order_total(@order.total),
-      "description" => "reembolso de orden #{@order.uuid} por la cantidad de #{purchase_order_total(@order.total)}",
+      "amount" => calc_refund(@order.total),
+      "description" => "reembolso de orden #{@order.uuid} por la cantidad de #{calc_refund(@order.total)}",
       "order_id" => "#{@order.uuid}-refund"
     }
     begin
@@ -157,8 +157,8 @@ class OrdersController < ApplicationController
     end
     # Refund money to card from employer openpay account
     request_hash = {
-      "description" => "Monto de la orden #{@order.uuid} devuelto por la cantidad de #{purchase_order_total(@order.total)}",
-      "amount" => purchase_order_total(@order.total)
+      "description" => "Monto de la orden #{@order.uuid} devuelto por la cantidad de #{calc_refund(@order.total)}",
+      "amount" => calc_refund(@order.total)
     }
     begin
       response = @charge.refund(@order.response_order_id ,request_hash, @order.employer.openpay_id)
