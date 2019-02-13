@@ -113,9 +113,7 @@ module ApplicationHelper
     # Constant Increment to keep our loss at minimum
     ci = 10
     # Formula to get earnings based on the base  price (package or offer number)
-    # ((ci - 2.9) - (ci * 0.0390224) - (0.0390224 * base) + get_order_fee(base) - 0.01).round(2)
-
-    ((0.9609776)*( base + ci ) - 2.9  - calc_employee_earning(base)- 0.01).round(2)
+    ((0.9609776)*( base + ci ) - 2.91  - calc_employee_earning(base)).round(2)
 
   end
 
