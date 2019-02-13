@@ -139,53 +139,15 @@ class OrdersController < ApplicationController
 
 
   def refund
-    # Move money from hold account to employer account
-    request_transfer_hash_hold = {
-      "customer_id" => @order.employer.openpay_id,
-      "amount" => calc_refund(@order.total),
-      "description" => "reembolso de orden #{@order.uuid} por la cantidad de #{calc_refund(@order.total)}",
-      "order_id" => "#{@order.uuid}-refund"
-    }
-    begin
-      response = @transfer.create(request_transfer_hash_hold, ENV.fetch("OPENPAY_HOLD_CLIENT"))
-      @order.response_refund_id = response["id"]
-      @order.save
-    rescue OpenpayTransactionException => e
-      flash[:error] = "#{e}"
-      redirect_to finance_path(:table => "purchases")
-      return false
-    end
-    # Refund money to card from employer openpay account
-    request_hash = {
-      "description" => "Monto de la orden #{@order.uuid} devuelto por la cantidad de #{calc_refund(@order.total)}",
-      "amount" => calc_refund(@order.total)
-    }
-    begin
-      response = @charge.refund(@order.response_order_id ,request_hash, @order.employer.openpay_id)
-      @order.response_refund_id = response["id"]
-      @order.save
-    rescue OpenpayException => e
-      flash[:error] = "#{e}"
-      redirect_to finance_path(:table => "purchases")
-      return false
-    end
-    #try to refund...
-    if  @order.refunded!
-      #if the order has a dispute (and obviously is disputed...)
-      if @order.dispute
-        #change dispute status to refunded
-        @order.dispute.refunded!
-      end
-      if @order.purchase_type == "Offer"
-        @order.purchase.request.closed!
-      end
+    if @order.refund_in_progress!
+      RefundOrderWorker.perform_async(@order.id)
       if current_user == @order.employer
-        flash[:success] = "La compra ha sido reembolsada, ten en cuenta que puede tardar hasta 72 hrs para aparecer en tu cuenta bancaria"
+        flash[:success] = "La orden esta en proceso de reembolso, recibiras un correo cuando la orden ya haya sido reembolsada"
       else
         create_notification(@order.employee, @order.employer, "te ha reembolsado", @order, "purchases")
       end
     else
-      flash[:error] = "Algo salió mal reembolsando la orden"
+      flash[:error] = "Ocurrio un error al intentar de reembolsar la orden"
     end
     redirect_to finance_path(:table => "purchases")
   end
