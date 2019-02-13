@@ -126,13 +126,14 @@ module ApplicationHelper
   end
 
   def calc_employee_earning base
-    base * 0.9
+    (base * 0.9).round(2)
   end
   ######
 
   # wip
   def calc_refund base
     openpay_earning = purchase_order_total(base) * 0.03364 + 2.9
+    (base - openpay_earning).round(2)
   end
 
   # Get toal price of order, with taxes included

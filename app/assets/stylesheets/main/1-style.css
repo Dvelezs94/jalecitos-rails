@@ -2908,6 +2908,7 @@ div.form {
 }
 .Transacciones-tab-area .nav-tabs {
 	border-bottom: none;
+  margin-bottom: 15px
 }
 .Transacciones-tab-secsion::after {
 	position: absolute;
