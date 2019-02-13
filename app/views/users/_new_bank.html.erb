@@ -7,12 +7,16 @@
                 <h3>Nuevo Banco</h3>
                 <div class="divi-new js-form-join-section" data-section="1"></div>
                 <%= form_with url: user_banks_path(current_user), class: "new_bank" do |f| %>
-                  <%= f.number_field :clabe, class: "required", placeholder: "CLABE", minlength: 18, maxlength: 18 %>
+                  <%= f.text_field :clabe, class: "required", placeholder: "CLABE",  maxlength: "18", onkeypress: "allowNumbersOnly(event)" %>
                   <%= f.text_field :bank_holder_name, class: "required", placeholder: "Nombre del Titular" %>
                   <%= f.text_field :alias, class: "required", placeholder: "Alias" %>
                   <br>
                   <%= f.submit 'Continuar', :class => 'btn btn-success' %>
                 <% end %>
+             </div>
+             <hr>
+             <div class="">
+                Soportado por  <%= image_tag("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/openpay_logos/logo_negro_openpay.png", class: "openpay-logo") %>
              </div>
          </div>
       </div>
