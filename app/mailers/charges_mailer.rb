@@ -24,4 +24,30 @@ class ChargesMailer < ApplicationMailer
 
     sendgrid_client.client.mail._("send").post(request_body: (data))
   end
+
+  def charge_refunded(order)
+    data = {
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": order.employer.email
+            }
+          ],
+          "dynamic_template_data": {
+            "ALIAS": order.employer.alias,
+            "ORDER_ID": order.uuid,
+            "REFUNDED_CASH": calc_refund(order.total)
+          }
+        }
+      ],
+      "from": {
+        "email": "noreply@jalecitos.com",
+        "name": "Jalecitos"
+      },
+      "template_id": "d-82a04a72af184270b047369b26649296"
+    }
+
+    sendgrid_client.client.mail._("send").post(request_body: (data))
+  end
 end
