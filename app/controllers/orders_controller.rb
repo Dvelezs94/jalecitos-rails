@@ -30,9 +30,9 @@ class OrdersController < ApplicationController
     request_hash = {
       "method" => "card",
       "source_id" => order_params[:card_id],
-      "amount" => purchase_order_total(@order.total),
+      "amount" => @order.total,
       "currency" => "MXN",
-      "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{purchase_order_total(@order.total)}",
+      "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}",
       "device_session_id" => params[:device_id],
       "use_3d_secure" => true,
       "redirect_url" => finance_url(:table => "purchases")
@@ -94,8 +94,8 @@ class OrdersController < ApplicationController
       #Openpay call to transfer the fee to the Employee
       request_hash = {
         "customer_id" => @order.employee.openpay_id,
-        "amount" => get_order_earning(@order.purchase.price),
-        "description" => "Pago de orden #{@order.uuid} por la cantidad de #{get_order_earning(@order.purchase.price)}",
+        "amount" => calc_employee_earning(@order.purchase.price),
+        "description" => "Pago de orden #{@order.uuid} por la cantidad de #{calc_employee_earning(@order.purchase.price)}",
         "order_id" => "#{@order.uuid}-complete"
       }
       begin
@@ -340,7 +340,7 @@ class OrdersController < ApplicationController
 
     def charge_fee(order, fee)
       request_fee_hash={"customer_id" => ENV.fetch("OPENPAY_HOLD_CLIENT"),
-                     "amount" => get_order_fee(order.purchase.price),
+                     "amount" => get_order_earning(order.purchase.price),
                      "description" => "Cobro de Comisión por la orden #{order.uuid}",
                      "order_id" => "#{order.uuid}-fee"
                     }
@@ -356,7 +356,7 @@ class OrdersController < ApplicationController
 
     def charge_tax(order, fee)
       request_tax_hash={"customer_id" => ENV.fetch("OPENPAY_HOLD_CLIENT"),
-                     "amount" => order_tax(order.purchase.price),
+                     "amount" => order_tax(order.purchase.price + 10),
                      "description" => "Cobro de impuesto por la orden #{order.uuid}",
                      "order_id" => "#{order.uuid}-tax"
                     }
