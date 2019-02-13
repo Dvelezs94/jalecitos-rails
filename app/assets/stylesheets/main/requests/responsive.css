@@ -65,7 +65,7 @@
   	position: absolute;
   	right: 0;
   }
-  .modal-content {
+  .modal-content, .modal-content-transparent {
   	width: 85%;
   }
 }

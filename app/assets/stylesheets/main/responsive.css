@@ -17,7 +17,7 @@
     width: 50px;
     height: 50px;
   }
-  .modal-content {
+  .modal-content, .modal-content-transparent {
     width: 600px;
   }
 
@@ -90,7 +90,7 @@
   .phone_links i {
     font-size: 21px;
   }
-  .modal-content {
+  .modal-content, .modal-content-transparent {
     width: 500px;
   }
 
@@ -1202,7 +1202,7 @@
     margin-bottom: 85px;
     margin-top: 15px;
   }
-  .modal-content {
+  .modal-content, .modal-content-transparent {
     width: 400px;
   }
   #profile_tabs a {
@@ -2283,7 +2283,7 @@
   #profile_tabs a {
     font-size: 12px;
   }
-  .modal-content {
+  .modal-content, .modal-content-transparent {
     width: 300px;
   }
   .plusarea a {
