@@ -7,7 +7,8 @@ class OrderInvoiceGeneratorWorker
     order = Order.find(order_id)
     zip_code = 25204
     iva = 0.16
-    subtotal = order.purchase.price.round(2)
+    base_earning = 10.0
+    subtotal = (order.purchase.price).round(2)
     total = order.total
     recipient = {"nombre": "#{order.billing_profile.name}",
                 "rfc": "#{order.billing_profile.rfc}",
@@ -31,15 +32,38 @@ class OrderInvoiceGeneratorWorker
                        "importe": order_tax(subtotal)
                    }
                ]
+              },
+              {"identificador": "Base #{order.uuid}",
+               "cantidad": 1,
+               "unidad": "Base",
+               "valor_unitario": base_earning,
+               "descripcion": "Base para la orden #{order.uuid}",
+               "importe": base_earning,
+               "clave": "80141600",
+               "clave_unidad": "E48",
+               "traslados": [
+                   {
+                       "impuesto": "002",
+                       "base": base_earning,
+                       "tipo_factor": "Tasa",
+                       "tasa": iva,
+                       "importe": (base_earning * iva).round(2)
+                   }
+               ]
               }]
       impuestos_traslado =  [{"impuesto": "002",
                               "tasa": iva,
                               "importe": concept[0][:traslados][0][:importe],
                               "tipo_factor": "Tasa"
+                            },
+                            {"impuesto": "002",
+                             "tasa": iva,
+                             "importe": concept[1][:traslados][0][:importe],
+                             "tipo_factor": "Tasa"
                             }]
       invoice = {"invoice_id": "#{order.uuid}",
                  "total": total,
-                 "subtotal": subtotal,
+                 "subtotal": subtotal + base_earning,
                  "forma_pago": "04",
                  "hide_total_items": true,
                  "hide_total_taxes": true,
@@ -50,8 +74,7 @@ class OrderInvoiceGeneratorWorker
                  "receptor": recipient,
                  "conceptos": concept,
                  "impuestos_traslado": impuestos_traslado,
-                 "total_trasladados": concept[0][:traslados][0][:importe],
-                 "impuestos_retencion": []
+                 "total_trasladados": (concept[0][:traslados][0][:importe] + concept[1][:traslados][0][:importe]).round(2)
                  }
 
       # Curl HTTP Call
