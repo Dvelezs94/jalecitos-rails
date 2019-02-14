@@ -4,18 +4,28 @@ require "#{Rails.root}/db/init_seeds/professions"
 require "#{Rails.root}/db/init_seeds/mx_places"
 
 # Populate DB with Mexico places
-InitMexicoPlaces.all.keys.each do |state|
-  State.create(name: state)
-end
-InitMexicoPlaces.all.values.each_with_index do |cities, n|
-  cities.each do |city|
-    City.create(name: city, state_id: n+1)
+if ENV.fetch("RAILS_ENV") != "development"
+  InitMexicoPlaces.all.keys.each do |state|
+    State.create(name: state)
+  end
+  InitMexicoPlaces.all.values.each_with_index do |cities, n|
+    cities.each do |city|
+      City.create(name: city, state_id: n+1)
+    end
   end
 end
 
 
 #fill db with fake info for development
 if ENV.fetch("RAILS_ENV") == "development"
+  InitMexicoPlaces.all.keys.each do |state|
+    State.create(name: state)
+  end
+  InitMexicoPlaces.all.values.each_with_index do |cities, n|
+    cities.in_groups_of(5).first.each do |city|
+      City.create(name: city, state_id: n+1)
+    end
+  end
   20.times do |x|
     User.create! do |user|
       user.name = Faker::Name.name + "#{x}"

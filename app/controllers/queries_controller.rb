@@ -3,7 +3,7 @@ class QueriesController < ApplicationController
   include SearchFunctions
   include LocationFunctions
   layout :set_layout
-  access user: [:user_search, :user_autocomplete_search, :autocomplete_profession, :user_mobile_search], admin: :all, all: [:guest_search, :guest_autocomplete_search]
+  access user: [:user_search, :user_autocomplete_search, :autocomplete_profession, :user_mobile_search], admin: :all, all: [:guest_search, :guest_autocomplete_search, :autocomplete_location]
 
   def guest_search
     if params[:gigs]
@@ -55,9 +55,19 @@ class QueriesController < ApplicationController
       fields: ["name"],
       match: :word_start,
       limit: 10,
-      load: false,
       misspellings: {below: 2}
     }).map(&:name)
+  end
+
+  def autocomplete_location
+    query = params[:query]
+    #init the filter params
+    render json: City.search(query, {
+      fields: ["name"],
+      match: :word_start,
+      limit: 10,
+      misspellings: {below: 2}
+    }).map { |city| "#{city.name}, #{State.find(city.state.id).name}, MX" }
   end
 
   def user_mobile_search
