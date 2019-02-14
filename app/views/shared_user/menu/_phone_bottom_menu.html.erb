@@ -4,19 +4,19 @@
       <div class="col-lg-12">
         <div class="headertop-right">
           <div class="phone_links">
-            <a href="<%= root_path %>">
+            <a href="<%= root_path %>" class="<%= active? root_path %>">
               <%= icon("fas", "home") %><br>
             </a>
-            <a href="<%= finance_path %>">
+            <a href="<%= finance_path %>" class="<%= active? finance_path %>">
               <%= icon("fas", "exchange-alt") %><br>
             </a>
             <a href="" class="plusred" id="newelementmodalphonetablet">
               <%= icon("fas", "plus") %><br>
             </a>
-            <a href="<%= conversations_path %>" class="redbell1">
+            <a href="<%= conversations_path %>" class="redbell1 <%= active? conversations_path %>">
               <%= icon("fas", "envelope") %><br>
             </a>
-            <a href="<%= all_notifications_path %>">
+            <a href="<%= all_notifications_path %>" class="<%= active? all_notifications_path %>" >
               <%= icon("fas", "bell") %><br>
             </a>
           </div>

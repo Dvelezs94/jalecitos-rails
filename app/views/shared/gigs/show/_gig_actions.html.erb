@@ -1,4 +1,6 @@
-<%= link_to icon("fas","share-alt", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
-<%= link_to status_text_helper(@gig), toggle_status_user_gig_path(current_user.slug,@gig) unless @gig.banned? || @gig.gig_first_pack[0].nil? %>
-<%= link_to icon("fas","pen", class: "fa-lg gig_action_icon", title: "Editar"), edit_user_gig_path(current_user.slug,@gig) %>
-<%= link_to icon("fas","trash", class: "fa-lg gig_action_icon", title: "Eliminar"), user_gig_path(current_user.slug,@gig), method: :delete, data: { confirm: '¿Estás seguro de querer borrar este trabajo?' }%>
+<div class="gig_actions">
+  <%= link_to icon("fas","share-alt", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
+  <%= link_to status_text_helper(@gig), toggle_status_user_gig_path(current_user.slug,@gig) unless @gig.banned? || @gig.gig_first_pack[0].nil? %>
+  <%= link_to icon("fas","pen", class: "fa-lg gig_action_icon", title: "Editar"), edit_user_gig_path(current_user.slug,@gig) %>
+  <%= link_to icon("fas","trash", class: "fa-lg gig_action_icon", title: "Eliminar"), user_gig_path(current_user.slug,@gig), method: :delete, data: { confirm: '¿Estás seguro de querer borrar este trabajo?' }%>
+</div>
