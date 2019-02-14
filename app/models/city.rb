@@ -1,5 +1,5 @@
 class City < ApplicationRecord
-  searchkick language: "spanish"
+  searchkick language: "spanish", word_start: [:name]
   # only send these fields to elasticsearch
   def search_data
     {

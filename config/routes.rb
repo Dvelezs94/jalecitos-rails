@@ -120,6 +120,7 @@ Rails.application.routes.draw do
   get 'user_search', to: 'queries#user_search'
   get 'user_autocomplete_search', to: 'queries#user_autocomplete_search'
   get 'autocomplete_profession', to: 'queries#autocomplete_profession'
+  get 'autocomplete_location', to: 'queries#autocomplete_location'
   get 'terminos-y-condiciones', to: 'pages#terms_and_conditions'
   get 'aviso-de-privacidad', to: 'pages#privacy_policy'
   get 'condiciones-de-venta', to: 'pages#sales_conditions'

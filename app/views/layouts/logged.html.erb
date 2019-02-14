@@ -12,9 +12,6 @@
     <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>
     <script type='text/javascript' src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>
     <%= javascript_include_tag 'logged', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places&callback=activatePlacesSearch", :defer => true, :async => true %>
-    <%= javascript_include_tag 'google_turbolink', 'data-turbolinks-track': 'reload', :defer => true, :async => true %>
-
     <!-- For PWA -->
     <link rel="manifest" href="/manifest.json"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
