@@ -61,7 +61,7 @@ function activateMobileSearch() {
 
 function fill_and_submit(autocomplete, input, name) {
   var place = autocomplete.getPlace();
-  $(input).val([place["address_components"][0].long_name, place["address_components"][1].long_name, place["address_components"][2].long_name].join(", "));
+  $(input).val([place["address_components"][0].long_name, place["address_components"][1].short_name, place["address_components"][2].short_name].join(", "));
   //use this just for best_in_place
   //hide and show map marker icon
   if (name == "mobile") {
