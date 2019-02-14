@@ -3,7 +3,7 @@
     <div class="page3single-slidersd">
       <div class="singleslidepd">
         <%= image_tag( image_display_helper(gig.images[0]) ) %>
-      <%= "<p class='verified'>Verificado</p>".html_safe if gig.user.verified %>
+        <%= "<p class='verified'>Verificado</p>".html_safe if gig.user.verified %>
       </div>
       <div class="gig-content">
         <div class="page3slides-contentrd">
@@ -16,13 +16,13 @@
           </p>
         </div>
         <div class="page3slide-stard">
-            <%= star_display_helper( gig.score_average ) %>
+          <%= star_display_helper( gig.score_average ) %>
           <%= "<p class='gig-score-times'>(#{gig.score_times})</p>".html_safe if gig.score_times > 0%>
         </div>
       </div>
-    </a>
-    <div class="hearted1" id="likes-<%= gig.slug %>">
-      <%= render "gigs/likes", gig: gig %>
     </div>
+  </a>
+  <div class="hearted1" id="likes-<%= gig.slug %>">
+    <%= render "gigs/likes", gig: gig %>
   </div>
 </div>

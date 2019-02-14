@@ -32,3 +32,7 @@ $ ->
   $(document).on "ajax:success", ".change_user_alias", (event, data) ->
     data = JSON.parse(data);
     window.location.replace(data.redirect);
+
+  #reload page when mobile change location is successful
+  $(document).on "ajax:success", "#mobile_autocomplete", (event, data) ->
+    location.reload();

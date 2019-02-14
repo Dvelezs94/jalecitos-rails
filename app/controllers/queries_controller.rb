@@ -3,7 +3,7 @@ class QueriesController < ApplicationController
   include SearchFunctions
   include LocationFunctions
   layout :set_layout
-  access user: [:user_search, :user_autocomplete_search, :autocomplete_profession], admin: :all, all: [:guest_search, :guest_autocomplete_search]
+  access user: [:user_search, :user_autocomplete_search, :autocomplete_profession, :user_mobile_search], admin: :all, all: [:guest_search, :guest_autocomplete_search]
 
   def guest_search
     if params[:gigs]
@@ -58,5 +58,8 @@ class QueriesController < ApplicationController
       load: false,
       misspellings: {below: 2}
     }).map(&:name)
+  end
+
+  def user_mobile_search
   end
 end

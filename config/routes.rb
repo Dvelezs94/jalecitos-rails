@@ -116,6 +116,7 @@ Rails.application.routes.draw do
   get 'guest_search', to: 'queries#guest_search'
   get 'guest_autocomplete_search', to: 'queries#guest_autocomplete_search'
 
+  get 'user_mobile_search', to: 'queries#user_mobile_search'
   get 'user_search', to: 'queries#user_search'
   get 'user_autocomplete_search', to: 'queries#user_autocomplete_search'
   get 'autocomplete_profession', to: 'queries#autocomplete_profession'

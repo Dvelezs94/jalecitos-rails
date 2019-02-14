@@ -20,7 +20,14 @@
     </div>
 
     <div class="pacificobg-socialicon">
+      <div class="arroweee">
+        <a href="">
+          <%= link_to icon("fas", "arrow-left"), 'javascript:history.go(-1);' %>
+        </a>
+      </div>
       <% if current_user != @gig.user %>
+      <div class="other_gig_actions">
+
         <div class="hearted1" id="likes-<%= @gig.slug %>">
           <%= render "gigs/likes", gig: @gig %>
         </div>
@@ -28,6 +35,7 @@
         <% if user_signed_in? %>
           <%= icon("fas", "flag", class: "fa-lg gig_action_icon cursor_pointer", title: "Reportar", id: "reportgigbtn") %>
         <% end %>
+      </div>
       <% else %>
         <%= render "shared/gigs/show/gig_actions" %>
       <% end %>
@@ -38,11 +46,6 @@
       </div>
     <% end %>
 
-    <div class="arroweee">
-      <a href="">
-        <%= link_to icon("fas", "arrow-left"), 'javascript:history.go(-1);' %>
-      </a>
-    </div>
   </div>
 
   <div class="perfil-area">
