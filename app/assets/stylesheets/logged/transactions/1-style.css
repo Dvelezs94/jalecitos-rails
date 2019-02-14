@@ -163,16 +163,6 @@ body {
   position: relative;
 }
 
-.toggle-menu {
-	opacity: 0;
-	visibility: hidden;
-    transition: .9s;
-}
-.toggle-menu.activee {
-	opacity: 1;
-	visibility: visible;
-}
-
 
 .bell {
   position: relative;
