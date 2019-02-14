@@ -1060,6 +1060,12 @@ p.limpi1 {
   color: #000;
 }
 
+.verificos-title p {
+  font-size: 14px;
+  color: #BFBFBF;
+  font-weight: 700;
+}
+
 .varificado-btn3 a {
   background: #39C27B;
   color: #fff;
