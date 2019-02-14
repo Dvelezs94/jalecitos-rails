@@ -1,6 +1,18 @@
 #create all the professions and categories
 require "#{Rails.root}/db/init_seeds/categories"
 require "#{Rails.root}/db/init_seeds/professions"
+require "#{Rails.root}/db/init_seeds/mx_places"
+
+# Populate DB with Mexico places
+InitMexicoPlaces.all.keys.each do |state|
+  State.create(name: state)
+end
+InitMexicoPlaces.all.values.each_with_index do |cities, n|
+  cities.each do |city|
+    City.create(name: city, state_id: n+1)
+  end
+end
+
 
 #fill db with fake info for development
 if ENV.fetch("RAILS_ENV") == "development"
