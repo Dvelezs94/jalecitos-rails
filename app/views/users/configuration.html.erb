@@ -27,7 +27,7 @@
         <div class="col-sm-4">
           <label for="">NOMBRE COMPLETO</label>
         </div>
-        <div class="col-sm-6"><%= best_in_place_if my_profile,@user, :name, :class => "form-control" %></div>
+        <div class="col-sm-6"><%= best_in_place current_user, :name, :class => "form-control" %></div>
       </div>
       <br>
       <div class="row">
@@ -41,7 +41,7 @@
         <div class="col-sm-4">
           <label for="">ALIAS</label>
         </div>
-        <div class="col-sm-6"><%= best_in_place_if my_profile,@user, :alias, :class => "form-control change_user_alias" %></div>
+        <div class="col-sm-6"><%= best_in_place current_user, :alias, :class => "form-control change_user_alias" %></div>
       </div>
       <br>
       <div class="row">
@@ -49,7 +49,7 @@
           <label for="">DISPONIBILIDAD</label>
         </div>
         <div class="col-sm-6">
-          <%= best_in_place_if my_profile,@user, :available, :as => :select, :collection => { "Tiempo completo" => "Tiempo completo", "Medio tiempo" => "Medio tiempo", "Fin de semana" => "Fin de semana", "Esporádico" => "Esporádico" }, :place_holder => "Edítame" %>
+          <%= best_in_place current_user, :available, :as => :select, :collection => { "Tiempo completo" => "Tiempo completo", "Medio tiempo" => "Medio tiempo", "Fin de semana" => "Fin de semana", "Esporádico" => "Esporádico" }, :place_holder => "Edítame" %>
         </div>
       </div>
       <br>
@@ -58,8 +58,10 @@
           <label for="">UBICACION</label>
         </div>
         <div class="col-sm-6">
-          <%= best_in_place_if my_profile,@user, :location, as: :input, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :inner_class =>
-        "best_google_input", :class => "google-span", :html_attrs => {:maxlength => 30} %>
+          <%= best_in_place current_user, :location, as: :input, id: "configuration_autocomplete",
+           ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success",
+           :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :inner_class =>
+        "best_google_input", :class => "config-google-span", :html_attrs => {:maxlength => 30} %>
         </div>
       </div>
       <br>
@@ -68,7 +70,7 @@
           <label for="">EDAD</label>
         </div>
         <div class="col-sm-6">
-          <%= best_in_place_if my_profile,@user, :age, :as => :select, :collection => (18..100).map { |i| [i, "#{i} años"]}, :place_holder => "Edítame" %>
+          <%= best_in_place current_user, :age, :as => :select, :collection => (18..100).map { |i| [i, "#{i} años"]}, :place_holder => "Edítame" %>
         </div>
       </div>
       <br>
@@ -77,7 +79,7 @@
           <label for="">SOBRE MI</label>
         </div>
         <div class="col-sm-6">
-          <%= best_in_place_if my_profile,@user, :bio, as: :textarea, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :html_attrs => {:maxlength => 500} %>
+          <%= best_in_place current_user, :bio, as: :textarea, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :html_attrs => {:maxlength => 500} %>
         </div>
       </div>
       <br>
@@ -121,7 +123,7 @@
           <label>EMAILS <span data-tooltip="Recibe Emails de tus transacciones importantes, incluyendo compras, ventas y recibos"><%= icon("fas","info-circle") %></span></label>
         </div>
         <div class="col-sm-6">
-          <%= best_in_place_if my_profile,@user, :transactional_emails, as: :select,
+          <%= best_in_place current_user, :transactional_emails, as: :select,
           collection: {true: "Activado", false: "Desactivado"}, :class => "form-control" %>
         </div>
       </div>
@@ -131,7 +133,7 @@
           <label>ULTIMAS NOTICIAS<span data-tooltip="Recibe las ultimas noticias por Email"><%= icon("fas","info-circle") %></span></label>
         </div>
         <div class="col-sm-6">
-          <%= best_in_place_if my_profile,@user, :marketing_emails, as: :select,
+          <%= best_in_place current_user, :marketing_emails, as: :select,
           collection: {true: "Activado", false: "Desactivado"}, :class => "form-control" %>
         </div>
       </div>

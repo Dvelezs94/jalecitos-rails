@@ -1,6 +1,7 @@
 $(document).on "turbolinks:load", ->
-  if $("#user_image").length > 0
+  if $(".best_in_place").length > 0
     $(".best_in_place").best_in_place();
+  if $("#user_image").length > 0
     #initialize file upload
     $("#user_image").fileupload(
       dataType: "script"

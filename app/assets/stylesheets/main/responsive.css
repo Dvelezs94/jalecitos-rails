@@ -4,6 +4,10 @@
   .container {
     min-width: 1200px;
   }
+  .gig-query .hearted1 {
+    top: 41%;
+    right: 9%;
+  }
   .phone_links i {
     font-size: 30px;
   }
@@ -92,6 +96,10 @@
   }
   .modal-content, .modal-content-transparent {
     width: 500px;
+  }
+  .gig-query .hearted1 {
+    top: 41%;
+    right: 9%;
   }
 
   .authorclick img {
@@ -1739,7 +1747,6 @@
   }
 
   .pacificobg-socialicon {
-    right: 10px;
     top: 10px;
   }
 
@@ -1836,12 +1843,6 @@
 
   .arroweee {
     display: block;
-  }
-
-  .arroweee {
-    position: absolute;
-    left: 12px;
-    top: 10px;
   }
 
   .servicoteam-wrap {
@@ -2406,6 +2407,7 @@
     background: #F4F5F7;
     box-shadow: 0 -5px 20px 0 rgba(0, 0, 0, 0.1);
   }
+
   .servicoteam-wrap {
     display: none;
   }
@@ -2425,13 +2427,17 @@
     margin-top: 20px;
     margin-bottom: 0px;
   }
+  .gig-query .hearted1 {
+    bottom: 2%;
+    left: 5%;
+  }
 }
 
 @media (max-width: 1200px) {
-  .filters{
+  .search-form .filters{
     padding-left: 0;
   }
-  div.input-area{
+  form.search-form {
     display: block;
   }
   div.form {

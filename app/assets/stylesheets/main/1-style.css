@@ -997,10 +997,14 @@ p {}
 
 .pacificobg-socialicon {
   position: absolute;
-  right: 20px;
-  top: 20px;
-  z-index: 1;
   display: flex;
+  top: 20px;
+  width: 100%;
+  text-align: right;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-image: linear-gradient( rgba(0,0,0,0.5), rgba(0,0,0,0) );
+  z-index: 1;
+  padding: 5px 0;
 }
 
 .singleslidep {}
@@ -1078,6 +1082,7 @@ p.limpi1 {
 .arroweee {
   display: none;
   z-index: 1;
+  margin-left: 15px;
 }
 
 .check-listpage3 i {
@@ -1478,18 +1483,6 @@ button:focus {
   position: relative;
 }
 
-.pacificobg-socialicon i {
-  color: #fff;
-  font-size: 18px;
-  margin: 4px;
-}
-
-.pacificobg-socialicon {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-}
-
 .singleslidep {}
 
 .innerpage3-rightsidetabs .nav-tabs {
@@ -1535,10 +1528,6 @@ p.limpi1 {
   position: absolute;
   right: 20px;
   bottom: 20px;
-}
-
-.arroweee {
-  display: none;
 }
 
 .check-listpage3 i {
@@ -1848,10 +1837,6 @@ p.gig-price {
 
 .servico-title span {
   padding-left: 8px;
-}
-
-.arroweee i {
-  color: #fff;
 }
 
 .califico-about {
@@ -2798,9 +2783,6 @@ p.req_location {
 	background: #39C27B;
 	padding: 15px 0;
 }
-.map-marker {
-	margin-top: 7px;
-}
 .belldropdownarea {
 	opacity: 0;
 	visibility: hidden;
@@ -2825,13 +2807,12 @@ p.req_location {
 }
 form.search-form {
   display: flex;
-  position: relative;
 }
 
-.search-form i {
+.search-form .form i {
   position: absolute;
-  top: 3px;
-  left: -4px;
+  top: 23%;
+  left: 6px;
   color: #9B9B9B;
   font-size: 22px;
   z-index: 4;
@@ -2847,8 +2828,9 @@ div.form {
   padding: 8px 19px;
   border-radius: 3px;
   width: 300px;
+  position: relative;
 }
-.filters input {
+.search-form .filters input {
   margin-right: 10px;
 }
 
@@ -2961,4 +2943,53 @@ div.form {
 	height: 3px;
 	background: #F5F6F7;
 	z-index: -1;
+}
+/*mobile search menu*/
+.map-marker span {
+	font-size: 14px;
+}
+.map-marker {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: white;
+}
+
+.mobile-search-form {
+  position: relative;
+  padding: 0 20px;
+}
+.mobile-search-form i.fa-search {
+  position: absolute;
+  z-index: 3;
+  font-size: 18px;
+  color: #39C27B;
+  top: 11px;
+  left: 35px;
+}
+
+.mobile-search-form i.fa-times {
+  position: absolute;
+  z-index: 3;
+  font-size: 18px;
+  color: gray;
+  top: 11px;
+  right: 35px;
+}
+
+.mobile-query {
+  width: 100%;
+  padding: 10px 45px;
+  border: none;
+  border-radius: 4px;
+  color: #39C27B;
+}
+
+/*active menu*/
+.active {
+  color: #007bff !important;
+}
+/*search styles*/
+.gig-query .hearted1 {
+  position: absolute;
 }
