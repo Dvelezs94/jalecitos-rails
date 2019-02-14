@@ -63,7 +63,10 @@
       <div class="col-6 justify-content-center text-center" style="display:flex;align-items:center;">
         <div class="map-marker">
           <%= icon("fas", "map-marker-alt",class: "mobile-location-item") %>
-          <%= best_in_place current_user, :location, as: :input, id: "mobile_autocomplete", :inner_class => "mobile_autocomplete", :class => "mobile-span", :place_holder => "Sin ubicación" %>
+          <%= best_in_place current_user, :location, as: :input,
+          :inner_class => "mobile_menu_autocomplete", :class => "menu-location-span",
+           :place_holder => "Sin ubicación",
+            ok_button: "Guardar", cancel_button: "Cancelar" %>
         </div>
       </div>
       <div class="col-3 text-right">
