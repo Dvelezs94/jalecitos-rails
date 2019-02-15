@@ -2993,3 +2993,30 @@ div.form {
 .gig-query .hearted1 {
   position: absolute;
 }
+/*mobile search styles*/
+.mobile_menu_autocomplete {
+  color: #fff;
+  font-size: 14px;
+  white-space: nowrap;
+  border-radius: 3px;
+  background: #39C27B;
+  margin-top: 3px;
+  border: none;
+  padding: 5px 15px;
+  width: 50vw;
+  text-align: center;
+  font-weight: 900;
+  text-overflow: ellipsis;
+}
+
+.mobile_menu_autocomplete::placeholder {
+  color: #fff;
+  text-align: center;
+}
+.mobile_menu_autocomplete:focus {
+  border: 1px solid #88DBB0;
+}
+
+.mobile_menu_autocomplete.tt-hint {
+  color: #39C27B !important;
+}

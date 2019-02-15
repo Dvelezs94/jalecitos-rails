@@ -69,6 +69,8 @@ class UsersController < ApplicationController
         format.json  { render :json => { :redirect => configuration_path } }
       else
         format.json { respond_with_bip(@user) }
+        #changing location use this
+        format.html { redirect_to request.referrer }
       end
     end
 
