@@ -148,8 +148,9 @@ class User < ApplicationRecord
    def set_location
      begin
        loc = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{lat},#{lon}"
-       geoloc = [loc.city, loc.state_code, loc.country_code].join(", ")
-       self.location = geoloc if (loc.country == "Mexico")
+       # Convert the geocoded location provided by the user on signup to valid using our GeoDatabase
+       geoloc = convert_geocode_to_valid(loc.city, loc.state_name)
+       self.location = geoloc
      rescue Geokit::Geocoders::GeocodeError
        true
      end
