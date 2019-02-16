@@ -1,3 +1,4 @@
+//this have to load first
 $(document).on('turbolinks:load', function() {
 
   window.autocomplete_search = new Bloodhound({

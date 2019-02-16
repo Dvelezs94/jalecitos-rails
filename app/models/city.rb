@@ -7,4 +7,8 @@ class City < ApplicationRecord
     }
   end
   belongs_to :state
+
+  has_many :gigs
+  has_many :requests
+  has_many :users
 end

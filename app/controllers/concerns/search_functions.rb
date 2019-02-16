@@ -7,12 +7,12 @@ module SearchFunctions
   end
 
   def user_where_filter
-    if params[:category_id] != "" && params[:location] != ""
-      {status: "published", category_id: params[:category_id], location: params[:location]}
+    if params[:category_id] != "" && params[:city] != ""
+      {status: "published", category_id: params[:category_id], city_id: params[:city_id]}
     elsif params[:category_id] != ""
       {status: "published", category_id: params[:category_id]}
-    elsif  params[:location] != ""
-      {status: "published", location: params[:location]}
+    elsif  params[:city] != ""
+      {status: "published", city_id: params[:city_id]}
     else
       {status: "published"}
     end
@@ -20,8 +20,8 @@ module SearchFunctions
 
   def guest_where_filter
     if params[:lon] != "" && params[:lat] != ""
-      location = get_location(params[:lat], params[:lon])
-      {status: "published", location: location}
+      city_id = geoloc_to_city(params[:lat], params[:lon])
+      {status: "published", city_id: city_id}
     else
       {status: "published"}
     end

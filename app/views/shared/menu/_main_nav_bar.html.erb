@@ -7,7 +7,7 @@
     <%= f.submit "mobile", style: "display: none;", id: "query-search" %>
     <% if params[:commit] == "mobile" %>
       <nav class="filters navbar navbar-expand-lg navbar-light bg-light">
-        <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Cualquier lugar de México", value: (params[:location].nil?)? current_user.location : params[:location] %>
+        <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Cualquier lugar de México", value: (params[:location].nil?)? current_user(true) : params[:location] %>
         <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Todas las categorías", :selected => params[:category_id] }, class: 'form-control', id: "category-select") %>
       </nav>
     <% end %>
@@ -32,7 +32,7 @@
               </div>
               <div class="button-area">
                 <nav class="filters navbar navbar-expand-lg navbar-light bg-light">
-                  <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Ubicación", value: (params[:location].nil?)? current_user.location : params[:location] %>
+                  <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Ubicación", value: (params[:location].nil?)? current_user.location(true) : params[:location] %>
                   <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría", :selected => params[:category_id] }, class: 'form-control', id: "category-select") %>
                 </nav>
               </div>
@@ -66,9 +66,10 @@
           <nav style="display:flex;justify-content:center;align-items:center;">
             <%= f.text_field :location, class: 'mobile_menu_autocomplete',
              id: "mobile_menu_autocomplete", size: 50, placeholder: raw("&#xf3c5;") + " Ubicación",
-              value: (params[:location].present?)? raw("&#xf3c5; ") + params[:location] : (current_user.location.present?)? raw("&#xf3c5; ") + current_user.location : "",
+              value: (current_user.location(true).present?)? raw("&#xf3c5; ") + current_user.location : "",
               style: "font-family: 'Font Awesome 5 Free' !important;font-weight:900;" %>
               <%# without submit button so the form cant be submitted if one option is not selected %>
+              <%= f.hidden_field :city_id, class: "city" %>
             </nav>
            <% end %>
 

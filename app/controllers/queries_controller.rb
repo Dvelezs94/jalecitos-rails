@@ -62,12 +62,16 @@ class QueriesController < ApplicationController
   def autocomplete_location
     query = params[:query]
     #init the filter params
-    render json: City.search(query, {
+    @cities = City.search(query, {
       fields: ["name"],
       match: :word_start,
       limit: 10,
       misspellings: {below: 2}
-    }).map { |city| "#{city.name}, #{State.find(city.state.id).name}, MX" }
+    }).map do |city|
+      { :location => "#{city.name}, #{city.state.name}, #{city.state.country.name}", :id => city.id }
+    end
+    render json: @cities
+
   end
 
   def user_mobile_search

@@ -198,3 +198,9 @@ fieldset[disabled] .twitter-typeahead .tt-input {
 .twitter-typeahead{
   width: 100%;
 }
+
+.tt-suggestion.tt-selectable {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

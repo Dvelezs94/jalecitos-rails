@@ -5,7 +5,7 @@
       <h1><%=link_to @gig.user.alias, user_path(@gig.user.slug), style: "color: black;" %>
         <%= "<span> #{icon("fas", "check-square", title: "Verificado")} </span>".html_safe if @gig.user.verified %>
       </h1>
-      <p class="hace2"><%= (@gig.user.location.present?)? @gig.user.location : "Ciudad indefinida" %></p>
+      <p class="hace2"><%= @gig.user.location.present? %></p>
       <div class="mentosstar-list">
         <%= star_display_helper(@gig.user.score.employee_score_average) %>
         <p class="hace1">Activo(a) hace <%= distance_of_time_in_words_to_now(@gig.user.current_sign_in_at) %></p>
