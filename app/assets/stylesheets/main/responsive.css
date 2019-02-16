@@ -2185,6 +2185,9 @@
   .single-request {
     width: 150px;
   }
+  .default-btn {
+    font-size: 14px;
+  }
   .footerdarea {
     display: none;
   }
