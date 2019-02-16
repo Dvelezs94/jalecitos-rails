@@ -5,12 +5,13 @@
     <%= f.text_field :query, value: params[:query], class: "mobile-query", placeholder: "Busca algo" %>
     <%= icon("fas", "times", onclick: "$('#query').val('')", style: "cursor: pointer;") %>
     <%= f.submit "mobile", style: "display: none;", id: "query-search" %>
-    <% if params[:commit] == "mobile" %>
-      <nav class="filters navbar navbar-expand-lg navbar-light bg-light">
-        <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Cualquier lugar de México", value: (params[:location].nil?)? current_user(true) : params[:location] %>
-        <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Todas las categorías", :selected => params[:category_id] }, class: 'form-control', id: "category-select") %>
+      <nav class="filters navbar navbar-expand-lg navbar-light bg-light" style="<%= "display:none;" if params[:commit] != "mobile" %>">
+        <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Cualquier lugar de México", value: (params[:location].nil?)? current_user.location(true) : params[:location] %>
+        <%= f.hidden_field :city_id, class: "city", value: (params[:city_id].present?)? params[:city_id] : current_user.city_id %>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Todas las categorías",
+         :selected => params[:category_id] }, class: 'form-control', id: "category-select",
+         onchange: "$(this).closest('form').find('input[type=submit]').click()") %>
       </nav>
-    <% end %>
 
   <% end %>
 </div>
@@ -33,7 +34,10 @@
               <div class="button-area">
                 <nav class="filters navbar navbar-expand-lg navbar-light bg-light">
                   <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Ubicación", value: (params[:location].nil?)? current_user.location(true) : params[:location] %>
-                  <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría", :selected => params[:category_id] }, class: 'form-control', id: "category-select") %>
+                  <%= f.hidden_field :city_id, class: "city", value: (params[:city_id].present?)? params[:city_id] : current_user.city_id %>
+                  <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría",
+                   :selected => params[:category_id] }, class: 'form-control', id: "category-select",
+                   onchange: "$(this).closest('form').find('input[type=submit]').click()") %>
                 </nav>
               </div>
             <% end %>
@@ -62,16 +66,14 @@
       </div>
       <div class="col-6 justify-content-center text-center" style="display:flex;align-items:center;">
 
-          <%= form_with model: User, url: user_path(current_user.slug, ), method: :patch , local: true do |f|%>
-          <nav style="display:flex;justify-content:center;align-items:center;">
-            <%= f.text_field :location, class: 'mobile_menu_autocomplete',
-             id: "mobile_menu_autocomplete", size: 50, placeholder: raw("&#xf3c5;") + " Ubicación",
-              value: (current_user.location(true).present?)? raw("&#xf3c5; ") + current_user.location : "",
-              style: "font-family: 'Font Awesome 5 Free' !important;font-weight:900;" %>
-              <%# without submit button so the form cant be submitted if one option is not selected %>
-              <%= f.hidden_field :city_id, class: "city" %>
-            </nav>
-           <% end %>
+        <%= form_with model: User, url: user_path(current_user.slug, ), method: :patch , local: true do |f|%>
+        <nav style="display:flex;justify-content:center;align-items:center;">
+          <%= f.text_field :location, class: 'mobile_menu_autocomplete', id: "mobile_menu_autocomplete", size: 50, placeholder: raw("&#xf3c5;") + " Ubicación", value: (current_user.location(true).present?)? raw("&#xf3c5; ") + current_user.location : "", style:
+          "font-family: 'Font Awesome 5 Free' !important;font-weight:900;" %>
+          <%# without submit button so the form cant be submitted if one option is not selected %>
+            <%= f.hidden_field :city_id, class: "city" %>
+          </nav>
+        <% end %>
 
       </div>
       <div class="col-3 text-right">

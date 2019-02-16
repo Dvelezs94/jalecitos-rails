@@ -7,12 +7,12 @@ class QueriesController < ApplicationController
 
   def guest_search
     if params[:gigs]
-      @gigs = Gig.search(params[:query], where: guest_where_filter, page: params[:gigs], per_page: 20)
+      @gigs = Gig.search(filter_query, where: guest_where_filter, page: params[:gigs], per_page: 20)
     elsif params[:requests]
-      @requests = Request.search(params[:query], where: guest_where_filter, page: params[:requests], per_page: 20)
+      @requests = Request.search(filter_query, where: guest_where_filter, page: params[:requests], per_page: 20)
     else
-      @gigs = Gig.search(params[:query], where: guest_where_filter, execute: false, page: params[:gigs], per_page: 20)
-      @requests = Request.search(params[:query], where: guest_where_filter, execute: false, page: params[:requests], per_page: 20)
+      @gigs = Gig.search(filter_query, where: guest_where_filter, execute: false, page: params[:gigs], per_page: 20)
+      @requests = Request.search(filter_query, where: guest_where_filter, execute: false, page: params[:requests], per_page: 20)
       Searchkick.multi_search([@gigs, @requests])
     end
     render template: "queries/search_results"
@@ -29,19 +29,19 @@ class QueriesController < ApplicationController
 
   def user_search
     if params[:gigs]
-      @gigs = Gig.search(params[:query], where: user_where_filter, page: params[:gigs], per_page: 20)
+      @gigs = Gig.search(filter_query, where: user_where_filter, page: params[:gigs], per_page: 20)
     elsif params[:requests]
-      @requests = Request.search(params[:query], where: user_where_filter, page: params[:requests], per_page: 20)
+      @requests = Request.search(filter_query, where: user_where_filter, page: params[:requests], per_page: 20)
     else
-    @gigs = Gig.search(params[:query], where: user_where_filter, page: params[:gigs], per_page: 20, execute: false)
-    @requests = Request.search(params[:query], where: user_where_filter, page: params[:requests], per_page: 20, execute: false)
+    @gigs = Gig.search(filter_query, where: user_where_filter, page: params[:gigs], per_page: 20, execute: false)
+    @requests = Request.search(filter_query, where: user_where_filter, page: params[:requests], per_page: 20, execute: false)
     Searchkick.multi_search([@gigs, @requests])
     end
     render template: "queries/search_results"
   end
 
   def user_autocomplete_search
-    render json: Searchkick.search(params[:query], {
+    render json: Searchkick.search(filter_query, {
       index_name: [Gig, Request],
       suggest: [:name, :description, :profession],
       where:  { status: "published" }

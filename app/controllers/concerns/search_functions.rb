@@ -7,11 +7,11 @@ module SearchFunctions
   end
 
   def user_where_filter
-    if params[:category_id] != "" && params[:city] != ""
+    if params[:category_id] != "" && params[:city_id] != ""
       {status: "published", category_id: params[:category_id], city_id: params[:city_id]}
     elsif params[:category_id] != ""
       {status: "published", category_id: params[:category_id]}
-    elsif  params[:city] != ""
+    elsif  params[:city_id] != ""
       {status: "published", city_id: params[:city_id]}
     else
       {status: "published"}
@@ -31,27 +31,10 @@ module SearchFunctions
     query = params[:query]
     #if query doesnt have nothing search for all
     query = "*" if ( query == "" )
-    #if query has "Voy a" at the beginning, cut it
-    query = ( query.start_with?("voy a", "Voy a") )? query.sub(/^Voy a /, '').sub(/^voy a /, '') : query
+    #if query has "Voy a" at the beginning, cut it (^ represents at the beginning and "i" is case insensitive)
+    query = query.sub(/^voy a /i, '')
     #same with requests...
-    query = ( query.start_with?("busco un", "Busco un") )? query.sub(/^Busco un /, '').sub(/^busco un /, '') : query
+    query = query.sub(/^busco un /i, '')
   end
 
-  def init_search_options
-    filters = Hash.new
-    if (params[:model_name] == "requests")
-      filters[:includes] = [:user]
-      filters[:status] = "published"
-      filters[:model] = Request
-    else
-      filters[:includes] = [:search_gigs_packages, :user]
-      filters[:status] = "published"
-      filters[:model] = Gig
-    end
-    return filters
-  end
-
-  def pre_text model
-    ( model == Gig)? "Voy a " : "Busco un "
-  end
 end

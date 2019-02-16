@@ -30,10 +30,12 @@ $(document).on('turbolinks:load', function() {
   }).on('typeahead:selected', function(e, data) {
     window.location_val = $(this).val();
     $(event.target).closest("form").find(".city").val(data.id);
+    $(event.target).closest("form").find("input[type=submit]").click();
 
   }).on('typeahead:autocompleted', function(e, data) {
     window.location_val = $(this).val();
     $(event.target).closest("form").find(".city").val(data.id);
+    $(event.target).closest("form").find("input[type=submit]").click();
   });
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   $('#form_autocomplete').typeahead(null, {
