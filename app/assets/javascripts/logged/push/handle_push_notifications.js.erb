@@ -40,7 +40,8 @@ function validateSWSubscription(){
    });
 }
 
-function resetNotifications() {
+function resetNotifications(e) {
+  e.preventDefault();
  navigator.serviceWorker.ready
   .then((registration) => {
     registration.pushManager.getSubscription()
