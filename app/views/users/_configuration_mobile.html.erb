@@ -207,7 +207,7 @@
                   <% if ! @user.verified? %>
                     <div class="perfil-text">
                       <h4>Verificación de perfil
-                        <a href="">Solicitar verificado</a>
+                        <a href="<%= new_verification_path %>">Solicitar verificacion</a>
                       </h4>
                     </div>
                   <% else %>
