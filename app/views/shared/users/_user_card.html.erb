@@ -5,7 +5,7 @@
     </div>
     <div class="activotext">
       <h1><%= @user.alias %></h1>
-      <p><%= (@user.location.nil?)? "Ciudad Indefinida" : @user.location %></p>
+      <p><%= @user.location %></p>
       <div class="innersocial-list">
         <%= star_display_helper( score_average(@user.score) ) %>
       </div>

@@ -270,15 +270,4 @@ module ApplicationHelper
     JSON.parse(res.body)
   end
 
-  # validate cities existance in the db
-  def convert_geocode_to_valid (city, state)
-    @city = City.find_by_name(city).present?
-    @state = State.find_by_name(state).present?
-    if (@city && @state) == true
-      return "#{city}, #{state}, MX"
-    else
-      return nil
-    end
-  end
-
 end

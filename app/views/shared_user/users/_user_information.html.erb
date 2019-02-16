@@ -40,7 +40,7 @@
     <div class="col-lg-9  col-md-9 col-sm-12 info-text">
       <p><%= best_in_place_if my_profile,@user, :location, as: :input, ok_button: "Guardar", cancel_button: "Cancelar", :ok_button_class => "btn btn-success", :cancel_button_class => "btn btn-danger", :place_holder => "Edítame", :inner_class =>
         "best_google_input", :class => "google-span", :html_attrs => {:maxlength => 30} %>
-        <%= "Indefinido" if current_user != @user && @user.location.nil? %>
+        <%= "Indefinido" if current_user != @user && @user.location(true).nil? %>
       </p>
     </div>
 

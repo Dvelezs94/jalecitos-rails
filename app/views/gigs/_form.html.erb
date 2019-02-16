@@ -87,7 +87,8 @@
               <%= icon "fas","map-marker", class: "fa-2x" %>
             </div>
             <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-              <%= form.text_field :location, class: 'text_box required', id: "form_autocomplete", size: 50, placeholder: 'Busca tu ciudad...', value: (gig.location != nil)? gig.location : (current_user.location != nil)? current_user.location : "" %>
+              <%= form.text_field :location, class: 'text_box required', id: "form_autocomplete", size: 50, placeholder: 'Busca tu ciudad...', value: (gig.location(true) != nil)? gig.location : current_user.location(true) %>
+              <%= form.hidden_field :city_id, class: "city", value: current_user.city_id %>
             </div>
             <%= render 'shared_user/gigs/forms/hints/city_hint.html.erb' %>
           </div>

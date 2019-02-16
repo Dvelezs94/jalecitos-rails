@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_14_040940) do
+ActiveRecord::Schema.define(version: 2019_02_15_213646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,12 @@ ActiveRecord::Schema.define(version: 2019_02_14_040940) do
     t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "disputes", force: :cascade do |t|
     t.bigint "order_id"
     t.integer "status", default: 0
@@ -107,7 +113,6 @@ ActiveRecord::Schema.define(version: 2019_02_14_040940) do
   create_table "gigs", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.string "location"
     t.integer "order_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -119,7 +124,9 @@ ActiveRecord::Schema.define(version: 2019_02_14_040940) do
     t.integer "score_average", default: 0
     t.integer "score_times", default: 0
     t.string "profession"
+    t.bigint "city_id"
     t.index ["category_id"], name: "index_gigs_on_category_id"
+    t.index ["city_id"], name: "index_gigs_on_city_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true
     t.index ["user_id"], name: "index_gigs_on_user_id"
   end
@@ -307,14 +314,15 @@ ActiveRecord::Schema.define(version: 2019_02_14_040940) do
     t.bigint "category_id"
     t.string "budget"
     t.string "image"
-    t.string "location"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
     t.integer "employee_id"
     t.string "profession"
+    t.bigint "city_id"
     t.index ["category_id"], name: "index_requests_on_category_id"
+    t.index ["city_id"], name: "index_requests_on_city_id"
     t.index ["slug"], name: "index_requests_on_slug", unique: true
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
@@ -337,6 +345,8 @@ ActiveRecord::Schema.define(version: 2019_02_14_040940) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_states_on_country_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -402,10 +412,11 @@ ActiveRecord::Schema.define(version: 2019_02_14_040940) do
     t.integer "status", default: 0
     t.integer "age"
     t.string "available"
-    t.string "location"
     t.boolean "transactional_emails", default: true
     t.boolean "marketing_emails", default: true
     t.boolean "verified", default: false
+    t.bigint "city_id"
+    t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -440,6 +451,7 @@ ActiveRecord::Schema.define(version: 2019_02_14_040940) do
   add_foreign_key "disputes", "orders"
   add_foreign_key "extras", "gigs", column: "gigs_id"
   add_foreign_key "gigs", "categories"
+  add_foreign_key "gigs", "cities"
   add_foreign_key "gigs", "users"
   add_foreign_key "likes", "gigs"
   add_foreign_key "likes", "users"
@@ -460,8 +472,11 @@ ActiveRecord::Schema.define(version: 2019_02_14_040940) do
   add_foreign_key "reports", "bans"
   add_foreign_key "reports", "users"
   add_foreign_key "requests", "categories"
+  add_foreign_key "requests", "cities"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "orders"
+  add_foreign_key "states", "countries"
+  add_foreign_key "users", "cities"
   add_foreign_key "verifications", "users"
   add_foreign_key "withdrawals", "users"
 end

@@ -42,15 +42,15 @@ class UsersController < ApplicationController
     # best in place update roles based on list select
     if @role = params[:user]["roles"]
       case @role
-      when "employee"
-        @user.update_attributes(:roles => [:user, :employee])
-      when "employer"
-        @user.update_attributes(:roles => [:user, :employer], tags: [])
-        @user.gigs.published.each do |g|
-          g.draft!
+        when "employee"
+          @user.update_attributes(:roles => [:user, :employee])
+        when "employer"
+          @user.update_attributes(:roles => [:user, :employer], tags: [])
+          @user.gigs.published.each do |g|
+            g.draft!
         end
-      when "employee_employer"
-        @user.update_attributes(:roles => [:user, :employer, :employee])
+        when "employee_employer"
+          @user.update_attributes(:roles => [:user, :employer, :employee])
       end
     # best in place for tags, split them to make a list and grab the first 10
     elsif params[:user]["tag_list"]
@@ -58,6 +58,8 @@ class UsersController < ApplicationController
       # @user.tag_list = @tag_list.first(10)
       # @user.save
       @user.update_attributes(:tag_list => @tag_list.first(10))
+    elsif params[:user][:city_id]
+      @user.update(city_id: params[:user][:city_id])
     # else we save the parameters as they come since they dont need special treatment
     else
       @user.update_attributes(user_params)
