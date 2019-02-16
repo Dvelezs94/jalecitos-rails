@@ -33,6 +33,26 @@ input:focus {
   text-align: left;
 }
 
+.default-btn {
+  color: #fff;
+  font-size: 17px;
+  background: #39C27B;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 5px;
+  border: none;
+}
+
+.default-deny-btn {
+  color: #fff;
+  font-size: 17px;
+  background: #F11D37;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 5px;
+  border: none;
+}
+
 .contact-us span {
   float: right;
   font-weight: 600;
