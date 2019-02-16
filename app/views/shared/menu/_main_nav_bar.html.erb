@@ -1,16 +1,18 @@
-<% if current_page?(user_mobile_search_path) || params[:commit] == "mobile" %>
+<% if current_page?(user_mobile_search_path) || params[:device] == "mobile" %>
   <div class="tablet-mobile-top-ber">
     <%= form_with url: user_search_path(), method: :get ,:html => {class: "mobile-search-form"} , local: true do |f|%>
-    <%= icon("fas", "search", onclick: "$('#query-search').click()", style: "cursor: pointer;") %>
+    <%= icon("fas", "search", onclick: "$(this).closest('form').find('input[type=submit]').click()", style: "cursor: pointer;") %>
     <%= f.text_field :query, value: params[:query], class: "mobile-query", placeholder: "Busca algo" %>
+    <%= f.submit "continuar", style: "display:none;" %>
     <%= icon("fas", "times", onclick: "$('#query').val('')", style: "cursor: pointer;") %>
-    <%= f.submit "mobile", style: "display: none;", id: "query-search" %>
-      <nav class="filters navbar navbar-expand-lg navbar-light bg-light" style="<%= "display:none;" if params[:commit] != "mobile" %>">
-        <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Cualquier lugar de México", value: (params[:location].nil?)? current_user.location(true) : params[:location] %>
-        <%= f.hidden_field :city_id, class: "city", value: (params[:city_id].present?)? params[:city_id] : current_user.city_id %>
+      <nav class="filters navbar navbar-expand-lg navbar-light bg-light" style="<%= "display:none;" if params[:device] != "mobile" %>">
+        <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50,
+         placeholder: "Cualquier lugar de México", value: (params[:location].nil?)? current_user.location(true) : params[:location] %>
+        <%= f.hidden_field :city_id, class: "city", value: (params[:city_id].nil?)? current_user.city_id : params[:city_id] %>
         <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Todas las categorías",
          :selected => params[:category_id] }, class: 'form-control', id: "category-select",
-         onchange: "$(this).closest('form').find('input[type=submit]').click()") %>
+         onchange: "$(this).closest('form').submit()") %>
+        <%= f.hidden_field :device, value: "mobile" %>
       </nav>
 
   <% end %>
@@ -27,17 +29,18 @@
             <div class="input-area">
               <%= form_with url: user_search_path, method: :get ,:html => {class: "search-form"} , local: true do |f|%>
               <div class="form">
-                <%= icon("fas", "search", onclick: "$('#query-search').click()", style: "cursor: pointer;") %>
+                <%= icon("fas", "search", onclick: "$(this).closest('form').find('input[type=submit]').click()", style: "cursor: pointer;") %>
                 <%= f.text_field :query, value: params[:query], class: " desktop-query", placeholder: "Busca algo" %>
-                <%= f.submit "Continuar", style: "display: none;", id: "query-search" %>
+                <%= f.submit "continuar", style: "display:none;" %>
               </div>
               <div class="button-area">
                 <nav class="filters navbar navbar-expand-lg navbar-light bg-light">
-                  <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Ubicación", value: (params[:location].nil?)? current_user.location(true) : params[:location] %>
-                  <%= f.hidden_field :city_id, class: "city", value: (params[:city_id].present?)? params[:city_id] : current_user.city_id %>
+                  <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50,
+                   placeholder: "Ubicación", value: (params[:location].nil?)? current_user.location(true) : params[:location] %>
+                  <%= f.hidden_field :city_id, class: "city", value: (params[:city_id].nil?)? current_user.city_id : params[:city_id] %>
                   <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría",
                    :selected => params[:category_id] }, class: 'form-control', id: "category-select",
-                   onchange: "$(this).closest('form').find('input[type=submit]').click()") %>
+                   onchange: "$(this).closest('form').submit()") %>
                 </nav>
               </div>
             <% end %>

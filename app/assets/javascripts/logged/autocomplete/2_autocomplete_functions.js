@@ -13,27 +13,28 @@ function autocom_loc_func(id) {
     window.city_val = $(e.target).closest("form").find(".city").val()
     $(this).val("");
   });
-  //tell the users that they have to select one of the given options if they hit enter and his city_id nis unfilled
-  //(sometimes enter doesnt work because form doesnt have submit button)
-  $(id).on("keyup", function(e) {
-    if (e.keyCode == 13 && $(e.target).closest("form").find(".city").val() == "" && window.accept_nil_loc != true) {
+
+  //if its search autocomplete, needs some filter behaviours
+  if (id == "#search_autocomplete") {
+    $(id).on("keydown", function(e) {
+      //if value of city is same...
+      if (e.keyCode == 13 && $(e.target).closest("form").find(".city").val() == window.city_val) {
+        event.preventDefault(); // prevent submitting form if user clicks enter, we will validate that
+        //and if location is empty, user wants to search in all mexico
+        if ($(this).val() == "") {
+          $(e.target).closest("form").find(".city").val("");
+          $(e.target).closest("form").submit();
+        }
+      }
+    });
+  }
+  $(id).on("keydown", function(e) {
+      //erase value of location if something random is typped
+    if (e.keyCode == 13 && $(e.target).closest("form").find(".city").val() == window.city_val && window.location_val != $(this).val()) {
       alert("Debes elegir alguna de las opciones proporcionadas");
       $(this).val("");
     }
-  });
-  $(id).on("keydown", function(e) {
-    //if value of city is same...
-    if (e.keyCode == 13 && $(e.target).closest("form").find(".city").val() == window.city_val) {
-      //if location is empty, user wants to search in all mexico
-      if ($(this).val() == "" ) {
-        $(e.target).closest("form").find(".city").val("");
-        window.accept_nil_loc = true;
-      }
-      //restore the initial value of location if smething randon is typped
-      else {
-        $(this).val(window.location_val);
-      }
-    }
+
   });
   //retype the location if nothing is set
   $(id).blur(function(event) {
