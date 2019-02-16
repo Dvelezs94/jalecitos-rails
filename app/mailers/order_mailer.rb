@@ -17,7 +17,7 @@ class OrderMailer < ApplicationMailer
           ],
           "dynamic_template_data": {
             "GIG_URL": user_gig_url(@order.purchase.gig.user, @order.purchase.gig),
-            "GIG_NAME": @order.purchase.gig.name,
+            "GIG_NAME": @order.purchase.gig.title,
             "EMPLOYER": @order.employer.slug,
             "EMPLOYEE": @order.employee.slug,
             "TRANSACTION_URL": finance_url(:table => "sales"),
@@ -53,7 +53,7 @@ class OrderMailer < ApplicationMailer
           ],
           "dynamic_template_data": {
             "GIG_URL": user_gig_url(@order.purchase.gig.user, @order.purchase.gig),
-            "GIG_NAME": @order.purchase.gig.name,
+            "GIG_NAME": @order.purchase.gig.title,
             "EMPLOYER": @order.employer.slug,
             "EMPLOYEE": @order.employee.slug,
             "PACKAGE": @order.purchase.pack_type,

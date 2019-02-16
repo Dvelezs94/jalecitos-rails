@@ -1,6 +1,11 @@
-<tr class="<%= billing_profile.id%>">
-  <td><%= billing_profile.name %></td>
-  <td><%= billing_profile.rfc %></td>
-  <td><%= billing_profile.zip_code %></td>
-  <td><%= link_to icon("fas","trash", class: "fa-lg"), user_billing_profile_path(current_user.slug, billing_profile.id), method: :delete, data: { confirm: 'Estas seguro?' }, remote: true %></td>
-</tr>
+<h4>Razón Social
+  <span><%= billing_profile.name %></span></h4>
+<h4>RFC
+  <span><%= billing_profile.rfc %></span></h4>
+<h4>Código Postal
+  <span><%= billing_profile.zip_code %></span></h4>
+<div class="Facturacion-btn">
+  <%= link_to user_billing_profile_path(current_user.slug, billing_profile.id), method: :delete, data: { confirm: 'Estas seguro?' }, remote: true do%>
+  <button>Borrar información</button>
+  <% end %>
+</div>
