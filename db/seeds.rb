@@ -1,9 +1,33 @@
 #create all the professions and categories
 require "#{Rails.root}/db/init_seeds/categories"
 require "#{Rails.root}/db/init_seeds/professions"
+require "#{Rails.root}/db/init_seeds/mx_places"
+
+# Populate DB with Mexico places
+Country.create(name: "MX")
+
+if ENV.fetch("RAILS_ENV") != "development"
+  InitMexicoPlaces.all.keys.each do |state|
+    State.create(name: state, country_id: 1)
+  end
+  InitMexicoPlaces.all.values.each_with_index do |cities, n|
+    cities.each do |city|
+      City.create(name: city, state_id: n+1)
+    end
+  end
+end
+
 
 #fill db with fake info for development
 if ENV.fetch("RAILS_ENV") == "development"
+  InitMexicoPlaces.all.keys.each do |state|
+    State.create(name: state, country_id: 1)
+  end
+  InitMexicoPlaces.all.values.each_with_index do |cities, n|
+    cities.in_groups_of(5).first.each do |city|
+      City.create(name: city, state_id: n+1)
+    end
+  end
   20.times do |x|
     User.create! do |user|
       user.name = Faker::Name.name + "#{x}"
@@ -17,7 +41,7 @@ if ENV.fetch("RAILS_ENV") == "development"
         user.requests.new do |request|
           request.name = Faker::Company.industry + "#{x}#{y}"
           request.description = Faker::Lorem.paragraph(30, true)
-          request.location = "#{Faker::Address.state}, México"
+          request.city_id = Faker::Number.between(1, 5)
           request.category_id = Faker::Number.between(1, 10)
           request.budget = Faker::Number.between(100, 5000)
           request.status = Faker::Number.between(0, 4)
@@ -28,7 +52,7 @@ if ENV.fetch("RAILS_ENV") == "development"
         user.gigs.new do |gig|
           gig.name = "#{Faker::Lorem.paragraph(2, true)}"
           gig.description = Faker::Lorem.paragraph(30, true)
-          gig.location = "#{Faker::Address.state}, México"
+          gig.city_id = Faker::Number.between(1, 5)
           gig.category_id = Faker::Number.between(1, 5)
           gig.status = Faker::Number.between(0, 2)
           gig.profession = Profession.find( Faker::Number.between(1, 20) ).name

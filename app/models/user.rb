@@ -7,10 +7,9 @@ class User < ApplicationRecord
   include OpenpayFunctions
   include OpenpayHelper
   #validations
-  include LocationValidation
+  include LocationFunctions
   #inspects
   include AliasFunctions
-  include ApplicationHelper
   #search
   searchkick language: "spanish"
   # only send these fields to elasticsearch
@@ -18,7 +17,7 @@ class User < ApplicationRecord
     {
       id: id,
       tags: tags,
-      location: location,
+      city_id: city_id,
       roles: roles
     }
   end
@@ -49,8 +48,7 @@ class User < ApplicationRecord
   validates :available, :inclusion=> { :in => ["Tiempo completo", "Medio tiempo", "Esporádico", "Fin de semana"]}, allow_blank: true
   validates_length_of :name, maximum: 100
   validates_length_of :alias, maximum: 30
-  validates_length_of :location, maximum: 100
-  validate :location_syntax
+  # validate :location_syntax
   validates_length_of :bio, maximum: 500
   validates_presence_of :alias, on: :update
   validates :alias, format: { :with => /\A[a-zA-Z0-9\-\_]+\z/ }, on: :update
@@ -59,6 +57,7 @@ class User < ApplicationRecord
   # Avatar image
   mount_uploader :image, AvatarUploader
   # Associations
+  belongs_to :city, optional: true
   # reports
   has_many :reports
   # Chat Relations
@@ -148,10 +147,11 @@ class User < ApplicationRecord
    def set_location
      begin
        loc = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{lat},#{lon}"
-       geoloc = [loc.city, loc.state_code, loc.country_code].join(", ")
-       self.location = geoloc if (loc.country == "Mexico")
+       # Convert the geocoded location provided by the user on signup to valid using our GeoDatabase
+       self.city= geoloc_to_city(loc.city, loc.state_name, "MX")
      rescue Geokit::Geocoders::GeocodeError
        true
      end
    end
+
 end

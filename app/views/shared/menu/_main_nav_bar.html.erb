@@ -7,7 +7,7 @@
     <%= f.submit "mobile", style: "display: none;", id: "query-search" %>
     <% if params[:commit] == "mobile" %>
       <nav class="filters navbar navbar-expand-lg navbar-light bg-light">
-        <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Cualquier lugar de México", value: (params[:location].nil?)? current_user.location : params[:location] %>
+        <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Cualquier lugar de México", value: (params[:location].nil?)? current_user(true) : params[:location] %>
         <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Todas las categorías", :selected => params[:category_id] }, class: 'form-control', id: "category-select") %>
       </nav>
     <% end %>
@@ -32,7 +32,7 @@
               </div>
               <div class="button-area">
                 <nav class="filters navbar navbar-expand-lg navbar-light bg-light">
-                  <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Ubicación", value: (params[:location].nil?)? current_user.location : params[:location] %>
+                  <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, placeholder: "Ubicación", value: (params[:location].nil?)? current_user.location(true) : params[:location] %>
                   <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría", :selected => params[:category_id] }, class: 'form-control', id: "category-select") %>
                 </nav>
               </div>
@@ -61,10 +61,18 @@
         </div>
       </div>
       <div class="col-6 justify-content-center text-center" style="display:flex;align-items:center;">
-        <div class="map-marker">
-          <%= icon("fas", "map-marker-alt",class: "mobile-location-item") %>
-          <%= best_in_place current_user, :location, as: :input, id: "mobile_autocomplete", :inner_class => "mobile_google_input", :class => "mobile-google-span", :place_holder => "Sin ubicación" %>
-        </div>
+
+          <%= form_with model: User, url: user_path(current_user.slug, ), method: :patch , local: true do |f|%>
+          <nav style="display:flex;justify-content:center;align-items:center;">
+            <%= f.text_field :location, class: 'mobile_menu_autocomplete',
+             id: "mobile_menu_autocomplete", size: 50, placeholder: raw("&#xf3c5;") + " Ubicación",
+              value: (current_user.location(true).present?)? raw("&#xf3c5; ") + current_user.location : "",
+              style: "font-family: 'Font Awesome 5 Free' !important;font-weight:900;" %>
+              <%# without submit button so the form cant be submitted if one option is not selected %>
+              <%= f.hidden_field :city_id, class: "city" %>
+            </nav>
+           <% end %>
+
       </div>
       <div class="col-3 text-right">
         <div class="tablet-mobile-user">
