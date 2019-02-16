@@ -62,7 +62,7 @@ class RequestsController < ApplicationController
       request_params = params.require(:request).permit(:name,
                                   :description,
                                   :image,
-                                  :location,
+                                  :city_id,
                                   :category_id,
                                   :budget,
                                   :tag_list,

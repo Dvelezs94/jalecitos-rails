@@ -91,10 +91,10 @@ class PagesController < ApplicationController
   end
 
   def conditions string=nil
-    if current_user.location && string == "verified"
-      {status: "published", location: I18n.transliterate(current_user.location), verified: true}
-    elsif current_user.location
-      {status: "published", location: I18n.transliterate(current_user.location)}
+    if current_user.location(true) && string == "verified"
+      {status: "published", city_id: current_user.city_id, verified: true}
+    elsif current_user.location(true)
+      {status: "published", city_id: current_user.city_id}
     elsif string == "verified"
       {status: "published", verified: true}
     else
