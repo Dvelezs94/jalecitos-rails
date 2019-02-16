@@ -18,7 +18,7 @@
               <div class="card-body">
                 <div class="tab-use-content">
                   <div class="tab-user">
-                    <a href=""><%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar", onclick: "profile_pic_mobile(e);")%></a>
+                    <a href="" id="mobile-pp"><%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar")%></a>
                     <p>EMAIL
                       <span><%= @user.email %></span></p>
                   </div>
