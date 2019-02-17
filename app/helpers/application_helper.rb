@@ -130,6 +130,11 @@ module ApplicationHelper
     (base * 0.9).round(2)
   end
   ######
+  # the difference with the one above is that this one calculates all the orders minus fees and taxes
+  def calc_employee_orders_earning(orders_total, orders_count)
+    (((orders_total / 116) * 100 - (10 * orders_count)) * 0.90).round(2)
+    # (45/58) * orders_total - 9 * orders.count
+  end
 
   # wip
   def calc_refund base
