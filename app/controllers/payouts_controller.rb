@@ -1,4 +1,4 @@
-class PayoutController < ApplicationController
+class PayoutsController < ApplicationController
   before_action :authenticate_user!
   access user: :all
   before_action :set_payouts, only: :show
@@ -6,10 +6,10 @@ class PayoutController < ApplicationController
 
   def create
     @orders = current_user.unpaid_orders
-    if @orders.count > 1
+    if @orders.count > 0
       @payout = Payout.new(user: current_user)
       if @payout.save
-        if @orders.update_all(payout: @payout)
+        if @orders.update_all(payout_id: @payout.id)
           flash[:success] = "Tu pago esta en proceso. Recibiras una notificacion por correo una vez que este procesado."
           # deny payout in case the order update all failed
         else
@@ -18,7 +18,7 @@ class PayoutController < ApplicationController
         end
       end
     else
-      flash[:error] = "No se puede proceder con el pago"
+      flash[:error] = "Debes tener mas de $100 MXN para poder retirar."
     end
     redirect_to "#{configuration_path}#bank"
   end
@@ -36,7 +36,7 @@ class PayoutController < ApplicationController
     if current_user.payouts.where(status: "pending").count > 0
       flash[:error] = "Tienes un pago en proceso."
       redirect_to "#{configuration_path}#bank"
-      return falseB
+      return false
     end
   end
 end

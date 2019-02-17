@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_17_000944) do
+ActiveRecord::Schema.define(version: 2019_02_15_213646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,7 +193,7 @@ ActiveRecord::Schema.define(version: 2019_02_17_000944) do
     t.string "uuid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "withdrawal_id"
+    t.bigint "payout_id"
     t.bigint "billing_profile_id"
     t.integer "invoice_status"
     t.string "invoice_id"
@@ -204,7 +204,7 @@ ActiveRecord::Schema.define(version: 2019_02_17_000944) do
     t.string "response_refund_hold_id"
     t.index ["billing_profile_id"], name: "index_orders_on_billing_profile_id"
     t.index ["employer_id", "employee_id"], name: "index_orders_on_employer_id_and_employee_id"
-    t.index ["withdrawal_id"], name: "index_orders_on_withdrawal_id"
+    t.index ["payout_id"], name: "index_orders_on_payout_id"
   end
 
   create_table "overall_averages", force: :cascade do |t|
@@ -243,9 +243,10 @@ ActiveRecord::Schema.define(version: 2019_02_17_000944) do
   end
 
   create_table "payouts", force: :cascade do |t|
+    t.string "transaction_id"
     t.bigint "user_id"
-    t.integer "status"
-    t.string "operation_id"
+    t.integer "status", default: 0
+    t.string "bank_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_payouts_on_user_id"
@@ -446,15 +447,6 @@ ActiveRecord::Schema.define(version: 2019_02_17_000944) do
     t.index ["user_id"], name: "index_verifications_on_user_id"
   end
 
-  create_table "withdrawals", force: :cascade do |t|
-    t.string "transaction_id"
-    t.bigint "user_id"
-    t.integer "status", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_withdrawals_on_user_id"
-  end
-
   add_foreign_key "billing_profiles", "users"
   add_foreign_key "cities", "states"
   add_foreign_key "disputes", "orders"
@@ -470,7 +462,7 @@ ActiveRecord::Schema.define(version: 2019_02_17_000944) do
   add_foreign_key "offers", "requests"
   add_foreign_key "offers", "users"
   add_foreign_key "orders", "billing_profiles"
-  add_foreign_key "orders", "withdrawals"
+  add_foreign_key "orders", "payouts"
   add_foreign_key "packages", "gigs"
   add_foreign_key "payments", "offers"
   add_foreign_key "payments", "packages"
@@ -488,5 +480,4 @@ ActiveRecord::Schema.define(version: 2019_02_17_000944) do
   add_foreign_key "states", "countries"
   add_foreign_key "users", "cities"
   add_foreign_key "verifications", "users"
-  add_foreign_key "withdrawals", "users"
 end

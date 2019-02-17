@@ -20,7 +20,7 @@ class CreatePayoutWorker
     }
     begin
       response = @payout.create(request_hash, @jalecitos_payout.user.openpay_id)
-    rescue OpenpayTransactionException = e
+    rescue OpenpayTransactionException => e
       @jalecitos_payout.failed!
       PayoutMailer.failed_payout(@jalecitos_payout.user, @employee_balance, e.description)
     end
