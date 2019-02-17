@@ -7,7 +7,7 @@ class PayoutsController < ApplicationController
   def create
     @orders = current_user.unpaid_orders
     if @orders.count > 0
-      @payout = Payout.new(user: current_user)
+      @payout = Payout.new(user: current_user, bank_id: params[:bank_id])
       if @payout.save
         if @orders.update_all(payout_id: @payout.id)
           flash[:success] = "Tu pago esta en proceso. Recibiras una notificacion por correo una vez que este procesado."
