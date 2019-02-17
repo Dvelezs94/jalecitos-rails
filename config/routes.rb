@@ -65,7 +65,7 @@ Rails.application.routes.draw do
      resource :reports, only: [:create], as: "report"
    end
 
-  resources :withdrawals, only: :create
+  resources :payouts, only: :create
   resources :notifications, only: [:index] do
     collection do
       post :mark_as_read
