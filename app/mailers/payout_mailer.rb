@@ -61,4 +61,33 @@ class PayoutMailer < ApplicationMailer
     sendgrid_client.client.mail._("send").post(request_body: (data))
   end
 
+  def notify_inconsistency(user)
+    data = {
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": "soporte@jalecitos.com"
+            }
+          ],
+          "bcc": [
+            {
+              "email": "jalecitos.mails@gmail.com"
+            }
+          ],
+          "dynamic_template_data": {
+            "ALIAS": user.email
+          }
+        }
+      ],
+      "from": {
+        "email": "noreply@jalecitos.com",
+        "name": "Jalecitos"
+      },
+      "template_id": "d-f7072a9372b54565bee54f626cf308df"
+    }
+
+    sendgrid_client.client.mail._("send").post(request_body: (data))
+  end
+
 end
