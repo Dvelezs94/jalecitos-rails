@@ -1,0 +1,3 @@
+<%= (@success)? add_gritter("Tu ubicación se ha actualizado.", :image => :success, :title => "Éxito" : add_gritter("Ha ocurrido un error.", :image => :error, :title => "Error" ) %>
+$("#config_autocomplete").blur();
+$("#config_autocomplete").val("<%= current_user.location %>");

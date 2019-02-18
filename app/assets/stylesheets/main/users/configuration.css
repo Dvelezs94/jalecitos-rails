@@ -104,31 +104,49 @@
   background: #F5F6F7;
   font-size: 19px;
   color: #8E8E93;
-  padding: 7px 15px;
   display: block;
 }
 
-.textarea-area textarea, .textarea-area span {
+.config_autocomplete {
+	padding: 5px 0;
+}
+
+.change_bio {
+	padding: 7px 15px;
 	width: 100%;
 	border: none;
 	background: #F5F6F7;
 	font-size: 19px;
 	color: #8E8E93;
-	padding: 7px 15px;
 	height: 200px;
 	resize: none;
-  display: block;
+	display: block;
 	min-height: 200px;
 	height: auto;
 }
-.inp-area i.fa {
+
+.change_bio_input {
+	border: none;
+	background: transparent;
+	font-size: 19px;
+	color: #8E8E93;
+	padding: 7px 15px;
+}
+.change_bio_input:focus {
+	outline: none;
+	margin-left: -15px;
+}
+
+
+
+.inp-area i.fas {
   position: absolute;
   right: 15px;
   top: 50%;
   margin-top: -8px;
   cursor: pointer;
 }
-.inp-area .fa.fa-map-marker {
+.inp-area .fas.fa-map-marker {
 	left: 10px;
 	font-size: 20px;
 	color: #39C27B;
@@ -763,8 +781,4 @@
 .modal-select .nice-select::after {
 	border-bottom: 3px solid #fff;
 	border-right: 3px solid #fff;
-}
-
-.tab-section-for-mobile {
-	display: none;
 }
