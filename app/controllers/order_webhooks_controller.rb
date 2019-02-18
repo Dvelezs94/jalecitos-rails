@@ -22,12 +22,12 @@ class OrderWebhooksController < ApplicationController
         @error_message = @object["transaction"]["error_message"]
         ChargeDeniedWorker.perform_async(@object_id, @error_message)
 
-      when @object_type == ["payout.succeeded"]
+      when @object_type == "payout.succeeded"
         @object_id = @object["transaction"]["order_id"]
         @object_id_parsed = @object_id.split('-').second
         PayoutCompleteWorker.perform_async(@object_id_parsed)
 
-      when @object_type == ["payout.failed"]
+      when @object_type == "payout.failed"
         @object_id = @object["transaction"]["order_id"]
         @object_id_parsed = @object_id.split('-').second
         @error_message = @object["transaction"]["error"]

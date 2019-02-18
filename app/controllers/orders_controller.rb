@@ -93,7 +93,7 @@ class OrdersController < ApplicationController
     if @order.in_progress? ||( @order.disputed? && current_user.has_roles?(:admin) )
       #Openpay call to transfer the fee to the Employee
       request_hash = {
-        "customer_id" => @order.employee.openpay_id,
+        "customer_id" => ENV.fetch("OPENPAY_PREDISPERSION_CLIENT"),
         "amount" => calc_employee_earning(@order.purchase.price),
         "description" => "Pago de orden #{@order.uuid} por la cantidad de #{calc_employee_earning(@order.purchase.price)}",
         "order_id" => "#{@order.uuid}-complete"
