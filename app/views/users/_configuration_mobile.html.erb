@@ -50,7 +50,7 @@
                        inner_class: "change_bio_input", :data => {:name => "biografía"} %>
                     </div>
                     <div class="inp-area marker-ex">
-                      <%= form_with model: User, url: update_users_path, method: :put , remote: true do |f|%>
+                      <%= form_with model: User, url: update_users_path, method: :put , local: true do |f|%>
                       <%= f.text_field :location, class: 'config_autocomplete', id: "config_autocomplete", size: 50, placeholder:" Elige tu ciudad", value: current_user.location(true) %>
                       <%= f.hidden_field :city_id, class: "city", id: "city_2" %>
                       <%= icon("fas", "map-marker") %>
