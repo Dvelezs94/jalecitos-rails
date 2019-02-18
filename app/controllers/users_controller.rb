@@ -59,8 +59,6 @@ class UsersController < ApplicationController
       # current_user.tag_list = @tag_list.first(10)
       # current_user.save
       current_user.update_attributes(:tag_list => @tag_list.first(10))
-    elsif params[:user][:city_id]
-      current_user.update(city_id: params[:user][:city_id])
     # else we save the parameters as they come since they dont need special treatment
     else
       @success = true if current_user.update_attributes(user_params)
@@ -97,7 +95,7 @@ class UsersController < ApplicationController
                                    :bio,
                                    :age,
                                    :available,
-                                   :location,
+                                   :city_id,
                                    :roles,
                                    :tag_list,
                                    :transactional_emails,
