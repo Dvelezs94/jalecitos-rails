@@ -68,10 +68,8 @@ class UsersController < ApplicationController
       #   # flash[:success] = 'Tu alias ha sido actualizado.'
       #   format.json  { render :json => { :redirect => configuration_path } }
         format.json { respond_with_bip(current_user) }
-        #changing location of mobile use this
+        #changing location of config and mobile use this
         format.html { redirect_to request.referrer }
-        #used in configuration location
-        format.js{}
     end
 
   end
