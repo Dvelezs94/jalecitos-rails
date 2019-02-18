@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       get :disputes
       get :bans
       get :verifications
+      post :create_openpay_user
+      get :openpay_dashboard
     end
   end
 

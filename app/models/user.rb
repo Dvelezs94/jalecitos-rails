@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :lat, :lon
+  include ApplicationHelper
   #includes
   #friendly_id
   extend FriendlyId
@@ -133,8 +134,8 @@ class User < ApplicationRecord
        super && self.active?
    end
    def balance
-     init_openpay("customer")
-     @customer.get(self.openpay_id)["balance"]
+     @orders_total = self.unpaid_orders
+     calc_employee_orders_earning(@orders_total.sum(:total), @orders_total.count)
    end
 
    def set_defaults

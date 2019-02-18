@@ -133,3 +133,46 @@ td, th {
 [data-toggle="toggle"] {
 	display: none;
 }
+
+.modal-content-transparent {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+
+.sign-up {
+  text-align: center;
+}
+
+.sign-up-form input[type="email"], .sign-up-form input[type="password"], .sign-up-form input[type="text"], .sign-up-form input[type="number"] {
+	border: none;
+	text-align: center;
+	background: #F7F7F7;
+	margin-bottom: 10px;
+	padding: 13px;
+	color: #8E8E93;
+	font-size: 14px;
+	font-weight: 700;
+	width: 100%;
+	border-radius: 5px;
+}
+.sign-up-form input[type="submit"] {
+	background: #39C27B;
+	color: #fff;
+	font-weight: 700;
+	width: 100%;
+	border: none;
+	cursor: pointer;
+	padding: 13px;
+	border-radius: 5px;
+}
