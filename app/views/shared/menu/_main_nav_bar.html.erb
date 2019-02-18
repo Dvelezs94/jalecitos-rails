@@ -69,7 +69,7 @@
       </div>
       <div class="col-6 justify-content-center text-center" style="display:flex;align-items:center;">
 
-        <%= form_with model: User, url: user_path(current_user.slug, ), method: :patch , local: true do |f|%>
+        <%= form_with model: User, url: update_users_path, method: :put , local: true do |f|%>
         <nav style="display:flex;justify-content:center;align-items:center;">
           <%= f.text_field :location, class: 'mobile_menu_autocomplete', id: "mobile_menu_autocomplete", size: 50, placeholder: raw("&#xf3c5;") + " Ubicación", value: (current_user.location(true).present?)? raw("&#xf3c5; ") + current_user.location : "", style:
           "font-family: 'Font Awesome 5 Free' !important;font-weight:900;" %>

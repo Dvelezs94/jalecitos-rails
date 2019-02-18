@@ -4,6 +4,7 @@ $(document).on('turbolinks:load', function() {
   autocom_loc_func("#mobile_menu_autocomplete");
   autocom_loc_func("#search_autocomplete");
   autocom_loc_func("#form_autocomplete");
+  autocom_loc_func("#config_autocomplete");
 });
 
 function autocom_loc_func(id) {

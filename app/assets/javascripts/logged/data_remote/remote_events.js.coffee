@@ -29,9 +29,14 @@ $ ->
   #    console.log(this)
   #    )
 
-  $(document).on "ajax:success", ".change_user_alias", (event, data) ->
-    data = JSON.parse(data);
-    window.location.replace(data.redirect);
+  $(document).on "ajax:success", ".best_in_place", (event, data, status, xhr) ->
+    $.gritter.add({ image: '/assets/success.png', title: 'Éxito', text: 'Tu ' + $(this).data('name') + " se ha actualizado" });
+
+  $(document).on "ajax:error", ".best_in_place", (event, data, status, xhr) ->
+    errors = JSON.parse(data.responseText)
+    $.gritter.add({ image: '/assets/error.png', title: 'Error', text: errors[0] });
+
+
 
   #reload page when mobile change location is successful
   $(document).on "ajax:success", "#mobile_autocomplete", (event, data) ->
