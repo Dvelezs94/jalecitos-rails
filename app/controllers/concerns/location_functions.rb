@@ -19,8 +19,8 @@ module LocationFunctions
   # used in users
   def geoloc_to_city(city, state, country)
     @country = Country.find_by_name(country)
-    @state = State.where(name: state, country: country)
-    @city = City.where(name: city, state: state)
+    @state = State.find_by(name: state, country: @country)
+    @city = City.find_by(name: city, state: @state)
     if @city
       return @city.id
     else

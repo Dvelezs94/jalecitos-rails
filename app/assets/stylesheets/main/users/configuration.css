@@ -104,31 +104,49 @@
   background: #F5F6F7;
   font-size: 19px;
   color: #8E8E93;
-  padding: 7px 15px;
   display: block;
 }
 
-.textarea-area textarea, .textarea-area span {
+.config_autocomplete {
+	padding: 5px 0;
+}
+
+.change_bio {
+	padding: 7px 15px;
 	width: 100%;
 	border: none;
 	background: #F5F6F7;
 	font-size: 19px;
 	color: #8E8E93;
-	padding: 7px 15px;
 	height: 200px;
 	resize: none;
-  display: block;
+	display: block;
 	min-height: 200px;
 	height: auto;
 }
-.inp-area i.fa {
+
+.change_bio_input {
+	border: none;
+	background: transparent;
+	font-size: 19px;
+	color: #8E8E93;
+	padding: 7px 15px;
+}
+.change_bio_input:focus {
+	outline: none;
+	margin-left: -15px;
+}
+
+
+
+.inp-area i.fas {
   position: absolute;
   right: 15px;
-  top: 50%;
+  top: 67%;
   margin-top: -8px;
   cursor: pointer;
 }
-.inp-area .fa.fa-map-marker {
+.inp-area .fas.fa-map-marker {
 	left: 10px;
 	font-size: 20px;
 	color: #39C27B;
@@ -142,7 +160,8 @@
 	padding-left: 35px;
 }
 
-.Nombre-completo-text label {
+.Nombre-completo-text label,
+.Notificaciónss label {
 	font-size: 19px;
 	color: #000;
 	margin-bottom: 0;
@@ -222,6 +241,10 @@
   margin-left: 70px;
 }
 
+.tab-use-content {
+	padding: 30px 0;
+}
+
 
 .tab-use-content .nav-tabs .nav-item {
 	margin-bottom: 0;
@@ -230,7 +253,6 @@
 	background: #EBF7F1;
 	border-radius: 5px;
 	margin-right: 70px;
-	width: 28%;
   text-align: center;
   color: #39C27B;
 }
@@ -332,13 +354,17 @@
 	left: 19px;
 }
 .input-checkbox p {
-  position: absolute;
-  top: 50%;
-  margin-bottom: 0;
-  margin-top: -15px;
-  margin-left: 50px;
   font-size: 15px;
   color: #8E8E93;
+}
+
+.boolean {
+	border-radius: 4px;
+	border: none;
+	background-color: #F5F6F7;
+	color: #8E8E93;
+	padding: 5px;
+	margin-left: 10px;
 }
 .input-checkbox {
 	position: relative;
@@ -763,8 +789,4 @@
 .modal-select .nice-select::after {
 	border-bottom: 3px solid #fff;
 	border-right: 3px solid #fff;
-}
-
-.tab-section-for-mobile {
-	display: none;
 }
