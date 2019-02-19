@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   include ReportFunctions
   respond_to :html, :json
   layout :set_layout
+  before_action :check_if_my_profile, only: :show
   before_action :set_user, only: [:show]
   before_action :set_user_config, only: [:configuration]
   access all: [:show], user: [:update_user, :configuration, :my_account]
@@ -120,5 +121,9 @@ class UsersController < ApplicationController
                                    :transactional_emails,
                                    :marketing_emails
                                  )
+    end
+
+    def check_if_my_profile
+        redirect_to my_account_users_path if current_user.slug == params[:id]
     end
 end
