@@ -34,6 +34,7 @@ Rails.application.routes.draw do
    resources :users, only: [:show] do
      collection do
        put :update_user, as: "update"
+       get :my_account
      end
      resource :reports, only: [:create], as: "report"
      resources :banks, only: [:create, :destroy]
