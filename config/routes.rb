@@ -31,7 +31,10 @@ Rails.application.routes.draw do
      confirmations: "users/confirmations",
      passwords: "users/passwords"
    }
-   resources :users, only: [:show, :update] do
+   resources :users, only: [:show] do
+     collection do
+       put :update_user, as: "update"
+     end
      resource :reports, only: [:create], as: "report"
      resources :banks, only: [:create, :destroy]
      resources :cards, only: [:create, :destroy]

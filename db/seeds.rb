@@ -35,6 +35,7 @@ if ENV.fetch("RAILS_ENV") == "development"
       user.role = "user"
       user.password = "123456"
       user.current_sign_in_at = Time.now()
+      user.city_id = Faker::Number.between(1, 5)
       # This is so we dont have to confirm the email on seeds
       user.confirmed_at = Time.now
       20.times do |y|
