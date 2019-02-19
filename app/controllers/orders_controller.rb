@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   include OpenpayHelper
   include UsersHelper
   include ApplicationHelper
-  access user: :all
+  access user: :all, admin: [:complete, :refund]
   before_action only: [:create, :refund] do
     init_openpay("charge")
   end
@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
       "currency" => "MXN",
       "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}",
       "device_session_id" => params[:device_id],
-      "use_3d_secure" => true,
+      "use_3d_secure" => (@order.total > 2999) ? true : false,
       "redirect_url" => finance_url(:table => "purchases")
     }
 
@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.response_order_id = response["id"]
         @order.save
-        redirect_to response["payment_method"]["url"]
+        redirect_to (@order.total > 2999) ? response["payment_method"]["url"] : finance_path(:table => "purchases")
       rescue OpenpayTransactionException => e
         @order.denied!
         flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
@@ -99,7 +99,7 @@ class OrdersController < ApplicationController
         "order_id" => "#{@order.uuid}-complete"
       }
       begin
-        response = @transfer.create(request_hash, ENV.fetch("OPENPAY_HOLD_CLIENT"))
+        response = @transfer.create(request_hash, @order.employer.openpay_id)
         @order.response_completion_id = response["id"]
         @order.save
       rescue OpenpayTransactionException => e
@@ -122,6 +122,8 @@ class OrdersController < ApplicationController
         charge_fee(@order, @fee)
         #charge tax
         charge_tax(@order, @fee)
+        # charge openpay tax
+        openpay_tax(@order, @fee)
         # Generate invoice if requested and if order changed to completed state
         OrderInvoiceGeneratorWorker.perform_async(@order.id) if @order.billing_profile_id
         flash[:success] = "La orden ha finalizado"
@@ -140,11 +142,20 @@ class OrdersController < ApplicationController
 
   def refund
     if @order.refund_in_progress!
-      RefundOrderWorker.perform_async(@order.id)
-      if current_user == @order.employer
-        flash[:success] = "La orden esta en proceso de reembolso, recibiras un correo cuando la orden ya haya sido reembolsada"
-      else
-        create_notification(@order.employee, @order.employer, "te ha reembolsado", @order, "purchases")
+      request_hash = {
+        "description" => "Monto de la orden #{@order.uuid} devuelto por la cantidad de #{@order.total}",
+        "amount" => @order.total
+      }
+      begin
+        response = @charge.refund(@order.response_order_id ,request_hash, @order.employer.openpay_id)
+        @order.update(response_refund_id: response["id"])
+        if current_user == @order.employer
+          flash[:success] = "La orden esta en proceso de reembolso, recibiras un correo cuando la orden ya haya sido reembolsada"
+        else
+          create_notification(@order.employee, @order.employer, "te ha reembolsado", @order, "purchases")
+        end
+      rescue
+        flash[:error] = "Ocurrio un error al intentar de reembolsar la orden"
       end
     else
       flash[:error] = "Ocurrio un error al intentar de reembolsar la orden"
@@ -232,7 +243,7 @@ class OrdersController < ApplicationController
     end
 
     def verify_refund_state
-      # check if is not admin
+      # check if is not admin (it shoould be a normal user)
       if ! current_user.has_roles?(:admin)
         # Cancel transaction if the order is on any of these states
         cancel_state(["completed", "disputed", "refunded"])
@@ -301,7 +312,7 @@ class OrdersController < ApplicationController
     end
 
     def charge_fee(order, fee)
-      request_fee_hash={"customer_id" => ENV.fetch("OPENPAY_HOLD_CLIENT"),
+      request_fee_hash={"customer_id" => order.employer.openpay_id,
                      "amount" => get_order_earning(order.purchase.price),
                      "description" => "Cobro de Comisión por la orden #{order.uuid}",
                      "order_id" => "#{order.uuid}-fee"
@@ -317,7 +328,7 @@ class OrdersController < ApplicationController
     end
 
     def charge_tax(order, fee)
-      request_tax_hash={"customer_id" => ENV.fetch("OPENPAY_HOLD_CLIENT"),
+      request_tax_hash={"customer_id" => order.employer.openpay_id,
                      "amount" => order_tax(order.purchase.price + 10),
                      "description" => "Cobro de impuesto por la orden #{order.uuid}",
                      "order_id" => "#{order.uuid}-tax"
@@ -329,6 +340,20 @@ class OrdersController < ApplicationController
       rescue
         order.response_tax_id = "failed"
         order.save
+      end
+    end
+
+    def openpay_tax(order, fee)
+      request_tax_hash={"customer_id" => order.employer.openpay_id,
+                     "amount" => calc_openpay_tax(order.total),
+                     "description" => "Cobro de impuesto para openpay por la orden #{order.uuid}",
+                     "order_id" => "#{order.uuid}-openpay-tax"
+                    }
+      begin
+        response_tax = fee.create(request_tax_hash)
+        order.update(response_openpay_tax_id: response_tax["id"])
+      rescue
+        order.update(response_openpay_tax_id: "failed")
       end
     end
 end

@@ -11,11 +11,15 @@ class OrderWebhooksController < ApplicationController
       case
       when @object_type == "charge.succeeded"
         @object_id = @object["transaction"]["id"]
-        TransferFundsAfterThreeDWorker.perform_async(@object_id)
+        UpdateOrderAfterPaymentSuccessWorker.perform_async(@object_id)
 
       when @object_type == "invoice.created"
         @invoice = @object["invoice_data"]
         NotifyInvoiceGenerationWorker.perform_async(@invoice["invoice_id"],  @invoice["public_pdf_link"], @invoice["public_xml_link"])
+
+      when @object_type == "charge.refunded"
+        @object_id = @object["transaction"]["id"]
+        NotifyRefundWorker.perform_async(@object_id)
 
       when @object_type == "charge.failed"
         @object_id = @object["transaction"]["id"]

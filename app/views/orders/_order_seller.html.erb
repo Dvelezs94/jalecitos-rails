@@ -4,9 +4,9 @@
       <h5 class="<%= order_seller.status %>"><%= t "orders.status.#{order_seller.status}" %></h5>
       <h4>ID: <%= order_seller.uuid %></h4>
       <% if order_seller.purchase_type == "Package"%>
-      <p><%= link_to order_seller.purchase.gig.title, user_gig_path(order_seller.purchase.gig.user.slug, order_seller.purchase.gig.slug), class: "order-title" %></p>
+      <p><%= link_to(order_seller.purchase.gig.title, user_gig_path(order_seller.purchase.gig.user.slug, order_seller.purchase.gig.slug), class: "order-title") rescue "Jale Eliminado" %></p>
       <% else %>
-      <p><%= link_to order_seller.purchase.request.title, request_path(order_seller.purchase.request.slug), class: "order-title" %>.</p>
+      <p><%= link_to order_seller.purchase.request.title, request_path(order_seller.purchase.request.slug), class: "order-title" rescue "Orden Eliminada"%>.</p>
       <% end %>
    </div>
 
@@ -19,7 +19,7 @@
       </div>
         <div class="Paquete-Básico">
             <% if order_seller.purchase_type == "Package"%>
-            <h5>Paquete <%= t "gigs.packages.#{order_seller.purchase.pack_type}"%></h5>
+            <h5>Paquete <%= t "gigs.packages.#{order_seller.purchase.pack_type}" rescue "Eliminado" %></h5>
             <% else %>
             <h5>Pedido</h5>
             <% end %>

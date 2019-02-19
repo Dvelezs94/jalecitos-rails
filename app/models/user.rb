@@ -99,7 +99,7 @@ class User < ApplicationRecord
   end
 
   def unpaid_orders
-    Order.where(employee: self, status: "completed", response_paid_id: nil)
+    Order.where(employee: self, status: "completed", paid_at: nil)
   end
   ############################################################################################
   ## PeterGate Roles                                                                        ##

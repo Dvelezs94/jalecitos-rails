@@ -37,7 +37,7 @@ class ChargesMailer < ApplicationMailer
           "dynamic_template_data": {
             "ALIAS": order.employer.alias,
             "ORDER_ID": order.uuid,
-            "REFUNDED_CASH": calc_refund(order.total)
+            "REFUNDED_CASH": order.total
           }
         }
       ],

@@ -9,10 +9,13 @@ class PayoutCompleteWorker
     if ! @jalecitos_payout.pending?
       return true
     end
-    if @jalecitos_payout.completed!
-      PayoutMailer.successful_payout(@jalecitos_payout.user, @employee_balance).deliver
-    else
-      PayoutMailer.notify_inconsistency(@jalecitos_payout.user).deliver
+    if @jalecitos_payout.orders.update_all(paid_at: Time.now.strftime("%Y-%m-%d %H:%M:%S"))
+      begin
+        @jalecitos_payout.completed!
+        PayoutMailer.successful_payout(@jalecitos_payout.user, @employee_balance).deliver
+      rescue
+        PayoutMailer.notify_inconsistency(@jalecitos_payout.user).deliver
+      end
     end
   end
 end
