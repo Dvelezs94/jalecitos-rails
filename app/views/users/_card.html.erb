@@ -1,4 +1,4 @@
-<li><%= image_tag ("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/card_logos/#{card["brand"]}.png") %>**** **** **** <%= card["card_number"].last(4) %>
+<li class="card_or_bank_object"><%= image_tag ("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/card_logos/#{card["brand"]}.png") %>**** **** **** <%= card["card_number"].last(4) %>
   <span><%= t "cards.types.#{card["type"].downcase}" %></span>
-  <%= link_to icon("far","trash-alt"), user_card_path(current_user.slug, card["id"]), method: :delete, data: { confirm: 'Segur que quieres borrar esta tarjeta?' }, remote: true %>
+  <%= link_to icon("far","trash-alt"), user_card_path(current_user.slug, card["id"]), method: :delete, data: { confirm: 'Seguro que quieres borrar esta tarjeta?' }, remote: true %>
 </li>

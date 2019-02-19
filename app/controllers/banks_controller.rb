@@ -20,12 +20,12 @@ class BanksController < ApplicationController
     begin
       @bank_account.create(request_hash.to_hash, current_user.openpay_id)
       flash[:success] = 'La cuenta fue creada exitosamente.'
-      redirect_to configuration_path
+      redirect_to configuration_path(collapse: "withdraw")
     rescue OpenpayTransactionException => e
         # e.http_code
         # e.error_code
-        flash[:error] = "#{e.description}, por favor intentalo de nuevo."
-        redirect_to configuration_path
+        flash[:error] = "#{e.description}, por favor intentalo de nuevo más tarde."
+        redirect_to configuration_path(collapse: "withdraw")
     end
   end
 
@@ -34,10 +34,10 @@ class BanksController < ApplicationController
     begin
       @bank_account.delete(current_user.openpay_id, params[:id])
       flash[:success] = 'La cuenta fue borrada exitosamente.'
-      redirect_to configuration_path
+      redirect_to configuration_path(collapse: "withdraw")
     rescue OpenpayTransactionException => e
-      flash[:error] = "#{e.description}, por favor intentalo de nuevo."
-      redirect_to configuration_path
+      flash[:error] = "#{e.description}, por favor intentalo de nuevo más tarde."
+      redirect_to configuration_path(collapse: "withdraw")
     end
   end
 
