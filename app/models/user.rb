@@ -158,5 +158,4 @@ class User < ApplicationRecord
        true
      end
    end
-
 end
