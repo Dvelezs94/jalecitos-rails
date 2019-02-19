@@ -71,8 +71,10 @@
 
         <%= form_with model: User, url: update_users_path, method: :put , local: true do |f|%>
         <nav style="display:flex;justify-content:center;align-items:center;">
-          <%= f.text_field :location, class: 'mobile_menu_autocomplete', id: "mobile_menu_autocomplete", size: 50, placeholder: raw("&#xf3c5;") + " Ubicación", value: (current_user.location(true).present?)? raw("&#xf3c5; ") + current_user.location : "", style:
-          "font-family: 'Font Awesome 5 Free' !important;font-weight:900;" %>
+          <%= f.text_field :location, class: 'mobile_menu_autocomplete', id: "mobile_menu_autocomplete",
+          size: 50, placeholder: raw("&#xf3c5;") + " Ubicación",
+           value: (current_user.location(true).present?)? "&#xf3c5; #{current_user.location}".html_safe : "",
+           style: "font-family: 'Font Awesome 5 Free' !important;font-weight:900;" %>
           <%# without submit button so the form cant be submitted if one option is not selected %>
             <%= f.hidden_field :city_id, class: "city" %>
           </nav>
