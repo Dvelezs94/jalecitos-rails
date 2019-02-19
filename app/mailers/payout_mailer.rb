@@ -1,4 +1,5 @@
 class PayoutMailer < ApplicationMailer
+  include ActionView::Helpers::NumberHelper
 
   def successful_payout(user, amount)
     data = {
@@ -16,7 +17,7 @@ class PayoutMailer < ApplicationMailer
           ],
           "dynamic_template_data": {
             "ALIAS": user.alias,
-            "MONEY": amount
+            "MONEY": number_to_currency(amount)
           }
         }
       ],
@@ -46,7 +47,7 @@ class PayoutMailer < ApplicationMailer
           ],
           "dynamic_template_data": {
             "ALIAS": user.alias,
-            "MONEY": amount,
+            "MONEY": number_to_currency(amount),
             "ERROR": error
           }
         }
