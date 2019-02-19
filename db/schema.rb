@@ -192,11 +192,11 @@ ActiveRecord::Schema.define(version: 2019_02_15_213646) do
     t.integer "employee_id"
     t.datetime "started_at"
     t.datetime "completed_at"
-    t.string "response_paid_id"
+    t.string "paid_at"
     t.string "uuid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "withdrawal_id"
+    t.bigint "payout_id"
     t.bigint "billing_profile_id"
     t.integer "invoice_status"
     t.string "invoice_id"
@@ -204,10 +204,10 @@ ActiveRecord::Schema.define(version: 2019_02_15_213646) do
     t.string "response_completion_id"
     t.string "response_fee_id"
     t.string "response_tax_id"
-    t.string "response_refund_hold_id"
+    t.string "response_openpay_tax_id"
     t.index ["billing_profile_id"], name: "index_orders_on_billing_profile_id"
     t.index ["employer_id", "employee_id"], name: "index_orders_on_employer_id_and_employee_id"
-    t.index ["withdrawal_id"], name: "index_orders_on_withdrawal_id"
+    t.index ["payout_id"], name: "index_orders_on_payout_id"
   end
 
   create_table "overall_averages", force: :cascade do |t|
@@ -243,6 +243,16 @@ ActiveRecord::Schema.define(version: 2019_02_15_213646) do
     t.index ["offer_id"], name: "index_payments_on_offer_id"
     t.index ["package_id"], name: "index_payments_on_package_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "payouts", force: :cascade do |t|
+    t.string "transaction_id"
+    t.bigint "user_id"
+    t.integer "status", default: 0
+    t.string "bank_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_payouts_on_user_id"
   end
 
   create_table "professions", force: :cascade do |t|
@@ -441,15 +451,6 @@ ActiveRecord::Schema.define(version: 2019_02_15_213646) do
     t.index ["user_id"], name: "index_verifications_on_user_id"
   end
 
-  create_table "withdrawals", force: :cascade do |t|
-    t.string "transaction_id"
-    t.bigint "user_id"
-    t.integer "status", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_withdrawals_on_user_id"
-  end
-
   add_foreign_key "billing_profiles", "users"
   add_foreign_key "cities", "states"
   add_foreign_key "countries", "states"
@@ -466,11 +467,12 @@ ActiveRecord::Schema.define(version: 2019_02_15_213646) do
   add_foreign_key "offers", "requests"
   add_foreign_key "offers", "users"
   add_foreign_key "orders", "billing_profiles"
-  add_foreign_key "orders", "withdrawals"
+  add_foreign_key "orders", "payouts"
   add_foreign_key "packages", "gigs"
   add_foreign_key "payments", "offers"
   add_foreign_key "payments", "packages"
   add_foreign_key "payments", "users"
+  add_foreign_key "payouts", "users"
   add_foreign_key "push_subscriptions", "users"
   add_foreign_key "replies", "disputes"
   add_foreign_key "replies", "users"
@@ -483,5 +485,4 @@ ActiveRecord::Schema.define(version: 2019_02_15_213646) do
   add_foreign_key "states", "countries"
   add_foreign_key "users", "cities"
   add_foreign_key "verifications", "users"
-  add_foreign_key "withdrawals", "users"
 end
