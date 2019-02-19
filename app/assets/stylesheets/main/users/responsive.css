@@ -3,39 +3,30 @@
   	margin-bottom: 30px;
   }
    .Nueva-tarjeta-btn a {
-  	color: #fff !important;
-  	font-size: 19px !important;
-  	font-weight: 700 !important;
+  	color: #fff ;
+  	font-size: 19px ;
+  	font-weight: 700 ;
   	background: #39C27B;
-  	display: inline-block !important;
-  	padding: 8px 20px !important;
-  	border-radius: 5px !important;
-  	width: auto !important;
+  	display: inline-block ;
+  	padding: 8px 20px ;
+  	border-radius: 5px ;
+  	width: auto ;
   }
   .Métodos-de-pago {
   	margin-bottom: 30px;
   }
-  .Facturacion-btn a {
-  	color: #fff !important;
-  	font-size: 15px !important;
-  	background: #EF2235;
-  	display: inline-block !important;
-  	padding: 10px 20px !important;
-  	border-radius: 5px !important;
-  	width: auto !important;
-  }
   .Facturacion-content {
-  	margin-bottom: 30px !important;
+  	margin-bottom: 30px ;
   }
   .Nueva-cuenta a {
   	display: inline-block;
-  	font-size: 15px !important;
+  	font-size: 15px ;
   	color: #fff;
   	background: #39C27B;
-  	padding: 10px 25px !important;
-  	font-weight: 700 !important;
-  	border-radius: 5px !important;
-  	width: auto !important;
+  	padding: 10px 25px ;
+  	font-weight: 700 ;
+  	border-radius: 5px ;
+  	width: auto ;
   }
   .Cuenta-box {
   	margin-bottom: 30px;
@@ -47,12 +38,12 @@
   	background: #39C27B;
   	color: #fff;
   	display: block;
-  	text-align: center !important;
-  	font-size: 19px !important;
-  	border-radius: 5px !important;
-  	padding: 4px !important;
-  	font-weight: 700 !important;
-  	width: auto !important;
+  	text-align: center ;
+  	font-size: 19px ;
+  	border-radius: 5px ;
+  	padding: 4px ;
+  	font-weight: 700 ;
+  	width: auto ;
   }
 
    .tab-section {
@@ -71,30 +62,30 @@
   	margin-bottom: 30px;
   }
    .Nueva-tarjeta-btn a {
-  	color: #fff !important;
-  	font-size: 19px !important;
-  	font-weight: 700 !important;
+  	color: #fff ;
+  	font-size: 19px ;
+  	font-weight: 700 ;
   	background: #39C27B;
-  	display: inline-block !important;
-  	padding: 8px 20px !important;
-  	border-radius: 5px !important;
-  	width: auto !important;
+  	display: inline-block ;
+  	padding: 8px 20px ;
+  	border-radius: 5px ;
+  	width: auto ;
   }
   .Métodos-de-pago {
   	margin-bottom: 30px;
   }
   .Facturacion-content {
-  	margin-bottom: 30px !important;
+  	margin-bottom: 30px ;
   }
   .Nueva-cuenta a {
   	display: inline-block;
-  	font-size: 15px !important;
+  	font-size: 15px ;
   	color: #fff;
   	background: #39C27B;
-  	padding: 10px 25px !important;
-  	font-weight: 700 !important;
-  	border-radius: 5px !important;
-  	width: auto !important;
+  	padding: 10px 25px ;
+  	font-weight: 700 ;
+  	border-radius: 5px ;
+  	width: auto ;
   }
   .Cuenta-box {
   	margin-bottom: 30px;
@@ -103,12 +94,12 @@
   	background: #39C27B;
   	color: #fff;
   	display: block;
-  	text-align: center !important;
-  	font-size: 19px !important;
-  	border-radius: 5px !important;
-  	padding: 4px !important;
-  	font-weight: 700 !important;
-  	width: auto !important;
+  	text-align: center ;
+  	font-size: 19px ;
+  	border-radius: 5px ;
+  	padding: 4px ;
+  	font-weight: 700 ;
+  	width: auto ;
   }
   .tab-user img {
   	width: 60px;
@@ -134,7 +125,7 @@
   }
   .Vendedor-text label {
   	color: #8E8E93;
-  	font-size: 15px !important;
+  	font-size: 15px ;
   	margin-top: 3px;
   }
   .tab-radio-btn p {
