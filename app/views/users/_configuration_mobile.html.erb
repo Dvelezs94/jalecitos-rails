@@ -33,45 +33,48 @@
                     <span><%= @user.email %></span></p>
                 </div>
                 <div class="Nombre-completo-text">
-                    <label for="">Nombre completo</label>
-                    <div class="inp-area">
-                      <%= best_in_place current_user, :name, url: update_users_path, style: "padding: 5px;", :data => {:name => "nombre"} %>
-                      <%= icon("fas", "pencil-alt") %>
-                    </div>
-                    <label for="">Alias</label>
-                    <div class="inp-area">
-                      <%= best_in_place current_user, :alias, class: "change_user_alias", url: update_users_path, style: "padding: 5px;", :data => {:name => "alias"} %>
-                      <%= icon("fas", "pencil-alt") %>
-                    </div>
-                    <label for="">Sobre mí</label>
-                    <div class="textarea-area">
-                      <%= best_in_place current_user, :bio, as: :textarea, :place_holder => "Edítame",
-                       :html_attrs => {:maxlength => 500}, url: update_users_path, class: "change_bio",
-                       inner_class: "change_bio_input", :data => {:name => "biografía"} %>
-                    </div>
-                    <div class="inp-area marker-ex">
-                      <%= form_with model: User, url: update_users_path, method: :put , local: true do |f|%>
-                      <%= f.text_field :location, class: 'config_autocomplete', id: "config_autocomplete", size: 50, placeholder:" Elige tu ciudad", value: current_user.location(true) %>
-                      <%= f.hidden_field :city_id, class: "city", id: "city_2" %>
-                      <%= icon("fas", "map-marker") %>
-                    <% end %>
+                  <label for="">Nombre completo</label>
+                  <div class="inp-area">
+                    <%= best_in_place current_user, :name, url: update_users_path, style: "padding: 5px;", :data => {:name => "nombre"} %>
+                    <%= icon("fas", "pencil-alt") %>
                   </div>
+                  <label for="">Alias</label>
+                  <div class="inp-area">
+                    <%= best_in_place current_user, :alias, class: "change_user_alias", url: update_users_path, style: "padding: 5px;", :data => {:name => "alias"} %>
+                    <%= icon("fas", "pencil-alt") %>
+                  </div>
+                  <label for="">Sobre mí</label>
+                  <div class="textarea-area">
+                    <%= best_in_place current_user, :bio, as: :textarea, :place_holder => "Edítame", :html_attrs => {:maxlength => 500}, url: update_users_path, class: "change_bio", inner_class: "change_bio_input", :data => {:name => "biografía"} %>
+                  </div>
+                  <div class="inp-area marker-ex">
+                    <label for="">Ubicación</label>
+                    <%= form_with model: User, url: update_users_path, method: :put , local: true do |f|%>
+                    <%= f.text_field :location, class: 'config_autocomplete', id: "config_autocomplete", size: 50, placeholder:" Elige tu ciudad", value: current_user.location(true) %>
+                    <%= f.hidden_field :city_id, class: "city", id: "city_2" %>
+                    <%= icon("fas", "map-marker") %>
+                  <% end %>
+                </div>
 
-                  <ul class="nav nav-tabs">
-
+                <ul class="nav nav-tabs">
+                  <div class="" >
+                      <label for="">Edad</label>
                     <li class="nav-item dropdown">
-                      <%= best_in_place current_user, :age, :as => :select, :collection => (18..100).map { |i| [i, "#{i} años"]},
-                       :place_holder => "Edad", url: update_users_path, :data => {:name => "edad"} %>
+                      <%= best_in_place current_user, :age, :as => :select, :collection => (18..100).map { |i| [i, "#{i} años"]}, :place_holder => "Indefinido", url: update_users_path, :data => {:name => "edad"} %>
                     </li>
+                  </div>
+                  <div class="">
+                    <label for="">Disponibilidad</label>
                     <li class="nav-item dropdown">
-                      <%= best_in_place current_user, :available, :as => :select, :collection => { "Tiempo completo" => "Tiempo completo", "Medio tiempo" => "Medio tiempo", "Fin de semana" => "Fin de semana", "Esporádico" => "Esporádico" }, :place_holder =>
-                      "Disponibilidad", url: update_users_path, :data => {:name => "disponibilidad"} %>
+                      <%= best_in_place current_user, :available, :as => :select, :collection => { "Tiempo completo" => "Tiempo completo", "Medio tiempo" => "Medio tiempo", "Fin de semana" => "Fin de semana", "Esporádico" => "Esporádico" }, :place_holder => "Indefinido",
+                      url: update_users_path, :data => {:name => "disponibilidad"} %>
                     </li>
 
                   </ul>
+                </div>
 
-                  <!-- <div class="tab-radio-btn"> <p>Rol</p> <div class="Vendedor-text"> <label class="tab-btn">Vendedor <input type="radio" checked="checked" name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Comprador <input type="radio"
-                  name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Ambos <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div> </div> -->
+                <!-- <div class="tab-radio-btn"> <p>Rol</p> <div class="Vendedor-text"> <label class="tab-btn">Vendedor <input type="radio" checked="checked" name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Comprador <input type="radio"
+                name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Ambos <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div> </div> -->
 
               </div>
             </div>
@@ -95,13 +98,19 @@
                 <button onclick="resetNotifications(event)" class="default-btn">Probar Notificaciones</button>
               </div>
               <div class="Notificaciónss">
-                <div class="input-checkbox">
-                  <%= best_in_place current_user, :transactional_emails, as: :checkbox, collection: {true: "Activado", false: "Desactivado"}, url: update_users_path %>
-                  <p>Notificación por e-mail</p>
+                <div class="input-checkbox" style="display: flex;align-items:center;">
+                  <label for="">Notificación por e-mail:</label>
+                  <%= best_in_place current_user, :transactional_emails, as: :checkbox,
+                   collection: {true: "Activado &#xf303;".html_safe, false: "Desactivado &#xf303;".html_safe}, url: update_users_path,
+                   :data => {:name => "notificación por e-mail"}, class: "boolean",
+                   style: "font-family: 'Font Awesome 5 Free' !important;font-weight:900;" %>
                 </div>
-                <div class="input-checkbox">
-                  <%= best_in_place current_user, :marketing_emails, as: :checkbox, collection: {true: "Activado", false: "Desactivado"}, url: update_users_path%>
-                  <p>Últimas noticias</p>
+                <div class="input-checkbox" style="display: flex;align-items:center;">
+                  <label for="">Últimas noticias:</label>
+                  <%= best_in_place current_user, :marketing_emails, as: :checkbox,
+                   collection: {true: "Activado &#xf303;".html_safe, false: "Desactivado &#xf303;".html_safe}, url: update_users_path,
+                   :data => {:name => "notificación de últimas noticias"}, class: "boolean",
+                   style: "font-family: 'Font Awesome 5 Free' !important;font-weight:900;"%>
                 </div>
               </div>
               <div class="fotografi">

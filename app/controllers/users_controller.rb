@@ -69,6 +69,7 @@ class UsersController < ApplicationController
       #   format.json  { render :json => { :redirect => configuration_path } }
         format.json { respond_with_bip(current_user) }
         #changing location of config and mobile use this
+        flash[:success] = "Tu ubicación se ha actualizado."
         format.html { redirect_to request.referrer }
     end
 

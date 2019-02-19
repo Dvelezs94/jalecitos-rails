@@ -142,7 +142,7 @@
 .inp-area i.fas {
   position: absolute;
   right: 15px;
-  top: 50%;
+  top: 67%;
   margin-top: -8px;
   cursor: pointer;
 }
@@ -160,7 +160,8 @@
 	padding-left: 35px;
 }
 
-.Nombre-completo-text label {
+.Nombre-completo-text label,
+.Notificaciónss label {
 	font-size: 19px;
 	color: #000;
 	margin-bottom: 0;
@@ -240,6 +241,10 @@
   margin-left: 70px;
 }
 
+.tab-use-content {
+	padding: 30px 0;
+}
+
 
 .tab-use-content .nav-tabs .nav-item {
 	margin-bottom: 0;
@@ -248,7 +253,6 @@
 	background: #EBF7F1;
 	border-radius: 5px;
 	margin-right: 70px;
-	width: 28%;
   text-align: center;
   color: #39C27B;
 }
@@ -350,13 +354,17 @@
 	left: 19px;
 }
 .input-checkbox p {
-  position: absolute;
-  top: 50%;
-  margin-bottom: 0;
-  margin-top: -15px;
-  margin-left: 50px;
   font-size: 15px;
   color: #8E8E93;
+}
+
+.boolean {
+	border-radius: 4px;
+	border: none;
+	background-color: #F5F6F7;
+	color: #8E8E93;
+	padding: 5px;
+	margin-left: 10px;
 }
 .input-checkbox {
 	position: relative;

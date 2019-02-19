@@ -124,27 +124,13 @@
   .inp-area input {
   	font-size: 15px;
   }
-  .Nombre-completo-text label {
+  .Nombre-completo-text label,
+  .Notificaciónss label {
   	font-size: 17px;
   }
   .textarea-area textarea {
   	font-size: 15px;
   	height: 150px;
-  }
-  .tab-use-content .nav-tabs .nav-item:last-child {
-  	margin-right: 0;
-  	position: absolute;
-  	right: 0;
-  	width: 50%;
-  }
-  .tab-use-content .nav-tabs .nav-item {
-  	margin-bottom: 15px;
-  	font-size: 16px;
-  	font-weight: 700;
-  	background: #EBF7F1;
-  	border-radius: 5px;
-  	margin-right: 30px;
-  	width: 38%;
   }
   .Vendedor-text label {
   	color: #8E8E93;
