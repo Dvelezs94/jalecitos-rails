@@ -27,15 +27,13 @@ class OrderWebhooksController < ApplicationController
         ChargeDeniedWorker.perform_async(@object_id, @error_message)
 
       when @object_type == "payout.succeeded"
-        @object_id = @object["transaction"]["order_id"]
-        @object_id_parsed = @object_id.split('-').second
-        PayoutCompleteWorker.perform_async(@object_id_parsed)
+        @object_id = @object["transaction"]["id"]
+        PayoutCompleteWorker.perform_async(@object_id)
 
       when @object_type == "payout.failed"
-        @object_id = @object["transaction"]["order_id"]
-        @object_id_parsed = @object_id.split('-').second
-        @error_message = @object["transaction"]["error"]
-        PayoutFailedWorker.perform_async(@object_id_parsed, @error_message)
+        @object_id = @object["transaction"]["id"]
+        @error_message = @object["transaction"]["error_message"]
+        PayoutFailedWorker.perform_async(@object_id, @error_message)
 
       when @object_type == "verification"
         OpenpayVerificationMailer.new_verification(ENV.fetch("RAILS_ENV"), @object["verification_code"]).deliver
