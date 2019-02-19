@@ -130,11 +130,18 @@ module ApplicationHelper
     (base * 0.9).round(2)
   end
   ######
+  # the difference with the one above is that this one calculates all the orders minus fees and taxes
+  def calc_employee_orders_earning(orders_total, orders_count)
+    (((orders_total / 116) * 100 - (10 * orders_count)) * 0.90).round(2)
+    # (45/58) * orders_total - 9 * orders.count
+  end
 
-  # wip
-  def calc_refund base
-    openpay_earning = purchase_order_total(base) * 0.03364 + 2.9
-    (base - openpay_earning).round(2)
+  def calc_openpay_tax (order_total)
+    openpay_fee = 0.029 #percent
+    openpay_base = 2.5 #MXN pesos
+    pre_iva = (order_total * openpay_fee + openpay_base).round(2)
+    tax_iva = pre_iva * 0.16
+    (pre_iva + tax_iva).round(2)
   end
 
   # Get toal price of order, with taxes included
@@ -157,8 +164,8 @@ module ApplicationHelper
 
   def print_earnings base
     ci = 10
-    jalecitos_earning =  (ci - 2.9) - (ci * 0.0390224) - (0.0390224 * base) + get_order_fee(base)
-    openpay_earning = purchase_order_total(base) * 0.03364 + 2.9
+    jalecitos_earning =  ((ci - 2.9) - (ci * 0.0390224) - (0.0390224 * base) + get_order_fee(base)).round(2)
+    openpay_earning = (purchase_order_total(base) * 0.03364 + 2.9).round(2)
     p "base + iva = #{purchase_order_total(base)}"
     p "openpay = #{openpay_earning}"
     p "jalecitos = #{jalecitos_earning}"

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       get :disputes
       get :bans
       get :verifications
+      post :create_openpay_user
+      get :openpay_dashboard
     end
   end
 
@@ -68,7 +70,7 @@ Rails.application.routes.draw do
      resource :reports, only: [:create], as: "report"
    end
 
-  resources :withdrawals, only: :create
+  resources :payouts, only: :create
   resources :notifications, only: [:index] do
     collection do
       post :mark_as_read

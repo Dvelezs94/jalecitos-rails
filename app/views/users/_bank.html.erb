@@ -2,7 +2,7 @@
   <div class="Cuenta-box-text">
     <h4><%= bank["alias"] %></h4>
     <p><%= bank["clabe"] %></p>
-    <span><%= link_to "Retirar Fondos", withdrawals_path(bank_id: bank["id"]), method: :post %></span>
+    <span><%= link_to "Retirar Fondos", payouts_path(bank_id: bank["id"]), method: :post %></span>
     <%= link_to icon("far","trash-alt", class: "fa-lg"), user_bank_path(current_user.slug, bank["id"]), method: :delete, data: { confirm: 'Seguro quieres borrar esta cuenta?' } %>
   </div>
 </div>
