@@ -12,11 +12,14 @@
                      <%= link_to icon("fab", "facebook")+" facebook", user_facebook_omniauth_authorize_path(lat:"latitude", lon:"longitude"), class: 'facebook-login', method: :post %>
                  </div>
                  <%= form_for(:user, :html => { :class => "sign_in_form" }, :url => session_path(:user)) do |f| %>
-                   <div class="information">
+                   <div class="information" style="margin-bottom: 20px;">
                      <%= f.email_field :email, placeholder: "Correo", class: "required", value: "", autofocus: true, onfocus: "getLocation();" %>
                      <%= f.password_field :password, placeholder: "Contraseña" , class: "required" %>
+                     <div class="remember_me" style="display:flex;justify-content:center;align-items:center;">
+                       <%= f.check_box :remember_me %>
+                       Recordarme
+                     </div>
                    </div>
-                   <%= f.check_box :remember_me, :checked => true, :style => 'display: none' %>
                    <%= f.submit 'Continuar', class: "login" %>
                   <p class="una"><%= link_to "Olvidé mi contraseña", new_password_path(:user) %></p>
                    <p class="una">¿No tienes cuenta?  <%= link_to "Registrate", {}, id: "register" %></p>

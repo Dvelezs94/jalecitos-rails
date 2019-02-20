@@ -74,24 +74,22 @@ class UsersController < ApplicationController
         when "employee_employer"
           current_user.update_attributes(:roles => [:user, :employer, :employee])
       end
-    # best in place for tags, split them to make a list and grab the first 10
-    elsif params[:user]["tag_list"]
-      @tag_list = params[:user]["tag_list"].downcase.split(" ")
-      # current_user.tag_list = @tag_list.first(10)
-      # current_user.save
-      current_user.update_attributes(:tag_list => @tag_list.first(10))
-    # else we save the parameters as they come since they dont need special treatment
-    else
+    elsif user_params.present?
       @success = true if current_user.update_attributes(user_params)
     end
     respond_to do |format|
       # if params[:user]["alias"]
       #   # flash[:success] = 'Tu alias ha sido actualizado.'
       #   format.json  { render :json => { :redirect => configuration_path } }
+
+        format.js { }
+        #best_in_place
         format.json { respond_with_bip(current_user) }
         #changing location of config and mobile use this
-        flash[:success] = "Tu ubicación se ha actualizado."
-        format.html { redirect_to request.referrer }
+        format.html {
+          flash[:success] = "Tu ubicación se ha actualizado."
+          redirect_to request.referrer
+         }
     end
 
   end

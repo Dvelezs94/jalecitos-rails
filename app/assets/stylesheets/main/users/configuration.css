@@ -94,11 +94,13 @@
 .Nombre-completo-text {
 	margin-top: 20px;
 }
-.inp-area {
+.inp-area,
+.textarea-area {
 	position: relative;
 	margin-bottom: 15px;
 }
-.inp-area input, .inp-area span {
+.inp-area input, .inp-area span.best_in_place,
+.config-tag-input {
   width: 100%;
   border: none;
   background: #F5F6F7;
@@ -112,7 +114,7 @@
 }
 
 .change_bio {
-	padding: 7px 15px;
+	padding: 7px 35px 7px 15px;
 	width: 100%;
 	border: none;
 	background: #F5F6F7;
@@ -130,7 +132,7 @@
 	background: transparent;
 	font-size: 19px;
 	color: #8E8E93;
-	padding: 7px 15px;
+	padding: 7px 35px 7px 15px;
 }
 .change_bio_input:focus {
 	outline: none;
@@ -139,23 +141,28 @@
 
 
 
-.inp-area i.fas {
+.inp-area i.fas,
+.textarea-area i.fas {
   position: absolute;
   right: 15px;
-  top: 67%;
   margin-top: -8px;
   cursor: pointer;
 }
-.inp-area .fas.fa-map-marker {
+.inp-area i.fas.fa-pencil-alt {
+	top: 56%;
+}
+.textarea-area i.fas.fa-pencil-alt {
+	top: 7%;
+}
+.inp-area .fas.fa-map-marker-alt {
 	left: 10px;
 	font-size: 20px;
 	color: #39C27B;
 	width: 20px;
 	text-align: center;
+	top: 67%;
 }
-.inp-area.marker-ex {
-	margin-top: 25px;
-}
+
 .inp-area.marker-ex input {
 	padding-left: 35px;
 }
@@ -210,6 +217,10 @@
   background-color: #39C27B;
 }
 
+.inp-area .best_in_place {
+	padding: 5px 35px 5px 5px !important;
+}
+
 /* Create the indicator (the dot/circle - hidden when not checked) */
 .checkmark:after {
   content: "";
@@ -241,7 +252,12 @@
   margin-left: 70px;
 }
 
-.tab-use-content {
+.tab-use-content,
+#notifications_collapse,
+#payment_methods,
+#billing,
+#withdraw,
+#collapseSix {
 	padding: 30px 0;
 }
 
@@ -255,6 +271,7 @@
 	margin-right: 70px;
   text-align: center;
   color: #39C27B;
+	padding: 5px 10px;
 }
 .tab-use-content .dropdown-toggle::after {
 	display: inline-block;
@@ -372,42 +389,6 @@
 }
 .Notificaciónss {
 	margin-top: 30px;
-}
-
-
-.fotografi li {
-  font-size: 19px;
-  list-style: none;
-  position: absolute;
-  left: 15px;
-}
-.fotografi {
-	position: relative;
-	background: #F7F7F7;
-	padding: 9px;
-	border-radius: 5px;
-}
-.fotografi li::after {
-	position: absolute;
-	content: "";
-	background: #39C27B;
-	width: 2px;
-	height: 58%;
-	top: 50%;
-	margin-top: -8px;
-	right: -4px;
-}
-.fotografi a {
-  padding: 6px 10px;
-  display: inline-block;
-  background: #0368F4;
-  color: #fff;
-  font-size: 13px;
-  border-radius: 5px;
-  margin-left: 130px;
-}
-.fotografi a:last-child {
-  margin-left: 17px;
 }
 
 .todos-list- li {
@@ -616,7 +597,7 @@
 	border-bottom: none;
 	position: relative;
 }
-.tab-section-for-mobile .btn {
+.tab-section-for-mobile .btn-link {
 	display: inline-block;
 	font-weight: 400;
 	text-align: center;

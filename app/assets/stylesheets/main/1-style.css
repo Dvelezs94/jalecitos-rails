@@ -2653,12 +2653,12 @@ p.gig-score-times {
   color: #28a745;
   cursor: pointer;
 }
-9
+
 /*error*/
 label.error,
 span.error,
 div.error{
-  color: red;
+  color: red !important;
 }
 /*dont display menu in front of bottom content*/
 .main_container{
@@ -3034,4 +3034,10 @@ div.form {
 
 .element-size {
   width: 70%;
+}
+
+.font-awesome {
+  font-family: 'Font Awesome 5 Free' !important;
+  font-weight: 900;
+
 }

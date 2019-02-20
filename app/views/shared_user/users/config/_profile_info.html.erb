@@ -1,0 +1,84 @@
+<div class="card">
+  <div class="card-header" id="headingOne">
+    <h5 class="mb-0">
+      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="<%= (params[:collapse].nil? || params[:collapse] == "profile_info")? "true" : "false" %>" aria-controls="collapseOne">
+        Editar perfil
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+        <i class="fa fa-angle-down" aria-hidden="true"></i>
+      </button>
+    </h5>
+  </div>
+  <div id="collapseOne" class="collapse <%= "show" if params[:collapse].nil? || params[:collapse] == "profile_info" %>" aria-labelledby="headingOne" data-parent="#accordion">
+    <div class="card-body">
+      <div class="tab-use-content">
+        <div class="tab-user">
+          <%= form_with(model: @user, local: true) do |form| %>
+          <% if @user.errors.any? %>
+            <% @user.errors.full_messages.each do |error| %>
+              <%= notification_generator_helper error, :error %>
+            <% end %>
+          <% end %>
+          <label class="profile-container">
+            <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar")%>
+            <%= form.file_field :image, class: 'form-control', accept: ".png, .jpg, .jpeg" %>
+          </label>
+        <% end %>
+        <p>EMAIL
+          <span><%= @user.email %></span></p>
+      </div>
+      <div class="Nombre-completo-text">
+        <label for="">Nombre completo</label>
+        <div class="inp-area">
+          <%= best_in_place current_user, :name, url: update_users_path, style: "padding: 5px;", :data => {:name => "nombre"},
+           :place_holder => "Edítame", id: "change_user_name" %>
+          <%= icon("fas", "pencil-alt", onclick: "$(this).closest('div').find('span.best_in_place').click()") %>
+        </div>
+        <label for="">Alias</label>
+        <div class="inp-area">
+          <%= best_in_place current_user, :alias, class: "change_user_alias", url: update_users_path,
+           style: "padding: 5px;", :data => {:name => "alias"}, id: "change_user_alias" %>
+          <%= icon("fas", "pencil-alt", onclick: "$(this).closest('div').find('span.best_in_place').click()") %>
+        </div>
+        <label for="">Sobre mí</label>
+        <div class="textarea-area">
+          <%= best_in_place current_user, :bio, as: :textarea, :place_holder => "Edítame",
+           :html_attrs => {:maxlength => 500}, url: update_users_path, class: "change_bio",
+            inner_class: "change_bio_input", :data => {:name => "biografía"}, id: "change_user_bio" %>
+          <%= icon("fas", "pencil-alt", onclick: "$(this).closest('div').find('span.best_in_place').click()") %>
+        </div>
+        <div class="inp-area marker-ex">
+          <label for="">Ubicación</label>
+          <%= form_with model: User, url: update_users_path, method: :put , local: true do |f|%>
+          <%= f.text_field :location, class: 'config_autocomplete', id: "config_autocomplete", size: 50, placeholder:" Elige tu ciudad", value: current_user.location(true) %>
+          <%= f.hidden_field :city_id, class: "city", id: "city_2" %>
+          <%= icon("fas", "map-marker-alt") %>
+        <% end %>
+      </div>
+
+      <ul class="nav nav-tabs">
+        <div class="">
+          <label for="">Edad</label>
+          <li class="nav-item dropdown">
+            <%= best_in_place current_user, :age, :as => :select, :collection => (18..100).map { |i| [i, "#{i} años"]},
+             :place_holder => "Indefinido", url: update_users_path, :data => {:name => "edad"}, id: "change_user_age" %>
+          </li>
+        </div>
+        <div class="">
+          <label for="">Disponibilidad</label>
+          <li class="nav-item dropdown">
+            <%= best_in_place current_user, :available, :as => :select,
+             :collection => { "Tiempo completo" => "Tiempo completo", "Medio tiempo" => "Medio tiempo", "Fin de semana" => "Fin de semana", "Esporádico" => "Esporádico" },
+              :place_holder => "Indefinido",
+             url: update_users_path, :data => {:name => "disponibilidad"}, id: "change_user_available" %>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- <div class="tab-radio-btn"> <p>Rol</p> <div class="Vendedor-text"> <label class="tab-btn">Vendedor <input type="radio" checked="checked" name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Comprador <input type="radio"
+      name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Ambos <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div> </div> -->
+
+    </div>
+  </div>
+</div>
+</div>
