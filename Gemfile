@@ -40,8 +40,8 @@ group :development, :test, :staging do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Random data for seeds
-  gem 'faker', '~> 1.9', '>= 1.9.1'
 end
+gem 'faker', '~> 1.9', '>= 1.9.1'
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
