@@ -371,7 +371,6 @@
 
   .varificado-btn3 {
     right: 10px;
-    top: 76%;
   }
   .servicoteam-wrap {
     display: none;
@@ -1219,7 +1218,7 @@
 }
 
 /* SM Small Device :320px. */
-@media only screen and (min-width: 480px) and (max-width: 767px) {
+@media only screen and (min-width: 320px) and (max-width: 767px) {
   .todoo1 img {
     display: none;
   }
@@ -1737,10 +1736,6 @@
     display: none;
   }
 
-  .catagorislide-area.innerpages3-area {
-    padding-bottom: 120px;
-    padding-top: 0;
-  }
 
   .verificos-title {
     display: none;
@@ -1770,10 +1765,6 @@
     text-align: center;
   }
 
-  .page3-btn a {
-    width: 50%;
-  }
-
   .servico-title {
     margin-top: 0;
     position: relative;
@@ -1796,16 +1787,16 @@
   p.limpi2 {
     display: inline-block;
     padding-left: 20px;
-    font-size: 12px;
+    float: right;
   }
 
   p.limpi1 {
-    font-size: 12px;
+    font-weight: 700;
     display: inline-block;
   }
 
   p.limpi2 sub {
-    font-size: 7px;
+    bottom: 0;
   }
 
   .page3-viewmore {
@@ -2179,225 +2170,6 @@
   }
 
 }
-/*Carousel*/
-@media only screen and (min-width: 320px) and (max-width: 479px) {
-  .single-gig,
-  .single-request {
-    width: 150px;
-  }
-  .default-btn {
-    font-size: 14px;
-  }
-  .footerdarea {
-    display: none;
-  }
-  .footerd2area {
-    display: block;
-    position: relative;
-    padding-top: 54px;
-    background: #12161C;
-    padding-bottom: 30px;
-  }
-
-  .maild-form input {
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
-
-  .footerd2fk a:hover i {
-    color: #fff;
-  }
-
-  .footerd2fk a i {
-    transition: .4s;
-  }
-
-  .footerd2area::after {
-    position: absolute;
-    background: #12161C;
-    content: "";
-    height: 181px;
-    top: -87px;
-    left: 0;
-    width: 100%;
-    border-radius: 50% 50% 0 0;
-    z-index: -1;
-  }
-
-  .maingreenbgd {
-    margin-bottom: 75px;
-  }
-
-  .footerd2social {
-    text-align: center;
-    width: 100%;
-    margin-top: -64px;
-    margin-bottom: 33px;
-  }
-
-  .footerd2fk img {
-    border-radius: 50%;
-    width: 65px;
-    margin-top: -40px;
-  }
-
-  .footerd2fk a {
-    margin: 10px;
-  }
-
-  .footerd2fk i {
-    background: #0067F3;
-    color: #000;
-    width: 30px;
-    height: 30px;
-    border-radius: 500%;
-    line-height: 30px;
-    text-align: center;
-    font-size: 20px;
-  }
-
-  .singlefooterdn ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .singlefooterdn ul li a {
-    color: #fff;
-    font-size: 12px;
-  }
-
-  .singlefooterdn ul li {
-    padding: 6px 0;
-  }
-
-  .singlefooterdn {}
-
-  .singlefooterdn p {
-    color: #fff;
-    font-size: 14px;
-    margin-bottom: 3px;
-  }
-  .legal-document {
-    width: 90%;
-  }
-  .servicoteam-wrap {
-    display: none;
-  }
-  #profile_tabs a {
-    font-size: 12px;
-  }
-  .modal-content, .modal-content-transparent {
-    width: 300px;
-  }
-  .plusarea a {
-    display: none;
-  }
-  .owl-stage{
-    padding-left: 5px !important;
-  }
-  .page3slides-contentrd p.location,
-  p.req_location {
-    min-height: 42px;
-  }
-  p.gig-title {
-    min-height: 63px;
-  }
-  p.req_title {
-    min-height: 108px;
-  }
-  .gigs-carousel .hearted1 {
-    left: 120px;
-    top: 68px;
-  }
-  p.verified{
-    top: 68px;
-  }
-
-  .phone_links i {
-    font-size: 25px;
-  }
-  p.gig-price {
-    font-size: 13px;
-  }
-  .catagorisingle-slide i {
-    width: 58px;
-    height: 58px;
-    line-height: 58px;
-    font-size: 32px;
-  }
-  .catagorisingle-slide p {
-    font-size: 10px;
-  }
-
-  .plusred i {
-    width: 37px;
-    height: 36px;
-    line-height: 37px;
-  }
-  /*carousel*/
-  .innerpage-leftsidejata {
-    height: 400px;
-  }
-  /*gig show*/
-  .innerpage3-rightsidetabs .nav-tabs .nav-link {
-    font-size: 16px;
-  }
-  /*search sizes of partials gig ans request*/
-  .gig-query .coa1,
-  .req-query p.fof {
-    font-size: 13px;
-  }
-  .gig-query .coa2,
-  .req-query p.jhh {
-    font-size: 12px;
-  }
-  .gig-query .coa3 {
-    font-size: 12px;
-  }
-  .gig-query .tabstar-no {
-    font-size: 12px;
-  }
-  /*profile*/
-  .gig-profile .gig-loc-sta {
-    display: block !important;
-  }
-  /*banner*/
-  .hero-darea::after {
-    background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/main_banner2.png");
-    background-position: center;
-    background-size: cover;
-    height: 100%;
-    content: "";
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    position: absolute;
-  }
-  /*hire experts*/
-  .contactd-content {
-    padding: 0;
-  }
-  /*talent reach*/
-  .singlemobiled.text-right {
-    padding-left: 0;
-  }
-  .singlemobiled.mobileds.sony {
-    padding-right: 0;
-  }
-  /*ready to be*/
-  .greend-right a {
-    margin: 0;
-  }
-  .greend-left h4 {
-    font-size: 18px;
-  }
-  .maingreenbgd .ready_to {
-    display: block !important;
-    text-align: center;
-    padding: 40px;
-  }
-}
 /*mobile menu*/
 @media only screen and (min-width: 320px) and (max-width: 991px) {
   .phone-bottom-menu {
@@ -2449,5 +2221,18 @@
   /*search results*/
   .gig-query .gig-image-profile img {
     border-radius: 0;
+  }
+}
+
+
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+  .single-gig,
+  .single-request {
+    width: 150px;
+  }
+
+  .gigs-carousel .hearted1 {
+    left: 120px;
+    top: 68px;
   }
 }

@@ -165,6 +165,7 @@
   color: #8E8E93;
   font-weight: 500;
   margin-left: 25px;
+  display: inline-block;
 }
 .chat-right-side-text {
   padding: 10px;
