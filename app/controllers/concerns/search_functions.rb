@@ -20,8 +20,12 @@ module SearchFunctions
 
   def guest_where_filter
     if params[:lon] != "" && params[:lat] != ""
-      city_id = geoloc_to_city(params[:lat], params[:lon])
-      {status: "published", city_id: city_id}
+      begin
+        loc = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{params[:lat]},#{params[:lon]}"
+        city_id = get_city_id_in_db(loc.city, loc.state_name, "MX")
+        {status: "published", city_id: city_id}
+      rescue
+        {status: "published"}
     else
       {status: "published"}
     end
