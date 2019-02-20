@@ -81,17 +81,19 @@ class UsersController < ApplicationController
       # if params[:user]["alias"]
       #   # flash[:success] = 'Tu alias ha sido actualizado.'
       #   format.json  { render :json => { :redirect => configuration_path } }
-
-        format.js { }
+      #labels and image of user
+        format.js {
+          if params[:user][:image].present?
+            @message = "Tu imagen de perfil se ha actualizado."
+          else
+            @message = "Tus etiquetas se han actualizado."
+          end
+         }
         #best_in_place
         format.json { respond_with_bip(current_user) }
         #changing location of config and mobile use this, and image of user
         format.html {
-          if params[:user][:image].present?
-            flash[:success] = "Tu imagen de perfil se ha actualizado."
-          else
           flash[:success] = "Tu ubicación se ha actualizado."
-          end
           redirect_to request.referrer
          }
     end
