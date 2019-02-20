@@ -156,7 +156,7 @@ class User < ApplicationRecord
      begin
        loc = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{lat},#{lon}"
        # Convert the geocoded location provided by the user on signup to valid using our GeoDatabase
-       self.city_id = geoloc_to_city(loc.city, loc.state_name, "MX")
+       self.city_id = get_city_id_in_db(loc.city, loc.state_name, "MX")
      rescue
        true
      end
