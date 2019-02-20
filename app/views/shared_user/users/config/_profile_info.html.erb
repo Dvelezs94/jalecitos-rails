@@ -12,7 +12,7 @@
     <div class="card-body">
       <div class="tab-use-content">
         <div class="tab-user">
-          <%= form_with(model: @user, local: true) do |form| %>
+          <%= form_with(model: @user, local: true, url: update_users_path, method: :put) do |form| %>
           <% if @user.errors.any? %>
             <% @user.errors.full_messages.each do |error| %>
               <%= notification_generator_helper error, :error %>
