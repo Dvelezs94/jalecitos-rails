@@ -26,6 +26,7 @@ module SearchFunctions
         {status: "published", city_id: city_id}
       rescue
         {status: "published"}
+      end
     else
       {status: "published"}
     end
