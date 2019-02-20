@@ -122,6 +122,8 @@ class UsersController < ApplicationController
     end
 
     def check_if_my_profile
+      if user_signed_in?
         redirect_to my_account_users_path if current_user.slug == params[:id]
+      end
     end
 end
