@@ -1,5 +1,5 @@
 <% if @success  %>
   <%= add_gritter(@message, :image => :success, :title => "Éxito", :time => 1000)%>
 <% else %>
-  <%= add_gritter("Ha ocurrido un error.", :image => :error, :title => "Error")%>
+  <%= add_gritter("Inténtalo de nuevo más tarde.", :image => :error, :title => "Error")%>
 <% end %>
