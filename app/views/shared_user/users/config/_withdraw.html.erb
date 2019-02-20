@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card-header" id="headingFive">
+    <h5 class="mb-0">
+      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#withdraw" aria-expanded="<%= (params[:collapse] == "withdraw")? "true" : "false" %>" aria-controls="withdraw">
+        Retirar fondos
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+        <i class="fa fa-angle-down" aria-hidden="true"></i>
+      </button>
+    </h5>
+  </div>
+  <div id="withdraw" class="collapse <%= "show" if params[:collapse] == "withdraw" %>" aria-labelledby="headingFive" data-parent="#accordion">
+    <div class="card-body">
+      <div class="Retirar-fondos-content loading-zone">
+        <div class="Saldo-disponible">
+          <h3><img src="assets/img/1_objects.png" alt="">Saldo disponible
+            <strong><%= number_to_currency(@user.balance || 0) %>
+              MXN</strong>
+          </h3>
+        </div>
+        <div class="Cuenta-box">
+          <%= render partial:'users/bank', collection: @user_banks %>
+          <div class="loading row justify-content-center" style="text-align: center; display: none;">
+            <%= image_tag('loading.gif') %>
+          </div>
+          <div class="Nueva-cuenta">
+            <button id="bankbtn2" class="default-btn">Nueva Cuenta</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

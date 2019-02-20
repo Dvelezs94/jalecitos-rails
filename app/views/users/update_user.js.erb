@@ -1,0 +1,5 @@
+<% if @success  %>
+  <%= add_gritter("Tus etiquetas se han actualizado.", :image => :success, :title => "Éxito", :time => 1000)%>
+<% else %>
+  <%= add_gritter("Tus etiquetas no han podido actualizarse.", :image => :error, :title => "Error")%>
+<% end %>

@@ -44,8 +44,12 @@ $(document).on('turbolinks:load', function() {
     }
   }).on('typeahead:selected', function(e, data) {
     $(event.target).closest("form").find(".city").val(data.id);
+    window.location_val = $(this).val();
+    window.city_val = $(e.target).closest("form").find(".city").val()
   }).on('typeahead:autocompleted', function(e, data) {
     $(event.target).closest("form").find(".city").val(data.id);
+    window.location_val = $(this).val();
+    window.city_val = $(e.target).closest("form").find(".city").val()
   });
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   $('#config_autocomplete').typeahead(null, {
