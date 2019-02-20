@@ -8,18 +8,18 @@ class BillingProfilesController < ApplicationController
     @billing_profile = BillingProfile.new(billing_profile_params)
     @billing_profiles_count = current_user.billing_profiles.enabled.count
     if @billing_profiles_count > 0
-      redirect_to "#{configuration_path}#billingprofile", alert: "Solo puedes tener 1 RFC registrado a la vez."
+      redirect_to configuration_path(collapse: "billing"), alert: "Solo puedes tener 1 RFC registrado a la vez."
     else
       if @billing_profile.save
-        redirect_to "#{configuration_path}#billingprofile", notice: "El perfil fue creado con exito."
+        redirect_to configuration_path(collapse: "billing"), notice: "El perfil fue creado con exito."
       else
-        redirect_to "#{configuration_path}#billingprofile", alert: "Error al crear perfil."
+        redirect_to configuration_path(collapse: "billing"), alert: "Error al crear perfil."
       end
     end
   end
 
   def destroy
-    @billing_profile.update_attribute(:status, 1)
+    redirect_to configuration_path(collapse: "billing"), notice: "Se ha eliminado el perfil de facturación." if @billing_profile.update_attribute(:status, 1)
   end
 
   private
