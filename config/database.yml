@@ -19,7 +19,7 @@ test:
 
 staging:
   <<: *default
-  database: staging
+  database: jalecitos_staging
 
 
 production:
