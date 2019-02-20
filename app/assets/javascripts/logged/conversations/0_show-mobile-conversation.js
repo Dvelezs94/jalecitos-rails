@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  var width = screen.width;
+  var width = $(window).width();
   var minwidth = 991;
 
   if (($.getUrlVar("user_id") != null) && width <= minwidth) {
