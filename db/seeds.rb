@@ -19,6 +19,7 @@ end
 
 
 #fill db with fake info for development
+if ENV.fetch("RAILS_ENV") == "development"
   InitMexicoPlaces.all.keys.each do |state|
     State.create(name: state, country_id: 1)
   end
@@ -102,5 +103,6 @@ end
         confirmed_at: Time.now
    )
   puts "Created testing user2"
+end
 
 # reindex has been moved to rake task, check jalecitos-cli
