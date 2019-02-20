@@ -1100,7 +1100,6 @@ p.limpi1 {
 .varificado-btn3 {
   position: absolute;
   right: 20px;
-  top: 84%;
   z-index: 1;
 }
 
@@ -1122,6 +1121,7 @@ p.limpi3 {
 
 p.limpi2 {
   color: #39C27B;
+  font-weight: 700;
 }
 
 .check-listpage3 p {
@@ -1377,19 +1377,10 @@ p.gig-price {
   min-height: 94px;
 }
 
-.catagorislide-area.innerpages3-area {
-  padding-bottom: 10px;
-}
 
 /*innerpage3*/
 .perfil-area {
   display: none;
-}
-
-.profileview-total a {
-  float: right;
-  color: #39C27B;
-  margin-top: 17px;
 }
 
 .profileview-total span {
@@ -1398,11 +1389,6 @@ p.gig-price {
   display: inline-block;
 }
 
-.profileview-total {
-  padding-top: 5px;
-  background: #F9F9F9;
-  border-bottom: 1px solid #ddd;
-}
 
 .sedcontent-wrap {
   display: none;
@@ -1535,18 +1521,6 @@ p.limpi1 {
 .verificos-title h3 {
   font-size: 36px;
   color: #000;
-}
-
-.varificado-btn3 a {
-  background: #39C27B;
-  color: #fff;
-  display: inline-block;
-  width: 128px;
-  text-align: center;
-  border-radius: 24px;
-  padding: 5px 0;
-  font-size: 12px;
-  font-weight: 700;
 }
 
 .varificado-btn3 {
@@ -1825,10 +1799,19 @@ p.gig-price {
   display: none;
 }
 
+.small-padding {
+  padding: 0px 5px;
+}
+
 .profileview-total a {
   float: right;
   color: #39C27B;
   margin-top: 17px;
+  padding-right: 5px;
+}
+
+.top-gig {
+  margin-top: 5px;
 }
 
 .profileview-total span {
@@ -1841,6 +1824,8 @@ p.gig-price {
   padding-top: 5px;
   background: #F9F9F9;
   border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
 }
 
 .sedcontent-wrap {
@@ -2937,6 +2922,7 @@ div.form {
 /*tabs*/
 .transacciones-tab-content {
 	position: relative;
+  justify-content: center;
 }
 
 .Transacciones-tab-area .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
@@ -3044,4 +3030,8 @@ div.form {
 
 .mobile_menu_autocomplete.tt-hint {
   color: #39C27B !important;
+}
+
+.element-size {
+  width: 70%;
 }
