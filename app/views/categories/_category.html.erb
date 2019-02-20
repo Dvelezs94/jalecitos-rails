@@ -1,4 +1,4 @@
-<%= link_to user_search_path(query: "*", category_id: category.id, location: "#{current_user.location}")do %>
+<%= link_to user_search_path(query: "*", category_id: category.id, city_id: "#{current_user.city_id}")do %>
 <div class="catagorisingle-slide">
   <%= icon('fas', category.icon) %>
   <p><%= category.name %></p>

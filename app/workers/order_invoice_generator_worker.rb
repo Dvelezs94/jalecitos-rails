@@ -18,36 +18,18 @@ class OrderInvoiceGeneratorWorker
     concept = [{"identificador": "Orden #{order.uuid}",
                "cantidad": 1,
                "unidad": "Orden",
-               "valor_unitario": subtotal,
+               "valor_unitario": subtotal + base_earning,
                "descripcion": "Servicios profesionales para la orden #{order.uuid}",
-               "importe": subtotal,
+               "importe": subtotal + base_earning,
                "clave": "80141600",
                "clave_unidad": "E48",
                "traslados": [
                    {
                        "impuesto": "002",
-                       "base": subtotal,
+                       "base": subtotal + base_earning,
                        "tipo_factor": "Tasa",
                        "tasa": iva,
-                       "importe": order_tax(subtotal)
-                   }
-               ]
-              },
-              {"identificador": "Base #{order.uuid}",
-               "cantidad": 1,
-               "unidad": "Base",
-               "valor_unitario": base_earning,
-               "descripcion": "Base para la orden #{order.uuid}",
-               "importe": base_earning,
-               "clave": "80141600",
-               "clave_unidad": "E48",
-               "traslados": [
-                   {
-                       "impuesto": "002",
-                       "base": base_earning,
-                       "tipo_factor": "Tasa",
-                       "tasa": iva,
-                       "importe": (base_earning * iva).round(2)
+                       "importe": (order_tax(subtotal) + (base_earning * iva)).round(2)
                    }
                ]
               }]
@@ -55,11 +37,6 @@ class OrderInvoiceGeneratorWorker
                               "tasa": iva,
                               "importe": concept[0][:traslados][0][:importe],
                               "tipo_factor": "Tasa"
-                            },
-                            {"impuesto": "002",
-                             "tasa": iva,
-                             "importe": concept[1][:traslados][0][:importe],
-                             "tipo_factor": "Tasa"
                             }]
       invoice = {"invoice_id": "#{order.uuid}",
                  "total": total,
@@ -74,7 +51,7 @@ class OrderInvoiceGeneratorWorker
                  "receptor": recipient,
                  "conceptos": concept,
                  "impuestos_traslado": impuestos_traslado,
-                 "total_trasladados": (concept[0][:traslados][0][:importe] + concept[1][:traslados][0][:importe]).round(2)
+                 "total_trasladados": concept[0][:traslados][0][:importe]
                  }
 
       # Curl HTTP Call
@@ -87,6 +64,5 @@ class OrderInvoiceGeneratorWorker
       req.basic_auth ENV.fetch("OPENPAY_PRIVATE_KEY"), ''
       req.body = invoice.to_json
       res = https.request(req)
-      p res
   end
 end
