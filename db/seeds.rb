@@ -6,7 +6,7 @@ require "#{Rails.root}/db/init_seeds/mx_places"
 # Populate DB with Mexico places
 Country.create(name: "MX")
 
-if ENV.fetch("RAILS_ENV") != "development"
+if ENV.fetch("RAILS_ENV") == "production"
   InitMexicoPlaces.all.keys.each do |state|
     State.create(name: state, country_id: 1)
   end
@@ -19,7 +19,7 @@ end
 
 
 #fill db with fake info for development
-if ENV.fetch("RAILS_ENV") == "development"
+if ENV.fetch("RAILS_ENV") != "production"
   InitMexicoPlaces.all.keys.each do |state|
     State.create(name: state, country_id: 1)
   end
