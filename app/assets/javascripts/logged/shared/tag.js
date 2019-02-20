@@ -3,33 +3,38 @@ $(document).on('turbolinks:load', function() {
 });
 
 function startTags() {
-  if ($(".tags-input").length == 1 && $(".tags-main-input").length == 0) {
+  if ($(".tags-input").length == 1 && $(".tags-input .initialized").length == 0) {
     let hiddenInput,
       el = document.getElementsByClassName('tags-input'),
-      mainInput = document.createElement('textarea'),
+      // mainInput = document.createElement('textarea'),
+      mainInput = $('.main-input')[0],
       stored,
       tagNumber = 0,
       tags = [];
-    if (window.location.href.indexOf("gigs") > -1) {
-      hiddenInput = document.getElementById('gig_tag_list');
-    } else {
-      hiddenInput = document.getElementById('request_tag_list');
-    }
 
-    mainInput.setAttribute('type', 'text');
-    mainInput.setAttribute('rows', 1);
-    mainInput.classList.add('main-input', 'tags-main-input');
+      hiddenInput = document.getElementsByClassName('hidden_tag_list')[0];
+
+      mainInput.classList.add('initialized');
+
+
+    // mainInput.setAttribute('type', 'text');
+    // mainInput.setAttribute('rows', 1);
+
+    // if (window.location.href.indexOf("configuration") > -1) {
+    // }
+    // else{
+    //   mainInput.classList.add('main-input', 'tags-main-input');
+    // }
     mainInput.addEventListener('input', function() {
       let enteredTags = mainInput.value.split('\n');
       let enteredTags2 = mainInput.value.replace(/^ +/gm, '');
       enteredTags2 = enteredTags2.split(' ');
-      console.log(enteredTags2);
 
       if (enteredTags.length > 1 || enteredTags2.length > 1) {
         if (tagNumber < 5) {
           if (enteredTags[0].length > 0 && enteredTags[0].length < 16 || enteredTags2[0].length > 0 && enteredTags2[0].length < 16) {
             $(".tag-error").html("");
-            addTag(enteredTags[0]);
+            addTag(enteredTags[0], "yes");
           } else {
             $(".tag-error").html("Cada tag debe contener de 1 a 15 caracteres");
           }
@@ -47,8 +52,7 @@ function startTags() {
         removeTag(tags.length - 1);
       }
     });
-
-    el[0].appendChild(mainInput);
+    // el[0].appendChild(mainInput);
 
     if (hiddenInput.value != "") {
       stored = hiddenInput.value.split(" ");
@@ -59,7 +63,7 @@ function startTags() {
     }
 
 
-    function addTag(text) {
+    function addTag(text, enter="no") {
       let tag = {
         text: text,
         element: document.createElement('span'),
@@ -79,8 +83,10 @@ function startTags() {
 
       el[0].insertBefore(tag.element, mainInput);
       tagNumber += 1;
-
       refreshTags();
+      if( enter == "yes" && window.location.href.indexOf("configuration") > -1 ) {
+        $('form.config-tag-form').submit();
+      }
     }
 
     function removeTag(index) {
@@ -89,6 +95,9 @@ function startTags() {
       el[0].removeChild(tag.element);
       tagNumber -= 1;
       refreshTags();
+      if (window.location.href.indexOf("configuration") > -1) {
+        $('form.config-tag-form').submit();
+      }
     }
 
     function refreshTags() {

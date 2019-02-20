@@ -29,16 +29,26 @@ function autocom_loc_func(id) {
       }
     });
   }
+
   $(id).on("keydown", function(e) {
-      //erase value of location if something random is typped
+    //erase value of location if something random is typped
     if (e.keyCode == 13 && $(e.target).closest("form").find(".city").val() == window.city_val && window.location_val != $(this).val()) {
       alert("Debes elegir alguna de las opciones proporcionadas");
       $(this).val("");
     }
 
   });
-  //retype the location if nothing is set
-  $(id).blur(function(event) {
-    $(this).val(window.location_val);
-  });
+  if (id == "#form_autocomplete") {
+    $(id).blur(function(e) {
+      //if id is same, retype location
+      if ($(e.target).closest("form").find(".city").val() == window.city_val) {
+        $(this).val(window.location_val);
+      }
+    });
+  } else {
+    //retype the location if nothing is set
+    $(id).blur(function(e) {
+      $(this).val(window.location_val);
+    });
+  }
 }

@@ -23,7 +23,7 @@ $ ->
       $(event.currentTarget).closest("div.current_img").fadeOut 500, -> @remove()
     #delete card element if configuration
     if $("#cardForm").length > 0
-      $(event.currentTarget).closest("tr").fadeOut 500, -> @remove()
+      $(event.currentTarget).closest("li.card_or_bank_object").fadeOut 500, -> @remove()
 
   # $('.change_user_alias').bind("ajax:success", (data) ->
   #    console.log(this)

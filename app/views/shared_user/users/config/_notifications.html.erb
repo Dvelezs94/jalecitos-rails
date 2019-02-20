@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-header" id="headingTwo">
+    <h5 class="mb-0">
+      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#notifications_collapse" aria-expanded="<%= (params[:collapse] == "notifications")? "true" : "false" %>" aria-controls="notifications_collapse">
+        Notificaciones
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+        <i class="fa fa-angle-down" aria-hidden="true"></i>
+      </button>
+    </h5>
+  </div>
+  <div id="notifications_collapse" class="collapse <%= " show" if params[:collapse] == "notifications" %>" aria-labelledby="headingTwo" data-parent="#accordion">
+    <div class="card-body">
+      <div class="Probar-Notificaciones-content">
+        <div class="Probar-Notificaciones-btn">
+          <button onclick="resetNotifications(event)" class="default-btn">Probar Notificaciones</button>
+        </div>
+        <div class="Notificaciónss">
+          <div class="input-checkbox" style="display: flex;align-items:center;">
+            <label for="">Notificación por e-mail:</label>
+            <%= best_in_place current_user, :transactional_emails, as: :checkbox, collection: {true: "Activado &#xf303;".html_safe, false: "Desactivado &#xf303;".html_safe}, url: update_users_path, :data => {:name => "notificación por e-mail"}, class: "boolean",
+            style: "font-family: 'Font Awesome 5 Free' !important;font-weight:900;" %>
+          </div>
+          <div class="input-checkbox" style="display: flex;align-items:center;">
+            <label for="">Últimas noticias:</label>
+            <%= best_in_place current_user, :marketing_emails, as: :checkbox, collection: {true: "Activado &#xf303;".html_safe, false: "Desactivado &#xf303;".html_safe}, url: update_users_path, :data => {:name => "notificación de últimas noticias"}, class:
+            "boolean", style: "font-family: 'Font Awesome 5 Free' !important;font-weight:900;"%>
+          </div>
+
+          <%=form_with(model: current_user, url: update_users_path, method: :put, :html => { :class=> "config-tag-form" }, remote: true) do |f| %>
+          <label for="">Etiquetas:</label>
+          <div class="tags-input" data-name="tags-input">
+            <%= f.hidden_field :tag_list, class: "hidden_tag_list" %>
+            <textarea rows="1" class="main-input config-tag-input font-awesome" placeholder="&#xf02c;"></textarea>
+          </div>
+          <label class="tag-error error"></label>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

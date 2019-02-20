@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="card-header" id="headingThree">
+    <h5 class="mb-0">
+      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#payment_methods" aria-expanded="<%= (params[:collapse] == "payment_methods")? "true" : "false" %>" aria-controls="payment_methods">
+        Métodos de pago
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+        <i class="fa fa-angle-down" aria-hidden="true"></i>
+      </button>
+    </h5>
+  </div>
+  <div id="payment_methods" class="collapse <%= "show" if params[:collapse] == "payment_methods" %>" aria-labelledby="headingThree" data-parent="#accordion">
+    <div class="card-body">
+      <div class="Métodos-de-pago loading-zone">
+        <div class="todos-list-">
+          <%= render partial: 'users/card', collection: @user_cards %>
+        </div>
+        <div class="loading row justify-content-center" style="text-align: center; display: none;">
+          <%= image_tag('loading.gif') %>
+        </div>
+
+        <div class="Nueva-tarjeta-btn">
+          <button id="cardbtn2" class="default-btn">Nueva Tarjeta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
