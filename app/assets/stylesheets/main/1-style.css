@@ -2922,7 +2922,6 @@ div.form {
 /*tabs*/
 .transacciones-tab-content {
 	position: relative;
-  justify-content: center;
 }
 
 .Transacciones-tab-area .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
