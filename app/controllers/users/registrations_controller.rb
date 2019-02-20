@@ -56,9 +56,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    if current_user.valid_password?(params[:password])
+      if current_user.disabled!
+        flash[:success] = "Tu cuenta ha sido desactivada."
+        redirect_to after_destroy_account_path
+      else
+        flash[:notice] = "Couldn't delete"
+        redirect_to configuration_path
+      end
+    else
+      flash[:notice] = "La contrasena no es valida"
+      redirect_to configuration_path
+    end
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -89,6 +100,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
     params[:from_mobile].present? ? mobile_sign_in_path : super(resource)
+  end
+
+  def after_destroy_account_path
+    params[:from_mobile].present? ? mobile_sign_in_path : root_path
   end
 
   private

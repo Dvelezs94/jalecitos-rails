@@ -15,7 +15,7 @@ class Order < ApplicationRecord
   belongs_to :employer, foreign_key: :employer_id, class_name: "User"
   belongs_to :employee, foreign_key: :employee_id, class_name: "User"
   belongs_to :purchase, polymorphic: true, optional: true
-  belongs_to :withdrawal, optional: true
+  belongs_to :payout, optional: true
   #Associations
   has_one :dispute
   has_many :reviews

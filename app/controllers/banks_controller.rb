@@ -6,6 +6,7 @@ class BanksController < ApplicationController
   before_action only: [:create, :destroy] do
     init_openpay("bank")
   end
+  before_action :validate_max_banks, only: :create
   access user: [:create, :destroy]
   before_action :check_user_ownership, only:[:create, :destroy]
 
@@ -55,6 +56,18 @@ class BanksController < ApplicationController
       if ! my_profile
         flash[:error] = "No tienes permisos para acceder aquí"
         redirect_to root_path
+      end
+    end
+
+    # Each user can have a max of 3 banks
+    def validate_max_banks
+      @current_avail_banks = get_openpay_resource("bank", current_user.openpay_id).count
+      if @current_avail_banks < 3
+        return true
+      else
+        flash[:error] = "Solo puedes tener un maximo de 3 bancos. Elimina una cuenta para poder proceder."
+        redirect_to configuration_path(collapse: "withdraw")
+        return false
       end
     end
 end

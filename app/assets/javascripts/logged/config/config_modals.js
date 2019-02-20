@@ -4,5 +4,6 @@ $(document).on('turbolinks:load', function() {
     modals('bankModal', "bankbtn2");
     modals('changePasswordModal', "changepassbtn2");
     modals('billingProfileModal', "billingprofilebtn2");
+    modals('confirmAccountDeletionModal', "confirmaccountdeletionbtn")
   }
 });

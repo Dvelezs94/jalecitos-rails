@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :lat, :lon
+  include ApplicationHelper
   #includes
   #friendly_id
   extend FriendlyId
@@ -70,6 +71,8 @@ class User < ApplicationRecord
   has_many :offers
   # Gigs
   has_many :gigs
+  # Payouts
+  has_many :payouts
   # Notifications
   has_many :notifications, as: :recipient
   # Orders and sales
@@ -79,8 +82,6 @@ class User < ApplicationRecord
   has_many :reviews, class_name: :Review, foreign_key: :giver_id
   #Push subscriptions reference
   has_many :push_subscriptions
-  #withdrawals Relations
-  has_many :withdrawals
   # Billing info (Invoices Profiles relation)
   has_many :billing_profiles
   # likes
@@ -98,6 +99,10 @@ class User < ApplicationRecord
   #disputes
   def disputes
     Dispute.where(order_id: Order.where(employer_id: self.id)).or(Dispute.where(order_id: Order.where(employee_id: self.id)))
+  end
+
+  def unpaid_orders
+    Order.where(employee: self, status: "completed", paid_at: nil)
   end
   ############################################################################################
   ## PeterGate Roles                                                                        ##
@@ -132,8 +137,8 @@ class User < ApplicationRecord
        super && self.active?
    end
    def balance
-     init_openpay("customer")
-     @customer.get(self.openpay_id)["balance"]
+     @orders_total = self.unpaid_orders
+     calc_employee_orders_earning(@orders_total.sum(:total), @orders_total.count)
    end
 
    def set_defaults
@@ -156,5 +161,4 @@ class User < ApplicationRecord
        true
      end
    end
-
 end

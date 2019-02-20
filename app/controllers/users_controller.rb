@@ -5,9 +5,10 @@ class UsersController < ApplicationController
   include ReportFunctions
   respond_to :html, :json
   layout :set_layout
+  before_action :check_if_my_profile, only: :show
   before_action :set_user, only: [:show]
   before_action :set_user_config, only: [:configuration]
-  access all: [:show], user: [:update_user, :configuration]
+  access all: [:show], user: [:update_user, :configuration, :my_account]
 
 
   def configuration
@@ -35,6 +36,26 @@ class UsersController < ApplicationController
         @gigs = Gig.search("*", includes: [:packages, :user], where: {user_id: @user.id, status: "published"} )
       end
     end
+  end
+
+  def my_account
+    @user = current_user
+    if params[:reviews]
+      @reviews = Review.search("*", where: {receiver_id: @user.id, status: "completed"}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:reviews], per_page: 20)
+    elsif params[:requests]
+      @requests = Request.search("*", where: {user_id: @user.id}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:requests], per_page: 20 )
+    else
+      report_options
+      @reviews = Review.search("*", where: {receiver_id: @user.id, status: "completed"}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:reviews], per_page: 20)
+      if @user == current_user
+        @gigs = Gig.search("*", includes: [:packages, :user], where: {user_id: @user.id}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], execute: false )
+        @requests = Request.search("*", where: {user_id: @user.id}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], execute: false, page: params[:requests], per_page: 20 )
+        Searchkick.multi_search([@gigs, @requests])
+      else
+        @gigs = Gig.search("*", includes: [:packages, :user], where: {user_id: @user.id, status: "published"} )
+      end
+    end
+    render "show"
   end
 
   # PATCH/PUT /users/1
@@ -98,5 +119,9 @@ class UsersController < ApplicationController
                                    :transactional_emails,
                                    :marketing_emails
                                  )
+    end
+
+    def check_if_my_profile
+        redirect_to my_account_users_path if current_user.slug == params[:id]
     end
 end
