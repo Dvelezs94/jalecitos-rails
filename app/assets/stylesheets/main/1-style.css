@@ -3045,3 +3045,8 @@ div.form {
 .mobile_menu_autocomplete.tt-hint {
   color: #39C27B !important;
 }
+
+.font-awesome {
+  font-family: 'Font Awesome 5 Free' !important;
+  font-weight: 900;
+}

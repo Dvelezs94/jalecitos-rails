@@ -99,7 +99,8 @@
 	position: relative;
 	margin-bottom: 15px;
 }
-.inp-area input, .inp-area span {
+.inp-area input, .inp-area span.best_in_place,
+.config-tag-input {
   width: 100%;
   border: none;
   background: #F5F6F7;
@@ -388,42 +389,6 @@
 }
 .Notificaciónss {
 	margin-top: 30px;
-}
-
-
-.fotografi li {
-  font-size: 19px;
-  list-style: none;
-  position: absolute;
-  left: 15px;
-}
-.fotografi {
-	position: relative;
-	background: #F7F7F7;
-	padding: 9px;
-	border-radius: 5px;
-}
-.fotografi li::after {
-	position: absolute;
-	content: "";
-	background: #39C27B;
-	width: 2px;
-	height: 58%;
-	top: 50%;
-	margin-top: -8px;
-	right: -4px;
-}
-.fotografi a {
-  padding: 6px 10px;
-  display: inline-block;
-  background: #0368F4;
-  color: #fff;
-  font-size: 13px;
-  border-radius: 5px;
-  margin-left: 130px;
-}
-.fotografi a:last-child {
-  margin-left: 17px;
 }
 
 .todos-list- li {

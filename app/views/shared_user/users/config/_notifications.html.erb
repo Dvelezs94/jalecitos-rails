@@ -8,7 +8,7 @@
       </button>
     </h5>
   </div>
-  <div id="notifications_collapse" class="collapse <%= "show" if params[:collapse] == "notifications" %>" aria-labelledby="headingTwo" data-parent="#accordion">
+  <div id="notifications_collapse" class="collapse <%= " show" if params[:collapse] == "notifications" %>" aria-labelledby="headingTwo" data-parent="#accordion">
     <div class="card-body">
       <div class="Probar-Notificaciones-content">
         <div class="Probar-Notificaciones-btn">
@@ -25,17 +25,17 @@
             <%= best_in_place current_user, :marketing_emails, as: :checkbox, collection: {true: "Activado &#xf303;".html_safe, false: "Desactivado &#xf303;".html_safe}, url: update_users_path, :data => {:name => "notificación de últimas noticias"}, class:
             "boolean", style: "font-family: 'Font Awesome 5 Free' !important;font-weight:900;"%>
           </div>
-        </div>
-        <div class="fotografi">
-          <li>fotografí</li>
-          <a href="">video
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </a>
-          <a href="">eventos
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </a>
-        </div>
+
+          <%=form_with(model: current_user, url: update_users_path, method: :put, :html => { :class=> "config-tag-form" }, remote: true) do |f| %>
+          <label for="">Etiquetas:</label>
+          <div class="tags-input" data-name="tags-input">
+            <%= f.hidden_field :tag_list, class: "hidden_tag_list" %>
+            <textarea rows="1" class="main-input config-tag-input font-awesome" placeholder="&#xf02c;"></textarea>
+          </div>
+          <label class="tag-error error"></label>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
 </div>

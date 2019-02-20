@@ -102,7 +102,8 @@
             </div>
             <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
               <div class="tags-input" data-name="tags-input">
-                <%= form.hidden_field :tag_list %>
+                <%= form.hidden_field :tag_list, class: "hidden_tag_list" %>
+                <textarea name="tag_list" rows="1" class="main-input tags-main-input"></textarea>
               </div>
               <label class="tag-error error"></label>
 
