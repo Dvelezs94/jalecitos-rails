@@ -1018,12 +1018,12 @@ p {}
 .pacificobg-socialicon {
   position: absolute;
   display: flex;
-  top: 20px;
+  top: 0;
   width: 100%;
   text-align: right;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%);
+  background: linear-gradient(to bottom, rgba(60,59,55,0.5) 0%,rgba(0,0,0,0) 100%);
   z-index: 1;
-  padding: 5px 0;
+  padding: 10px 0;
 }
 
 .singleslidep {}

@@ -15,6 +15,10 @@
     cursor: pointer;
 }
 
+.current_images {
+  justify-content: center;
+}
+
 .post_form_col {
     background: #fff;
     border: 1px #e3e3e3 solid;
@@ -27,6 +31,7 @@
   padding-bottom: 22px;
   margin-bottom: 2vh;
 }
+
 .label-price{
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -42,9 +47,6 @@
 #price-symbol{
   margin: auto 5px;
   font-size: 20px;
-}
-.form_block img {
-    width: 31px;
 }
 
 .form_block textarea {
@@ -428,13 +430,6 @@ p.example {
 }
 }
 
-.end-buttons{
-  display: flex;
-}
-
-.end-buttons input[type=submit]{
-  float: right;
-}
 
 .tags-main-input{
   height: auto !important;
@@ -529,6 +524,13 @@ div.error{
     margin: 0 auto;
     text-align: center;
   }
+  img.delete-image {
+    width: 200px;
+  }
+  .continue-button,
+  .back-button {
+    width: 100px;
+  }
 }
 
 .del-img-icon{
@@ -537,6 +539,7 @@ div.error{
   top: 28%;
   right: 40%;
   cursor: pointer;
+  color: black;
 }
 .current_img:hover i{
   visibility: visible;
