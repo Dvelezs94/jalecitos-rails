@@ -6,16 +6,20 @@
     </div>
     <div class="metodo-text">
       <h4>Método de Pago
-        <%= link_to "Administrar Tarjetas #{icon("fa", "angle-right")}".html_safe, configuration_path(anchor: "card") %></h4>
+        <%= link_to "Administrar Tarjetas #{icon("fa", "angle-right")}".html_safe, configuration_path(collapse: "payment_methods") %></h4>
     </div>
 
     <div class="checkmark-area">
+      <% if @user_cards.count > 0 %>
       <%= render partial: 'shared_user/hire/card', collection: @user_cards, locals:{ f: f }%>
+      <% else %>
+        No tienes tarjetas agregadas. Haz click <%= link_to "Aqui", configuration_path(collapse: "payment_methods") %> para agregar una nueva.
+      <% end %>
     </div>
 
     <div class="metodo-text">
       <h4>Facturación
-        <%= link_to "Administrar Facturación #{icon("fa", "angle-right")}".html_safe, configuration_path(anchor: "billingprofile") %></h4>
+        <%= link_to "Administrar Facturación #{icon("fa", "angle-right")}".html_safe, configuration_path(collapse: "billing") %></h4>
     </div>
 
     <%= render partial: 'shared_user/hire/billing_profile', collection: @billing_profiles, locals:{ f: f } %>
