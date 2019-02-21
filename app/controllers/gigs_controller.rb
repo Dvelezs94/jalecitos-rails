@@ -109,7 +109,7 @@ class GigsController < ApplicationController
     end
 
     def get_related_gigs
-      @related_gigs = Gig.search("*", where: { category_id: @gig.category_id, status: "published", id: { not: @gig.id }, city_id: @gig.city_id }, page: params[:related_gigs], per_page: 5)
+      @related_gigs = Gig.search("*", where: { category_id: @gig.category_id, status: "published", _id: { not: @gig.id }, city_id: @gig.city_id }, page: params[:related_gigs], per_page: 5)
     end
 
     def get_reviews
