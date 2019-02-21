@@ -9,7 +9,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-7 col-md-12 centered-form">
-        <h3>Agrega un nuevo jale para ofertar tus servicios</h3>
+        <h3>Agrega un nuevo Jale para ofertar tus servicios</h3>
         <div class="form_box post_form_col">
 
           <div class="form_block row">
@@ -51,7 +51,7 @@
               <p class="form-title">Elige una categoria:</p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
-            <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría" }, class: 'form-category required' ) %>
+            <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría" }, class: 'form-select required' ) %>
 
             <%= render 'shared_user/gigs/forms/hints/category_hint.html.erb' %>
           </div>
