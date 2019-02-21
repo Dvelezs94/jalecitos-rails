@@ -232,11 +232,11 @@ body {
 }
 .pendiente-text h4 {
 	position: absolute;
-	top: 50%;
 	right: 10px;
 	font-weight: 700;
 	font-size: 22px;
 	margin-top: -35px;
+  top: auto;
 }
 .pendiente-text h5 {
 	font-weight: 700;
