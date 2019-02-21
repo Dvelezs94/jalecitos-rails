@@ -6,7 +6,7 @@
 <% end %>
 
 <!-- ---post request form -->
-<div class="container-fluid section request_post_form">
+<div class="container-fluid section ">
   <div class="container">
     <div class="row">
       <div class="col-lg-7 col-md-12 centered-form">
@@ -67,9 +67,9 @@
               <%= icon "fas","folder-open", class: "fa-2x" %>
             </div>
             <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-              <div class="input-box">
+
                 <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, class: 'required', prompt: 'Selecciona Una Opcion' ) %>
-              </div>
+
             </div>
             <%= render 'shared_user/requests/forms/hints/category_hint.html.erb' %>
           </div>
@@ -122,9 +122,7 @@
               <%= icon "fas","dollar", class: "fa-2x" %>
             </div>
             <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-              <div class="input-box">
                 <%= form.select :budget, options_for_budget, {}, prompt: 'Selecciona Una Opcion', class: "required" %>
-              </div>
             </div>
             <%= render 'shared_user/requests/forms/hints/budget_hint.html.erb' %>
           </div>
