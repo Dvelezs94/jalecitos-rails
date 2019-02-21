@@ -200,8 +200,9 @@
 }
 
 .chat-write-text p {
+  color: #fff;
 	font-size: 17px;
-	background: #F5F6F7;
+  background: #39C27B;
 	padding: 10px;
 	border-radius: 5px;
 	margin-bottom: 8px;
@@ -231,9 +232,8 @@
 }
 
 .chat-right-write-text p {
-	color: #fff;
 	font-size: 17px;
-	background: #39C27B;
+	background: #F5F6F7;
 	max-width: 350px;
 	padding: 10px;
 	border-radius: 5px;

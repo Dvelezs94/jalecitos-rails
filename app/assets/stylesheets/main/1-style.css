@@ -772,16 +772,17 @@ p {}
 
 .rightsidetab-content::after {
   position: absolute;
-  background: #979797;
-  height: 1px;
+  background: #F5F6F7;
+  height: 3px;
   width: 100%;
   content: "";
   left: 0;
-  top: 46px;
+  top: 44px;
+  z-index: -1;
 }
 
 .rightsidetab-content .nav-tabs .nav-link.active {
-  border-bottom: 2px solid #39C27B !important;
+  border-bottom: 3px solid #39C27B !important;
   border-color: transparent;
 }
 
@@ -2780,8 +2781,10 @@ p.req_location {
   justify-content: space-between;
 }
 #profile_tabs a {
-  color: black;
-  font-size: 16px;
+  border: none;
+  font-size: 19px;
+  font-weight: 700;
+  color: #C7C7CC;
 }
 /*MENU*/
 .tablet-mobile-user img {
