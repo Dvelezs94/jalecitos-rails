@@ -21,6 +21,10 @@
   	border: none;
   	padding: 0;
   }
+  .total-a-ex a {
+  	font-size: 15px;
+  	padding: 7px 30px;
+  }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
