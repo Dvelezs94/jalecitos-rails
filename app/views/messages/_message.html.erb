@@ -1,21 +1,21 @@
 <% if user == message.user %>
-<div class="chat-left-side-chat-write chat-write">
-    <div class="single-chat-write">
+<div class="chat-right-side-chat-write chat-write">
+    <div class="single-right-chat-write">
         <!-- <%= image_tag(message.user.image_url(:thumb), class: "message-avatar") %> -->
         <div class="chat-write-text">
             <% if message.body? %>
               <p><%= message.body %></p>
             <% end %>
             <% if message.image? %>
-              <p><%= link_to(image_tag(message.image_url, class: "message-img"), message.image_url ) %></p>
+              <p><%= link_to(image_tag(message.image_url, class: "message-img"), message.image_url, target: "_blank" ) %></p>
             <% end %>
             <!-- <span>14:36</span> -->
         </div>
     </div>
 </div>
 <% else %>
-<div class="chat-right-side-chat-write chat-write">
-    <div class="single-right-chat-write">
+<div class="chat-left-side-chat-write chat-write">
+    <div class="single-chat-write">
         <div class="chat-right-write-text">
             <p><%= message.body %>
             <% if message.image? %>
