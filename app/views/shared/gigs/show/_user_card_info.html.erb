@@ -1,11 +1,11 @@
 <div class="mentos-areapag3">
   <div class="mentos-authors">
-    <%= link_to image_tag(avatar_display_helper(@gig.user.image_url(:thumb)), class: "nav-avatar"), user_path(@gig.user.slug) %>
+    <%= link_to image_tag(avatar_display_helper(@gig.user.image_url), class: "nav-avatar"), user_path(@gig.user.slug) %>
     <div class="mentos-title2">
       <h1><%=link_to @gig.user.alias, user_path(@gig.user.slug), style: "color: black;" %>
         <%= "<span> #{icon("fas", "check-square", title: "Verificado")} </span>".html_safe if @gig.user.verified %>
       </h1>
-      <p class="hace2"><%= @gig.user.location.present? %></p>
+      <p class="hace2"><%= @gig.user.location %></p>
       <div class="mentosstar-list">
         <%= star_display_helper(@gig.user.score.employee_score_average) %>
         <p class="hace1">Activo(a) hace <%= distance_of_time_in_words_to_now(@gig.user.current_sign_in_at) %></p>
