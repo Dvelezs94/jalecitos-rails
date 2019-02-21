@@ -1,6 +1,6 @@
 <div class="mentos-areapag3">
   <div class="mentos-authors">
-    <%= link_to image_tag(avatar_display_helper(@gig.user.image_url(:thumb)), class: "nav-avatar"), user_path(@gig.user.slug) %>
+    <%= link_to image_tag(avatar_display_helper(@gig.user.image_url), class: "nav-avatar"), user_path(@gig.user.slug) %>
     <div class="mentos-title2">
       <h1><%=link_to @gig.user.alias, user_path(@gig.user.slug), style: "color: black;" %>
         <%= "<span> #{icon("fas", "check-square", title: "Verificado")} </span>".html_safe if @gig.user.verified %>
