@@ -3035,8 +3035,23 @@ div.form {
   width: 70%;
 }
 
+.question_hint.toggler {
+  cursor: pointer;
+}
+
+/*custom styles*/
 .font-awesome {
   font-family: 'Font Awesome 5 Free' !important;
   font-weight: 900 !important;
 
+}
+
+.flex-space-bet {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.displayed {
+  display: block !important;
 }

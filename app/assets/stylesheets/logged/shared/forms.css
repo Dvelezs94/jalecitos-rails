@@ -73,6 +73,13 @@ span.action {
   border-radius: 4px;
 }
 
+.form_box input:focus,
+.form_box textarea:focus,
+.form_box select:focus {
+  outline: none !important;
+}
+
+
 .custom-file-upload {
 
     cursor: pointer;
@@ -127,10 +134,10 @@ small.attach-limit {
 }
 
 span.fa.fa-lightbulb-o,
-.exclamation_hint {
+.question_hint {
     background-color: #27825F;
     color: white;
-    width: 24px;
+    min-width: 24px;
     height: 24px;
     border-radius: 50%;
     margin-right: 9px;
@@ -164,14 +171,15 @@ ul.dropdown-menu {
     border: 1px solid rgba(0,0,0,.15);
     /* border-radius: .25rem; */
     border-top: 0px;
-
 }
 
 .form_block .tooltiptext {
+  display: none;
   background-color: #EAF3EF;
   color: #655e5e;
   padding: 12px 13px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .form-category {
@@ -231,6 +239,9 @@ ul.dropdown-menu {
 
 .cf {
     *zoom: 1;
+}
+.form_block {
+  margin-bottom: 20px;
 }
 
 /* FORM */
@@ -323,19 +334,22 @@ section.plan.cf {
 .form_block {
     opacity: 1;
     position: relative;
-    margin: 34px 0px;
+    margin: 0 20px 34px 20px;
     padding-right: 20px;
     padding-left: 20px;
 }
 
+.question_hint.toggler {
+  display: none;
+}
+
 .form_block .tooltiptext {
-    visibility: hidden;
     width: 46%;
     left: 100%;
     position: absolute;
 }
 /*Vertical position of hints */
-#gig_name_hint,
+/* #gig_name_hint,
 #request_name_hint{
   top: -49%;
 }
@@ -355,10 +369,10 @@ section.plan.cf {
 }
 #gig_tags_hint{
   top: -25%;
-}
+} */
 /*end*/
 .form_block:hover .tooltiptext {
-    visibility: visible;
+    display: block;
 }
 .tooltiptext h3.p-t-10 {
     font-size: 18px;
@@ -391,6 +405,10 @@ span.tooltiptext:before {
 .form_block .tooltiptext {
     width: 100%;
     margin: 17px 0px;
+}
+
+.tooltiptext .question_hint {
+  display: none;
 }
 
 p.example {
