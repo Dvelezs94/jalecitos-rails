@@ -56,6 +56,23 @@
     border-radius: 4px;
 }
 
+span.action {
+  color: #000;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.form_box .styled {
+  color: #7F7F7F;
+  width: 100%;
+  border: 1px solid #E5E5E5;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: 400;
+  background: #FAFAFA;
+  border-radius: 4px;
+}
+
 .custom-file-upload {
 
     cursor: pointer;
@@ -77,6 +94,25 @@
     border-radius: 3px;
 }
 
+.continue-button,
+.back-button {
+  color: #fff;
+  width: 133px;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.continue-button {
+  background: #39C27A;
+}
+
+.back-button {
+  background: #7E7E7E;
+}
+
 .custom-file-upload:hover {
     color:green;
 }
@@ -90,25 +126,22 @@ small.attach-limit {
     color: #777777bd;
 }
 
-.input-box a.dropdown-toggle {
-    font-size: 15px;
-    overflow: hidden;
-    width: 49%;
-    box-sizing: border-box;
-    background-color: #fff;
-    display: inline-block;
-    position: relative;
-      color: #777;
-    text-decoration: none;
-    text-align: left;
-    border: 1px #b2b2b2 solid;
-    padding: 7px 30px 7px 10px;
-
-    margin: 0;
-    white-space: nowrap;
-    cursor: pointer;
-    border-radius: 3px;
+span.fa.fa-lightbulb-o,
+.exclamation_hint {
+    background-color: #27825F;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 9px;
+    text-align: center;
+    line-height: 25px;
 }
+
+.centered-form {
+  margin: 20px auto 0 auto;
+}
+
 
 
 ul.dropdown-menu {
@@ -134,24 +167,20 @@ ul.dropdown-menu {
 
 }
 
-.input-box select {
-    border: 1px #b2b2b2 solid;
-    border-radius: 4px;
-    width: 49%;
-    height: 33px;
-    font-size: 14px;
-    cursor: pointer;
+.form_block .tooltiptext {
+  background-color: #EAF3EF;
+  color: #655e5e;
+  padding: 12px 13px;
+  font-size: 14px;
 }
 
-.current_form .text_box{
-
-    border: 1px #b2b2b2 solid;
-    border-radius: 4px;
-    width: 49%;
-    height: 33px;
-    padding: 0px 9px;
+.form-category {
+  text-align: left;
+  padding: 12px 18px;
+  background: #ECF9F2;
+  border: none;
+  color: #39C27B;
 }
-
 
 .btn-standard2{
     padding: 6px 21px;
@@ -210,6 +239,13 @@ ul.dropdown-menu {
 	display: none;
 }
 
+.tooltiptext h3.p-t-10 {
+  line-height: inherit;
+}
+.form-title {
+  font-weight: 700;
+  color: #39C27B;
+}
 .form label {
     position: relative;
     border-radius: 4px;
@@ -258,11 +294,7 @@ section.plan.cf {
 }
 
 @media only screen and (max-width:600px){
-    .input-box select,.form label,.btn-standard2,.text_box{
-        width: 100%;
-        margin-bottom: 10px;
-        margin-left: 0px;
-    }
+
 }
 .post {
     font-size: 14px;
@@ -299,13 +331,8 @@ section.plan.cf {
 .form_block .tooltiptext {
     visibility: hidden;
     width: 46%;
-    background-color: #DEEFF0;
-    color: #655e5e;
-    padding: 12px 13px;
     left: 100%;
-    font-size: 14px;
     position: absolute;
-    z-index: 1;
 }
 /*Vertical position of hints */
 #gig_name_hint,
@@ -344,14 +371,6 @@ p.example {
     border-radius: 5px;
 }
 
-span.fa.fa-lightbulb-o {
-    background-color: #78cdd2;
-    color: white;
-    padding: 11px 14px;
-    border-radius: 49%;
-    margin-right: 9px;
-}
-
 span.tooltiptext:before {
     content: '';
     display: block;
@@ -371,23 +390,9 @@ span.tooltiptext:before {
 @media only screen and (max-width:1016px){
 .form_block .tooltiptext {
     width: 100%;
-    background-color: #DEEFF0;
-    color: #655e5e;
-    padding: 12px 13px;
-    /* left: 105%;
-    top: -49%; */
-    font-size: 14px;
-    /* left: 50%; */
-    position: relative;
     margin: 17px 0px;
 }
-span.fa.fa-lightbulb-o {
-    background-color: #78cdd2;
-    color: white;
-    padding: 11px 14px;
-    border-radius: 49%;
-    margin-right: 9px;
-}
+
 p.example {
     /* border: 1px solid blue; */
     padding: 5px 9px;
