@@ -679,7 +679,7 @@ ul.social-buttons li a {
   transition: all 0.3s;
   color: white;
   border-radius: 100%;
-  
+
   background-color: #212529;
 }
 
@@ -719,7 +719,7 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 }
 
 .centered-form {
-  margin: 0 auto;
+  margin: 20px auto 0 auto;
 }
 /*Links of pagination*/
 .pagination{

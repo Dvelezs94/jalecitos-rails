@@ -5,129 +5,99 @@
   <% end %>
 <% end %>
 <!-- ---post request form -->
-<div class="container-fluid section request_post_form">
+<div class="container-fluid section">
   <div class="container">
     <div class="row">
       <div class="col-lg-7 col-md-12 centered-form">
-        <h3>Ofrece Tus Servicios Por Medio De Un Nuevo Jale</h3>
+        <h3>Agrega un nuevo Jale para ofertar tus servicios</h3>
         <div class="form_box post_form_col">
-          <div class="col-lg-12  col-md-12">
-            <p>¿Qué oficio/profesión estás ejerciendo en este jale?</p>
-          </div>
+
           <div class="form_block row">
-            <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-              <%= icon "fas","folder-open", class: "fa-2x" %>
+            <div class="flex-space-bet">
+              <p class="form-title">¿Cúal es tu profesión u oficio en este jale?</p>
+              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
-            <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-              <div class="input-box">
-                <%= form.text_field :profession, class: "form-control", required: true, maxlength: 50, placeholder: "Ej: Fotógrafo" %>
-              </div>
-            </div>
+            <%= form.text_field :profession, class: "styled", required: true, maxlength: 50, placeholder: "Ej: Fotógrafo" %>
             <%= render 'shared_user/gigs/forms/hints/profession_hint.html.erb' %>
           </div>
 
-          <div class="col-lg-12  col-md-12">
-            <p>¿Qué estás ofreciendo?</p>
-          </div>
           <div class="form_block row ">
+            <div class="flex-space-bet">
+              <p class="form-title">¿Qué vas a ofrecer?</p>
+              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
+            </div>
 
-            <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-              <%= icon "fas","font", class: "fa-2x" %>
-            </div>
-            <div class="row col-lg-11 col-md-11 col-sm-11 col-11">
-              Voy a...
-              <%= form.text_area :name, class: 'name-class name-0 js-br-description required', placeholder: "realizarte una sesión de fotografías.", value: gig.name, maxlength: 100 %>
-            </div>
+            <span class="action">Voy a...</span>
+            <%= form.text_area :name, class: 'name-class name-0 required styled', placeholder: "realizarte una sesión de fotografías.", value: gig.name, maxlength: 100 %>
 
             <%= render 'shared_user/gigs/forms/hints/name_hint.html.erb' %>
           </div>
           <hr>
-          <div class="col-lg-12  col-md-12">
-            <p>Descripción:</p>
-          </div>
           <div class="form_block row ">
-
-            <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-              <%= icon "fas","sticky-note", class: "fa-2x" %>
+            <div class="flex-space-bet">
+              <p class="form-title">Descripción:</p>
+              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
-            <div class="row col-lg-11 col-md-11 col-sm-11 col-11">
-              <%= form.text_field :description, class: 'js-br-description', id: "description", type: "hidden" %>
-              <trix-editor input="description" class="trix-class trix_input_0 required" maxlength="1000"></trix-editor>
+            <%= form.text_field :description, id: "description", type: "hidden" %>
+            <trix-editor input="description" class="trix-class trix_input_0 required styled" maxlength="1000"></trix-editor>
 
-              <div class="gap"></div>
-
-            </div>
             <%= render 'shared_user/gigs/forms/hints/description_hint.html.erb' %>
             <hr>
           </div>
           <hr>
 
-          <div class="col-lg-12  col-md-12">
-            <p>Elige una categoria:</p>
-          </div>
           <div class="form_block row">
-            <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-              <%= icon "fas","folder-open", class: "fa-2x" %>
+            <div class="flex-space-bet">
+              <p class="form-title">Elige una categoria:</p>
+              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
-            <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-              <div class="input-box">
-                <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: true }, class: 'input-box required' ) %>
-              </div>
-            </div>
+            <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría" }, class: 'form-select required' ) %>
+
             <%= render 'shared_user/gigs/forms/hints/category_hint.html.erb' %>
           </div>
           <hr>
           <!-- 2 end -->
-          <div class="col-lg-12  col-md-12">
-            <p>En qué ciudad del mundo te ubicas?
-            </p>
-          </div>
           <div class="form_block row">
-            <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-              <%= icon "fas","map-marker", class: "fa-2x" %>
+            <div class="flex-space-bet">
+              <p class="form-title">¿En qué ciudad del mundo te ubicas?
+              </p>
+              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
-            <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-              <%= form.text_field :location, class: 'text_box required', id: "form_autocomplete", size: 50, placeholder: 'Busca tu ciudad...', value: (gig.location(true) != nil)? gig.location : current_user.location(true) %>
-              <%= form.hidden_field :city_id, class: "city", value: current_user.city_id %>
-            </div>
+
+            <%= form.text_field :location, class: 'required font-awesome styled', id: "form_autocomplete", size: 50, placeholder: '&#xf3c5; Busca tu ciudad...'.html_safe, value: (gig.location(true) != nil)? gig.location : current_user.location(true) %>
+            <%= form.hidden_field :city_id, class: "city", value: current_user.city_id %>
+
             <%= render 'shared_user/gigs/forms/hints/city_hint.html.erb' %>
           </div>
           <hr>
 
           <!-- tags -->
-          <div class="col-lg-12  col-md-12">
-            <p>Especifica las etiquetas para que te encuentren más rapido (<strong>Opcional</strong>)
-            </p>
-          </div>
           <div class="form_block row">
-            <div class=" col-lg-1 col-md-1 col-sm-1 col-1">
-              <%= icon "fas","tags", class: "fa-2x" %>
+            <div class="flex-space-bet">
+              <p class="form-title">Especifica las etiquetas para que te encuentren más rapido (<strong>Opcional</strong>)
+              </p>
+              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
-            <div class=" col-lg-11 col-md-11 col-sm-11 col-11">
-              <div class="tags-input" data-name="tags-input">
-                <%= form.hidden_field :tag_list, class: "hidden_tag_list" %>
-                <textarea name="tag_list" rows="1" class="main-input tags-main-input"></textarea>
-              </div>
-              <label class="tag-error error"></label>
 
+            <div class="tags-input" data-name="tags-input">
+              <%= form.hidden_field :tag_list, class: "hidden_tag_list" %>
+              <textarea name="tag_list" rows="1" class="main-input tags-main-input styled font-awesome" placeholder="&#xf02c;"></textarea>
             </div>
+            <label class="tag-error error"></label>
+
             <%= render 'shared_user/gigs/forms/hints/tags_hint.html.erb' %>
           </div>
 
           <hr>
 
           <!-- 3 end -->
-          <div class="row">
-
-            <div class="col-lg-12  col-md-12 end-buttons">
-              <div class="col-lg-6  col-md-6 ">
-                <%= link_to 'Cancelar', user_path(current_user.slug), :data => {:confirm => 'Tu progreso hasta ahora NO se guardará'}, class: "btn btn-danger" %>
-              </div>
-              <div class="col-lg-6  col-md-6 ">
-                <%= form.submit "Continuar", class: "btn btn-success" %>
-              </div>
+          <div style="margin: 0 20px;">
+            <div class="flex-space-bet">
+                <%= link_to 'Cancelar', user_path(current_user.slug), :data => {:confirm => 'Tu progreso hasta ahora NO se guardará'}, class: "btn back-button" %>
+                <%= form.submit "Continuar", class: "btn continue-button" %>
             </div>
           </div>
+        </div>
         </div>
         <!-- form box -->
         <!-- -->
