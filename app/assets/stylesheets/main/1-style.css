@@ -103,10 +103,9 @@ h6 {
   color: #222222;
 
 }
-
 body {
-  color: #9B9B9B;
   font-weight: 400;
+  font-family: 'Nunito', sans-serif;
   font-size: 14px;
 }
 
@@ -714,6 +713,10 @@ p {}
   color: #0067F4 !important;
   padding-top: 2px;
   padding-bottom: 5px;
+}
+
+.mar-0-auto {
+  margin: 0 auto;
 }
 
 .gig-profile .gig-image-profile img {
@@ -3000,7 +3003,7 @@ div.form {
 }
 
 /*active menu*/
-.active {
+.phone_links .active {
   color: #007bff !important;
 }
 /*search styles*/
@@ -3058,4 +3061,7 @@ div.form {
 
 .displayed {
   display: block !important;
+}
+.w-100 {
+  width: 100%;
 }
