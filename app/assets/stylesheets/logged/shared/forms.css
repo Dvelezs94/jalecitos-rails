@@ -41,13 +41,11 @@
   text-align: center;
   width: 100%;
 }
-.price-input{
-  width: 80%;
-}
 #price-symbol{
   margin: auto 5px;
   font-size: 20px;
 }
+
 
 .form_block textarea {
     padding: 5px 9px;
@@ -102,6 +100,7 @@ span.action {
     transition: color .2s,background-color .2s,box-shadow .2s,border .2s;
     border-radius: 3px;
 }
+
 
 .continue-button,
 .back-button {
@@ -259,6 +258,7 @@ ul.dropdown-menu {
   font-weight: 700;
   color: #39C27B;
 }
+
 .form label {
     position: relative;
     border-radius: 4px;
@@ -469,17 +469,37 @@ div.error{
 }
 
 /* pack form */
+.pack-names #nav-tab {
+	background: #F0F0F0;
+	padding: 1px 0;
+	border-radius: 5px 5px 0 0;
+	border-bottom: 1px solid #E5E5E5;
+}
 
-.package-form-title{
-  text-align: center;
-}
-.package-form-name{
-  background-color: #212529;
+.pack-names i.fas.fa-plus {
+  background: #39C27A;
   color: #fff;
-  padding: 11px 0;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 24px;
 }
-.form-space{
-  padding: 5px 10px;
+
+.pack-names #nav-tab a {
+  padding: 22px 0;
+  text-align: center;
+  border: none;
+  color: #7E7E7E;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  width: 33.3%;
+}
+
+.pack-names .nav-link.active {
+  color: #39C27A !important;
+  background-color: #D5E9DE;
+  border-bottom: 1px solid #39C27A !important;
 }
 .submit-pack-buttons{
   width: 100%;

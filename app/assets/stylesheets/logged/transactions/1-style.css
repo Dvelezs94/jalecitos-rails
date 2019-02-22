@@ -1,45 +1,5 @@
 /* Base CSS */
 
-
-.alignleft {
-    float: left;
-    margin-right: 15px;
-}
-.alignright {
-    float: right;
-    margin-left: 15px;
-}
-.aligncenter {
-    display: block;
-    margin: 0 auto 15px;
-}
-a:focus { outline: 0 solid }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0 0 13px;
-  color: #222222;
-
-
-}
-body {
-  color: #9B9B9B;
-  font-weight: 400;
-  font-family: 'Nunito', sans-serif;
-  font-size: 14px;
-}
-
-@font-face {
-    font-family:Avenirbold;
-    src: url(../fonts/AvenirNextLTPro-Bold.otf);
-}
-
-
-
 .form input[type="text"]::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #757575;
   opacity: 1; /* Firefox */
