@@ -1,85 +1,48 @@
 $(document).on('turbolinks:load', function() {
   //if you are in packages form page
   if ($("#packages_form").length == 1) {
-    firstDisplay();
-    $("#pack-plus").click(displayPack);
-    $("#pack-minus").click(hidePack);
+    $("a.pack-tab-displayer").on("click", function() {
+      event.preventDefault();
+      displayTab();
+    });
+
+    $("a.erase-all").on("click", function() {
+      event.preventDefault();
+      var pack_number = this.getAttribute("href");
+      var $el = $(this);
+      var response = confirm($el.data('confirm') || '¿Quieres borrar este paquete?');
+      if (response) {
+        deleteFormContent(pack_number);
+      }
+    });
   }
 });
-function displayedPackages(totalForms){
-  displayed = 0;
-  for (var i = 0; i < totalForms; i++) {
-    //check how many packages are displayed
-    if ( $(".form-number-" + i)[0].style.display == "block" ) {
-      displayed +=1;
-    }
-    if (i == totalForms-1){
-      return displayed;
-    }
+
+function displayTab() {
+  //hide other trash icons
+  $("a.erase-all:visible").css("display", "none");
+  //now display the tab
+  var hidden_pack = $(".pack-names a.nav-item:hidden");
+  hidden_pack[0].style.display = "block";
+  hidden_pack[0].click();
+  if (hidden_pack.length == 1) {
+    $("a.pack-tab-displayer")[0].style.display = "none";
   }
 }
 
-function firstDisplay() {
-  totalForms = $(".form-number").length;
-  for (var i = 1; i < totalForms; i++) {
-    //dont display unfilled packages, statring from the second one
-    if ( $(".name-"+i)[0].value == "" ) {
-      xform = $(".form-number-" + i);
-      xform[0].style.display = "none";
-    }
+function deleteFormContent(formNumber) {
+  if (formNumber > 0) {
+    //hide the nav link
+    $(".pack-names a.nav-item")[formNumber].style.display = "none";
+    $(".pack-names a.nav-item")[formNumber-1].click();
+    //show the trash icon of earlier form
+    $("a.erase-all")[formNumber-1].style.display = "block";
+
   }
-  //check displayed packages to determine if show plus and minus
-  displayed = displayedPackages(totalForms);
-
-  if ( displayed < totalForms ) {
-    xplus = $("#pack-plus");
-    xplus[0].style.display = "block";
-  }
-
-  if ( displayed > 1 ) {
-    xminus = $("#pack-minus");
-    xminus[0].style.display = "block";
-  }
-
-}
-
-function displayPack() {
-  totalForms = $(".form-number").length;
-  formNumber = displayedPackages(totalForms);
-
-  //display the block and set minus
-  $(".form-number-" + formNumber)[0].style.display = "block";
-  $("#pack-minus")[0].style.display = "block";
-
-  //possibly hide plus
-  if(formNumber + 1 == totalForms){
-    $("#pack-plus")[0].style.display = "none";
-  }
-
-}
-
-function hidePack() {
-  totalForms = $(".form-number").length;
-  formNumber = displayedPackages(totalForms)-1;
-
-  //hide the block and set plus
-  $(".form-number-" + formNumber)[0].style.display = "none";
-  $("#pack-plus")[0].style.display = "block";
-
-  //delete content of hidden form_block
-  deleteFormContent(formNumber);
-
-  //possibly hide minus
-  if(formNumber-1 == 0){
-    $("#pack-minus")[0].style.display = "none";
-  }
-
-}
-
-function deleteFormContent(formNumber){
-  $(".name-"+formNumber)[0].value = "";
-    $(".name-"+formNumber).keyup();
+  $("a.pack-tab-displayer")[0].style.display = "block";
+  $(".name-" + formNumber)[0].value = "";
+  $(".name-" + formNumber).keyup();
   $("trix-editor[input=description" + formNumber + "]")[0].value = "";
   $("trix-editor[input=description" + formNumber + "]").keyup();
-  $(".price-input-"+formNumber)[0].value = "";
+  $(".price-input-" + formNumber)[0].value = "";
 }

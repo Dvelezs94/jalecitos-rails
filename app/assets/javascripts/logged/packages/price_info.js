@@ -16,7 +16,7 @@ function price_calculation() {
   number = $(this)[0].value;
   input = $(this)[0].className.split(" ")[1].match(/\d+$/)[0];
   if (number >= 100){
-  $("#price-calc-" + input).text("$"+(number*1.16).toFixed(2)+ " MXN");
+  $("#price-calc-" + input).text("$"+(number/9*10).toFixed(2)+ " MXN");
   }
   else{
     $("#price-calc-" + input).text("-");
