@@ -67,6 +67,11 @@
   color: #0067f4;
 }
 
+.submit-right {
+	text-align: right;
+	margin-top: 8px;
+}
+
 .resolved {
   color: #39c27b;
 }
@@ -140,33 +145,4 @@
 
 .support-response {
 	background-color: #EAF8F1;
-}
-.diego-user h5 {
-	margin-left: 40px;
-	margin-bottom: 0;
-	font-size: 19px;
-}
-.Paquete-Básico {
-	padding: 10px;
-}
-.Paquete-Básico h5 {
-	color: #8E8E93;
-	text-transform: uppercase;
-	font-weight: 700;
-	font-size: 15px;
-	letter-spacing: 1px;
-	margin-bottom: 7px;
-}
-
-.Paquete-Básico span {
-	font-size: 13px;
-	color: #8E8E93;
-	font-weight: 400;
-}
-.Paquete-Básico h4 {
-	font-size: 23px;
-	color: #39C27B;
-	font-weight: 700;
-	margin-top: 12px;
-	margin-bottom: 0;
 }
