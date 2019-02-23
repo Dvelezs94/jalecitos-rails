@@ -138,7 +138,6 @@
 	z-index: 99;
 }
 .pendiente-text h4 {
-	top: 40%;
 	font-size: 18px;
 }
  .pendiente-text p {
@@ -184,6 +183,14 @@
 	text-align: center;
 	line-height: 36px;
 	font-size: 25px;
+}
+
+.left-response-heading {
+	font-size: 16px;
+}
+
+.right-response-heading {
+  font-size: 14px;
 }
 
 

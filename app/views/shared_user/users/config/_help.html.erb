@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header" id="headingSix">
+    <h5 class="mb-0">
+      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#help" aria-expanded="<%= (params[:collapse] == "help")? "true" : "false" %>" aria-controls="help">
+        Ayuda
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+        <i class="fa fa-angle-down" aria-hidden="true"></i>
+      </button>
+    </h5>
+  </div>
+  <div id="help" class="collapse <%= "show" if params[:collapse] == "help" %>" aria-labelledby="headingFour" data-parent="#accordion">
+    <div class="card-body">
+      <div class="Facturacion-content">
+        <div class="perfil-text">
+          <h4>¿Necesitas Ayuda?
+            <%= link_to "Panel de Ayuda", tickets_path %>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

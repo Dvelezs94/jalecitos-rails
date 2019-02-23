@@ -71,6 +71,8 @@ Rails.application.routes.draw do
      resource :reports, only: [:create], as: "report"
    end
 
+  resources :tickets
+  resources :ticket_responses
   resources :payouts, only: :create
   resources :notifications, only: [:index] do
     collection do
