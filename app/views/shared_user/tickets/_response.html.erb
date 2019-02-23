@@ -4,8 +4,8 @@
     <div class="col-lg-12">
       <div class="transacciones-tab-text support-response">
         <div class="ticket-text">
-          <h5>Soporte</h5>
-          <h4>Publicado <%= distance_of_time_in_words_to_now(response.created_at) %></h4>
+          <p class="left-response-heading">Soporte</p>
+          <p class="right-response-heading">hace <%= distance_of_time_in_words_to_now(response.created_at) %></p>
           <p class="ticket-description"><%= response.message %></p>
         </div>
       </div>
