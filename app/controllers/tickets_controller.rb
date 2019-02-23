@@ -2,8 +2,8 @@ class TicketsController < ApplicationController
   include SanitizeParams
   layout 'logged'
   before_action :authenticate_user!
-  before_action :set_ticket, only: :show
-  before_action :validate_user, only: [:show]
+  before_action :set_ticket, only: [:show, :mark_as_resolved]
+  before_action :validate_user, only: [:show, :mark_as_resolved]
 
   def index
     @tickets = Ticket.where(user: current_user)
@@ -27,6 +27,12 @@ class TicketsController < ApplicationController
     end
   end
 
+  def mark_as_resolved
+    if @ticket.resolved!
+      redirect_to ticket_path(@ticket), notice: 'El caso ha sido resuelto'
+    end
+  end
+
   private
   def set_ticket
     @ticket = Ticket.find(params[:id])
@@ -39,7 +45,7 @@ class TicketsController < ApplicationController
 
   def validate_user
     if ! current_user.has_role?(:admin)
-      render :new if current_user != @ticket.user
+      redirect_to tickets_path if current_user != @ticket.user
     end
   end
 end
