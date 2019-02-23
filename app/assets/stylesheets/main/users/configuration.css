@@ -257,7 +257,8 @@
 #payment_methods,
 #billing,
 #withdraw,
-#collapseSix {
+#collapseSix,
+#help {
 	padding: 30px 0;
 }
 
@@ -540,6 +541,8 @@
   padding: 10px 20px;
   border-radius: 5px;
   margin-top: -15px;
+	font-weight: 100;
+	font-size: 17px;
 }
 .verificado-btn a {
   background: #39C27B;

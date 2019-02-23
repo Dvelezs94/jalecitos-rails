@@ -1,0 +1,172 @@
+.ticket-tab-section::after {
+	position: absolute;
+	left: 0;
+	content: "";
+	width: 100%;
+	height: 3px;
+	background: #F5F6F7;
+	z-index: -1;
+}
+
+.ayuda-tab-content {
+  justify-content: center;
+}
+
+.new-case {
+  margin: 20px 0px;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-low {
+  background-color: #39c27b;
+}
+
+.dot-normal {
+  background-color: #f9b732;
+}
+
+.dot-high {
+  background-color: #ef2235;
+}
+
+.transacciones-tab-text {
+	border: 2px solid #F5F6F7;
+	border-radius: 3px;
+	margin-bottom: 15px;
+}
+.pendiente-text {
+	position: relative;
+	padding: 10px;
+}
+.pendiente-text h4 {
+	position: absolute;
+	right: 10px;
+	font-weight: 700;
+	font-size: 22px;
+	margin-top: -35px;
+  top: auto;
+}
+.pendiente-text h5 {
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 14px;
+	border: 1px solid;
+	display: inline-block;
+	padding: 5px 10px;
+	border-radius: 3px;
+}
+
+/* colors for transactions status */
+.in_progress{
+  color: #0067f4;
+}
+
+.resolved {
+  color: #39c27b;
+}
+/* end */
+.pendiente-text p {
+	color: #8E8E93;
+	font-size: 19px;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.ticket-text {
+  position: relative;
+  padding: 10px;
+}
+
+.ticket-text h5 {
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 14px;
+	border: 1px solid;
+	display: inline-block;
+	padding: 5px 10px;
+	border-radius: 3px;
+}
+
+.ticket-text h4 {
+	position: absolute;
+  right: 10px;
+  font-weight: 700;
+  font-size: 22px;
+  margin-top: -35px;
+  top: auto;
+}
+
+.ticket-text h6 {
+
+}
+
+.left-response-heading {
+	font-weight: 700;
+	font-size: 19px;
+	display: inline-block;
+	border-radius: 3px;
+}
+
+.right-response-heading {
+	position: absolute;
+  right: 10px;
+  font-size: 16px;
+  margin-top: -40px;
+  top: auto;
+}
+
+.ticket-title {
+	color: #000;
+	font-size: 19px;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.ticket-description {
+	color: #000;
+	font-size: 17px;
+	margin-bottom: 0;
+}
+
+.user-response {
+	background-color: #F7F7F7;
+}
+
+.support-response {
+	background-color: #EAF8F1;
+}
+.diego-user h5 {
+	margin-left: 40px;
+	margin-bottom: 0;
+	font-size: 19px;
+}
+.Paquete-Básico {
+	padding: 10px;
+}
+.Paquete-Básico h5 {
+	color: #8E8E93;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 15px;
+	letter-spacing: 1px;
+	margin-bottom: 7px;
+}
+
+.Paquete-Básico span {
+	font-size: 13px;
+	color: #8E8E93;
+	font-weight: 400;
+}
+.Paquete-Básico h4 {
+	font-size: 23px;
+	color: #39C27B;
+	font-weight: 700;
+	margin-top: 12px;
+	margin-bottom: 0;
+}

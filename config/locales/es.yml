@@ -41,6 +41,10 @@ es:
     types:
       debit: "Débito"
       credit: "Crédito"
+  tickets:
+    status:
+      in_progress: "En progreso"
+      resolved: "Resuelto"
   # Default content
   activerecord:
     errors:
