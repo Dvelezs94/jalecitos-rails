@@ -448,10 +448,8 @@ p.fell2 {}
 
 p.req_title {
   color: #000;
-  font-size: 18px;
+  font-size: 14px;
   margin-bottom: 6px !important;
-  min-height: 81px;
-  word-break: break-all;
 }
 
 .single-request {
@@ -843,11 +841,6 @@ p {}
 
 .tabbigissue1-total li {
   color: #4A4A4A;
-}
-
-.coa1 {
-  color: #626262;
-  font-size: 12px;
 }
 
 .rightsidetab-content #myTab a {
@@ -1368,11 +1361,6 @@ p.loyed3 {
   padding-left: 4px;
 }
 
-p.gig-title {
-  color: #000;
-  word-break: break-all;
-}
-
 p.gig-price {
   color: #39C27B;
 }
@@ -1691,12 +1679,6 @@ p.limpi2 sub {
   border-bottom: 2px solid #F2F2F2;
   padding-top: 15px;
   padding-bottom: 15px;
-}
-
-.servico-authoristd {
-  position: absolute;
-  left: 0;
-  top: 15px;
 }
 
 .servico-singleteam {}
@@ -2410,12 +2392,13 @@ button:focus {
   width: 200px;
 }
 .page3slides-contentrd p.location,
-.coa1,
+.gig-query .location,
 p.fof {
   font-size: 14px;
   color: #BFBFBF;
   font-weight: 700;
 }
+
 
 .gigs-carousel .owl-item img {
   border-radius: 4px 4px 0 0;
@@ -2710,7 +2693,7 @@ p.req_location {
   margin-bottom: 3px;
 }
 .req_info {
-  padding: 15px 15px;
+  padding: 15px 5px;
 }
 .single-request {
   width: 200px;
@@ -3064,4 +3047,35 @@ div.form {
 }
 .w-100 {
   width: 100%;
+}
+
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.multi-line-truncate-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
+}
+.multi-line-truncate-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
+}
+
+.min-height-42px {
+  min-height: 42px;
+}
+
+.min-height-66px {
+  min-height: 66px;
 }
