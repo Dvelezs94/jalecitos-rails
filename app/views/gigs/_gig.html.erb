@@ -7,10 +7,10 @@
       </div>
       <div class="gig-content">
         <div class="page3slides-contentrd">
-          <p class="location"><%= truncate(gig.location, length: 25)%></p>
-          <p class="gig-title"><%= truncate(gig.title, length: 50) %>
+          <p class="location truncate"><%= gig.location%></p>
+          <p class="gig-title multi-line-truncate-2 min-height-42px"><%= gig.title %>
           </p>
-          <p class="gig-price">Desde
+          <p class="gig-price truncate">Desde
             <%= query_home_or_profile_helper(gig) %>
             MXN
           </p>

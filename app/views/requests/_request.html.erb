@@ -1,8 +1,9 @@
 <a href="<%= request_path(request) %>">
 <div class="single-request">
   <div class="req_info">
-    <p class="req_location"><%= truncate(request.location, length: 25)%></p>
-    <p class="req_title"><%= truncate(request.title, length: 50) %></p>
+    <p class="req_location truncate"><%= request.location%></p>
+    <p class="req_title multi-line-truncate-2 min-height-44px"><%= request.title %></p>
+    <!-- <p class="req_description multi-line-truncate-3 min-height-66px"><%# request.description %></p> -->
   </div>
   <div class="req_budget">
     <p class="COAH3"><%= request.budget %> MXN</p>
