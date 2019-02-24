@@ -7,8 +7,8 @@
     <div class="gig-text col-xl-12 col-lg-12 col-md-8 col-sm-8 col-7">
       <div style="padding:5px;">
         <div class="tabbigissue1-total">
-          <p class="coa1"><%= truncate(gig.location, length: 20 )%></p>
-          <p class="coa2"><%= truncate(gig.title, length: 50 )%></p>
+          <p class="location truncate"><%=gig.location%></p>
+          <p class="coa2 multi-line-truncate-2"><%= gig.title%></p>
           <p class="coa3">Desde
             <%= number_to_currency(purchase_order_total(gig.packages.first.price)) %>
             MXN</p>

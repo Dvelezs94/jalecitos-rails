@@ -4,7 +4,8 @@
   .container {
     min-width: 1200px;
   }
-  .gig-query .hearted1 {
+  .gig-query .hearted1,
+  .gig-profile .hearted1 {
     top: 45%;
     right: 9%;
   }
@@ -84,6 +85,10 @@
   .innerpage3-rightsidetabs .nav-link {
     display: block;
   }
+
+}
+
+@media (min-width: 768px) {
   .servicoteam-wrap {
     display: block !important;
   }
@@ -97,7 +102,8 @@
   .modal-content, .modal-content-transparent {
     width: 500px;
   }
-  .gig-query .hearted1 {
+  .gig-query .hearted1,
+  .gig-profile .hearted1 {
     top: 41%;
     right: 9%;
   }
@@ -371,9 +377,6 @@
 
   .varificado-btn3 {
     right: 10px;
-  }
-  .servicoteam-wrap {
-    display: none;
   }
   .catagorisingle-slide i {
     width: 90px;
@@ -837,11 +840,6 @@
     padding-bottom: 138px;
   }
 
-  p.gig-title {
-    font-size: 12px;
-    line-height: 16px;
-  }
-
   p.loyed2 {
     font-size: 12px;
   }
@@ -901,7 +899,7 @@
     display: none;
   }
 
-  .page3slides-contentrd p {
+  .page3slides-contentrd p.gig-price {
     font-size: 12px;
   }
 
@@ -1222,6 +1220,10 @@
   .todoo1 img {
     display: none;
   }
+
+  .servicoteam-wrap {
+    display: none;
+  }
   #profile_tabs a {
     font-size: 14px;
   }
@@ -1344,11 +1346,7 @@
     padding-left: 7px;
   }
 
-  p.gig-title {
-    font-size: 11px;
-  }
-
-  .page3slides-contentrd p {
+  .page3slides-contentrd p.gig-price {
     font-size: 11px;
   }
 
@@ -1569,7 +1567,6 @@
   p.req_title {
     color: #000;
     font-size: 15px;
-    margin-bottom: 6px !important;
   }
 
   .single-request {
@@ -1830,10 +1827,6 @@
 
   .arroweee {
     display: block;
-  }
-
-  .servicoteam-wrap {
-    display: none;
   }
 
   .perfil-area {
@@ -2179,9 +2172,6 @@
     box-shadow: 0 -5px 20px 0 rgba(0, 0, 0, 0.1);
   }
 
-  .servicoteam-wrap {
-    display: none;
-  }
   .plusred i {
     background: #39C27B;
     color: #fff;
@@ -2194,11 +2184,13 @@
     display: flex;
   }
   /*search*/
-  .gig-query .gig-query-content {
+  .gig-query .gig-query-content,
+  .gig-profile .gig-query-content {
     margin-top: 20px;
     margin-bottom: 0px;
   }
-  .gig-query .hearted1 {
+  .gig-query .hearted1,
+  .gig-profile .hearted1 {
     bottom: 2%;
     left: 5%;
   }
@@ -2215,7 +2207,8 @@
     width: auto;
   }
   /*search results*/
-  .gig-query .gig-image-profile img {
+  .gig-query .gig-image-profile img,
+  .gig-profile .gig-image-profile img {
     border-radius: 0;
   }
 

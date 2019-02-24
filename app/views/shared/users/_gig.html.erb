@@ -1,4 +1,4 @@
-<div class="gig-query gig-profile col-xl-4 col-lg-4">
+<div class="gig-profile col-xl-4 col-lg-4">
   <%= link_to user_gig_path(gig.user.slug, gig.slug) do %>
   <div class="gig-query-content" style="display:flex;flex-wrap:wrap;">
     <div class="col-xl-12 col-lg-12 col-md-4 col-sm-4 col-5 padingminus1" style="padding: 0;">
@@ -8,10 +8,10 @@
       <div style="padding:5px;">
         <div class="tabbigissue1-total">
           <div class="gig-loc-sta" style="display:flex;justify-content:space-between;">
-            <p class="coa1"><%= truncate(gig.location, length: 20 )%></p>
+            <p class="location truncate"><%= gig.location%></p>
             <%= "<span class='gig-status gig-#{gig.status}'> #{t "gigs.status."+gig.status}</span>".html_safe if gig.user == current_user %>
           </div>
-          <p class="coa2"><%= truncate(gig.title, length: 50 )%></p>
+          <p class="coa2 multi-line-truncate-2 min-height-42px"><%= gig.title %></p>
           <p class="coa3">Desde
             <%= query_home_or_profile_helper gig %>
             MXN</p>

@@ -2,9 +2,9 @@
   <a href="<%= request_path(request.slug) %>">
     <div class="riktos-wrapper">
       <div class="singleriktos">
-          <p class="fof"><%= request.location %></p>
-        <p class="jkl"><%= truncate(request.title, length: 50) %></p>
-        <p class="jhh"><%= truncate(request.description, length: 100) %></p>
+          <p class="fof truncate"><%= request.location %></p>
+        <p class="jkl truncate"><%= request.title %></p>
+        <p class="jhh multi-line-truncate-2"><%= request.description %></p>
         <span><%= request.offers.count %> ofertas</span>
         <div style="display: flex; justify-content: space-between;">
           <p class="yii">Publicado hace <%= distance_of_time_in_words_to_now(request.created_at) %></p>

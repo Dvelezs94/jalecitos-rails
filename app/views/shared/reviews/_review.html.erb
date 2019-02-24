@@ -5,7 +5,9 @@
   <div class="authoristed-contents1">
     <p class="loyed1"> <strong><%= link_to review.giver.alias, user_path(review.giver.slug), style:"color: black;" %></strong>
       <%= image_tag("star-on", title: review.rating.stars, class: "single-star") %>
+
       <span class="rating-score"><%= review.rating.stars %></span>
+
     </p>
     <p class="loyed2">
       <% if review.comment.present? %>
