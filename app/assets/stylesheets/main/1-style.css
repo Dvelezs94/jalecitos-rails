@@ -2393,6 +2393,7 @@ button:focus {
 }
 .page3slides-contentrd p.location,
 .gig-query .location,
+.gig-profile .location,
 p.fof {
   font-size: 14px;
   color: #BFBFBF;
@@ -2864,11 +2865,13 @@ div.form {
   justify-content: space-between;
 }
 /*query page*/
-.gig-query .gig-text {
+.gig-query .gig-text,
+.gig-profile .gig-text {
   border: 1px solid #E5E5E5;
   min-height: 128px;
 }
-.gig-query .gig-image {
+.gig-query .gig-image,
+.gig-profile .gig-image {
   width: 100%;
   height: 100%;
   border-radius: 4px 4px 0 0 ;
@@ -2878,11 +2881,13 @@ div.form {
   margin-top: 27px;
   margin-bottom: 42px;
 }
-.gig-query .coa2 {
+.gig-query .coa2,
+.gig-profile .coa2 {
   font-weight: bold;
 }
 
-.gig-query .gig-query-content {
+.gig-query .gig-query-content,
+.gig-profile .gig-query-content {
   min-height: 120px;
 }
 /* Transacciones secsion Start */
@@ -2989,8 +2994,9 @@ div.form {
 .phone_links .active {
   color: #007bff !important;
 }
-/*search styles*/
-.gig-query .hearted1 {
+/*search styles (and profile also)*/
+.gig-query .hearted1,
+.gig-profile .hearted1 {
   position: absolute;
 }
 /*mobile search styles*/
