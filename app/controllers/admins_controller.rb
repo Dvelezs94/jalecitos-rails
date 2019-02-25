@@ -31,6 +31,10 @@ class AdminsController < ApplicationController
     @verifications = Verification.order(status: :asc).page(params[:ban_page]).per(25)
   end
 
+  def tickets
+    @tickets = Ticket.order(status: :asc).page(params[:ticket_page]).per(25)
+  end
+
   def openpay_dashboard
     @balance = @customer.get(ENV.fetch("OPENPAY_PREDISPERSION_CLIENT"))["balance"] if ENV.fetch("OPENPAY_PREDISPERSION_CLIENT") != ""
     @balance ||= "cuenta predispersion no seteada"
@@ -58,5 +62,6 @@ class AdminsController < ApplicationController
     @pending_verifications = Verification.pending.count
     @pending_bans = Ban.pending.count
     @pending_disputes = Dispute.waiting_for_support.count
+    @open_tickets = Ticket.in_progress.count
   end
 end

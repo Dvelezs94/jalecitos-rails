@@ -86,6 +86,7 @@
 .ticket-text {
   position: relative;
   padding: 10px;
+	word-break: break-all;
 }
 
 .ticket-text h5 {

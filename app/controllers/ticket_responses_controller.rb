@@ -14,7 +14,9 @@ class TicketResponsesController < ApplicationController
 
   private
   def ticket_response_params
-      params.require(:ticket_response).permit(:message, :image, :ticket_id)
+      ticket_params = params.require(:ticket_response).permit(:message, :image, :ticket_slug)
+      ticket_params[:ticket_id] = Ticket.friendly.find(ticket_params[:ticket_slug]).id
+      ticket_params.except(:ticket_slug)
   end
 
   def validate_user

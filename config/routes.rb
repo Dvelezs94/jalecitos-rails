@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get :verifications
       post :create_openpay_user
       get :openpay_dashboard
+      get :tickets
     end
   end
 
@@ -71,7 +72,11 @@ Rails.application.routes.draw do
      resource :reports, only: [:create], as: "report"
    end
 
-  resources :tickets
+  resources :tickets do
+    member do
+      post :mark_as_resolved
+    end
+  end
   resources :ticket_responses
   resources :payouts, only: :create
   resources :notifications, only: [:index] do
