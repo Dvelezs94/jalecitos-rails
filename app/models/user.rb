@@ -64,6 +64,9 @@ class User < ApplicationRecord
   belongs_to :city, optional: true
   # reports
   has_many :reports
+  # Ticket system
+  has_many :tickets
+  has_many :ticket_responses
   # Chat Relations
   has_many :messages
   # Request System

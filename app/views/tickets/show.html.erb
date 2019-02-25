@@ -1,0 +1,20 @@
+<%= render 'shared_user/tickets/top_ticket_nav' %>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="transacciones-tab-text">
+        <div class="ticket-text">
+          <h5 class="<%= @ticket.status %>"><%= t "tickets.status.#{@ticket.status}" %></h5>
+          <h4>
+            <span class="dot dot-<%= @ticket.priority %>"></span></h4>
+          <p class="ticket-title"><%= @ticket.title %></p>
+          <p class="ticket-description"><%= @ticket.description.html_safe %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'shared_user/tickets/response', collection: @ticket_responses %>
+<%= render 'shared_user/tickets/response_form' if @ticket.in_progress? %>

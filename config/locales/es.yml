@@ -41,6 +41,13 @@ es:
     types:
       debit: "Débito"
       credit: "Crédito"
+  tickets:
+    status:
+      in_progress: "En progreso"
+      resolved: "Resuelto"
+    turn:
+      waiting_for_support: "Esperando a soporte"
+      waiting_for_user: "Esperando al usuario"
   # Default content
   activerecord:
     errors:
