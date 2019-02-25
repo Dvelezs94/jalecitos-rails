@@ -1,0 +1,59 @@
+<%= form_with(model: ticket, :html => { :class=> "current_form" }, local: true) do |form| %>
+<% if ticket.errors.any? %>
+  <% ticket.errors.full_messages.each do |error| %>
+    <%= notification_generator_helper error, :error %>
+  <% end %>
+<% end %>
+
+<!-- post ticket form -->
+<div class="container-fluid section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 col-md-12 centered-form">
+        <h3>Crea un caso nuevo y nosotros te atenderemos a la brevedad.</h3>
+        <div class="form_box post_form_col">
+          <div class="form_block row ">
+            <div class="flex-space-bet">
+              <p class="form-title">Titulo breve:</p>
+            </div>
+            <%= form.text_field :title, class: "styled tt-input"%>
+            <hr>
+          </div>
+          <hr>
+
+          <div class="form_block row ">
+            <div class="flex-space-bet">
+              <p class="form-title">Descripcion del problema:</p>
+            </div>
+            <%= form.text_field :description, id: "description", type: "hidden" %>
+            <trix-editor input="description" class="trix-class trix_input_0 required styled" maxlength="1000"></trix-editor>
+            <hr>
+          </div>
+          <hr>
+
+          <div class="form_block row">
+            <div class="flex-space-bet">
+              <p class="form-title">Severidad del problema:</p>
+            </div>
+            <%= form.select(:priority, [["Baja", "low"], ["Media", "normal"], ["Alta", "high"]], {}, {class: "form-select required"}) %>
+          </div>
+          <hr>
+
+          <!-- 3 end -->
+          <div style="margin: 0 20px;">
+            <div class="flex-space-bet">
+                <%= link_to 'Cancelar', user_path(current_user.slug), :data => {:confirm => 'Tu progreso hasta ahora NO se guardará'}, class: "btn back-button" %>
+                <%= form.submit "Continuar", class: "btn continue-button" %>
+            </div>
+          </div>
+        </div>
+        <!-- form box -->
+        <!-- -->
+      </div>
+      <!-- -->
+    </div>
+    <!-- col lg 7 -->
+  </div>
+</div>
+<!-- container fluid -->
+<% end %>
