@@ -102,8 +102,8 @@ end
       real_char = decodeHTMLEntities(pack[:description])
       noHtml = pack[:description].gsub(/<[^>]*>/, "")
       noHtml_real_char = decodeHTMLEntities(noHtml)
-      flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 100 && pack[:price] != "")
-      flash.now[:error] = "No se permiten cantidades arriba de 10,000 MXN" if (pack[:price].to_f > 10000)
+      flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 111 && pack[:price] != "")
+      flash.now[:error] = "No puedes ganar arriba de de 9,000 MXN" if (pack[:price].to_f > 10000)
       flash.now[:error] = "Sólo se admiten como máximo 1000 caracteres" if noHtml_real_char.length > 1000
       flash.now[:error] = "La descriptión contiene demasiados efectos de texto" if real_char.length > 2000
       flash.now[:error] = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
@@ -120,8 +120,8 @@ end
       real_char = decodeHTMLEntities(pack[:description])
       noHtml = pack[:description].gsub(/<[^>]*>/, "")
       noHtml_real_char = decodeHTMLEntities(noHtml)
-      flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 100 && pack[:price] != "")
-      flash.now[:error] = "No se permiten cantidades arriba de 10,000 MXN" if (pack[:price].to_f > 10000)
+      flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 111 && pack[:price] != "")
+      flash.now[:error] = "No puedes ganar arriba de de 9,000 MXN" if (pack[:price].to_f > 10000)
       flash.now[:error] = "Sólo se admiten como máximo 1000 caracteres" if noHtml_real_char.length > 1000
       flash.now[:error] = "La descriptión contiene demasiados efectos de texto" if real_char.length > 2000
       flash.now[:error] = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100

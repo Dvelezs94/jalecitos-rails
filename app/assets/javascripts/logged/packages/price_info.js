@@ -5,20 +5,25 @@ $(document).on('turbolinks:load', function() {
 });
 
 function init_price_count() {
+  //generate the events
   $(".price-input").keyup(price_calculation);
+  //trigger events at load
   for (var i = 0; i < 3; i++) {
     priceInput = $(".price-input-" + i)
-      priceInput.keyup();
+    priceInput.keyup();
   }
 
 }
+
 function price_calculation() {
   number = $(this)[0].value;
   input = $(this)[0].className.split(" ")[1].match(/\d+$/)[0];
-  if (number >= 100){
-  $("#price-calc-" + input).text("$"+(number/9*10).toFixed(2)+ " MXN");
-  }
-  else{
+  if (number >= 100) {
+    base_price = number / 9 * 10
+    $("#price-calc-" + input).text("$" + (((base_price) + 10) * 1.16).toFixed(2) + " MXN");
+    $("#base-price-" + input).val(base_price);
+  } else {
     $("#price-calc-" + input).text("-");
+    $("#base-price-" + input).val("");
   }
 }
