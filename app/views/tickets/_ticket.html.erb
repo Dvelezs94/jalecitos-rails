@@ -1,5 +1,5 @@
 <div class="col-lg-12">
-  <%= link_to ticket_path(ticket) do %>
+  <%= link_to ticket_path(ticket.slug) do %>
   <div class="transacciones-tab-text">
     <div class="ticket-text">
       <h5 class="<%= ticket.status %>"><%= t "tickets.status.#{ticket.status}" %></h5>

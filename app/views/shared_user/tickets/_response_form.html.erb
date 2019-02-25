@@ -5,13 +5,14 @@
         <div class="ticket-text">
         <%= form_with(model: TicketResponse.new) do |form| %>
         <%= form.text_area :message, class: "form-control" %>
-        <%= form.hidden_field :ticket_id, :value => params[:id]  %>
+        <%= form.hidden_field :ticket_slug, :value => params[:id]  %>
         <div class="submit-right">
           <%= form.submit "Continuar", class: "btn continue-button" %>
         </div>
         <% end %>
         </div>
       </div>
+      <%= link_to "Marcar como resuelto", mark_as_resolved_ticket_path(@ticket), method: :post, :data => {:confirm => 'Si continuas este caso se cerrara.'} %>
     </div>
   </div>
 </div>

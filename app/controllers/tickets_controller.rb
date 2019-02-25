@@ -35,7 +35,7 @@ class TicketsController < ApplicationController
 
   private
   def set_ticket
-    @ticket = Ticket.find(params[:id])
+    @ticket = Ticket.friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

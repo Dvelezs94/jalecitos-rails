@@ -9,7 +9,7 @@
           <h4>
             <span class="dot dot-<%= @ticket.priority %>"></span></h4>
           <p class="ticket-title"><%= @ticket.title %></p>
-          <p class="ticket-description"><%= @ticket.description %></p>
+          <p class="ticket-description"><%= @ticket.description.html_safe %></p>
         </div>
       </div>
     </div>
