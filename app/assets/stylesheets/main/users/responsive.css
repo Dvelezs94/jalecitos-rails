@@ -193,6 +193,7 @@
   .perfil-text h4 a, .perfil-text h4 button {
   	padding: 8px 10px;
   	margin-top: -6px;
+    font-size: 17px;
   }
   .Eliminar-cuenta h5 {
   	font-size: 15px;

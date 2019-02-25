@@ -2898,7 +2898,13 @@ div.form {
 .transacciones-text {
 	position: relative;
 	padding: 20px 0;
+  margin-left: -10px;
 }
+
+.transacciones-text a {
+	color: #000;
+}
+
 .transacciones-text span {
 	position: absolute;
 	left: 0;

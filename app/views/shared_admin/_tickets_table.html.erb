@@ -1,0 +1,21 @@
+<div class="col-md-12">
+  <h2>Tickets</h2>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm ban">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>User</th>
+          <th>Priority</th>
+          <th>Turno</th>
+          <th>Status</th>
+          <th>Updated time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'tickets/tickets_admin_dashboard', collection: @tickets %>
+      </tbody>
+    </table>
+    <%= paginate @tickets, param_name: :ticket_page %>
+  </div>
+</div>
