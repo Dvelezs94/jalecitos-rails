@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_15_213646) do
+ActiveRecord::Schema.define(version: 2019_02_25_035651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -388,6 +388,32 @@ ActiveRecord::Schema.define(version: 2019_02_15_213646) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
+  create_table "ticket_responses", force: :cascade do |t|
+    t.bigint "ticket_id"
+    t.bigint "user_id"
+    t.string "message"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_ticket_responses_on_ticket_id"
+    t.index ["user_id"], name: "index_ticket_responses_on_user_id"
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "priority"
+    t.bigint "user_id"
+    t.integer "status", default: 0
+    t.string "image"
+    t.integer "turn", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_tickets_on_slug", unique: true
+    t.index ["user_id"], name: "index_tickets_on_user_id"
+  end
+
   create_table "user_scores", force: :cascade do |t|
     t.float "employer_score_average", default: 0.0
     t.float "employee_score_average", default: 0.0
@@ -483,6 +509,9 @@ ActiveRecord::Schema.define(version: 2019_02_15_213646) do
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "orders"
   add_foreign_key "states", "countries"
+  add_foreign_key "ticket_responses", "tickets"
+  add_foreign_key "ticket_responses", "users"
+  add_foreign_key "tickets", "users"
   add_foreign_key "users", "cities"
   add_foreign_key "verifications", "users"
 end

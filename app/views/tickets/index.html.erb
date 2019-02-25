@@ -1,0 +1,14 @@
+<%= render 'shared_user/tickets/top_ticket_nav' %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+            <div class="ayuda-tab-content row">
+              <%= link_to new_ticket_path, class: "new-case" do %>
+                <button type="button" name="button" class="default-btn">Nuevo Caso</button>
+              <% end %>
+              <%= render partial: 'tickets/ticket', collection: @tickets %>
+            </div>
+      </div>
+    </div>
+  </div>
