@@ -26,6 +26,9 @@
             <span><%= order_seller.created_at %></span>
             <h4><%= "$#{order_seller.total} MXN" %></h4>
             <br>
+            <% if order_seller.details? %>
+            <strong>Detalles extras: </strong><p class="inline"><%= order_seller.details %></p>
+            <% end %>
             <% if order_seller.address? %>
             <strong>Dirección: </strong><p class="inline"><%= order_seller.address %></p>
             <iframe width="100%" height="170" frameborder="0" style="border:0"
