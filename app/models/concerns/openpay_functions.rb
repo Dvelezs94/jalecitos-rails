@@ -33,8 +33,8 @@ module OpenpayFunctions
         response_hash = @customer.create(request_hash.to_hash)
         self.openpay_id = response_hash['id']
         save
-      rescue OpenpayTransactionException => e
-         puts "#{self.alias} issue: #{e.description}, so the user could not be created on openpay"
+      rescue
+         true
       end
     end
   end

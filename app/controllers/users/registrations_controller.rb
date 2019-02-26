@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params.merge(lat: params[:sign_up_lat], lon: params[:sign_up_lon]))
-    resource.save
+    resource.save!
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
@@ -28,7 +28,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      redirect_to root_path, notice: "Algo ha salido mal con tu registro."
+      redirect_to root_path, notice: "Algo ha salido mal con tu registro. Contacta a Soporte para mayor informacion."
     end
   end
 

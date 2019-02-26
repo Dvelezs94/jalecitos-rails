@@ -38,7 +38,7 @@ class User < ApplicationRecord
   enum status: { active: 0, disabled: 1, banned: 2}
   before_create :set_location
   # Create default values
-  after_create :set_defaults
+  before_validation :set_defaults
 
   # Create User Score
   before_validation :create_user_score, on: :create
@@ -54,8 +54,8 @@ class User < ApplicationRecord
   validate :maximum_amount_of_tags, :no_spaces_in_tag, :tag_length
   # validate :location_syntax
   validates_length_of :bio, maximum: 500
-  validates_presence_of :alias, on: :update
-  validates :alias, format: { :with => /\A[a-zA-Z0-9\-\_]+\z/, message: "sólo puede contener caracteres alfanuméricos, guión y guión bajo." }, on: :update
+  validates_presence_of :alias
+  validates :alias, format: { :with => /\A[a-zA-Z0-9\-\_]+\z/, message: "sólo puede contener caracteres alfanuméricos, guión y guión bajo." }
   # User Score
   belongs_to :score, foreign_key: :score_id, class_name: "UserScore"
   # Avatar image
