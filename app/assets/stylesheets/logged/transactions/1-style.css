@@ -289,11 +289,11 @@
 .diego-velez-text {
 	position: relative;
 }
-.diego-velez-btn {
+/* .diego-velez-btn {
 	position: absolute;
 	bottom: 12px;
 	right: 10px;
-}
+} */
 .diego-velez-btn a {
 	display: block;
 	background: #39C27B;
