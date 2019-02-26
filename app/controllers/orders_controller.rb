@@ -15,8 +15,7 @@ class OrdersController < ApplicationController
   before_action only: [:complete] do
     init_openpay("fee")
   end
-  before_action :get_order, only: [:request_start, :start, :request_complete, :complete, :refund]
-  before_action :get_order_by_uuid, only: [:details, :update_details]
+  before_action :get_order_by_uuid, only: [:request_start, :start, :request_complete, :complete, :refund, :details, :update_details]
   before_action :verify_order_employee, only: [:request_start, :request_complete]
   before_action :verify_order_owner, only: [:start, :complete, :details, :update_details]
   before_action :verify_owner_or_employee, only: [:refund]
