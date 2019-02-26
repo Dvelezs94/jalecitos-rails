@@ -1,11 +1,18 @@
-<%= form_with model: @order, url: update_details_order_path, method: :put,:html =>{class: "search-form"} , local: true do |f|%>
-<div class="">
-  <input type="checkbox" onclick="$('.order-location').toggle();"/> Esta orden es a Domicilio
-  <div class="order-location">
-    <%= f.text_field :address, class: 'text_box form-control', id: "google_autocomplete", size: 200, placeholder: "Cualquier lugar en México" %>
+<div class="container">
+  <%= form_with model: @order, url: update_details_order_path, method: :put,:html =>{class: "search-form"} , local: true do |f|%>
+  <div class="form-group">
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="showlocation" onclick="$('.order-location').toggle();">
+      <label class="form-check-label" for="showlocation">Esta orden es a Domicilio</label>
+    </div>
+    <div class="order-location">
+      <%= f.text_field :address, class: 'text_box form-control', id: "google_autocomplete", size: 200, placeholder: "Cualquier lugar en México" %>
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="agree-info" required>
+      <label class="form-check-label" for="agree-info">Estoy de acuerdo con la informacion proporcionada</label>
+    </div>
+    <%= f.submit "Continuar", class: "btn btn-primary" %>
   </div>
-
-  <input type="checkbox" required> Estoy de acuerdo con la informacion proporcionada
-  <%= f.submit "Continuar" %>
+  <% end %>
 </div>
-<% end %>
