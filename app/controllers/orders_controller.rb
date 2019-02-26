@@ -184,7 +184,7 @@ class OrdersController < ApplicationController
     end
 
     def order_details_params
-      order_params = params.require(:order).permit(:address, :details)
+      order_params = params.require(:order).permit(:details, :address)
     end
 
     def set_defaults parameters
