@@ -3,5 +3,5 @@ class BillingProfile < ApplicationRecord
   belongs_to :user
   has_many :orders
 
-  validates_presence_of :rfc, :name, :zip_code, :address
+  validates_presence_of :rfc, :name
 end
