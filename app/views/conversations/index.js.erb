@@ -1,12 +1,19 @@
-//if scroll is at top, move bottom 1 space to stay in current message
-$(".message_view_box").scrollTop(1)
-//add items
-$(".message_view_box ul.messages-list").prepend('<%= j render "conversations/conversation_content", messages: @messages.sort %>');
-//remove old pagination
-$('.pag-and-load').remove();
-// check if puts new pagination
-<% if @messages.next_page %>
-  $(".message_view_box").prepend('<%= j paginate(@messages) %>');
+<% if params[:page] %>
+  //if scroll is at top, move bottom 1 space to stay in current message
+  $(".message_view_box").scrollTop(1)
+  //add items
+  $(".message_view_box ul.messages-list").prepend('<%= j render "conversations/conversation_content", messages: @messages.sort %>');
+  //remove old pagination
+  $('.pag-and-load').remove();
+  // check if puts new pagination
+  <% if @messages.next_page %>
+    $(".message_view_box").prepend('<%= j paginate(@messages) %>');
+  <% end %>
+  //prevent multiple calls
+  <% sleep 1 %>
+<% elsif params[:word] %>
+$("#contacts-list").html("");
+  <% @users.each do |user| %>
+  $("#contacts-list").append("<%= j render partial: 'conversation_min', locals: { user: user } %>")
+  <% end %>
 <% end %>
-//prevent multiple calls
-<% sleep 1 %>
