@@ -2,9 +2,10 @@ module ConversationsHelper
   def set_recipient
     if params[:user_id]
       @remote_user = User.friendly.find(params[:user_id]).id
-      if ! @conversation = Conversation.where("(sender_id = ? OR recipient_id = ?) AND( sender_id = ? OR recipient_id = ?)", current_user.id, current_user.id, @remote_user , @remote_user).first
+
+      if ! @conversation = Conversation.search("*", where: { _or: [{sender_id: current_user.id, recipient_id: @remote_user}, {sender_id: @remote_user ,recipient_id: current_user.id}] }, limit: 1).first
           #  Create conversation if not found. this can be refactored later
-          Conversation.create!(sender_id: current_user.id, recipient_id: @remote_user)
+          Conversation.create(sender_id: current_user.id, recipient_id: @remote_user)
           set_recipient
       end
     else
