@@ -41,7 +41,7 @@ class User < ApplicationRecord
   before_validation :set_defaults
 
   # Create User Score
-  before_validation :create_user_score, on: :create
+  after_commit :create_user_score
 
   # Create openpay user
   after_commit :create_openpay_account
@@ -57,7 +57,7 @@ class User < ApplicationRecord
   validates_presence_of :alias
   validates :alias, format: { :with => /\A[a-zA-Z0-9\-\_]+\z/, message: "sólo puede contener caracteres alfanuméricos, guión y guión bajo." }
   # User Score
-  belongs_to :score, foreign_key: :score_id, class_name: "UserScore"
+  belongs_to :score, foreign_key: :score_id, class_name: "UserScore", optional: true
   # Avatar image
   mount_uploader :image, AvatarUploader
   # Associations
@@ -150,9 +150,12 @@ class User < ApplicationRecord
    end
 
    def create_user_score
-     UserScore.create do |user_score|
-       self.score = user_score
-     end
+     if self.score.nil?
+      UserScore.create do |user_score|
+        self.score = user_score
+      end
+      save
+    end
    end
 
    def set_location
