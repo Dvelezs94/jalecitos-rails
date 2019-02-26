@@ -33,28 +33,26 @@
             allowfullscreen="allowfullscreen">
             </iframe>
             <% end %>
-        </div>
-
-
-        <div class="diego-velez-btn">
-          <% if order_seller.pending? %>
-            <% if order_seller.started_at? %>
-            <%= link_to "denegar", refund_order_path(order_seller.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
-            <% else %>
-              <%= link_to "denegar", refund_order_path(order_seller.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
-              <%= link_to "solicitar inicio", request_start_order_path(order_seller.id), :method => :put %>
-            <% end %>
-          <% elsif order_seller.in_progress? %>
-            <% if order_seller.completed_at? %>
+            <div class="diego-velez-btn">
+              <% if order_seller.pending? %>
+              <% if order_seller.started_at? %>
+              <%= link_to "denegar", refund_order_path(order_seller.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
+              <% else %>
+              <%= link_to "denegar", refund_order_path(order_seller.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
+              <%= link_to "solicitar inicio", request_start_order_path(order_seller.uuid), :method => :put %>
+              <% end %>
+              <% elsif order_seller.in_progress? %>
+              <% if order_seller.completed_at? %>
               <%= link_to "disputa", new_order_dispute_path(order_seller.uuid) %>
-              <%= link_to "reembolsar", refund_order_path(order_seller.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
-            <% else %>
-              <%= link_to "reembolsar", refund_order_path(order_seller.id), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
-              <%= link_to "solicitar finalizar", request_complete_order_path(order_seller.id), :method => :put %>
-            <% end %>
-          <% elsif order_seller.disputed? %>
-            <%= link_to "ir al caso", order_dispute_path(order_seller.uuid, order_seller.dispute) %>
-          <% end %>
+              <%= link_to "reembolsar", refund_order_path(order_seller.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
+              <% else %>
+              <%= link_to "reembolsar", refund_order_path(order_seller.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
+              <%= link_to "solicitar finalizar", request_complete_order_path(order_seller.uuid), :method => :put %>
+              <% end %>
+              <% elsif order_seller.disputed? %>
+              <%= link_to "ir al caso", order_dispute_path(order_seller.uuid, order_seller.dispute) %>
+              <% end %>
+            </div>
         </div>
     </div>
   </div>

@@ -32,27 +32,25 @@
             src='https://www.google.com/maps/embed/v1/place?key=<%= ENV.fetch("GOOGLE_MAP_API") %>&q=<%= CGI.escape(order_buyer.address) %>'            allowfullscreen="allowfullscreen">
             </iframe>
             <% end %>
-        </div>
-
-
-        <div class="diego-velez-btn">
-          <% if order_buyer.pending? %>
-            <% if order_buyer.started_at? %>
-              <%= link_to "reembolso", refund_order_path(order_buyer.id), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
-              <%= link_to "comenzar", start_order_path(order_buyer.id), method: :put, :data => {:confirm => 'Seguro que quieres comenzar la orden?'} %>
-            <% else %>
-              <%= link_to "reembolso", refund_order_path(order_buyer.id), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
-            <% end %>
-          <% elsif order_buyer.in_progress? %>
-              <% if order_buyer.completed_at? %>
-                <%= link_to "disputa", new_order_dispute_path(order_buyer.uuid) %>
-                <%= link_to "finalizar orden", complete_order_path(order_buyer.id), :method => :put, :data => {:confirm => 'Seguro que quieres finalizar la orden?'} %>
+            <div class="diego-velez-btn">
+              <% if order_buyer.pending? %>
+              <% if order_buyer.started_at? %>
+              <%= link_to "reembolso", refund_order_path(order_buyer.uuid), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
+              <%= link_to "comenzar", start_order_path(order_buyer.uuid), method: :put, :data => {:confirm => 'Seguro que quieres comenzar la orden?'} %>
               <% else %>
-                <%= link_to "disputa", new_order_dispute_path(order_buyer.uuid) %>
+              <%= link_to "reembolso", refund_order_path(order_buyer.uuid), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
               <% end %>
-          <% elsif order_buyer.disputed? %>
-                <%= link_to "ir al caso", order_dispute_path(order_buyer.uuid, order_buyer.dispute) %>
-          <% end %>
+              <% elsif order_buyer.in_progress? %>
+              <% if order_buyer.completed_at? %>
+              <%= link_to "disputa", new_order_dispute_path(order_buyer.uuid) %>
+              <%= link_to "finalizar orden", complete_order_path(order_buyer.uuid), :method => :put, :data => {:confirm => 'Seguro que quieres finalizar la orden?'} %>
+              <% else %>
+              <%= link_to "disputa", new_order_dispute_path(order_buyer.uuid) %>
+              <% end %>
+              <% elsif order_buyer.disputed? %>
+              <%= link_to "ir al caso", order_dispute_path(order_buyer.uuid, order_buyer.dispute) %>
+              <% end %>
+            </div>
         </div>
     </div>
   </div>
