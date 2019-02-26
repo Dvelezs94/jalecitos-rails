@@ -25,6 +25,14 @@
             <% end %>
             <span><%= order_seller.created_at %></span>
             <h4><%= "$#{order_seller.total} MXN" %></h4>
+            <br>
+            <% if order_seller.address? %>
+            <strong>Dirección: </strong><p class="inline"><%= order_seller.address %></p>
+            <iframe width="100%" height="170" frameborder="0" style="border:0"
+            src='https://www.google.com/maps/embed/v1/place?key=<%= ENV.fetch("GOOGLE_MAP_API") %>&q=<%= CGI.escape(order_seller.address) %>'
+            allowfullscreen="allowfullscreen">
+            </iframe>
+            <% end %>
         </div>
 
 

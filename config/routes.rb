@@ -99,6 +99,8 @@ Rails.application.routes.draw do
       put :complete
       put :request_start
       put :start
+      get :details
+      put :update_details
     end
     resources :disputes, only: [:new, :create, :show] do
       resources :replies, only: [:create]
