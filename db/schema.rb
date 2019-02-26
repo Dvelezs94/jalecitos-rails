@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_25_205443) do
+ActiveRecord::Schema.define(version: 2019_02_26_231454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,9 @@ ActiveRecord::Schema.define(version: 2019_02_25_205443) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
+    t.float "lat"
+    t.float "lon"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -206,6 +209,9 @@ ActiveRecord::Schema.define(version: 2019_02_25_205443) do
     t.string "response_tax_id"
     t.string "response_openpay_tax_id"
     t.string "address"
+    t.float "lat"
+    t.float "lon"
+    t.string "details"
     t.index ["billing_profile_id"], name: "index_orders_on_billing_profile_id"
     t.index ["employer_id", "employee_id"], name: "index_orders_on_employer_id_and_employee_id"
     t.index ["payout_id"], name: "index_orders_on_payout_id"
