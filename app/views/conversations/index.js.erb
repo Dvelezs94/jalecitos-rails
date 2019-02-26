@@ -13,7 +13,11 @@
   <% sleep 1 %>
 <% elsif params[:word] %>
 $("#contacts-list").html("");
-  <% @users.each do |user| %>
-  $("#contacts-list").append("<%= j render partial: 'conversation_min', locals: { user: user } %>")
+  <% if @users.present? %>
+    <% @users.each do |user| %>
+      $("#contacts-list").append("<%= j render partial: 'conversation_min', locals: { user: user } %>");
+    <% end %>
+  <% else %>
+    $("#contacts-list").append("<div class='no-matches'>Sin coincidencias</div>");
   <% end %>
 <% end %>
