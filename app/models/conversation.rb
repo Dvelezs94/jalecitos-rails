@@ -1,4 +1,14 @@
 class Conversation < ApplicationRecord
+  #search
+  searchkick language: "spanish"
+
+  def search_data
+    {
+      recipient_id: recipient_id,
+      sender_id: sender_id,
+      updated_at: updated_at,
+     }
+  end
   has_many :messages, dependent: :destroy
   belongs_to :sender, foreign_key: :sender_id, class_name: "User"
   belongs_to :recipient, foreign_key: :recipient_id, class_name: "User"
