@@ -1,30 +1,44 @@
 <% if user == message.user %>
-<div class="chat-right-side-chat-write chat-write">
+  <div class="chat-right-side-chat-write chat-write">
     <div class="single-right-chat-write">
-        <!-- <%= image_tag(message.user.image_url(:thumb), class: "message-avatar") %> -->
-        <div class="chat-write-text">
-            <% if message.body? %>
-              <p><%= message.body %></p>
-            <% end %>
-            <% if message.image? %>
-              <p><%= link_to(image_tag(message.image_url, class: "message-img"), message.image_url, target: "_blank" ) %></p>
-            <% end %>
-            <!-- <span>14:36</span> -->
-        </div>
+      <!-- <%= image_tag(message.user.image_url(:thumb), class: "message-avatar") %> -->
+      <div class="chat-write-text">
+        <% if message.body? %>
+          <p><%= message.body %>
+          <% if message.lat? %>
+            <iframe width="100%" height="250" frameborder="0" style="border:0"
+            src='https://www.google.com/maps/embed/v1/view?key=<%= ENV.fetch("GOOGLE_MAP_API") %>&center=<%= "#{message.lat}, #{message.lon}" %>&zoom=17'
+            allowfullscreen="allowfullscreen">
+            </iframe>
+          <% end %>
+        </p>
+        <% end %>
+        <% if message.image? %>
+          <p><%= link_to(image_tag(message.image_url, class: "message-img"), message.image_url, target: "_blank" ) %></p>
+        <% end %>
+
+        <!-- <span>14:36</span> -->
+      </div>
     </div>
-</div>
+  </div>
 <% else %>
-<div class="chat-left-side-chat-write chat-write">
+  <div class="chat-left-side-chat-write chat-write">
     <div class="single-chat-write">
-        <div class="chat-right-write-text">
-            <p><%= message.body %>
-            <% if message.image? %>
-              <%= link_to(image_tag(message.image_url, class: "message-img"), message.image_url ) %>
-            </p>
-            <% end %>
-            <!-- <span>14:36</span> -->
-        </div>
-        <!-- <%= image_tag(message.user.image_url(:thumb), class: "message-avatar") %> -->
+      <div class="chat-right-write-text">
+        <p><%= message.body %>
+          <% if message.lat? %>
+            <iframe width="100%" height="250" frameborder="0" style="border:0"
+            src='https://www.google.com/maps/embed/v1/view?key=<%= ENV.fetch("GOOGLE_MAP_API") %>&center=<%= "#{message.lat}, #{message.lon}" %>&zoom=17'
+            allowfullscreen="allowfullscreen">
+            </iframe>
+          <% end %>
+          <% if message.image? %>
+            <%= link_to(image_tag(message.image_url, class: "message-img"), message.image_url ) %>
+        </p>
+        <% end %>
+        <!-- <span>14:36</span> -->
+      </div>
+      <!-- <%= image_tag(message.user.image_url(:thumb), class: "message-avatar") %> -->
     </div>
-</div>
+  </div>
 <% end %>
