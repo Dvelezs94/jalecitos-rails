@@ -7,7 +7,7 @@ module GigStatus
       redirect_to user_path(current_user.slug)
     else
       change_status
-      flash[:success] = "Se ha cambiado el estado del Gig exitosamente"
+      flash[:success] = "Se ha cambiado el estado del Jale exitosamente"
       redirect_to user_path(current_user.slug)
     end
   end
@@ -20,7 +20,7 @@ module GigStatus
   private
 
   def check_first_package
-    flash[:error]='Este Gig no contiene ningún paquete' if (@gig.gig_first_pack[0].nil? || @gig.gig_first_pack[0].name == "" || @gig.gig_first_pack[0].description == "" || @gig.gig_first_pack[0].price == nil || @gig.gig_first_pack[0].price < 100) 
+    flash[:error]='Este Gig no contiene ningún paquete' if (@gig.gig_first_pack[0].nil? || @gig.gig_first_pack[0].name == "" || @gig.gig_first_pack[0].description == "" || @gig.gig_first_pack[0].price == nil || @gig.gig_first_pack[0].price < 100)
   end
 
   def change_status
