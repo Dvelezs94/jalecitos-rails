@@ -1,0 +1,19 @@
+$(document).on('turbolinks:load', function() {
+  if ($("#filter-conversation").length > 0) {
+    $("#filter-conversation").keyup(
+      filter_conversation
+    );
+  }
+});
+
+function filter_conversation() {
+  var loc = window.location.href;
+  if (loc.indexOf("?") === -1)
+     loc += "?";
+  else
+     loc += "&";
+
+  loc += "word=" + $(this).val();
+
+  $.getScript(loc);
+}
