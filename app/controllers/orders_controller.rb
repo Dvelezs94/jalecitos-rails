@@ -1,8 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  include SetLayout
   include OpenpayHelper
   include UsersHelper
   include ApplicationHelper
+  layout :set_layout
   access user: :all, admin: [:complete, :refund]
   before_action only: [:create, :refund] do
     init_openpay("charge")
@@ -14,8 +16,9 @@ class OrdersController < ApplicationController
     init_openpay("fee")
   end
   before_action :get_order, only: [:request_start, :start, :request_complete, :complete, :refund]
+  before_action :get_order_by_uuid, only: [:details, :update_details]
   before_action :verify_order_employee, only: [:request_start, :request_complete]
-  before_action :verify_order_owner, only: [:start, :complete]
+  before_action :verify_order_owner, only: [:start, :complete, :details, :update_details]
   before_action :verify_owner_or_employee, only: [:refund]
   before_action :verify_charge_response, except: [:create]
   before_action :verify_availability, only: [:create]
@@ -25,26 +28,24 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-
-    #prepare charge
-    request_hash = {
-      "method" => "card",
-      "source_id" => order_params[:card_id],
-      "amount" => @order.total,
-      "currency" => "MXN",
-      "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}",
-      "device_session_id" => params[:device_id],
-      "use_3d_secure" => (@order.total > 2999) ? true : false,
-      "redirect_url" => finance_url(:table => "purchases")
-    }
-
     if @order.save
+      #prepare charge
+      request_hash = {
+        "method" => "card",
+        "source_id" => order_params[:card_id],
+        "amount" => @order.total,
+        "currency" => "MXN",
+        "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}",
+        "device_session_id" => params[:device_id],
+        "use_3d_secure" => (@order.total > 2999) ? true : false,
+        "redirect_url" => details_order_url(@order.uuid)
+      }
       #create charge on openpay
       begin
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.response_order_id = response["id"]
         @order.save
-        redirect_to (@order.total > 2999) ? response["payment_method"]["url"] : finance_path(:table => "purchases")
+        redirect_to (@order.total > 2999) ? response["payment_method"]["url"] : details_order_path(@order.uuid)
       rescue OpenpayTransactionException => e
         @order.denied!
         flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
@@ -163,12 +164,28 @@ class OrdersController < ApplicationController
     redirect_to finance_path(:table => "purchases")
   end
 
+  def details
+  end
+
+  def update_details
+    if @order.update_attributes(order_details_params)
+      flash[:success] = "Se le ha enviado un mensaje con los detalles al experto para atender tu orden."
+    else
+      flash[:error] = "Hubo un error actualizando los datos."
+    end
+    redirect_to finance_url(:table => "purchases")
+  end
+
   private
 
     # Only allow a trusted parameter "white list" through.
     def order_params
       order_params = params.require(:order).permit(:card_id, :purchase, :purchase_type, :billing_profile_id)
       order_params = set_defaults(order_params)
+    end
+
+    def order_details_params
+      order_params = params.require(:order).permit(:address)
     end
 
     def set_defaults parameters
@@ -193,6 +210,10 @@ class OrdersController < ApplicationController
 
     def get_order
       @order = Order.find(params[:id])
+    end
+
+    def get_order_by_uuid
+      @order = Order.find_by_uuid(params[:id])
     end
 
     def verify_order_employee

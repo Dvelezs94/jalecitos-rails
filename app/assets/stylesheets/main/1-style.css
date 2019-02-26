@@ -1051,7 +1051,8 @@ p.limpi1 {
 }
 
 .innerpage3-rightsidetabs {
-  border: 1px solid #F2F2F2;
+  border: 2px solid #F5F6F7;
+  border-radius: 5px;
 }
 
 .earnlist-mewrapt {
@@ -1132,9 +1133,10 @@ p.limpi2 {
 
 .mentos-areapag3 {
   text-align: center;
-  border: 1px solid #F2F2F2;
+  border: 2px solid #F5F6F7;
   margin-top: 18px;
   position: relative;
+  border-radius: 5px;
 }
 
 .mentos-authors {
@@ -1504,7 +1506,8 @@ p.limpi1 {
 }
 
 .innerpage3-rightsidetabs {
-  border: 1px solid #F2F2F2;
+  border: 2px solid #F5F6F7;
+  border-radius: 5px;
 }
 
 .earnlist-mewrapt {
@@ -1534,7 +1537,6 @@ p.limpi3 {
 
 p.limpi2 {
   color: #39C27B;
-  font-family: Avenirbold;
 }
 
 .check-listpage3 p {
@@ -1543,18 +1545,6 @@ p.limpi2 {
 
 .check-listpage3 {
   margin-top: 30px;
-}
-
-.mentos-areapag3 {
-  text-align: center;
-  border: 1px solid #F2F2F2;
-  margin-top: 18px;
-  position: relative;
-}
-
-.mentos-authors {
-  border-bottom: 1px solid #F2F2F2;
-  padding-top: 12px;
 }
 
 .page3-comment i {
@@ -1573,6 +1563,9 @@ p.limpi2 {
   top: 12px;
 }
 
+.inline {
+  display: inline;
+}
 .mentos-title2 h1 {
   font-size: 24px;
   margin-bottom: 8px;
