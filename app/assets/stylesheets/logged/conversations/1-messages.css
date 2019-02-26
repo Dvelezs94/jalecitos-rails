@@ -282,5 +282,9 @@
 	cursor: pointer;
 }
 
+.no-matches {
+  text-align: center;
+  margin-top: 5%;
+}
 
 /* messages page End*/
