@@ -12,8 +12,6 @@
                <%= form_with model: @billing_profile, url: user_billing_profiles_path(current_user), class: "new_billing_profile" do |f| %>
                  <%= f.text_field :name, class: "required", placeholder: "Razon Social" %>
                  <%= f.text_field :rfc, class: "required", placeholder: "RFC" %>
-                 <%= f.text_field :address, class: "required", placeholder: "Direccion Calle y Numero" %>
-                 <%= f.number_field :zip_code, class: "required", placeholder: "Codigo Postal", maxlength: 5 %>
                  <br>
                  <%= f.submit 'Continuar', :class => 'btn btn-success' %>
                <% end %>
