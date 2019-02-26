@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
         "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}",
         "device_session_id" => params[:device_id],
         "use_3d_secure" => (@order.total > 2999) ? true : false,
-        "redirect_url" => details_order_path(@order.uuid)
+        "redirect_url" => details_order_url(@order.uuid)
       }
       #create charge on openpay
       begin
