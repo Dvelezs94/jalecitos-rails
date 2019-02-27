@@ -52,10 +52,9 @@
   <div class="perfil-area">
     <div class="profileview1">
       <div class="profileview-total">
-        <img src="assets/img/jaman.png" alt="">
-        <span><%= @gig.user.alias %></span>
+        <%= image_tag(@gig.user.image_url(:thumb)) %>
+        <span><%= link_to @gig.user.alias, user_path(@gig.user.slug) %></span>
         <%= "#{icon("fas", "check-square", title: "Verificado")}".html_safe if @gig.user.verified %>
-        <%= link_to "Ver perfil", user_path(@gig.user.slug) %>
       </div>
     </div>
   </div>
