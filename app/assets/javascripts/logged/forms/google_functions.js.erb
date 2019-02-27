@@ -12,6 +12,6 @@ function activatePlacesSearch() {
   //
   google.maps.event.addListener(search_autocomplete, 'place_changed', function () {
       var place = search_autocomplete.getPlace();
-      $('#mapPreview').attr("src", "https://www.google.com/maps/embed/v1/place?key=" + Gkey + "&q=place_id:" + (place.place_id || "ChIJU1NoiDs6BIQREZgJa760ZO0") );
+      $('#mapPreview').attr("src", "https://www.google.com/maps/embed/v1/place?key=" + Gkey + "&q=place_id:" + (place.place_id || "ChIJU1NoiDs6BIQREZgJa760ZO0"));// if not found, search mexico
   });
 }

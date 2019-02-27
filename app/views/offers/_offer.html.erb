@@ -7,7 +7,7 @@
         <%= score_average(offer.user.score) %></span></h5>
     <p>Horas estimadas:
       <%= offer.hours %>
-      <strong><%= number_to_currency(cons_mult_helper(offer.price), precision: 2) %>
+      <strong><%= number_to_currency(purchase_order_total(offer.price), precision: 2) %>
         MXN</strong>
     </p>
   </div>
