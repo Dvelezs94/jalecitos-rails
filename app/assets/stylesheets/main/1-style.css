@@ -2871,10 +2871,14 @@ div.form {
   justify-content: space-between;
 }
 /*query page*/
-.gig-query .gig-text,
-.gig-profile .gig-text {
-  border: 1px solid #E5E5E5;
+.gig-query-content {
   min-height: 128px;
+  box-shadow: 2px 2px 16px 0 rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
+}
+
+.gig-query-content:hover {
+  box-shadow: 6px 6px 24px 0 rgba(0, 0, 0, 0.05);
 }
 .gig-query .gig-image,
 .gig-profile .gig-image {

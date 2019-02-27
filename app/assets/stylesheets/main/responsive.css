@@ -4,6 +4,11 @@
   .container {
     min-width: 1200px;
   }
+
+  .gig-profile {
+    margin: 8px 0px;
+  }
+
   .gig-query .hearted1,
   .gig-profile .hearted1 {
     top: 45%;
@@ -98,6 +103,9 @@
 @media (min-width: 992px) and (max-width: 1199px) {
   .phone_links i {
     font-size: 21px;
+  }
+  .gig-profile {
+    margin: 8px 0px;
   }
   .modal-content, .modal-content-transparent {
     width: 500px;
