@@ -5,3 +5,9 @@
 .order-date {
   display: none;
 }
+
+.Postularme-btn a {
+  margin-left: 10px;
+  font-weight: 600;
+  padding: 7px 30px;
+}
