@@ -283,8 +283,10 @@
 .diego-user img {
 	position: absolute;
 	left: 10px;
-	width: 20px;
+	width: 25px;
+  height: 25px;
   border-radius: 50%;
+  border: 2px solid #EEEEF3;
 }
 .diego-user h5 {
 	margin-left: 40px;
