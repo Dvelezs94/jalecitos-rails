@@ -90,6 +90,15 @@
 
 .details-form {
   margin-top: 30px;
+  padding-bottom: 10vh;
+  width: 100%;
+}
+
+
+
+.grey-input {
+  border: none;
+  background-color: #F2F2F2;
 }
 
 .details-header::after {
@@ -102,9 +111,15 @@
 	z-index: -1;
 }
 
-.gmap-canvas {
-  margin: 5px 0px;
+.label-bold {
+  font-weight: 700;
+  font-size: 18px;
 }
+
+.gmap-canvas {
+  margin: 20px 0px;
+}
+
 .user-bar li {
 	display: inline-block;
 	text-align: center;

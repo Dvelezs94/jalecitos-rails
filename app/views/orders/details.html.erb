@@ -17,7 +17,7 @@
        <span class="checkmark"></span>
       </label>
     <div class="order-location">
-      <%= f.text_field :address, class: 'text_box form-control', id: "google_autocomplete", size: 200, placeholder: "Cualquier lugar en México" %>
+      <%= f.text_field :address, class: 'text_box form-control grey-input', id: "google_autocomplete", size: 200, placeholder: "Escribe tu direccion" %>
       <div class="gmap-canvas">
         <iframe width="100%" height="450" id="mapPreview" frameborder="0" style="border:0"
         src="https://www.google.com/maps/embed/v1/place?key=<%= ENV.fetch('GOOGLE_MAP_API') %>&q=mexico"
@@ -27,8 +27,8 @@
     </div>
 
     <div class="form-group">
-      <label for="comment">Informacion extra</label>
-      <%= f.text_area :details, class: "form-control" %>
+      <label for="comment" class="label-bold">Informacion extra</label>
+      <%= f.text_area :details, class: "form-control grey-input", placeholder: "Informacion util para el experto", rows: 5 %>
     </div>
       <label class="check-btn"> Estoy de acuerdo con la informacion proporcionada
         <input type="checkbox" class="form-check-input" id="agree-info" required>
