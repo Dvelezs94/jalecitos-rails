@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_26_231454) do
+ActiveRecord::Schema.define(version: 2019_02_27_225305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -458,6 +458,7 @@ ActiveRecord::Schema.define(version: 2019_02_26_231454) do
     t.boolean "marketing_emails", default: true
     t.boolean "verified", default: false
     t.bigint "city_id"
+    t.string "time_zone", default: "America/Mexico_City"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
