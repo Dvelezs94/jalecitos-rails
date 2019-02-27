@@ -1259,14 +1259,6 @@ p.limpi2 sub {
   margin: 0;
 }
 
-.servico-title {
-  border-top: 1px solid #F2F2F2;
-  border-bottom: 1px solid #F2F2F2;
-  padding: 15px 0;
-  margin-top: 30px;
-  cursor: default;
-}
-
 .servico-singleteam {
   position: relative;
   padding-left: 95px;
@@ -1382,10 +1374,18 @@ p.gig-price {
   display: none;
 }
 
-.profileview-total span {
-  color: #4A4A4A;
-  margin: 17px;
-  display: inline-block;
+.profileview-total span a {
+  color: #000;
+  font-weight: 700;
+  padding-left: 5px;
+}
+
+.profileview-total img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 5px 15px;
+  border: 4px solid #EEEEF3;
 }
 
 
@@ -1664,8 +1664,8 @@ p.limpi2 sub {
 }
 
 .servico-title {
-  border-top: 1px solid #F2F2F2;
-  border-bottom: 1px solid #F2F2F2;
+  border-top: 2px solid #F2F2F2;
+  border-bottom: 2px solid #F2F2F2;
   padding: 15px 0;
   margin-top: 30px;
 }
@@ -1784,36 +1784,26 @@ p.gig-price {
 }
 
 .small-padding {
-  padding: 0px 5px;
+  padding: 0px 0px;
 }
 
-.profileview-total a {
-  float: right;
-  color: #39C27B;
-  margin-top: 17px;
-  padding-right: 5px;
-}
 
-.top-gig {
-  margin-top: 5px;
-}
-
-.profileview-total span {
-  color: #4A4A4A;
-  margin: 17px;
-  display: inline-block;
-}
-
-.profileview-total {
-  padding-top: 5px;
-  background: #F9F9F9;
-  border-bottom: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
+.sedcontent-wrap::before {
+	position: absolute;
+	left: 0;
+	content: "";
+	width: 100%;
+	height: 3px;
+	background: #F5F6F7;
+	z-index: -1;
 }
 
 .sedcontent-wrap {
   display: none;
+}
+
+.sed-content {
+  margin: 0px 15px;
 }
 
 .sed-content h3 {
@@ -2411,11 +2401,9 @@ p.fof {
   border-radius: 4px 4px 0 0;
 }
 
-/* .gig-content {
-  border: 1px solid #E5E5E5;
-  border-radius: 0 0 4px 4px;
-  padding: 15px 5px;
-} */
+.gig-content {
+  padding: 15px 10px;
+}
 p.gig-score-times {
   color: gray;
   font-weight: 600;

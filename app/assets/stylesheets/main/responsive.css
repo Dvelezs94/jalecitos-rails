@@ -116,6 +116,10 @@
     right: 9%;
   }
 
+  .small-padding {
+    padding-top: 5px;
+  }
+
   .authorclick img {
     width: 45px;
     height: 45px;
@@ -1822,7 +1826,7 @@
   }
 
   .servico-title i {
-    padding-left: 3px;
+    padding: 0px 5px;
   }
 
   .servico-title span {
@@ -2214,6 +2218,7 @@
   div.form {
     width: auto;
   }
+
   /*search results*/
   .gig-query .gig-image-profile img,
   .gig-profile .gig-image-profile img {
