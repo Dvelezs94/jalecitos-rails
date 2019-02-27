@@ -1,4 +1,5 @@
 class BillingProfilesController < ApplicationController
+  include RefererFunctions
   before_action :authenticate_user!
   access user: :all, admin: :all
   before_action :set_billing_profile, only: [:destroy]
@@ -11,9 +12,19 @@ class BillingProfilesController < ApplicationController
       redirect_to configuration_path(collapse: "billing"), alert: "Solo puedes tener 1 RFC registrado a la vez."
     else
       if @billing_profile.save
-        redirect_to configuration_path(collapse: "billing"), notice: "El perfil fue creado con exito."
+        flash[:success] = "El perfil fue creado con exito."
       else
-        redirect_to configuration_path(collapse: "billing"), alert: "Error al crear perfil."
+        flash[:alert] = "Error al crear perfil."
+      end
+      referer_params = referer_params(request.referer)
+      if referer_params["package_id"].join("") != ""
+        package = Package.find_by_slug(referer_params["package_id"])
+        redirect_to hire_user_gig_package_path(package.gig.user, package.gig, package)
+      elsif referer_params["offer_id"].join("") != ""
+        offer = Offer.find_by_id(referer_params["offer_id"])
+        redirect_to hire_request_offer_path(offer.request, offer)
+      else
+        redirect_to configuration_path(collapse: "billing")
       end
     end
   end

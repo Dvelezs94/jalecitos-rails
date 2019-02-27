@@ -24,7 +24,7 @@
             <h5>Pedido</h5>
             <% end %>
             <span><%= order_buyer.created_at %></span>
-            <h4><%= "$#{order_buyer.total} MXN" %></h4>
+            <h4><%= "#{number_to_currency(order_buyer.total)} MXN" %></h4>
             <% if order_buyer.details? %>
             <br>
             <strong>Detalles extras: </strong><p class="inline"><%= order_buyer.details %></p>

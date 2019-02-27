@@ -49,10 +49,7 @@ class User < ApplicationRecord
   validates_length_of :alias, maximum: 30
   validate :maximum_amount_of_tags, :no_spaces_in_tag, :tag_length
   # validate :location_syntax
-  validates_length_of :bio, maximum: 500#if alias changes, also slug
-  def should_generate_new_friendly_id?
-    slug.blank? || alias_changed?
-  end
+  validates_length_of :bio, maximum: 500
   validates_presence_of :alias
   validates :alias, format: { :with => /\A[a-zA-Z0-9\-\_]+\z/, message: "sólo puede contener caracteres alfanuméricos, guión y guión bajo." }
   # User Score
