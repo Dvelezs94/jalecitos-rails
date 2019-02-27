@@ -28,8 +28,6 @@ class User < ApplicationRecord
   ratyrate_rater
   #Tags
   acts_as_taggable
-  #alias
-  friendly_id :alias, use: :slugged
   #enum
   enum status: { active: 0, disabled: 1, banned: 2}
   before_create :set_location
@@ -163,6 +161,9 @@ class User < ApplicationRecord
        true
      end
    end
+
+   #alias
+   friendly_id :alias, use: :slugged
 
    private
    #if alias changes, also slug
