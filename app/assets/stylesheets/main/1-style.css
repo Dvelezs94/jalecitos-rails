@@ -2387,7 +2387,16 @@ button:focus {
 }
 .single-gig {
   width: 200px;
+  margin: 10px 0px;
+  border-radius: 2px;
+  box-shadow: 2px 2px 16px 0 rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
 }
+
+.single-gig:hover {
+  box-shadow: 6px 6px 24px 0 rgba(0, 0, 0, 0.05);
+}
+
 .page3slides-contentrd p.location,
 .gig-query .location,
 .gig-profile .location,
@@ -2402,11 +2411,11 @@ p.fof {
   border-radius: 4px 4px 0 0;
 }
 
-.gig-content {
+/* .gig-content {
   border: 1px solid #E5E5E5;
   border-radius: 0 0 4px 4px;
   padding: 15px 5px;
-}
+} */
 p.gig-score-times {
   color: gray;
   font-weight: 600;
