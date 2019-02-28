@@ -21,7 +21,6 @@
 
 .post_form_col {
     background: #fff;
-    border: 1px #e3e3e3 solid;
     padding: 22px 0px;
 
 }
@@ -41,10 +40,7 @@
   text-align: center;
   width: 100%;
 }
-#price-symbol{
-  margin: auto 5px;
-  font-size: 20px;
-}
+
 
 
 .form_block textarea {

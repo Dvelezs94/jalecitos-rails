@@ -1,3 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  activatePlacesSearch();
+  if ($('#google_autocomplete').length > 0) {
+    activatePlacesSearch();
+  }
 });

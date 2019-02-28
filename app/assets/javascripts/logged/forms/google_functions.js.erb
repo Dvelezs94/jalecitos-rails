@@ -1,0 +1,17 @@
+function activatePlacesSearch() {
+  var search_input = document.getElementById('google_autocomplete');
+  var Gkey = "<%= ENV.fetch('GOOGLE_MAP_API') %>";
+  var options = {
+    types: ['address'],
+    componentRestrictions: {
+      country: "mx"
+    }
+  };
+  var search_autocomplete = new google.maps.places.Autocomplete(search_input, options)
+  // function to update lat and lon on the view
+  //
+  google.maps.event.addListener(search_autocomplete, 'place_changed', function () {
+      var place = search_autocomplete.getPlace();
+      $('#mapPreview').attr("src", "https://www.google.com/maps/embed/v1/place?key=" + Gkey + "&q=place_id:" + (place.place_id || "ChIJU1NoiDs6BIQREZgJa760ZO0"));// if not found, search mexico
+  });
+}
