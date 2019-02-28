@@ -206,24 +206,24 @@ module ApplicationHelper
   def star_display_helper number
     decimal = number % 1
     if number == 0
-      "Sin reseñas"
+      "<h6>Sin reseñas</h6>".html_safe
     else
       html = ""
       #number of complete stars
       number.to_i.times do
-        html << image_tag("star-on", title: number)
+        html << image_tag("star-on.svg", title: number)
       end
       #if has decimal...
       if decimal > 0
-        html << image_tag("star-off", title: number.round(1)) if decimal < 0.25
+        html << image_tag("star-off.svg", title: number.round(1)) if decimal < 0.25
 
-        html << image_tag("star-half", title: number.round(1)) if decimal.between?( 0.25, 0.75 )
+        html << image_tag("star-half.svg", title: number.round(1)) if decimal.between?( 0.25, 0.75 )
 
-        html << image_tag("star-on", title: number.round(1)) if decimal > 0.75
+        html << image_tag("star-on.svg", title: number.round(1)) if decimal > 0.75
       end
       #stars that doesnt have
       ( (5-number).to_i ).times do
-        html << image_tag("star-off", title: number)
+        html << image_tag("star-off.svg", title: number)
       end
       #return it
       html.html_safe
