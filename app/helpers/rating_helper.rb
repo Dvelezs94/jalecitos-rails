@@ -8,9 +8,9 @@ module RatingHelper
     enable_half  = options[:enable_half]  || false
     half_show    = options[:half_show]    || true
     star_path    = options[:star_path]    || ""
-    star_on      = options[:star_on]      || asset_path('star-on.png')
-    star_off     = options[:star_off]     || asset_path('star-off.png')
-    star_half    = options[:star_half]    || asset_path('star-half.png')
+    star_on      = options[:star_on]      || asset_path('star-on.svg')
+    star_off     = options[:star_off]     || asset_path('star-off.svg')
+    star_half    = options[:star_half]    || asset_path('star-half.svg')
     cancel       = options[:cancel]       || false
     cancel_place = options[:cancel_place] || "left"
     cancel_hint  = options[:cancel_hint]  || "Cancel current rating!"
@@ -91,9 +91,9 @@ module RatingHelper
     enable_half  = options[:enable_half]  || false
     half_show    = options[:half_show]    || true
     star_path    = options[:star_path]    || ""
-    star_on      = options[:star_on]      || asset_path('star-on.png')
-    star_off     = options[:star_off]     || asset_path('star-off.png')
-    star_half    = options[:star_half]    || asset_path('star-half.png')
+    star_on      = options[:star_on]      || asset_path('star-on.svg')
+    star_off     = options[:star_off]     || asset_path('star-off.svg')
+    star_half    = options[:star_half]    || asset_path('star-half.svg')
     cancel       = options[:cancel]       || false
     cancel_place = options[:cancel_place] || "left"
     cancel_hint  = options[:cancel_hint]  || "Cancel current rating!"
