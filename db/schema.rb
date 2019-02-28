@@ -337,6 +337,7 @@ ActiveRecord::Schema.define(version: 2019_02_26_231454) do
     t.integer "employee_id"
     t.string "profession"
     t.bigint "city_id"
+    t.integer "offers_count", default: 0
     t.index ["category_id"], name: "index_requests_on_category_id"
     t.index ["city_id"], name: "index_requests_on_city_id"
     t.index ["slug"], name: "index_requests_on_slug", unique: true

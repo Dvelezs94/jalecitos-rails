@@ -2,6 +2,7 @@
 require "#{Rails.root}/db/init_seeds/categories"
 require "#{Rails.root}/db/init_seeds/professions"
 require "#{Rails.root}/db/init_seeds/mx_places"
+include RequestsHelper
 
 # Populate DB with Mexico places
 Country.create(name: "MX")
@@ -44,7 +45,7 @@ if ENV.fetch("RAILS_ENV") != "production"
           request.description = Faker::Lorem.paragraph(30, true)
           request.city_id = Faker::Number.between(1, 5)
           request.category_id = Faker::Number.between(1, 10)
-          request.budget = Faker::Number.between(100, 5000)
+          request.budget = options_for_budget[Faker::Number.between(0, (options_for_budget.count - 1))]
           request.status = Faker::Number.between(0, 4)
           request.profession = Profession.find( Faker::Number.between(1, 20) ).name
         end

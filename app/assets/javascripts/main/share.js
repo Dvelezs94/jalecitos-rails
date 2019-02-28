@@ -11,18 +11,16 @@ $(document).on('turbolinks:load', function() {
     if (navigator.share) {
       navigator.share({
           title: document.title,
-          text: "Observa esta liga! Creo es de tu interes.",
+          text: "¡Observa esta liga! Creo es de tu interés.",
           url: url
       })
-        .then(() => console.log('Successful share'))
-        .catch((error) => console.log('Error sharing', error));
     } else {
       new Clipboard('#share', {
         text: function() {
           return url;
         }
       });
-      alert("La Direccion ha sido copiada en el portapapeles");
+      alert("La url ha sido copiada en el portapapeles");
     }
     event.preventDefault();
   });
