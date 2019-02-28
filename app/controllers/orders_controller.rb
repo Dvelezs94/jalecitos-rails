@@ -168,7 +168,7 @@ class OrdersController < ApplicationController
 
   def update_details
     if @order.update_attributes(order_details_params)
-      flash[:success] = "Se le ha enviado un mensaje con los detalles al experto para atender tu orden."
+      flash[:success] = "Se le ha enviado la orden al experto."
     else
       flash[:error] = "Hubo un error actualizando los datos."
     end
