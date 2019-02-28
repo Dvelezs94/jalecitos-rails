@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   include OpenpayHelper
+  include RefererFunctions
   before_action :authenticate_user!
   before_action only: [:create, :destroy] do
     init_openpay("card")
@@ -21,7 +22,16 @@ class CardsController < ApplicationController
         # e.error_code
         flash[:error] = "#{e.description}, por favor intentalo de nuevo."
     end
-    redirect_to configuration_path(collapse: "payment_methods")
+    referer_params = referer_params(request.referer)
+    if referer_params["package_id"].join("") != ""
+      package = Package.find_by_slug(referer_params["package_id"])
+      redirect_to hire_user_gig_package_path(package.gig.user, package.gig, package)
+    elsif referer_params["offer_id"].join("") != ""
+      offer = Offer.find_by_id(referer_params["offer_id"])
+      redirect_to hire_request_offer_path(offer.request, offer)
+    else
+      redirect_to configuration_path(collapse: "payment_methods")
+    end
   end
 
   def destroy
@@ -42,7 +52,7 @@ class CardsController < ApplicationController
       return true
     else
       flash[:error] = "Solo puedes tener un maximo de 3 tarjetas. Elimina una para poder proceder."
-      redirect_to "#{configuration_path}#card"
+      redirect_to configuration_path(collapse: "payment_methods")
       return false
     end
   end

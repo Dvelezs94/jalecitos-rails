@@ -1228,7 +1228,10 @@
   .todoo1 img {
     display: none;
   }
-
+  .packages-builder {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
   .servicoteam-wrap {
     display: none;
   }

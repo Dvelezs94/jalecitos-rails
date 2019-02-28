@@ -2,9 +2,10 @@ class Request < ApplicationRecord
   #includes
   include TagRestrictions
   include DescriptionRestrictions
+  include RequestsHelper
   include LocationFunctions
   #search
-  searchkick language: "spanish", word_start: [:name, :description], suggest: [:name, :description, :profession]
+  searchkick language: "spanish", word_start: [:name, :description, :profession], suggest: [:name, :description, :profession]
   def search_data
     {
       name: no_special_chars(name).downcase,
@@ -39,6 +40,7 @@ class Request < ApplicationRecord
   validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
   validate :description_length, :count_without_html
   validate :location_validate
+  validate :budget_options
 
   #Custom fields
   mount_uploader :image, RequestUploader
@@ -54,5 +56,11 @@ class Request < ApplicationRecord
 
   def title
     "Busco un #{self.profession} #{self.name}"
+  end
+
+  def budget_options
+    if ! options_for_budget.include?(self.budget)
+      errors.add(:base, "No seleccionaste un presupuesto válido.")
+    end
   end
 end

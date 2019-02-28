@@ -230,9 +230,11 @@ module ApplicationHelper
     end
   end
 
-  def score_average us
-    if us.employee_score_times == 0.0 && us.employer_score_times == 0.0
+  def score_average us, return_number=true
+    if us.employee_score_times == 0.0 && us.employer_score_times == 0.0 && return_number == true
       0.0
+    elsif us.employee_score_times == 0.0 && us.employer_score_times == 0.0 && return_number != true
+      "N/A"
     elsif us.employer_score_times == 0.0
       us.employee_score_average
     elsif us.employee_score_times == 0.0

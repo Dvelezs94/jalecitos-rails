@@ -3,7 +3,8 @@ class Offer < ApplicationRecord
   include DescriptionRestrictions
   #Associations
   belongs_to :user
-  belongs_to :request
+  #counter_cache automatically increments and decrements offers_count in requests
+  belongs_to :request, counter_cache: true
   has_one :payment
   #Validations
   validate :description_length, :count_without_html

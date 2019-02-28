@@ -1,4 +1,4 @@
-<% if current_user && current_user.likes?(gig) %>
+<% if current_user && gig.likes.select{|l| l.user_id == 1}.present? %>
   <%= link_to icon("fas", "heart medium-icon", title: "Me gusta", class: "like"), user_gig_like_path(gig.user.slug, gig.slug), method: :delete, remote: true %>
 <% else %>
   <%= link_to icon("fas", "heart medium-icon", title: "Me gusta", class: "unlike"), user_gig_like_path(gig.user.slug, gig.slug), method: :post, remote: true %>

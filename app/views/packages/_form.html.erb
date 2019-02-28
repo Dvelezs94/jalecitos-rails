@@ -1,13 +1,13 @@
 <%= form_with(model: package, url: package_form_url_helper, method: form_method_helper, local: true, :html => { :id => "packages_form", class: "current_form" }) do |form|%>
-<div class="container-fluid section centered-form">
+<div class="container-fluid section centered-form packages-builder">
   <h3 id="how-many-pack">Define tus paquetes</h3>
   <div class="col-lg-8 mar-0-auto">
     <nav class="pack-names">
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link package-nav active" id="pack-tab-0" data-toggle="tab" href="#package-0" role="tab" aria-selected="true">Básico</a>
-        <a class="nav-item nav-link package-nav" id="pack-tab-1" data-toggle="tab" href="#package-1" role="tab" aria-selected="false" style="<%= "display:none;" if @gig.packages[1].name == "" %>">Éstandar</a>
-        <a class="nav-item nav-link package-nav" id="pack-tab-2" data-toggle="tab" href="#package-2" role="tab" aria-selected="false" style="<%= "display:none;" if @gig.packages[2].name == "" %>">Premium</a>
-        <a href="#" class="pack-tab-displayer" style="<%= "display:none;" if  @gig.packages[2].name != '' %>"><%= icon("fas", "plus") %></a>
+        <a class="nav-item nav-link package-nav" id="pack-tab-1" data-toggle="tab" href="#package-1" role="tab" aria-selected="false" style="<%= "display:none;" if params[:action] == 'new' || @gig.packages[1].name == "" %>">Éstandar</a>
+        <a class="nav-item nav-link package-nav" id="pack-tab-2" data-toggle="tab" href="#package-2" role="tab" aria-selected="false" style="<%= "display:none;" if params[:action] == 'new' || @gig.packages[2].name == "" %>">Premium</a>
+        <a href="#" class="pack-tab-displayer" style="<%= "display:none;" if ! params[:action] == 'new' && @gig.packages[2].name != '' %>"><%= icon("fas", "plus") %></a>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
@@ -48,7 +48,7 @@
                   <%= icon "fas","dollar", class: "fa-2x", id: "price-symbol" %>
                   <input type="number" name="want_win_<%= n %>" min="100" max="9000" step=".01"
                    class="price-input price-input-<%= n %> form-control"
-                   value="<%= (@gig.packages[n].price*0.9).round(2) if @gig.packages[n].price.present? %>">
+                   value="<%= (@gig.packages[n].price*0.9).round(2) if params[:action] == 'edit_packages' && @gig.packages[n].price.present? %>">
                   <%= pa.hidden_field :price, id: "base-price-#{n}", class: "form_fields_#{n}" %>
                   <span class="error error_span_<%= 3*n+3 %>"></span>
                   </div>

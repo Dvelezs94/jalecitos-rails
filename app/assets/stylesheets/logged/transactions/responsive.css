@@ -104,6 +104,9 @@
  .tablet-mobile-top-ber {
 	display: block;
 }
+.gmap-canvas iframe {
+  height: 250px
+}
 .Transacciones-tab-secsion {
 	margin-bottom: 80px;
 }
