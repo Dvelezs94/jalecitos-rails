@@ -140,3 +140,5 @@ gem 'js_cookie_rails', '~> 2.2'
 gem 'recaptcha', '~> 4.13', '>= 4.13.1'
 # nice scroll
 gem 'nicescroll-rails', '~> 3.5', '>= 3.5.4.1'
+# Query places by name
+gem 'google_places', '~> 1.2'

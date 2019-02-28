@@ -52,6 +52,8 @@ class User < ApplicationRecord
   validates :alias, format: { :with => /\A[a-zA-Z0-9\-\_]+\z/, message: "sólo puede contener caracteres alfanuméricos, guión y guión bajo." }
   # User Score
   belongs_to :score, foreign_key: :score_id, class_name: "UserScore", optional: true
+  # update user timezone if location changed
+  before_update :update_time_zone, :if => :city_id_changed?
   # Avatar image
   mount_uploader :image, AvatarUploader
   # Associations
@@ -169,5 +171,13 @@ class User < ApplicationRecord
    #if alias changes, also slug
    def should_generate_new_friendly_id?
      slug.blank? || alias_changed?
+   end
+
+   def update_time_zone
+     @client = GooglePlaces::Client.new(ENV.fetch("GOOGLE_MAP_API"))
+     @loc = @client.spots_by_query(self.location).first
+     @url = "https://maps.googleapis.com/maps/api/timezone/json?key=#{ENV.fetch("GOOGLE_MAP_API")}&location=#{@loc.lat},#{@loc.lng}&timestamp=#{Time.now.getutc.to_i}"
+     @res = JSON.parse(Net::HTTP.get(URI.parse("#{@url}")))
+     self.time_zone = @res["timeZoneId"] if TZInfo::Timezone.all_country_zone_identifiers.include? @res["timeZoneId"]
    end
 end
