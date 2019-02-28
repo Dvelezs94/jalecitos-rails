@@ -10,7 +10,7 @@
           <p class="location truncate"><%=gig.location%></p>
           <p class="coa2 multi-line-truncate-2"><%= gig.title%></p>
           <p class="coa3">Desde
-            <%= number_to_currency(purchase_order_total(gig.packages.first.price)) %>
+            <%= number_to_currency(purchase_order_total(gig.query_pack.first.price)) %>
             MXN</p>
         </div>
         <div class="tabstar-no" style="display:flex;align-items:center;">

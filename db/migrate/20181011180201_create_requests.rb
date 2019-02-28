@@ -7,7 +7,6 @@ class CreateRequests < ActiveRecord::Migration[5.2]
       t.references :category, foreign_key: true
       t.string :budget
       t.string :image
-      t.string :location
       t.integer :status, default: 0
 
       t.timestamps
