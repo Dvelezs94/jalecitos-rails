@@ -100,8 +100,6 @@
 	margin-top: 20px;
 }
 .fernanda-single-box img {
-  position: absolute;
-  left: 14px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -114,16 +112,25 @@
   font-weight: 700;
   margin-bottom: 5px;
 }
-.fernanda-user-box-text h5 a {
+.offer_image_name {
+	display: flex;
+	align-items: center;
+}
+
+.offer_image_name h5 {
+  margin: 0 0 0 10px;
+}
+
+.offer_image_name h5 a {
   color: #000;
 }
 
-.fernanda-user-box-text h5 span {
-	float: right;
+.offer_image_name span {
+	margin-left: auto;
 	color: #8E8E93;
 	font-size: 14px;
 }
-.fernanda-user-box-text h5 span i.fa {
+.offer_image_name span i.fa {
 	color: #FDBA32;
 }
 
