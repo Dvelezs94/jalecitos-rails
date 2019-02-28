@@ -19,9 +19,9 @@
                         <a href=""><%= @request.location %></a>
                         <span>Publicado hace <%= distance_of_time_in_words(@request.created_at, Time.now) %></span>
                     </div>
-
+                    <span class="show_req_budget">Presupuesto: <%= @request.budget %> MXN</span>
                     <div class="ipsum-text">
-                     <p><%= @request.description.html_safe %></span></p>
+                     <p><%= @request.description.html_safe %></p>
                      <!-- <a onclick="myFunction()" id="myBtn" href="#">Ver más <i class="fa fa-angle-down" aria-hidden="true"></i></a> -->
                      </div>
 
@@ -61,7 +61,7 @@
             <div class="col-lg-12">
                 <div class="fernanda-content">
                     <div class="fernanda-user-box">
-                        <%= render @request.offers %>
+                        <%= (@request.offers_count > 0)? render(@request.offers) : "No hay postulados" %>
                     </div>
                 </div>
             </div>

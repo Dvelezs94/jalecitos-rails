@@ -30,13 +30,16 @@
   color: #0067F4;
   font-weight: 700;
 }
-.Saltillo span {
+.Saltillo span,
+.show_req_budget {
   color: #8E8E93;
   font-size: 11px;
-  margin-left: 20px;
 }
+
 .Saltillo {
   padding: 10px 0;
+	display: flex;
+	justify-content: space-between;
 }
 
 
