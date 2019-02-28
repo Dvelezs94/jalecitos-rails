@@ -4,7 +4,6 @@ class CreateDisputes < ActiveRecord::Migration[5.2]
       t.references :order, foreign_key: true, unique: true
       t.integer :status, default: 0
       t.string :description
-      t.string :image
 
       t.timestamps
     end
