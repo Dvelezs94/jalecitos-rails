@@ -23,7 +23,7 @@
             <% else %>
             <h5>Pedido</h5>
             <% end %>
-            <span><%= order_buyer.created_at %></span>
+            <span><%= date_time_to_format(order_buyer.created_at, current_user.time_zone) %></span>
             <h4><%= "#{number_to_currency(order_buyer.total)} MXN" %></h4>
             <% if order_buyer.details? %>
             <br>
