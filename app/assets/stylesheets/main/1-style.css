@@ -101,7 +101,7 @@ input:focus {
   float: right;
 }
 .default-btn {
-  color: white;
+  color: var(--white);
   font-size: 17px;
   background: green;
   display: inline-block;
@@ -183,7 +183,7 @@ form.search-form .query {
   background-color: rgba(244, 245, 247, 1);
   border: none;
   border-radius: 24px;
-  color: gray;
+  color: var(--gray);
   font-weight: 700 !important;
   width: 284px;
 }
@@ -2414,7 +2414,7 @@ p.fof {
   padding: 8px 10px;
 }
 p.gig-score-times {
-  color: gray;
+  color: var(--gray);
   font-weight: 600;
   margin-left: 10px;
   margin-top: -2px;
@@ -2429,7 +2429,7 @@ p.gig-score-times {
 }
 
 .page3slide-stard h6 {
-  color: gray;
+  color: var(--gray);
 }
 
 .owl-stage {
@@ -2701,7 +2701,7 @@ div.error{
 }
 
 h6.req_location {
-  color: gray;
+  color: var(--gray);
 }
 .req_info {
   padding: 10px 10px;
@@ -2997,7 +2997,7 @@ div.form {
   position: absolute;
   z-index: 3;
   font-size: 18px;
-  color: gray;
+  color: var(--gray);
   top: 11px;
   right: 35px;
 }
