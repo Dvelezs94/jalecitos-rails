@@ -856,7 +856,7 @@
     font-size: 12px;
   }
 
-  .page3slide-titles1 h3 {
+  .page3slide-titles1 h1 {
     font-size: 24px;
   }
 
@@ -909,10 +909,6 @@
 
   p.loyed2 br {
     display: none;
-  }
-
-  .page3slides-contentrd p.gig-price {
-    font-size: 12px;
   }
 
   .verificos-title h3 {
@@ -1358,11 +1354,7 @@
     padding-left: 7px;
   }
 
-  .page3slides-contentrd p.gig-price {
-    font-size: 11px;
-  }
-
-  .catagorisingle-slide p {
+  .catagorisingle-slide h5 {
     font-size: 10px;
   }
   h3 {
@@ -1574,11 +1566,6 @@
   .timer {
     right: 11px;
     top: 15px;
-  }
-
-  p.req_title {
-    color: #000;
-    font-size: 15px;
   }
 
   .single-request {
@@ -1833,7 +1820,7 @@
     padding-left: 3px;
   }
 
-  .page3slide-titles1 h3 {
+  .page3slide-titles1 h1 {
     font-size: 22px;
   }
 
@@ -2235,8 +2222,8 @@
   }
 
   .gigs-carousel .hearted1 {
-    left: 120px;
-    top: 68px;
+    left: 123px;
+    top: 85px;
   }
 
   p.verified{

@@ -1,5 +1,5 @@
 /* Custom Fonts */
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 @font-face {
   font-family: "Gilroy-Extra-Bold";
   src: url('/assets/gilroy_extra_bold.woff2') format('woff2'), /* Super Modern Browsers */
@@ -13,10 +13,72 @@
 /* Base CSS */
 body {
   font-family: 'Nunito', sans-serif;
+  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1200 - 320)));
+  margin: 0 0 4px;
+  font-weight: 400;
 }
 
-h1, h2, h3 {
+h1 {
   font-family: 'Gilroy-Extra-Bold', sans-serif;
+  font-size: calc(25px + (30 - 25) * ((100vw - 320px) / (1200 - 320)));
+  margin: 0 0 16px;
+  color: #000000;
+}
+
+h2 {
+  font-family: 'Gilroy-Extra-Bold', sans-serif;
+  font-size: calc(19px + (24 - 19) * ((100vw - 320px) / (1200 - 320)));
+  margin: 0 0 16px;
+  color: #000000;
+}
+
+h3 {
+  font-family: 'Nunito-Extra-Bold', sans-serif;
+  font-size: calc(17px + (22 - 17) * ((100vw - 320px) / (1200 - 320)));
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #000000;
+}
+
+h4 {
+  font-family: 'Nunito', sans-serif;
+  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1200 - 320)));
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #000000;
+}
+
+h5 {
+  font-family: 'Nunito', sans-serif;
+  font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1200 - 320)));
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #000000;
+}
+
+h6 {
+  font-family: 'Nunito', sans-serif;
+  font-size: calc(11px + (14 - 11) * ((100vw - 320px) / (1200 - 320)));
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #000000;
+}
+
+/* Color palette */
+
+:root {
+  --green: #39c27b;
+  --dark-green: #27825f;
+  --blue: #0067f4;
+  --yellow: #f9b732;
+  --red: #ef2235;
+  --disabled: rgba(142, 142, 147, 0.5);
+  --gray: #8e8e93;
+  --mid-gray: #c7c7cc;
+  --light-mid-gray: #d8d8d8;
+  --light-gray: #f7f7f7;
+  --white: #ffffff;
+  --black: #000000;
 }
 
 input:focus {
@@ -38,9 +100,9 @@ input:focus {
   padding: 5px 30px;
 }
 .default-btn {
-  color: #fff;
+  color: white;
   font-size: 17px;
-  background: #39C27B;
+  background: green;
   display: inline-block;
   padding: 8px 20px;
   border-radius: 5px;
@@ -48,9 +110,9 @@ input:focus {
 }
 
 .default-deny-btn {
-  color: #fff;
+  color: white;
   font-size: 17px;
-  background: #F11D37;
+  background: red;
   display: inline-block;
   padding: 8px 20px;
   border-radius: 5px;
@@ -97,22 +159,6 @@ a:focus {
   outline: 0 solid
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0 0 15px;
-  color: #222222;
-
-}
-body {
-  font-weight: 400;
-  font-family: 'Nunito', sans-serif;
-  font-size: 14px;
-}
-
 .selector-for-some-widget {
   box-sizing: content-box;
 }
@@ -136,7 +182,7 @@ form.search-form .query {
   background-color: rgba(244, 245, 247, 1);
   border: none;
   border-radius: 24px;
-  color: #9B9B9B;
+  color: gray;
   font-weight: 700 !important;
   width: 284px;
 }
@@ -166,7 +212,7 @@ form.search-form input {
   padding: 22px 0;
   border-bottom: 1px solid #979797;
   z-index: 999;
-  background: #fff;
+  background: white;
 }
 
 .headertop-location li {
@@ -293,11 +339,10 @@ a.authorclick {
   margin-bottom: 44px;
 }
 
-.catagorisingle-slide p {
+.catagorisingle-slide h5 {
   color: #222222;
   margin: 0;
   padding-top: 10px;
-  font-size: 16px;
 }
 
 /*catagorislide-area end */
@@ -450,15 +495,9 @@ p.fell2 {}
   right: -24px;
 }
 
-p.req_title {
-  color: #000;
-  font-size: 14px;
-  margin-bottom: 6px !important;
-}
-
 .single-request {
-  background: #F4F5F7;
-  border-radius: 6px;
+  background-color: var(--light-gray);
+  border-radius: 4px;
 }
 
 p.COAH3 {
@@ -709,7 +748,9 @@ p.quam1 {
   margin-bottom: 30px;
 }
 
-p {}
+p {
+
+}
 
 .contactars p {
   color: #0067F4 !important;
@@ -1342,25 +1383,24 @@ p.loyed3 {
   box-shadow: 2px 2px #C4C5C6;
 }
 
-.page3slide-titles1 h3 {
-  font-size: 28px;
-  color: #000;
+.page3slide-titles1 h1 {
   margin-top: 10px;
 }
 
-.page3slides-contentrd p {
-  margin-bottom: 5px;
-  color: #9B9B9B;
+.page3slides-contentrd h6 {
+  margin-bottom: 8px;
+  color: #8E8E93;
 }
 
 .page3slide-stard li {
   list-style: none;
   display: inline-block;
-  padding-left: 4px;
+  padding-left: 8px;
 }
 
 p.gig-price {
-  color: #39C27B;
+  color: var(--green);
+  margin: 0 0 8px;
 }
 
 .page3slides-contentrd {
@@ -1428,8 +1468,8 @@ p.gig-price {
 
 .gigs-carousel .hearted1 {
   position: absolute;
-  left: 160px;
-  top: 100px;
+  left: 165px;
+  top: 111px;
 }
 p.verified {
   position: absolute;
@@ -1745,33 +1785,8 @@ p.loyed3 {
   box-shadow: 2px 2px #C4C5C6;
 }
 
-.page3slide-titles1 h3 {
-  font-size: 28px;
-  color: #000;
-  margin-top: 10px;
-}
-
-.page3slides-contentrd p {
-  margin-bottom: 5px;
-  color: #9B9B9B;
-}
-
-.page3slide-stard li {
-  list-style: none;
-  display: inline-block;
-  padding-left: 4px;
-}
-
 p.gig-title {
   color: #000;
-}
-
-p.gig-price {
-  color: #39C27B;
-}
-
-.page3slides-contentrd {
-  margin-top: 10px;
 }
 
 .catagorislide-area.innerpages3-area {
@@ -2057,15 +2072,12 @@ button:focus {
 }
 
 .contactd-content h4 {
-  font-family: 'Nunito', sans-serif;
   font-size: 18px;
-  color: #000;
   margin-bottom: 4px;
   font-weight: 700;
 }
 
 .contactd-content p {
-  font-family: 'Nunito', sans-serif;
   font-size: 16px;
   color: #4A4A4A;
 }
@@ -2094,10 +2106,6 @@ button:focus {
 /*contactd end*/
 .todod-bg img {
   width: 100%;
-}
-
-.contactd-heading h2, p {
-  font-family: 'Nunito', sans-serif;
 }
 
 .contactd-heading {
@@ -2402,7 +2410,7 @@ p.fof {
 }
 
 .gig-content {
-  padding: 15px 10px;
+  padding: 8px 10px;
 }
 p.gig-score-times {
   color: gray;
@@ -2412,10 +2420,15 @@ p.gig-score-times {
 }
 .owl-carousel .owl-item .page3slide-stard img {
   width: auto !important;
-  height: 16px;
+  height: calc(12px + (16 - 12) * ((100vw - 300px) / (1600 - 300)));
 }
+
 .page3slide-stard {
   display: flex;
+}
+
+.page3slide-stard h6 {
+  color: gray;
 }
 
 .owl-stage {
@@ -2454,6 +2467,11 @@ p.gig-score-times {
 .page3slide-stard img {
   width: 16px;
   height: 16px;
+  margin-right: 5px;
+}
+
+.page3slide-stard h6 {
+  margin: 0px;
 }
 
 .review-avatar {
@@ -2681,14 +2699,11 @@ div.error{
   font-size: 14px;
 }
 
-p.req_location {
-  color: #BFBFBF;
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 3px;
+h6.req_location {
+  color: gray;
 }
 .req_info {
-  padding: 15px 5px;
+  padding: 10px 10px;
 }
 .single-request {
   width: 200px;
@@ -2851,7 +2866,7 @@ div.form {
   color: #fff;
 }
 /*category carousel*/
-.catagorisingle-slide p {
+.catagorisingle-slide h5 {
   word-break: normal;
 }
 /*gig show*/
