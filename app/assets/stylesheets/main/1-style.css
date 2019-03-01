@@ -2871,8 +2871,9 @@ div.form {
   word-break: normal;
 }
 /*gig show*/
-.package_names {
-  justify-content: space-between;
+.package_names .nav-item {
+  width: 33.3%;
+  text-align: center;
 }
 /*query page*/
 .gig-query-content {
