@@ -187,8 +187,10 @@
               <%= render partial: 'users/billing_profile', collection: @billing_profiles  %>
             </tbody>
           </table>
-          <div class="loading row justify-content-center" style="text-align: center; display: none;">
-            <%= image_tag('loading.gif') %>
+          <div class="loading row justify-content-center loading-css" style="text-align: center; display: none;">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
           </div>
           <button class="btn btn-md butn" id="billingprofilebtn">Nuevo Perfil</button>
         </div>
@@ -217,7 +219,9 @@
             </tbody>
           </table>
           <div class="loading row justify-content-center" style="text-align: center; display: none;">
-            <%= image_tag('loading.gif') %>
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
           </div>
           <button id="cardbtn">Nueva Tarjeta</button>
         </div>

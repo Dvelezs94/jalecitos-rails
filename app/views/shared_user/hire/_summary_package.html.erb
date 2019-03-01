@@ -13,9 +13,9 @@
            <p><%= @package.description.html_safe %></p>
         </div>
         <div class="total-a">
-          <h5>Subtotal<span><%= number_to_currency(@price[:subtotal]) %> MXN</span></h5>
-          <h5>Comision<span><%= number_to_currency(@price[:fee]) %> MXN</span></h5>
-          <h5>Total<span><%= number_to_currency(purchase_order_total(@package.price), precision: 2) %> MXN</span></h5>
+          <p>Subtotal<span><%= number_to_currency(@price[:subtotal]) %> MXN</span></p>
+          <p>Comision<span><%= number_to_currency(@price[:fee]) %> MXN</span></p>
+          <p>Total<span><%= number_to_currency(purchase_order_total(@package.price), precision: 2) %> MXN</span></p>
         </div>
         <div class="continuars-btn">
           <%= f.hidden_field :purchase, :value => params[:id] %>
