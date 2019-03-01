@@ -30,7 +30,8 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     if @order.save
-      min_3d_amount = 100
+      # minimum amount to require 3d secure
+      min_3d_amount = 2999
       #prepare charge
       request_hash = {
         "method" => "card",
@@ -54,6 +55,8 @@ class OrdersController < ApplicationController
         flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
         redirect_to finance_path(:table => "purchases")
       end
+    else
+      redirect_to request.referer, alert: "No se pudo crear tu orden, asegurate de elegir un método de pago."
     end
 
   end #create end
