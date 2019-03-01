@@ -7,9 +7,9 @@
       </div>
       <div class="gig-content">
         <div class="page3slides-contentrd">
-          <p class="location truncate"><%= gig.location%></p>
-          <p class="gig-title multi-line-truncate-2 min-height-42px"><%= gig.title %>
-          </p>
+          <h6 class="location truncate"><%= gig.location%></h6>
+          <h4 class="gig-title multi-line-truncate-3 min-height-66px"><%= gig.title %>
+          </h4>
           <p class="gig-price truncate">Desde
             <%= query_home_or_profile_helper(gig) %>
             MXN
@@ -17,7 +17,7 @@
         </div>
         <div class="page3slide-stard">
           <%= star_display_helper( gig.score_average ) %>
-          <%= "<p class='gig-score-times'>(#{gig.score_times})</p>".html_safe if gig.score_times > 0%>
+          <%= "<h6>(#{gig.score_times})</h6>".html_safe if gig.score_times > 0%>
         </div>
       </div>
     </div>
