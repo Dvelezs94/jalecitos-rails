@@ -12,8 +12,18 @@ class RequestsController < ApplicationController
 
   # GET /requests/1
   def show
-    report_options
-    @hires_open = (@request.employee.nil?) ? true : false
+    if params[:page]
+      @other_offers = @request.offers.where.not(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+    else
+      report_options
+      @hires_open = (@request.employee.nil?) ? true : false
+      if @request.offers_count > 0 #search offers is there some
+        @other_offers = @request.offers.where.not(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+       if @other_offers.total_count < @request.offers_count #that means the user has an offer
+         @my_offer = @request.offers.find_by_user_id(current_user.id)
+       end
+      end
+    end
   end
 
   # GET /requests/new
