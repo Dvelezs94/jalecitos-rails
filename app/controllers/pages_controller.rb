@@ -33,8 +33,15 @@ class PagesController < ApplicationController
   end
 
   def finance
-    @purchases = Order.search("*", where: {employer_id: current_user.id}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}])
-    @sales = Order.search("*", where: {employee_id: current_user.id, status: {not: "denied"}}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}])
+    if params[:purchases]
+      @purchases = Order.search("*", where: {employer_id: current_user.id}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], per_page: 20, page: params[:purchases])
+    elsif params[:sales]
+      @sales = Order.search("*", where: {employee_id: current_user.id, status: {not: "denied"}}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], per_page: 20, page: params[:sales])
+    else
+      @purchases = Order.search("*", where: {employer_id: current_user.id}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], per_page: 20, page: params[:purchases], execute: false)
+      @sales = Order.search("*", where: {employee_id: current_user.id, status: {not: "denied"}}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], per_page: 20, page: params[:sales], execute: false)
+      Searchkick.multi_search([@purchases, @sales])
+    end
   end
 
   def liked
@@ -51,7 +58,6 @@ class PagesController < ApplicationController
   end
 
   def employer_employee_rules
-
   end
 
   private

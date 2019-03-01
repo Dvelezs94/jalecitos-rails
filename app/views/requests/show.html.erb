@@ -59,10 +59,15 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="fernanda-content">
-                    <div class="fernanda-user-box">
-                        <%= (@request.offers_count > 0)? render(@request.offers) : "No hay postulados" %>
+                <div class="paginator-container fernanda-content">
+                    <div class="paginated-other_offers fernanda-user-box">
+                        <%= render( @my_offer ) if @my_offer.present? %>
+                        <%= render( @other_offers ) if @other_offers.present? %>
+                      <% if @my_offer.nil? && @other_offers.nil? %>
+                        No hay postulados
+                      <% end %>
                     </div>
+                    <%= paginate @other_offers if @other_offers.present? %>
                 </div>
             </div>
         </div>
