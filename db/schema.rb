@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_28_211310) do
+ActiveRecord::Schema.define(version: 2019_03_01_043118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -412,6 +412,7 @@ ActiveRecord::Schema.define(version: 2019_02_28_211310) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.json "images"
     t.index ["slug"], name: "index_tickets_on_slug", unique: true
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
@@ -469,7 +470,7 @@ ActiveRecord::Schema.define(version: 2019_02_28_211310) do
 
   create_table "verifications", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "identification"
+    t.json "identification"
     t.string "curp"
     t.string "address"
     t.string "criminal_letter"
