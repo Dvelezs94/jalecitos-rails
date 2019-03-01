@@ -8,9 +8,7 @@ class UpdateOrderAfterPaymentSuccessWorker
     # finish job if id doesnt exist
     return true if ! defined? @order
     #  handle double send from openpay
-    if ! @order.waiting_for_bank_approval?
-      return true
-    end
+    return true if ! @order.waiting_for_bank_approval?
 
     if @order.pending!
       # Create notification after the funds are moved
