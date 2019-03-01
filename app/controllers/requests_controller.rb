@@ -12,8 +12,18 @@ class RequestsController < ApplicationController
 
   # GET /requests/1
   def show
-    report_options
-    @hires_open = (@request.employee.nil?) ? true : false
+    if params[:page]
+      @other_offers = @request.offers.where.not(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+    else
+      report_options
+      @hires_open = (@request.employee.nil?) ? true : false
+      if @request.offers_count > 0 #search offers is there some
+       @my_offer = @request.offers.find_by_user_id(current_user.id) #try to search my offer
+       if @my_offer.nil? || @request.offers_count > 1 && @my_offer.present? # i know if minimum exists one offer, if i dont have offer or i have one and there are more than one offer, other offers exist
+         @other_offers = @request.offers.where.not(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+       end
+      end
+    end
   end
 
   # GET /requests/new
