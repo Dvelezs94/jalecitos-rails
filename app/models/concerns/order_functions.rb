@@ -23,6 +23,7 @@ module OrderFunctions
       create_review(order, order.employer, order.employee, order.purchase.request)
       create_review(order, order.employee, order.employer, order.purchase.request)
     end
+
     #get the id of the user corresponding review and the one for use in the job
     @my_review = @new_reviews.select{ |r| r.giver_id == order.employer.id }.first
     @other_review = @new_reviews.select{ |r| r.giver_id != order.employer.id }.first

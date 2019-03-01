@@ -1,0 +1,13 @@
+<% name = (params[:purchases].present?)? "purchase" : "sale" %>
+<% collection = instance_variable_get("@"+name+"s") %>
+
+paginator_container = $('.paginated-'+'<%= j name %>'+"s").closest(".paginator-container");
+$(".paginated-"+'<%= j name %>'+"s").append('<%= j render(partial: "orders/single_#{name}", collection: collection) %>');
+
+paginator_container.find('.pag-and-load').remove();
+
+<% if collection.next_page %>
+  paginator_container.append("<%= j paginate(collection, param_name: name+'s') %>");
+<% end %>
+
+<% sleep 1 %>
