@@ -18,8 +18,7 @@ class TicketsController < ApplicationController
   end
 
   def create
-    @ticket = Ticket.new( sanitized_params(ticket_params) )
-    @ticket.user = current_user
+    @ticket = Ticket.new( ticket_params )
     if @ticket.save
       redirect_to ticket_path(@ticket), notice: 'Tu caso ha sido creado y seras notificado en cuanto lo revisemos.'
     else
@@ -40,7 +39,7 @@ class TicketsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def ticket_params
-      params.require(:ticket).permit(:title, :description, :priority, :image)
+      params.require(:ticket).permit(:title, :description, :priority, {images: []}).merge(:user => current_user)
   end
 
   def validate_user

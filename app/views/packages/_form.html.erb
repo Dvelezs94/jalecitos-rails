@@ -7,7 +7,7 @@
         <a class="nav-item nav-link package-nav active" id="pack-tab-0" data-toggle="tab" href="#package-0" role="tab" aria-selected="true">Básico</a>
         <a class="nav-item nav-link package-nav" id="pack-tab-1" data-toggle="tab" href="#package-1" role="tab" aria-selected="false" style="<%= "display:none;" if params[:action] == 'new' || @gig.packages[1].name == "" %>">Éstandar</a>
         <a class="nav-item nav-link package-nav" id="pack-tab-2" data-toggle="tab" href="#package-2" role="tab" aria-selected="false" style="<%= "display:none;" if params[:action] == 'new' || @gig.packages[2].name == "" %>">Premium</a>
-        <a href="#" class="pack-tab-displayer" style="<%= "display:none;" if ! params[:action] == 'new' && @gig.packages[2].name != '' %>"><%= icon("fas", "plus") %></a>
+        <a href="#" class="pack-tab-displayer" style="<%= "display:none;" if params[:action] == 'edit_packages' && @gig.packages[2].name != '' %>"><%= icon("fas", "plus") %></a>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">

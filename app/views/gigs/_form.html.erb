@@ -9,7 +9,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-7 col-md-12 centered-form">
-        <h3>Agrega un nuevo Jale para ofertar tus servicios</h3>
+        <h3 class="text-center">Agrega un nuevo Jale para ofertar tus servicios</h3>
         <div class="form_box post_form_col">
 
           <div class="form_block row">
@@ -17,8 +17,8 @@
               <p class="form-title">¿Cúal es tu profesión u oficio en este jale?</p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
-            <%= form.text_field :profession, class: "styled", required: true, maxlength: 50, placeholder: "Ej: Fotógrafo" %>
             <%= render 'shared_user/gigs/forms/hints/profession_hint.html.erb' %>
+            <%= form.text_field :profession, class: "styled", required: true, maxlength: 50, placeholder: "Ej: Fotógrafo" %>
           </div>
 
           <div class="form_block row ">
@@ -26,30 +26,30 @@
               <p class="form-title">¿Qué vas a ofrecer?</p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
+            <%= render 'shared_user/gigs/forms/hints/name_hint.html.erb' %>
 
             <span class="action">Voy a...</span>
             <%= form.text_area :name, class: 'name-class name-0 required styled', placeholder: "realizarte una sesión de fotografías.", value: gig.name, maxlength: 100 %>
 
-            <%= render 'shared_user/gigs/forms/hints/name_hint.html.erb' %>
           </div>
           <div class="form_block row ">
             <div class="flex-space-bet">
               <p class="form-title">Descripción:</p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
+            <%= render 'shared_user/gigs/forms/hints/description_hint.html.erb' %>
             <%= form.text_field :description, id: "description", type: "hidden" %>
             <trix-editor input="description" class="trix-class trix_input_0 required styled" maxlength="1000"></trix-editor>
 
-            <%= render 'shared_user/gigs/forms/hints/description_hint.html.erb' %>
           </div>
           <div class="form_block row">
             <div class="flex-space-bet">
               <p class="form-title">Elige una categoria:</p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
+            <%= render 'shared_user/gigs/forms/hints/category_hint.html.erb' %>
             <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría" }, class: 'form-select required' ) %>
 
-            <%= render 'shared_user/gigs/forms/hints/category_hint.html.erb' %>
           </div>
           <!-- 2 end -->
           <div class="form_block row">
@@ -58,11 +58,11 @@
               </p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
+            <%= render 'shared_user/gigs/forms/hints/city_hint.html.erb' %>
 
             <%= form.text_field :location, class: 'required font-awesome styled', id: "form_autocomplete", size: 50, placeholder: '&#xf3c5; Busca tu ciudad...'.html_safe, value: (gig.location(true) != nil)? gig.location : current_user.location(true) %>
             <%= form.hidden_field :city_id, class: "city", value: current_user.city_id %>
 
-            <%= render 'shared_user/gigs/forms/hints/city_hint.html.erb' %>
           </div>
 
           <!-- tags -->
@@ -72,6 +72,7 @@
               </p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
+            <%= render 'shared_user/gigs/forms/hints/tags_hint.html.erb' %>
 
             <div class="tags-input" data-name="tags-input">
               <%= form.hidden_field :tag_list, class: "hidden_tag_list" %>
@@ -79,7 +80,6 @@
             </div>
             <label class="tag-error error"></label>
 
-            <%= render 'shared_user/gigs/forms/hints/tags_hint.html.erb' %>
           </div>
 
 

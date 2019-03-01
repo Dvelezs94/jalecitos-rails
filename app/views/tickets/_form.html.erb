@@ -10,26 +10,23 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-7 col-md-12 centered-form">
-        <h3>Crea un caso nuevo y nosotros te atenderemos a la brevedad.</h3>
+        <h3 class="text-center">Crea un caso nuevo y nosotros te atenderemos a la brevedad.</h3>
         <div class="form_box post_form_col">
           <div class="form_block row ">
             <div class="flex-space-bet">
-              <p class="form-title">Titulo breve:</p>
+              <p class="form-title">Título breve:</p>
             </div>
-            <%= form.text_field :title, class: "styled tt-input"%>
-            <hr>
+            <%= form.text_field :title, class: "styled required", maxlength: "100" %>
+
           </div>
-          <hr>
 
           <div class="form_block row ">
             <div class="flex-space-bet">
-              <p class="form-title">Descripcion del problema:</p>
+              <p class="form-title">Descripción del problema:</p>
             </div>
-            <%= form.text_field :description, id: "description", type: "hidden" %>
-            <trix-editor input="description" class="trix-class trix_input_0 required styled" maxlength="1000"></trix-editor>
-            <hr>
+            <%= form.text_area :description, class: "styled required", maxlength: "1000" %>
+
           </div>
-          <hr>
 
           <div class="form_block row">
             <div class="flex-space-bet">
@@ -37,7 +34,22 @@
             </div>
             <%= form.select(:priority, [["Baja", "low"], ["Media", "normal"], ["Alta", "high"]], {}, {class: "form-select required"}) %>
           </div>
-          <hr>
+
+          <div class="form_block row">
+            <div class="flex-space-bet">
+              <p class="form-title">Imágenes (<strong>Opcional</strong>) :</p>
+            </div>
+
+            <%= form.file_field :images, multiple: true, accept: ".png, .jpg, .jpeg" %>
+            <ul>
+              <li>
+                <small class="attach-limit">Tamaño máximo por archivo: 10MB</small>
+              </li>
+              <li>
+                <small class="attach-limit">Se admiten como máximo 5 imágenes</small>
+              </li>
+            </ul>
+          </div>
 
           <!-- 3 end -->
           <div style="margin: 0 20px;">

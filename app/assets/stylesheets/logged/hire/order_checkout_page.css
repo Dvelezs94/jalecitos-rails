@@ -272,6 +272,7 @@
 }
 .total-a-ex a:not([href]) {
 	float: right;
+	cursor: pointer;
 	background: #39C27B;
 	font-size: 15px;
 	color: #fff;
