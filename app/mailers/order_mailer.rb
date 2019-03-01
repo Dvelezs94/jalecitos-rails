@@ -144,4 +144,36 @@ class OrderMailer < ApplicationMailer
 
     sendgrid_client.client.mail._("send").post(request_body: (data))
   end
+
+  def completed_after_72_hours(order)
+    @order = order
+
+    data = {
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": @order.employer.email
+            }
+          ],
+          "bcc": [
+            {
+              "email": "jalecitos.mails@gmail.com"
+            }
+          ],
+          "dynamic_template_data": {
+            "ALIAS": @order.employer.slug,
+            "ORDER_ID": @order.uuid
+          }
+        }
+      ],
+      "from": {
+        "email": "noreply@jalecitos.com",
+        "name": "Jalecitos"
+      },
+      "template_id": "d-b4c1b012e85047de86d61c8f189894e6"
+    }
+
+    sendgrid_client.client.mail._("send").post(request_body: (data))
+  end
 end

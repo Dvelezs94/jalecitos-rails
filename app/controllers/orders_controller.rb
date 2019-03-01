@@ -2,8 +2,10 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   include SetLayout
   include OpenpayHelper
+  include OpenpayFunctions
   include UsersHelper
   include ApplicationHelper
+  include OrderFunctions
   layout :set_layout
   access user: :all, admin: [:complete, :refund]
   before_action only: [:create, :refund] do
@@ -44,6 +46,7 @@ class OrdersController < ApplicationController
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.response_order_id = response["id"]
         @order.save
+        flash[:success] = "Se ha creado la orden."
         redirect_to (@order.total > 2999) ? response["payment_method"]["url"] : details_order_path(@order.uuid)
       rescue OpenpayTransactionException => e
         @order.denied!
@@ -72,6 +75,12 @@ class OrdersController < ApplicationController
       if @order.save
         flash[:success] = "La orden se actualizó correctamente"
         create_notification(@order.employee, @order.employer, "solicitó finalizar", @order.purchase, "purchases")
+        # Queue job to finish the order in 72 hours
+        if ENV.fetch("RAILS_ENV") == "production"
+          FinishOrderWorker.perform_in(72.hours, @order.id)
+        else
+          FinishOrderWorker.perform_in(30.seconds, @order.id)
+        end
       else
         flash[:error] = "Hubo un error en tu solicitud"
       end
@@ -92,31 +101,11 @@ class OrdersController < ApplicationController
     #if the order is disputed just the admin can complete it
     if @order.in_progress? ||( @order.disputed? && current_user.has_roles?(:admin) )
       #Openpay call to transfer the fee to the Employee
-      request_hash = {
-        "customer_id" => ENV.fetch("OPENPAY_PREDISPERSION_CLIENT"),
-        "amount" => calc_employee_earning(@order.purchase.price),
-        "description" => "Pago de orden #{@order.uuid} por la cantidad de #{calc_employee_earning(@order.purchase.price)}",
-        "order_id" => "#{@order.uuid}-complete"
-      }
-      begin
-        response = @transfer.create(request_hash, @order.employer.openpay_id)
-        @order.response_completion_id = response["id"]
-        @order.save
-      rescue OpenpayTransactionException => e
-        flash[:error] = "#{e}"
-        redirect_to finance_path(:table => "purchases")
-        return false
-      end
+      pay_to_customer(@order, @transfer)
       # End openpay call
       if @order.completed!
         if @order.dispute
           @order.dispute.proceeded!
-        end
-          # add 1 to gig order count
-        if @order.purchase_type == "Package"
-          @order.purchase.gig.increment!(:order_count)
-        elsif @order.purchase_type == "Offer"
-          @order.purchase.request.completed!
         end
         #Charge the fee
         charge_fee(@order, @fee)
@@ -124,11 +113,8 @@ class OrdersController < ApplicationController
         charge_tax(@order, @fee)
         # charge openpay tax
         openpay_tax(@order, @fee)
-        # Generate invoice if requested and if order changed to completed state
-        OrderInvoiceGeneratorWorker.perform_async(@order.id) if @order.billing_profile_id
         flash[:success] = "La orden ha finalizado"
-        # Create Reviews for employer and employee with gig or request
-        create_reviews
+        create_reviews(@order)
         create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales", @other_review.id)
       else
         flash[:error] = "Hubo un error en tu solicitud"
@@ -168,7 +154,7 @@ class OrdersController < ApplicationController
 
   def update_details
     if @order.update_attributes(order_details_params)
-      flash[:success] = "Se le ha enviado la orden al experto."
+      flash[:success] = "Se ha actualizado la orden con los nuevos detalles."
     else
       flash[:error] = "Hubo un error actualizando los datos."
     end
@@ -305,75 +291,10 @@ class OrdersController < ApplicationController
       return
     end
 
-    def create_reviews
-      #this is useful for collecting the two reviews generated
-      @new_reviews = []
-      if @order.purchase_type == "Package"
-        create_review( @order, @order.employer, @order.employee, @order.purchase.gig)
-        create_review( @order, @order.employee, @order.employer, @order.purchase.gig)
-      else
-        create_review(@order, @order.employer, @order.employee, @order.purchase.request)
-        create_review(@order, @order.employee, @order.employer, @order.purchase.request)
-      end
-      #get the id of the user corresponding review and the one for use in the job
-      @my_review = @new_reviews.select{ |r| r.giver_id == current_user.id }.first
-      @other_review = @new_reviews.select{ |r| r.giver_id != current_user.id }.first
-    end
-
-    def create_review(order, giver, receiver, object)
-      @new_reviews << Review.create( order: order, giver: giver, receiver: receiver, reviewable: object)
-    end
-
     # Make sure the billing profile is legit
     def check_billing_profile
       if order_params[:billing_profile_id] != nil
         cancel_execution if (current_user.billing_profiles.find_by_status("enabled").id != order_params[:billing_profile_id].to_i)
-      end
-    end
-
-    def charge_fee(order, fee)
-      request_fee_hash={"customer_id" => order.employer.openpay_id,
-                     "amount" => get_order_earning(order.purchase.price),
-                     "description" => "Cobro de Comisión por la orden #{order.uuid}",
-                     "order_id" => "#{order.uuid}-fee"
-                    }
-      begin
-        response_fee = fee.create(request_fee_hash)
-        order.response_fee_id = response_fee["id"]
-        order.save
-      rescue
-        order.response_fee_id = "failed"
-        order.save
-      end
-    end
-
-    def charge_tax(order, fee)
-      request_tax_hash={"customer_id" => order.employer.openpay_id,
-                     "amount" => order_tax(order.purchase.price + 10),
-                     "description" => "Cobro de impuesto por la orden #{order.uuid}",
-                     "order_id" => "#{order.uuid}-tax"
-                    }
-      begin
-        response_tax = fee.create(request_tax_hash)
-        order.response_tax_id = response_tax["id"]
-        order.save
-      rescue
-        order.response_tax_id = "failed"
-        order.save
-      end
-    end
-
-    def openpay_tax(order, fee)
-      request_tax_hash={"customer_id" => order.employer.openpay_id,
-                     "amount" => calc_openpay_tax(order.total),
-                     "description" => "Cobro de impuesto para openpay por la orden #{order.uuid}",
-                     "order_id" => "#{order.uuid}-openpay-tax"
-                    }
-      begin
-        response_tax = fee.create(request_tax_hash)
-        order.update(response_openpay_tax_id: response_tax["id"])
-      rescue
-        order.update(response_openpay_tax_id: "failed")
       end
     end
 end

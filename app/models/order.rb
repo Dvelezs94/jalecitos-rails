@@ -1,4 +1,7 @@
 class Order < ApplicationRecord
+  include ActiveModel::Dirty
+  include OpenpayHelper
+  include OrderFunctions
   #search
   searchkick language: "spanish"
 
@@ -27,8 +30,13 @@ class Order < ApplicationRecord
   enum status: { waiting_for_bank_approval: 0, pending: 1, denied: 2, in_progress: 3, disputed: 4, completed: 5, refund_in_progress: 6, refunded: 7}
   # Invoice status, in case there is any
   enum invoice_status: { invoice_pending: 0, invoice_completed: 1, invoice_error: 2, platform_error: 3}
+  # Actions after a request is completed
+  before_update -> {[increment_count(self), finish_order_request(self), generate_invoice(self)]}, if: :status_change_to_completed?
 
   private
+    def status_change_to_completed?
+      status_changed?(to: "completed")
+    end
 
    def set_access_uuid
      self.uuid = generate_uuid
