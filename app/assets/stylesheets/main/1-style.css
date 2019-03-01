@@ -835,7 +835,8 @@ p {
 
 .tabpicc1.covico img {
   width: 90px;
-  margin-top: -10px;
+  height: 90px;
+  margin-left: 10px;
 }
 
 .col-lg-2.padingminus {

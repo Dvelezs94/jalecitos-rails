@@ -30,6 +30,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     if @order.save
+      min_3d_amount = 100
       #prepare charge
       request_hash = {
         "method" => "card",
@@ -38,7 +39,7 @@ class OrdersController < ApplicationController
         "currency" => "MXN",
         "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}",
         "device_session_id" => params[:device_id],
-        "use_3d_secure" => (@order.total > 2999) ? true : false,
+        "use_3d_secure" => (@order.total > min_3d_amount) ? true : false,
         "redirect_url" => details_order_url(@order.uuid)
       }
       #create charge on openpay
@@ -47,7 +48,7 @@ class OrdersController < ApplicationController
         @order.response_order_id = response["id"]
         @order.save
         flash[:success] = "Se ha creado la orden."
-        redirect_to (@order.total > 2999) ? response["payment_method"]["url"] : details_order_path(@order.uuid)
+        redirect_to (@order.total > min_3d_amount) ? response["payment_method"]["url"] : details_order_path(@order.uuid)
       rescue OpenpayTransactionException => e
         @order.denied!
         flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
