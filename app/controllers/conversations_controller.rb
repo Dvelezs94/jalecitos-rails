@@ -40,12 +40,13 @@ class ConversationsController < ApplicationController
   end
 
   def filter_conversations
+    word = params[:word].downcase
     @my_conversations.each do |c|
       #check if the opposite user alias includes the text, @users is going to be used in partial
       if c.sender_id == current_user.id
-        @users << {'user' => c.recipient, 'unread_messages' => c.unread_messages?(current_user)} if c.recipient.alias.include? params[:word]
+        @users << {'user' => c.recipient, 'unread_messages' => c.unread_messages?(current_user)} if c.recipient.alias.downcase.include? word
       else
-        @users << {'user' => c.sender, 'unread_messages' => c.unread_messages?(current_user)} if c.sender.alias.include? params[:word]
+        @users << {'user' => c.sender, 'unread_messages' => c.unread_messages?(current_user)} if c.sender.alias.downcase.include? word
       end
     end
   end

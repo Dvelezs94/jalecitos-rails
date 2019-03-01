@@ -1,0 +1,55 @@
+<%= form_with(model: dispute, url: order_disputes_path, local: true, class: "current_form") do |form| %>
+<% if dispute.errors.any? %>
+  <%dispute.errors.full_messages.each do |error| %>
+    <%= notification_generator_helper error, :error %>
+  <% end %>
+<% end %>
+<div class="container-fluid section ">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 col-md-12 centered-form">
+        <h3 style="text-align:center;">Describe el problema</h3>
+        <div class="form_box post_form_col">
+
+          <div class="form_block row">
+            <div class="flex-space-bet">
+              <p class="form-title">Descripción:</p>
+            </div>
+            <%= form.text_area :description, class: 'form-control required', id: "description", maxlength: 1000, placeholder: "Por favor, describe a detalle el problema." %>
+          </div>
+
+          <div class="form_block row">
+            <div class="flex-space-bet">
+              <p class="form-title">Imágenes (<strong>Opcional</strong>) :</p>
+            </div>
+
+            <%= form.file_field :images, multiple: true, accept: ".png, .jpg, .jpeg" %>
+            <ul>
+              <li>
+                <small class="attach-limit">Tamaño máximo por archivo: 10MB</small>
+              </li>
+              <li>
+                <small class="attach-limit">Se admiten como máximo 5 imágenes</small>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 3 end -->
+
+          <div style="margin: 0 20px;">
+            <div class="flex-space-bet">
+              <%= link_to 'Cancelar', :back, :data => {:confirm => 'Tu progreso hasta ahora NO se guardará'}, class: "btn back-button" %>
+              <%= form.submit "Continuar", class: "btn continue-button" %>
+            </div>
+          </div>
+
+        </div>
+        <!-- form box -->
+        <!-- -->
+      </div>
+      <!-- -->
+    </div>
+    <!-- col lg 7 -->
+  </div>
+</div>
+<% end %>

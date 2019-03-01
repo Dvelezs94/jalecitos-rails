@@ -402,7 +402,7 @@ a.continue_purchase {
 }
 
 .medium-icon {
-  font-size: 24px;
+  font-size: calc(16px + (20 - 12) * ((100vw - 300px) / (1600 - 300)));
 }
 
 /* hearts inside a tag */

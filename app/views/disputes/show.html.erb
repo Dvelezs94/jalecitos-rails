@@ -18,15 +18,32 @@
                   <hr>
                 <% end %>
               <% end %>
-              <div class="col-lg-8">
-              <strong>Causa de la disputa</strong>
-              <%= @dispute.image? ? link_to(icon("fas","paperclip", class: "fa-lg"), @dispute.image_url) : "" %>
-              <hr>
-                <%= @dispute.description.html_safe %>
+              <div class="col-lg-12">
+                <h3>Causa de la disputa</h3>
               </div>
-              <div class="col-lg-4">
-                <strong>Detalles de la disputa</strong>
+              <div class="col-lg-12">
+                <%= @dispute.description.html_safe %>
+              <hr>
+              </div>
+
+              <div class="col-lg-12">
+                <h3>Evidencia</h3>
+              </div>
+              <div class="col-lg-12" style="display:flex;flex-wrap:wrap;">
+                <% if @dispute.images.present? %>
+              <% @dispute.images.each do |image| %>
+              <div class="current_img img-thumbnail">
+                <%=link_to image_tag(image.url, size: '150x150'), image.url  %>
+              </div>
+              <% end %>
+              <% else %>
+                No hay nada para mostrar
+              <% end %>
+              </div>
+
+              <div class="col-lg-12">
                 <hr>
+                <h3>Detalles de la disputa</h3>
                 <p><strong>Numero de Orden: </strong><%= @dispute.order.uuid %></p>
                 <% if @dispute.order.purchase_type == "Package" %>
                 <p><strong>Jale: </strong><%= @dispute.order.purchase ? link_to(@dispute.order.purchase.gig.title, user_gig_path(@dispute.order.purchase.gig.user.slug, @dispute.order.purchase.gig.slug)) : "Borrado" %></p>
