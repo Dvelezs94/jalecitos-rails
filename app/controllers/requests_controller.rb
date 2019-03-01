@@ -18,9 +18,9 @@ class RequestsController < ApplicationController
       report_options
       @hires_open = (@request.employee.nil?) ? true : false
       if @request.offers_count > 0 #search offers is there some
-       @my_offer = @request.offers.find_by_user_id(current_user.id) #try to search my offer
-       if @my_offer.nil? || @request.offers_count > 1 && @my_offer.present? # i know if minimum exists one offer, if i dont have offer or i have one and there are more than one offer, other offers exist
-         @other_offers = @request.offers.where.not(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+        @other_offers = @request.offers.where.not(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+       if @other_offers.total_count < @request.offers_count #that means the user has an offer
+         @my_offer = @request.offers.find_by_user_id(current_user.id)
        end
       end
     end
