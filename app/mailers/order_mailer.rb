@@ -1,4 +1,33 @@
 class OrderMailer < ApplicationMailer
+  def error_worker(order_id)
+    data = {
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": "support@jalecitos.com"
+            }
+          ],
+          "bcc": [
+            {
+              "email": "jalecitos.mails@gmail.com"
+            }
+          ],
+          "dynamic_template_data": {
+            "ORDER_ID": order_id
+          }
+        }
+      ],
+      "from": {
+        "email": "noreply@jalecitos.com",
+        "name": "Jalecitos"
+      },
+      "template_id": "d-506e9eadc66b4d518efc64f061d365af"
+    }
+
+    sendgrid_client.client.mail._("send").post(request_body: (data))
+  end
+
   def new_gig_order_to_employee(order)
     @order = order
 
