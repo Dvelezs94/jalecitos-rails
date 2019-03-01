@@ -30,7 +30,9 @@
               <%= form.file_field :images, multiple: true, id: "file-input", accept: ".png, .jpg, .jpeg", style: "display:none;"%>
           </div>
           <div class="loading row justify-content-center" style="text-align: center; display: none;">
-            <%= image_tag('loading.gif') %>
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
           </div>
 
           <!-- 3 end -->

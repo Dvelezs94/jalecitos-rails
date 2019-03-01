@@ -2,7 +2,7 @@
 <div class="transacciones-tab-text">
   <div class="pendiente-text">
       <h5 class="<%= order_seller.status %>"><%= t "orders.status.#{order_seller.status}" %></h5>
-      <h4>ID: <%= order_seller.uuid %></h4>
+      <h4># <%= order_seller.uuid %></h4>
       <% if order_seller.purchase_type == "Package"%>
       <p><%= link_to(order_seller.purchase.gig.title, user_gig_path(order_seller.purchase.gig.user.slug, order_seller.purchase.gig.slug), class: "order-title") rescue "Jale Eliminado" %></p>
       <% else %>

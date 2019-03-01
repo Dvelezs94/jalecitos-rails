@@ -1448,11 +1448,11 @@ p.gig-price {
   display: none;
 }
 
-.servico-title span {
+.servico-title span h6 {
   padding-left: 8px;
   font-size: 14px;
   color: grey;
-  vertical-align: middle;
+  display: inline-block;
 }
 
 .arroweee i {

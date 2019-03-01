@@ -241,7 +241,10 @@
 .total-a h5 {
   font-size: 19px;
 }
-.total-a h5 span {
+.total-a p {
+	margin-bottom: 0px;	
+}
+.total-a p span {
   float: right;
 }
 
