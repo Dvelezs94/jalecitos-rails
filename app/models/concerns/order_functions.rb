@@ -1,6 +1,6 @@
 module OrderFunctions
   extend ActiveSupport::Concern
-  
+
   def increment_count(order)
     if order.purchase_type == "Package"
       order.purchase.gig.increment!(:order_count)
@@ -23,6 +23,7 @@ module OrderFunctions
       create_review(order, order.employer, order.employee, order.purchase.request)
       create_review(order, order.employee, order.employer, order.purchase.request)
     end
+
     #get the id of the user corresponding review and the one for use in the job
     @my_review = @new_reviews.select{ |r| r.giver_id == current_user.id }.first
     @other_review = @new_reviews.select{ |r| r.giver_id != current_user.id }.first

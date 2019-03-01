@@ -21,6 +21,7 @@ class FinishOrderWorker
         charge_tax(@order, @fee)
         # charge openpay tax
         openpay_tax(@order, @fee)
+
         # send email notifying the user
         OrderMailer.completed_after_72_hours(@order).deliver
       rescue
