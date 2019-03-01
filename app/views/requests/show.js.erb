@@ -1,0 +1,13 @@
+<% name = "other_offer" %>
+<% collection = instance_variable_get("@"+name+"s") %>
+
+paginator_container = $('.paginated-'+'<%= j name %>'+"s").closest(".paginator-container");
+$(".paginated-"+'<%= j name %>'+"s").append('<%= j render(collection) %>');
+
+paginator_container.find('.pag-and-load').remove();
+
+<% if collection.next_page %>
+  paginator_container.append("<%= j paginate(collection) %>");
+<% end %>
+
+<% sleep 1 %>

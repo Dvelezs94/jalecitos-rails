@@ -21,11 +21,13 @@ class FinishOrderWorker
         charge_tax(@order, @fee)
         # charge openpay tax
         openpay_tax(@order, @fee)
+        # Create reviews and notifications
+        create_reviews(@order)
+        create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales", @other_review.id)
         # send email notifying the user
         OrderMailer.completed_after_72_hours(@order).deliver
       rescue
-        # send email leting us know something has failed in this job
-        true
+        OrderMailer.error_worker(@order.uuid).deliver
       end
     end
   end
