@@ -35,6 +35,22 @@
             <%= form.select(:priority, [["Baja", "low"], ["Media", "normal"], ["Alta", "high"]], {}, {class: "form-select required"}) %>
           </div>
 
+          <div class="form_block row">
+            <div class="flex-space-bet">
+              <p class="form-title">Imágenes (<strong>Opcional</strong>) :</p>
+            </div>
+
+            <%= form.file_field :images, multiple: true, accept: ".png, .jpg, .jpeg" %>
+            <ul>
+              <li>
+                <small class="attach-limit">Tamaño máximo por archivo: 10MB</small>
+              </li>
+              <li>
+                <small class="attach-limit">Se admiten como máximo 5 imágenes</small>
+              </li>
+            </ul>
+          </div>
+
           <!-- 3 end -->
           <div style="margin: 0 20px;">
             <div class="flex-space-bet">

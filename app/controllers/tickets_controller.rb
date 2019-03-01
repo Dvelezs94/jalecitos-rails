@@ -39,7 +39,7 @@ class TicketsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def ticket_params
-      params.require(:ticket).permit(:title, :description, :priority, :image).merge(:user => current_user)
+      params.require(:ticket).permit(:title, :description, :priority, {images: []}).merge(:user => current_user)
   end
 
   def validate_user
