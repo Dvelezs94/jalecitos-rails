@@ -22,11 +22,11 @@ class CardsController < ApplicationController
         # e.error_code
         flash[:error] = "#{e.description}, por favor intentalo de nuevo."
     end
-    referer_params = referer_params(request.referer)
-    if referer_params["package_id"] != [""] && referer_params["package_id"] != nil
+    ref_params = referer_params(request.referer)
+    if ref_params["package_id"] != [""] && ref_params["package_id"].present?
       package = Package.find_by_slug(referer_params["package_id"])
       redirect_to hire_user_gig_package_path(package.gig.user, package.gig, package)
-    elsif referer_params["offer_id"] != [""] && referer_params["offer_id"] != nil
+    elsif ref_params["offer_id"] != [""] && ref_params["offer_id"].present?
       offer = Offer.find_by_id(referer_params["offer_id"])
       redirect_to hire_request_offer_path(offer.request, offer)
     else

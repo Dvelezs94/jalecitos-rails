@@ -15,7 +15,7 @@ class MobilesController < ApplicationController
 
   def verify_logged
     if user_signed_in?
-      redirect_to root_path
+      redirect_to root_path(review: "true")
     end
   end
 end
