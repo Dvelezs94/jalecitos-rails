@@ -10,75 +10,69 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-7 col-md-12 centered-form">
-        <h3>Verifica tu perfil y aumenta tus ventas!</h3> <small><a href="#">¿Para que me sirve verificar mi perfil?</a></small>
+        <h3 class="text-center">¡Verifica tu perfil y aumenta tus ventas!</h3>
+        <h6 class="text-center"><a href="#">¿Para qué me sirve verificar mi perfil?</a></h6>
         <div class="form_box post_form_col">
-          <div class="col-lg-12  col-md-12">
-            <p>IFE/INE (Vigente), Acta de Nacimiento, Pasaporte (Vigente)
-            </p>
-          </div>
-          <div class="form_block row ">
-            <div class="row file_upload">
-              <div class="col-lg-8">
-                <label  class="custom-file-upload">
-                  <%= form.file_field :identification, class: 'form-control', required: true, accept: ".png, .jpg, .jpeg" %>
-                </label>
-                <small class="attach-limit">Tamano Maximo por archivo 10MB</small>
-              </div>
+
+          <div class="form_block row">
+            <div class="flex-space-bet">
+              <p class="form-title">CURP:</p>
             </div>
+              <%= form.text_field :curp, class: 'form-control required', required: true %>
           </div>
-          <hr>
-          <!-- -->
-          <div class="col-lg-12  col-md-12">
-            <p>CURP:
-            </p>
-          </div>
-          <div class="form_block row ">
-            <div class="row col-lg-11 col-md-11 col-sm-11 col-11">
-              <%= form.text_field :curp, class: 'text_box required', required: true %>
+
+          <div class="form_block row">
+            <div class="flex-space-bet">
+              <p class="form-title">IFE/INE (Vigente), Acta de Nacimiento o Pasaporte (Vigente):</p>
             </div>
+              <%= form.file_field :identification, multiple: true, required: true, accept: ".png, .jpg, .jpeg, .pdf" %>
+
+              <ul>
+                <li>
+                  <small class="attach-limit">EN caso de ser IFE/INE, se requiere una imagen por delante y una por detrás</small>
+                </li>
+                <li>
+                  <small class="attach-limit">Tamaño máximo por archivo: 10MB</small>
+                </li>
+              </ul>
           </div>
-          <hr>
+
+          <div class="form_block row">
+            <div class="flex-space-bet">
+              <p class="form-title">Comprobante de Domicilio:</p>
+            </div>
+              <%= form.file_field :address, required: true, accept: ".png, .jpg, .jpeg, .pdf" %>
+
+              <ul>
+                <li>
+                  <small class="attach-limit">Tamaño máximo por archivo: 10MB</small>
+                </li>
+              </ul>
+          </div>
+
           <!--  -->
-          <div class="col-lg-12  col-md-12">
-            <p>Comprobante de Domicilio
-            </p>
-          </div>
-          <div class="form_block row ">
-            <div class="row file_upload">
-              <div class="col-lg-8">
-                <label  class="custom-file-upload">
-                  <%= form.file_field :address, class: 'form-control', required: true, accept: ".png, .jpg, .jpeg" %>
-                </label>
-                <small class="attach-limit">Tamano Maximo por archivo 10MB</small>
-              </div>
+
+          <div class="form_block row">
+            <div class="flex-space-bet">
+              <p class="form-title">Carta de No Antecedentes Penales:</p>
             </div>
+              <%= form.file_field :criminal_letter, required: true, accept: ".png, .jpg, .jpeg, .pdf" %>
+
+              <ul>
+                <li>
+                  <small class="attach-limit">Tamaño máximo por archivo: 10MB</small>
+                </li>
+              </ul>
           </div>
-          <hr>
-          <!--  -->
-          <div class="col-lg-12  col-md-12">
-            <p>Carta de No antecedentes Penales
-            </p>
-          </div>
-          <div class="form_block row ">
-            <div class="row file_upload">
-              <div class="col-lg-8">
-                <label  class="custom-file-upload">
-                  <%= form.file_field :criminal_letter, class: 'form-control', required: true, accept: ".png, .jpg, .jpeg" %>
-                </label>
-                <small class="attach-limit">Tamano Maximo por archivo 10MB</small>
-              </div>
-            </div>
-          </div>
-          <hr>
         <!-- -->
-        <div class="col-lg-12  col-md-12 ">
-          <div class="col-lg-6  col-md-6 ">
-            <%= link_to 'Cancelar', root_path(current_user.slug), :data => {:confirm => 'Tu progreso NO se guardará'}, class: "btn btn-danger" %>
-          </div>
-          <div class="col-lg-6  col-md-6 ">
-            <%= form.submit "Continuar", class: "post" %>
+
+        <div style="margin: 0 20px;">
+          <div class="flex-space-bet">
+            <%= link_to 'Cancelar', configuration_path(:collapse => "account"), :data => {:confirm => 'Tu progreso NO se guardará'}, class: "btn back-button" %>
+            <%= form.submit "Continuar", class: "btn continue-button" %>
           </div>
         </div>
+
         <!--  -->
       </div>
       <!-- -->
