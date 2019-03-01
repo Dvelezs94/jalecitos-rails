@@ -19,6 +19,7 @@ class Order < ApplicationRecord
   belongs_to :employee, foreign_key: :employee_id, class_name: "User"
   belongs_to :purchase, polymorphic: true, optional: true
   belongs_to :payout, optional: true
+  validates_presence_of :purchase, :employer, :employee, :card_id
   #Associations
   has_one :dispute
   has_many :reviews

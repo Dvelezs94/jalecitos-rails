@@ -14,9 +14,8 @@
            <p><%= @offer.description.html_safe %></p>
         </div>
         <div class="total-a">
-            <h5>Paquete<span><%= number_to_currency(cons_mult_helper(@offer.price), precision: 2) %> MXN</span></h5>
-            <h5>Comision Base<span>$11.60 MXN</span></h5>
-            <h5>IVA<span><%= number_to_currency(order_tax(@offer.price), precision: 2) %> MXN</span></h5>
+            <h5>Subtotal<span><%= number_to_currency(@price[:subtotal]) %> MXN</span></h5>
+            <h5>Comision<span><%= number_to_currency(@price[:fee]) %> MXN</span></h5>
             <h5>Total<span><%= number_to_currency(purchase_order_total(@offer.price), precision: 2) %> MXN</span></h5>
         </div>
         <div class="continuars-btn">

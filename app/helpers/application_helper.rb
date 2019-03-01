@@ -116,6 +116,15 @@ module ApplicationHelper
     ((0.9609776)*( base + ci ) - 2.91  - calc_employee_earning(base)).round(2)
 
   end
+  # this is used for the hire view, to calculate the subtotal and our fee + iva
+  def calc_hire_view price
+    # Constant Increment to keep our loss at minimum
+    ci = 10
+    iva = 1.16
+    fee = (((price * 0.1) + ci) * iva).round(2)
+    subtotal = ((price * 0.9) * iva).round(2)
+    {"fee": fee, "subtotal": subtotal}
+  end
 
   def order_tax price
     (price * 0.16).round(2)
