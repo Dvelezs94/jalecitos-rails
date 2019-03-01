@@ -25,12 +25,12 @@ module OrderFunctions
     end
 
     #get the id of the user corresponding review and the one for use in the job
-    @my_review = @new_reviews.select{ |r| r.giver_id == current_user.id }.first
-    @other_review = @new_reviews.select{ |r| r.giver_id != current_user.id }.first
+    @my_review = @new_reviews.select{ |r| r.giver_id == order.employer.id }.first
+    @other_review = @new_reviews.select{ |r| r.giver_id != order.employer.id }.first
   end
 
   def create_review(order, giver, receiver, object)
-    @new_reviews << Review.create( order: order, giver: giver, receiver: receiver, reviewable: object)
+    @new_reviews << Review.create!( order: order, giver: giver, receiver: receiver, reviewable: object)
   end
 
   def generate_invoice(order)

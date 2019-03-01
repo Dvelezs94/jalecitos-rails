@@ -83,7 +83,7 @@ class OrdersController < ApplicationController
         if ENV.fetch("RAILS_ENV") == "production"
           FinishOrderWorker.perform_in(72.hours, @order.id)
         else
-          FinishOrderWorker.perform_in(30.seconds, @order.id)
+          FinishOrderWorker.perform_in(10.seconds, @order.id)
         end
       else
         flash[:error] = "Hubo un error en tu solicitud"
