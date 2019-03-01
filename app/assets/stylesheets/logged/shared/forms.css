@@ -145,6 +145,7 @@ ul.dropdown-menu {
 }
 
 .form-select {
+  width: 100%;
   text-align: left;
   padding: 12px 18px;
   background: #ECF9F2;
@@ -462,6 +463,8 @@ div.error{
   background-color: #D5E9DE;
   border-bottom: 1px solid #39C27A !important;
 }
+
+
 .submit-pack-buttons{
   width: 100%;
   text-align: center;
@@ -531,4 +534,11 @@ div.error{
 /* hide ratyrate cancel button */
 .raty-cancel{
   display: none;
+}
+
+/*galleries styles*/
+.custom-file-upload {
+  border-radius: 4px;
+  padding: 3px 5px 5px 5px;
+  border: 1px solid var(--gray);
 }
