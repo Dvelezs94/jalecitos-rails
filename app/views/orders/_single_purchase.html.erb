@@ -2,7 +2,7 @@
 <div class="transacciones-tab-text">
   <div class="pendiente-text">
       <h5 class="<%= single_purchase.status %>"><%= t "orders.status.#{single_purchase.status}" %></h5>
-      <h4>ID: <%= single_purchase.uuid %></h4>
+      <h4># <%= single_purchase.uuid %></h4>
       <% if single_purchase.purchase_type == "Package"%>
       <p><%= link_to single_purchase.purchase.gig.title, user_gig_path(single_purchase.purchase.gig.user.slug, single_purchase.purchase.gig.slug), class: "order-title" rescue "Jale Eliminado" %></p>
       <% else %>
@@ -36,6 +36,11 @@
             src='https://www.google.com/maps/embed/v1/place?key=<%= ENV.fetch("GOOGLE_MAP_API") %>&q=<%= CGI.escape(single_purchase.address) %>'
             allowfullscreen="allowfullscreen">
             </iframe>
+            <% end %>
+            <% if single_purchase.in_progress? %>
+              <% if single_purchase.completed_at? %>
+              <p class="time-left">La orden se auto completara en: <%= distance_of_time_in_words(Time.now, single_purchase.started_at + 72.hours) %></p>
+              <% end %>
             <% end %>
             <div class="diego-velez-btn">
               <% if single_purchase.pending? %>
