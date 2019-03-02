@@ -1,27 +1,9 @@
-<% if params[:reviews].present? %>
-
-  $(".paginated_reviews").append('<%= j render(partial: "shared/reviews/review", collection: @reviews) %>');
-
-  <% if @reviews.next_page %>
-
-    $(".page3-viewmore").append('<%= j link_to_next_page(@reviews, "Ver más#{icon("fas", "angle-down")}".html_safe,class: "review_paginator" ,remote: true) %>');
-  <% else %>
-    $(".page3-viewmore").remove();
-  <% end %>
-
+$(".paginated_reviews").append('<%= j render(partial: "shared/reviews/review", collection: @reviews) %>');
+$(".page3-viewmore").html("");
+<% if @reviews.next_page %>
+  $(".page3-viewmore").append('<%= j link_to_next_page(@reviews, "Ver más#{icon("fas", "angle-down")}".html_safe,class: "review_paginator" ,remote: true, param_name: :reviews) %>');
 <% else %>
-
-  $(".paginated_requests").append('<%= j render(partial: "shared/reviews/request", collection: @requests) %>');
-
-  <% if @requests.next_page %>
-
-    $(".page3-viewmore").append('<%= j link_to_next_page(@reviews, "Ver más#{icon("fas", "angle-down")}".html_safe,class: "review_paginator" ,remote: true) %>');
-  <% else %>
-    $(".page3-viewmore").remove();
-  <% end %>
-
+  $(".page3-viewmore").remove();
 <% end %>
-
-
 
 <% sleep 1 %>
