@@ -87,10 +87,6 @@
     width: 142px;
   }
 
-  .herodleft-side {
-      padding-right: 95px;
-  }
-
   .innerpage3-rightsidetabs .nav-link {
     display: block;
   }
@@ -376,10 +372,6 @@
     margin-right: 12px;
   }
 
-  .herodleft-side {
-      padding-right: 95px;
-  }
-
   .maild-form-wraps {
     margin-bottom: 22px;
     margin-left: 24px;
@@ -446,6 +438,10 @@
   .headertop-location i {
     font-size: 23px;
     color: #fff;
+  }
+
+  .herodleft-side {
+    padding-right: 215px;
   }
 
   .phone_links {
@@ -1084,8 +1080,8 @@
   }
 
   .footerd2fk i {
-    background: #0067F3;
-    color: #000;
+    background: var(--blue);
+    color: #FFF;
     width: 48px;
     height: 48px;
     border-radius: 500%;
@@ -1100,20 +1096,13 @@
     list-style: none;
   }
 
-  .singlefooterdn ul li a {
-    color: #fff;
-    font-size: 18px;
-  }
-
   .singlefooterdn ul li {
     padding: 6px 0;
   }
 
   .singlefooterdn {}
 
-  .singlefooterdn p {
-    color: #fff;
-    font-size: 20px;
+  .singlefooterdn h4 {
     margin-bottom: 3px;
   }
 
@@ -1191,7 +1180,7 @@
     display: none;
   }
 
-  .greend-right a {
+  .greend-right a h4 {
     margin-right: 15px;
   }
 
@@ -1250,9 +1239,9 @@
 
   .hero-darea::after {
     background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/main_banner2.png");
-    background-position: 100% 0%;
+    background-position: 23% 30%;
     background-size: cover;
-    height: calc(47% + (80 - 47) * ((100vw - 320px) / (767 - 320)));
+    height: calc(60% + (80 - 60) * ((100vw - 320px) / (425 - 320)));
     content: "";
     right: 0;
     bottom: 0;
@@ -1295,8 +1284,8 @@
   }
 
   .footerd2fk i {
-    background: #0067F3;
-    color: #000;
+    background: var(--blue);
+    color: #FFF;
     width: 35px;
     height: 35px;
     border-radius: 500%;
@@ -1311,20 +1300,13 @@
     list-style: none;
   }
 
-  .singlefooterdn ul li a {
-    color: #fff;
-    font-size: 12px;
-  }
-
   .singlefooterdn ul li {
     padding: 1px 0;
   }
 
   .singlefooterdn {}
 
-  .singlefooterdn p {
-    color: #fff;
-    font-size: 14px;
+  .singlefooterdn h4 {
     margin-bottom: 3px;
   }
 
@@ -1902,7 +1884,8 @@
   }
 
   .herodleft-side {
-    padding-top: 180px;
+    padding-top: 260px;
+    padding-right: 0px;
   }
 
   .herod-leftmenu-wrap ul li a {
@@ -1948,7 +1931,7 @@
   }
 
   .contactd-content {
-    padding-left: 42px;
+    padding-left: 72px;
     padding-right: 0;
   }
 
@@ -1994,36 +1977,27 @@
     padding: 38px 0;
   }
 
-  .greend-left h4 {
-    font-size: 15px;
-  }
-
-  .greend-right a {
-    width: 77px;
-    text-align: center;
-    padding: 6px 0;
-    border-radius: 2px;
-    font-size: 10px;
+  .greend-right a h4 {
     margin: 0;
   }
 
-  .footerd2area::after {
+  /*.footerd2area::after {
     position: absolute;
-    background: #12161C;
+    background: #FFFFFF;
     content: "";
     height: 181px;
     top: -87px;
     left: 0;
     width: 100%;
-    border-radius: 50% 50% 0 0;
     z-index: -1;
   }
+  */
 
   .footerd2area {
     display: block;
     position: relative;
-    padding-top: 54px;
-    background: #12161C;
+    padding-top: 40px;
+    background: #F7F7F7;
     position: relative;
     padding-bottom: 22px;
   }
