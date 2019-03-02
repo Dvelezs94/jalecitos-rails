@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
   end #create end
 
   def request_start
-      @order.started_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+      @order.started_at = Time.now.in_time_zone.strftime("%Y-%m-%d %H:%M:%S")
       if @order.employee == current_user
         if @order.save
           flash[:success] = "La orden se actualizó correctamente"
@@ -75,7 +75,7 @@ class OrdersController < ApplicationController
   end
 
   def request_complete
-      @order.completed_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+      @order.completed_at = Time.now.in_time_zone.strftime("%Y-%m-%d %H:%M:%S")
       if @order.save
         flash[:success] = "La orden se actualizó correctamente"
         create_notification(@order.employee, @order.employer, "solicitó finalizar", @order.purchase, "purchases")
@@ -83,7 +83,7 @@ class OrdersController < ApplicationController
         if ENV.fetch("RAILS_ENV") == "production"
           FinishOrderWorker.perform_in(72.hours, @order.id)
         else
-          FinishOrderWorker.perform_in(10.seconds, @order.id)
+          FinishOrderWorker.perform_in(30.seconds, @order.id)
         end
       else
         flash[:error] = "Hubo un error en tu solicitud"
