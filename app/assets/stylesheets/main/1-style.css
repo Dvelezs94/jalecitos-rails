@@ -1937,6 +1937,10 @@ button:focus {
   z-index: 9;
 }
 
+.herodleft-side {
+  padding-right: 95px;
+}
+
 .herodleft-side h1 {
   color: #000;
   font-size: calc(45px + (68 - 45) * ((100vw - 320px) / (1800 - 320)));
@@ -2167,30 +2171,24 @@ button:focus {
   background-size: cover;
 }
 
-.greend-left h4 {
+.greend-left h2 {
   color: #fff;
-  font-family: 'Nunito', sans-serif;
-  font-size: 28px;
   margin: 0;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 500;
 }
 
 
-.greend-right a {
+.greend-right a h4 {
   background: #FFFFFF;
   display: inline-block;
-  width: 124px;
   text-align: center;
   color: #39C27B;
-  padding: 8px 0;
-  margin: 67px 67px 67px 0px;
-  border-radius: 5px;
-  font-family: 'Nunito', sans-serif;
+  padding: 8px 8px;
+  border-radius: 4px;
 }
 
 .maingreenbgd {
   border-radius: 4px;
+  padding: 38px 0;
 }
 
 /*greend end*/
@@ -2198,6 +2196,8 @@ button:focus {
 .footerdarea {
   padding: 48px 0;
 }
+
+
 
 .footerd-listt ul {
   margin: 0;
@@ -2208,21 +2208,16 @@ button:focus {
 .footerd-listt ul li a {
   color: #7F7F7F;
   font-size: 16px;
-  font-family: 'Nunito', sans-serif;
 }
 
 .footerd-logo p {
   color: #000;
   font-weight: 300;
   padding-left: 11px;
-  font-family: 'Nunito', sans-serif;
 }
 
 .footerd-listt p {
   color: #000;
-  font-size: 16px;
-  font-weight: 700;
-  font-family: 'Nunito', sans-serif;
 }
 
 /*greend end*/
@@ -2241,11 +2236,21 @@ button:focus {
 
 .footerd-social a i {
   font-size: 21px;
+  color: white;
   transition: .4s;
 }
 
 .footerd-social a:hover i {
   color: #fff;
+}
+
+.singlefooterdn p {
+  color: black;
+  margin-bottom: 8px;
+}
+
+.singlefooterdn ul li a {
+  color: black;
 }
 
 /*footerd end*/
