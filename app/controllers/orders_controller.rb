@@ -119,14 +119,14 @@ class OrdersController < ApplicationController
         openpay_tax(@order, @fee)
         flash[:success] = "La orden ha finalizado"
         create_reviews(@order)
-        create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales", @other_review.id)
+        create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales", @employee_review.id)
       else
         flash[:error] = "Hubo un error en tu solicitud"
       end
     else
       flash[:error] = "Hubo un error en tu solicitud"
     end
-      redirect_to finance_path(:table => "purchases", :review => true, :identifier => @my_review.id)
+      redirect_to finance_path(:table => "purchases", :review => true, :identifier => @employer_review.id)
   end
 
 

@@ -9,7 +9,7 @@ class NotificationRelayWorker
     # Create push notification
     @message = {
       title: "Jalecitos",
-      body:  "#{notification.user.slug} #{notification.action} #{build_notifiable_type(notification.notifiable)}",
+      body:  "#{notification.user.slug} #{notification.action} #{build_notification_text(notification, notification.notifiable)}",
       badge: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo_Jalecitos-01.png",
       # tag: "jalecios",
       openUrl: url_generator_helper(notification, notification.notifiable),
