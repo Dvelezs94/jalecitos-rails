@@ -13,28 +13,28 @@
 /* Base CSS */
 body {
   font-family: 'Nunito', sans-serif;
-  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1200 - 320)));
+  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
   margin: 0 0 4px;
   font-weight: 400;
 }
 
 h1 {
   font-family: 'Gilroy-Extra-Bold', sans-serif;
-  font-size: calc(25px + (30 - 25) * ((100vw - 320px) / (1200 - 320)));
+  font-size: calc(25px + (30 - 25) * ((100vw - 320px) / (1800 - 320)));
   margin: 0 0 16px;
   color: #000000;
 }
 
 h2 {
   font-family: 'Gilroy-Extra-Bold', sans-serif;
-  font-size: calc(19px + (24 - 19) * ((100vw - 320px) / (1200 - 320)));
+  font-size: calc(19px + (24 - 19) * ((100vw - 320px) / (1800 - 320)));
   margin: 0 0 16px;
   color: #000000;
 }
 
 h3 {
   font-family: 'Nunito-Extra-Bold', sans-serif;
-  font-size: calc(17px + (22 - 17) * ((100vw - 320px) / (1200 - 320)));
+  font-size: calc(17px + (22 - 17) * ((100vw - 320px) / (1800 - 320)));
   font-weight: 700;
   margin: 0 0 8px;
   color: #000000;
@@ -42,7 +42,7 @@ h3 {
 
 h4 {
   font-family: 'Nunito', sans-serif;
-  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1200 - 320)));
+  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
   font-weight: 700;
   margin: 0 0 8px;
   color: #000000;
@@ -50,7 +50,7 @@ h4 {
 
 h5 {
   font-family: 'Nunito', sans-serif;
-  font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1200 - 320)));
+  font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1800 - 320)));
   font-weight: 700;
   margin: 0 0 8px;
   color: #000000;
@@ -58,7 +58,7 @@ h5 {
 
 h6 {
   font-family: 'Nunito', sans-serif;
-  font-size: calc(11px + (14 - 11) * ((100vw - 320px) / (1200 - 320)));
+  font-size: calc(11px + (14 - 11) * ((100vw - 320px) / (1800 - 320)));
   font-weight: 700;
   margin: 0 0 8px;
   color: #000000;
@@ -1888,11 +1888,8 @@ button:focus {
 }
 
 .headerd-mainmenu ul li a {
-  font-weight: 700;
-  color: #7F7F7F;
-  padding: 7px;
+  padding: 8px;
   display: inline-block;
-  font-family: 'Nunito', sans-serif;
 }
 
 .headerd-area {
@@ -1911,13 +1908,9 @@ button:focus {
   margin-left: 18px;
 }
 
-.headerd-mainmenu ul li:last-child a {
-  color: #fff;
-}
-
-.headerd-mainmenu ul li a {
-  font-weight: 700;
-  font-size: 14px;
+.headerd-mainmenu ul li:last-child h5 {
+  color: var(--white);
+  margin: 0 0 0px;
 }
 
 /*headerd*/
@@ -1946,21 +1939,14 @@ button:focus {
 
 .herodleft-side h1 {
   color: #000;
-  font-size: 68px;
-  line-height: 79px;
-  margin-bottom: 23px;
-}
-
-.herodleft-side {
-  padding-right: 95px;
+  font-size: calc(45px + (68 - 45) * ((100vw - 320px) / (1800 - 320)));
+  line-height: calc(45px + (79 - 45) * ((100vw - 320px) / (1800 - 320)));
+  margin-bottom: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
 }
 
 .herodleft-side p {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 300;
-  font-size: 20px;
-  color: #4A4A4A;
-  margin-bottom: 32px;
+  color: var(--gray);
+  margin-bottom: calc(20px + (32 - 16) * ((100vw - 320px) / (1800 - 320)));
 }
 
 .maild-form-wraps {
@@ -2063,24 +2049,23 @@ button:focus {
 }
 
 .contactd-heading h2 {
-  font-size: 52px;
-  color: #000;
-  font-family: Gilroy-Extra-Bold;
+    color: #000;
+    font-size: calc(32px + (48 - 32) * ((100vw - 320px) / (1800 - 320)));
+    line-height: calc(32px + (54 - 32) * ((100vw - 320px) / (1800 - 320)));
+    margin-bottom: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
+    margin-top: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
 }
 
 .singlecontactd-box {
   text-align: center;
 }
 
-.contactd-content h4 {
-  font-size: 18px;
-  margin-bottom: 4px;
-  font-weight: 700;
+.contactd-content p {
+  color: var(--gray);
 }
 
-.contactd-content p {
-  font-size: 16px;
-  color: #4A4A4A;
+.contactd-heading p {
+  color: var(--gray);
 }
 
 .contacd-icon i {
@@ -2128,15 +2113,8 @@ button:focus {
   max-width: 250px;
 }
 
-.oferta h4 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
 .oferta p {
-  font-size: 16px;
-  font-family: 'Nunito', sans-serif;
+  color: var(--gray);
 }
 
 .mobileds {
@@ -2159,8 +2137,9 @@ button:focus {
   position: relative;
 }
 
-.mobileprice p {
-  line-height: 14px;
+.mobileprice h4 {
+  line-height: 20px;
+  color: var(--white);
 }
 
 .mobileprice {
@@ -2169,7 +2148,7 @@ button:focus {
   height: 95px;
   border-radius: 50%;
   text-align: center;
-  padding-top: 34px;
+  padding-top: 28px;
   color: #fff;
   position: absolute;
   right: 40px;
@@ -2313,8 +2292,13 @@ button:focus {
   background: #3CC87D;
   padding: 20px;
   border: 0;
-  padding-left: 60px;
-  color: #fff;
+  padding-left: 50px;
+  color: white;
+}
+
+.mail-form input::placeholder {
+  color: white;
+  opacity: 0.6;
 }
 
 .mail-form {
@@ -2325,9 +2309,10 @@ button:focus {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  color: #fff;
+  color: white;
   left: 20px;
   font-size: 19px;
+  opacity: 0.4;
   cursor: pointer;
 }
 
@@ -2340,14 +2325,7 @@ button:focus {
   cursor: pointer;
 }
 
-.mail-form i.fas.fa-search:after {
-  position: absolute;
-  content: "";
-  width: 2px;
-  height: 21px;
-  background: #fff;
-  right: -10px;
-}
+
 
 .mail-form input[type="email"]::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -2421,7 +2399,7 @@ p.gig-score-times {
 }
 .owl-carousel .owl-item .page3slide-stard img {
   width: auto !important;
-  height: calc(12px + (16 - 12) * ((100vw - 300px) / (1600 - 300)));
+  height: calc(12px + (16 - 12) * ((100vw - 300px) / (1800 - 300)));
 }
 
 .page3slide-stard {
