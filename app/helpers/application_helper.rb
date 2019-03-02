@@ -11,7 +11,7 @@ module ApplicationHelper
   end
 
   def create_notification(user, recipient, message, model, query_url=nil, review_id=nil)
-    Notification.create(recipient: recipient, user: user, action: message, notifiable: model, query_url: query_url, review_id: review_id)
+    Notification.create(user: user, recipient: recipient, action: message, notifiable: model, query_url: query_url, review_id: review_id)
   end
 
   def active? path
@@ -86,21 +86,32 @@ module ApplicationHelper
     end
   end
 
-  def build_notifiable_type (object)
-    case
-    when object.class == Request
-       "en el pedido #{object.name}"
-    when object.class == Package
-       "en el jale Voy a #{object.gig.name} por el paquete #{object.pack_type}"
-    when object.class == Dispute
-        "en la orden #{object.order.uuid}"
-    when object.class == Offer
-        "en el pedido #{object.request.name}"
-    when object.class == Order
-        "la orden #{object.uuid} por la cantidad de $#{object.total} MXN. Ten en cuenta que puede tardar hasta 72 hrs para aparecer en tu cuenta bancaria."
-    when object.class == Reply
-        "en la disputa de la orden #{object.dispute.order.uuid}"
+  def build_notification_text (notification, object)
+    if notification.action != "Se ha finalizado" #need to have user
+        text = "<strong>#{notification.user.slug}</strong> #{notification.action} "
+      case
+      when object.class == Request
+        text += "en el pedido #{object.name}"
+      when object.class == Package
+        text += "el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
+      when object.class == Dispute
+        text += "en la orden #{object.order.uuid}"
+      when object.class == Offer
+        text += "el pedido #{object.request.title}"
+      when object.class == Order
+        text += "la orden #{object.uuid} por la cantidad de $#{object.total} MXN. Ten en cuenta que puede tardar hasta 72 hrs para aparecer en tu cuenta bancaria."
+      when object.class == Reply
+        text += "en la disputa de la orden #{object.dispute.order.uuid}"
+      end
+    else
+      case
+      when object.class == Package
+        text = "#{notification.action} el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
+      when object.class == Offer
+        text = "#{notification.action} el pedido #{object.request.title}"
+      end
     end
+    text.html_safe
   end
 
   def cons_mult_helper number
