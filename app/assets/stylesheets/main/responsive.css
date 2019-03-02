@@ -289,12 +289,6 @@
     padding-left: 2px;
   }
 
-  .herodleft-side h1 {
-    color: #000;
-    font-size: 55px;
-    line-height: 65px;
-  }
-
   .maild-form {
     position: relative;
     width: 111%;
@@ -444,6 +438,10 @@
   .headertop-location i {
     font-size: 23px;
     color: #fff;
+  }
+
+  .herodleft-side {
+    padding-right: 215px;
   }
 
   .phone_links {
@@ -972,12 +970,6 @@
     display: none;
   }
 
-  .herodleft-side p {
-    font-size: 18px;
-    color: #000;
-    font-weight: 600;
-  }
-
   .herod-leftcontentwrap {
     margin-top: 330px;
   }
@@ -1088,8 +1080,8 @@
   }
 
   .footerd2fk i {
-    background: #0067F3;
-    color: #000;
+    background: var(--blue);
+    color: #FFF;
     width: 48px;
     height: 48px;
     border-radius: 500%;
@@ -1104,20 +1096,13 @@
     list-style: none;
   }
 
-  .singlefooterdn ul li a {
-    color: #fff;
-    font-size: 18px;
-  }
-
   .singlefooterdn ul li {
     padding: 6px 0;
   }
 
   .singlefooterdn {}
 
-  .singlefooterdn p {
-    color: #fff;
-    font-size: 20px;
+  .singlefooterdn h4 {
     margin-bottom: 3px;
   }
 
@@ -1151,17 +1136,6 @@
     bottom: 0;
     width: 100%;
     position: absolute;
-  }
-
-  .herodleft-side h1 {
-    color: #000;
-    font-size: 51px;
-    line-height: 75px;
-    margin-bottom: 0;
-  }
-
-  .herodleft-side p {
-    margin-bottom: 17px;
   }
 
   .contacd-icon i {
@@ -1206,7 +1180,7 @@
     display: none;
   }
 
-  .greend-right a {
+  .greend-right a h4 {
     margin-right: 15px;
   }
 
@@ -1265,15 +1239,16 @@
 
   .hero-darea::after {
     background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/main_banner2.png");
-    background-position: 23% 100%;
+    background-position: 23% 30%;
     background-size: cover;
-    height: 100%;
+    height: calc(60% + (80 - 60) * ((100vw - 320px) / (425 - 320)));
     content: "";
     right: 0;
     bottom: 0;
     width: 100%;
     position: absolute;
     z-index: -1;
+    top: 0px;
   }
 
   .singlecontactd-box {
@@ -1309,8 +1284,8 @@
   }
 
   .footerd2fk i {
-    background: #0067F3;
-    color: #000;
+    background: var(--blue);
+    color: #FFF;
     width: 35px;
     height: 35px;
     border-radius: 500%;
@@ -1325,20 +1300,13 @@
     list-style: none;
   }
 
-  .singlefooterdn ul li a {
-    color: #fff;
-    font-size: 12px;
-  }
-
   .singlefooterdn ul li {
     padding: 1px 0;
   }
 
   .singlefooterdn {}
 
-  .singlefooterdn p {
-    color: #fff;
-    font-size: 14px;
+  .singlefooterdn h4 {
     margin-bottom: 3px;
   }
 
@@ -1900,24 +1868,10 @@
     margin-top: 0;
   }
 
-  .herodleft-side h1 {
-    color: #000;
-    font-size: 50px;
-    line-height: 40px;
-    margin-bottom: 5px;
-  }
-
   .contacd-icon {
     position: absolute;
     left: 0;
     top: 6px;
-  }
-
-  .herodleft-side p {
-    font-weight: 300;
-    font-size: 13px;
-    color: #000;
-    margin-bottom: 7px;
   }
 
   .herod-leftmenu-wrap {
@@ -1930,7 +1884,8 @@
   }
 
   .herodleft-side {
-    padding-top: 310px;
+    padding-top: 260px;
+    padding-right: 0px;
   }
 
   .herod-leftmenu-wrap ul li a {
@@ -1976,7 +1931,7 @@
   }
 
   .contactd-content {
-    padding-left: 42px;
+    padding-left: 72px;
     padding-right: 0;
   }
 
@@ -1986,12 +1941,6 @@
 
   .mobileds {
     margin-top: 0px;
-  }
-
-  .contactd-heading h2 {
-    font-size: 28px;
-    font-family: Gilroy-Extra-Bold;
-    color: #000;
   }
 
   .text-right {}
@@ -2024,52 +1973,31 @@
     padding-right: 146px;
   }
 
-  .oferta h4 {
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 0px;
-  }
-
-  .oferta p {
-    font-size: 14px;
-    line-height: 15px;
-    margin-bottom: 8px;
-  }
-
   .maingreenbgd {
     padding: 38px 0;
   }
 
-  .greend-left h4 {
-    font-size: 15px;
-  }
-
-  .greend-right a {
-    width: 77px;
-    text-align: center;
-    padding: 6px 0;
-    border-radius: 2px;
-    font-size: 10px;
+  .greend-right a h4 {
     margin: 0;
   }
 
-  .footerd2area::after {
+  /*.footerd2area::after {
     position: absolute;
-    background: #12161C;
+    background: #FFFFFF;
     content: "";
     height: 181px;
     top: -87px;
     left: 0;
     width: 100%;
-    border-radius: 50% 50% 0 0;
     z-index: -1;
   }
+  */
 
   .footerd2area {
     display: block;
     position: relative;
-    padding-top: 54px;
-    background: #12161C;
+    padding-top: 40px;
+    background: #F7F7F7;
     position: relative;
     padding-bottom: 22px;
   }

@@ -14,7 +14,10 @@
 }
 
 
-
+.time-left {
+  color: var(--blue);
+  font-weight: 700;
+}
 
 /* Header top Start */
 .header-to-area {

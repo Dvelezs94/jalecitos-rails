@@ -9,7 +9,7 @@ class Review < ApplicationRecord
       reviewable_type: reviewable_type,
       reviewable_id: reviewable_id,
       status: status,
-      created_at: created_at
+      updated_at: updated_at
     }
   end
 

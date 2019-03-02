@@ -12,7 +12,7 @@
           <div class="maild-form-wraps">
             <div class="mail-form">
               <%= form_with url: guest_search_path, method: :get, class: "search-form-guest" ,local: true do |f|%>
-              <%= f.text_field :query, value: params[:query], placeholder: "Prueba con “reparación”", onclick: "getLocation();", required: true%>
+              <%= f.text_field :query, value: params[:query], placeholder: "Prueba con “reparación”", onclick: "getLocation();", required: true, autofocus: true %>
               <%= f.hidden_field :lat, value: params[:lat] %>
               <%= f.hidden_field :lon, value: params[:lon] %>
               <%= icon "fas", "search", style: "cursor:pointer;z-index:3;", onclick: "$('.submit-query').click();" %>
@@ -26,7 +26,7 @@
             <div class="herod-leftmenu-wrap">
               <nav>
                 <ul>
-                  <li>Populares</li>
+                  <li><h5>Populares:</h5></li>
                   <li><a href="#">Limpieza</a></li>
                   <li><a href="#">Clases</a></li>
                   <li><a href="#">Reparación</a></li>
