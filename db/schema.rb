@@ -265,9 +265,7 @@ ActiveRecord::Schema.define(version: 2019_03_01_043118) do
 
   create_table "push_subscriptions", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "auth"
-    t.string "p256dh"
-    t.string "endpoint"
+    t.string "auth_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_push_subscriptions_on_user_id"

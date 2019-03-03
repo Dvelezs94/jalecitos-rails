@@ -121,7 +121,7 @@ gem 'sendgrid-ruby', '~> 5.3'
 # PWA
 gem 'serviceworker-rails', '~> 0.5.5'
 # Push notifications
-gem 'webpush', '~> 0.3.4'
+gem 'fcm', '~> 0.0.6'
 #user profile image
 gem 'jquery-fileupload-rails', '~> 1.0'
 # Copy items to clipboard using JS
