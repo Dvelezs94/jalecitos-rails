@@ -39,7 +39,7 @@
             <% end %>
             <% if single_purchase.in_progress? %>
               <% if single_purchase.completed_at? %>
-              <p class="time-left">La orden se auto completara en: <%= distance_of_time_in_words(Time.now, single_purchase.started_at + 72.hours) %></p>
+              <p class="time-left">La orden se autocompletará en: <%= distance_of_time_in_words(Time.now, single_purchase.started_at + 72.hours) %></p>
               <% end %>
             <% end %>
             <div class="diego-velez-btn">
