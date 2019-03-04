@@ -4,7 +4,7 @@ $(document).on('turbolinks:load', function() {
     Notification.requestPermission(function(status) {
       if (Notification.permission === "granted") {
         navigator.serviceWorker.ready.then(() => {
-          resetNotifications();
+          createFirebaseSubscription();
         });
       }
     });
