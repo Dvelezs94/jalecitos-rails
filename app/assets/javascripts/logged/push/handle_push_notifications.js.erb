@@ -7,7 +7,7 @@ function fetchSubscription(subscription){
     if(response.ok) {
       console.log("Registro de token exitoso");
     } else {
-      console.log("Error al registrar el token: ", response);
+      console.log("Error al registrar el token, puede que ya exista en la DB: ", response);
     }
   }).catch(function(err) {
     console.log("No se pudo realizar la peticion: ", err);
@@ -61,39 +61,5 @@ function deleteFirebaseSubscription(){
   }
   }).catch(function(err) {
     console.log('An error occurred while retrieving token. ', err);
-  });
-}
-
-
-// legacy
-function validateSWSubscription(){
-  navigator.serviceWorker.ready
-   .then((registration) => {
-     registration.pushManager.getSubscription()
-       .then((subscription) => {
-         if (!subscription) {
-           resetNotifications();
-           return;
-         }
-       });
-   });
-}
-
-function resetNotifications(e) {
- navigator.serviceWorker.ready
-  .then((registration) => {
-    registration.pushManager.getSubscription()
-      .then((subscription) => {
-        if (!subscription) {
-          createSWSubscription(registration);
-          return;
-        }
-        dropSubscription(subscription);
-        subscription.unsubscribe()
-          .catch((e) => {
-            logger.error('Error thrown while unsubscribing from push messaging', e);
-          });
-        resetNotifications()
-      });
   });
 }
