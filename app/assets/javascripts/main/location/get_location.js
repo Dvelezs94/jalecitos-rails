@@ -11,10 +11,10 @@ function showPosition(position) {
     $("#sign_up_lat").val(position.coords.latitude);
     $("#sign_up_lon").val(position.coords.longitude);
     $(".facebook-login").each(function(){
-      var oldUrl = $(this).attr("href"); // Get current url
+      var oldUrl = $(this).attr("action"); // Get current url
       var newLat = oldUrl.replace("latitude", position.coords.latitude); // Create new url
       var newLon = newLat.replace("longitude", position.coords.longitude); // Create new url
-      $(this).attr("href", newLon);
+      $(this).attr("action", newLon);
     });
   }
   if ($("#lat").length > 0) {

@@ -1,4 +1,5 @@
 $(document).on('turbolinks:load', function() {
+  if ($('#inModal').length > 0) {
   modals('inModal', "sign_in");
   modals('upModal', "sign_up");
   modals('upModal', "register");
@@ -9,4 +10,5 @@ $(document).on('turbolinks:load', function() {
       modals('upModal', "sign_up");
       modals('upModal', "register");
   });
+}
 });
