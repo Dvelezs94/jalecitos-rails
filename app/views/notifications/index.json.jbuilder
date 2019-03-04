@@ -11,9 +11,8 @@ json.array! @notifications do |notification|
     end
 
   # Build the message depending on the notifiable type
-  json.notifiable do
-    json.type build_notification_text(notification, notification.notifiable)
-  end
+  json.text json.type build_notification_text(notification, notification.notifiable)
+
   json.date distance_of_time_in_words_to_now(notification.created_at)
   json.seen notification.read_at?
 end

@@ -603,14 +603,19 @@ p.greensbold {
   transition: .4s;
 }
 
+.sameicon {
+  display: flex;
+  align-items: center;
+}
+
 .belldropdown-box:hover .sameicon i {
   background: #39C27B;
   color: #fff;
 }
 
 .belldropdown-text {
-  padding-left: 70px;
-  padding-right: 13px;
+  width: 100%;
+  padding-left: 2%;
 }
 
 p.quam1 {
@@ -660,10 +665,6 @@ p.quam1 {
   border-radius: 50%;
 }
 
-.notif-text {
-  padding-left: 40px;
-  padding-right: 15px;
-}
 .clickred i {
   position: absolute;
   right: 25px;
@@ -1433,6 +1434,22 @@ p.gig-price {
 
 .sedcontent-wrap {
   display: none;
+}
+
+.notif-icon {
+  position: relative;
+}
+
+.notif-icon.unread::after {
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #EF2235;
+  border-radius: 50%;
+  transform: translateY(50%);
 }
 
 .sed-content h3 {
@@ -2658,14 +2675,9 @@ div.error{
   margin-left: auto;
 }
 .belldropdown-box {
-  position: relative;
+  display: flex;
   margin-bottom: 10px;
   padding: 5px 0;
-}
-.sameicon {
-  position: absolute;
-  left: 5px;
-  top: 15px;
 }
 .notif-avatar-mobile {
   width: 50px;
