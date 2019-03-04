@@ -582,11 +582,6 @@
     font-size: 35px;
   }
 
-  .belldropdown-text {
-    padding-left: 70px;
-    padding-right: 13px;
-  }
-
 
   .clickred i {
     bottom: 0;
@@ -1497,12 +1492,6 @@
     background: #fff;
     font-size: 25px;
   }
-
-  .belldropdown-text {
-    padding-left: 38px;
-    padding-right: 13px;
-  }
-
 
   .belldropdownarea.activee {
     visibility: visible;

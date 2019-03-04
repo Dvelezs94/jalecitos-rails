@@ -16,8 +16,8 @@
             <a href="<%= conversations_path %>" class="redbell1 <%= active? conversations_path %>">
               <%= icon("fas", "envelope") %><br>
             </a>
-            <a href="<%= all_notifications_path %>" class="<%= active? all_notifications_path %>" >
-              <%= icon("fas", "bell") %><br>
+            <a href="<%= all_notifications_path %>" class="<%= active? all_notifications_path %>" data-behavior='read-notifications' >
+              <%= icon("fas", "bell", class: "notif-icon") %><br>
             </a>
           </div>
         </div>

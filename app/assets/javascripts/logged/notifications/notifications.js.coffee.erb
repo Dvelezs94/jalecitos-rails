@@ -19,7 +19,7 @@ $(document).on "turbolinks:load", ->
         dataType: "JSON"
         method: "POST"
         success: ->
-          $("[data-behavior='unread-count']").text(0)
+          $(".notif-icon").removeClass("unread");
       )
 
     renderNotifications: (data) =>
@@ -41,13 +41,14 @@ $(document).on "turbolinks:load", ->
             <span><i class='fa fa-clock-o' aria-hidden='true'></i>#{notification.date}</span>
             </div>
             </div>
-            <p class='greensbold'>#{notification.notifiable.type}</p>
+            <p class='greensbold'>#{notification.text}</p>
           </div>
         </div>
         </a>
         "
 
-      $("[data-behavior='unread-count']").text(unread_count)
+      if unread_count > 0 # put the red dot if there are unread notifications
+        $(".notif-icon").addClass("unread");
       $("[data-behavior='notification-items']").html(items)
       if items.length > 0
         $("[data-behavior='notification-items']").append('<div  class="all-not-link" ><a href="/notifications/all">Ver todas</a></div>')
