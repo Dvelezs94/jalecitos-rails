@@ -103,30 +103,32 @@ class OrdersController < ApplicationController
 
   def complete
     #if the order is disputed just the admin can complete it
-    if @order.in_progress? ||( @order.disputed? && current_user.has_roles?(:admin) )
-      #Openpay call to transfer the fee to the Employee
-      pay_to_customer(@order, @transfer)
-      # End openpay call
-      if @order.completed!
-        if @order.dispute
-          @order.dispute.proceeded!
+    @order.with_lock do #prevent double execution if worker completes at same time
+      if @order.in_progress? ||( @order.disputed? && current_user.has_roles?(:admin) )
+        #Openpay call to transfer the fee to the Employee
+        pay_to_customer(@order, @transfer)
+        # End openpay call
+        if @order.completed!
+          if @order.dispute
+            @order.dispute.proceeded!
+          end
+          #Charge the fee
+          charge_fee(@order, @fee)
+          #charge tax
+          charge_tax(@order, @fee)
+          # charge openpay tax
+          openpay_tax(@order, @fee)
+          flash[:success] = "La orden ha finalizado"
+          create_reviews(@order)
+          create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales", @employee_review.id)
+        else
+          flash[:error] = "Hubo un error en tu solicitud"
         end
-        #Charge the fee
-        charge_fee(@order, @fee)
-        #charge tax
-        charge_tax(@order, @fee)
-        # charge openpay tax
-        openpay_tax(@order, @fee)
-        flash[:success] = "La orden ha finalizado"
-        create_reviews(@order)
-        create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales", @employee_review.id)
       else
         flash[:error] = "Hubo un error en tu solicitud"
       end
-    else
-      flash[:error] = "Hubo un error en tu solicitud"
     end
-      redirect_to finance_path(:table => "purchases", :review => true, :identifier => @employer_review.id)
+    redirect_to finance_path(:table => "purchases", :review => true, :identifier => @employer_review.id)
   end
 
 
