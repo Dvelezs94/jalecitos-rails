@@ -7,7 +7,7 @@ function fetchSubscription(subscription){
     if(response.ok) {
       console.log("Registro de token exitoso");
     } else {
-      console.log("Error al registrar el token, puede que ya exista en la DB: ", response);
+      console.warn("Error al registrar el token, puede que ya exista en la DB: ", response);
     }
   }).catch(function(err) {
     console.log("No se pudo realizar la peticion: ", err);
@@ -22,7 +22,7 @@ function dropSubscription(subscription) {
     if(response.ok) {
       console.log("Eliminacion de token exitoso");
     } else {
-      console.log("Error al borrar el token: ", response);
+      console.warn("Error al borrar el token: ", response);
     }
   }).catch(function(err) {
     console.log("No se pudo realizar la peticion: ", err);
@@ -31,7 +31,6 @@ function dropSubscription(subscription) {
 
 function createFirebaseSubscription(){
   messaging.requestPermission().then(function() {
-    console.log('Notification permission granted.');
     messaging.getToken().then(function(currentToken) {
     if (currentToken) {
       const currentTokenKey = { auth_key: currentToken }
