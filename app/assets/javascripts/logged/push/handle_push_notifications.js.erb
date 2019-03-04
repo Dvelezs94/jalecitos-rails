@@ -35,7 +35,6 @@ function createFirebaseSubscription(){
     messaging.getToken().then(function(currentToken) {
     if (currentToken) {
       const currentTokenKey = { auth_key: currentToken }
-      console.log(currentTokenKey);
       fetchSubscription(currentTokenKey);
     } else {
       // Show permission request.
