@@ -4,7 +4,9 @@ $(document).on('turbolinks:load', function() {
 
           navigator.serviceWorker.register('/serviceworker.js', {scope: './'})
               .then(registration => {
+                if (messaging.registrationToUse == null ) {
                   messaging.useServiceWorker(registration);
+                }
               })
               .catch(err => console.log('Service Worker Error', err))
 
