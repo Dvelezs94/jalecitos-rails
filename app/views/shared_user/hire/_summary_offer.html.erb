@@ -22,7 +22,7 @@
           <%= f.hidden_field :purchase, :value => params[:id] %>
           <%= f.hidden_field :purchase_type, :value => "Offer" %>
           <div class="continuars-btn">
-              <%= f.submit "Continuar", id: "purchase" %>
+              <%= f.button "Continuar", class: "btn btn-success" id: "purchase", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Comprando.."} %>
           </div>
         </div>
     </div>

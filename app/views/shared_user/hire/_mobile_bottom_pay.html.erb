@@ -4,7 +4,8 @@
             <div class="col-lg-12">
                 <div class="total-a-ex">
                   <h5>Total<span><%= number_to_currency(purchase_order_total((defined? @package) ? @package.price  : @offer.price), precision: 2) %> MXN</span></h5>
-                  <a onclick="$('#purchase').click();">Pagar</a>
+                  <!-- <a onclick="$('#purchase').click();">Pagar</a> -->
+                  <%= button_tag "Comprar", :class => "btn btn-success", :type => "submit", :data => {disable_with: "<i class='fa fa-spinner fa-spin'></i> Comprando.."} %>
                </div>
             </div>
         </div>

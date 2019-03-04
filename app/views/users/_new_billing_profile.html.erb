@@ -13,7 +13,7 @@
                  <%= f.text_field :name, class: "required", placeholder: "Razon Social" %>
                  <%= f.text_field :rfc, class: "required", placeholder: "RFC" %>
                  <br>
-                 <%= f.submit 'Continuar', :class => 'btn btn-success' %>
+                 <%= f.button 'Continuar', :class => 'btn btn-success', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Guardando.."} %>
                <% end %>
              </div>
          </div>
