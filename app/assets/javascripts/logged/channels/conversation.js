@@ -2,6 +2,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
   connected: function() {},
   disconnected: function() {},
   received: function(data) {
+    $(".mess-icon").addClass("unread");
     var conversation = $('#conversation-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
     conversation.find('.messages-list').append(data['message']);
 

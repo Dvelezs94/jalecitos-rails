@@ -1,0 +1,20 @@
+$(document).on "turbolinks:load", ->
+  class Conversations
+    constructor: ->
+      @setup()
+
+    setup: ->
+      $.ajax(
+        url: "/conversations/check_unread.json"
+        dataType: "JSON"
+        method: "GET"
+        success: @renderBoolean
+      )
+
+    renderBoolean: (data) =>
+      # put the red dot if there are unread conversations
+      if data.unread == true
+        $(".mess-icon").addClass("unread");
+
+  jQuery ->
+    new Conversations
