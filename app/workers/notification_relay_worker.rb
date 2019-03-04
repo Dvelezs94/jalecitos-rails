@@ -1,6 +1,7 @@
 class NotificationRelayWorker
   include Sidekiq::Worker
   include ApplicationHelper
+  include PushFunctions
   include Rails.application.routes.url_helpers
 
   def perform(notification_id, review_id)
@@ -8,37 +9,14 @@ class NotificationRelayWorker
 
     # Create push notification
     @message = {
-      title: "Jalecitos",
-      body:  "#{notification.user.slug} #{notification.action} #{build_notification_text(notification, notification.notifiable)}",
-      badge: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo_Jalecitos-01.png",
-      # tag: "jalecios",
-      openUrl: url_generator_helper(notification, notification.notifiable),
-      vibrate: [125, 75, 125],
+      notification: {
+        title: "Jalecitos",
+        body:  build_notification_text(notification, notification.notifiable),
+        icon: avatar_display_helper(notification.user.image_url(:thumb))
+      }
     }
 
-    @vapid = {
-      subject: "mailto:noreply@jalecitos.com",
-      public_key: ENV.fetch('VAPID_PUBLIC_KEY'),
-      private_key: ENV.fetch('VAPID_PRIVATE_KEY')
-    }
-
-    #Loop through every subscription to send the push notification
-    notification.recipient.push_subscriptions.each do |subs|
-      begin
-        Webpush.payload_send(
-          endpoint: subs.endpoint,
-          message: JSON.generate(@message),
-          p256dh: subs.p256dh,
-          auth: subs.auth,
-          vapid: @vapid
-        )
-      # If the subscription is gone(deleted), destroy it from DB
-      rescue Webpush::InvalidSubscription
-        subs.destroy
-      rescue Webpush::ExpiredSubscription
-        subs.destroy
-      end
-    end
+    createFirebasePush(notification.recipient_id, @message)
 
     # Render Website notification
     html = {:fadeItem => ApplicationController.render(partial: "notifications/flash/notification", locals: {notification: notification}, formats: [:html]),
