@@ -33,8 +33,9 @@ class NotificationsController < ApplicationController
   end
 
   def drop_subscribe
-    @subscription = subscribe_params[:auth]
-    if current_user.push_subscriptions.find_by_auth(@subscription).destroy
+    @subscription = subscribe_params[:auth_key]
+    puts @subscription
+    if current_user.push_subscriptions.find_by_auth_key(@subscription).destroy
       render json: { message: "Removed subscription" }, status: :ok
     else
       render json: { message: "Failure when removing subscription" }, status: :not_implemented
@@ -44,8 +45,7 @@ class NotificationsController < ApplicationController
   private
 
   def subscribe_params
-    subscribe_params = params.permit(:endpoint, :keys => [:auth, :p256dh])
-    subscribe_params[:keys].merge(endpoint: subscribe_params[:endpoint])
+    subscribe_params = params.permit(:auth_key)
   end
 
 end
