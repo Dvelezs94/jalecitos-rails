@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 2019_03_01_043118) do
     t.integer "status", default: 0
     t.string "slug"
     t.json "images"
-    t.integer "score_average", default: 0
+    t.float "score_average", default: 0.0
     t.integer "score_times", default: 0
     t.string "profession"
     t.bigint "city_id"
