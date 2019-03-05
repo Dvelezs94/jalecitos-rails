@@ -22,8 +22,8 @@ Rails.application.routes.draw do
       get :check_unread
     end
     member do
+      post :read_conversation, as: "read"
       post :close
-      post :mark_as_read
     end
     resources :messages, only: [:create]
   end

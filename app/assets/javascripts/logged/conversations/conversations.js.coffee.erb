@@ -1,20 +1,28 @@
 $(document).on "turbolinks:load", ->
-  class Conversations
-    constructor: ->
-      @setup()
-
-    setup: ->
-      $.ajax(
-        url: "/conversations/check_unread.json"
-        dataType: "JSON"
-        method: "GET"
-        success: @renderBoolean
-      )
-
-    renderBoolean: (data) =>
-      # put the red dot if there are unread conversations
-      if data.unread == true
-        $(".mess-icon").addClass("unread");
-
   jQuery ->
-    new Conversations
+    window.conversations = new Conversations
+
+class Conversations
+  constructor: ->
+    @setup()
+
+  setup: ->
+    $.ajax(
+      url: "/conversations/check_unread.json"
+      dataType: "JSON"
+      method: "GET"
+      success: @renderBoolean
+    )
+
+  renderBoolean: (data) =>
+    # put the red dot if there are unread conversations
+    if data.unread == true
+      $(".mess-icon").addClass("unread");
+
+  readConversation: () =>
+    $.ajax(
+      url: "/conversations/" + $("#conversation_div").data("conversation-id") + "/read_conversation"
+      data: { authenticity_token: $('[name="csrf-token"]')[0].content }
+      dataType: "JSON"
+      method: "POST"
+    )

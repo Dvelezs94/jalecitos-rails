@@ -34,11 +34,6 @@ class ConversationsController < ApplicationController
     end
   end
 
-  def mark_as_read
-    # mark current_user messages as read on that conversation
-    @unread_messages = @conversation.messages.where(read_at: nil).where.not(user: current_user).update_all(read_at: Time.zone.now)
-  end
-
 
   def close
     @conversation = Conversation.find(params[:id])
@@ -59,6 +54,12 @@ class ConversationsController < ApplicationController
         break
       end
     end
+  end
+
+  def read_conversation
+    @conversation = Conversation.find(params[:id])
+    # mark current_user messages as read on that conversation
+    @unread_messages = @conversation.messages.where(read_at: nil).where.not(user: current_user).update_all(read_at: Time.zone.now)
   end
 
 end
