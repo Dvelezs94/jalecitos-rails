@@ -72,7 +72,7 @@ module ApplicationHelper
     when object.class == Request
        request_path(object.slug)
     when object.class ==  Offer || object.class ==  Package
-      if notification.action == "ha finalizado"
+      if notification.action == "ha finalizado" || notification.action == "Se ha finalizado"
        finance_path(:table => notification.query_url, :review => true, :notification => notification.id)
       else
        finance_path(:table => notification.query_url)
@@ -228,22 +228,23 @@ module ApplicationHelper
     if number == 0
       "<h6>Sin reseñas</h6>".html_safe
     else
+      rounded = number.round(1)
       html = ""
       #number of complete stars
       number.to_i.times do
-        html << image_tag("star-on.svg", title: number)
+        html << image_tag("star-on.svg", title: rounded)
       end
       #if has decimal...
       if decimal > 0
-        html << image_tag("star-off.svg", title: number.round(1)) if decimal < 0.25
+        html << image_tag("star-off.svg", title: rounded) if decimal < 0.25
 
-        html << image_tag("star-half.svg", title: number.round(1)) if decimal.between?( 0.25, 0.75 )
+        html << image_tag("star-half.svg", title: rounded) if decimal.between?( 0.25, 0.75 )
 
-        html << image_tag("star-on.svg", title: number.round(1)) if decimal > 0.75
+        html << image_tag("star-on.svg", title: rounded) if decimal > 0.75
       end
       #stars that doesnt have
       ( (5-number).to_i ).times do
-        html << image_tag("star-off.svg", title: number)
+        html << image_tag("star-off.svg", title: rounded)
       end
       #return it
       html.html_safe

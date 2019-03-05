@@ -22,8 +22,8 @@ App.notifications = App.cable.subscriptions.create("NotificationsChannel", {
       activate_ratyrate(); //activates stars
       review_validation(); //activates the validation of the form
     }
-    //add 1 count to notifications
-    $("#unread-count").html( parseInt($("#unread-count").text())+1)
+    //put the red dot
+    $(".notif-icon").addClass("unread");
     //then hide and remove notification
     $("#notifications .toast__container").last().delay(5000).hide(1500, function(){ $("#notifications .toast__container").last().remove(); });
   }

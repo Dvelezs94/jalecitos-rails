@@ -25,7 +25,7 @@
                     placeholder: "CVV", minlength: 3, maxlength: 4, onkeypress: "allowNumbersOnly(event)", :data => { :openpay_card => "cvv2"} %>
                  </div>
 
-               <%= f.submit 'Continuar', :class => 'btn btn-success', :id => "save-card" %>
+               <%= f.button 'Continuar', :class => 'btn btn-success', :id => "save-card", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Guardando.."} %>
              <% end %>
            </div>
            <hr>

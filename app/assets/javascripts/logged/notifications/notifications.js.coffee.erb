@@ -1,57 +1,59 @@
 $(document).on "turbolinks:load", ->
-  class Notifications
-    constructor: ->
-      @notifications = $("[data-behavior='notification-items']")
-      @setup() if @notifications.length > 0
-
-    setup: ->
-      $("[data-behavior='read-notifications']").on "click", @readNotifications
-      $.ajax(
-        url: "/notifications.json"
-        dataType: "JSON"
-        method: "GET"
-        success: @renderNotifications
-      )
-
-    readNotifications: (e) =>
-      $.ajax(
-        url: "/notifications/mark_as_read"
-        dataType: "JSON"
-        method: "POST"
-        success: ->
-          $("[data-behavior='unread-count']").text(0)
-      )
-
-    renderNotifications: (data) =>
-      unread_count = 0
-      unread = for d in data
-                 if ! d.seen
-                   unread_count += 1
-
-      items = $.map data, (notification) ->
-        "
-        <a href='#{notification.redirect.path}'>
-        <div class='belldropdown-box notifications-#{notification.seen}'>
-          <div class='sameicon'>
-            <img class='notif-avatar' src='#{notification.user.image_url}'>
-          </div>
-          <div class='belldropdown-text'>
-          <div class='head-notif'>
-            <div class='timer'>
-            <span><i class='fa fa-clock-o' aria-hidden='true'></i>#{notification.date}</span>
-            </div>
-            </div>
-            <p class='greensbold'><strong>#{notification.user.slug}</strong> #{notification.action} #{notification.notifiable.type}</p>
-          </div>
-        </div>
-        </a>
-        "
-
-      $("[data-behavior='unread-count']").text(unread_count)
-      $("[data-behavior='notification-items']").html(items)
-      if items.length > 0
-        $("[data-behavior='notification-items']").append('<div  class="all-not-link" ><a href="/notifications/all">Ver todas</a></div>')
-      else
-        $("[data-behavior='notification-items']").append('<div  class="no-notifications" >No hay nada para mostrar</div>')
   jQuery ->
     new Notifications
+
+class Notifications
+  constructor: ->
+    @notifications = $("[data-behavior='notification-items']")
+    @setup() if @notifications.length > 0
+
+  setup: ->
+    $("[data-behavior='read-notifications']").on "click", @readNotifications
+    $.ajax(
+      url: "/notifications.json"
+      dataType: "JSON"
+      method: "GET"
+      success: @renderNotifications
+    )
+
+  readNotifications: (e) =>
+    $.ajax(
+      url: "/notifications/mark_as_read"
+      dataType: "JSON"
+      method: "POST"
+      success: ->
+        $(".notif-icon").removeClass("unread");
+    )
+
+  renderNotifications: (data) =>
+    unread_count = 0
+    unread = for d in data
+               if ! d.seen
+                 unread_count += 1
+
+    items = $.map data, (notification) ->
+      "
+      <a href='#{notification.redirect.path}'>
+      <div class='belldropdown-box notifications-#{notification.seen}'>
+        <div class='sameicon'>
+          <img class='notif-avatar' src='#{notification.user.image_url}'>
+        </div>
+        <div class='belldropdown-text'>
+        <div class='head-notif'>
+          <div class='timer'>
+          <span><i class='fa fa-clock-o' aria-hidden='true'></i>#{notification.date}</span>
+          </div>
+          </div>
+          <p class='greensbold'>#{notification.text}</p>
+        </div>
+      </div>
+      </a>
+      "
+
+    if unread_count > 0 # put the red dot if there are unread notifications
+      $(".notif-icon").addClass("unread");
+    $("[data-behavior='notification-items']").html(items)
+    if items.length > 0
+      $("[data-behavior='notification-items']").append('<div  class="all-not-link" ><a href="/notifications/all">Ver todas</a></div>')
+    else
+      $("[data-behavior='notification-items']").append('<div  class="no-notifications" >No hay nada para mostrar</div>')

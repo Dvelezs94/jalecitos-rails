@@ -4,10 +4,11 @@
       <div class="tickets-tab-text">
         <div class="ticket-text">
         <%= form_with(model: TicketResponse.new) do |form| %>
-        <%= form.text_area :message, class: "form-control" %>
+        <%= form.text_area :message, class: "form-control", :maxlength => 1000 %>
+        <div class="ticket-response-form">
+        <%= form.file_field :image, accept: ".png, .jpg, .jpeg", style: "max-width: 50%;" %>
         <%= form.hidden_field :ticket_slug, :value => params[:id]  %>
-        <div class="submit-right">
-          <%= form.submit "Continuar", class: "btn continue-button" %>
+          <%= form.button "Continuar", class: "btn continue-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Enviando.."} %>
         </div>
         <% end %>
         </div>

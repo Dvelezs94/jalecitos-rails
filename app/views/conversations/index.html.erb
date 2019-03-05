@@ -12,8 +12,9 @@
           </div>
           <div id="contacts-list">
           <% @users.each do |user| %>
-          <%= render partial: "conversation_min", locals: { user: user } %>
-        <% end %>
+            <%= render partial: "conversation_min", locals: { user: user } %>
+          <% end %>
+          <%= paginate @conversations, param_name: :conversation %>
         </div>
       </div>
     </div>
@@ -26,7 +27,7 @@
             <div class="empty-state no-conversations text-center">
               <%= icon "fas","comments", class: "fa-5x" %>
               <h4>Nada que ver aquí</h4>
-              <small>Abre una conversacion para mostrarla aquí</small>
+              <small>Abre una conversación para mostrarla aquí</small>
             </div>
           </div>
         <% end %>

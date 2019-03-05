@@ -7,12 +7,12 @@
             <span>Transacciones</span></a>
         </li>
         <li>
-          <a href="<%= conversations_path %>"><%= icon("fas", "envelope") %>
+          <a href="<%= conversations_path %>" data-behavior='read-messages'><%= icon("fas", "envelope", class: "mess-icon") %>
             <span>Mensajes</span></a>
         </li>
         <li>
-          <a href="#" onclick="toggleNotifications(event);" data-behavior='read-notifications'><%= icon("fas", "bell") %>
-            <span>Notificaciones</span></a>
+          <a href="#" onclick="toggleNotifications(event);" data-behavior='read-notifications'><%= icon("fas", "bell", class: "notif-icon") %>
+            <span> Notificaciones</span></a>
         </li>
         <%=link_to image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "user_pic"), my_account_users_path%>
       </ul>

@@ -103,7 +103,7 @@ input:focus {
 .default-btn {
   color: var(--white);
   font-size: 17px;
-  background: green;
+  background: var(--green);
   display: inline-block;
   padding: 8px 20px;
   border-radius: 5px;
@@ -251,6 +251,13 @@ form.search-form input {
   /* Microsoft Edge */
   color: #9B9B9B;
 }
+
+.ready_to {
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+}
+
 
 .maild-form form input[type="email"]::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -603,14 +610,19 @@ p.greensbold {
   transition: .4s;
 }
 
+.sameicon {
+  display: flex;
+  align-items: center;
+}
+
 .belldropdown-box:hover .sameicon i {
   background: #39C27B;
   color: #fff;
 }
 
 .belldropdown-text {
-  padding-left: 70px;
-  padding-right: 13px;
+  width: 100%;
+  padding-left: 2%;
 }
 
 p.quam1 {
@@ -660,10 +672,6 @@ p.quam1 {
   border-radius: 50%;
 }
 
-.notif-text {
-  padding-left: 40px;
-  padding-right: 15px;
-}
 .clickred i {
   position: absolute;
   right: 25px;
@@ -731,11 +739,13 @@ p.quam1 {
   color: #fff;
 }
 
-.reportar-btn a i {
+.reportar-btn a i,
+.reportar-btn buttton i {
   padding-right: 9px;
 }
 
-.inner-comment a {
+.inner-comment a,
+.inner-comment button {
   background: #0067F4;
   display: inline-block;
   color: #fff;
@@ -743,6 +753,11 @@ p.quam1 {
   text-align: center;
   padding: 10px 0;
   border-radius: 24px;
+  border: none;
+}
+
+button:focus {
+  outline: none;
 }
 
 .inner-comment {
@@ -1433,6 +1448,24 @@ p.gig-price {
 
 .sedcontent-wrap {
   display: none;
+}
+
+.notif-icon,
+.mess-icon {
+  position: relative;
+}
+
+.notif-icon.unread::after,
+.mess-icon.unread::after {
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #EF2235;
+  border-radius: 50%;
+  transform: translateY(50%);
 }
 
 .sed-content h3 {
@@ -2168,13 +2201,19 @@ button:focus {
 /*greend start*/
 .maingreenbgd {
   background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/ready_to_be_expert.png");
-  background-position: center;
+  background-position: right;
   background-size: cover;
+  border-radius: 4px;
+  padding: 38px 0;
 }
 
 .greend-left h2 {
   color: #fff;
   margin: 0;
+  font-size: calc(32px + (48 - 32) * ((100vw - 320px) / (1800 - 320)));
+  line-height: calc(32px + (54 - 32) * ((100vw - 320px) / (1800 - 320)));
+  margin-bottom: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
+  margin-top: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
 }
 
 
@@ -2183,13 +2222,9 @@ button:focus {
   display: inline-block;
   text-align: center;
   color: #39C27B;
-  padding: 8px 8px;
+  padding: 8px 16px;
   border-radius: 4px;
-}
-
-.maingreenbgd {
-  border-radius: 4px;
-  padding: 38px 0;
+  font-size: calc(14px + (20 - 14) * ((100vw - 320px) / (1800 - 320)));
 }
 
 /*greend end*/
@@ -2247,7 +2282,7 @@ button:focus {
 
 .singlefooterdn p {
   color: black;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .singlefooterdn ul li a {
@@ -2257,7 +2292,7 @@ button:focus {
 /*footerd end*/
 .headerd-area .mean-container a.meanmenu-reveal span {
   display: block;
-  background: #000;
+  background: var(--gray);
   height: 3px;
   margin-top: 3px;
 }
@@ -2266,21 +2301,23 @@ button:focus {
   float: left;
   width: 100%;
   background: transparent;
-  padding: 4px 0;
+  padding: 2px 0;
   min-height: 0;
   z-index: 999999;
 }
 
 .headerd-area .mean-container a.meanmenu-reveal {
-  color: #000;
+  color: var(--gray);
 }
 
 .headerd-area .mean-container .mean-nav {
   float: left;
   width: 100%;
-  background: #0c1923;
+  background: white;
   margin-top: 14px;
   position: absolute;
+  border-radius: 4px;
+  box-shadow: 10px 10px 40px 0px rgba(0,0,0,0.16);
 }
 
 .headerd-area .meanmenu-reveal {
@@ -2658,14 +2695,9 @@ div.error{
   margin-left: auto;
 }
 .belldropdown-box {
-  position: relative;
+  display: flex;
   margin-bottom: 10px;
   padding: 5px 0;
-}
-.sameicon {
-  position: absolute;
-  left: 5px;
-  top: 15px;
 }
 .notif-avatar-mobile {
   width: 50px;
@@ -2807,8 +2839,8 @@ form.search-form {
 .search-form .form i {
   position: absolute;
   top: 23%;
-  left: 6px;
-  color: #9B9B9B;
+  left: 12px;
+  color: var(--disabled);
   font-size: 22px;
   z-index: 4;
 }

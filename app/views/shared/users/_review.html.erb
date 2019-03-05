@@ -25,7 +25,7 @@
                 <% end %>
               <% end %>
             </p>
-            <p>Hace <%= distance_of_time_in_words_to_now(review.created_at) %></p>
+            <p>Hace <%= distance_of_time_in_words_to_now(review.updated_at) %></p>
             <% if review.reviewable_type == "Gig" %>
             <p class="coa3 tj">
               <%= link_to "Jale: #{truncate(review.reviewable.title, length: 50)}", user_gig_path(review.reviewable.user, review.reviewable), class:"coa3 tj"  %>

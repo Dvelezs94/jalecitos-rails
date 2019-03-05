@@ -17,10 +17,13 @@ Rails.application.routes.draw do
 
   resources :reviews, only: [:update]
 
-  resources :conversations do
+  resources :conversations, only: [:index, :create] do
+    collection do
+      get :check_unread
+    end
     member do
+      post :read_conversation, as: "read"
       post :close
-      post :mark_as_read
     end
     resources :messages, only: [:create]
   end
