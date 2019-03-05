@@ -1605,7 +1605,8 @@
     border: none;
   }
 
-  .inner-comment a {
+  .inner-comment a
+  .inner-comment button {
     width: 125px;
     padding: 7px 0;
   }

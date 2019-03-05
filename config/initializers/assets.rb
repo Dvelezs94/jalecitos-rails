@@ -28,6 +28,7 @@ Rails.application.config.assets.precompile += %w( admin.scss )
 Rails.application.config.assets.precompile += %w( mobile.css )
 
 
+
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
