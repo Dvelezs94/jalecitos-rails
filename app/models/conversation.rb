@@ -37,6 +37,6 @@ class Conversation < ApplicationRecord
   end
 
   def unread_messages?(user)
-    self.messages.where(read_at: nil).where.not(user: user).present?
+    self.messages.where(read_at: nil).where.not(user: user).limit(1).present?
   end
 end

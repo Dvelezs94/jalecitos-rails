@@ -1,15 +1,15 @@
-<div class="belldropdown-box relative">
-  <a href="<%=url_generator_helper(notification, notification.notifiable) %>", style="display: flex">
-  <div>
-    <%= image_tag(notification.user.image_url(:thumb), class: "notif-avatar-mobile") %>
+<a href='<%=url_generator_helper(notification, notification.notifiable) %>'>
+<div class='belldropdown-box notifications-#{notification.seen}'>
+  <div class='sameicon'>
+    <%= image_tag(notification.user.image_url(:thumb), class: "notif-avatar") %>
   </div>
-  <div class="notif-text">
-    <p class="greensbold">
-    <%= build_notification_text(notification, notification.notifiable) %>
-    </p>
-    <div class="time-ago-mobile">
-      <span><%= icon("fas","clock") %> <%=distance_of_time_in_words(notification.created_at, Time.now)%></span>
+  <div class='belldropdown-text'>
+  <div class='head-notif'>
+    <div class='timer'>
+    <span><i class='fa fa-clock-o' aria-hidden='true'></i><%=distance_of_time_in_words(notification.created_at, Time.now)%></span>
     </div>
+    </div>
+    <p class='greensbold'><%= build_notification_text(notification, notification.notifiable) %></p>
   </div>
-</a>
 </div>
+</a>

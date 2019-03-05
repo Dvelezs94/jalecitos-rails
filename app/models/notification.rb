@@ -8,6 +8,14 @@ class Notification < ApplicationRecord
   #search
   searchkick language: "spanish"
 
+  def search_data
+    {
+      recipient_id: recipient_id,
+      read_at: read_at,
+      created_at: created_at
+     }
+  end
+
   # Trigger notification after it is created
   after_commit -> { NotificationRelayWorker.perform_async(self.id, review_id) }, on: :create
 end

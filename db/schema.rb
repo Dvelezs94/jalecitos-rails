@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 2019_03_01_043118) do
     t.integer "status", default: 0
     t.string "slug"
     t.json "images"
-    t.integer "score_average", default: 0
+    t.float "score_average", default: 0.0
     t.integer "score_times", default: 0
     t.string "profession"
     t.bigint "city_id"
@@ -265,9 +265,7 @@ ActiveRecord::Schema.define(version: 2019_03_01_043118) do
 
   create_table "push_subscriptions", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "auth"
-    t.string "p256dh"
-    t.string "endpoint"
+    t.string "auth_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_push_subscriptions_on_user_id"

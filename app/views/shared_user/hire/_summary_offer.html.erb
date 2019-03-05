@@ -15,14 +15,14 @@
         </div>
         <div class="total-a">
             <p>Subtotal<span><%= number_to_currency(@price[:subtotal]) %> MXN</span></p>
-            <p>Comision<span><%= number_to_currency(@price[:fee]) %> MXN</span></p>
+            <p>Comisión<span><%= number_to_currency(@price[:fee]) %> MXN</span></p>
             <p>Total<span><%= number_to_currency(purchase_order_total(@offer.price), precision: 2) %> MXN</span></p>
         </div>
         <div class="continuars-btn">
           <%= f.hidden_field :purchase, :value => params[:id] %>
           <%= f.hidden_field :purchase_type, :value => "Offer" %>
           <div class="continuars-btn">
-              <%= f.submit "Continuar", id: "purchase" %>
+              <%= f.button "Continuar", class: "btn btn-success" id: "purchase", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Comprando.."} %>
           </div>
         </div>
     </div>
