@@ -10,7 +10,7 @@
 }
 
 .modal-logo img {
-  max-width: 100%;
+  max-width: 80%;
 }
 
 .modal-logo h3 span {
@@ -60,7 +60,7 @@
 	margin: 0 auto;
 	border: none;
 	border-radius: 5px;
-	padding: 0 35px;
+	padding: 0 8px;
 }
 
 .modal-mobile {
