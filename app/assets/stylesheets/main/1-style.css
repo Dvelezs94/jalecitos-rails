@@ -252,6 +252,13 @@ form.search-form input {
   color: #9B9B9B;
 }
 
+.ready_to {
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+}
+
+
 .maild-form form input[type="email"]::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #fff;
@@ -2194,13 +2201,19 @@ button:focus {
 /*greend start*/
 .maingreenbgd {
   background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/ready_to_be_expert.png");
-  background-position: center;
+  background-position: right;
   background-size: cover;
+  border-radius: 4px;
+  padding: 38px 0;
 }
 
 .greend-left h2 {
   color: #fff;
   margin: 0;
+  font-size: calc(32px + (48 - 32) * ((100vw - 320px) / (1800 - 320)));
+  line-height: calc(32px + (54 - 32) * ((100vw - 320px) / (1800 - 320)));
+  margin-bottom: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
+  margin-top: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
 }
 
 
@@ -2209,13 +2222,9 @@ button:focus {
   display: inline-block;
   text-align: center;
   color: #39C27B;
-  padding: 8px 8px;
+  padding: 8px 16px;
   border-radius: 4px;
-}
-
-.maingreenbgd {
-  border-radius: 4px;
-  padding: 38px 0;
+  font-size: calc(14px + (20 - 14) * ((100vw - 320px) / (1800 - 320)));
 }
 
 /*greend end*/
@@ -2273,7 +2282,7 @@ button:focus {
 
 .singlefooterdn p {
   color: black;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .singlefooterdn ul li a {
@@ -2283,7 +2292,7 @@ button:focus {
 /*footerd end*/
 .headerd-area .mean-container a.meanmenu-reveal span {
   display: block;
-  background: #000;
+  background: var(--gray);
   height: 3px;
   margin-top: 3px;
 }
@@ -2292,21 +2301,23 @@ button:focus {
   float: left;
   width: 100%;
   background: transparent;
-  padding: 4px 0;
+  padding: 2px 0;
   min-height: 0;
   z-index: 999999;
 }
 
 .headerd-area .mean-container a.meanmenu-reveal {
-  color: #000;
+  color: var(--gray);
 }
 
 .headerd-area .mean-container .mean-nav {
   float: left;
   width: 100%;
-  background: #0c1923;
+  background: white;
   margin-top: 14px;
   position: absolute;
+  border-radius: 4px;
+  box-shadow: 10px 10px 40px 0px rgba(0,0,0,0.16);
 }
 
 .headerd-area .meanmenu-reveal {
@@ -2828,8 +2839,8 @@ form.search-form {
 .search-form .form i {
   position: absolute;
   top: 23%;
-  left: 6px;
-  color: #9B9B9B;
+  left: 12px;
+  color: var(--disabled);
   font-size: 22px;
   z-index: 4;
 }
