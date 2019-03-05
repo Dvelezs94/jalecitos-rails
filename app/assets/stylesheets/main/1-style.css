@@ -1436,11 +1436,13 @@ p.gig-price {
   display: none;
 }
 
-.notif-icon {
+.notif-icon,
+.mess-icon {
   position: relative;
 }
 
-.notif-icon.unread::after {
+.notif-icon.unread::after,
+.mess-icon.unread::after {
   position: absolute;
   right: -5px;
   top: 50%;
