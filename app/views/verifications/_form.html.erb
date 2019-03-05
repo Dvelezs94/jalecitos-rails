@@ -69,7 +69,7 @@
         <div style="margin: 0 20px;">
           <div class="flex-space-bet">
             <%= link_to 'Cancelar', configuration_path(:collapse => "account"), :data => {:confirm => 'Tu progreso NO se guardará'}, class: "btn back-button" %>
-            <%= form.submit "Continuar", class: "btn continue-button" %>
+            <%= form.button "Continuar", class: "btn continue-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Enviando.."} %>
           </div>
         </div>
 
