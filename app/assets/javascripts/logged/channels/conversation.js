@@ -14,7 +14,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
           $("#contacts-list").prepend(data['conversation_min']);
       }
       //conversation is not in the current conversations and pagination is present: prepend it and delete the last conversation, so the pagination dont break
-      else if ($(".pag-and-load").length > 0) {
+      else if ($('#conversation-list').find(".pag-and-load").length > 0) {
         $("#contacts-list")[0].children[$("#contacts-list")[0].children.length - 2].remove() //last is paginator, so -2
         $("#contacts-list").prepend(data['conversation_min']);
       }
