@@ -133,10 +133,15 @@
   margin-bottom: 0;
     position: relative;
 }
+#contacts-list {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 70vh;
+}
 .single-box-text p::after {
 	position: absolute;
 	right: 0;
-	top: 0;
+	top: -9px;
 	width: 10px;
 	height: 10px;
 	content: "";
