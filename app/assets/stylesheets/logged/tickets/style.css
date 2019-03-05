@@ -35,6 +35,13 @@
   background-color: #ef2235;
 }
 
+.ticket-response-form {
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-between;
+
+}
+
 .tickets-tab-text {
 	border: 2px solid #F5F6F7;
 	border-radius: 3px;

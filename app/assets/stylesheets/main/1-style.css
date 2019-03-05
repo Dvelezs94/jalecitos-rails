@@ -732,11 +732,13 @@ p.quam1 {
   color: #fff;
 }
 
-.reportar-btn a i {
+.reportar-btn a i,
+.reportar-btn buttton i {
   padding-right: 9px;
 }
 
-.inner-comment a {
+.inner-comment a,
+.inner-comment button {
   background: #0067F4;
   display: inline-block;
   color: #fff;
@@ -744,6 +746,11 @@ p.quam1 {
   text-align: center;
   padding: 10px 0;
   border-radius: 24px;
+  border: none;
+}
+
+button:focus {
+  outline: none;
 }
 
 .inner-comment {
