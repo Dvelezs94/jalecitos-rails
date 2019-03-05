@@ -4,20 +4,29 @@
   //add items
   $(".message_view_box ul.messages-list").prepend('<%= j render "conversations/conversation_content", messages: @messages.sort %>');
   //remove old pagination
-  $('.pag-and-load').remove();
+  $(".message_view_box").find('.pag-and-load').remove();
   // check if puts new pagination
   <% if @messages.next_page %>
     $(".message_view_box").prepend('<%= j paginate(@messages) %>');
   <% end %>
-  //prevent multiple calls
   <% sleep 1 %>
-<% elsif params[:word] %>
-$("#contacts-list").html("");
-  <% if @users.present? %>
+<% elsif params[:conversation] || params[:word] == "" %>
+    $("#contacts-list").find(".pag-and-load").remove(); // if i am paginating normally, remove pagination to append new things
+    $(".no-matches").remove(); //if came from a search remove phrase of no results if exist
     <% @users.each do |user| %>
-      $("#contacts-list").append("<%= j render partial: 'conversation_min', locals: { user: user } %>");
+      $("#contacts-list").append('<%= j render "conversations/conversation_min", user: user %>')
     <% end %>
-  <% else %>
-    $("#contacts-list").append("<div class='no-matches'>Sin coincidencias</div>");
-  <% end %>
+    <% if @conversations.next_page %>
+      $("#contacts-list").append('<%= j paginate @conversations, param_name: :conversation %>')
+    <% end %>
+    <% sleep 1 if params[:conversation] %>
+<% elsif params[:word] %>
+    $("#contacts-list").html("");
+    <% if @users.present? %>
+      <% @users.each do |user| %>
+        $("#contacts-list").append("<%= j render partial: 'conversation_min', locals: { user: user } %>");
+      <% end %>
+    <% else %>
+      $("#contacts-list").append("<div class='no-matches'>Sin coincidencias</div>");
+    <% end %>
 <% end %>

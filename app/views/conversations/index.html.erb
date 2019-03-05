@@ -12,8 +12,9 @@
           </div>
           <div id="contacts-list">
           <% @users.each do |user| %>
-          <%= render partial: "conversation_min", locals: { user: user } %>
-        <% end %>
+            <%= render partial: "conversation_min", locals: { user: user } %>
+          <% end %>
+          <%= paginate @conversations, param_name: :conversation %>
         </div>
       </div>
     </div>

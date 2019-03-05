@@ -10,6 +10,20 @@ class ConversationsController < ApplicationController
   def index
     if params[:page]
       @messages = Message.search("*", where: {conversation_id: @conversation.id}, order: [{ _id: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 25)
+    elsif params[:conversation] || params[:word] == ""
+      @conversations = Conversation.search("*", where: { _or: [{sender_id: current_user.id}, {recipient_id: current_user.id}] }, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], per_page: 20, page: params[:conversation])
+      get_opposite_user( @conversations )
+      respond_to do |format|
+        format.html {
+          if params[:user_id] && params[:user_id] != current_user.slug
+            @messages = Message.search("*", where: {conversation_id: @conversation.id}, order: [{ _id: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 25)
+            mark_as_read
+          end
+          report_options
+        }
+        format.js{}
+      end
+
     elsif params[:word]
       @users = []
       @my_conversations = Conversation.search("*", where: {
@@ -17,7 +31,8 @@ class ConversationsController < ApplicationController
          })
       filter_conversations
     else
-      get_opposite_user(Conversation.search("*", where: { _or: [{sender_id: current_user.id}, {recipient_id: current_user.id}] }, order: [{ updated_at: { order: :desc, unmapped_type: :long}}]) )
+      @conversations = Conversation.search("*", where: { _or: [{sender_id: current_user.id}, {recipient_id: current_user.id}] }, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], per_page: 20, page: params[:conversation])
+      get_opposite_user( @conversations )
       if params[:user_id] && params[:user_id] != current_user.slug
         @messages = Message.search("*", where: {conversation_id: @conversation.id}, order: [{ _id: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 25)
         mark_as_read
