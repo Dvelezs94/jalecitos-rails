@@ -14,7 +14,7 @@
                  </div>
                  <%= form_for(:user, :html => { :class => "sign_in_form" }, :url => session_path(:user)) do |f| %>
                    <div class="information">
-                     <%= f.email_field :email, placeholder: "Correo", class: "required", value: "", autofocus: true, onfocus: "getLocation();" %>
+                     <%= f.email_field :email, placeholder: "Correo", class: "required", value: "", autofocus: true, autocomplete: :off,onfocus: "getLocation();" %>
                      <%= f.password_field :password, placeholder: "Contraseña" , class: "required" %>
                      <%= hidden_field_tag :from_mobile, value = 'true' %>
                    </div>
