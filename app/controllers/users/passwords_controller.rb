@@ -32,6 +32,8 @@ class Users::PasswordsController < Devise::PasswordsController
   # protected
 
    def after_resetting_password_path_for(resource)
+     puts "X"* 100
+     puts("after_resetting_password_path_for")
      return platform_redirect_root_path
    end
 
