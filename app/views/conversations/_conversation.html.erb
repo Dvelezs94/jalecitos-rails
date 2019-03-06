@@ -20,7 +20,7 @@
     <div class="bottom-chat-write">
       <%= form_for [@conversation, Message.new], remote: true do |f| %>
       <label for="message_image">
-        <%= icon("fas","paperclip", class: "fa-2x", title: "Adjuntar imagen", id: "attach-i")  %>
+        <%= icon("fas","image", class: "fa-2x", title: "Adjuntar imagen", id: "attach-i")  %>
         <%= f.file_field :image, accept: ".jpg, .jpeg, .png", style: "display: none;" %>
         <label id="file-name" title="borrar imagen"></label>
       </label>
