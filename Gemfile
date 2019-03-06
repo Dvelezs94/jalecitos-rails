@@ -143,3 +143,5 @@ gem 'recaptcha', '~> 4.13', '>= 4.13.1'
 gem 'nicescroll-rails', '~> 3.5', '>= 3.5.4.1'
 # Query places by name
 gem 'google_places', '~> 1.2'
+# lazy load for image tags
+gem 'lazyload-rails', '~> 0.3.1'
