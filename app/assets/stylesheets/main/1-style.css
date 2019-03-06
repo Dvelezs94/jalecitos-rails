@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 @font-face {
   font-family: "Gilroy-Extra-Bold";
+  font-display: auto;
   src: url('/assets/gilroy_extra_bold.woff2') format('woff2'), /* Super Modern Browsers */
        url('/assets/gilroy_extra_bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
        url('/assets/gilroy_extra_bold.woff2') format('woff2'), /* Super Modern Browsers */
