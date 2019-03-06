@@ -5,6 +5,10 @@ $(document).on('turbolinks:load', function() {
       'user[password]': {
         minlength: 6,
         maxlength: 128,
+        aNumberLowerUpper: true,
+        aNumberLower: true,
+        aNumberUpper: true,
+        aLowerUpper: true,
         aNumber: true,
         aLower: true,
         anUpper: true
@@ -25,7 +29,45 @@ $(document).on('turbolinks:load', function() {
       }
     }
   });
+  $(".change_password_form").validate({
+    rules: {
+      'user[password]': {
+        minlength: 6,
+        maxlength: 128,
+        aNumberLowerUpper: true,
+        aNumberLower: true,
+        aNumberUpper: true,
+        aLowerUpper: true,
+        aNumber: true,
+        aLower: true,
+        anUpper: true
+      },
+      'user[password_confirmation]': {
+        equalTo: "#user_password"
+      }
+    }
+  });
 });
+
+$.validator.addMethod('aNumberLowerUpper', function(value, element) {
+    return this.optional(element) || ( value.match(/[0-9]/) || value.match(/[a-z]/) || value.match(/[A-Z]/));
+  },
+  'La contraseña debe contener al menos un número, una mayúscula y una minúscula.');
+
+$.validator.addMethod('aNumberLower', function(value, element) {
+    return this.optional(element) || (value.match(/[0-9]/) || value.match(/[a-z]/));
+  },
+  'La contraseña debe contener al menos un número y una minúscula.');
+
+$.validator.addMethod('aNumberUpper', function(value, element) {
+    return this.optional(element) || (value.match(/[0-9]/) || value.match(/[A-Z]/));
+  },
+  'La contraseña debe contener al menos un número y una mayúscula.');
+
+  $.validator.addMethod('aLowerUpper', function(value, element) {
+      return this.optional(element) || (value.match(/[A-Z]/) || value.match(/[a-z]/));
+    },
+    'La contraseña debe contener al menos una minúscula y una mayúscula.');
 
 $.validator.addMethod('aNumber', function(value, element) {
     return this.optional(element) || (value.match(/[0-9]/));

@@ -26,17 +26,3 @@
 
 </div>
 </div>
-
-<script>
-     $(".change_password_form").validate({
-       rules : {
-        'user[password]' : {
-            minlength : 6
-        },
-        'user[password_confirmation]' : {
-            minlength : 6,
-            equalTo : "#user_password"
-        }
-      }
-    });
-</script>

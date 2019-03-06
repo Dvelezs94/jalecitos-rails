@@ -20,7 +20,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #Devise redirects
 
   #behave as request of "user"
   def self.renderer_with_signed_in_user(user)
