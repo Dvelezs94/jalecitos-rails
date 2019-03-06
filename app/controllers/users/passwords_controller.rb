@@ -3,9 +3,6 @@
 class Users::PasswordsController < Devise::PasswordsController
   layout :set_layout
 
-  def after_sending_reset_password_instructions_path_for(resource_name)
-    return platform_redirect_root_path
-  end
   # GET /resource/password/new
   # def new
   #   super
@@ -25,7 +22,10 @@ class Users::PasswordsController < Devise::PasswordsController
   # def update
   #   super
   # end
-  private
+  protected
+  def after_sending_reset_password_instructions_path_for(resource_name)
+    return platform_redirect_root_path
+  end
   def set_layout
     cookies.signed[:mb] ? "mobile" : "guest"
   end
