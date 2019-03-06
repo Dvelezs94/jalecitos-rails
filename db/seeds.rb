@@ -34,7 +34,7 @@ if ENV.fetch("RAILS_ENV") != "production"
       user.name = Faker::Name.name + "#{x}"
       user.email = Faker::Internet.email + "#{x}"
       user.role = "user"
-      user.password = "123456"
+      user.password = "1234aA"
       user.current_sign_in_at = Time.now()
       user.city_id = Faker::Number.between(1, 5)
       # This is so we dont have to confirm the email on seeds
@@ -80,7 +80,7 @@ if ENV.fetch("RAILS_ENV") != "production"
 
   User.create!(
         email: "admin@e.com",
-        password: "adminpassword",
+        password: "Admin1",
         name: "admin",
         role: "admin",
         confirmed_at: Time.now
@@ -89,7 +89,7 @@ if ENV.fetch("RAILS_ENV") != "production"
 
   User.create!(
         email: "testuser1@jalecitos.com",
-        password: "testuserpass",
+        password: "Test12",
         name: "Test User",
         role: "user",
         confirmed_at: Time.now
@@ -98,7 +98,7 @@ if ENV.fetch("RAILS_ENV") != "production"
 
   User.create!(
         email: "testuser2@jalecitos.com",
-        password: "testuserpass",
+        password: "Test12",
         name: "Test User",
         role: "user",
         confirmed_at: Time.now

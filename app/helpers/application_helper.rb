@@ -209,7 +209,7 @@ module ApplicationHelper
         <meta name='category' content='#{@gig.category.name}'>".html_safe
     elsif @request.present? && current_page?( request_path(@request) )
         "<title>Trabajo de #{@request.profession} en #{@request.location} | Encontrar trabajo de #{@request.profession} por internet.</title>
-        <meta name='description' content='Se solicita #{@request.profession} en #{@request.location} para #{@request.name}. Registrate hoy en Jalecitos para encontrar trabajo.'>
+        <meta name='description' content='Se solicita #{@request.profession} en #{@request.location} para #{@request.name}. Regístrate hoy en Jalecitos para encontrar trabajo.'>
         <meta name='keywords' content='#{@request.location},#{@request.profession},#{@request.tag_list.join(',')}'>
         <meta name='category' content='#{@request.category.name}'>".html_safe
     elsif current_page?( root_path ) && params[:query]
