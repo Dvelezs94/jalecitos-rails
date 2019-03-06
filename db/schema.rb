@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_194533) do
+ActiveRecord::Schema.define(version: 2019_03_06_025643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -459,12 +459,16 @@ ActiveRecord::Schema.define(version: 2019_03_05_194533) do
     t.boolean "verified", default: false
     t.bigint "city_id"
     t.string "time_zone", default: "America/Mexico_City"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["score_id"], name: "index_users_on_score_id"
     t.index ["slug"], name: "index_users_on_slug", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   create_table "verifications", force: :cascade do |t|
