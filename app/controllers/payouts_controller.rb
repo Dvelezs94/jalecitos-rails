@@ -1,6 +1,7 @@
 class PayoutsController < ApplicationController
   include ApplicationHelper
   include OpenpayHelper
+  include OrderFunctions
   before_action :authenticate_user!
   access user: :all
   before_action :set_payouts, only: :show
@@ -13,25 +14,28 @@ class PayoutsController < ApplicationController
     @orders = current_user.unpaid_orders
     if @orders.count > 0
       @jalecitos_payout = Payout.new(user: current_user, bank_id: params[:bank_id])
+      # calculate orders and money to give to the user.
+      # this function collects the ids that fit on a desired amount (eg 5000)
+      #  it returns the ids that fit
+      @payment_hash = calc_payout(@orders)
       if @jalecitos_payout.save
-        if @orders.update_all(payout_id: @jalecitos_payout.id)
+        @orders_array = []
+        @payment_hash[0][:orders].each {|o| @orders_array <<  o[:id]}
+        if Order.where(id: @orders_array).update_all(payout_id: @jalecitos_payout.id)
           ########### Payout Creation ##########
-          @order_total = @jalecitos_payout.orders.sum(:total)
-          # based on the total, calculate the corresponding money to the user
-          @employee_balance = calc_employee_orders_earning(@order_total, @jalecitos_payout.orders.count)
           request_hash={
            "method" => "bank_account",
            "destination_id" => @jalecitos_payout.bank_id,
-           "amount" => @employee_balance,
+           "amount" => @payment_hash[0][:count],
            "description" => "Retiro del usuario #{@jalecitos_payout.user.email}",
-           "order_id" => "payout-#{@jalecitos_payout.id}"
+           "order_id" => "payout-#{current_user.id}-#{@jalecitos_payout.id}"
           }
           begin
             response = @payout.create(request_hash, @jalecitos_payout.user.openpay_id)
             @jalecitos_payout.update(transaction_id: response["id"])
             flash[:success] = "Tu pago esta en proceso. Recibiras una notificacion por correo una vez que se haya procesado."
-          rescue OpenpayTransactionException => e
-            flash[:error] = "El pago no pudo ser concretado por la siguiente razon. #{e.description}. Intenta de nuevo mas tarde o comunicate con soporte para resolverlo."
+          rescue
+            flash[:error] = "El pago no pudo ser concretado. Intenta de nuevo mas tarde o comunicate con soporte para resolverlo."
             @jalecitos_payout.failed!
           end
           ###########

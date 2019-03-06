@@ -1,5 +1,6 @@
 class OrderInvoiceGeneratorWorker
   include Sidekiq::Worker
+  sidekiq_options retry: false
   include ApplicationHelper
   require 'net/http'
 
