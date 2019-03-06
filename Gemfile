@@ -63,8 +63,9 @@ gem 'font-awesome-sass', '~> 5.6', '>= 5.6.1'
 gem "autoprefixer-rails"
 #gem 'therubyracer'
 #gem 'less-rails-bootstrap'
-gem 'devise'
+gem 'devise', '~> 4.6', '>= 4.6.1'
 gem 'devise-bootstrapped'
+gem 'devise-security', '~> 0.13.0'
 # Gem to export active record as diagram
 gem 'railroady', '~> 1.5', '>= 1.5.3', group: :development
 

@@ -3,7 +3,7 @@
     <h3>Cambia tu contraseña</h3>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "change_password_form" }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= render "users/shared/error_messages", resource: resource %>
   <%= f.hidden_field :reset_password_token %>
 
   <div class="field form-group">
@@ -26,17 +26,3 @@
 
 </div>
 </div>
-
-<script>
-     $(".change_password_form").validate({
-       rules : {
-        'user[password]' : {
-            minlength : 6
-        },
-        'user[password_confirmation]' : {
-            minlength : 6,
-            equalTo : "#user_password"
-        }
-      }
-    });
-</script>
