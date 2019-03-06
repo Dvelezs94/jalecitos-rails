@@ -15,7 +15,7 @@
                  </div>
                  <%= form_for(:user, :html => { :class => "sign_in_form" }, :url => session_path(:user)) do |f| %>
                    <div class="information" style="margin-bottom: 20px;">
-                     <%= f.email_field :email, placeholder: "Correo", class: "required", value: "", autofocus: true, onfocus: "getLocation();" %>
+                     <%= f.email_field :email, placeholder: "Correo", class: "required", value: "", autocomplete: :off, autofocus: true, onfocus: "getLocation();" %>
                      <%= f.password_field :password, placeholder: "Contraseña" , class: "required" %>
                      <div class="remember_me" style="display:flex;justify-content:center;align-items:center;">
                        <%= f.check_box :remember_me %>
