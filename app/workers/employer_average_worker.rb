@@ -1,5 +1,6 @@
 class EmployerAverageWorker
   include Sidekiq::Worker
+  sidekiq_options retry: false
 
   def perform(review_id)
     review = Review.find(review_id)
