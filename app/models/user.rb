@@ -112,9 +112,9 @@ class User < ApplicationRecord
   petergate(roles: [:admin, :support, :employer, :employee], multiple: true)                                      ##
   ############################################################################################
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable, :trackable,
-         :recoverable, :rememberable, :validatable,
+  # :confirmable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :lockable, :registerable, :confirmable, :trackable,
+         :recoverable, :rememberable, :secure_validatable,
          :omniauthable, :omniauth_providers => [:facebook]
    # Custom methods for OmniAuth
    def self.new_with_session(params, session)

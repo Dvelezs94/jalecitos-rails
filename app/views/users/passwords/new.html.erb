@@ -4,7 +4,7 @@
     <h3>¿Olvidaste tu contraseña?</h3>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-    <%= devise_error_messages! %>
+    <%= render "users/shared/error_messages", resource: resource %>
 
     <div class="field form-group">
       <%= f.label :email %><br />
