@@ -29,7 +29,7 @@
       <% if current_user != @gig.user %>
       <div class="other_gig_actions">
 
-        <div class="hearted1" id="likes-<%= @gig.slug %>">
+        <div class="hearted1 likes-<%= @gig.slug %>">
           <%= render "gigs/likes", gig: @gig %>
         </div>
         <%= link_to icon("fas", "share-alt", title: "Compartir"), {}, id: "share" %>

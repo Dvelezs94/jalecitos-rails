@@ -13,9 +13,9 @@
                      <%= icon("fab", "facebook-square") + " Facebook" %>
                      <% end %>
                  </div>
-                 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+                 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { class: "sign_up_form" }) do |f| %>
                    <%= devise_error_messages! %>
-                   <%= f.email_field :email, placeholder: "Correo", id: "user_email_new", class: "required", autocomplete: "email", autofocus: true, onfocus: "getLocation();" %>
+                   <%= f.email_field :email, placeholder: "Correo", id: "user_email_new", class: "required", autocomplete: :off, autofocus: true, onfocus: "getLocation();" %>
                    <% if @minimum_password_length %>
                    <em>(<%= @minimum_password_length %> characters minimum)</em>
                    <% end %>
@@ -23,7 +23,7 @@
                    <%= f.password_field :password_confirmation, placeholder: "Confirmar contraseña", id: "user_password_conf_new", class: "required", autocomplete: "new-password" %>
                    <%= hidden_field_tag :sign_up_lat, value = '' %>
                    <%= hidden_field_tag :sign_up_lon, value = '' %>
-                   <div class="row justify-content-center">
+                   <div class="row justify-content-center" style="margin-bottom: 40px;">
                      <%= recaptcha_tags %>
                    </div>
                    <%= f.button 'Continuar', class: "default-btn signup-continue", :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i> Entrando..." } %>

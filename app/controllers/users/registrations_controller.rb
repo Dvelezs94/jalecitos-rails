@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    redirect_to root_path
+    super
   end
 
   # POST /resource
@@ -28,7 +28,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      redirect_to root_path, notice: "Algo ha salido mal con tu registro. Contacta a Soporte para mayor informacion."
+      redirect_to root_path, notice: "Algo ha salido mal con tu registro. Contacta a Soporte para mayor información."
     end
   end
 
@@ -99,7 +99,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
-    params[:from_mobile].present? ? mobile_sign_in_path : super(resource)
+    params[:from_mobile].present? ? mobile_sign_up_path : root_path
   end
 
   def after_destroy_account_path
@@ -107,12 +107,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   private
-    def check_captcha
-      unless verify_recaptcha
-        self.resource = resource_class.new sign_up_params
-        resource.validate # Look for any other validation errors besides Recaptcha
-        flash[:error] = "No se pudo crear  tu cuenta."
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
-      end
+  def check_captcha
+    unless verify_recaptcha
+      self.resource = resource_class.new sign_up_params
+      resource.validate # Look for any other validation errors besides Recaptcha
+      flash[:error] = "Por favor, confirma que no eres un robot en tu registro."
+      redirect_to after_inactive_sign_up_path_for(resource)
     end
+  end
+
+  def redirect_validation
+    params[:from_mobile].present? ? "mobiles#sign_in" : 'pages#home'
+  end
 end
