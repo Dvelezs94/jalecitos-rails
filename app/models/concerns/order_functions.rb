@@ -36,4 +36,25 @@ module OrderFunctions
   def generate_invoice(order)
     OrderInvoiceGeneratorWorker.perform_async(order.id) if order.billing_profile_id
   end
+  # function to calculate payout
+  def calc_payout(orders)
+    h = [orders: [], :count => 0]
+    count = 0
+    max = 5000.0 #maximum allowed openpay payout
+    orders.each do |o|
+      available = max - count
+      if available >= o.payout_left
+        h[0][:orders] << {id: o.id,  payout_left: 0}
+        count += o.payout_left
+      elsif available > 0
+        h[0][:orders] << {id: o.id,  payout_left: (o.payout_left - available).round(2)}
+        count += available
+        break
+      else
+        break
+      end
+    end
+    h[0][:count] = count
+    h
+  end
 end
