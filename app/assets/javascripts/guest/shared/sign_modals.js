@@ -3,6 +3,7 @@ $(document).on('turbolinks:load', function() {
   modals('inModal', "sign_in");
   modals('upModal', "sign_up");
   modals('upModal', "register");
+  modals('upModal', "ready_to");
 
   //when resizing on 767 the events doesnt exist because of the menu
   $(window).resize(function() {
