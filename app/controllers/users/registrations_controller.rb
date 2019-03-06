@@ -28,7 +28,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      redirect_to root_path, notice: "Algo ha salido mal con tu registro. Contacta a Soporte para mayor información."
+      if resource.errors.any?
+        redirect_to root_path, notice: "#{resource.errors.full_messages[0]}"
+      else
+        redirect_to root_path, notice: "Algo ha salido mal con tu registro. Contacta a Soporte para mayor información."
+      end
     end
   end
 
