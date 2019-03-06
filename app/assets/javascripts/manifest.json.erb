@@ -1,4 +1,3 @@
-<% icon_sizes = Rails.configuration.serviceworker.icon_sizes %>
 {
   "name": "Jalecitos",
   "short_name": "Jalecitos",
@@ -7,13 +6,16 @@
   "display": "standalone",
   "orientation": "portrait",
   "icons": [
-  <% icon_sizes.map { |s| "#{s}x#{s}" }.each.with_index do |dim, i| %>
   {
-    "src": "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/pwa_<%= dim %>.png",
-    "sizes": "<%= dim %>",
+    "src": "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/pwa_192x192.png",
+    "sizes": "192x192",
     "type": "image/png"
-  }<%= i == (icon_sizes.length - 1) ? '' : ',' %>
-  <% end %>
+  },
+  {
+    "src": "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/pwa_512x512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }
   ],
   "start_url": "/mobile_sign_in",
   "gcm_sender_id": "103953800507"
