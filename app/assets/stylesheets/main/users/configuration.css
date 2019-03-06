@@ -618,7 +618,7 @@
 	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 	width: 100%;
 	text-align: left;
-	color: #D8D8DA !important;
+	color: #000 !important;
 	font-weight: 700 !important;
 }
 .tab-section-for-mobile .card-body {
