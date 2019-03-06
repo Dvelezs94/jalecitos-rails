@@ -138,7 +138,7 @@ class User < ApplicationRecord
    end
    def balance
      @orders_total = self.unpaid_orders
-     calc_employee_orders_earning(@orders_total.sum(:total), @orders_total.count)
+     @orders_total.sum(:payout_left)
    end
 
    def set_defaults
