@@ -3,7 +3,9 @@ $(document).on('turbolinks:load', function() {
     apiKey: "<%= ENV.fetch('GCM_API_KEY') %>",
     messagingSenderId: "<%= ENV.fetch('GCM_SENDER_ID') %>"
   }
-  firebase.initializeApp(firebaseConfig);
-  const messaging = firebase.messaging();
-  messaging.usePublicVapidKey("<%= ENV.fetch('GCM_VAPID_PUBLIC_KEY') %>");
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+    messaging.usePublicVapidKey("<%= ENV.fetch('GCM_VAPID_PUBLIC_KEY') %>");
+  }
 });
