@@ -3,7 +3,7 @@
     <div class="col-md-9">
       <div class="authorise-wrap">
         <div class="authorinpic">
-          <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar") %>
+          <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar", data: {lity: true}, lazy: true) %>
         </div>
       <div class="authorisescontent">
         <h1><%= @user.alias %></h1>
