@@ -1,5 +1,6 @@
 class NotificationRelayWorker
   include Sidekiq::Worker
+  sidekiq_options retry: 2
   include ApplicationHelper
   include PushFunctions
   include Rails.application.routes.url_helpers

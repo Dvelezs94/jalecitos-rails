@@ -1,6 +1,6 @@
 class MessageBroadcastWorker
   include Sidekiq::Worker
-
+  sidekiq_options retry: false
   def perform(message_id)
     message = Message.find(message_id)
     sender = message.user
