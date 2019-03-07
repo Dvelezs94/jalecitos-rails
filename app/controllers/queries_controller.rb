@@ -2,17 +2,18 @@ class QueriesController < ApplicationController
   include SetLayout
   include SearchFunctions
   include LocationFunctions
+  include GetQuery
   layout :set_layout
   access user: [:user_search, :user_autocomplete_search, :autocomplete_profession, :user_mobile_search], admin: :all, all: [:guest_search, :guest_autocomplete_search, :autocomplete_location]
 
   def guest_search
     if params[:gigs]
-      @gigs = Gig.search(filter_query, includes: [:query_pack, :likes, :user, city: [state: :country]], where: guest_where_filter, page: params[:gigs], per_page: 20, operator: "or")
+      get_guest_gig(true)
     elsif params[:requests]
-      @requests = Request.search(filter_query, includes: [:offers, city: [state: :country]], where: guest_where_filter, page: params[:requests], per_page: 20, operator: "or")
+      get_guest_request(true)
     else
-      @gigs = Gig.search(filter_query, includes: [:query_pack, :likes, :user, city: [state: :country]], where: guest_where_filter, execute: false, page: params[:gigs], per_page: 20, operator: "or")
-      @requests = Request.search(filter_query, includes: [:offers, city: [state: :country]], where: guest_where_filter, execute: false, page: params[:requests], per_page: 20, operator: "or")
+      get_guest_gig
+      get_guest_request
       Searchkick.multi_search([@gigs, @requests])
     end
     render template: "queries/search_results"
@@ -29,13 +30,13 @@ class QueriesController < ApplicationController
 
   def user_search
     if params[:gigs]
-      @gigs = Gig.search(filter_query, includes: [:query_pack, :likes, :user, city: [state: :country]], where: user_where_filter, page: params[:gigs], per_page: 20, operator: "or")
+      get_user_gig(true)
     elsif params[:requests]
-      @requests = Request.search(filter_query, includes: [:offers, city: [state: :country]], where: user_where_filter, page: params[:requests], per_page: 20, operator: "or")
+      get_user_request(true)
     else
-    @gigs = Gig.search(filter_query, includes: [:query_pack, :likes, :user, city: [state: :country]], where: user_where_filter, page: params[:gigs], per_page: 20, execute: false, operator: "or")
-    @requests = Request.search(filter_query, includes: [:offers, city: [state: :country]], where: user_where_filter, page: params[:requests], per_page: 20, execute: false, operator: "or")
-    Searchkick.multi_search([@gigs, @requests])
+      get_user_gig
+      get_user_request
+      Searchkick.multi_search([@gigs, @requests])
     end
     render template: "queries/search_results"
   end
