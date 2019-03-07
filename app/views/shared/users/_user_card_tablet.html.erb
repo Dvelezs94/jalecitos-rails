@@ -3,7 +3,7 @@
     <div class="col-md-9">
       <div class="authorise-wrap">
         <div class="authorinpic">
-          <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar") %>
+          <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar", data: {lity: true}, lazy: true) %>
         </div>
       <div class="authorisescontent">
         <h1><%= @user.alias %></h1>
@@ -18,9 +18,9 @@
   </div>
   <div class="col-md-3">
     <% if my_profile %>
-    <div class="authorlock">
-      <%= button_to configuration_path, :method => :get, :data => { :disable_with => "<i class='fa fa-cog fa-spin'></i> Configuracion" } do %>
-      <%= " #{icon('fas', 'cog')} Configuracion ".html_safe %>
+    <div class="inner-comment">
+      <%= button_to configuration_path, :method => :get, :data => { :disable_with => "<i class='fa fa-cog fa-spin'></i> Configuración" } do %>
+      <%= " #{icon('fas', 'cog')} Configuración ".html_safe %>
       <% end %>
     </div>
     <div class="authorlock authorlock2">
