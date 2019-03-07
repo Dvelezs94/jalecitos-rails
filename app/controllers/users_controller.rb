@@ -51,6 +51,9 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   #aqui la parte del usuario de la url no importa, ya que aqui adentro se usa current_user, esto para darle seguridad a los usuarios de solo editar su perfil
   def update_user
+    if params[:user]["name"]
+      update_openpay_name(params[:user]["name"])
+    end
     # best in place update roles based on list select
     if @role = params[:user]["roles"]
       case @role
@@ -120,6 +123,21 @@ class UsersController < ApplicationController
     def check_if_my_profile
       if user_signed_in?
         redirect_to my_account_users_path if current_user.slug == params[:id]
+      end
+    end
+
+    def update_openpay_name (name)
+      init_openpay("customer")
+      request_hash = {
+                      "name": name,
+                      "email": current_user.email
+                      }
+      begin
+        @customer.update(request_hash, current_user.openpay_id)
+      rescue
+        flash[:error] = "Error interno, el usuario no pudo ser actualizado"
+        redirect_to configuration_path
+        false
       end
     end
 end

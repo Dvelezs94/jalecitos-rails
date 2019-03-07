@@ -26,6 +26,7 @@ class OrdersController < ApplicationController
   before_action :verify_order_limit, only: [:create]
   before_action :verify_refund_state, only: [:refund]
   before_action :check_billing_profile, only: :create
+  before_action :verify_personal_information, only: :create
 
   def create
     @order = Order.new(order_params)
@@ -302,6 +303,13 @@ class OrdersController < ApplicationController
     def check_billing_profile
       if order_params[:billing_profile_id] != nil
         cancel_execution if (current_user.billing_profiles.find_by_status("enabled").id != order_params[:billing_profile_id].to_i)
+      end
+    end
+
+    def verify_personal_information
+      if current_user.name.blank?
+        flash[:error] = "Asegurate de tener tu nombre completo actualizada para proceder a comprar"
+        redirect_to configuration_path
       end
     end
 end
