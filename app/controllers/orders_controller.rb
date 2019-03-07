@@ -47,11 +47,11 @@ class OrdersController < ApplicationController
       #create charge on openpay
       begin
         response = @charge.create(request_hash, current_user.openpay_id)
-        @order.response_order_id = response["id"]
-        @order.save
+        @order.update(response_order_id: response["id"])
         flash[:success] = "Se ha creado la orden."
         redirect_to (@order.total > min_3d_amount) ? response["payment_method"]["url"] : details_order_path(@order.uuid)
       rescue OpenpayTransactionException => e
+        @order.update(response_order_id: "failed")
         @order.denied!
         flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
         redirect_to finance_path(:table => "purchases")
