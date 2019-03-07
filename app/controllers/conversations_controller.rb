@@ -14,7 +14,7 @@ class ConversationsController < ApplicationController
       get_conversations
       get_opposite_user( @conversations )
       respond_to do |format|
-        format.html {
+        format.html { # if an user clicks in pagination
           if params[:user_id] && params[:user_id] != current_user.slug
             get_messages
             mark_as_read
@@ -61,7 +61,9 @@ class ConversationsController < ApplicationController
   end
 
   def check_unread
-    @conversations = Conversation.search("*", includes: [:messages], where: { _or: [{sender_id: current_user.id}, {recipient_id: current_user.id}] })
+    @conversations = Conversation.search("*",
+       includes: [:messages], where: { _or: [{sender_id: current_user.id},
+          {recipient_id: current_user.id}] })
     @unread = false
     @conversations.each do |c|
       if c.unread_messages?(current_user)
