@@ -1,14 +1,6 @@
 /* Custom Fonts */
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
-@font-face {
-  font-family: "Gilroy-Extra-Bold";
-  font-display: auto;
-  src: url('/assets/gilroy_extra_bold.woff2') format('woff2'), /* Super Modern Browsers */
-       url('/assets/gilroy_extra_bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/assets/gilroy_extra_bold.woff2') format('woff2'), /* Super Modern Browsers */
-       url('/assets/gilroy_extra_bold.woff') format('font-woff'), /* Pretty Modern Browsers */
-       url('/assets/gilroy_extra_bold.ttf')  format('truetype') /* Safari, Android, iOS */
-}
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:800,900');
 
 
 /* Base CSS */
@@ -20,14 +12,16 @@ body {
 }
 
 h1 {
-  font-family: 'Gilroy-Extra-Bold', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 900;
   font-size: calc(25px + (30 - 25) * ((100vw - 320px) / (1800 - 320)));
   margin: 0 0 16px;
   color: #000000;
 }
 
 h2 {
-  font-family: 'Gilroy-Extra-Bold', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 900;
   font-size: calc(19px + (24 - 19) * ((100vw - 320px) / (1800 - 320)));
   margin: 0 0 16px;
   color: #000000;
