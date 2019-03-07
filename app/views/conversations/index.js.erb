@@ -11,8 +11,7 @@
   <% end %>
   <% sleep 1 %>
 <% elsif params[:conversation] || params[:word] == "" %>
-    $("#contacts-list").find(".pag-and-load").remove(); // if i am paginating normally, remove pagination to append new things
-    $(".no-matches").remove(); //if came from a search remove phrase of no results if exist
+    $("#contacts-list").html("");
     <% @users.each do |user| %>
       $("#contacts-list").append('<%= j render "conversations/conversation_min", user: user %>')
     <% end %>
