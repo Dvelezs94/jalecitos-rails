@@ -13,14 +13,14 @@ class RequestsController < ApplicationController
   # GET /requests/1
   def show
     if params[:page]
-      @other_offers = @request.offers.where.not(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+      @other_offers = @request.offers.includes(user: :score).where.not(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
     else
       report_options
       @hires_open = (@request.employee.nil?) ? true : false
       if @request.offers_count > 0 #search offers is there some
-        @other_offers = @request.offers.where.not(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
-       if @other_offers.total_count < @request.offers_count #that means the user has an offer
-         @my_offer = @request.offers.find_by_user_id(current_user.id)
+        @other_offers = @request.offers.includes(user: :score).where.not(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+       if @other_offers.length < @request.offers_count #that means the user has an offer
+         @my_offer = @request.offers.includes(user: :score).find_by_user_id(current_user.id)
        end
       end
     end
@@ -63,7 +63,8 @@ class RequestsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_request
-      @request = Request.includes(:offers).friendly.find(params[:id])
+      #dont include offers because the logic does it
+      @request = Request.includes(:user, city: [state: :country]).friendly.find(params[:id])
     end
 
     def request_params
