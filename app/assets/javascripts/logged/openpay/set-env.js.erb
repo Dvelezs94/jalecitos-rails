@@ -1,8 +1,12 @@
 $(document).on('turbolinks:load', function() {
   if ($("#cardForm").length > 0 || $("#new_order").length > 0 ) {
-    OpenPay.setId("<%= ENV.fetch("OPENPAY_MERCHANT_ID") %>");
-    OpenPay.setApiKey("<%= ENV.fetch("OPENPAY_PUBLIC_KEY") %>");
-    OpenPay.setSandboxMode("<%= ENV.fetch('OPENPAY_PROD') == 'true' ? false : true %>");
+    OpenPay.setId("<%= ENV.fetch('OPENPAY_MERCHANT_ID') %>");
+    OpenPay.setApiKey("<%= ENV.fetch('OPENPAY_PUBLIC_KEY') %>");
+    <% if ENV.fetch('OPENPAY_PROD') %>
+      OpenPay.setSandboxMode(false);
+    <% else %>
+      OpenPay.setSandboxMode(true);
+    <% end %>
     //Antifraud
     if($("#cardForm").length > 0){
     var deviceSessionId = OpenPay.deviceData.setup("cardForm", "device_id");
