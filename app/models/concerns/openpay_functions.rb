@@ -23,7 +23,7 @@ module OpenpayFunctions
 
       # Create default hash for new user
       request_hash={
-        "name" => self.alias,
+        "name" => (self.name || self.alias),
         "last_name" => nil,
         "email" => self.email,
         "requires_account" => true
