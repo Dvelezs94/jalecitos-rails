@@ -1,5 +1,6 @@
 class ChargeDeniedWorker
   include Sidekiq::Worker
+  sidekiq_options retry: 5
   include ApplicationHelper
 
   def perform(response, error_message)
