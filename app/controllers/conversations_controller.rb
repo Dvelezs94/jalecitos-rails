@@ -9,14 +9,14 @@ class ConversationsController < ApplicationController
   # GET /conversations
   def index
     if params[:page]
-      @messages = Message.search("*", where: {conversation_id: @conversation.id}, order: [{ _id: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 25)
+      get_messages
     elsif params[:conversation] || params[:word] == ""
-      @conversations = Conversation.search("*", includes: [:sender, :recipient, :messages], where: { _or: [{sender_id: current_user.id}, {recipient_id: current_user.id}] }, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], per_page: 20, page: params[:conversation])
+      get_conversations
       get_opposite_user( @conversations )
       respond_to do |format|
         format.html {
           if params[:user_id] && params[:user_id] != current_user.slug
-            @messages = Message.search("*", where: {conversation_id: @conversation.id}, order: [{ _id: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 25)
+            get_messages
             mark_as_read
           end
           report_options
@@ -31,12 +31,10 @@ class ConversationsController < ApplicationController
          }, order: [{ updated_at: { order: :desc, unmapped_type: :long}}])
       filter_conversations
     else
-      @conversations = Conversation.search("*", includes: [:sender, :recipient, :messages],
-         where: { _or: [{sender_id: current_user.id}, {recipient_id: current_user.id}] }, order: [{ updated_at: { order: :desc, unmapped_type: :long}}],
-          per_page: 20, page: params[:conversation])
+      get_conversations
       get_opposite_user( @conversations )
       if params[:user_id] && params[:user_id] != current_user.slug
-        @messages = Message.search("*", where: {conversation_id: @conversation.id}, order: [{ _id: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 25)
+        get_messages
         mark_as_read
       end
       report_options
@@ -77,6 +75,21 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:id])
     # mark current_user messages as read on that conversation
     @unread_messages = @conversation.messages.where(read_at: nil).where.not(user: current_user).update_all(read_at: Time.zone.now)
+  end
+
+  private
+  def get_conversations
+    @conversations = Conversation.search("*", includes: [:sender, :recipient, :messages],
+       where: { _or: [{sender_id: current_user.id}, {recipient_id: current_user.id}] },
+        order: [{ updated_at: { order: :desc, unmapped_type: :long}}],
+        per_page: 20, page: params[:conversation])
+  end
+
+  def get_messages
+    @messages = Message.search("*",
+       where: {conversation_id: @conversation.id},
+        order: [{ _id: { order: :desc, unmapped_type: :long}}],
+         page: params[:page], per_page: 25)
   end
 
 end
