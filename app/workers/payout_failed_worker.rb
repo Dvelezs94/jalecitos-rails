@@ -1,5 +1,6 @@
 class PayoutFailedWorker
   include Sidekiq::Worker
+  sidekiq_options retry: 5
   include OrderFunctions
   include ApplicationHelper
   include OpenpayHelper
