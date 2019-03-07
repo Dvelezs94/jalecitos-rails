@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function() {
   if ($("#cardForm").length > 0 || $("#new_order").length > 0 ) {
     OpenPay.setId("<%= ENV.fetch('OPENPAY_MERCHANT_ID') %>");
     OpenPay.setApiKey("<%= ENV.fetch('OPENPAY_PUBLIC_KEY') %>");
-    <% if ENV.fetch('OPENPAY_PROD') %>
+    <% if ENV.fetch('OPENPAY_PROD') == "true" %>
       OpenPay.setSandboxMode(false);
     <% else %>
       OpenPay.setSandboxMode(true);
