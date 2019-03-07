@@ -30,8 +30,8 @@
                        <% if current_user == @request.user %>
                         <%= link_to 'Editar', edit_request_path(@request), class: "btn btn-primary" %>
                         <%= link_to 'Borrar', request_path(@request), class: "btn btn-danger", method: :delete, :data => {:confirm => 'Confirma que quieres borrar este pedido'}  %>
-                       <% elsif  current_user && has_offered(current_user.id)  %>
-                        <p class="text-muted">Tu oferta esta postulada</p>
+                       <% elsif  current_user && @my_offer.present?  %>
+                        <p class="text-muted">Tu oferta está postulada</p>
                        <% else %>
                         <%= link_to 'Postularme', new_request_offer_path(@request), class: "btn btn-success postularme-offer" %>
                        <% end %>
