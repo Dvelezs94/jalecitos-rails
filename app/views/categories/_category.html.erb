@@ -1,4 +1,4 @@
-<%= link_to user_search_path(query: "*", category_id: category.id, city_id: "#{current_user.city_id}")do %>
+<%= link_to user_search_path(query: "*", category_id: category.id, city_id: "#{current_user.city_id}", device: "#{"mobile" if cookies.signed[:mb]}" ) do %>
 <div class="catagorisingle-slide">
   <%= icon('fas', category.icon) %>
   <h5><%= category.name %></h5>

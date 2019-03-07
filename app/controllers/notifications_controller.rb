@@ -34,7 +34,6 @@ class NotificationsController < ApplicationController
 
   def drop_subscribe
     @subscription = subscribe_params[:auth_key]
-    puts @subscription
     if current_user.push_subscriptions.find_by_auth_key(@subscription).destroy
       render json: { message: "Removed subscription" }, status: :ok
     else
