@@ -1,7 +1,7 @@
 <div class="col-lg-4 col-md-12">
   <div class="author2total">
     <div class="author2">
-      <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar")%>
+      <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar", data: {lity: true}, lazy: true)%>
     </div>
     <div class="activotext">
       <h1><%= @user.alias %></h1>

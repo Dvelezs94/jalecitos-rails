@@ -12,7 +12,6 @@ $(document).on "turbolinks:load", ->
   #special pagination in messages
   else
     $("#contacts-list").scroll ->
-      console.log(this.scrollHeight - $(this).scrollTop())
       url = $(this).find('a.next-page').attr('href')
       if url && this.scrollHeight - $(this).scrollTop() < $(this).height() * 1.5 #the visible part is the height
         $(this).find('.pagination:visible').text("")
