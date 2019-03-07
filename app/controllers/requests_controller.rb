@@ -1,6 +1,7 @@
 class RequestsController < ApplicationController
   include SanitizeParams
   include SetLayout
+  include GetRequest
   before_action :authenticate_user!, except: :show
   before_action :set_request, only: [:show, :edit, :update, :destroy]
   access all: [:show], user: :all
@@ -13,12 +14,12 @@ class RequestsController < ApplicationController
   # GET /requests/1
   def show
     if params[:page]
-      @other_offers = @request.offers.includes(user: :score).where.not(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+      get_other_offers
     else
       report_options
       @hires_open = (@request.employee.nil?) ? true : false
       if @request.offers_count > 0 #search offers is there some
-        @other_offers = @request.offers.includes(user: :score).where.not(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+        get_other_offers
        if @other_offers.length < @request.offers_count #that means the user has an offer
          @my_offer = @request.offers.includes(user: :score).find_by_user_id(current_user.id)
        end

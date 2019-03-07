@@ -1,30 +1,16 @@
 class PagesController < ApplicationController
   include SetLayout
-  require "i18n"
+  include GetHome
   before_action :admin_redirect, only: :home
   before_action :pending_review, only: [:home, :finance], :if => :signed_and_rev
   layout :set_layout
   access user: :all, admin: [:home], all: [:home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules]
   def home
-    if params[:current]
-      if params[:popular_gigs]
-        @popular_gigs = Gig.search("*", includes: [:gigs_packages, :user, :likes, city: [state: :country]], where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:popular_gigs], per_page: 15)
-      elsif params[:recent_requests]
-        @recent_requests = Request.search("*", includes: [city: [state: :country]], where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:recent_requests], per_page: 15)
-      elsif params[:verified_gigs]
-        @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user], where: conditions("verified"), order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:verified_gigs], per_page: 15)
-      elsif params[:liked_gigs]
-        @liked_gigs = Like.search( "*", where: {user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:liked_gigs], per_page: 15)
-        @liked_gigs_items = Gig.includes(:gigs_packages, :user, :likes, city: [state: :country]).where(id: @liked_gigs.results.pluck(:gig_id)).order(created_at: :desc)
-      end
+    if params[:current] #if some pagination is present...
+      home_paginate
       render template: "shared/carousels/add_items_carousel.js.erb"
     elsif current_user
-        @popular_gigs = Gig.search("*", includes: [:gigs_packages, :user, :likes, city: [state: :country]], where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:popular_gigs], per_page: 15, execute: false)
-        @recent_requests = Request.search("*", includes: [city: [state: :country]], where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:recent_requests], per_page: 15, execute: false)
-        @verified_gigs = Gig.search("*", includes: [:gigs_packages, :user, :likes, city: [state: :country]], where: conditions("verified"), order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:verified_gigs], per_page: 15, execute: false)
-        @liked_gigs = Like.search( "*", where: {user_id: current_user.id}, order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:liked_gigs], per_page: 15, execute: false )
-        Searchkick.multi_search([@popular_gigs, @recent_requests, @verified_gigs, @liked_gigs])
-        @liked_gigs_items = Gig.includes(:gigs_packages, :user, :likes, city: [state: :country]).where(id: @liked_gigs.results.pluck(:gig_id)).order(created_at: :desc)
+      home_get_all
     end
   end
 
@@ -34,12 +20,12 @@ class PagesController < ApplicationController
 
   def finance
     if params[:purchases]
-      @purchases = Order.search("*", where: {employer_id: current_user.id}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], per_page: 20, page: params[:purchases])
+      get_purchases(true)
     elsif params[:sales]
-      @sales = Order.search("*", where: {employee_id: current_user.id, status: {not: "denied"}}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], per_page: 20, page: params[:sales])
+      get_sales(true)
     else
-      @purchases = Order.search("*", where: {employer_id: current_user.id}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], per_page: 20, page: params[:purchases], execute: false)
-      @sales = Order.search("*", where: {employee_id: current_user.id, status: {not: "denied"}}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], per_page: 20, page: params[:sales], execute: false)
+      get_purchases
+      get_sales
       Searchkick.multi_search([@purchases, @sales])
     end
   end
