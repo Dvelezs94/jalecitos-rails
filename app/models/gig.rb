@@ -35,6 +35,8 @@ class Gig < ApplicationRecord
   has_many :gig_packages, ->{ limit(3).order(id: :asc) }, class_name: 'Package'
   has_many :gigs_packages, ->{ limit(45).order(id: :asc) }, class_name: 'Package'
   has_many :query_pack, ->{ limit(60).order(id: :asc) }, class_name: 'Package'
+  has_many :prof_pack, ->{ limit(60).order(id: :asc) }, class_name: 'Package'
+  has_many :related_pack, ->{ limit(15).order(id: :asc) }, class_name: 'Package'
   #Validations
   validates_presence_of :name, :profession, :description
   validate :maximum_amount_of_tags, :no_spaces_in_tag, :tag_length

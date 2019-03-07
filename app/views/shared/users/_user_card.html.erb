@@ -1,7 +1,7 @@
 <div class="col-lg-4 col-md-12">
   <div class="author2total">
     <div class="author2">
-      <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar")%>
+      <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar", data: {lity: true}, lazy: true)%>
     </div>
     <div class="activotext">
       <h1><%= @user.alias %></h1>
@@ -14,8 +14,8 @@
       </div>
       <div class="inner-comment">
       <% if my_profile %>
-        <%= button_to configuration_path, :method => :get, :data => { :disable_with => "<i class='fa fa-cog fa-spin'></i> Configuracion" } do %>
-        <%= " #{icon('fas', 'cog')} Configuracion ".html_safe %>
+        <%= button_to configuration_path, :method => :get, :data => { :disable_with => "<i class='fa fa-cog fa-spin'></i> Configuración" } do %>
+        <%= " #{icon('fas', 'cog')} Configuración ".html_safe %>
         <% end %>
       <% else %>
         <%=link_to( " #{icon('fas', 'comment')}Contactar ".html_safe, conversations_path( user_id: @user.slug) )%>

@@ -10,8 +10,8 @@
         <div class="tabbigissue1-totalwrap">
           <div class="tabbigissue1-total">
             <li> <strong><%= link_to review.giver.alias, user_path(review.giver.slug), style: "color: black;vertical-align:middle;" %></strong>
-                <%= image_tag("star-on", title: review.rating.stars, class: "single-star") %>
-                <span class="rating-score"><%= review.rating.stars %></span>
+                <%= image_tag("star-on", title: review.prof_rating.stars, class: "single-star") %>
+                <span class="rating-score"><%= review.prof_rating.stars.to_i %></span>
             </li>
             <p class="profile_review_rext" style="color: black;">
               <% if review.comment.present? %>

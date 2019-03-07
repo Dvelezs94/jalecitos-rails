@@ -153,6 +153,10 @@ ul.dropdown-menu {
   color: #39C27B;
 }
 
+#score-error {
+  display: block;
+}
+
 .btn-standard2{
     padding: 6px 21px;
     font-size: 12px;
