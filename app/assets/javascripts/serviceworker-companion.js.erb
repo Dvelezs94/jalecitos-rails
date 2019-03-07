@@ -4,11 +4,12 @@ $(document).on('turbolinks:load', function() {
 
           navigator.serviceWorker.register('/serviceworker.js', {scope: './'})
               .then(registration => {
-                if (messaging.registrationToUse == null ) {
-                  messaging.useServiceWorker(registration);
-                }
+                  if (messaging.registrationToUse == null ) {
+                      messaging.usePublicVapidKey("<%= ENV.fetch('GCM_VAPID_PUBLIC_KEY') %>");
+                      messaging.useServiceWorker(registration);
+                  }
               })
-              .catch(err => console.log('Service Worker Error', err))
+              .catch(err => console.log('Service Worker Error', err));
 
       } else {
           pushBtn.textContent = 'Push not supported.'
