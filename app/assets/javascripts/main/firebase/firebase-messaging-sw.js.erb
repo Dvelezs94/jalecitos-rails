@@ -6,7 +6,7 @@ $(document).on('turbolinks:load', function() {
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
   }
-  if (typeof variable !== 'undefined') {
+  if (typeof messaging === "undefined") {
     const messaging = firebase.messaging();
     messaging.usePublicVapidKey("<%= ENV.fetch('GCM_VAPID_PUBLIC_KEY') %>");
   }
