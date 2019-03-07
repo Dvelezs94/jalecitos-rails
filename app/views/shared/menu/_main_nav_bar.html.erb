@@ -83,7 +83,7 @@
       </div>
       <div class="col-3 text-right">
         <div class="tablet-mobile-user">
-          <%=link_to image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "user_pic"), user_path(current_user)%>
+          <%=link_to image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "user_pic", lazy: true), user_path(current_user)%>
         </div>
       </div>
     </div>
