@@ -1,0 +1,8 @@
+$(document).on('turbolinks:load', function() {
+  if (!firebase.apps.length) {
+    firebase.initializeApp({
+      apiKey: "<%= ENV.fetch('GCM_API_KEY') %>",
+      messagingSenderId: "<%= ENV.fetch('GCM_SENDER_ID') %>"
+    });
+  }
+});
