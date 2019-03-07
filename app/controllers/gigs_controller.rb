@@ -1,6 +1,7 @@
 class GigsController < ApplicationController
   include SanitizeParams
   include GigStatus
+  include GetGig
   include PackTypes
   include SetLayout
   include ReportFunctions
@@ -17,15 +18,16 @@ class GigsController < ApplicationController
   # GET /gigs/1
   def show
     if params[:reviews]
-      get_reviews
+      get_reviews(true)
     elsif params[:related_gigs]
-      get_related_gigs
+      get_related_gigs(true)
       render template: "shared/carousels/add_items_carousel.js.erb"
     else
       define_pack_names
       get_reviews
-      report_options
       get_related_gigs
+      Searchkick.multi_search([@related_gigs, @reviews])
+      report_options
     end
   end
 
@@ -106,15 +108,6 @@ class GigsController < ApplicationController
 
     def check_gig_ownership
       redirect_to(root_path) if (current_user.nil? || current_user.id != @gig.user_id)
-    end
-
-    def get_related_gigs
-      @related_gigs = Gig.search("*", includes: [:user, :related_pack, :likes, city: [state: :country]], where: { category_id: @gig.category_id, status: "published", _id: { not: @gig.id }, city_id: @gig.city_id }, page: params[:related_gigs], per_page: 5)
-    end
-
-    def get_reviews
-      #get the associated reviews that doesnt belong to gig owner
-      @reviews = Review.search("*", includes: [:giver, :gig_rating], where: { reviewable_id: @gig.id, reviewable_type: "Gig", receiver_id: @gig.user.id, status: "completed" }, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:reviews], per_page: 5)
     end
 
     # Check if there are running orders before destroying
