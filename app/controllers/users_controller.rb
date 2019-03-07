@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   include OpenpayHelper
   include SetLayout
+  include GetUser
   include UsersHelper
   include ReportFunctions
   respond_to :html, :json
@@ -22,26 +23,27 @@ class UsersController < ApplicationController
 
   def show
     if params[:reviews]
-      @reviews = Review.search("*", includes: [:giver, :reviewable,:prof_rating], where: {receiver_id: @user.id, status: "completed"}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:reviews], per_page: 20)
+      get_reviews(true)
     else
       report_options
-      @reviews = Review.search("*", includes: [:giver, :reviewable,:prof_rating], where: {receiver_id: @user.id, status: "completed"}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:reviews], per_page: 20)
-      @gigs = Gig.search("*", includes: [:prof_pack, :user, city: [state: :country]], where: {user_id: @user.id, status: "published"} )
+      get_reviews
+      get_gigs
+      Searchkick.multi_search([@gigs, @reviews])
     end
   end
 
   def my_account
     @user = current_user
     if params[:reviews]
-      @reviews = Review.search("*", includes: [:giver, :reviewable,:prof_rating], where: {receiver_id: @user.id, status: "completed"}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:reviews], per_page: 20)
+      get_reviews(true)
     elsif params[:requests]
-      @requests = Request.search("*", includes: [city: [state: :country]], where: {user_id: @user.id}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:requests], per_page: 20 )
+      get_requests(true)
     else
       report_options
-      @reviews = Review.search("*", includes: [:giver, :reviewable,:prof_rating], where: {receiver_id: @user.id, status: "completed"}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], page: params[:reviews], per_page: 20)
-      @gigs = Gig.search("*", includes: [:prof_pack, :user, city: [state: :country]], where: {user_id: @user.id}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], execute: false )
-      @requests = Request.search("*", includes: [city: [state: :country]], where: {user_id: @user.id}, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], execute: false, page: params[:requests], per_page: 20 )
-      Searchkick.multi_search([@gigs, @requests])
+      get_reviews
+      get_gigs
+      get_requests
+      Searchkick.multi_search([@gigs, @requests, @reviews])
     end
     render "show"
   end
