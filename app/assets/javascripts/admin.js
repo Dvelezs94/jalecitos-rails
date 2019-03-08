@@ -10,6 +10,8 @@
 
 //= require gritter
 
+//= require lazyload
+
 //= require_tree ./main
 
 //= require_tree ./admin
