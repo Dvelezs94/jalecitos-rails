@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
   if ($("#contactbtn").length > 0) {
-    modals('contactModal',"contactbtn");
-    modals('contactModal',"contact2btn");
+    modals('contact', 'contactModal',"contactbtn");
+    modals('contact', 'contactModal',"contact2btn");
   }
 });

@@ -50,7 +50,10 @@
 .checkmark-area {
 	margin-top: 20px;
 	margin-bottom: 15px;
-	margin-left: 33px;
+	font-weight: bold;
+	background-color: var(--light-gray);
+	padding: 16px;
+	border-radius: 5px;
 }
 
 

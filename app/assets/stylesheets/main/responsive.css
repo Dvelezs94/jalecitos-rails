@@ -2100,7 +2100,6 @@
 @media only screen and (min-width: 320px) and (max-width: 991px) {
   .phone-bottom-menu {
     display: block;
-    padding: 15px 0;
     position: fixed;
     bottom: 0;
     z-index: 9;
@@ -2109,6 +2108,9 @@
     box-shadow: 0 -5px 20px 0 rgba(0, 0, 0, 0.1);
   }
 
+  .phone_links a {
+    padding: 15px 0;
+  }
   .plusred i {
     background: #39C27B;
     color: #fff;

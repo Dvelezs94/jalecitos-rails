@@ -2722,11 +2722,12 @@ h6.req_location {
 }
 /*mobile menu*/
 .phone_links {
-  justify-content: space-between;
   text-align: center;
   align-items: center;
 }
-
+.phone_links a {
+  width: 20%;
+}
 
 /*FACEBOOK BUTTON*/
 /* Shared */
