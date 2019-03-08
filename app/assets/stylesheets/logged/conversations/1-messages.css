@@ -29,7 +29,7 @@
 .messages-box-area::after {
 	position: absolute;
 	left: 0;
-	top: 65px;
+	top: 78px;
 	width: 100%;
 	height: 2px;
 	content: "";
@@ -169,8 +169,7 @@
   font-size: 13px;
   color: #8E8E93;
   font-weight: 500;
-  margin-left: 25px;
-  display: inline-block;
+  display: block;
 }
 .chat-right-side-text {
   padding: 10px;
