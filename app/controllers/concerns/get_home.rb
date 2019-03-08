@@ -14,14 +14,14 @@ module GetHome
     @popular_gigs = Gig.search("*",
        includes: [:gigs_packages, :user, :likes, city: [state: :country]],
         where: conditions,
-         order: [{ updated_at: { order: :desc, unmapped_type: :long}}],
+         order: [{ order_count: { order: :desc, unmapped_type: :long}}],
           page: params[:popular_gigs], per_page: 15, execute: bool)
   end
 
   def get_recent_requests bool=false
     @recent_requests = Request.search("*",
        includes: [city: [state: :country]],
-        where: conditions, order: [{ updated_at: { order: :desc, unmapped_type: :long}}],
+        where: conditions, order: [{ created_at: { order: :desc, unmapped_type: :long}}],
          page: params[:recent_requests], per_page: 15, execute: bool)
   end
 

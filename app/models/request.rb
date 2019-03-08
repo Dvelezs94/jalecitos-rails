@@ -16,8 +16,7 @@ class Request < ApplicationRecord
       status: status,
       user_id: user_id,
       profession: profession,
-      created_at: created_at,
-      updated_at: updated_at
+      created_at: created_at
      }
   end
   #Tags
