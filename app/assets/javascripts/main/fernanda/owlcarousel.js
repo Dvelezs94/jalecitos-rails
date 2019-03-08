@@ -43,8 +43,12 @@ $(document).on('turbolinks:load', function() {
         },
         350: {
           items: 2,
+          margin: 5,
+          stagePadding: 5
+        },
+        400: {
+          items: 2,
           margin: 10
-
         },
         480: {
           items: 2,
@@ -85,8 +89,12 @@ $(document).on('turbolinks:load', function() {
         },
         350: {
           items: 2,
+          margin: 5,
+          stagePadding: 5
+        },
+        400: {
+          items: 2,
           margin: 10
-
         },
         480: {
           items: 2,
