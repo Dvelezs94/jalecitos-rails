@@ -36,9 +36,9 @@ $(document).on('turbolinks:load', function() {
       stagePadding: 20,
       responsive: {
         0: {
-          items: 2,
+          items: 1,
           margin: 5,
-          stagePadding: 5
+          stagePadding: 68
 
         },
         350: {
@@ -78,9 +78,9 @@ $(document).on('turbolinks:load', function() {
       stagePadding: 20,
       responsive: {
         0: {
-          items: 2,
+          items: 1,
           margin: 5,
-          stagePadding: 5
+          stagePadding: 68
 
         },
         350: {
