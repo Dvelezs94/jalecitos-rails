@@ -1,11 +1,15 @@
-function modals (modalId, buttonId, buttonBehaviour="block", display=false) {
+function modals (modalName, modalId, buttonId, buttonBehaviour="block", display=false) {
   // Get the modal
   var modal = document.getElementById(modalId);
   //display if necessary
+  //by value in function...
   if (display == true){
     modal.style.display = "block";
   }
-
+  //by query string...
+  if ($.getUrlVar("modal") == modalName) {
+    modal.style.display = "block";
+  }
   // Get the button that closes
   var button = document.getElementById(buttonId);
 

@@ -1,3 +1,3 @@
 $(document).on('turbolinks:load', function() {
-    modals('createOpenpayAccountModal', "create-openpay-user");
+    modals('create-opy-acc','createOpenpayAccountModal', "create-openpay-user");
 });
