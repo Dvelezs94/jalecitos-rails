@@ -19,7 +19,7 @@ module GetUser
     @requests = Request.search("*",
        includes: [city: [state: :country]],
         where: {user_id: @user.id},
-         order: [{ updated_at: { order: :desc, unmapped_type: :long}}],
+         order: [{ created_at: { order: :desc, unmapped_type: :long}}],
           execute: bool, page: params[:requests], per_page: 20 )
   end
 

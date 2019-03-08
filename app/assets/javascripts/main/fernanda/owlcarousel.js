@@ -36,15 +36,19 @@ $(document).on('turbolinks:load', function() {
       stagePadding: 20,
       responsive: {
         0: {
-          items: 2,
+          items: 1,
           margin: 5,
-          stagePadding: 5
+          stagePadding: 68
 
         },
         350: {
           items: 2,
+          margin: 5,
+          stagePadding: 5
+        },
+        400: {
+          items: 2,
           margin: 10
-
         },
         480: {
           items: 2,
@@ -78,15 +82,19 @@ $(document).on('turbolinks:load', function() {
       stagePadding: 20,
       responsive: {
         0: {
-          items: 2,
+          items: 1,
           margin: 5,
-          stagePadding: 5
+          stagePadding: 68
 
         },
         350: {
           items: 2,
+          margin: 5,
+          stagePadding: 5
+        },
+        400: {
+          items: 2,
           margin: 10
-
         },
         480: {
           items: 2,

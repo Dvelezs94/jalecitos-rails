@@ -1,31 +1,15 @@
 $(document).on('turbolinks:load', function() {
+  var _originalSize = $(window).height()
   if (screen.width <= 991) {
-    // text areas and inputs
-    $('input').focusin(function() {
-      $('.phone-bottom-menu').hide();
-    });
-    $('input').focusout(function() {
-      $('.phone-bottom-menu').show();
-    });
-    $('textarea').focusin(function() {
-      $('.phone-bottom-menu').hide();
-    });
-    $('textarea').focusout(function() {
-      $('.phone-bottom-menu').show();
-    });
-    //  for best in place
-    $('span.best_in_place').focusin(function() {
-      $('.phone-bottom-menu').hide();
-    });
-    $('span.best_in_place').focusout(function() {
-      $('.phone-bottom-menu').show();
-    });
-    //  for trix
-    document.addEventListener("trix-focus", function(event) {
-      $('.phone-bottom-menu').hide();
-    });
-    document.addEventListener("trix-blur", function(event) {
-      $('.phone-bottom-menu').show();
+    $(window).resize(function() {
+      if ($(window).height() < _originalSize) { // keyboard show up
+        $('.phone-bottom-menu').hide();
+        $(".main_container").css("margin-bottom", "0");
+      } else { //keyboard closed
+        $(".main_container").css("margin-bottom", "9vh");
+        $('.phone-bottom-menu').show();
+      }
+      message_view_height(); // use this if conversation is present
     });
   }
 });

@@ -1059,8 +1059,10 @@
   .footerd2social {
     text-align: center;
     width: 100%;
-    margin-top: -64px;
     margin-bottom: 33px;
+  }
+  .footer-info {
+    margin-top: 44px;
   }
 
   .footerd2fk img {
@@ -2016,7 +2018,9 @@
   .footerd2social {
     text-align: center;
     width: 100%;
-    margin-top: -74px;
+  }
+  .footer-info {
+    margin-top: 54px;
   }
 
   .singlefooterdn {
@@ -2106,6 +2110,10 @@
     width: 100%;
     background: #F4F5F7;
     box-shadow: 0 -5px 20px 0 rgba(0, 0, 0, 0.1);
+  }
+  /*dont display menu in front of bottom content*/
+  .main_container{
+    margin-bottom: 9vh;
   }
 
   .phone_links a {
