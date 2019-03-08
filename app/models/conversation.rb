@@ -28,8 +28,8 @@ class Conversation < ApplicationRecord
     create(sender_id: sender_id, recipient_id: recipient_id)
   end
 
-  def opposed_user(user)
-    user == recipient ? sender : recipient
+  def opposed_user(user_id)
+    user_id == recipient_id ? sender : recipient
   end
 
   def participants

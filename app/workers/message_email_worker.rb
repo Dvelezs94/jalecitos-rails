@@ -6,8 +6,8 @@ class MessageEmailWorker
 
   #Message (user, recipient, body, conversation_id)
   def perform(message_id)
-    message = Message.find(message_id)
-    receiver = message.conversation.opposed_user(message)
+    message = Message.includes(:conversation).find(message_id)
+    receiver = message.conversation.opposed_user(message.user_id)
     # Check if message has been read already
     if message.read_at?
       # Return true to finish operation if condition is met
