@@ -3,7 +3,7 @@ Rails.application.configure do
     # map to assets implicitly
     match "/serviceworker.js"
     match "/manifest.json"
-
+    match "/firebase-messaging-sw.js"
     # Examples
     #
     # map to a named asset explicitly

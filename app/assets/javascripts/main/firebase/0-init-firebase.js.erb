@@ -5,4 +5,9 @@ $(document).on('turbolinks:load', function() {
       messagingSenderId: "<%= ENV.fetch('GCM_SENDER_ID') %>"
     });
   }
+  messaging = firebase.messaging();
+  // if (messaging.registrationToUse == null ) {
+  //     messaging.usePublicVapidKey("<%= ENV.fetch('GCM_VAPID_PUBLIC_KEY') %>");
+  //     // messaging.useServiceWorker(registration);
+  // }
 });

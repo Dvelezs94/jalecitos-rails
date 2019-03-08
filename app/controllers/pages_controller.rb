@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   before_action :pending_review, only: [:home, :finance], :if => :signed_and_rev
   layout :set_layout
-  access user: :all, admin: [:home], all: [:home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules]
+  access user: :all, admin: [:home], all: [:home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots]
   def home
     if params[:current] #if some pagination is present...
       home_paginate
@@ -44,6 +44,11 @@ class PagesController < ApplicationController
   end
 
   def employer_employee_rules
+  end
+
+  def robots
+    respond_to :text
+    expires_in 6.hours, public: true
   end
 
   private
