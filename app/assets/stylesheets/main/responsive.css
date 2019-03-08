@@ -2111,6 +2111,10 @@
     background: #F4F5F7;
     box-shadow: 0 -5px 20px 0 rgba(0, 0, 0, 0.1);
   }
+  /*dont display menu in front of bottom content*/
+  .main_container{
+    margin-bottom: 9vh;
+  }
 
   .phone_links a {
     padding: 15px 0;
