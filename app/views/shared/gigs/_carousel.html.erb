@@ -1,6 +1,4 @@
 <div class="container page3slides-area3">
-  <div class="row">
-
     <div class="page3slide-titles1">
       <h1><%= title %></h1>
     </div>
@@ -10,5 +8,4 @@
       <%= render gigs %>
       <%= link_to_next_page(gigs, "Oculto".html_safe, class: "carousel-paginator" , param_name: param_name, :params => {:current => param_name}, remote: true, style: "display: none;") %>
     </div>
-  </div>
 </div>
