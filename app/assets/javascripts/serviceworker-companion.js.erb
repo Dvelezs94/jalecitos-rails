@@ -1,18 +1,20 @@
 $(document).on('turbolinks:load', function() {
   const messaging = firebase.messaging();
   if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/firebase-messaging-sw.js.erb', {scope: './'})
+      .then(registration => {
+        console.log("registered Firebase SW");
+      }).catch(err => console.log("Could not register firebase SW", err));
+      //  Our SW
+      // navigator.serviceWorker.register('/serviceworker.js', {scope: './'})
+      //   .then(registration => {
+      //       console.log("registered SW");
+      //   }).catch(err => console.log('Service Worker Error', err));
+        // firebase SW
 
-          navigator.serviceWorker.register('/serviceworker.js', {scope: './'})
-              .then(registration => {
-                  if (messaging.registrationToUse == null ) {
-                      messaging.usePublicVapidKey("<%= ENV.fetch('GCM_VAPID_PUBLIC_KEY') %>");
-                      messaging.useServiceWorker(registration);
-                  }
-              })
-              .catch(err => console.log('Service Worker Error', err));
 
-      } else {
-          pushBtn.textContent = 'Push not supported.'
-      }
+  } else {
+      pushBtn.textContent = 'Push not supported.'
+  }
 
 });

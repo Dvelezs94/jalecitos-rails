@@ -142,6 +142,7 @@ Rails.application.routes.draw do
   get 'terminos-y-condiciones', to: 'pages#terms_and_conditions'
   get 'aviso-de-privacidad', to: 'pages#privacy_policy'
   get 'condiciones-de-venta', to: 'pages#sales_conditions'
+  get '/robots.:format' => 'pages#robots'
   get 'reglas-prestador-empleador', to: 'pages#employer_employee_rules'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
