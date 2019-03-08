@@ -1,6 +1,5 @@
 /* Custom Fonts */
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
-@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:800,900');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:700,800|Nunito:400,700');
 
 
 /* Base CSS */
@@ -12,16 +11,16 @@ body {
 }
 
 h1 {
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
   font-size: calc(25px + (30 - 25) * ((100vw - 320px) / (1800 - 320)));
   margin: 0 0 16px;
   color: #000000;
 }
 
 h2 {
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
   font-size: calc(19px + (24 - 19) * ((100vw - 320px) / (1800 - 320)));
   margin: 0 0 16px;
   color: #000000;
@@ -1972,8 +1971,8 @@ button:focus {
 
 .herodleft-side h1 {
   color: #000;
-  font-size: calc(45px + (68 - 45) * ((100vw - 320px) / (1800 - 320)));
-  line-height: calc(45px + (79 - 45) * ((100vw - 320px) / (1800 - 320)));
+  font-size: calc(45px + (60 - 45) * ((100vw - 320px) / (1800 - 320)));
+  line-height: calc(45px + (70 - 45) * ((100vw - 320px) / (1800 - 320)));
   margin-bottom: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
 }
 
@@ -2083,8 +2082,8 @@ button:focus {
 
 .contactd-heading h2 {
     color: #000;
-    font-size: calc(32px + (48 - 32) * ((100vw - 320px) / (1800 - 320)));
-    line-height: calc(32px + (54 - 32) * ((100vw - 320px) / (1800 - 320)));
+    font-size: calc(28px + (40 - 28) * ((100vw - 320px) / (1800 - 320)));
+    line-height: calc(28px + (42 - 28) * ((100vw - 320px) / (1800 - 320)));
     margin-bottom: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
     margin-top: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
 }
@@ -2205,8 +2204,8 @@ button:focus {
 .greend-left h2 {
   color: #fff;
   margin: 0;
-  font-size: calc(32px + (48 - 32) * ((100vw - 320px) / (1800 - 320)));
-  line-height: calc(32px + (54 - 32) * ((100vw - 320px) / (1800 - 320)));
+  font-size: calc(28px + (40 - 28) * ((100vw - 320px) / (1800 - 320)));
+  line-height: calc(28px + (42 - 28) * ((100vw - 320px) / (1800 - 320)));
   margin-bottom: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
   margin-top: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
 }
