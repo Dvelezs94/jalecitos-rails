@@ -27,14 +27,14 @@
             <div class="paginator-container tab-pane fade <%= "show active" if params[:table] == "purchases"|| params[:table].nil? %>" id="Shah-Home" role="tabpanel" aria-labelledby="nav-home-tab">
               <div class="paginated-purchases transacciones-tab-content row">
                 <%= render partial: 'orders/single_purchase', collection: @purchases %>
-                <%= "No hay nada para mostrar" if @purchases.total_count == 0 %>
+                <%= "<div class='container'>No hay nada para mostrar</div>".html_safe if @purchases.total_count == 0 %>
               </div>
               <%= paginate @purchases, param_name: :purchases  %>
             </div>
             <div class="paginator-container tab-pane fade <%= "show active" if params[:table] == "sales" %>" id="Shah-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
               <div class="paginated-sales transacciones-tab-content row">
                 <%= render partial: 'orders/single_sale', collection: @sales %>
-                <%= "No hay nada para mostrar" if @sales.total_count == 0 %>
+                <%= "<div class='container'>No hay nada para mostrar</div>".html_safe if @sales.total_count == 0 %>
               </div>
               <%= paginate @sales, param_name: :sales  %>
             </div>
