@@ -23,7 +23,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
         $("#contacts-list").prepend(data['conversation_min']);
       }
     }
-    if (conversation.length == 0){ // if i am not inside the conversation add the dot
+    if (data['role'] == "receiver" && conversation.length == 0){ // if i am the receiver and not in the conversation, add the dot
       $(".mess-icon").addClass("unread");
     }
     else {
