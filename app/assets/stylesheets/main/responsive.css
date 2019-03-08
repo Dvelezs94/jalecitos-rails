@@ -1059,8 +1059,10 @@
   .footerd2social {
     text-align: center;
     width: 100%;
-    margin-top: -64px;
     margin-bottom: 33px;
+  }
+  .footer-info {
+    margin-top: 44px;
   }
 
   .footerd2fk img {
@@ -2016,7 +2018,9 @@
   .footerd2social {
     text-align: center;
     width: 100%;
-    margin-top: -74px;
+  }
+  .footer-info {
+    margin-top: 54px;
   }
 
   .singlefooterdn {
