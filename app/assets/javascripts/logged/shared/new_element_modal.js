@@ -1,4 +1,4 @@
 $(document).on('turbolinks:load', function() {
-    modals('newElementModal', "newelementbtndesktop");
-    modals('newElementModal', "newelementmodalphonetablet");
+    modals('new_element', 'newElementModal', "newelementbtndesktop");
+    modals('new_element', 'newElementModal', "newelementmodalphonetablet");
 });
