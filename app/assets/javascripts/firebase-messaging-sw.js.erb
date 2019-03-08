@@ -1,0 +1,29 @@
+importScripts('https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js')
+importScripts('https://www.gstatic.com/firebasejs/5.8.5/firebase-messaging.js')
+
+if (!firebase.apps.length) {
+  firebase.initializeApp({
+    apiKey: "<%= ENV.fetch('GCM_API_KEY') %>",
+    messagingSenderId: "<%= ENV.fetch('GCM_SENDER_ID') %>"
+  });
+}
+const messaging = firebase.messaging();
+//
+messaging.setBackgroundMessageHandler(function(payload) {
+  const notificationTitle = 'Data Message Title';
+  const notificationOptions = {
+    body: 'Data Message body'
+  };
+//
+  return self.registration.showNotification(notificationTitle,
+      notificationOptions);
+});
+
+
+
+
+// $(document).on('turbolinks:load', function() {
+//   importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
+//   var messaging = firebase.messaging();
+// });
+//
