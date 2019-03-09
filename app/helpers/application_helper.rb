@@ -300,5 +300,4 @@ module ApplicationHelper
     res = https.request(req)
     JSON.parse(res.body)
   end
-
 end
