@@ -120,6 +120,11 @@ $(document).on('turbolinks:load', function() {
     owl_requests.on('dragged.owl.carousel', function() {
       fillCarousel(this);
     });
+
+    owl_requests.on('translated.owl.carousel', function() {
+      $(this).trigger('click');
+      $(this).trigger('touchstart');
+    });
   }
   if ($(".gig-show-carousel").length > 0) {
     $(".gig-show-carousel").owlCarousel({

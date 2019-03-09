@@ -37,6 +37,6 @@
 
 //= require twitter/typeahead
 
-//= require owl.carousel
+//= require swiper
 
 //= require js.cookie
