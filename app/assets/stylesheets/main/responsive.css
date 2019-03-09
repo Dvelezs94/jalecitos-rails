@@ -1198,6 +1198,10 @@
   .todoo1 img {
     display: none;
   }
+
+  .error-image {
+    width: 100%;
+  }
   .packages-builder {
     padding-right: 0px;
     padding-left: 0px;
