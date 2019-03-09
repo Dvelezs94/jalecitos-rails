@@ -3,6 +3,7 @@ class Gig < ApplicationRecord
   include TagRestrictions
   include DescriptionRestrictions
   include LocationFunctions
+  include GigRequestFunctions
   #search
   searchkick language: "spanish", word_start: [:name, :description, :profession], suggest: [:name, :description, :profession]
   def search_data
@@ -18,7 +19,7 @@ class Gig < ApplicationRecord
       verified: user.verified,
       updated_at: updated_at,
       order_count: order_count,
-      score: score_average * score_times 
+      score: score_average * score_times
      }
   end
   #Tags
@@ -79,6 +80,6 @@ class Gig < ApplicationRecord
   end
 
   def title
-    "Voy a #{self.name}"
+    "Voy a #{to_downcase(self.name)}"
   end
 end
