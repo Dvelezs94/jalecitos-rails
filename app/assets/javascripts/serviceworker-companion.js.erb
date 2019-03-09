@@ -5,16 +5,19 @@ $(document).on('turbolinks:load', function() {
       .then(registration => {
         console.log("registered Firebase SW");
       }).catch(err => console.log("Could not register firebase SW", err));
-      //  Our SW
-      // navigator.serviceWorker.register('/serviceworker.js', {scope: './'})
-      //   .then(registration => {
-      //       console.log("registered SW");
-      //   }).catch(err => console.log('Service Worker Error', err));
-        // firebase SW
-
-
-  } else {
-      pushBtn.textContent = 'Push not supported.'
   }
 
+  // on foreground message
+  // messaging.onMessage(function(payload) {
+  //   console.log('Message received. ', payload);
+  // });
+
+  // token refresh
+  messaging.onTokenRefresh(function() {
+    messaging.getToken().then(function(refreshedToken) {
+        const currentTokenKey = { auth_key: refreshedToken }
+        fetchSubscription(currentTokenKey);
+    }).catch(function(err) {
+    });
+  });
 });
