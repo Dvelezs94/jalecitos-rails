@@ -147,3 +147,5 @@ gem 'google_places', '~> 1.2'
 gem 'lazyload-rails', '~> 0.3.1'
 # error detection
 gem 'bugsnag', '~> 6.11', '>= 6.11.1'
+# Steps
+gem 'steps-rails', '~> 1.2', '>= 1.2.9'

@@ -1047,6 +1047,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    steps-rails (1.2.9)
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.9)
@@ -1142,6 +1143,7 @@ DEPENDENCIES
   sidekiq (~> 5.2, >= 5.2.5)
   spring
   spring-watcher-listen (~> 2.0.0)
+  steps-rails (~> 1.2, >= 1.2.9)
   trix (~> 0.9.5)
   turbolinks (~> 5)
   twitter-typeahead-rails (~> 0.11.1)
