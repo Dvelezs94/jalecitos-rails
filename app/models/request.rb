@@ -4,6 +4,7 @@ class Request < ApplicationRecord
   include DescriptionRestrictions
   include RequestsHelper
   include LocationFunctions
+  include GigRequestFunctions
   #search
   searchkick language: "spanish", word_start: [:name, :description, :profession], suggest: [:name, :description, :profession]
   def search_data
@@ -54,7 +55,7 @@ class Request < ApplicationRecord
   end
 
   def title
-    "Busco un #{self.profession} #{self.name}"
+    "Busco un #{to_downcase(self.profession)} #{to_downcase(self.name)}"
   end
 
   def budget_options
