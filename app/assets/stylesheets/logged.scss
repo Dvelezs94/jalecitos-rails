@@ -2,10 +2,10 @@
  *= require_self
  *= require gritter
  *= require trix
- *= require owl.carousel
- *= require owl.theme
  *= require_tree ./main
  *= require_tree ./logged
+ *= require swiper
+
  */
 
  @import 'bootstrap';
