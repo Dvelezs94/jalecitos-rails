@@ -51,6 +51,9 @@ class PagesController < ApplicationController
     expires_in 6.hours, public: true
   end
 
+  def wizard
+  end
+
   private
 
   def admin_redirect

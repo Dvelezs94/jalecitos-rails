@@ -124,6 +124,7 @@ Rails.application.routes.draw do
   get 'mobile_sign_up', to: 'mobiles#sign_up'
   get 'configuration', to: 'users#configuration'
   get 'requests', to: 'pages#request_index'
+  get 'wizard', to: 'pages#wizard'
   get 'finance', to: 'pages#finance'
   get 'disputes', to: 'disputes#index'
   get 'likes', to: 'pages#liked'
