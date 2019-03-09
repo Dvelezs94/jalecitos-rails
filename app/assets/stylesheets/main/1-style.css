@@ -2677,10 +2677,6 @@ span.error,
 div.error{
   color: red !important;
 }
-/*dont display menu in front of bottom content*/
-.main_container{
-  margin-bottom: 9vh;
-}
 /*Notifications*/
 .head-notif {
   display: flex;

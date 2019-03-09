@@ -218,8 +218,9 @@ module ApplicationHelper
         <meta name='keywords' content='encontrar, trabajo, empleos, expertos, internet'>
         <meta name='category' content='Trabajo, Empleo'>".html_safe
     else
-        "<title>Jalecitos</title>".html_safe
-        "<meta name='description' content='Expertos en oficios | Hogar y Oficina'>".html_safe
+        "<title>Jalecitos | Encontrar trabajo por internet nunca ha sido tan fácil</title>
+        <meta name='description' content='Conoce los mejores expertos que puedes contratar por Jalecitos. Si eres experto, ¡encuentra trabajo hoy utilizando nuestra aplicación!'>
+        <meta name='keywords' content='Contratar expertos de confianza, contratar expertos por internet, contratar expertos México'>".html_safe
     end
   end
 
