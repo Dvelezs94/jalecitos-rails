@@ -18,7 +18,8 @@ class MessageNotificationWorker
      notification: {
         title: "Jalecitos",
         body:  "#{message.user.slug}: #{message.body}",
-        icon: "#{avatar_display_helper(message.user.image_url(:thumb))}"
+        icon: "#{avatar_display_helper(message.user.image_url(:thumb))}",
+        click_action: conversations_url(:user_id => message.user.slug)
       }
     }
     createFirebasePush(@receiver.id, @message)
