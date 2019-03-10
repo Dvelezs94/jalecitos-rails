@@ -3,7 +3,7 @@ $(document).on('turbolinks:load', function() {
     const messaging = firebase.messaging();
   }
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('firebase-messaging-sw.js', { scope: '/' }).then(function(reg) {
+    navigator.serviceWorker.register('firebase-messaging-sw.js', { scope: './' }).then(function(reg) {
       // updatefound is fired if service-worker.js changes.
       reg.onupdatefound = function() {
         // The updatefound event implies that reg.installing is set; see

@@ -6,7 +6,7 @@ class ChargeDeniedWorker
   def perform(response, error_message)
     @order = Order.find_by_response_order_id(response)
     # if order doesnt exist, finish job gracefuly
-    return true if ! defined? @order
+    return true if @order.blank?
     # finish job if the order was already handled before
     return true if ! @order.waiting_for_bank_approval?
 
