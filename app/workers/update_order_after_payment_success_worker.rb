@@ -7,7 +7,7 @@ class UpdateOrderAfterPaymentSuccessWorker
 
     @order = Order.find_by_response_order_id(response)
     # finish job if id doesnt exist
-    return true if ! defined? @order
+    return true if @order.blank?
     #  handle double send from openpay
     return true if ! @order.waiting_for_bank_approval?
 
