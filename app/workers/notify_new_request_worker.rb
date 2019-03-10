@@ -25,7 +25,8 @@ class NotifyNewRequestWorker
         title: "Jalecitos",
         body:  "Encontramos un pedido en tu zona que puede interesarte! - #{request.title}",
         icon: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png",
-        click_action: request_path(request.slug)
+        click_action: request_path(request.slug),
+        badge: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo_Jalecitos-01.png"
       }
     }
 
