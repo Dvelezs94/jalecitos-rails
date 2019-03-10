@@ -3,7 +3,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "Jalecitos",
+      "package_name": "jalecitos.com",
       "sha256_cert_fingerprints": ["75:CA:84:9B:8F:B5:15:D5:91:6D:6C:60:A9:A7:DA:7A:42:CD:95:5E:A0:4E:07:94:75:65:D2:54:71:5F:ED:A3"]
     }
   }
