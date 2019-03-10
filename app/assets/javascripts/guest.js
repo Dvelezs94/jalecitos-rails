@@ -22,8 +22,6 @@
 
 //= require_tree ./guest
 
-//= require serviceworker-companion
-
 //= require clipboard
 
 //= require twitter/typeahead
@@ -31,3 +29,5 @@
 //= require owl.carousel
 
 //= require js.cookie
+
+//= require serviceworker-companion
