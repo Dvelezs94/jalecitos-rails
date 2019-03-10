@@ -27,7 +27,7 @@ h2 {
 }
 
 h3 {
-  font-family: 'Nunito-Extra-Bold', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: calc(17px + (22 - 17) * ((100vw - 320px) / (1800 - 320)));
   font-weight: 700;
   margin: 0 0 8px;
@@ -95,12 +95,26 @@ input:focus {
   float: right;
 }
 .default-btn {
+  font-family: 'Nunito', sans-serif;
+  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
+  font-weight: 700;
   color: var(--white);
-  font-size: 17px;
   background: var(--green);
   display: inline-block;
-  padding: 8px 20px;
-  border-radius: 5px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+}
+
+.default-secondary-btn {
+  font-family: 'Nunito', sans-serif;
+  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
+  font-weight: 700;
+  color: var(--green) ;
+  background: var(--white);
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 4px;
   border: none;
 }
 
@@ -311,8 +325,8 @@ a.authorclick {
 }
 
 .catagorislide-area {
-  padding-top: 30px;
-  padding-bottom: 20px;
+  padding-top: 12px;
+  padding-bottom: 10px;
 }
 
 .catagorislide-area .owl-controls .owl-nav div {
@@ -1064,7 +1078,7 @@ p {
 .pacificobg-socialicon i {
   color: #fff;
   font-size: 18px;
-  margin: 4px;
+  margin: 4px 10px 0px 4px;
   line-height: 0.75em;
 }
 
@@ -1130,7 +1144,6 @@ p.limpi1 {
 }
 
 .verificos-title h3 {
-  font-size: 36px;
   color: #000;
 }
 
@@ -1395,7 +1408,7 @@ p.loyed3 {
 }
 
 .page3slide-titles1 h1 {
-  margin-top: 10px;
+  margin: 10px 0px 16px 15px
 }
 
 .page3slides-contentrd h6 {
@@ -1427,6 +1440,7 @@ p.gig-price {
 
 .profileview-total span a {
   color: #000;
+  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
   font-weight: 700;
   padding-left: 5px;
 }
@@ -1462,9 +1476,17 @@ p.gig-price {
   transform: translateY(50%);
 }
 
-.sed-content h3 {
-  font-size: 22px;
-  margin-top: 15px;
+.sed-content h2 {
+  margin-top: 8px;
+}
+
+.sed-content h5 {
+  margin-top: 12px;
+  color: var(--gray);
+}
+
+.sed-content p {
+  margin-top: -18px;
 }
 
 .sedcontent-wrap a {
@@ -1549,9 +1571,6 @@ button:focus {
   color: black;
 }
 
-.sed-content p {
-  margin: 0;
-}
 /*innerpage3*/
 .pacificost-bg {
   background: url(../img/pllo.jpg);
@@ -1588,7 +1607,6 @@ p.limpi1 {
 }
 
 .verificos-title h3 {
-  font-size: 36px;
   color: #000;
 }
 
@@ -1837,7 +1855,7 @@ p.gig-title {
 	left: 0;
 	content: "";
 	width: 100%;
-	height: 3px;
+	height: 2px;
 	background: #F5F6F7;
 	z-index: -1;
 }
@@ -1848,11 +1866,6 @@ p.gig-title {
 
 .sed-content {
   margin: 0px 15px;
-}
-
-.sed-content h3 {
-  font-size: 22px;
-  margin-top: 15px;
 }
 
 .sedcontent-wrap a {
@@ -1897,10 +1910,6 @@ button:focus {
 .sedcontent-wrap a {
   float: right;
   padding-right: 6px;
-}
-
-.sed-content p {
-  margin: 0;
 }
 
 .headerd-mainmenu ul {
@@ -2625,16 +2634,6 @@ p.gig-score-times {
   margin-bottom: 20px;
 }
 
-.nuevo-jale {
-  font-weight: 600;
-  color: #FFF;
-}
-
-.nuevo-pedido {
-  font-weight: 600;
-  color: #3BC27E;
-}
-
 .modal-content-transparent {
     background-color: transparent;
     margin: auto;
@@ -2797,9 +2796,10 @@ h6.req_location {
 }
 /*MENU*/
 .tablet-mobile-user img {
-	width: 40px;
-  height: 40px;
+	width: 34px;
+  height: 34px;
   margin-top: 0px;
+  box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.07);
 }
 .tablet-mobile-top-ber {
 	background: #39C27B;
@@ -2923,7 +2923,7 @@ div.form {
 }
 .transacciones-text {
 	position: relative;
-	padding: 20px 0;
+	padding: 12px 0;
   margin-left: -10px;
 }
 
@@ -2939,8 +2939,7 @@ div.form {
 	color: #000;
 }
 .transacciones-text h1 {
-	font-size: 30px;
-	margin-left: 20px;
+	margin-left: 16px;
     margin-bottom: 0;
 }
 .transacciones-text span i.fa {
@@ -2952,17 +2951,17 @@ div.form {
 }
 
 .Transacciones-tab-area .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-	color: #39C27B !important;
+	color: var(--green) !important;
 	background-color: #fff;
-	border-bottom: 3px solid #39C27B !important;
+	border-bottom: 3px solid var(--green) !important;
 }
 
 .Transacciones-tab-area .nav-tabs .nav-link {
 	border: none;
 	padding: 0;
-	font-size: 19px;
-	font-weight: 700;
-	color: #C7C7CC;
+  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
+  font-weight: 700;
+	color: var(--mid-gray);
 }
 .Transacciones-tab-area .nav-tabs .nav-link:last-child {
 	margin-left: 30px;
@@ -2974,11 +2973,11 @@ div.form {
 .Transacciones-tab-secsion::after {
 	position: absolute;
 	left: 0;
-	top: 29px;
+	top: 22px;
 	content: "";
 	width: 100%;
 	height: 3px;
-	background: #F5F6F7;
+	background: var(--light-gray);
 	z-index: -1;
 }
 /*mobile search menu*/
@@ -3024,7 +3023,8 @@ div.form {
 
 /*active menu*/
 .phone_links .active {
-  color: #007bff !important;
+  color: var(--blue) !important;
+  text-shadow: 0px 0px 20px rgba(0,103,244,0.44);
 }
 /*search styles (and profile also)*/
 .gig-query .hearted1,
@@ -3060,7 +3060,7 @@ div.form {
 }
 
 .element-size {
-  width: 70%;
+  width: 80%;
 }
 
 .question_hint.toggler {
