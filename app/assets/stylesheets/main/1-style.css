@@ -118,6 +118,16 @@ input:focus {
   border: none;
 }
 
+.error-header {
+  font-size: 70px;
+  color: lightgrey;
+  display: block;
+}
+
+.error-link {
+  font-weight: 700;
+}
+
 .default-deny-btn {
   color: white;
   font-size: 17px;
@@ -2675,10 +2685,6 @@ label.error,
 span.error,
 div.error{
   color: red !important;
-}
-/*dont display menu in front of bottom content*/
-.main_container{
-  margin-bottom: 9vh;
 }
 /*Notifications*/
 .head-notif {

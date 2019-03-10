@@ -218,8 +218,9 @@ module ApplicationHelper
         <meta name='keywords' content='encontrar, trabajo, empleos, expertos, internet'>
         <meta name='category' content='Trabajo, Empleo'>".html_safe
     else
-        "<title>Jalecitos</title>".html_safe
-        "<meta name='description' content='Expertos en oficios | Hogar y Oficina'>".html_safe
+        "<title>Jalecitos | Encontrar trabajo por internet nunca ha sido tan fácil</title>
+        <meta name='description' content='Conoce los mejores expertos que puedes contratar por Jalecitos. Si eres experto, ¡encuentra trabajo hoy utilizando nuestra aplicación!'>
+        <meta name='keywords' content='Contratar expertos de confianza, contratar expertos por internet, contratar expertos México'>".html_safe
     end
   end
 
@@ -268,10 +269,14 @@ module ApplicationHelper
   def ios_pwa_tags
     "<meta name='apple-mobile-web-app-capable' content='yes'>
     <meta name='apple-mobile-web-app-status-bar-style' content='default'>
-    <link rel='apple-touch-icon' href='touch-icon-iphone.png'>
-    <link rel='apple-touch-icon' sizes='152x152' href='touch-icon-ipad.png'>
-    <link rel='apple-touch-icon' sizes='180x180' href='touch-icon-iphone-retina.png'>
-    <link rel='apple-touch-icon' sizes='167x167' href='touch-icon-ipad-retina.png'>
+    <link rel='apple-touch-icon' sizes='57x57' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-57x57.png' />
+    <link rel='apple-touch-icon' sizes='72x72' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-72x72.png' />
+    <link rel='apple-touch-icon' sizes='76x76' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-76x76.png' />
+    <link rel='apple-touch-icon' sizes='114x114' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-114x114.png' />
+    <link rel='apple-touch-icon' sizes='120x120' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-120x120.png' />
+    <link rel='apple-touch-icon' sizes='144x144' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-144x144.png' />
+    <link rel='apple-touch-icon' sizes='152x152' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-152x152.png' />
+    <link rel='apple-touch-icon' sizes='180x180' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-180x180.png' />
     <link href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/splashscreens/iphone5_splash.png' media='(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)' rel='apple-touch-startup-image' />
     <link href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/splashscreens/iphone6_splash.png' media='(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)' rel='apple-touch-startup-image' />
     <link href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/splashscreens/iphoneplus_splash.png' media='(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)' rel='apple-touch-startup-image' />
@@ -299,5 +304,4 @@ module ApplicationHelper
     res = https.request(req)
     JSON.parse(res.body)
   end
-
 end
