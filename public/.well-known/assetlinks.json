@@ -4,7 +4,7 @@
     "target": {
       "namespace": "android_app",
       "package_name": "jalecitos.com",
-      "sha256_cert_fingerprints": ["75:CA:84:9B:8F:B5:15:D5:91:6D:6C:60:A9:A7:DA:7A:42:CD:95:5E:A0:4E:07:94:75:65:D2:54:71:5F:ED:A3"]
+      "sha256_cert_fingerprints": ["8D:CF:DB:60:E7:56:91:14:FE:6B:81:45:2B:46:8B:58:98:19:53:D7:10:54:92:D0:05:64:B8:0A:A7:17:74:92"]
     }
   }
 ]
