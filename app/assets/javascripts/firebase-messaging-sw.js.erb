@@ -8,22 +8,24 @@ if (!firebase.apps.length) {
     messagingSenderId: "<%= ENV.fetch('GCM_SENDER_ID') %>"
   });
 }
-const messaging = firebase.messaging();
-//
-messaging.setBackgroundMessageHandler(function(payload) {
-  const notificationTitle = payload.data.title;
-  const notificationOptions = {
-    body: payload.data.body,
-    icon: payload.data.icon,
-    tag: payload.data.tag,
-    data: payload.data.link
-  };
-//
-  return self.registration.showNotification(notificationTitle,
-      notificationOptions);
-//
-});
 
+if (firebase.messaging.isSupported()) {
+  const messaging = firebase.messaging();
+  //
+  messaging.setBackgroundMessageHandler(function(payload) {
+    const notificationTitle = payload.data.title;
+    const notificationOptions = {
+      body: payload.data.body,
+      icon: payload.data.icon,
+      tag: payload.data.tag,
+      data: payload.data.link
+    };
+  //
+    return self.registration.showNotification(notificationTitle,
+        notificationOptions);
+  //
+  });
+}
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
 const CACHE_VERSION = 1;

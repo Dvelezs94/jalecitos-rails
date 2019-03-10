@@ -1,5 +1,7 @@
 $(document).on('turbolinks:load', function() {
-  const messaging = firebase.messaging();
+  if (firebase.messaging.isSupported()) {
+    const messaging = firebase.messaging();
+  }
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('firebase-messaging-sw.js', { scope: '/' }).then(function(reg) {
       // updatefound is fired if service-worker.js changes.
@@ -41,11 +43,13 @@ $(document).on('turbolinks:load', function() {
   // });
 
   // token refresh
-  messaging.onTokenRefresh(function() {
-    messaging.getToken().then(function(refreshedToken) {
-        const currentTokenKey = { auth_key: refreshedToken }
-        fetchSubscription(currentTokenKey);
-    }).catch(function(err) {
+  if (firebase.messaging.isSupported()) {
+    messaging.onTokenRefresh(function() {
+      messaging.getToken().then(function(refreshedToken) {
+          const currentTokenKey = { auth_key: refreshedToken }
+          fetchSubscription(currentTokenKey);
+      }).catch(function(err) {
+      });
     });
-  });
+  }
 });
