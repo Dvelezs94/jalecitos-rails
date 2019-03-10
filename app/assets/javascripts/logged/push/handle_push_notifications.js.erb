@@ -6,10 +6,8 @@ function fetchSubscription(subscription){
   }).then(function(response) {
     if(response.ok) {
       console.log("Registro de token exitoso");
-      alert("Estas al tanto de tus jales");
     } else {
       console.warn("Error al registrar el token, puede que ya exista en la DB: ", response);
-      alert("Estas al tanto de tus jales");
     }
   }).catch(function(err) {
     // console.log("No se pudo realizar la peticion: ", err);
