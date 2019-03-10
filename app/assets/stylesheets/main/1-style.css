@@ -104,6 +104,16 @@ input:focus {
   border: none;
 }
 
+.error-header {
+  font-size: 70px;
+  color: lightgrey;
+  display: block;
+}
+
+.error-link {
+  font-weight: 700;
+}
+
 .default-deny-btn {
   color: white;
   font-size: 17px;
