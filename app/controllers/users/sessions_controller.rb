@@ -32,7 +32,7 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def redirect_validation
-    params[:from_mobile].present? ? "mobiles#sign_in" : 'pages#home'
+    params[:from_mobile].present? ? "mobiles#log_in" : 'pages#home'
   end
 
   # method used to set a cookie after successful sign in

@@ -34,6 +34,7 @@ module Jalecitos
     # config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     # compress content
     config.middleware.use Rack::Deflater
+    config.exceptions_app = self.routes
   end
 
 end
