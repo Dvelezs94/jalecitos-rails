@@ -4,10 +4,10 @@ class MobilesController < ApplicationController
   before_action :verify_logged
   before_action :set_mb_cookie
 
-  def sign_in
+  def log_in
   end
 
-  def sign_up
+  def register
   end
 
   private

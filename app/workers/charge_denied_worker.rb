@@ -5,14 +5,12 @@ class ChargeDeniedWorker
 
   def perform(response, error_message)
     @order = Order.find_by_response_order_id(response)
-    if defined? @order
-      if ! @order.waiting_for_bank_approval?
-        return true
-      end
-      @order.denied!
-      ChargesMailer.charge_denied(@order, error_message).deliver
-    else
-      true
-    end
+    # if order doesnt exist, finish job gracefuly
+    return true if ! defined? @order
+    # finish job if the order was already handled before
+    return true if ! @order.waiting_for_bank_approval?
+
+    @order.denied!
+    ChargesMailer.charge_denied(@order, error_message).deliver
   end
 end

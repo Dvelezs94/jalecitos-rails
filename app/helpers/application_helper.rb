@@ -269,10 +269,14 @@ module ApplicationHelper
   def ios_pwa_tags
     "<meta name='apple-mobile-web-app-capable' content='yes'>
     <meta name='apple-mobile-web-app-status-bar-style' content='default'>
-    <link rel='apple-touch-icon' href='touch-icon-iphone.png'>
-    <link rel='apple-touch-icon' sizes='152x152' href='touch-icon-ipad.png'>
-    <link rel='apple-touch-icon' sizes='180x180' href='touch-icon-iphone-retina.png'>
-    <link rel='apple-touch-icon' sizes='167x167' href='touch-icon-ipad-retina.png'>
+    <link rel='apple-touch-icon' sizes='57x57' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-57x57.png' />
+    <link rel='apple-touch-icon' sizes='72x72' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-72x72.png' />
+    <link rel='apple-touch-icon' sizes='76x76' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-76x76.png' />
+    <link rel='apple-touch-icon' sizes='114x114' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-114x114.png' />
+    <link rel='apple-touch-icon' sizes='120x120' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-120x120.png' />
+    <link rel='apple-touch-icon' sizes='144x144' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-144x144.png' />
+    <link rel='apple-touch-icon' sizes='152x152' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-152x152.png' />
+    <link rel='apple-touch-icon' sizes='180x180' href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/pwa_icons/ios/apple-touch-icon-180x180.png' />
     <link href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/splashscreens/iphone5_splash.png' media='(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)' rel='apple-touch-startup-image' />
     <link href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/splashscreens/iphone6_splash.png' media='(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)' rel='apple-touch-startup-image' />
     <link href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/splashscreens/iphoneplus_splash.png' media='(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)' rel='apple-touch-startup-image' />
