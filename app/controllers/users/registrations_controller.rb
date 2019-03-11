@@ -121,6 +121,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def redirect_validation
-    params[:from_mobile].present? ? "mobiles#sign_in" : 'pages#home'
+    params[:from_mobile].present? ? "mobiles#log_in" : 'pages#home'
   end
 end

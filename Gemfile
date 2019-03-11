@@ -145,3 +145,13 @@ gem 'nicescroll-rails', '~> 3.5', '>= 3.5.4.1'
 gem 'google_places', '~> 1.2'
 # lazy load for image tags
 gem 'lazyload-rails', '~> 0.3.1'
+# error detection
+gem 'bugsnag', '~> 6.11', '>= 6.11.1'
+# Steps
+gem 'steps-rails', '~> 1.2', '>= 1.2.9'
+# aws s3 driver
+gem 'fog-aws', '~> 3.3'
+# Sitemap generator
+gem 'sitemap_generator', '~> 6.0', '>= 6.0.2'
+# Cron jobs
+gem 'sidekiq-cron', '~> 1.1'
