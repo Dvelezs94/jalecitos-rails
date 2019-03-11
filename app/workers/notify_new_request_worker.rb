@@ -1,7 +1,7 @@
 class NotifyNewRequestWorker
   include Sidekiq::Worker
   include PushFunctions
-  sidekiq_options retry: 2
+  sidekiq_options retry: 2, dead: false
   include Rails.application.routes.url_helpers
 
   def perform(request_id)
