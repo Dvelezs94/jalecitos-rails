@@ -1,18 +1,22 @@
 $(document).on('turbolinks:load', function() {
   window.swip = {};
   var cat_csl = new Swiper('.category-carousel', {
+    breakpointsInverse: true,
     slidesPerView: 6.5,
-    loop: true,
+    loop: false,
     spaceBetween: 10,
     breakpoints: {
-       1000: {
-         slidesPerView: 5.5
-       },
-       768: {
-         slidesPerView: 4.5
+          0: {
+            slidesPerView: 4,
+          },
+          768: {
+            slidesPerView: 5,
+          },
+          1000: {
+            slidesPerView: 6,
+          }
+        }
 
-       }
-     }
   });
 
   $(".gig-req-carousel").each(function(index, element){
@@ -22,22 +26,31 @@ $(document).on('turbolinks:load', function() {
       centeredSlides: false,
       loop: false,
       observer: true,
-      spaceBetween: 10,
+      spaceBetween: 20,
       breakpointsInverse: true,
       breakpoints: {
-        320: {
-          slidesPerView: 2
+        0: {
+          slidesPerView: 2,
+        },
+        350: {
+          slidesPerView: 2,
+
+        },
+        480: {
+          slidesPerView: 2,
+
         },
         768: {
-          slidesPerView: 3.5
+          slidesPerView: 3,
         },
         1000: {
-          slidesPerView: 4.5
+          slidesPerView: 4,
         },
         1200: {
-          slidesPerView: 5.5
+          slidesPerView: 5,
         }
       }
+
     });
     window.swip[$(element).attr('class').split(' ')[1]] = el;
     el.on('slideChange', function () {
