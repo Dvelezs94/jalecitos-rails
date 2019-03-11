@@ -36,6 +36,7 @@
               </div>
               <%= pa.text_field :description, id: "description#{n}", type: "hidden" %>
               <trix-editor input="description<%= n %>" class="trix-class trix_input_<%= n %> form_fields_<%= n %> styled" maxlength="1000"></trix-editor>
+              <p class="use-trix"> Si deseas opciones avanzadas en el texto, haz click<a href="#"> aquí</a> </p>
               <span class="error error_span_<%= 3*n+2 %>"></span>
             </div>
             <hr>
