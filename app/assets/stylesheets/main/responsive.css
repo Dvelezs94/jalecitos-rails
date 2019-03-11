@@ -263,10 +263,6 @@
     margin-top: 8px;
   }
 
-  .page3slides-wrapd .owl-nav div {
-    margin-top: -92px;
-  }
-
   .header-logo.page3s img {
     width: 84px;
   }
@@ -900,23 +896,6 @@
     margin-top: 10px;
   }
 
-  .page3slides-wrapd .owl-nav div i {
-    font-size: 20px;
-    width: 25px;
-    height: 25px;
-    line-height: 25px;
-    padding-left: 9px;
-  }
-
-  .page3slides-wrapd .owl-nav div {
-    position: absolute;
-    left: -16px;
-  }
-
-  .page3slides-wrapd .owl-nav .owl-next {
-    right: -15px;
-  }
-
   .headerd-area {
     padding: 28px 0;
   }
@@ -1306,39 +1285,11 @@
     display: none;
   }
 
-  .page3slides-wrapd .owl-nav div i {
-    font-size: 16px;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    padding-left: 7px;
-  }
-
   .catagori-title h1 {
     font-size: 31px;
     margin-bottom: 30px;
     text-align: center;
   }
-
-  .total-popularslide .owl-nav div {
-    position: absolute;
-    left: -13px;
-    bottom: 70%;
-  }
-
-  .total-popularslide .owl-nav .owl-next {
-    left: auto;
-    right: -8px;
-  }
-
-  .ultimoslide-wrap .owl-nav div {
-    left: -13px;
-  }
-
-  .ultimoslide-wrap .owl-nav .owl-next {
-    right: -9px;
-  }
-
   .headerlogo768 {
     display: block;
   }
@@ -1646,14 +1597,6 @@
     font-size: 16px;
   }
 
-  .page3slides-wrapd .owl-nav div {
-    left: -11px;
-    margin-top: -75px;
-  }
-
-  .page3slides-wrapd .owl-nav .owl-next {
-    right: -8px;
-  }
 
   .servico-title h3 {
     font-size: 20px;
