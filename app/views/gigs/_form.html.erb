@@ -34,13 +34,14 @@
           </div>
           <div class="form_block row ">
             <div class="flex-space-bet">
-              <p class="form-title">Descripción:</p>
+              <p class="form-title">Descripción general:</p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
             <%= render 'shared_user/gigs/forms/hints/description_hint.html.erb' %>
             <%= form.text_field :description, id: "description", type: "hidden" %>
-            <trix-editor input="description" class="trix-class trix_input_0 required styled" maxlength="1000"></trix-editor>
-
+            <trix-editor input="description" class="trix-class trix_input_0 required styled" maxlength="1000"
+             placeholder="Fotógrafo profesional con x años de experiencia. Ofrezco servicios de fotografía de calidad para eventos."></trix-editor>
+          <p class="use-trix"> Si deseas opciones avanzadas en el texto, haz click<a href="#"> aquí</a> </p>
           </div>
           <div class="form_block row">
             <div class="flex-space-bet">
