@@ -1,6 +1,6 @@
 class UpdateOrderAfterPaymentSuccessWorker
   include Sidekiq::Worker
-  sidekiq_options retry: 2
+  sidekiq_options retry: 2, dead: false
   include ApplicationHelper
 
   def perform(response)

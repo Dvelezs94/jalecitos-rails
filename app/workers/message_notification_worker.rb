@@ -1,6 +1,6 @@
 class MessageNotificationWorker
   include Sidekiq::Worker
-  sidekiq_options retry: false
+  sidekiq_options retry: false, dead: false
   include ApplicationHelper
   include PushFunctions
   include Rails.application.routes.url_helpers

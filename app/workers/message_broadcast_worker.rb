@@ -1,6 +1,6 @@
 class MessageBroadcastWorker
   include Sidekiq::Worker
-  sidekiq_options retry: false
+  sidekiq_options retry: false, dead: false
   def perform(message_id)
     message = Message.includes(conversation: [:messages, :recipient, :sender]).find(message_id)
     if message.user_id == message.conversation.recipient_id
