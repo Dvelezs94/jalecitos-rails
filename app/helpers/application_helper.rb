@@ -86,12 +86,12 @@ module ApplicationHelper
     end
   end
 
-  def build_notification_text (notification, object)
+  def build_notification_text (notification, object, html=true)
     if notification.action != "Se ha finalizado" #need to have user
         text = "<strong>#{notification.user.slug}</strong> #{notification.action} "
       case
       when object.class == Request
-        text += "en el pedido #{object.name}"
+        text += "en el pedido #{object.title}"
       when object.class == Package
         text += "el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
       when object.class == Dispute
@@ -111,7 +111,11 @@ module ApplicationHelper
         text = "#{notification.action} el pedido #{object.request.title}"
       end
     end
-    text.html_safe
+    if html == true
+      text.html_safe
+    else
+      ActionView::Base.full_sanitizer.sanitize(text)
+    end
   end
 
   def cons_mult_helper number
