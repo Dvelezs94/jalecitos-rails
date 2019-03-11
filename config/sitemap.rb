@@ -17,7 +17,7 @@ SitemapGenerator::Sitemap.create do
   # Links are added to the Sitemap in the order they are specified.
   add root_path, :changefreq => 'daily'
 
-  Gig.find_each do |gig|
+  Gig.published.find_each do |gig|
     add user_gig_path(gig.user.slug, gig.slug), :lastmod => gig.updated_at
   end
 

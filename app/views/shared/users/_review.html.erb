@@ -28,11 +28,10 @@
             <p>Hace <%= distance_of_time_in_words_to_now(review.updated_at) %></p>
             <% if review.reviewable_type == "Gig" %>
             <p class="coa3 tj">
-              <%= link_to "Jale: #{truncate(review.reviewable.title, length: 50)}", user_gig_path(review.reviewable.user, review.reviewable), class:"coa3 tj"  %>
+              <%= link_to "Jale: #{truncate(review.reviewable.title, length: 50)}", user_gig_path(review.reviewable.user, review.reviewable), class:"coa3 tj"  rescue "Jale no disponible."  %>
             <% else %>
             <p class="coa3 chi1">
-              <%= link_to "Pedido: #{truncate(review.reviewable.title, length: 50)}", request_path(review.reviewable)  %>
-
+              <%= link_to "Pedido: #{truncate(review.reviewable.title, length: 50)}", request_path(review.reviewable) rescue "Pedido no disponible."  %>
             <% end %>
             </p>
           </div>
