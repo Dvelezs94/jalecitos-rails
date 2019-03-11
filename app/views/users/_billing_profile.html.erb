@@ -3,8 +3,6 @@
   <span><%= billing_profile.name %></span></h4>
 <h4>RFC
   <span><%= billing_profile.rfc %></span></h4>
-<h4>Código Postal
-  <span><%= billing_profile.zip_code %></span></h4>
 <div class="Facturacion-btn">
   <%= link_to user_billing_profile_path(current_user.slug, billing_profile.id), method: :delete, data: { confirm: 'Estas seguro?' } do%>
   <button>Borrar información</button>
