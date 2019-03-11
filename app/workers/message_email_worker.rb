@@ -1,6 +1,6 @@
 class MessageEmailWorker
   include Sidekiq::Worker
-  sidekiq_options retry: 2
+  sidekiq_options retry: 2, dead: false
   include ApplicationHelper
   include Rails.application.routes.url_helpers
 
