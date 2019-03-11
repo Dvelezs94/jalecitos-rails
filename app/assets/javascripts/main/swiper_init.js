@@ -47,10 +47,14 @@ $(document).on('turbolinks:load', function() {
   var gig_show = new Swiper('.gig-show-carousel', {
     loop: true,
     slidesPerView: 1,
+    autoplay: false,
     autoplay: {
       delay: 5000
     }
 });
+if ($(".show-slide").length -2 == 1)  {
+  gig_show.autoplay.stop();
+}
 
 });
 

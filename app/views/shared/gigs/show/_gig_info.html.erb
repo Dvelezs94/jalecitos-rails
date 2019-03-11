@@ -13,12 +13,12 @@
             <!-- Slides -->
             <% if @gig.images.count > 0 %>
               <% @gig.images.each do |image| %>
-                <div class='swiper-slide'>
+                <div class='swiper-slide show-slide'>
                   <%= image_tag( image.url, class: 'img-show', data: {lity: true}) %>
                 </div>
               <% end %>
             <% else %>
-              <div class="swiper-slide">
+              <div class="swiper-slide show-slide">
                 <%= image_tag( "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/app_images/gig-no-image-2.png", class: 'img-show', data: {lity: true})%>
               </div>
             <% end %>
