@@ -1,6 +1,6 @@
 class NotificationRelayWorker
   include Sidekiq::Worker
-  sidekiq_options retry: 2
+  sidekiq_options retry: 2, dead: false
   include ApplicationHelper
   include PushFunctions
   include Rails.application.routes.url_helpers
@@ -13,7 +13,9 @@ class NotificationRelayWorker
       notification: {
         title: "Jalecitos",
         body:  build_notification_text(notification, notification.notifiable),
-        icon: avatar_display_helper(notification.user.image_url(:thumb))
+        icon: avatar_display_helper(notification.user.image_url(:thumb)),
+        click_action: url_generator_helper(notification, notification.notifiable),
+        badge: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo_Jalecitos-01.png"
       }
     }
 
