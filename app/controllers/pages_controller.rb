@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   before_action :pending_review, only: [:home, :finance], :if => :signed_and_rev
   layout :set_layout
-  access user: :all, admin: [:home], all: [:home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots]
+  access user: :all, admin: [:home], all: [:home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots, :sitemap]
   def home
     if params[:current] #if some pagination is present...
       home_paginate
@@ -49,6 +49,13 @@ class PagesController < ApplicationController
   def robots
     respond_to :text
     expires_in 6.hours, public: true
+  end
+
+  def wizard
+  end
+
+  def sitemap
+    redirect_to "https://#{ENV.fetch('S3_BUCKET_NAME')}.s3.amazonaws.com/sitemaps/sitemap.xml.gz"
   end
 
   private

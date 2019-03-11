@@ -120,10 +120,11 @@ Rails.application.routes.draw do
       put :deny
     end
   end
-  get 'mobile_sign_in', to: 'mobiles#sign_in'
-  get 'mobile_sign_up', to: 'mobiles#sign_up'
+  get 'mobile_sign_in', to: 'mobiles#log_in'
+  get 'mobile_sign_up', to: 'mobiles#register'
   get 'configuration', to: 'users#configuration'
   get 'requests', to: 'pages#request_index'
+  get 'wizard', to: 'pages#wizard'
   get 'finance', to: 'pages#finance'
   get 'disputes', to: 'disputes#index'
   get 'likes', to: 'pages#liked'
@@ -143,9 +144,12 @@ Rails.application.routes.draw do
   get 'aviso-de-privacidad', to: 'pages#privacy_policy'
   get 'condiciones-de-venta', to: 'pages#sales_conditions'
   get '/robots.:format' => 'pages#robots'
+  get '/sitemap', to: 'pages#sitemap'
   get 'reglas-prestador-empleador', to: 'pages#employer_employee_rules'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # LEAVE THIS AT THE END!!
+  match "/404", :to => "errors#not_found", :via => :all
+  match "/500", :to => "errors#internal_server_error", :via => :all
   match '*path' => redirect('/'), via: :get
 end

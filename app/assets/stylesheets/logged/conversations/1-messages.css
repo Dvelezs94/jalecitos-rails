@@ -29,7 +29,7 @@
 .messages-box-area::after {
 	position: absolute;
 	left: 0;
-	top: 78px;
+	top: 55px;
 	width: 100%;
 	height: 2px;
 	content: "";
@@ -48,12 +48,9 @@
 
 .mensajes-chat {
 	position: relative;
-	margin-top: 15px;
+	margin-top: 12px;
 }
-.mensajes-chat h2 {
-  font-size: 28px;
-  margin-left: 25px;
-}
+
 .mensajes-chat h2 span {
 	background: #0368F4;
 	width: 20px;
@@ -81,10 +78,18 @@
 
 .conversación-input input {
   border: none;
-  font-size: 17px;
+  font-family: 'Nunito', sans-serif;
+  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
+  font-weight: 700;
+  color: var(--gray);
   background: none;
   margin-left: 26px;
 }
+
+.conversación-input input::placeholder {
+  color: var(--mid-gray);
+}
+
 .conversación-input {
 	background: #F5F6F7;
 	padding: 10px;
@@ -92,13 +97,14 @@
 	position: relative;
 	margin-top: 44px;
 	margin-bottom: 20px;
-	width: 85%;
+	width: 92%;
 }
 .conversación-input i {
   position: absolute;
   top: 50%;
   margin-top: -8px;
   font-size: 16px;
+  color: var(--disabled);
 }
 
 
@@ -107,7 +113,7 @@
   position: relative;
   background: #F5F6F7;
   border-radius: 4px;
-  padding: 14px 16px;
+  padding: 14px 5px;
   width: 95%;
 }
 .chat-single-box.ef {
@@ -156,26 +162,22 @@
   color: #8E8E93;
 }
 
-
-
-.Harold-Bates-text h3 {
-  font-size: 22px;
-}
-.Harold-Bates-text h3 i {
+.Harold-Bates-text h2 i {
   color: #000;
-  display: none;
+  font-size: 16px;
+  padding-right: 8px;
 }
-.Harold-Bates-text h3 span {
-  font-size: 13px;
-  color: #8E8E93;
-  font-weight: 500;
+.Harold-Bates-text h2 span {
+  font-family: 'Nunito', sans-serif;
+  font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1800 - 320)));
+  font-weight: 400;
+  color: var(--gray);
+  padding-left: 28px;
+  padding-top: 4px;
   display: block;
 }
 .chat-right-side-text {
   padding: 10px;
-}
-.Harold-Bates-text {
-	padding: 10px 0;
 }
 
 .chat-right-side-date {
