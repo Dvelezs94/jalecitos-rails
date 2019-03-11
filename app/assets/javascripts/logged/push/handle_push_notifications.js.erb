@@ -10,7 +10,8 @@ function fetchSubscription(subscription){
       console.warn("Error al registrar el token, puede que ya exista en la DB: ", response);
     }
   }).catch(function(err) {
-    console.log("No se pudo realizar la peticion: ", err);
+    // console.log("No se pudo realizar la peticion: ", err);
+    alert("Error");
   });
 }
 function dropSubscription(subscription) {

@@ -13,6 +13,8 @@
 
 //= require trix
 
+//= require jquery.steps
+
 //= require jquery.easing
 
 //= require jquery.validate

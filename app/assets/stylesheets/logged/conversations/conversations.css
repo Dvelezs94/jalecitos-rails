@@ -161,7 +161,7 @@
 }
 
 .conversación-input {
-	margin: 0 auto;
+	margin: 0px 12px;
 }
 
 .chat-right-side {
@@ -242,24 +242,29 @@
 }
 
 .chat-box-man {
-	margin-top: 20px;
+	margin-top: 12px;
 }
  .mensajes-chat {
-	margin-bottom: 34px;
+	margin-bottom: 28px;
 }
 .single-box-text p {
-	font-size: 12px;
+	font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1800 - 320)));
+  color: var(--gray);
 }
-.single-box-text h5 {
-	font-size: 14px;
+
+.single-box-text h4 {
+	margin: 0 0 4px;
 }
+
+
 .chat-single-box img {
-	width: 30px;
-	height: 30px;
+	width: 33px;
+	height: 33px;
+	box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.07);
 }
 
 .single-box-text {
-	margin-left: 40px;
+	margin-left: 48px;
 }
 
 
