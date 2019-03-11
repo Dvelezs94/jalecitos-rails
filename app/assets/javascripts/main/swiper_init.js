@@ -18,7 +18,7 @@ $(document).on('turbolinks:load', function() {
   $(".gig-req-carousel").each(function(index, element){
     var $this = $(this);
     el = new Swiper(this, {
-      slidesPerView: 2,
+      slidesPerView: "auto",
       centeredSlides: false,
       loop: false,
       observer: true,
