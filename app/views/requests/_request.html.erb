@@ -1,12 +1,14 @@
-<a href="<%= request_path(request) %>">
-<div class="single-request">
-  <div class="req_info">
-    <h6 class="req_location truncate"><%= request.location%></h6>
-    <h4 class="req_title multi-line-truncate-3 min-height-44px"><%= request.title %></h4>
-    <!-- <p class="req_description multi-line-truncate-3 min-height-66px"><%# request.description %></p> -->
-  </div>
-  <div class="req_budget">
-    <p class="COAH3 truncate"><%= request.budget %> MXN</p>
-  </div>
+<div class="swiper-slide">  
+  <a href="<%= request_path(request) %>">
+    <div class="single-request">
+      <div class="req_info">
+        <h6 class="req_location truncate"><%= request.location%></h6>
+        <h4 class="req_title multi-line-truncate-3 min-height-66px"><%= request.title %></h4>
+        <!-- <p class="req_description multi-line-truncate-3 min-height-66px"><%# request.description %></p> -->
+      </div>
+      <div class="req_budget">
+        <p class="COAH3 truncate"><%= request.budget %> MXN</p>
+      </div>
+    </div>
+  </a>
 </div>
-</a>

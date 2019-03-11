@@ -102,7 +102,7 @@ gem 'jquery-easing-rails', '~> 0.0.2'
 #jquery form validation
 gem 'jquery-validation-rails', '~> 1.16'
 #slick
-gem 'jquery-slick-rails', '~> 1.9'
+# gem 'jquery-slick-rails', '~> 1.9'
 # Payments
 gem 'openpay', '~> 2.0'
 #Search engine
@@ -130,7 +130,7 @@ gem 'clipboard-rails', '~> 1.7', '>= 1.7.1'
 # sidekiq for background job processing
 gem 'sidekiq', '~> 5.2', '>= 5.2.5'
 #carousels
-gem 'owlcarousel-rails', '~> 2.2', '>= 2.2.3.5'
+# gem 'swiper-rails', '~> 1.0', '>= 1.0.4'
 # Track button clicks
 gem 'google-tag-manager-rails', '~> 0.1.3'
 # Geocoder, get user current location

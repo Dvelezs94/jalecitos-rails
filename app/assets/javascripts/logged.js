@@ -19,8 +19,6 @@
 
 //= require jquery.validate
 
-//= require jquery.slick
-
 //= require jquery.nicescroll.js
 
 //= require best_in_place
@@ -39,6 +37,6 @@
 
 //= require twitter/typeahead
 
-//= require owl.carousel
+
 
 //= require js.cookie

@@ -5,21 +5,25 @@
     <p><%= @gig.location %></p>
   </div>
 
-  <div class="gig-images-container">
-    <div class="owl-carousel gig-show-carousel">
-      <% if @gig.images.count > 0 %>
-        <% @gig.images.each do |image| %>
-          <div class=''>
-            <%= image_tag( image.url, class: 'img-responsive', data: {lity: true}) %>
-          </div>
-        <% end %>
-      <% else %>
-        <div class="">
-          <%= image_tag( "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/app_images/gig-no-image-2.png", class: 'img-responsive', data: {lity: true})%>
-        </div>
-      <% end %>
-    </div>
 
+  <div class="gig-images-container">
+    <div class="gig-show-carousel">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <% if @gig.images.count > 0 %>
+              <% @gig.images.each do |image| %>
+                <div class='swiper-slide show-slide'>
+                  <%= image_tag( image.url, class: 'img-show', data: {lity: true}) %>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="swiper-slide show-slide">
+                <%= image_tag( "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/app_images/gig-no-image-2.png", class: 'img-show', data: {lity: true})%>
+              </div>
+            <% end %>
+        </div>
+    </div>
     <div class="pacificobg-socialicon">
       <div class="arroweee">
         <a href="">
