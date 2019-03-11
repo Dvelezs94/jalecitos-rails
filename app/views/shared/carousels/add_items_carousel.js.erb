@@ -1,24 +1,22 @@
- carousel = $('.owl-carousel.'+'<%= j params[:current] %>');
+carousel = window.swip["<%= j params[:current] %>"];
 <% collection = instance_variable_get("@"+params[:current]) %>
 //remove paginator
-indexToRemove = carousel.find(".owl-stage").children().length -1;
-carousel.trigger( 'remove.owl.carousel',  indexToRemove );
+indexToRemove = carousel.slides.length-1
+carousel.removeSlide(indexToRemove);
 
-<% if params[:current] != "liked_gigs" %>
-  //add items
-  <% collection.each do |item| %>
-     carousel.trigger('add.owl.carousel', "<%= j render item %>").trigger('refresh.owl.carousel');
-  <% end %>
+//add items
+<% if params[:current] == "liked_gigs" %>
+  carousel.appendSlide("<%= j render @liked_gigs_items %>");
 <% else %>
-  //add items
-  <% @liked_gigs_items.each do |item| %>
-     carousel.trigger('add.owl.carousel', "<%= j render item %>").trigger('refresh.owl.carousel');
-  <% end %>
+  carousel.appendSlide("<%= j render collection %>");
 <% end %>
 
 //if next page add new paginator
 <% if collection.next_page %>
-  <% link = link_to_next_page(collection, "Oculto", class: "carousel-paginator" , param_name: params[:current], :params => {:current => params[:current]}, remote: true, style: "display: none;") %>
-  carousel.trigger('add.owl.carousel', "<%=j link %>").trigger('refresh.owl.carousel');
+  <% link = link_to_next_page(collection, "Oculto", class: "carousel-paginator" ,
+     param_name: params[:current], :params => {:current => params[:current]},
+      remote: true, style: "display: none;") %>
+  carousel.appendSlide("<div class='swiper-slide'><%=j link %></div>");
 <% end %>
+  
 <% sleep 0.5 %>

@@ -175,20 +175,6 @@
     right: 128px;
   }
 
-  .total-popularslide .owl-nav .owl-next {
-    left: auto;
-    right: -24px;
-  }
-
-  .ultimoslide-wrap .owl-nav div i {
-    padding-left: 11px;
-  }
-
-  .ultimoslide-wrap .owl-nav .owl-next {
-    left: auto;
-    right: -24px;
-  }
-
   .bellposition.page2date {
     padding-right: 140px;
     margin-top: 3px;
@@ -2164,14 +2150,10 @@
 
 
 @media only screen and (min-width: 320px) and (max-width: 479px) {
-  .single-gig,
-  .single-request {
-    width: 150px;
-  }
 
-  .gigs-carousel .hearted1 {
-    left: 123px;
-    top: 85px;
+  .gig-req-carousel .hearted1 {
+    top: 30%;
+    right: 10px;
   }
 
   p.verified{

@@ -37,6 +37,6 @@
 
 //= require twitter/typeahead
 
-//= require swiper
+
 
 //= require js.cookie

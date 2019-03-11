@@ -130,7 +130,7 @@ gem 'clipboard-rails', '~> 1.7', '>= 1.7.1'
 # sidekiq for background job processing
 gem 'sidekiq', '~> 5.2', '>= 5.2.5'
 #carousels
-gem 'swiper-rails', '~> 1.0', '>= 1.0.4'
+# gem 'swiper-rails', '~> 1.0', '>= 1.0.4'
 # Track button clicks
 gem 'google-tag-manager-rails', '~> 0.1.3'
 # Geocoder, get user current location

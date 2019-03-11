@@ -28,4 +28,5 @@
 
 //= require twitter/typeahead
 
+
 //= require js.cookie
