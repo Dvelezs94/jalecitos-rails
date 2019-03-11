@@ -1671,7 +1671,7 @@
   .verificos-title h3 br {
     display: none;
   }
-  
+
   .mentos-areapag3 {
     display: none;
   }
@@ -2069,6 +2069,7 @@
 }
 /*mobile menu*/
 @media only screen and (min-width: 320px) and (max-width: 991px) {
+
   .phone-bottom-menu {
     display: block;
     position: fixed;

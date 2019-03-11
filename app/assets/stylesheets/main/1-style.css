@@ -88,6 +88,9 @@ input:focus {
 .contact-us p {
   text-align: left;
 }
+trix-toolbar  {
+  display: none;
+}
 
 .primary-jale-btn {
   font-weight: 700;
