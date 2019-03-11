@@ -5,7 +5,7 @@ module GetGig
        includes: [:user, :related_pack,
           :likes, city: [state: :country]],
            where: { category_id: @gig.category_id, status: "published", _id: { not: @gig.id }, city_id: @gig.city_id },
-            page: params[:related_gigs], per_page: 5, execute: bool)
+            page: params[:related_gigs], per_page: 10, execute: bool)
   end
 
   def get_reviews bool=false

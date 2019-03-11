@@ -3,9 +3,20 @@
       <h1><%= title %></h1>
     </div>
 
-    <div class="page3slides-wrapd owl-carousel gigs-carousel <%= param_name %>">
 
-      <%= render gigs %>
-      <%= link_to_next_page(gigs, "Oculto".html_safe, class: "carousel-paginator" , param_name: param_name, :params => {:current => param_name}, remote: true, style: "display: none;") %>
+    <div class="gig-req-carousel <%= param_name %>">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <%= render gigs %>
+          <% if gigs.next_page %>
+              <div class="swiper-slide">
+                <%= link_to_next_page(gigs, "Oculto".html_safe,
+                   class: "carousel-paginator" , param_name: param_name,
+                    :params => {:current => param_name}, remote: true, style: "display: none;") %>
+              </div>
+          <% end %>
+        </div>
     </div>
+
 </div>

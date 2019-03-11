@@ -1,4 +1,11 @@
 <div class="container catagorislide-area">
-  <h1 class="category-carousel-title">Categorías</h1>
-    <%= render Category.all %>
+<h1 class="category-carousel-title">Categorías</h1>
+  <!-- Slider main container -->
+<div class="category-carousel">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+        <!-- Slides -->
+        <%= render Category.all %>
+    </div>
+</div>
 </div>
