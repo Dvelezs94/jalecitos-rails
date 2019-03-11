@@ -1,6 +1,6 @@
 class FinishOrderWorker
   include Sidekiq::Worker
-  sidekiq_options retry: false
+  sidekiq_options retry: false, dead: false
   include OpenpayFunctions
   include OrderFunctions
   include OpenpayHelper
