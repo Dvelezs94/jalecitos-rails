@@ -1,4 +1,4 @@
-module GetHome
+module GetPages
   private
 
   def home_get_all
