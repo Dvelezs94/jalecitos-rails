@@ -35,16 +35,6 @@
 	content: "";
 	background: #F5F6F7;
 }
-.messages-box-area::before {
-	position: absolute;
-	left: 39%;
-	top: 0;
-	width: 2px;
-	height: 100%;
-	content: "";
-	background: #F5F6F7;
-}
-
 
 .mensajes-chat {
 	position: relative;
@@ -177,7 +167,7 @@
   display: block;
 }
 .chat-right-side-text {
-  padding: 10px;
+  padding: 10px 10px 0 10px;
 }
 
 .chat-right-side-date {

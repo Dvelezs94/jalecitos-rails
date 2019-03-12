@@ -12,7 +12,7 @@ class OfferMailer < ApplicationMailer
           ],
           "dynamic_template_data": {
             "REQUEST_URL": request_url(@offer.request),
-            "REQUEST": @offer.request.name,
+            "REQUEST": @offer.request.title,
             "OFFERER_URL": user_url(@offer.user.slug),
             "OFFERER": @offer.user.slug,
             "ALIAS": @offer.request.user.slug

@@ -21,12 +21,13 @@
                    </div>
                    <div class="gap"></div>
                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                     <%= f.text_area :comment, placeholder: "Comentario (Opcional)", class: "form-control" , rows: 2, maxlength: 2000 %>
+                     <%= f.text_area :comment, placeholder: "Comentario (Opcional)", style: "margin-top: 15px;",
+                      class: "form-control" , rows: 2, maxlength: 2000 %>
                    </div>
                  </div>
-                 <div class="gap"></div>
 
-                 <%= f.submit 'Enviar', :class => 'btn btn-success', :onclick => '$(".review_form").valid()? $("#reviewModal").fadeOut("fast", function() { $(this).remove(); } ) : null;' %>
+                 <%= f.submit 'Enviar', :class => 'btn continue-button w-100', style: "margin-top: 15px;",
+                  :onclick => '$(".review_form").valid()? $("#reviewModal").fadeOut("fast", function() { $(this).remove(); } ) : null;' %>
                  <br>
                <% end %>
 

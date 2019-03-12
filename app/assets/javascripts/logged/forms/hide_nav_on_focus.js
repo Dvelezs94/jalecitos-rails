@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  var _originalSize = $(window).height()
+  var _originalSize = $(window).height();
   if (screen.width <= 991) {
     $(window).resize(function() {
       if ($(window).height() < _originalSize) { // keyboard show up
