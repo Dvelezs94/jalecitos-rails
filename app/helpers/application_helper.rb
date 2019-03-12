@@ -87,14 +87,17 @@ module ApplicationHelper
   end
 
   def build_notification_text (notification, object, html=true)
+<<<<<<< HEAD
     text = ""
+=======
+>>>>>>> a9ca035b3ee01f3c5cbe35fce56c5488b6e25f29
     if notification.action != "Se ha finalizado" #need to have user
       text = "<strong>#{notification.user.slug}</strong> #{notification.action} "
       case
       when object == nil #deleted gig (package also)
         text += "un <strong>Jale eliminado</strong>"
       when object.class == Request
-        text += "en el pedido #{object.name}"
+        text += "en el pedido #{object.title}"
       when object.class == Package
         text += "el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
       when object.class == Dispute
@@ -118,8 +121,14 @@ module ApplicationHelper
       end
     end
     if html == true
+<<<<<<< HEAD
     text.html_safe
     else
+=======
+      text.html_safe
+    else
+      ActionView::Base.full_sanitizer.sanitize(text)
+>>>>>>> a9ca035b3ee01f3c5cbe35fce56c5488b6e25f29
     end
   end
 
