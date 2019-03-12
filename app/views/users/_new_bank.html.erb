@@ -11,7 +11,7 @@
                   <%= f.text_field :bank_holder_name, class: "required", placeholder: "Nombre del Titular" %>
                   <%= f.text_field :alias, class: "required", placeholder: "Alias" %>
                   <br>
-                  <%= f.button 'Continuar', :class => 'btn btn-success', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Guardando.."} %>
+                  <%= f.button 'Continuar', :class => 'btn continue-button', style: "width:100%;", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Guardando.."} %>
                 <% end %>
              </div>
              <hr>
