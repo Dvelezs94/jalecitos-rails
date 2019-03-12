@@ -32,6 +32,13 @@
               <%= paginate @purchases, param_name: :purchases  %>
             </div>
             <div class="paginator-container tab-pane fade <%= "show active" if params[:table] == "sales" %>" id="Shah-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+              <% if current_user.balance >= 100 && current_user.payouts.where(status: "pending").count < 1 %>
+              <%= link_to configuration_path(collapse: "withdraw") do %>
+              <div class="alert alert-success" role="alert">
+                <%= "Tienes un saldo de #{number_to_currency(current_user.balance)}. haz click aqui para retirarlo." %>
+              </div>
+              <% end %>
+              <% end %>
               <div class="paginated-sales transacciones-tab-content row">
                 <%= render partial: 'orders/single_sale', collection: @sales %>
                 <%= "<div class='container'>No hay nada para mostrar</div>".html_safe if @sales.total_count == 0 %>
