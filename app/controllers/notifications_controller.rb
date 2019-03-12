@@ -16,7 +16,7 @@ class NotificationsController < ApplicationController
     @unread_notifications = Notification.search("*", where:{recipient_id: current_user.id, read_at: nil})
     if @unread_notifications.count > 0
       @unread_notifications.each do |notification|
-        notification.update_attributes(read_at: Time.zone.now)
+        notification.update(read_at: Time.zone.now)
       end
     end
     render json: {success: true}
