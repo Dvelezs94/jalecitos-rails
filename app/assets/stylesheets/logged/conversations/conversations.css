@@ -2,9 +2,12 @@
 	border-right: 2px solid #F5F6F7;
 }
 
-@media (min-width: 320px) and (max-width: 991px) { 
+@media (min-width: 320px) and (max-width: 991px) {
 	.conversation-filter-box {
 		border-right: none;
+	}
+	.messages-box-area::after {
+		top: 50px;	
 	}
 }
 
