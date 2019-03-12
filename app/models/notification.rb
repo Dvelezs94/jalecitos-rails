@@ -4,7 +4,7 @@ class Notification < ApplicationRecord
 
   belongs_to :user
   belongs_to :recipient, class_name: "User"
-  belongs_to :notifiable, polymorphic: true
+  belongs_to :notifiable, polymorphic: true, optional: true #optional because a gig can be erased, so its packages also
   #search
   searchkick language: "spanish"
 
