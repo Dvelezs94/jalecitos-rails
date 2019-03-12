@@ -21,7 +21,9 @@ SitemapGenerator::Sitemap.create do
     add user_gig_path(gig.user.slug, gig.slug), :lastmod => gig.updated_at
   end
 
-  User.find_each do |user|
+  User.active.find_each do |user|
     add user_path(user.slug), :lastmod => user.updated_at
   end
+
+  add '/trabaja'
 end
