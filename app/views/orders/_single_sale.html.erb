@@ -16,6 +16,11 @@
           <%= image_tag(single_sale.employer.image_url(:thumb))%>
           <h5><%= single_sale.employer.alias %></h5>
         <% end %>
+        <% if single_sale.status == "pending" || single_sale.status == "in_progress" %>
+          <%= link_to conversations_path(user_id: single_sale.employer.slug), class: "transaction-message-icon" do %>
+            <strong><%= icon("fas", "comment") %> Mensaje</strong>
+          <% end %>
+        <% end %>
       </div>
         <div class="Paquete-Básico">
             <% if single_sale.purchase_type == "Package"%>

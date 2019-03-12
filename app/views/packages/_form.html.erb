@@ -24,18 +24,19 @@
             <%= fields_for 'packages[]', pack do |pa| %>
 
             <div class="form-block form-group-<%= n %> row col-lg-11 centered-form">
-              <strong class="form-title"><%= pa.label :name %></strong>
-              <%= pa.text_field :name, class: "name-class name-#{n} form_fields_#{n} styled",maxlength: 100 %>
+              <strong class="form-title">Nombre del paquete</strong>
+              <%= pa.text_field :name, class: "name-class name-#{n} form_fields_#{n} styled",maxlength: 100, placeholder: "Fotos tamaño infantil" %>
               <span class="error error_span_<%= 3*n+1 %>"></span>
             </div>
 
             <hr>
             <div class="form-block form-group-<%= n %> row col-lg-11 centered-form">
               <div class="flex-space-bet">
-                <p class="form-title"><%= pa.label :description %></p>
+                <p class="form-title">Lo que realizaré</p>
               </div>
               <%= pa.text_field :description, id: "description#{n}", type: "hidden" %>
-              <trix-editor input="description<%= n %>" class="trix-class trix_input_<%= n %> form_fields_<%= n %> styled" maxlength="1000"></trix-editor>
+              <trix-editor input="description<%= n %>" class="trix-class trix_input_<%= n %> form_fields_<%= n %> styled"
+                 maxlength="1000" placeholder="5 fotos tamaño infantil a color"></trix-editor>
               <p class="use-trix"> Si deseas opciones avanzadas en el texto, haz click<a href="#"> aquí</a> </p>
               <span class="error error_span_<%= 3*n+2 %>"></span>
             </div>

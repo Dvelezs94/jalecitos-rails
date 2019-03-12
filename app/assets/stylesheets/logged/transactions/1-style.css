@@ -282,6 +282,7 @@
 .diego-user {
 	position: relative;
 	margin-top: 15px;
+  display: flex;
 }
 .diego-user img {
 	position: absolute;
@@ -306,6 +307,10 @@
 	font-size: 15px;
 	letter-spacing: 1px;
 	margin-bottom: 7px;
+}
+
+.transaction-message-icon {
+  margin-left: 10px;
 }
 
 .Paquete-Básico span {
