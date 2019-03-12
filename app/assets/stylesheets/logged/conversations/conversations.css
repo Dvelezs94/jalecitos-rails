@@ -1,9 +1,16 @@
+.conversation-filter-box {
+	border-right: 2px solid #F5F6F7;
+}
+
+@media (min-width: 320px) and (max-width: 991px) { 
+	.conversation-filter-box {
+		border-right: none;
+	}
+}
+
 /* XL Device :1200px. */
 @media (min-width: 1200px) and (max-width: 1449px) {
 
-.messages-box-area::before {
-	left: 33%;
-}
 .chat-box-man {
 	margin-top: 27px;
 }
@@ -12,18 +19,10 @@
 	margin-bottom: 40px;
 }
 
-
-
-
 }
 
 /* LG Device :992px. */
 @media (min-width: 992px) and (max-width: 1199px) {
-
-   .messages-box-area::before {
-	left: 34%;
-}
-
 
     .logo a img {
 	border-radius: 50%;
@@ -86,10 +85,6 @@
   width: 100%;
 }
 
-.messages-box-area::before {
-	display: none;
-}
-
 .chat-right-side {
 	display: none;
 }
@@ -147,9 +142,6 @@
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 .notifarea {
 	width: 100%;
-}
-.messages-box-area::before {
-	display: none;
 }
 
 .messages-box-area .container {

@@ -10,7 +10,7 @@
         <%= star_display_helper( score_average(@user.score) ) %>
       </div>
       <div class="contactars">
-        <p>Activo(a) hace <%= distance_of_time_in_words_to_now(@user.current_sign_in_at) %></p>
+        <p>Activo(a) hace <%= distance_of_time_in_words_to_now(@user.current_sign_in_at) rescue "nunca" %></p>
       </div>
       <div class="inner-comment">
       <% if my_profile %>
