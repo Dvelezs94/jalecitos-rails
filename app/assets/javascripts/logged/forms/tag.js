@@ -85,7 +85,7 @@ function startTags() {
       tagNumber += 1;
       refreshTags();
       if( enter == "yes" && window.location.href.indexOf("configuration") > -1 ) {
-        $('form.config-tag-form').submit();
+        $('form.config-tag-form input[type=submit]').click();
       }
     }
 
@@ -96,7 +96,7 @@ function startTags() {
       tagNumber -= 1;
       refreshTags();
       if (window.location.href.indexOf("configuration") > -1) {
-        $('form.config-tag-form').submit();
+        $('form.config-tag-form input[type=submit]').click();
       }
     }
 
