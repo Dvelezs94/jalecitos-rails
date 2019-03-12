@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   include GetUser
   include UsersHelper
   include ReportFunctions
-  respond_to :html, :json
+  respond_to :html, :json, :js
   layout :set_layout
   before_action :check_if_my_profile, only: :show
   before_action :set_user, only: [:show]
@@ -80,6 +80,7 @@ class UsersController < ApplicationController
             @message = "Tu imagen de perfil se ha actualizado."
           else
             @message = "Tus etiquetas se han actualizado."
+            puts @message
           end
          }
         #best_in_place
