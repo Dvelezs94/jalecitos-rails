@@ -19,12 +19,10 @@ class PayoutCompleteWorker
       begin
         @jalecitos_payout.completed!
         PayoutMailer.successful_payout(@jalecitos_payout.user, @employee_balance).deliver
-      rescue => exception
-        Bugsnag.notify(exception)
-        PayoutMailer.notify_inconsistency(@jalecitos_payout.user).deliver
       end
-    rescue
-
+    rescue => exception
+      Bugsnag.notify(exception)
+      PayoutMailer.notify_inconsistency(@jalecitos_payout.user).deliver
     end
   end
 
