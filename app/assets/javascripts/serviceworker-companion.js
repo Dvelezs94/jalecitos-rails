@@ -41,15 +41,4 @@ $(document).on('turbolinks:load', function() {
   // messaging.onMessage(function(payload) {
   //   console.log('Message received. ', payload);
   // });
-
-  // token refresh
-  if (firebase.messaging.isSupported()) {
-    messaging.onTokenRefresh(function() {
-      messaging.getToken().then(function(refreshedToken) {
-          const currentTokenKey = { auth_key: refreshedToken }
-          fetchSubscription(currentTokenKey);
-      }).catch(function(err) {
-      });
-    });
-  }
 });
