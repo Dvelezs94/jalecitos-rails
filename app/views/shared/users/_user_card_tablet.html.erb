@@ -12,7 +12,7 @@
       <div class="authorisesstar">
         <%= star_display_helper( score_average(@user.score) ) %>
         <p>Activo(a) hace
-          <%= distance_of_time_in_words_to_now(@user.current_sign_in_at) %></p>
+          <%= distance_of_time_in_words_to_now(@user.current_sign_in_at) rescue "nunca" %></p>
       </div>
     </div>
   </div>
