@@ -41,4 +41,13 @@ $(document).on('turbolinks:load', function() {
   // messaging.onMessage(function(payload) {
   //   console.log('Message received. ', payload);
   // });
+  messaging.onTokenRefresh(function() {
+    messaging.getToken().then(function(refreshedToken) {
+      console.log('Token refreshed.');
+      const currentTokenKey = { auth_key: refreshedToken }
+      fetchSubscription(currentTokenKey);
+    }).catch(function(err) {
+      console.log('Unable to retrieve refreshed token ', err);
+    });
+  });
 });
