@@ -87,10 +87,7 @@ module ApplicationHelper
   end
 
   def build_notification_text (notification, object, html=true)
-<<<<<<< HEAD
     text = ""
-=======
->>>>>>> a9ca035b3ee01f3c5cbe35fce56c5488b6e25f29
     if notification.action != "Se ha finalizado" #need to have user
       text = "<strong>#{notification.user.slug}</strong> #{notification.action} "
       case
@@ -121,14 +118,9 @@ module ApplicationHelper
       end
     end
     if html == true
-<<<<<<< HEAD
-    text.html_safe
-    else
-=======
       text.html_safe
     else
       ActionView::Base.full_sanitizer.sanitize(text)
->>>>>>> a9ca035b3ee01f3c5cbe35fce56c5488b6e25f29
     end
   end
 
