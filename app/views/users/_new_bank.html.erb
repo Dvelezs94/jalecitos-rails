@@ -9,7 +9,7 @@
                 <%= form_with url: user_banks_path(current_user), class: "new_bank" do |f| %>
                   <%= f.text_field :clabe, class: "required", placeholder: "CLABE",  maxlength: "18", onkeypress: "allowNumbersOnly(event)" %>
                   <%= f.text_field :bank_holder_name, class: "required", placeholder: "Nombre del Titular" %>
-                  <%= f.text_field :alias, class: "required", placeholder: "Alias" %>
+                  <%= f.text_field :alias, class: "required", placeholder: "Alias (identificador)" %>
                   <br>
                   <%= f.button 'Continuar', :class => 'btn btn-success', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Guardando.."} %>
                 <% end %>
