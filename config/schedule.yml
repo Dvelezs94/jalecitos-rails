@@ -1,4 +1,4 @@
 generate_sitemap_job:
   # cron: "*/1 * * * *"
-  cron: "0 0 * * 0"
+  cron: "0 1 * * *"
   class: "RegenerateSitemapWorker"
