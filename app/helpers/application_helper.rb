@@ -86,10 +86,13 @@ module ApplicationHelper
     end
   end
 
-  def build_notification_text (notification, object)
+  def build_notification_text (notification, object, html=true)
+    text = ""
     if notification.action != "Se ha finalizado" #need to have user
-        text = "<strong>#{notification.user.slug}</strong> #{notification.action} "
+      text = "<strong>#{notification.user.slug}</strong> #{notification.action} "
       case
+      when object == nil #deleted gig (package also)
+        text += "un <strong>Jale eliminado</strong>"
       when object.class == Request
         text += "en el pedido #{object.name}"
       when object.class == Package
@@ -104,14 +107,20 @@ module ApplicationHelper
         text += "en la disputa de la orden #{object.dispute.order.uuid}"
       end
     else
+      text = "#{notification.action} "
       case
+      when object == nil #deleted gig (package also)
+        text += "un <strong>Jale eliminado</strong>"
       when object.class == Package
-        text = "#{notification.action} el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
+        text = "el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
       when object.class == Offer
-        text = "#{notification.action} el pedido #{object.request.title}"
+        text = "el pedido #{object.request.title}"
       end
     end
+    if html == true
     text.html_safe
+    else
+    end
   end
 
   def cons_mult_helper number
