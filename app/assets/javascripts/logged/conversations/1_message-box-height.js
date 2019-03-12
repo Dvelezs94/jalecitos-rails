@@ -1,8 +1,8 @@
 function message_view_height () {
   screen_height = $(window).height();
-  extra_padding = 45;
+  extra_padding = 50;
   upper_conversation_menu = $('.Harold-Bates-text h3:visible').outerHeight(true) || 0;
-  mobile_nav = $('.phone-bottom-menu:visible:visible').outerHeight(true) || 0;
+  mobile_nav = $('.phone-bottom-menu:visible').outerHeight(true) || 0;
   mobile_top_menu = $('.tablet-mobile-top-ber:visible').outerHeight(true) || 0;
   conversation_input = $('.bottom-chat-write:visible').outerHeight(true) || 0;
   desktop_top_menu = $('.header-to-area:visible').outerHeight(true) || 0;

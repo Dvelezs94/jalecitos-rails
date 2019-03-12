@@ -80,16 +80,9 @@ class OffersController < ApplicationController
       offer_params = params.require(:offer).permit(:description,
                                                    :price,
                                                    :hours
-                                                  )
-      offer_params = set_owner(offer_params)
+                                                 ).merge(:request_id => @request.id, :user_id => current_user.id)
     end
-
-    def set_owner parameters
-      parameters[:request_id] = @request.id
-      parameters[:user_id] = current_user.id
-      parameters
-    end
-
+    
     def check_offer_ownership
       if current_user != @offer.user
         redirect_to root_path
