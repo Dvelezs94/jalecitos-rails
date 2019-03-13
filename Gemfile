@@ -155,3 +155,5 @@ gem 'fog-aws', '~> 3.3'
 gem 'sitemap_generator', '~> 6.0', '>= 6.0.2'
 # Cron jobs
 gem 'sidekiq-cron', '~> 1.1'
+# introduce the site to new people
+gem 'introjs-rails', '~> 1.0'
