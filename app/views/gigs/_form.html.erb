@@ -12,7 +12,7 @@
         <h3 class="text-center">Agrega un nuevo Jale para ofertar tus servicios</h3>
         <div class="form_box post_form_col">
 
-          <div class="form_block row">
+          <div class="form_block form_section row">
             <div class="flex-space-bet">
               <p class="form-title">¿Cúal es tu profesión u oficio en este jale?</p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
@@ -21,7 +21,7 @@
             <%= form.text_field :profession, class: "styled", required: true, maxlength: 50, placeholder: "Ej: Fotógrafo" %>
           </div>
 
-          <div class="form_block row ">
+          <div class="form_block form_section row ">
             <div class="flex-space-bet">
               <p class="form-title">¿Qué vas a ofrecer?</p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
@@ -32,7 +32,7 @@
             <%= form.text_area :name, class: 'name-class name-0 required styled', placeholder: "realizarte una sesión de fotografías.", value: gig.name, maxlength: 100 %>
 
           </div>
-          <div class="form_block row ">
+          <div class="form_block form_section row ">
             <div class="flex-space-bet">
               <p class="form-title">Descripción general:</p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
@@ -43,7 +43,7 @@
              placeholder="Fotógrafo profesional con x años de experiencia. Ofrezco servicios de fotografía de calidad para eventos."></trix-editor>
           <p class="use-trix"> Si deseas opciones avanzadas en el texto, haz click<a href="#"> aquí</a> </p>
           </div>
-          <div class="form_block row">
+          <div class="form_block form_section row">
             <div class="flex-space-bet">
               <p class="form-title">Elige una categoria:</p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
@@ -53,7 +53,7 @@
 
           </div>
           <!-- 2 end -->
-          <div class="form_block row">
+          <div class="form_block form_section row">
             <div class="flex-space-bet">
               <p class="form-title">¿En qué ciudad del mundo te ubicas?
               </p>
@@ -67,7 +67,7 @@
           </div>
 
           <!-- tags -->
-          <div class="form_block row">
+          <div class="form_block form_section row">
             <div class="flex-space-bet">
               <p class="form-title">Especifica las etiquetas para que te encuentren más rapido (<strong>Opcional</strong>)
               </p>
