@@ -22,6 +22,8 @@ class Review < ApplicationRecord
   has_one :gig_rating, ->{ limit(5)}, class_name: 'Rate', as: :rateable
   has_one :rating, class_name: 'Rate', as: :rateable #limit 1 by default, this is used in reviews controller
 
+  validates_presence_of :reviewable, on: :create
+
   # Options to rate
   ratyrate_rateable 'Employee', 'Employer'
   enum status: { pending: 0, completed: 1 }

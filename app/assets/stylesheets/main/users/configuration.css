@@ -71,6 +71,15 @@
 	position: relative;
 }
 
+#config_tag_hint {
+	width: 100%;
+	position: static;
+}
+
+#config_tag_hint::before {
+	display: none;
+}
+
 .tab-user p {
 	position: absolute;
 	top: 50%;

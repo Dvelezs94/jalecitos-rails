@@ -18,10 +18,8 @@ class User < ApplicationRecord
   # only send these fields to elasticsearch
   def search_data
     {
-      id: id,
-      tags: tags,
-      city_id: city_id,
-      roles: roles
+      tags: tag_list.join(" "),
+      city_id: city_id
     }
   end
   #Define who can do the rating, which happens to be the user

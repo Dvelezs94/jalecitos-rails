@@ -23,7 +23,7 @@ class QueriesController < ApplicationController
   def guest_autocomplete_search
     render json: Searchkick.search(params[:query], {
       index_name: [Gig, Request],
-      suggest: [:name, :description, :profession],
+      suggest: [:name, :description, :profession, :tags],
       where:  { status: "published" }
     }).suggestions
   end
@@ -44,7 +44,7 @@ class QueriesController < ApplicationController
   def user_autocomplete_search
     render json: Searchkick.search(filter_query, {
       index_name: [Gig, Request],
-      suggest: [:name, :description, :profession],
+      suggest: [:name, :description, :profession, :tags],
       where:  { status: "published" }
     }).suggestions
   end
