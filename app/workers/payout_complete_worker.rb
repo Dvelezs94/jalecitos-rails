@@ -30,10 +30,10 @@ class PayoutCompleteWorker
     orders_array.each do |o|
       if o[:payout_left] == 0
         p "updating #{o} with 0 payout_left"
-        Order.find(o[:id]).update(paid_at: Time.now.strftime("%Y-%m-%d %H:%M:%S"), payout_left: o[:payout_left])
+        Order.find(o[:id]).update!(paid_at: Time.now.strftime("%Y-%m-%d %H:%M:%S"), payout_left: o[:payout_left])
       else
         p "updating #{o} with #{o[:payout_left]} payout_left"
-        Order.find(o[:id]).update(payout_left: o[:payout_left])
+        Order.find(o[:id]).update!(payout_left: o[:payout_left])
       end
     end
   end
