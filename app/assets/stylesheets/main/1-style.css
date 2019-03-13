@@ -2911,7 +2911,7 @@ div.form {
   width: 80%;
 }
 
-.question_hint.toggler {
+.question_hint {
   cursor: pointer;
 }
 
