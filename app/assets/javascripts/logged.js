@@ -21,6 +21,8 @@
 
 //= require jquery.nicescroll.js
 
+//= require introjs
+
 //= require best_in_place
 
 //= require jquery-fileupload/basic

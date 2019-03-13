@@ -27,7 +27,7 @@
               <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png'), root_path %>
             </div>
             <div class="input-area">
-              <%= form_with url: user_search_path, method: :get ,:html => {class: "search-form"} , local: true do |f|%>
+              <%= form_with url: user_search_path, method: :get ,:html => {class: "search-form"}, id: "search-form" , local: true do |f|%>
               <div class="form">
                 <%= icon("fas", "search", onclick: "$(this).closest('form').find('input[type=submit]').click()", style: "cursor: pointer;") %>
                 <%= f.text_field :query, value: params[:query], class: " desktop-query", placeholder: "Busca algo" %>
@@ -61,7 +61,7 @@
       <div class="col-3">
         <div class="tablet-mobile-input">
           <div class="mobile-input-icon">
-            <a class="menu-open" href="<%= user_mobile_search_path %>">
+            <a class="menu-open" id="menu-open" href="<%= user_mobile_search_path %>">
               <i class="fa fa-search"></i>
             </a>
           </div>
@@ -83,7 +83,7 @@
       </div>
       <div class="col-3 text-right">
         <div class="tablet-mobile-user">
-          <%=link_to image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "user_pic", lazy: true), user_path(current_user)%>
+          <%=link_to image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "user_pic", lazy: true, id: "user_pic"), user_path(current_user)%>
         </div>
       </div>
     </div>
@@ -94,13 +94,14 @@
 <div class="headerd-area">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3 col-md-2 col-12">
+      <div class="col-lg-3 col-md-2 col-2 col-sm-2">
         <div class="headerd-logo">
-          <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png', size: "138x32"), root_path %>
+          <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png', size: "138x32"), root_path, id: "main-logo" %>
+          <%= link_to(image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png', size: "32x32"), root_path, id: "mobile-logo") %>
         </div>
         <div class="mobile-menu"></div>
       </div>
-      <div class="col-lg-9 col-md-10 col-0">
+      <div class="col-lg-9 col-md-10 col-10">
         <div class="headerd-mainmenu">
           <nav id="mobile-menu">
             <%= nav_links_helper %>

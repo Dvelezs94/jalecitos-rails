@@ -36,6 +36,18 @@
     font-size: 21px;
   }
 
+  .hero-darea::after{
+    background: url(https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/hero+image.png);
+    background-position: top;
+    background-size: cover;
+    height: 100%;
+    content: "";
+    right: 135px;
+    bottom: -16px;
+    width: 35%;
+    position: absolute;
+  }
+
   form.search-form .query {
     font-size: 14px;
     padding: 12px 40px;
@@ -53,6 +65,10 @@
     font-weight: 400;
     margin-left: 5px;
     border-bottom: 1px dashed #9B9B9B;
+  }
+
+  #mobile-logo {
+    display: none;
   }
 
   .search-form-div a {
@@ -91,6 +107,10 @@
     display: block;
   }
 
+  .hero-darea-img img {
+    display: none;
+  }
+
 }
 
 @media (min-width: 768px) {
@@ -101,6 +121,9 @@
 
 /* LG Device :992px. */
 @media (min-width: 992px) and (max-width: 1199px) {
+  #mobile-logo {
+    display: none;
+  }
   .phone_links i {
     font-size: 21px;
   }
@@ -130,7 +153,9 @@
     height: 42px;
   }
 
-
+  .hero-darea-img img {
+    display: none;
+  }
 
   .search-form-div i {
     color: #9B9B9B;
@@ -386,6 +411,12 @@
     margin-right: 3px;
   }
 
+  .maild-form-wraps {
+    margin-bottom: 22px;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
   form.search-form .query {
     font-size: 19px;
     padding: 9px 54px;
@@ -423,7 +454,7 @@
   }
 
   .herodleft-side {
-    padding-right: 215px;
+    text-align: center;
   }
 
   .phone_links {
@@ -901,17 +932,19 @@
   }
 
   .hero-darea::after {
-    width: 100%;
+    display: none;
+  }
+
+  .hero-darea-img img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .maild-form {
     width: 85%;
     margin-left: 73px;
     z-index: 9;
-  }
-
-  .hero-darea::after {
-    z-index: -1;
   }
 
   .herod-leftmenu-wrap {
@@ -923,7 +956,7 @@
   }
 
   .herod-leftcontentwrap {
-    margin-top: 330px;
+    margin-top: 48px;
   }
 
   .singlecontactd-box {
@@ -938,14 +971,14 @@
   .contacd-icon {
     display: inline-block;
     position: absolute;
-    left: 0;
+    left: 113px;
     top: 0;
   }
 
   .contactd-content {
-    padding-left: 60px;
+    padding-left: 178px;
     margin-bottom: 30px;
-    padding-right: 275px;
+    padding-right: 40px;
   }
 
   .singlemobiled.text-right {
@@ -998,19 +1031,8 @@
     transition: .4s;
   }
 
-  .footerd2area::after {
-    position: absolute;
-    background: var(--light-gray);
-    content: "";
-    height: 181px;
-    top: -117px;
-    left: 0;
-    width: 100%;
-    z-index: -1;
-  }
-
   .maingreenbgd {
-    margin-bottom: 75px;
+    margin-bottom: 0px;
   }
 
   .footerd2social {
@@ -1079,18 +1101,6 @@
     margin-top: -11px;
   }
 
-  .hero-darea::after {
-    background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/main_banner2.png");
-    background-position: center;
-    background-size: cover;
-    height: 100%;
-    content: "";
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    position: absolute;
-  }
-
   .contacd-icon i {
     font-size: 35px;
   }
@@ -1148,10 +1158,21 @@
   #profile_tabs a {
     font-size: 14px;
   }
+  #mobile-logo {
+    display: none;
+  }
 }
 
 /* SM Small Device :320px. */
 @media only screen and (min-width: 320px) and (max-width: 767px) {
+  #main-logo {
+    display: none;
+  }
+
+  #mobile-logo {
+    display: inline;
+  }
+
   .todoo1 img {
     display: none;
   }
@@ -1195,17 +1216,16 @@
   }
 
   .hero-darea::after {
-    background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/main_banner2.png");
-    background-position: 23% 30%;
-    background-size: cover;
-    height: calc(60% + (80 - 60) * ((100vw - 320px) / (425 - 320)));
-    content: "";
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    position: absolute;
-    z-index: -1;
-    top: 0px;
+    display: none;
+  }
+
+  .hero-darea-img img {
+    max-width: 100%;
+    height: auto;
+    padding-bottom: 24px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .singlecontactd-box {
@@ -1222,17 +1242,6 @@
     display: block;
   }
 
-  .footerd2area::after {
-    position: absolute;
-    background: var(--light-gray);
-    content: "";
-    height: 120px;
-    top: -87px;
-    left: 0;
-    width: 100%;
-    z-index: -1;
-  }
-
   img {}
 
   .footerd2area {
@@ -1244,7 +1253,10 @@
   .footerd2fk img {
     border-radius: 50%;
     width: 58px;
-    margin-top: -42px;
+    margin-top: -22px;
+    margin-left: -8px;
+    margin-right: 64px;
+
   }
 
   .footerd2fk a {
@@ -1259,7 +1271,7 @@
     border-radius: 500%;
     line-height: 35px;
     text-align: center;
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .singlefooterdn ul {
@@ -1796,8 +1808,16 @@
   }
 
   .herodleft-side {
-    padding-top: 260px;
+    padding-top: 50px;
     padding-right: 0px;
+  }
+
+  .herodleft-side h1 {
+    text-align: center;
+  }
+
+  .herodleft-side p {
+    text-align: center;
   }
 
   .herod-leftmenu-wrap ul li a {
@@ -1812,7 +1832,7 @@
   }
 
   .contactd-area {
-    padding: 22px 0;
+    padding: 32px 0;
   }
 
   .todoo1 {
@@ -1824,9 +1844,7 @@
   }
 
   .singlemobiled.text-center {
-    position: absolute;
-    top: -190px;
-    right: -44px;
+    position: inherit;
   }
   .singlemobiled img{
     max-width: 185px;
@@ -1881,8 +1899,7 @@
   }
 
   .oferta {
-    margin-bottom: 0px;
-    padding-right: 146px;
+    display: none;
   }
 
   .maingreenbgd {
@@ -1922,7 +1939,7 @@
   }
 
   .greenbgd-area {
-    margin-bottom: 122px;
+    margin-bottom: 0px;
   }
 
   .footerd2social {
@@ -2024,7 +2041,7 @@
   }
   /*dont display menu in front of bottom content*/
   .main_container{
-    margin-bottom: 9vh;
+    margin-bottom: 4vh;
   }
 
   .phone_links a {

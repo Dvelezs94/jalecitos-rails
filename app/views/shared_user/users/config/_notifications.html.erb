@@ -27,13 +27,22 @@
           </div>
 
           <%=form_with(model: current_user, url: update_users_path, method: :put, :html => { :class=> "config-tag-form" }, remote: true) do |f| %>
-          <label for="">Etiquetas:</label>
-          <div class="tags-input" data-name="tags-input">
-            <%= f.hidden_field :tag_list, class: "hidden_tag_list" %>
-            <textarea rows="1" class="main-input config-tag-input font-awesome" placeholder="&#xf02c;"></textarea>
+
+          <div class="form_block">
+            <div class="flex-space-bet">
+              <label for="">Etiquetas:</label>
+              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
+            </div>
+            <div class="tags-input" data-name="tags-input">
+              <%= f.hidden_field :tag_list, class: "hidden_tag_list" %>
+              <textarea rows="1" class="main-input config-tag-input font-awesome" placeholder="&#xf02c;"></textarea>
+              <%= render 'shared_user/config/hints/tags_hint.html.erb' %>
+            </div>
+            <label class="tag-error error"></label>
+            <%= f.submit "enviar", style: "display:none;" %>
+
           </div>
-          <label class="tag-error error"></label>
-          <%= f.submit "enviar", style: "display:none;" %>
+
         <% end %>
       </div>
     </div>
