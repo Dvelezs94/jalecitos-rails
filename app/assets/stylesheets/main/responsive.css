@@ -36,6 +36,18 @@
     font-size: 21px;
   }
 
+  .hero-darea::after{
+    background: url(https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/hero+image.png);
+    background-position: top;
+    background-size: cover;
+    height: 100%;
+    content: "";
+    right: 135px;
+    bottom: -16px;
+    width: 35%;
+    position: absolute;
+  }
+
   form.search-form .query {
     font-size: 14px;
     padding: 12px 40px;
