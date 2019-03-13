@@ -12,7 +12,7 @@
       <div class="col-lg-7 col-md-12 centered-form">
         <h3 class="text-center">Crea un caso nuevo y nosotros te atenderemos a la brevedad.</h3>
         <div class="form_box post_form_col">
-          <div class="form_block row ">
+          <div class="form_block form_section row ">
             <div class="flex-space-bet">
               <p class="form-title">Título breve:</p>
             </div>
@@ -20,7 +20,7 @@
 
           </div>
 
-          <div class="form_block row ">
+          <div class="form_block form_section row ">
             <div class="flex-space-bet">
               <p class="form-title">Descripción del problema:</p>
             </div>
@@ -28,14 +28,14 @@
 
           </div>
 
-          <div class="form_block row">
+          <div class="form_block form_section row">
             <div class="flex-space-bet">
               <p class="form-title">Severidad del problema:</p>
             </div>
             <%= form.select(:priority, [["Baja", "low"], ["Media", "normal"], ["Alta", "high"]], {}, {class: "form-select required"}) %>
           </div>
 
-          <div class="form_block row">
+          <div class="form_block form_section row">
             <div class="flex-space-bet">
               <p class="form-title">Imágenes (<strong>Opcional</strong>) :</p>
             </div>

@@ -38,13 +38,17 @@
 
 
 
-.form_block textarea {
+.form_section textarea {
     padding: 5px 9px;
     display: inline-block;
     width: 100%;
     height: 70px;
     border: 1px #b2b2b2 solid;
     border-radius: 4px;
+}
+.config-tag-input {
+  padding: 5px 9px;
+  border-radius: 4px;
 }
 
 span.action {
@@ -135,7 +139,7 @@ ul.dropdown-menu {
     border-top: 0px;
 }
 
-.form_block .tooltiptext {
+.tooltiptext {
   display: none;
   background-color: #EAF3EF;
   color: #655e5e;
@@ -207,7 +211,7 @@ ul.dropdown-menu {
 .cf {
     *zoom: 1;
 }
-.form_block {
+.form_section {
   margin-bottom: 20px;
 }
 
@@ -302,16 +306,19 @@ section.plan.cf {
 .form_block {
     opacity: 1;
     position: relative;
-    margin: 0 20px 34px 20px;
-    padding-right: 20px;
-    padding-left: 20px;
+}
+
+.form_section {
+  margin: 0 20px 34px 20px;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .question_hint.toggler {
   display: none;
 }
 
-.form_block .tooltiptext {
+.tooltiptext {
     width: 46%;
     left: 100%;
     position: absolute;
@@ -370,7 +377,7 @@ span.tooltiptext:before {
 
 
 @media only screen and (max-width:1016px){
-.form_block .tooltiptext {
+.tooltiptext {
     width: 100%;
     margin: 17px 0px;
 }
@@ -390,7 +397,7 @@ p.example {
     font-size: 18px;
 }
 
-.form_block.row {
+.form_section.row {
     padding-right: 26px;
     padding-left: 26px;
 }
