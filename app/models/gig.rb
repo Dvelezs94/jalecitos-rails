@@ -5,12 +5,13 @@ class Gig < ApplicationRecord
   include LocationFunctions
   include GigRequestFunctions
   #search
-  searchkick language: "spanish", word_start: [:name, :description, :profession], suggest: [:name, :description, :profession]
+  searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
   def search_data
     {
       name: no_special_chars(name).downcase,
       #remove html, multi spaces (IS REQUIRED REPLACING THE HTML WITH SPACE) and remove entities (also strip spaces from beginning and end), then remove special chars amd strip (removes leading and trailing spaces) and make it downcase
-      description: "#{no_special_chars( decodeHTMLEntities(  no_double_spaces( no_html(description, true) ), false ) ).strip.downcase} #{tag_list.join(" ")}",
+      description: no_special_chars( decodeHTMLEntities(  no_double_spaces( no_html(description, true) ), false ) ).strip.downcase,
+      tags: tag_list.join(" "),
       city_id: city_id,
       category_id: category_id,
       status: status,
