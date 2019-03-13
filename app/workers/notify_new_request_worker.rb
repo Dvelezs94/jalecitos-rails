@@ -6,19 +6,21 @@ class NotifyNewRequestWorker
 
   def perform(request_id)
     request = Request.find(request_id)
-    # Users list from gigs professions and location
-    @users_gigs = Gig.search(request.profession, where: {city_id: request.city_id}, load: false).results.map(&:user_id)
-
-    # Users list from tags list and location
-    if (@tags = request.tag_list.to_s) != ""
-      @users_tags = User.search(@tags, operator: "or", where: {city_id: request.city_id}, load: false).results.map(&:id)
-    else
-      @users_tags = []
-    end
-
+    #specifications
+    specif = request.tag_list.join(" ") +  " " + request.profession
+    # Search from gigs
+    @gigs = Gig.search(specif, fields: [:tags, :profession], operator: "or", where: {city_id: request.city_id}, load: false, execute: false)
+    # Search from users
+    @users = User.search(specif, fields: [:tags], operator: "or", where: {city_id: request.city_id}, load: false, execute: false)
+    #make search in one request
+    Searchkick.multi_search([@gigs, @users])
+    #get ids
+    @gig_user_ids = @gigs.map(&:user_id)
+    @user_ids = @users.map(&:id)
     # Merge both lists with unique users ids
-    @users = (@users_gigs + @users_tags).uniq
-
+    @notify_to = (@user_ids + @gig_user_ids).uniq
+    #dont send to owner
+    @notify_to -= [request.user_id]
     #build notification
     @message = {
       notification: {
@@ -31,8 +33,8 @@ class NotifyNewRequestWorker
     }
 
     #Loop through every subscription to send the push notification
-    @users.each do |user|
-      createFirebasePush(user, @message)
+    @notify_to.each do |user_id|
+      createFirebasePush(user_id, @message)
     end
 
   end
