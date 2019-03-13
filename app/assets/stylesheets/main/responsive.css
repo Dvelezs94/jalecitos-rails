@@ -105,6 +105,9 @@
 
 /* LG Device :992px. */
 @media (min-width: 992px) and (max-width: 1199px) {
+  #mobile-logo {
+    display: none;
+  }
   .phone_links i {
     font-size: 21px;
   }
