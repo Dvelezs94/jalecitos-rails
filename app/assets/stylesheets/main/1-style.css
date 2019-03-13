@@ -1826,15 +1826,15 @@ button:focus {
 /*headerd*/
 /*headerd-hero*/
 .hero-darea::after {
-  background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/main_banner.png");
-  background-position: center;
-  background-size: cover;
-  height: 100%;
-  content: "";
-  right: 0;
-  bottom: 0;
-  width: 56%;
-  position: absolute;
+  background: url("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/hero+image.png");
+  background-position: top;
+    background-size: cover;
+    height: 100%;
+    content: "";
+    right: 45px;
+    bottom: -16px;
+    width: 48%;
+    position: absolute;
 }
 
 .hero-darea {
@@ -1845,10 +1845,6 @@ button:focus {
   margin-top: 115px;
   position: relative;
   z-index: 9;
-}
-
-.herodleft-side {
-  padding-right: 95px;
 }
 
 .herodleft-side h1 {
@@ -1965,7 +1961,7 @@ button:focus {
 .contactd-heading h2 {
     color: #000;
     font-size: calc(28px + (40 - 28) * ((100vw - 320px) / (1800 - 320)));
-    line-height: calc(28px + (42 - 28) * ((100vw - 320px) / (1800 - 320)));
+    line-height: calc(32px + (44 - 32) * ((100vw - 320px) / (1800 - 320)));
     margin-bottom: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
     margin-top: calc(16px + (24 - 16) * ((100vw - 320px) / (1800 - 320)));
 }
