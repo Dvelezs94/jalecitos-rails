@@ -55,7 +55,7 @@ class PagesController < ApplicationController
   end
 
   def sitemap
-    redirect_to https://production.jalecitos.com.s3.amazonaws.com/sitemaps/sitemap.xml.gz
+    redirect_to "https://production.jalecitos.com.s3.amazonaws.com/sitemaps/sitemap.xml"
   end
 
   def work
