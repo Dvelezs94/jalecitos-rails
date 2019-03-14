@@ -39,16 +39,8 @@ module DescriptionRestrictions
     errors.add(:base, "La descriptión contiene demasiados efectos de texto") if real_char.length > 2000
   end
 
-  def no_special_chars text
-    text.gsub(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/, '')
-  end
-
   def no_html text, keep_a_space=false
     (keep_a_space)? text.gsub(/<[^>]*>/, " ") : text.gsub(/<[^>]*>/, "")
-  end
-
-  def no_double_spaces text
-    text.gsub(/ +/, " ")
   end
 
 end
