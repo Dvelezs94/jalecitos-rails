@@ -11,7 +11,7 @@
           <div>
               <h4>Oferta de <%= @offer.user.alias %></h4>
           </div>
-           <p><%= @offer.description.html_safe %></p>
+           <p><%= @offer.description %></p>
         </div>
         <div class="total-a">
             <p>Subtotal<span><%= number_to_currency(@price[:subtotal]) %> MXN</span></p>

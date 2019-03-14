@@ -1,16 +1,16 @@
 class Gig < ApplicationRecord
   #includes
   include TagRestrictions
-  include DescriptionRestrictions
   include LocationFunctions
+  include FilterRestrictions
   include GigRequestFunctions
   #search
   searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
   def search_data
     {
       name: no_special_chars(name).downcase,
-      #remove html, multi spaces (IS REQUIRED REPLACING THE HTML WITH SPACE) and remove entities (also strip spaces from beginning and end), then remove special chars amd strip (removes leading and trailing spaces) and make it downcase
-      description: no_special_chars( decodeHTMLEntities(  no_double_spaces( no_html(description, true) ), false ) ).strip.downcase,
+      #remove special chars
+      description: no_special_chars(description),
       tags: tag_list.join(" "),
       city_id: city_id,
       category_id: category_id,
@@ -45,8 +45,8 @@ class Gig < ApplicationRecord
   validates_presence_of :name, :profession, :description
   validate :maximum_amount_of_tags, :no_spaces_in_tag, :tag_length
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
+  validates_length_of :description, :maximum => 1000, :message => "debe contener como máximo 1000 caracteres."
   validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
-  validate :description_length, :count_without_html
   validate :location_validate
   #Gallery validations
   validates :images, length: {
@@ -60,24 +60,13 @@ class Gig < ApplicationRecord
 
   #capitalize before save
   def profession=(val)
-    write_attribute(:profession, no_double_spaces(val.strip.capitalize))
+    write_attribute(:profession, no_multi_spaces(val.strip.capitalize))
   end
   def description=(val)
-    write_attribute(:description, remove_uris(val))
+    write_attribute(:description, no_multi_spaces(remove_uris(val.strip)))
   end
   def name=(val)
-    write_attribute(:name, remove_uris(val))
-  end
-
-
-  #functions
-  def remove_uris(text)
-  uri_regex = %r"((?:(?:[^ :/?#]+):)(?://(?:[^ /?#]*))(?:[^ ?#]*)(?:\?(?:[^ #]*))?(?:#(?:[^ ]*))?)"
-    text.split(uri_regex).collect do |s|
-      unless s =~ uri_regex
-        s
-      end
-    end.join
+    write_attribute(:name, no_multi_spaces(remove_uris(val.strip)))
   end
 
   def title
