@@ -53,7 +53,38 @@
 span.action {
   color: #000;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
+}
+
+span.action-gig {
+  position: absolute;
+  top: 39%;
+  left: 3%;
+}
+.action-indent {
+  text-indent: 10% !important;
+}
+@media screen and (min-width: 480px) and (max-width: 520px) {
+  .action-indent {
+    text-indent: 12% !important;
+  }
+
+}
+@media screen and (min-width: 390px) and (max-width: 479px) {
+  .action-indent {
+    text-indent: 20% !important;
+  }
+  span.action-gig {
+    left: 5%;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 389px) {
+  .action-indent {
+    text-indent: 25% !important;
+  }
+  span.action-gig {
+    left: 7%;
+  }
 }
 
 .form_box .styled {
@@ -426,6 +457,7 @@ button[disabled] {pointer-events:none}
 .count{
   margin-left: auto;
   font-size: 0.8rem;
+
 }
 span.error,
 div.error{
