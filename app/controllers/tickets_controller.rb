@@ -1,5 +1,4 @@
 class TicketsController < ApplicationController
-  include SanitizeParams
   layout 'logged'
   before_action :authenticate_user!
   before_action :set_ticket, only: [:show, :mark_as_resolved]

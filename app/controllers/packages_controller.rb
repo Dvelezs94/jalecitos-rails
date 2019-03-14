@@ -1,8 +1,6 @@
 class PackagesController < ApplicationController
   layout 'logged'
-  include SanitizeParams
   include PackTypes
-  include DescriptionRestrictions
   include OpenpayHelper
   before_action :set_gig_and_packages, only: [:new, :create, :edit_packages, :update_packages]
   before_action :check_gig_ownership, only: [:new, :create, :edit_packages, :update_packages]
@@ -29,7 +27,7 @@ end
   def create
     if params[:packages].count == 3
       params[:packages].each_with_index do |pack, pack_type|
-          pack = sanitized_params( package_params(pack) )
+          pack = package_params(pack)
           pack[:pack_type] = pack_type
           pack[:gig_id] = @gig.id
           @pack = Package.new(pack)
@@ -48,7 +46,7 @@ end
   def update_packages
     @gig.gig_packages.each do |record|
       pack = params[:packages]["#{record.slug}"]
-      pack = sanitized_params( package_params(pack) )
+      pack = package_params(pack)
       if record.update(pack)
         flash[:notice] = 'Tu Jale se ha actualizado exitosamente.'
       else
@@ -100,13 +98,9 @@ end
 
   def validate_create
     params[:packages].each do |pack|
-      real_char = decodeHTMLEntities(pack[:description])
-      noHtml = pack[:description].gsub(/<[^>]*>/, "")
-      noHtml_real_char = decodeHTMLEntities(noHtml)
       flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 111 && pack[:price] != "")
       flash.now[:error] = "No puedes ganar arriba de de 9,000 MXN" if (pack[:price].to_f > 10000)
-      flash.now[:error] = "Sólo se admiten como máximo 1000 caracteres" if noHtml_real_char.length > 1000
-      flash.now[:error] = "La descriptión contiene demasiados efectos de texto" if real_char.length > 2000
+      flash.now[:error] = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
       flash.now[:error] = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
       if flash.now[:error]
         prepare_packages
@@ -118,13 +112,9 @@ end
   def validate_update
     @gig.gig_packages.each do |record|
       pack = params[:packages]["#{record.slug}"]
-      real_char = decodeHTMLEntities(pack[:description])
-      noHtml = pack[:description].gsub(/<[^>]*>/, "")
-      noHtml_real_char = decodeHTMLEntities(noHtml)
       flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 111 && pack[:price] != "")
       flash.now[:error] = "No puedes ganar arriba de de 9,000 MXN" if (pack[:price].to_f > 10000)
-      flash.now[:error] = "Sólo se admiten como máximo 1000 caracteres" if noHtml_real_char.length > 1000
-      flash.now[:error] = "La descriptión contiene demasiados efectos de texto" if real_char.length > 2000
+      flash.now[:error] = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
       flash.now[:error] = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
       if flash.now[:error]
         define_pack_names

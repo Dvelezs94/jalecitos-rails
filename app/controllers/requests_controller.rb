@@ -1,5 +1,4 @@
 class RequestsController < ApplicationController
-  include SanitizeParams
   include SetLayout
   include GetRequest
   before_action :authenticate_user!, except: :show
@@ -38,7 +37,7 @@ class RequestsController < ApplicationController
 
   # POST /requests
   def create
-    @request = Request.new( sanitized_params(request_params) )
+    @request = Request.new( request_params )
     if @request.save
       redirect_to request_path(@request), notice: 'Tu pedido fue creado.'
     else

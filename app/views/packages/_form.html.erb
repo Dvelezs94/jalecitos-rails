@@ -34,10 +34,11 @@
               <div class="flex-space-bet">
                 <p class="form-title">Lo que realizaré</p>
               </div>
-              <%= pa.text_field :description, id: "description#{n}", type: "hidden" %>
-              <trix-editor input="description<%= n %>" class="trix-class trix_input_<%= n %> form_fields_<%= n %> styled"
-                 maxlength="1000" placeholder="5 fotos tamaño infantil a color"></trix-editor>
-              <p class="use-trix"> Si deseas opciones avanzadas en el texto, haz click<a href="#"> aquí</a> </p>
+
+                 <%= pa.text_area :description, id: "description#{n}", maxlength: 1000,
+                 placeholder: "5 fotos tamaño infantil a color",
+                 class: "description-class description-#{n} form_fields_#{n} styled required", rows: 5 %>
+
               <span class="error error_span_<%= 3*n+2 %>"></span>
             </div>
             <hr>

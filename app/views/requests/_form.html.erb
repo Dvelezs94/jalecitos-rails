@@ -30,9 +30,11 @@
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
             <%= render 'shared_user/requests/forms/hints/description_hint.html.erb' %>
-            <%= form.text_field :description, id: "description", type: "hidden" %>
-            <trix-editor input="description" class="trix-class trix_input_0 required styled" maxlength="1000"></trix-editor>
-            <p class="use-trix"> Si deseas opciones avanzadas en el texto, haz click<a href="#"> aquí</a> </p>
+
+            <%= form.text_area :description, id: "description", maxlength: 1000,
+            placeholder: "Necesito fotografías blanco y negro tamaño infantil.",
+            class: "description-class description-0 styled required", rows: 5 %>
+
           </div>
 
           <div class="form_block form_section row">
