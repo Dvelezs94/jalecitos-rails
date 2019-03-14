@@ -30,21 +30,21 @@
         <label for="">Nombre completo</label>
         <div class="inp-area">
           <%= best_in_place current_user, :name, url: update_users_path, style: "padding: 5px;", :data => {:name => "nombre"},
-           :place_holder => "Edítame", id: "change_user_name" %>
-          <%= icon("fas", "pencil-alt", onclick: "$(this).closest('div').find('span.best_in_place').click()") %>
+           :place_holder => "Edítame", id: "change_user_name", inner_class: "best_input" %>
+          <%= icon("fas", "pencil-alt", class: "toggable") %>
         </div>
         <label for="">Alias</label>
         <div class="inp-area">
           <%= best_in_place current_user, :alias, class: "change_user_alias", url: update_users_path,
-           style: "padding: 5px;", :data => {:name => "alias"}, id: "change_user_alias" %>
-          <%= icon("fas", "pencil-alt", onclick: "$(this).closest('div').find('span.best_in_place').click()") %>
+           style: "padding: 5px;", :data => {:name => "alias"}, id: "change_user_alias", inner_class: "best_input" %>
+          <%= icon("fas", "pencil-alt", class: "toggable") %>
         </div>
         <label for="">Sobre mí</label>
         <div class="textarea-area">
           <%= best_in_place current_user, :bio, as: :textarea, :place_holder => "Edítame",
            :html_attrs => {:maxlength => 500}, url: update_users_path, class: "change_bio",
-            inner_class: "change_bio_input", :data => {:name => "biografía"}, id: "change_user_bio" %>
-          <%= icon("fas", "pencil-alt", onclick: "$(this).closest('div').find('span.best_in_place').click()") %>
+            inner_class: "best_input change_bio_input", :data => {:name => "biografía"}, id: "change_user_bio" %>
+          <%= icon("fas", "pencil-alt", class: "toggable") %>
         </div>
         <div class="inp-area marker-ex">
           <label for="">Ubicación</label>
@@ -59,7 +59,7 @@
         <div class="">
           <label for="">Edad</label>
           <li class="nav-item dropdown">
-            <%= best_in_place current_user, :age, :as => :select, :collection => (18..100).map { |i| [i, "#{i} años"]},
+            <%= best_in_place current_user, :age, :as => :select, :collection => (0..100).map { |i| [i, "#{i} años"]},
              :place_holder => "Indefinido", url: update_users_path, :data => {:name => "edad"}, id: "change_user_age" %>
           </li>
         </div>

@@ -157,10 +157,12 @@
   margin-top: -8px;
   cursor: pointer;
 }
-.inp-area i.fas.fa-pencil-alt {
+.inp-area i.fas.fa-pencil-alt,
+.inp-area i.fas.fa-check {
 	top: 56%;
 }
-.textarea-area i.fas.fa-pencil-alt {
+.textarea-area i.fas.fa-pencil-alt,
+.textarea-area i.fas.fa-check {
 	top: 7%;
 }
 .inp-area .fas.fa-map-marker-alt {
