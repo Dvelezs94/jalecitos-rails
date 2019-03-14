@@ -11,8 +11,6 @@
 
 //= require gritter
 
-//= require trix
-
 //= require jquery.steps
 
 //= require jquery.easing

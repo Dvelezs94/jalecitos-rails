@@ -10,7 +10,7 @@
         </div>
         <div class="mantenimiento-text">
               <h4><%= @package.name %></h4>
-           <p><%= @package.description.html_safe %></p>
+           <p><%= @package.description %></p>
         </div>
         <div class="total-a">
           <p>Subtotal<span><%= number_to_currency(@price[:subtotal]) %> MXN</span></p>

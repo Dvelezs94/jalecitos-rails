@@ -55,8 +55,7 @@ function deleteFormContent(formNumber) {
   $("a.pack-tab-displayer")[0].style.display = "block";
   $(".name-" + formNumber)[0].value = "";
   $(".name-" + formNumber).keyup();
-  $("trix-editor[input=description" + formNumber + "]")[0].value = "";
-  $("trix-editor[input=description" + formNumber + "]").keyup();
+  $(".description-" + formNumber)[0].value = "";
   $(".price-input-" + formNumber)[0].value = "";
   $("#price-calc-" + formNumber).html("-");
   $("#base-price-" + formNumber).val("");
