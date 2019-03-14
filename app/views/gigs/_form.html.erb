@@ -27,9 +27,10 @@
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
             <%= render 'shared_user/gigs/forms/hints/name_hint.html.erb' %>
-
-            <span class="action">Voy a...</span>
-            <%= form.text_area :name, class: 'name-class name-0 required styled', placeholder: "realizarte una sesión de fotografías.", maxlength: 100 %>
+            <div style="position:relative;width:100%;margin:0 auto;" class="row">
+              <span class="action action-gig">Voy a </span>
+              <%= form.text_area :name, class: 'name-class name-0 required styled action-indent', placeholder: "realizarte una sesión de fotografías.", maxlength: 100 %>
+            </div>
 
           </div>
           <div class="form_block form_section row ">
