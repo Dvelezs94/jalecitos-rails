@@ -1,5 +1,6 @@
 # Set the host name for URL creation
 SitemapGenerator::Sitemap.default_host = "https://www.jalecitos.com"
+SitemapGenerator::Sitemap.compress = false
 SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(fog_provider: 'AWS',
                                                                     aws_access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
                                                                     aws_secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
