@@ -15,9 +15,9 @@
             <div class="flex-space-bet">
               <p class="form-title">Descripción:</p>
             </div>
-            <%= form.text_field :description, class: 'form-control', id: "description", type: "hidden" %>
-            <trix-editor input="description" class="trix-class trix_input_0 required" maxlength="1000" placeholder="Por favor, describe por qué serías la mejor opción para este proyecto."></trix-editor>
-            <p class="use-trix"> Si deseas opciones avanzadas en el texto, haz click<a href="#"> aquí</a> </p>
+            <%= form.text_area :description, id: "description", maxlength: 1000,
+            placeholder: "Por favor, describe por qué serías la mejor opción para este proyecto.",
+            class: "description-class description-0 styled required", rows: 5 %>
           </div>
 
 
@@ -25,14 +25,14 @@
             <div class="flex-space-bet">
               <p class="form-title">Horas estimadas (<strong>Opcional</strong>):</p>
             </div>
-            <%= form.number_field :hours, class: 'form-control', step: 1 %>
+            <%= form.number_field :hours, class: 'styled', step: 1 %>
           </div>
           <div class="form_block form_section row">
             <div class="row will-earn justify-content-center col-lg-6 col-md-6 col-sm-12 col-12">
               <p class="price-text form-title">Lo que ganaré:</p>
               <div class="row justify-content-center">
                 <input type="number" name="want_win_0" min="100" max="9000" step=".01"
-                class="price-input price-input-0 form-control required"
+                class="price-input price-input-0 styled required"
                 value="<%= (@offer.price*0.9).round(2) if params[:action] == 'edit' %>">
                 <%= form.hidden_field :price, id: "base-price-0" %>
               </div>

@@ -1,5 +1,4 @@
 class GigsController < ApplicationController
-  include SanitizeParams
   include GigStatus
   include GetGig
   include PackTypes
@@ -42,7 +41,7 @@ class GigsController < ApplicationController
 
   # POST /gigs
   def create
-    @gig = Gig.new(sanitized_params(gig_params))
+    @gig = Gig.new(gig_params)
 
     if @gig.save
       redirect_to user_gig_galleries_path(current_user.slug, @gig)
@@ -53,7 +52,7 @@ class GigsController < ApplicationController
 
   # PATCH/PUT /gigs/1
   def update
-    if @gig.update(sanitized_params(gig_params))
+    if @gig.update(gig_params)
       @package = Package.find_by_gig_id(@gig)
       redirect_to user_gig_galleries_path(current_user.slug, @gig)
     else
