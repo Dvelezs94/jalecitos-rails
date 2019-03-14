@@ -8,7 +8,7 @@ function init_char_N_count() {
 
   nameInputs = $(".name-class");
     $(".name-class").keyup(char_N_count);
-  for (var i = 0; i < trixInputs.length; i++) {
+  for (var i = 0; i < nameInputs.length; i++) {
     $(".name-" + i).before("<label id='count_N_" + i + "' class='count'></label>");
     $(".name-" + i).keyup();
   }
