@@ -1,7 +1,7 @@
 <div class="col-lg-6">
 <div class="transacciones-tab-text">
   <div class="pendiente-text">
-      <h5 class="<%= single_purchase.status %>"><%= t "orders.status.#{single_purchase.status}" %></h5>
+      <h5 class="<%= single_purchase.status %>"><%= t("orders.status.#{single_purchase.status}") %> <%= order_hint_employer(single_purchase.status) %></h5>
       <h4># <%= single_purchase.uuid %></h4>
       <% if single_purchase.purchase_type == "Package"%>
       <p><%= link_to single_purchase.purchase.gig.title, user_gig_path(single_purchase.purchase.gig.user.slug, single_purchase.purchase.gig.slug), class: "order-title" rescue "Jale Eliminado" %></p>
