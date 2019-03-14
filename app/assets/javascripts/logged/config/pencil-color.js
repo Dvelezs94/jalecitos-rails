@@ -21,8 +21,14 @@ $(document).on('turbolinks:load', function() {
       else {
         window.best_focus = false;
       }
-
     });
-
+    $("body").focusout(function() {
+      $(".toggable").removeClass("fa-check green");
+      $(".toggable").addClass("fa-pencil-alt");
+    });
+    $(".best_input").focusout(function() {
+      $(".toggable").removeClass("fa-check green");
+      $(".toggable").addClass("fa-pencil-alt");
+    });
 }
 });
