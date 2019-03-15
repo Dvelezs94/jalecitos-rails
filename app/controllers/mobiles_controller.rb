@@ -5,9 +5,11 @@ class MobilesController < ApplicationController
   before_action :set_mb_cookie
 
   def log_in
+    render "users/sessions/new"
   end
 
   def register
+    render "users/registrations/new"
   end
 
   private
