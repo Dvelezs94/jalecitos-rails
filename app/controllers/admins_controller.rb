@@ -63,5 +63,6 @@ class AdminsController < ApplicationController
     @pending_bans = Ban.pending.count
     @pending_disputes = Dispute.waiting_for_support.count
     @open_tickets = Ticket.in_progress.count
+    @user_count = User.count
   end
 end
