@@ -14,6 +14,10 @@
   justify-content: center;
 }
 
+.form_box.post_form_col {
+  margin-bottom: 5vh;
+}
+
 .post_form_col {
     background: #fff;
     padding: 22px 0px;
