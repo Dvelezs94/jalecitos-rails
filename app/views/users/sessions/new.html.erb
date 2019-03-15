@@ -7,7 +7,7 @@
              </div>
              <div class="sign-up-form">
                  <div class="nueva">
-                     <h3>Identificate</h3>
+                     <h3>Identifícate</h3>
                      <%= button_to user_facebook_omniauth_authorize_path(lat:"latitude", lon:"longitude"), form_class: 'facebook-login', :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i> Entrando..." } do %>
                      <%= icon("fab", "facebook-square") + " Facebook" %>
                      <% end %>
@@ -16,12 +16,11 @@
                    <div class="information">
                      <%= f.email_field :email, placeholder: "Correo", class: "required", value: "", autofocus: true, autocomplete: :off,onfocus: "getLocation();" %>
                      <%= f.password_field :password, placeholder: "Contraseña" , class: "required" %>
-                     <%= hidden_field_tag :from_mobile, value = 'true' %>
                    </div>
                    <%= f.check_box :remember_me, :checked => true, :style => 'display: none' %>
                    <%= f.button 'Continuar', class: "default-btn signup-continue", :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i> Entrando..." } %>
                   <p class="una"><%= link_to "Olvidé mi contraseña", new_password_path(:user) %></p>
-                   <p class="una">¿No tienes cuenta?  <%= link_to "Regístrate", mobile_sign_up_path %></p>
+                   <p class="una">¿No tienes cuenta?  <%= link_to "Regístrate",params[:controller] == "mobiles"? mobile_sign_up_path : new_user_registration_path %></p>
                  <% end %>
              </div>
          </div>

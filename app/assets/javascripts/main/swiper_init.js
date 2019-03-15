@@ -62,13 +62,13 @@ $(document).on('turbolinks:load', function() {
     slidesPerView: 1,
     autoplay: false,
     autoplay: {
-      delay: 5000
+      delay: 3000
     }
   });
   if ($(".show-slide").length - 2 == 1) {
     gig_show.autoplay.stop();
   }
-  window.dispatchEvent(new Event('resize')); //this fixes the bug of slider after cache
+  window.dispatchEvent(new Event('resize')); //this fixes the bug of slider loading with turbolinks and cache
 });
 
 function fillCarousel(carousel) {

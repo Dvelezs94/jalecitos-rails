@@ -672,6 +672,7 @@ p.quam1 {
   margin-bottom: 5px;
   font-size: 40px;
   color: #000;
+  word-break: break-all;
 }
 
 .innersocial-list i {
@@ -1092,6 +1093,9 @@ p.limpi1 {
   font-size: 14px;
   color: #BFBFBF;
   font-weight: 700;
+}
+.verificos-title {
+  margin-top: 1vh;
 }
 
 .varificado-btn3 a {
