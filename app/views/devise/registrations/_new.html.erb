@@ -30,6 +30,8 @@
                  <% end %>
                  <br>
                  <p>Al continuar aceptas los <%= link_to "Terminos y Condiciones", terminos_y_condiciones_path, target: "_blank" %> así como el <%= link_to "Aviso de Privacidad", aviso_de_privacidad_path, target: "_blank" %></p>
+                 <p style="color:var(--green);">¿No encuentras el mail? Revisa tu carpeta de spam</p>
+                 <%= link_to "¿No recibiste las instrucciones de confirmación?", new_confirmation_path(resource_name) %> <br/>
              </div>
          </div>
       </div>

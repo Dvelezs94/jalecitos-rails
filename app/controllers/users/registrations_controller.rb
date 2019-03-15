@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  layout "mobile"
   prepend_before_action :check_captcha, only: [:create]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -29,9 +30,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       set_minimum_password_length
       if resource.errors.any?
-        redirect_to root_path, notice: "#{resource.errors.full_messages[0]}"
+        redirect_to new_user_session_path, notice: "#{resource.errors.full_messages[0]}"
       else
-        redirect_to root_path, notice: "Algo ha salido mal con tu registro. Contacta a Soporte para mayor información."
+        redirect_to new_user_session_path, notice: "Algo ha salido mal con tu registro. Contacta a Soporte para mayor información."
       end
     end
   end
@@ -66,11 +67,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
         flash[:success] = "Tu cuenta ha sido desactivada."
         redirect_to after_destroy_account_path
       else
-        flash[:notice] = "Couldn't delete"
+        flash[:notice] = "No se pudo borrar"
         redirect_to configuration_path
       end
     else
-      flash[:notice] = "La contrasena no es valida"
+      flash[:notice] = "La contraseña no es válida"
       redirect_to configuration_path
     end
   end
@@ -103,11 +104,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
-    params[:from_mobile].present? ? mobile_sign_up_path : root_path
+    cookies.permanent.signed[:mb].present? ? mobile_sign_up_path : root_path
   end
 
   def after_destroy_account_path
-    params[:from_mobile].present? ? mobile_sign_in_path : root_path
+    cookies.permanent.signed[:mb].present? ? mobile_sign_in_path : root_path
   end
 
   private
@@ -118,9 +119,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash[:error] = "Por favor, confirma que no eres un robot en tu registro."
       redirect_to after_inactive_sign_up_path_for(resource)
     end
-  end
-
-  def redirect_validation
-    params[:from_mobile].present? ? "mobiles#log_in" : 'pages#home'
   end
 end
