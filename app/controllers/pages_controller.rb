@@ -110,7 +110,7 @@ class PagesController < ApplicationController
 
   def signed_and_rev
     #format html helps to not query pending reviews when pagination triggers
-    (:signed_in? && params[:review] == "true" && request.format.html?)? true : false
+    (user_signed_in? && params[:review] == "true" && request.format.html?)? true : false
   end
 
 
