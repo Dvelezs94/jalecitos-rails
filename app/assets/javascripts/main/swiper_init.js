@@ -6,20 +6,20 @@ $(document).on('turbolinks:load', function() {
     loop: false,
     spaceBetween: 10,
     breakpoints: {
-          0: {
-            slidesPerView: 4,
-          },
-          768: {
-            slidesPerView: 5,
-          },
-          1000: {
-            slidesPerView: 6,
-          }
-        }
+      0: {
+        slidesPerView: 4,
+      },
+      768: {
+        slidesPerView: 5,
+      },
+      1000: {
+        slidesPerView: 6,
+      }
+    }
 
   });
 
-  $(".gig-req-carousel").each(function(index, element){
+  $(".gig-req-carousel").each(function(index, element) {
     var $this = $(this);
     el = new Swiper(this, {
       slidesPerView: "auto",
@@ -53,7 +53,7 @@ $(document).on('turbolinks:load', function() {
 
     });
     window.swip[$(element).attr('class').split(' ')[1]] = el;
-    el.on('slideChange', function () {
+    el.on('slideChange', function() {
       fillCarousel(this);
     });
   });
@@ -64,15 +64,15 @@ $(document).on('turbolinks:load', function() {
     autoplay: {
       delay: 5000
     }
-});
-if ($(".show-slide").length -2 == 1)  {
-  gig_show.autoplay.stop();
-}
-
+  });
+  if ($(".show-slide").length - 2 == 1) {
+    gig_show.autoplay.stop();
+  }
+  window.dispatchEvent(new Event('resize')); //this fixes the bug of slider after cache
 });
 
 function fillCarousel(carousel) {
-  if (carousel.slides.length - carousel.activeIndex  < 8) {
+  if (carousel.slides.length - carousel.activeIndex < 8) {
     link_elem = $(carousel.wrapperEl).find(".carousel-paginator:hidden");
     if (link_elem.length > 0) { //useful to not cause errors while moving and waiting for request
       url = link_elem.attr("href");
