@@ -22,15 +22,15 @@
                    <%= f.password_field :password_confirmation, placeholder: "Confirmar contraseña", id: "user_password_conf_new", required: true, class: "required", autocomplete: "new-password" %>
                    <%= hidden_field_tag :sign_up_lat, value = '' %>
                    <%= hidden_field_tag :sign_up_lon, value = '' %>
-                   <%= hidden_field_tag :from_mobile, value = 'true' %>
                    <div class="row justify-content-center", style="margin-bottom:40px;">
                      <%= recaptcha_tags %>
                    </div>
                    <%= f.button 'Continuar', class: "default-btn signup-continue", :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i> Entrando..." } %>
-                   <p class="una">¿Ya tienes una cuenta?  <%= link_to "Inicia sesión", mobile_sign_in_path %></p>
+                   <p class="una">¿Ya tienes una cuenta?  <%= link_to "Inicia sesión", params[:controller]== "mobiles"? mobile_sign_in_path : new_user_session_path %></p>
                  <% end %>
-                 <br>
                  <p>Al continuar aceptas los <%= link_to "Terminos y Condiciones", terminos_y_condiciones_path, target: "_blank" %> así como el <%= link_to "Aviso de Privacidad", aviso_de_privacidad_path, target: "_blank" %></p>
+                 <p style="color:var(--green);">¿No encuentras el mail? Revisa tu carpeta de spam</p>
+                   <%= link_to "¿No recibiste las instrucciones de confirmación?", new_confirmation_path(resource_name) %> <br/>
              </div>
          </div>
       </div>

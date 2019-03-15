@@ -2,19 +2,16 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  layout "mobile"
   after_action :set_cookie, only: :create
 
   # GET /resource/sign_in
   def new
-    auth_options = { :recall => redirect_validation, :scope => :user }
-    resource = warden.authenticate!(auth_options)
     super
   end
 
   # POST /resource/sign_in
   def create
-    auth_options = { :recall => redirect_validation, :scope => :user }
-    resource = warden.authenticate!(auth_options)
     super
   end
 
@@ -31,10 +28,6 @@ class Users::SessionsController < Devise::SessionsController
   # end
   private
 
-  def redirect_validation
-    params[:from_mobile].present? ? "mobiles#log_in" : 'pages#home'
-  end
-
   # method used to set a cookie after successful sign in
   # lg stands for logged
   def set_cookie
@@ -43,7 +36,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def after_sign_out_path_for(resource)
-    if cookies.signed[:mb]
+    if cookies.permanent.signed[:mb].present?
       mobile_sign_in_path
     else
       root_path
@@ -51,7 +44,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def after_sign_in_path_for resource
-    params[:from_mobile].present? ? root_path(notifications: "enable", review: "true") : root_path(review: "true")
+    cookies.permanent.signed[:mb].present? ? root_path(notifications: "enable", review: "true") : root_path(review: "true")
     #if i am in localhost/sign_in path, redirect to localhost, otherwise, it will throw a too many times redirect error
     # (Rails.application.routes.recognize_path(request.referrer)[:controller] == "users/sessions")? root_path : request.referrer + "?review=true"
   end
