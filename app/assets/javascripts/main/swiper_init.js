@@ -26,6 +26,9 @@ $(document).on('turbolinks:load', function() {
       centeredSlides: false,
       loop: false,
       observer: true,
+      autoplay: {
+        delay: 7000
+      },
       spaceBetween: 20,
       breakpointsInverse: true,
       breakpoints: {
@@ -60,7 +63,6 @@ $(document).on('turbolinks:load', function() {
   var gig_show = new Swiper('.gig-show-carousel', {
     loop: true,
     slidesPerView: 1,
-    autoplay: false,
     autoplay: {
       delay: 3000
     }
@@ -68,7 +70,9 @@ $(document).on('turbolinks:load', function() {
   if ($(".show-slide").length - 2 == 1) {
     gig_show.autoplay.stop();
   }
-  window.dispatchEvent(new Event('resize')); //this fixes the bug of slider loading with turbolinks and cache
+  if ($(".swiper-container-initialized").length > 0 ){
+    window.dispatchEvent(new Event('resize')); //this fixes the bug of slider loading with turbolinks and cache
+  }
 });
 
 function fillCarousel(carousel) {

@@ -19,16 +19,16 @@ $(document).on('turbolinks:load', function() {
           },
           {
             element: document.getElementById("user_pic"),
-            intro: 'Aqui podras ver tu perfil y acceder a configuracion.',
+            intro: 'Desde aqui podras ver tu perfil y acceder a configuracion.',
             position: 'left'
           },
           {
             element: document.getElementById("menu-open"),
-            intro: 'Aqui podras buscar jales y pedidos.',
+            intro: 'Este buscador sirve para encontrar jales y pedidos dentro de la zona.',
             position: "right"
           },
           {
-            intro: 'Si tienes dudas, puedes consultar las guias de usuario en https://blog.jalecitos.com/',
+            intro: 'Si tienes dudas, puedes consultar las guias de usuario en nuestro <a href="https://blog.jalecitos.com/blog/" target="_blank">blog</a>',
           }
         ],
         showStepNumbers:false
@@ -48,20 +48,20 @@ $(document).on('turbolinks:load', function() {
           },
           {
             element: document.getElementById('newelementbtndesktop'),
-            intro: "Aqui podras crear nuevos jales y pedidos.",
+            intro: "Con este boton podras crear nuevos jales y pedidos",
             position: 'left'
           },
           {
             element: document.getElementById("main-nav-btns"),
-            intro: 'Aqui podras ver tus transacciones, mensajes, notificaciones y perfil.',
+            intro: 'En esta barra podras ver tus transacciones, mensajes, notificaciones y perfil.',
             position: 'bottom'
           },
           {
             element: document.getElementById("search-form"),
-            intro: 'Aqui podras buscar jales y pedidos, dependiendo de la zona que elijas'
+            intro: 'Este buscador sirve para encontrar jales y pedidos dentro de la zona.'
           },
           {
-            intro: 'Si tienes dudas, puedes consultar las guias de usuario en https://blog.jalecitos.com/',
+            intro: 'Si tienes dudas, puedes consultar las guias de usuario en nuestro <a href="https://blog.jalecitos.com/blog/" target="_blank">blog</a>',
           }
         ],
         showStepNumbers:false

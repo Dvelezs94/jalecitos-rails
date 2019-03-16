@@ -18,7 +18,7 @@
   </div>
   <% if current_user == offer.user || current_user == offer.request.user %>
     <div class="ipsum-text">
-      <p><%=offer.description %></p>
+    <pre><p><%=offer.description %></p></pre>
     </div>
   <% end %>
   <% if current_user == offer.user && @hires_open%>

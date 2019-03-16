@@ -1,11 +1,13 @@
 $(document).on('turbolinks:load', function() {
-  var _originalSize = $(window).height();
+  var _originalSize = screen.height -120 // screen never changes (but its a little bit bigger in comparison with $(window).height()), 120 is an aprox to get in the middle of keyboard range
   if (screen.width <= 991) {
     $(window).resize(function() {
+      //when keyboard shows up, window height gets smaller
       if ($(window).height() < _originalSize) { // keyboard show up
-        $('.phone-bottom-menu').hide();
         $(".main_container").css("margin-bottom", "0");
-      } else { //keyboard closed
+        $('.phone-bottom-menu').hide();
+      }
+       else { //keyboard closed
         $(".main_container").css("margin-bottom", "9vh");
         $('.phone-bottom-menu').show();
       }

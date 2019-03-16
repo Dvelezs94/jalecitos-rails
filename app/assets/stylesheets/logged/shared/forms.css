@@ -352,6 +352,10 @@ section.plan.cf {
   padding-left: 20px;
 }
 
+#pack_price_hint {
+  width: 80%;
+}
+
 .question_hint.toggler {
   display: none;
 }
