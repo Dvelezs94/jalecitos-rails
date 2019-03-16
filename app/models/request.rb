@@ -61,7 +61,7 @@ class Request < ApplicationRecord
   end
 
   def title
-    "Busco un #{to_downcase(self.profession)} #{to_downcase(self.name)}"
+    "Busco #{to_downcase(self.profession)} #{to_downcase(self.name)}"
   end
 
   def budget_options
