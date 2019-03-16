@@ -1,9 +1,7 @@
 module LocationFunctions
   def location(empty_if_nil=false)
-    if city && empty_if_nil == false
+    if city
       "#{city.name}, #{city.state.name}, #{city.state.country.name}"
-    elsif city && empty_if_nil == true
-      true
     elsif empty_if_nil == false
       "Ciudad Indefinida"
     else
