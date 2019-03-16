@@ -18,8 +18,8 @@ class OrdersController < ApplicationController
     init_openpay("fee")
   end
   before_action :get_order_by_uuid, only: [:request_start, :start, :request_complete, :complete, :refund, :details, :update_details]
-  before_action :verify_order_employee, only: [:request_start, :request_complete]
-  before_action :verify_order_owner, only: [:start, :complete, :details, :update_details]
+  before_action :verify_order_employee, only: [:start, :request_complete]
+  before_action :verify_order_owner, only: [:complete, :details, :update_details]
   before_action :verify_owner_or_employee, only: [:refund]
   before_action :verify_charge_response, except: [:create]
   before_action :verify_availability, only: [:create]
@@ -63,19 +63,6 @@ class OrdersController < ApplicationController
 
   end #create end
 
-  def request_start
-      @order.started_at = Time.now.in_time_zone.strftime("%Y-%m-%d %H:%M:%S")
-      if @order.employee == current_user
-        if @order.save
-          flash[:success] = "La orden se actualizó correctamente"
-          create_notification(@order.employee, @order.employer, "solicitó comenzar", @order.purchase, "purchases")
-        else
-          flash[:error] = "Hubo un error en tu  solicitud"
-        end
-        redirect_to finance_path(:table => "sales")
-      end
-  end
-
   def request_complete
       @order.completed_at = Time.now.in_time_zone.strftime("%Y-%m-%d %H:%M:%S")
       if @order.save
@@ -96,11 +83,11 @@ class OrdersController < ApplicationController
   def start
       if @order.in_progress!
         flash[:success] = "La orden está en progreso"
-        create_notification(@order.employer, @order.employee, "ha comenzado", @order.purchase, "sales")
+        create_notification(@order.employee, @order.employer, "ha comenzado", @order.purchase, "purchases")
       else
         flash[:error] = "Hubo un error en tu solicitud"
       end
-      redirect_to finance_path(:table => "purchases")
+      redirect_to finance_path(:table => "sales")
   end
 
   def complete

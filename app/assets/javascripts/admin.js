@@ -12,6 +12,8 @@
 
 //= require lazyload
 
+//= require jquery.validate
+
 //= require_tree ./main
 
 //= require_tree ./admin
