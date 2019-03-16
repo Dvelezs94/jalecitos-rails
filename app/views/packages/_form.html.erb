@@ -56,8 +56,11 @@
                   <span class="error error_span_<%= 3*n+3 %>"></span>
                   </div>
                 </div>
-                <div class="row will-show col-lg-6 col-md-6 col-sm-12 col-12">
-                  <p class="price-text form-title">Precio final:</p>
+                <div class=" form_block row will-show col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="flex-space-bet">
+                    <p class="price-text form-title">Precio final:  <%= icon("fas", "question-circle", class: "question_hint toggler") %></p>
+                  </div>
+                  <%= render 'shared_user/pack/hints/price_hint.html.erb' %>
                   <label id="price-calc-<%= n %>" class="label-price"></label>
                 </div>
 

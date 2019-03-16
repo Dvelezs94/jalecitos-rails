@@ -63,7 +63,7 @@
             <%= render 'shared_user/gigs/forms/hints/city_hint.html.erb' %>
 
             <%= form.text_field :location, class: 'required font-awesome styled', id: "form_autocomplete", size: 50, placeholder: '&#xf3c5; Busca tu ciudad...'.html_safe, value: (gig.location(true) != nil)? gig.location : current_user.location(true) %>
-            <%= form.hidden_field :city_id, class: "city", value: current_user.city_id %>
+            <%= form.hidden_field :city_id, class: "city", value: (gig.city_id != nil)? gig.city_id : current_user.city_id %>
 
           </div>
 
