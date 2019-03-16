@@ -4,6 +4,7 @@ module GetPages
   def home_get_all
     get_popular_gigs
     get_recent_requests
+    get_recent_gigs
     get_verified_gigs
     get_liked_gigs
     Searchkick.multi_search([@popular_gigs, @recent_requests, @verified_gigs, @liked_gigs])
@@ -16,6 +17,13 @@ module GetPages
         where: conditions,
          order: [{ order_count: { order: :desc, unmapped_type: :long}}],
           page: params[:popular_gigs], per_page: 15, execute: bool)
+  end
+  def get_recent_gigs bool=false
+    @recent_gigs = Gig.search("*",
+       includes: [:gigs_packages, :user, :likes, city: [state: :country]],
+        where: conditions,
+         order: [{ created_at: { order: :desc, unmapped_type: :long}}],
+          page: params[:recent_gigs], per_page: 15, execute: bool)
   end
 
   def get_recent_requests bool=false
@@ -67,9 +75,23 @@ module GetPages
       get_recent_requests(true)
     elsif params[:verified_gigs]
       get_verified_gigs(true)
+    elsif params[:recent_gigs]
+      get_recent_gigs(true)
     elsif params[:liked_gigs]
       get_liked_gigs(true)
       get_liked_gigs_items
+    end
+  end
+
+  def conditions string=nil
+    if current_user.location(true) && string == "verified"
+      {status: "published", city_id: current_user.city_id, verified: true}
+    elsif current_user.location(true)
+      {status: "published", city_id: current_user.city_id}
+    elsif string == "verified"
+      {status: "published", verified: true}
+    else
+      {status: "published"}
     end
   end
 end
