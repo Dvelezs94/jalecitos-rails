@@ -2038,6 +2038,10 @@ button:focus {
   padding-bottom: 80px;
 }
 
+.container.page3slides-area3 {
+  margin-bottom: 5vh;
+}
+
 /*contactd end*/
 /*mobiled start*/
 .singlemobiled img {
