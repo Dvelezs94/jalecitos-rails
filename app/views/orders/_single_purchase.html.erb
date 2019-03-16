@@ -44,26 +44,21 @@
             <% end %>
             <% if single_purchase.in_progress? %>
               <% if single_purchase.completed_at? %>
-              <p class="time-left">La orden se autocompletará en: <%= distance_of_time_in_words(Time.now, single_purchase.started_at + 72.hours) %></p>
+              <p class="time-left">La orden se autocompletará en: <%= distance_of_time_in_words(Time.now, single_purchase.completed_at + 72.hours) %></p>
               <% end %>
             <% end %>
             <div class="diego-velez-btn">
               <% if single_purchase.pending? %>
-              <% if single_purchase.started_at? %>
-              <%= link_to "reembolso", refund_order_path(single_purchase.uuid), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
-              <%= link_to "comenzar", start_order_path(single_purchase.uuid), method: :put, :data => {:confirm => 'Seguro que quieres comenzar la orden?'} %>
-              <% else %>
-              <%= link_to "reembolso", refund_order_path(single_purchase.uuid), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
-              <% end %>
+                <%= link_to "reembolsar", refund_order_path(single_purchase.uuid), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
               <% elsif single_purchase.in_progress? %>
-              <% if single_purchase.completed_at? %>
-              <%= link_to "disputa", new_order_dispute_path(single_purchase.uuid) %>
-              <%= link_to "finalizar orden", complete_order_path(single_purchase.uuid), :method => :put, :data => {:confirm => 'Seguro que quieres finalizar la orden?'} %>
-              <% else %>
-              <%= link_to "disputa", new_order_dispute_path(single_purchase.uuid) %>
-              <% end %>
+                <% if single_purchase.completed_at? %>
+                  <%= link_to "estoy en desacuerdo", new_order_dispute_path(single_purchase.uuid) %>
+                  <%= link_to "finalizar", complete_order_path(single_purchase.uuid), :method => :put, :data => {:confirm => 'Seguro que quieres finalizar la orden?'} %>
+                <% else %>
+                  <%= link_to "problema con la orden", new_order_dispute_path(single_purchase.uuid) %>
+                <% end %>
               <% elsif single_purchase.disputed? %>
-              <%= link_to "ir al caso", order_dispute_path(single_purchase.uuid, single_purchase.dispute) %>
+                <%= link_to "ir al caso", order_dispute_path(single_purchase.uuid, single_purchase.dispute) %>
               <% end %>
             </div>
         </div>

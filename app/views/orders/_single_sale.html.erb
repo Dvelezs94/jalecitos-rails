@@ -44,22 +44,18 @@
             <% end %>
             <div class="diego-velez-btn">
               <% if single_sale.pending? %>
-              <% if single_sale.started_at? %>
-              <%= link_to "denegar", refund_order_path(single_sale.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
-              <% else %>
-              <%= link_to "denegar", refund_order_path(single_sale.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
-              <%= link_to "solicitar inicio", request_start_order_path(single_sale.uuid), :method => :put %>
-              <% end %>
+                  <%= link_to "reemboolsar", refund_order_path(single_sale.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
+                  <%= link_to "comenzar", start_order_path(single_sale.uuid), :method => :put %>
               <% elsif single_sale.in_progress? %>
-              <% if single_sale.completed_at? %>
-              <%= link_to "disputa", new_order_dispute_path(single_sale.uuid) %>
-              <%= link_to "reembolsar", refund_order_path(single_sale.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
-              <% else %>
-              <%= link_to "reembolsar", refund_order_path(single_sale.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
-              <%= link_to "solicitar finalizar", request_complete_order_path(single_sale.uuid), :method => :put %>
-              <% end %>
+                <% if single_sale.completed_at? %>
+                  <%= link_to "problema con la orden", new_order_dispute_path(single_sale.uuid) %>
+                  <%= link_to "reembolsar", refund_order_path(single_sale.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
+                <% else %>
+                  <%= link_to "reembolsar", refund_order_path(single_sale.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
+                  <%= link_to "solicitar finalizar", request_complete_order_path(single_sale.uuid), :method => :put %>
+                <% end %>
               <% elsif single_sale.disputed? %>
-              <%= link_to "ir al caso", order_dispute_path(single_sale.uuid, single_sale.dispute) %>
+                <%= link_to "ir al caso", order_dispute_path(single_sale.uuid, single_sale.dispute) %>
               <% end %>
             </div>
         </div>
