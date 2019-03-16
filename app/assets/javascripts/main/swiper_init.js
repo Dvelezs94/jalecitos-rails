@@ -26,6 +26,9 @@ $(document).on('turbolinks:load', function() {
       centeredSlides: false,
       loop: false,
       observer: true,
+      autoplay: {
+        delay: 7000
+      },
       spaceBetween: 20,
       breakpointsInverse: true,
       breakpoints: {
@@ -60,7 +63,6 @@ $(document).on('turbolinks:load', function() {
   var gig_show = new Swiper('.gig-show-carousel', {
     loop: true,
     slidesPerView: 1,
-    autoplay: false,
     autoplay: {
       delay: 3000
     }
