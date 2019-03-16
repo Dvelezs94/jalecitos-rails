@@ -10,6 +10,14 @@ body {
   font-weight: 400;
 }
 
+pre {
+  font-family: 'Nunito', sans-serif;
+  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
+  margin: 0 0 4px;
+  font-weight: 400;
+  white-space: pre-wrap;
+}
+
 h1 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
@@ -1135,6 +1143,14 @@ p.limpi3 {
 p.limpi2 {
   color: #39C27B;
   font-weight: 700;
+  margin-bottom: 0;
+}
+
+pre p {
+  margin-bottom: 0;
+}
+pre p.limpi3 {
+  margin-top: -10px;
 }
 
 .check-listpage3 p {
@@ -1249,7 +1265,7 @@ p.limpi2 sub {
   cursor: pointer;
 }
 
-.califico-about p {
+.califico-about pre {
   color: #4A4A4A;
   font-size: 16px;
 }

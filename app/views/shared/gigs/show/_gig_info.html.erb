@@ -56,7 +56,7 @@
   <div class="perfil-area">
     <div class="profileview1">
       <div class="profileview-total">
-        <%= image_tag(@gig.user.image_url(:thumb)) %>
+        <%=link_to image_tag(@gig.user.image_url(:thumb)), user_path(@gig.user.slug) %>
         <span><%= link_to @gig.user.alias, user_path(@gig.user.slug) %></span>
         <%= "#{icon("fas", "check-square", title: "Verificado")}".html_safe if @gig.user.verified %>
       </div>
@@ -68,7 +68,7 @@
       <h5><%= @gig.location %></h5>
       <h2><%= @gig.title %></h2>
       <br>
-      <p><%= gig_description %></p>
+      <pre> <p><%= gig_description %></p> </pre>
       <br>
     </div>
 
@@ -77,12 +77,12 @@
   <!-- for768 -->
 
   <div class="califico-about nulla">
-    <p><%= gig_description %></p>
+    <pre><p><%= gig_description %></p></pre>
   </div>
 </div>
 
 <!-- for992 -->
 
 <div class="califico-about">
-  <p><%= gig_description %></p>
+<pre><p><%= gig_description %></p></pre>
 </div>
