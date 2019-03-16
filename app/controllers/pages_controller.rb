@@ -95,18 +95,6 @@ class PagesController < ApplicationController
     end
   end
 
-  def conditions string=nil
-    if current_user.location(true) && string == "verified"
-      {status: "published", city_id: current_user.city_id, verified: true}
-    elsif current_user.location(true)
-      {status: "published", city_id: current_user.city_id}
-    elsif string == "verified"
-      {status: "published", verified: true}
-    else
-      {status: "published"}
-    end
-  end
-
 
   def signed_and_rev
     #format html helps to not query pending reviews when pagination triggers
