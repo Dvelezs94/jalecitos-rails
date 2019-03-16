@@ -8,7 +8,7 @@ $(document).on('turbolinks:load', function() {
   });
   // employee
   $(".fa-pending-employee").click(function(){
-    alert("El cliente está esperando tu solicitud para comenzar el jale. En caso de ya haber solicitado el inicio, comunicarse con el usuario para su aceptación.");
+    alert("Tu aceptacion para el jale esta pendiente. Puedes mandar un mensaje al usuario si tienes dudas antes de comenzar.");
   });
   $(".fa-waiting-for-bank-approval-employee").click(function(){
     alert("El pago está siendo validado con el banco.");

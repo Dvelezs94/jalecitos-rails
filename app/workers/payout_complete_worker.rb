@@ -8,6 +8,10 @@ class PayoutCompleteWorker
   def perform(payout_id)
     # get payout id
     @jalecitos_payout = Payout.find_by_transaction_id(payout_id)
+    # handle payouts that dont exist, for example when we get paid to the company account
+    if @jalecitos_payout.blank?
+      return true
+    end
     # get balance
     @employee_balance = calc_payout(@jalecitos_payout.orders)[0][:count]
     if ! @jalecitos_payout.pending?
