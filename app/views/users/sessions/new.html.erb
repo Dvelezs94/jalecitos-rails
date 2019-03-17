@@ -17,7 +17,11 @@
                      <%= f.email_field :email, placeholder: "Correo", class: "required", value: "", autofocus: true, autocomplete: :off,onfocus: "getLocation();" %>
                      <%= f.password_field :password, placeholder: "Contraseña" , class: "required" %>
                    </div>
-                   <%= f.check_box :remember_me, :checked => true, :style => 'display: none' %>
+                   <% if (controller.controller_name == "sessions" && cookies.permanent.signed[:mb].present? ||controller.controller_name == "mobiles" ) %>
+                    <%= f.check_box :remember_me, :checked => true, :style => 'display: none' %>
+                   <% else %>
+                    <%= f.check_box :remember_me, :checked => false %> Recordarme
+                   <% end %>
                    <%= f.button 'Continuar', class: "default-btn signup-continue", :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i> Entrando..." } %>
                   <p class="una"><%= link_to "Olvidé mi contraseña", new_password_path(:user) %></p>
                    <p class="una">¿No tienes cuenta?  <%= link_to "Regístrate",params[:controller] == "mobiles"? mobile_sign_up_path : new_user_registration_path %></p>
