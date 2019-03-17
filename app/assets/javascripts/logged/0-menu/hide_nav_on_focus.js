@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  var _originalSize = screen.height -120 // screen never changes (but its a little bit bigger in comparison with $(window).height()), 120 is an aprox to get in the middle of keyboard range
+  var _originalSize = screen.height * 0.75 // screen never changes (but its a little bit bigger in comparison with $(window).height()), this is an aprox to get in the middle of keyboard range
   if (screen.width <= 991) {
     $(window).resize(function() {
       //when keyboard shows up, window height gets smaller
