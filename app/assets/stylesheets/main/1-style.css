@@ -465,6 +465,10 @@ p.fell2 {}
   border-radius: 4px;
 }
 
+.single-request:active {
+  background-color: #fff;
+}
+
 p.COAH3 {
   margin: 0;
 }
@@ -2303,6 +2307,13 @@ button:focus {
 
 .single-gig:hover {
   box-shadow: 6px 6px 24px 0 rgba(0, 0, 0, 0.05);
+  transform: scale(1.03);
+}
+
+.single-gig:active {
+  box-shadow: 2px 2px 24px 0 rgba(0, 0, 0, 0.03);
+  background: #F3F2F2;
+  transform: scale(.98);
 }
 
 .page3slides-contentrd p.location,

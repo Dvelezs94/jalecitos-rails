@@ -1,7 +1,18 @@
 <div class="col-md-12">
   <h2>Users</h2>
-  <div class="admin-chart">
-    <%= line_chart User.group_by_day(:created_at).count %>
+  <div class="admin-chart row">
+    <div class="col-6">
+      <h4>Por Creacion</h4>
+      <%= line_chart User.group_by_day(:created_at).count %>
+    </div>
+    <div class="col-6">
+      <h4>Por Edad</h4>
+      <%= column_chart User.group(:age).count %>
+    </div>
+    <div class="col-6">
+      <h4>Por Ciudad</h4>
+      <%= pie_chart City.joins(:users).group(:name).count %>
+    </div>
   </div>
   <div class="table-responsive">
     <table class="table table-striped table-sm">
