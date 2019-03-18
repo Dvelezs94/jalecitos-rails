@@ -3,6 +3,6 @@
   <td><%= order_dashboard.total %></td>
   <td><%= order_dashboard.employer.alias %></td>
   <td><%= order_dashboard.employee.alias %></td>
-  <td><%= order_dashboard.purchase.class == Package ? order_dashboard.purchase.gig.title : order_dashboard.purchase.request.title %></td>
+  <td><%= (order_dashboard.purchase.class == Package ? order_dashboard.purchase.gig.title : order_dashboard.purchase.request.title) rescue "Eliminado" %></td>
   <td><%= order_dashboard.status %></td>
 </tr>
