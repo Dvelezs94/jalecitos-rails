@@ -67,6 +67,7 @@ class OrdersController < ApplicationController
       @order.completed_at = Time.now.in_time_zone.strftime("%Y-%m-%d %H:%M:%S")
       if @order.save
         flash[:success] = "La orden se actualizó correctamente"
+        OrderMailer.order_request_finish(@order).deliver
         create_notification(@order.employee, @order.employer, "solicitó finalizar", @order.purchase, "purchases")
         # Queue job to finish the order in 72 hours
         if ENV.fetch("RAILS_ENV") == "production"
@@ -83,6 +84,7 @@ class OrdersController < ApplicationController
   def start
       if @order.in_progress!
         flash[:success] = "La orden está en progreso"
+        OrderMailer.order_started(@order).deliver
         create_notification(@order.employee, @order.employer, "ha comenzado", @order.purchase, "purchases")
       else
         flash[:error] = "Hubo un error en tu solicitud"
@@ -109,6 +111,7 @@ class OrdersController < ApplicationController
           openpay_tax(@order, @fee)
           flash[:success] = "La orden ha finalizado"
           create_reviews(@order)
+          OrderMailer.order_finished(@order).deliver
           create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales", @employee_review.id)
         else
           flash[:error] = "Hubo un error en tu solicitud"

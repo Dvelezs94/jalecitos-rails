@@ -28,7 +28,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    redirect_to root_path, notice: "Error, tu registro no pudo ser completado"
+    redirect_to new_user_session_path, notice: "Error, tu registro no pudo ser completado ya que puede que ya exista una cuenta con este correo."
   end
 
   def log_in_and_remember(user)
