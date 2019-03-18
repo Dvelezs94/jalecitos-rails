@@ -1,8 +1,14 @@
 <div class="col-md-12">
   <h2>Orders</h2>
-  <div class="admin-chart">
-    <%= line_chart Order.group_by_day(:created_at).count %>
-    <%= pie_chart Order.group(:status).count %>
+  <div class="admin-chart row">
+    <div class="col-6">
+      <h4>Por Fecha</h4>
+      <%= line_chart Order.group_by_day(:created_at).count %>
+    </div>
+    <div class="col-6">
+      <h4>Por Estado</h4>
+      <%= pie_chart Order.group(:status).count %>
+    </div>
   </div>
   <div class="table-responsive">
     <table class="table table-striped table-sm">
