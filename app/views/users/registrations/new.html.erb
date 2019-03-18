@@ -22,7 +22,7 @@
                    <%= f.password_field :password_confirmation, placeholder: "Confirmar contraseña", id: "user_password_conf_new", required: true, class: "required", autocomplete: "new-password" %>
                    <%= hidden_field_tag :sign_up_lat, value = '' %>
                    <%= hidden_field_tag :sign_up_lon, value = '' %>
-                   <div class="row justify-content-center", style="margin-bottom:10px;">
+                   <div class="row justify-content-center", style="margin-bottom:28px;">
                      <%= recaptcha_tags %>
                    </div>
                    <%= f.button 'Continuar', class: "default-btn signup-continue", :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i> Entrando..." } %>
