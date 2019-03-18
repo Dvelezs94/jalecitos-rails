@@ -1,0 +1,25 @@
+<div class="col-md-12">
+  <h2>Orders</h2>
+  <div class="admin-chart">
+    <%= line_chart Order.group_by_day(:created_at).count %>
+    <%= pie_chart Order.group(:status).count %>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>UUID</th>
+          <th>Price</th>
+          <th>Employer</th>
+          <th>Employee</th>
+          <th>Gig / Req</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+          <%= render partial: 'orders/order_dashboard', collection: @orders %>
+      </tbody>
+    </table>
+    <%= paginate @orders, param_name: :order_page %>
+  </div>
+</div>

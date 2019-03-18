@@ -157,3 +157,7 @@ gem 'sitemap_generator', '~> 6.0', '>= 6.0.2'
 gem 'sidekiq-cron', '~> 1.1'
 # introduce the site to new people
 gem 'introjs-rails', '~> 1.0'
+# group items by date
+gem 'groupdate', '~> 4.1', '>= 4.1.1'
+# create charts
+gem 'chartkick', '~> 3.0', '>= 3.0.2'

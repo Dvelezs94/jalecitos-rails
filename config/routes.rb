@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post :create_openpay_user
       get :openpay_dashboard
       get :tickets
+      get :orders
     end
   end
 
