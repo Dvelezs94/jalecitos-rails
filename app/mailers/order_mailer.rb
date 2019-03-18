@@ -47,8 +47,8 @@ class OrderMailer < ApplicationMailer
           "dynamic_template_data": {
             "GIG_URL": user_gig_url(@order.purchase.gig.user, @order.purchase.gig),
             "GIG_NAME": @order.purchase.gig.title,
-            "EMPLOYER": @order.employer.slug,
-            "EMPLOYEE": @order.employee.slug,
+            "EMPLOYER": @order.employer.alias,
+            "EMPLOYEE": @order.employee.alias,
             "TRANSACTION_URL": finance_url(:table => "sales"),
             "PACKAGE": @order.purchase.pack_type
           }
@@ -83,8 +83,8 @@ class OrderMailer < ApplicationMailer
           "dynamic_template_data": {
             "GIG_URL": user_gig_url(@order.purchase.gig.user, @order.purchase.gig),
             "GIG_NAME": @order.purchase.gig.title,
-            "EMPLOYER": @order.employer.slug,
-            "EMPLOYEE": @order.employee.slug,
+            "EMPLOYER": @order.employer.alias,
+            "EMPLOYEE": @order.employee.alias,
             "PACKAGE": @order.purchase.pack_type,
             "PACKAGE_DESCRIPTION": @order.purchase.description,
             "TOTAL":  @order.total
@@ -121,8 +121,8 @@ class OrderMailer < ApplicationMailer
             "REQUEST_URL": request_url(@order.purchase.request.slug),
             "REQUEST_NAME": @order.purchase.request.name,
             "REQUEST_INFORMATION": @order.purchase.request.description,
-            "EMPLOYER": @order.employer.slug,
-            "EMPLOYEE": @order.employee.slug,
+            "EMPLOYER": @order.employer.alias,
+            "EMPLOYEE": @order.employee.alias,
             "TRANSACTION_URL": finance_url(:table => "purchases"),
             "OFFER_TOTAL":  @order.purchase.price
           }
@@ -157,8 +157,8 @@ class OrderMailer < ApplicationMailer
           "dynamic_template_data": {
             "REQUEST_URL": request_url(@order.purchase.request.slug),
             "REQUEST_NAME": @order.purchase.request.name,
-            "EMPLOYER": @order.employer.slug,
-            "EMPLOYEE": @order.employee.slug,
+            "EMPLOYER": @order.employer.alias,
+            "EMPLOYEE": @order.employee.alias,
             "OFFER_DESCRIPTION": @order.purchase.description,
             "TOTAL":  @order.total
           }
@@ -169,6 +169,90 @@ class OrderMailer < ApplicationMailer
         "name": "Jalecitos"
       },
       "template_id": "d-958c8e1758c949538a8151829672f264"
+    }
+
+    sendgrid_client.client.mail._("send").post(request_body: (data))
+  end
+
+  def order_started(order)
+    @order = order
+
+    data = {
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": @order.employer.email
+            }
+          ],
+          "dynamic_template_data": {
+            "EMPLOYER": @order.employer.alias,
+            "EMPLOYEE": @order.employee.alias,
+            "ORDER_ID": @order.uuid
+          }
+        }
+      ],
+      "from": {
+        "email": "noreply@jalecitos.com",
+        "name": "Jalecitos"
+      },
+      "template_id": "d-c2a12c29f7494f09a2c5a63f5a01440c"
+    }
+
+    sendgrid_client.client.mail._("send").post(request_body: (data))
+  end
+
+  def order_request_finish(order)
+    @order = order
+
+    data = {
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": @order.employer.email
+            }
+          ],
+          "dynamic_template_data": {
+            "EMPLOYER": @order.employer.alias,
+            "EMPLOYEE": @order.employee.alias,
+            "ORDER_ID": @order.uuid
+          }
+        }
+      ],
+      "from": {
+        "email": "noreply@jalecitos.com",
+        "name": "Jalecitos"
+      },
+      "template_id": "d-dc6a5e483f424ee7a867e5e0e8b3d48b"
+    }
+
+    sendgrid_client.client.mail._("send").post(request_body: (data))
+  end
+
+  def order_finished(order)
+    @order = order
+
+    data = {
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": @order.employee.email
+            }
+          ],
+          "dynamic_template_data": {
+            "EMPLOYER": @order.employer.alias,
+            "EMPLOYEE": @order.employee.alias,
+            "ORDER_ID": @order.uuid
+          }
+        }
+      ],
+      "from": {
+        "email": "noreply@jalecitos.com",
+        "name": "Jalecitos"
+      },
+      "template_id": "d-8570d6c13aef4ce1a538ae43a524cb99"
     }
 
     sendgrid_client.client.mail._("send").post(request_body: (data))
@@ -191,7 +275,7 @@ class OrderMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
-            "ALIAS": @order.employer.slug,
+            "ALIAS": @order.employer.alias,
             "ORDER_ID": @order.uuid
           }
         }

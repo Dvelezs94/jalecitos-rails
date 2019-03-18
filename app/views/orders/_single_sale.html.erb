@@ -44,15 +44,27 @@
             <% end %>
             <div class="diego-velez-btn">
               <% if single_sale.pending? %>
-                  <%= link_to "reemboolsar", refund_order_path(single_sale.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
-                  <%= link_to "comenzar", start_order_path(single_sale.uuid), :method => :put %>
+              <%= button_to refund_order_path(single_sale.uuid), method: :put, class: "transaction-btn-refund",  :data => { :confirm => 'Seguro que quieres reembolsar?', :disable_with => "<i class='fa fa-spinner fa-spin'></i>" } do %>
+                <%= "reembolsar" %>
+              <% end %>
+              <%= button_to start_order_path(single_sale.uuid), method: :put,  :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i>" } do %>
+                <%= "comenzar" %>
+              <% end %>
               <% elsif single_sale.in_progress? %>
                 <% if single_sale.completed_at? %>
-                  <%= link_to "problema con la orden", new_order_dispute_path(single_sale.uuid) %>
-                  <%= link_to "reembolsar", refund_order_path(single_sale.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
+                <%= button_to new_order_dispute_path(single_sale.uuid), method: :get, class: "transaction-btn-dispute", :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i>" } do %>
+                  <%= "problema con la orden" %>
+                <% end %>
+                <%= button_to refund_order_path(single_sale.uuid), method: :put, class: "transaction-btn-refund", :data => { :confirm => 'Seguro que quieres reembolsar?', :disable_with => "<i class='fa fa-spinner fa-spin'></i>" } do %>
+                  <%= "reembolsar" %>
+                <% end %>
                 <% else %>
-                  <%= link_to "reembolsar", refund_order_path(single_sale.uuid), method: :put, :data => {:confirm => 'Seguro que quieres Reembolsar?'} %>
-                  <%= link_to "solicitar finalizar", request_complete_order_path(single_sale.uuid), :method => :put %>
+                <%= button_to refund_order_path(single_sale.uuid), method: :put, class: "transaction-btn-refund", :data => { :confirm => 'Seguro que quieres reembolsar?', :disable_with => "<i class='fa fa-spinner fa-spin'></i>" } do %>
+                  <%= "reembolsar" %>
+                <% end %>
+                <%= button_to request_complete_order_path(single_sale.uuid), method: :put,  :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i>" } do %>
+                  <%= "solicitar finalizar" %>
+                <% end %>
                 <% end %>
               <% elsif single_sale.disputed? %>
                 <%= link_to "ir al caso", order_dispute_path(single_sale.uuid, single_sale.dispute) %>
