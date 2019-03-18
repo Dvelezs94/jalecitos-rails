@@ -14,6 +14,10 @@
 
 //= require jquery.validate
 
+//= require Chart.bundle
+
+//= require chartkick
+
 //= require_tree ./main
 
 //= require_tree ./admin

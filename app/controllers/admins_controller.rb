@@ -19,6 +19,10 @@ class AdminsController < ApplicationController
     @users =  User.order(:name).page(params[:user_page]).per(25)
   end
 
+  def orders
+    @orders =  Order.order(:created_at).page(params[:order_page]).per(25)
+  end
+
   def disputes
     @disputes = Dispute.order(status: :asc).page(params[:dispute_page]).per(25)
   end
@@ -64,5 +68,7 @@ class AdminsController < ApplicationController
     @pending_disputes = Dispute.waiting_for_support.count
     @open_tickets = Ticket.in_progress.count
     @user_count = User.count
+    @orders_count = Order.count
+    @gigs_count = Gig.count
   end
 end
