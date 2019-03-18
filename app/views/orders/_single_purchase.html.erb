@@ -49,13 +49,21 @@
             <% end %>
             <div class="diego-velez-btn">
               <% if single_purchase.pending? %>
-                <%= link_to "reembolsar", refund_order_path(single_purchase.uuid), method: :put, :data => {:confirm => 'Seguro que quieres reembolsar?'} %>
+                <%= button_to refund_order_path(single_purchase.uuid), method: :put, class: "transaction-btn-refund",  :data => { :confirm => 'Seguro que quieres reembolsar?', :disable_with => "<i class='fa fa-spinner fa-spin'></i>" } do %>
+                  <%= "reembolsar" %>
+                <% end %>
               <% elsif single_purchase.in_progress? %>
                 <% if single_purchase.completed_at? %>
-                  <%= link_to "estoy en desacuerdo", new_order_dispute_path(single_purchase.uuid) %>
-                  <%= link_to "finalizar", complete_order_path(single_purchase.uuid), :method => :put, :data => {:confirm => 'Seguro que quieres finalizar la orden?'} %>
+                <%= button_to new_order_dispute_path(single_purchase.uuid), method: :get, class: "transaction-btn-dispute", :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i>" } do %>
+                  <%= "estoy en desacuerdo" %>
+                <% end %>
+                <%= button_to complete_order_path(single_purchase.uuid), method: :put,  :data => { :confirm => 'Seguro que quieres finalizar la orden?', :disable_with => "<i class='fa fa-spinner fa-spin'></i>" } do %>
+                  <%= "finalizar" %>
+                <% end %>
                 <% else %>
-                  <%= link_to "problema con la orden", new_order_dispute_path(single_purchase.uuid) %>
+                  <%= button_to new_order_dispute_path(single_purchase.uuid), method: :get, class: "transaction-btn-dispute", :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i>" } do %>
+                    <%= "problema con la orden" %>
+                  <% end %>
                 <% end %>
               <% elsif single_purchase.disputed? %>
                 <%= link_to "ir al caso", order_dispute_path(single_purchase.uuid, single_purchase.dispute) %>
