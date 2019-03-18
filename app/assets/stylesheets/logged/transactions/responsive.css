@@ -149,7 +149,8 @@
 .Paquete-Básico span {
 	font-size: 11px;
 }
-.diego-velez-btn a {
+.diego-velez-btn a,
+.diego-velez-btn button {
 	font-size: 15px;
 	padding: 6px 10px;
 	margin-bottom: 10px;

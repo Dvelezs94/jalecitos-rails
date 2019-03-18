@@ -331,7 +331,8 @@
 .diego-velez-btn {
 	margin-top: 10px;
 }
-.diego-velez-btn a {
+.diego-velez-btn a,
+.diego-velez-btn button {
 	display: block;
 	background: #39C27B;
 	text-align: center;
@@ -341,13 +342,22 @@
 	margin-bottom: 14px;
 	padding: 6px 12px;
 	border-radius: 4px;
+  width: 100%;
+  border: none;
 }
-.diego-velez-btn a:first-child {
-	background: #C7C7CC;
+
+.transaction-btn-refund {
+  background: #C7C7CC !important;
 }
-.diego-velez-btn a:last-child {
+
+.transaction-btn-dispute {
+  background: #C7C7CC !important;
+}
+
+/* .diego-velez-btn a:last-child,
+.diego-velez-btn button:last-child {
 	margin-bottom: 0;
-}
+} */
 
 /* Transacciones tab secsion End */
 
