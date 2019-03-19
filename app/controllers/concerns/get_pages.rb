@@ -2,13 +2,19 @@ module GetPages
   private
 
   def home_get_all
-    get_popular_gigs
-    get_recent_requests
-    get_recent_gigs
-    get_verified_gigs
-    get_liked_gigs
-    Searchkick.multi_search([@popular_gigs, @recent_requests, @verified_gigs, @liked_gigs])
-    get_liked_gigs_items
+    if current_user
+      get_popular_gigs
+      get_recent_requests
+      get_recent_gigs
+      get_verified_gigs
+      get_liked_gigs
+      Searchkick.multi_search([@popular_gigs, @recent_requests, @verified_gigs, @liked_gigs, @recent_gigs])
+      get_liked_gigs_items
+    else
+      get_recent_gigs
+      get_recent_requests
+      Searchkick.multi_search([@recent_gigs, @recent_requests])
+    end
   end
 
   def get_popular_gigs bool=false
@@ -18,7 +24,7 @@ module GetPages
          order: [{ order_count: { order: :desc, unmapped_type: :long}}],
           page: params[:popular_gigs], per_page: 15, execute: bool)
   end
-  
+
   def get_recent_gigs bool=false
     @recent_gigs = Gig.search("*",
        includes: [:gigs_packages, :user, :likes, city: [state: :country]],
@@ -85,13 +91,17 @@ module GetPages
   end
 
   def conditions string=nil
-    if current_user.location(true) && string == "verified"
-      {status: "published", city_id: current_user.city_id, verified: true}
-    elsif current_user.location(true)
-      {status: "published", city_id: current_user.city_id}
-    elsif string == "verified"
-      {status: "published", verified: true}
-    else
+    if current_user
+      if current_user.location(true) && string == "verified"
+        {status: "published", city_id: current_user.city_id, verified: true}
+      elsif current_user.location(true)
+        {status: "published", city_id: current_user.city_id}
+      elsif string == "verified"
+        {status: "published", verified: true}
+      else
+        {status: "published"}
+      end
+    else # is guest
       {status: "published"}
     end
   end

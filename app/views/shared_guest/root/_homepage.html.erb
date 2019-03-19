@@ -1,6 +1,14 @@
 <%= render 'shared_guest/main_banner' %>
+<div class="space">
 
-<%= render 'shared_guest/hire_experts' %>
+</div>
+
+<%= render('shared/gigs/carousel', title: "Jales Recientes", gigs: @recent_gigs, param_name: :recent_gigs) if @recent_gigs.present? %>
+
+<%= render('shared/requests/carousel', title: "Pedidos Recientes", requests: @recent_requests, param_name: :recent_requests) if @recent_requests.present? %>
+
+
+<%# render 'shared_guest/hire_experts' %>
 
 <%= render 'shared_guest/find_experts' %>
 
