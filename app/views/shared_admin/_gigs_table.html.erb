@@ -10,6 +10,10 @@
       <%= pie_chart City.joins(:gigs).group(:name).count %>
     </div>
     <div class="col-6">
+      <h4>Por Categoria</h4>
+      <%= pie_chart Category.joins(:gigs).group(:name).count %>
+    </div>
+    <div class="col-6">
       <h4>Por Fecha</h4>
       <%= line_chart Gig.group_by_day(:created_at).count %>
     </div>
