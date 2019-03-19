@@ -7,7 +7,7 @@
     <div class="gig-text col-xl-12 col-lg-12 col-md-8 col-sm-8 col-7">
       <div style="padding:5px;">
         <div class="tabbigissue1-total">
-          <p class="location truncate"><%=gig.location%></p>
+          <p class="location truncate"><%=prof_or_loc gig%></p>
           <p class="coa2 multi-line-truncate-2"><%= gig.title%></p>
           <p class="coa3">Desde
             <%= number_to_currency(purchase_order_total(gig.query_pack.first.price)) %>

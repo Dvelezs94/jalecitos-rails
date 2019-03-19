@@ -1,5 +1,37 @@
 module ApplicationHelper
 
+  def prof_or_loc model  #this function is used in home and queries
+    if params[:query].present?
+      if params[:city_id].present?
+        model.profession
+      else
+        model.location
+      end
+    elsif current_user
+      if  current_user.city_id.present?
+        model.profession
+      else
+        model.location
+      end
+    else #is guest
+      model.location
+    end
+  end
+
+  def gig_carousel title, variable_name, partial='shared/gigs/carousel', liked=false
+    collection = instance_variable_get("@"+variable_name.to_s)
+    if liked == false
+      render(partial, title: title, gigs: collection, param_name: variable_name) if collection.present?
+    else
+      render(partial, title: title, gigs: @liked_gigs_items, param_name: variable_name) if collection.present?
+    end
+  end
+
+  def req_carousel title, variable_name, partial='shared/requests/carousel'
+    collection = instance_variable_get("@"+variable_name.to_s)
+    render(partial, title: title, requests: collection, param_name: variable_name) if collection.present?
+  end
+
   def nav_links_helper
     if has_role?(:admin)
       render 'shared_admin/nav_links_admin'
