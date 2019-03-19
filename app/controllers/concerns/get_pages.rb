@@ -8,11 +8,12 @@ module GetPages
       get_recent_gigs
       get_verified_gigs
       get_liked_gigs
-      Searchkick.multi_search([@popular_gigs, @recent_requests, @verified_gigs, @liked_gigs])
+      Searchkick.multi_search([@popular_gigs, @recent_requests, @verified_gigs, @liked_gigs, @recent_gigs])
       get_liked_gigs_items
     else
       get_recent_gigs
       get_recent_requests
+      Searchkick.multi_search([@recent_gigs, @recent_requests])
     end
   end
 
