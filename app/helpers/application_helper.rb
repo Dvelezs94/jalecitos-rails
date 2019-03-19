@@ -1,15 +1,15 @@
 module ApplicationHelper
 
   def prof_or_loc model  #this function is used in home and queries
-    if current_user
+    if controller.controller_name == "gigs" #if gig show carousel (user or guest)
+      model.profession #related gigs are searched in same city
+    elsif current_user #if user
       if params[:query].present? # if query
         if params[:city_id].present?
           model.profession
         else
           model.location
         end
-      elsif controller.controller_name == "gigs" #if gig show carousel
-        model.profession #related gigs are searched in same city
       else #homepage
         if current_user.city_id.present?
           model.profession
@@ -20,7 +20,7 @@ module ApplicationHelper
     else # is guest
       if params[:lat].present? #query with location
         model.profession
-      else #homepage and gig show carousel
+      else #homepage
         model.location
       end
     end
