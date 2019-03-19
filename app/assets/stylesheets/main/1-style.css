@@ -118,6 +118,14 @@ input:focus {
   margin-bottom: 8vh;
 }
 
+.app-download-div{
+  text-align: center;
+}
+
+.app-download {
+  width: 200px;
+}
+
 .default-secondary-btn {
   font-family: 'Nunito', sans-serif;
   font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));

@@ -936,9 +936,9 @@
   }
 
   .hero-darea-img img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    display: none;
+    /* margin-left: auto;
+    margin-right: auto; */
   }
 
   .maild-form {
@@ -1169,6 +1169,10 @@
     display: none;
   }
 
+  .space {
+    display: none;
+  }
+
   #mobile-logo {
     display: inline;
   }
@@ -1220,12 +1224,17 @@
   }
 
   .hero-darea-img img {
-    max-width: 100%;
+    /* max-width: 100%;
     height: auto;
     padding-bottom: 24px;
     display: block;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; */
+    display: none;
+  }
+
+  .app-download {
+    width: 150px;
   }
 
   .singlecontactd-box {
@@ -2014,7 +2023,7 @@
   }
 
   .maild-form-wraps {
-    margin-bottom: 22px;
+    margin-bottom: 10px;
     margin-left: 0;
   }
   .headerd-mainmenu ul li {

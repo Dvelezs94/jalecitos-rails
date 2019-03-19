@@ -26,12 +26,15 @@
               <nav>
                 <ul>
                   <li><h5>Ejemplos:</h5></li>
-                  <li><a href="#" onclick="event.preventDefault();$('#query').val('Limpieza');$('.search-form-guest').submit();">Limpieza</a></li>
+                  <li><a href="#" onclick="event.preventDefault();$('#query').val('Eventos');$('.search-form-guest').submit();">Eventos</a></li>
                   <li><a href="#" onclick="event.preventDefault();$('#query').val('Clases');$('.search-form-guest').submit();">Clases</a></li>
                   <li><a href="#" onclick="event.preventDefault();$('#query').val('Reparación');$('.search-form-guest').submit();">Reparación</a></li>
                 </ul>
               </nav>
             </div>
+          </div>
+          <div class="app-download-div">
+            <%= link_to image_tag("https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/badge-android-es.png", class: "app-download"), "https://play.google.com/store/apps/details?id=jalecitos.com", target: "_blank" %>
           </div>
 
           <div class= "hero-darea-img">
