@@ -44,7 +44,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def after_sign_in_path_for resource
-    cookies.permanent.signed[:mb].present? ? root_path(notifications: "enable", review: "true") : root_path(review: "true")
+    cookies.permanent.signed[:mb].present? ? root_path( review: "true", notifications: "enable") : root_path(review: "true")
     #if i am in localhost/sign_in path, redirect to localhost, otherwise, it will throw a too many times redirect error
     # (Rails.application.routes.recognize_path(request.referrer)[:controller] == "users/sessions")? root_path : request.referrer + "?review=true"
   end
