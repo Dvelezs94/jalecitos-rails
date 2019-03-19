@@ -1,11 +1,11 @@
 <%= render 'categories/category_carousel' %>
 
-<%= render('shared/gigs/carousel', title: "Jales Populares", gigs: @popular_gigs, param_name: :popular_gigs) if @popular_gigs.present? %>
+<%= gig_carousel( "Jales Populares", :popular_gigs) %>
 
-<%= render('shared/requests/carousel', title: "Pedidos Recientes", requests: @recent_requests, param_name: :recent_requests) if @recent_requests.present? %>
+<%= req_carousel("Pedidos Recientes", :recent_requests) %>
 
-<%= render('shared/gigs/carousel', title: "Agregados recientemente", gigs: @recent_gigs, param_name: :recent_gigs) if @recent_gigs.present? %>
+<%= gig_carousel( "Agregados recientemente", :recent_gigs) %>
 
-<%= render('shared/gigs/carousel', title: "Jales Verificados", gigs: @verified_gigs, param_name: :verified_gigs) if @verified_gigs.present? %>
+<%= gig_carousel( "Jales Verificados", :verified_gigs) %>
 
-<%= render('shared_user/gigs/liked_carousel', title: "Jales Gustados", gigs: @liked_gigs_items, param_name: :liked_gigs) if @liked_gigs.present? %>
+<%= gig_carousel( "Jales Gustados", :liked_gigs, 'shared_user/gigs/liked_carousel', true) %>
