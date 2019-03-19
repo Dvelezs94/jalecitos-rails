@@ -9,7 +9,7 @@ class PagesController < ApplicationController
     if params[:current] #if some pagination is present...
       home_paginate
       render template: "shared/carousels/add_items_carousel.js.erb"
-    elsif current_user
+    else
       home_get_all
     end
   end
