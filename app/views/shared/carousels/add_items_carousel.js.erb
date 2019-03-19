@@ -1,11 +1,11 @@
 carousel = window.swip["<%= j params[:current] %>"];
 <% collection = instance_variable_get("@"+params[:current]) %>
-currentIndex = carousel.activeIndex;
 //remove paginator
 indexToRemove = carousel.slides.length-1
 carousel.removeSlide(indexToRemove);
 
 if (carousel.isEnd) {
+  currentIndex = carousel.activeIndex;
   carousel.slideTo(currentIndex-1, 1); //this prevents bug of carousel keep paginating if user reaches end
 }
 //add items
@@ -23,4 +23,4 @@ if (carousel.isEnd) {
   carousel.appendSlide("<div class='swiper-slide'><%=j link %></div>");
 <% end %>
 
-<% sleep 1 %>
+<% sleep 0.5 %>
