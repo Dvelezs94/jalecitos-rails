@@ -1,7 +1,24 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include Devise::Controllers::Rememberable
   def facebook
-    #@user = User.from_omniauth(request.env["omniauth.auth"])
+    generic_auth
+  end
+
+  def google_oauth2
+    generic_auth
+  end
+
+  def failure
+    redirect_to new_user_session_path, notice: "Error, tu registro no pudo ser completado ya que puede que ya exista una cuenta con este correo."
+  end
+
+  def log_in_and_remember(user)
+    remember_me(user)
+    sign_in(user)
+    cookies.permanent.signed[:lg] = rand
+  end
+
+  def generic_auth
     @auth = request.env["omniauth.auth"]
 
     if ! @user = User.find_by_email(@auth.info.email)
@@ -25,15 +42,5 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session["devise.facebook_data"] = request.env["omniauth.auth"]
       redirect_to new_user_registration_url, notice: "Error al tratar de acceder"
     end
-  end
-
-  def failure
-    redirect_to new_user_session_path, notice: "Error, tu registro no pudo ser completado ya que puede que ya exista una cuenta con este correo."
-  end
-
-  def log_in_and_remember(user)
-    remember_me(user)
-    sign_in(user)
-    cookies.permanent.signed[:lg] = rand
   end
 end
