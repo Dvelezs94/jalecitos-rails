@@ -9,6 +9,7 @@ class BanksController < ApplicationController
   before_action :validate_max_banks, only: :create
   access user: [:create, :destroy]
   before_action :check_user_ownership, only:[:create, :destroy]
+  before_action :verify_personal_information, only: :create
 
 
   def create
@@ -68,6 +69,13 @@ class BanksController < ApplicationController
         flash[:error] = "Solo puedes tener un maximo de 3 bancos. Elimina una cuenta para poder proceder."
         redirect_to configuration_path(collapse: "withdraw")
         return false
+      end
+    end
+
+    def verify_personal_information
+      if current_user.name.blank?
+        flash[:error] = "Asegurate de tener tu nombre completo actualizado para proceder a comprar"
+        redirect_to configuration_path
       end
     end
 end
