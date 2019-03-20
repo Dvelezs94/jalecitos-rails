@@ -74,6 +74,8 @@ gem 'petergate', '~> 1.9', '>= 1.9.1'
 
 #Facebook login
 gem 'omniauth-facebook', '~> 5.0'
+# Google omniauth
+gem 'omniauth-google-oauth2', '~> 0.6.1'
 #Notifications
 gem 'gritter', '~> 1.2'
 #Store images

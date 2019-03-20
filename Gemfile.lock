@@ -955,6 +955,10 @@ GEM
       rack (>= 1.6.2, < 3)
     omniauth-facebook (5.0.0)
       omniauth-oauth2 (~> 1.2)
+    omniauth-google-oauth2 (0.6.1)
+      jwt (>= 2.0)
+      omniauth (>= 1.1.1)
+      omniauth-oauth2 (>= 1.5)
     omniauth-oauth2 (1.6.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.9)
@@ -1159,6 +1163,7 @@ DEPENDENCIES
   mini_racer
   nicescroll-rails (~> 3.5, >= 3.5.4.1)
   omniauth-facebook (~> 5.0)
+  omniauth-google-oauth2 (~> 0.6.1)
   openpay (~> 2.0)
   petergate (~> 1.9, >= 1.9.1)
   pg (>= 0.18, < 2.0)
