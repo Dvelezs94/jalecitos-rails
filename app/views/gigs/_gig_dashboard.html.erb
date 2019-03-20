@@ -1,9 +1,0 @@
-<tr>
-  <td><%= link_to gig_dashboard.name, user_gig_path(gig_dashboard.user.slug, gig_dashboard.slug)%></td>
-  <td><%= link_to gig_dashboard.user.alias,  user_path(gig_dashboard.user.slug) %></td>
-  <td><%= image_tag( image_display_helper(gig_dashboard.images[0]), width: "50%", height: "30%" ) %></td>
-  <td>Published <%= distance_of_time_in_words(gig_dashboard.created_at, Time.now) %> ago</td>
-  <td><%= gig_dashboard.order_count %></td>
-  <td><%= gig_dashboard.status %></td>
-  <td><%= status_icon_admin_helper(gig_dashboard) %></td>  
-</tr>

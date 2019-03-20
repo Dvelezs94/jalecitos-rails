@@ -1,6 +1,7 @@
 <% if current_user.confirmed_at.nil? %>
 <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-   Tienes <%= ((current_user.created_at+15.days - Time.now )/1.day).to_i %> días para confirmar tu cuenta. <%= link_to "No recibí mi correo de confirmación.", send_new_confirmation_email_users_path %>
+   Tienes <%= ((current_user.created_at+15.days - Time.now )/1.day).to_i %> días para confirmar tu cuenta. <br>
+    <%= link_to "No recibí mi correo de confirmación.", send_new_confirmation_email_users_path %>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
