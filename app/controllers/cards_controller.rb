@@ -7,6 +7,7 @@ class CardsController < ApplicationController
   end
   before_action :validate_max_cards, only: :create
   access user: [:create, :destroy]
+  before_action :verify_personal_information, only: :create
 
 
   def create
@@ -22,7 +23,7 @@ class CardsController < ApplicationController
         # e.error_code
         flash[:error] = "#{e.description}, por favor intentalo de nuevo."
     end
-    
+
     ref_params = referer_params(request.referer)
     if ref_params["package_id"] != [""] && ref_params["package_id"].present?
       package = Package.find_by_slug(ref_params["package_id"])
@@ -55,6 +56,13 @@ class CardsController < ApplicationController
       flash[:error] = "Solo puedes tener un maximo de 3 tarjetas. Elimina una para poder proceder."
       redirect_to configuration_path(collapse: "payment_methods")
       return false
+    end
+  end
+
+  def verify_personal_information
+    if current_user.name.blank?
+      flash[:error] = "Asegurate de tener tu nombre completo actualizado para proceder a agregar una tarjeta"
+      redirect_to configuration_path
     end
   end
 

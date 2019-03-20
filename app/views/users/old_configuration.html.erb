@@ -99,7 +99,7 @@
         </div>
         <div class="col-sm-6">
 
-          <%= best_in_place_if my_profile, @user, :roles, :class => "form-control", as: :select,
+          <%= best_in_place_if my_profile, @user, :roles_word, :class => "form-control", as: :select,
            collection: {choose: "Elige una opcion", employee_employer: "Ambos", employer: "Comprador", employee: "Vendedor"},
            :place_holder => (current_user.roles.count == 3)? "Ambos" : @roles[current_user.roles.last],
            skip_blur: true%></div>

@@ -40,6 +40,7 @@ Rails.application.routes.draw do
      collection do
        put :update_user, as: "update"
        get :my_account
+       get :send_new_confirmation_email
      end
      resource :reports, only: [:create], as: "report"
      resources :banks, only: [:create, :destroy]
