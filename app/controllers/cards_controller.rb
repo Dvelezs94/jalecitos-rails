@@ -61,7 +61,7 @@ class CardsController < ApplicationController
 
   def verify_personal_information
     if current_user.name.blank?
-      flash[:error] = "Asegurate de tener tu nombre completo actualizado para proceder a comprar"
+      flash[:error] = "Asegurate de tener tu nombre completo actualizado para proceder a agregar una tarjeta"
       redirect_to configuration_path
     end
   end
