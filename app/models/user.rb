@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :lat, :lon
+  attr_accessor :lat, :lon, :roles_word
   include ApplicationHelper
   #includes
   #friendly_id
@@ -30,8 +30,8 @@ class User < ApplicationRecord
   enum status: { active: 0, disabled: 1, banned: 2}
   before_create :set_location
   # Create default values
-  before_validation :set_defaults
-
+  before_validation :set_defaults, on: :create
+  before_update :set_roles
   # Create User Score
   after_commit :create_user_score
 
@@ -166,8 +166,32 @@ class User < ApplicationRecord
    #alias
    friendly_id :alias, use: :slugged
 
+
+
    private
    #if alias changes, also slug
+
+   def set_roles
+     if self.roles_word.present?
+       case self.roles_word
+         when "employee"
+           self.roles = [:user, :employee]
+         when "employer"
+           self.roles = [:user, :employer]
+           self.tags = []
+           self.gigs.published.each do |g|
+             g.draft!
+           end
+         when "employee_employer"
+           self.roles = [:user, :employer, :employee]
+         when "admin"
+           self.roles = (ENV.fetch("RAILS_ENV") == "development")? [:admin] : [:user, :employer, :employee] #cant use this in production
+         else
+           self.roles = [:user, :employer, :employee] #default option is all (except admin)
+       end
+     end
+   end
+
    def should_generate_new_friendly_id?
      slug.blank? || alias_changed?
    end
