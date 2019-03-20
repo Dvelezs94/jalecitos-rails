@@ -1,0 +1,15 @@
+<% name = params[:current] %>
+<% plural = name+"s" %>
+<% collection = instance_variable_get("@"+name+"s") %>
+
+
+paginator_container = $('.paginated_'+"<%=j plural %>").closest(".paginator_container");
+
+$('.paginated_'+"<%=j plural %>").append('<%= j render(partial: "admins/#{name}", collection: collection) %>');
+paginator_container.find('.pag-and-load').remove();
+
+<% if collection.next_page %>
+  paginator_container.append("<%= j paginate(collection, param_name: name, :params => {:current => name} ) %>");
+<% end %>
+
+<% sleep 1 %>

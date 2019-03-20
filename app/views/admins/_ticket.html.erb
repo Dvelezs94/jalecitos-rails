@@ -1,0 +1,8 @@
+<tr>
+  <td><%= link_to ticket.title, ticket_path(ticket) %></td>
+  <td><%= link_to ticket.user.alias, user_path(ticket.user) %></td>
+  <td><%= ticket.priority %></td>
+  <td><%= t "tickets.turn.#{ticket.turn}" if ticket.in_progress? %></td>
+  <td><%= ticket.status %></td>
+  <td>hace <%= distance_of_time_in_words_to_now(ticket.updated_at) %></td>
+</tr>
