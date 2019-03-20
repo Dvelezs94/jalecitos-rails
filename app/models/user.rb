@@ -113,7 +113,7 @@ class User < ApplicationRecord
   # :confirmable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :lockable, :registerable, :confirmable, :trackable,
          :recoverable, :rememberable, :secure_validatable,
-         :omniauthable, :omniauth_providers => [:facebook]
+         :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
    # Custom methods for OmniAuth
    def self.new_with_session(params, session)
     super.tap do |user|
