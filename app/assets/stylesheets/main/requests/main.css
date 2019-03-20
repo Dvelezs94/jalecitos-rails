@@ -175,9 +175,14 @@
 	margin-right: 20px;
 }
 
-.Contratar-b {
+.Contratar-b:first-child {
+	background: #0067F4 !important;
+	margin-right: 10px;
+}
+
+.Contratar-b:last-child {
 	background: #39C27B !important;
-	margin-right: 20px;
+	margin-right: 10px;
 }
 
 .contratado-btn a {
