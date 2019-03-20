@@ -67,7 +67,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         flash[:success] = "Tu cuenta ha sido desactivada."
         redirect_to after_destroy_account_path
       else
-        flash[:notice] = "No se pudo borrar"
+        flash[:notice] = "No se pudo borrar esta cuenta"
         redirect_to configuration_path
       end
     else
