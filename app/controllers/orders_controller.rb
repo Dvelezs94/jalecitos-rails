@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
         "source_id" => order_params[:card_id],
         "amount" => @order.total,
         "currency" => "MXN",
-        "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}",
+        "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}. orden ID: #{@order.uuid}",
         "device_session_id" => params[:device_id],
         "use_3d_secure" => (@order.total > min_3d_amount) ? true : false,
         "redirect_url" => details_order_url(@order.uuid)
@@ -125,13 +125,13 @@ class OrdersController < ApplicationController
 
 
   def refund
-    if @order.refund_in_progress!
       request_hash = {
         "description" => "Monto de la orden #{@order.uuid} devuelto por la cantidad de #{@order.total}",
         "amount" => @order.total
       }
       begin
         response = @charge.refund(@order.response_order_id ,request_hash, @order.employer.openpay_id)
+        @order.refund_in_progress!
         @order.update(response_refund_id: response["id"])
         if current_user == @order.employer
           flash[:success] = "La orden esta en proceso de reembolso, recibiras un correo cuando la orden ya haya sido reembolsada"
@@ -141,9 +141,6 @@ class OrdersController < ApplicationController
       rescue
         flash[:error] = "Ocurrio un error al intentar de reembolsar la orden"
       end
-    else
-      flash[:error] = "Ocurrio un error al intentar de reembolsar la orden"
-    end
     redirect_to finance_path(:table => "purchases")
   end
 
