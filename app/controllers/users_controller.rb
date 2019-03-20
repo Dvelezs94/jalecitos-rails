@@ -80,13 +80,18 @@ class UsersController < ApplicationController
   end
 
   def send_new_confirmation_email
-    if current_user.confirmed_at.nil?
-      begin
-        current_user.send_confirmation_instructions
-        flash[:success] = "Instrucciones enviadas. Asegurate de revisar tu bandeja de spam"
-      rescue
-        flash[:error] = "Hubo un error al enviar tu mail de confirmacion. Contactanos para solucionarlo"
+    if Time.now - current_user.confirmation_sent_at > 30.minute
+      if current_user.confirmed_at.nil?
+        begin
+          current_user.send_confirmation_instructions
+          current_user.update(confirmation_sent_at: Time.now)
+          flash[:success] = "Instrucciones enviadas. Asegurate de revisar tu bandeja de spam"
+        rescue
+          flash[:error] = "Hubo un error al enviar tu mail de confirmacion. Contactanos para solucionarlo"
+        end
       end
+    else
+      flash[:error] = "Favor de esperar #{((current_user.confirmation_sent_at+30.minute - Time.now)/1.minute).to_i} minutos antes de solicitar un nuevo mail de confirmacion."
     end
     redirect_to root_path
   end
