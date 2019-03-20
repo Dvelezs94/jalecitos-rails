@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   before_action :check_if_my_profile, only: :show
   before_action :set_user, only: [:show]
   before_action :set_user_config, only: [:configuration]
-  access all: [:show], user: [:update_user, :configuration, :my_account]
+  access all: [:show], user: [:update_user, :configuration, :my_account, :send_new_confirmation_email]
 
 
   def configuration
@@ -77,6 +77,18 @@ class UsersController < ApplicationController
          }
     end
 
+  end
+
+  def send_new_confirmation_email
+    if current_user.confirmed_at.nil?
+      begin
+        current_user.send_confirmation_instructions
+        flash[:success] = "Instrucciones enviadas. Asegurate de revisar tu bandeja de spam"
+      rescue
+        flash[:error] = "Hubo un error al enviar tu mail de confirmacion. Contactanos para solucionarlo"
+      end
+    end
+    redirect_to root_path
   end
 
 
