@@ -54,22 +54,7 @@ class UsersController < ApplicationController
     if params[:user]["name"]
       update_openpay_name(params[:user]["name"])
     end
-    # best in place update roles based on list select
-    if @role = params[:user]["roles"]
-      case @role
-        when "employee"
-          current_user.update_attributes(:roles => [:user, :employee])
-        when "employer"
-          current_user.update_attributes(:roles => [:user, :employer], tags: [])
-          current_user.gigs.published.each do |g|
-            g.draft!
-          end
-        when "employee_employer"
-          current_user.update_attributes(:roles => [:user, :employer, :employee])
-      end
-    elsif user_params.present?
-      @success = true if current_user.update_attributes(user_params)
-    end
+    @success = true if current_user.update_attributes(user_params)
     respond_to do |format|
       # if params[:user]["alias"]
       #   # flash[:success] = 'Tu alias ha sido actualizado.'
@@ -114,7 +99,7 @@ class UsersController < ApplicationController
                                    :age,
                                    :available,
                                    :city_id,
-                                   :roles,
+                                   :roles_word,
                                    :tag_list,
                                    :transactional_emails,
                                    :marketing_emails
