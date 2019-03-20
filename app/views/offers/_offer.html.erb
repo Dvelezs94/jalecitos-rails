@@ -8,13 +8,11 @@
 
   </div>
   <div class="fernanda-user-box-text">
-    <% if offer.hours.present? %>
-      <p>Horas estimadas:
-        <%= offer.hours %>
+    <p>Horas estimadas:
+        <%= offer.hours if offer.hours.present? %>
         <strong><%= number_to_currency(purchase_order_total(offer.price), precision: 2) %>
           MXN</strong>
       </p>
-    <% end %>
   </div>
   <% if current_user == offer.user || current_user == offer.request.user %>
     <div class="ipsum-text">
@@ -29,6 +27,7 @@
   <% end %>
   <% if current_user == offer.request.user && @hires_open %>
     <div class="Borrar-btn">
+      <%= link_to("Mensaje", conversations_path(user_id: offer.user.alias), class: "Contratar-b") %>
       <%= link_to("Contratar", hire_request_offer_path(offer.request.slug, offer), class: "Contratar-b") %>
     </div>
   <% end %>
