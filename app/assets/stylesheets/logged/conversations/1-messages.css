@@ -203,6 +203,7 @@
 	border-radius: 5px;
 	margin-bottom: 8px;
   max-width: 350px;
+  text-align: left;
 }
 .chat-write-text span {
 	font-size: 12px;

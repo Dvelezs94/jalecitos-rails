@@ -8,35 +8,42 @@ class AdminsController < ApplicationController
   end
 
   def index_dashboard
-    @gigs = Gig.order(updated_at: :desc).page(params[:gig_page]).per(25)
+    @gigs = Gig.includes(:user).order(updated_at: :desc).page(params[:gig]).per(25)
+    set_paginator
   end
 
   def categories
-    @categories =  Category.order(:name).page(params[:category_page]).per(25)
+    @categories =  Category.order(:name)
   end
 
   def users
-    @users =  User.order(:name).page(params[:user_page]).per(25)
+    @users =  User.order(id: :asc).page(params[:user]).per(25)
+    set_paginator
   end
 
   def orders
-    @orders =  Order.order(:created_at).page(params[:order_page]).per(25)
+    @orders =  Order.order(:created_at).page(params[:order]).per(25)
+    set_paginator
   end
 
   def disputes
-    @disputes = Dispute.order(status: :asc).page(params[:dispute_page]).per(25)
+    @disputes = Dispute.order(status: :asc).page(params[:dispute]).per(25)
+    set_paginator
   end
 
   def bans
-    @bans = Ban.order(status: :asc).page(params[:ban_page]).per(25)
+    @bans = Ban.order(status: :asc).page(params[:ban]).per(25)
+    set_paginator
   end
 
   def verifications
-    @verifications = Verification.order(status: :asc).page(params[:ban_page]).per(25)
+    @verifications = Verification.order(status: :asc).page(params[:verification]).per(25)
+    set_paginator
   end
 
   def tickets
-    @tickets = Ticket.order(status: :asc).page(params[:ticket_page]).per(25)
+    @tickets = Ticket.order(status: :asc).page(params[:ticket]).per(25)
+    set_paginator
   end
 
   def openpay_dashboard
@@ -63,12 +70,18 @@ class AdminsController < ApplicationController
 
   private
   def set_vars
-    @pending_verifications = Verification.pending.count
-    @pending_bans = Ban.pending.count
-    @pending_disputes = Dispute.waiting_for_support.count
-    @open_tickets = Ticket.in_progress.count
-    @user_count = User.count
-    @orders_count = Order.count
-    @gigs_count = Gig.count
+    if request.format.html?
+      @pending_verifications = Verification.pending.count
+      @pending_bans = Ban.pending.count
+      @pending_disputes = Dispute.waiting_for_support.count
+      @open_tickets = Ticket.in_progress.count
+      @user_count = User.count
+      @orders_count = Order.count
+      @gigs_count = Gig.count
+    end
+  end
+
+  def set_paginator
+    render "pagination" if request.format.js?
   end
 end
