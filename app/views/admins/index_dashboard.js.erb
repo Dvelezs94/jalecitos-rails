@@ -1,0 +1,9 @@
+paginator_container = $('.paginated_gigs').closest(".paginator_container");
+$(".paginated_gigs").append('<%= j render(partial: "gigs/gig_dashboard", collection: @gigs) %>');
+paginator_container.find('.pag-and-load').remove();
+
+<% if @gigs.next_page %>
+  paginator_container.append("<%= j paginate(@gigs, param_name: :gig_page) %>");<% else %>
+<% end %>
+
+<% sleep 1 %>
