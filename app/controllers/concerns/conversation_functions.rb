@@ -3,8 +3,10 @@ module ConversationFunctions
   def set_recipient
     if params[:user_id]
       @remote_user = User.friendly.find(params[:user_id]).id
-
-      if ! @conversation = Conversation.search("*", where: { _or: [{sender_id: current_user.id, recipient_id: @remote_user}, {sender_id: @remote_user ,recipient_id: current_user.id}] }, limit: 1).first
+      @conversation = Conversation.where(sender_id: current_user.id, recipient_id: @remote_user ).
+      or( Conversation.where(sender_id: @remote_user, recipient_id: current_user.id) ).
+      limit(1).first
+      if ! @conversation
           #  Create conversation if not found. this can be refactored later
           Conversation.create(sender_id: current_user.id, recipient_id: @remote_user)
           set_recipient
@@ -23,7 +25,7 @@ module ConversationFunctions
 
   def filter_conversations
     word = params[:word].downcase
-    @my_conversations.each do |c|
+    @all_conversations.each do |c|
       #check if the opposite user alias includes the text, @users is going to be used in partial
       if c.sender_id == current_user.id
         @users << {'user' => c.recipient, 'unread_messages' => c.unread_messages?(current_user)} if c.recipient.alias.downcase.include? word

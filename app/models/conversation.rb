@@ -1,14 +1,14 @@
 class Conversation < ApplicationRecord
   #search
-  searchkick language: "spanish"
+  # searchkick language: "spanish"
 
-  def search_data
-    {
-      recipient_id: recipient_id,
-      sender_id: sender_id,
-      updated_at: updated_at,
-     }
-  end
+  # def search_data
+  #   {
+  #     recipient_id: recipient_id,
+  #     sender_id: sender_id,
+  #     updated_at: updated_at,
+  #    }
+  # end
   has_many :messages, dependent: :destroy
   belongs_to :sender, foreign_key: :sender_id, class_name: "User"
   belongs_to :recipient, foreign_key: :recipient_id, class_name: "User"
@@ -20,6 +20,12 @@ class Conversation < ApplicationRecord
       where(sender_id: recipient_id, recipient_id: sender_id)
     )
   end
+
+  scope :mine, -> (user_id) do
+    #dont show conversations that doesnt have messages
+    where("(sender_id=? OR recipient_id=?) AND (updated_at - created_at > '?')", user_id, user_id, 0.3.second)
+  end
+
 
   def self.get(sender_id, recipient_id)
     conversation = between(sender_id, recipient_id).first
