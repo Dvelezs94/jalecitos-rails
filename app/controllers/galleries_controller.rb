@@ -1,6 +1,7 @@
 class GalleriesController < ApplicationController
   layout 'logged'
   before_action :set_gig, only: [:index, :create, :destroy]
+  skip_before_action :verify_authenticity_token
   before_action :check_gig_ownership, only:[:index, :create, :destroy]
   access user: :all
 
