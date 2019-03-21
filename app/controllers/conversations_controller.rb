@@ -26,9 +26,7 @@ class ConversationsController < ApplicationController
 
     elsif params[:word]
       @users = []
-      @my_conversations = Conversation.search("*", where: {
-         _or: [{sender_id: current_user.id}, {recipient_id: current_user.id}]
-         }, order: [{ updated_at: { order: :desc, unmapped_type: :long}}])
+      get_conversations
       filter_conversations
     else
       get_conversations
@@ -61,9 +59,8 @@ class ConversationsController < ApplicationController
   end
 
   def check_unread
-    @conversations = Conversation.search("*",
-       includes: [:messages], where: { _or: [{sender_id: current_user.id},
-          {recipient_id: current_user.id}] })
+    @conversations = Conversation.includes(:messages).
+    mine(current_user)
     @unread = false
     @conversations.each do |c|
       if c.unread_messages?(current_user)
@@ -81,17 +78,19 @@ class ConversationsController < ApplicationController
 
   private
   def get_conversations
-    @conversations = Conversation.search("*", includes: [:sender, :recipient, :messages],
-       where: { _or: [{sender_id: current_user.id}, {recipient_id: current_user.id}] },
-        order: [{ updated_at: { order: :desc, unmapped_type: :long}}],
-        per_page: 20, page: params[:conversation])
+    if params[:word].present? #need all conversations
+      @all_conversations = Conversation.includes(:sender, :recipient, :messages).
+      mine(current_user.id).
+      order(updated_at: :desc)
+    else #paginated conversations
+      @conversations = Conversation.includes(:sender, :recipient, :messages)
+      .mine(current_user.id).order(updated_at: :desc).
+      page(params[:conversation]).per(20)
+    end
   end
 
   def get_messages
-    @messages = Message.search("*",
-       where: {conversation_id: @conversation.id},
-        order: [{ _id: { order: :desc, unmapped_type: :long}}],
-         page: params[:page], per_page: 25)
+    @messages = Message.where(conversation_id: @conversation.id).order(id: :desc).page(params[:page]).per(25)
   end
 
 end

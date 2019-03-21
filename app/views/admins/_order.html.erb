@@ -1,0 +1,8 @@
+<tr>
+  <td><%= order.uuid %></td>
+  <td><%= order.total %></td>
+  <td><%= order.employer.alias %></td>
+  <td><%= order.employee.alias %></td>
+  <td><%= (order.purchase.class == Package ? order.purchase.gig.title : order.purchase.request.title) rescue "Eliminado" %></td>
+  <td><%= order.status %></td>
+</tr>

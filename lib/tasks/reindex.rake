@@ -1,5 +1,5 @@
 task :reindex => [:environment] do
-  reindex_list = [Gig, Request, Message, Notification, Review, User, Order, Profession, Like, City, Conversation]
+  reindex_list = [Gig, Request, Notification, Review, User, Order, Profession, Like, City]
   reindex_list.each do |model|
     model.reindex
   end

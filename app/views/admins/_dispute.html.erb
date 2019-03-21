@@ -1,0 +1,9 @@
+<tr>
+  <td><%= link_to "#{dispute.order.employee.alias}(#{dispute.order.employee.disputes.count})", user_path(dispute.order.employee), title: "Numero de disputas" %></td>
+  <td><%= link_to "#{dispute.order.employer.alias}(#{dispute.order.employer.disputes.count})", user_path(dispute.order.employer), title: "Numero de disputas" %></td>
+  <td><%= link_to dispute.order.uuid %></td>
+  <td><%= dispute.order.total %></td>
+  <td><%= dispute.status %></td>
+  <td><%= dispute.order.status %></td>
+  <td><%= link_to icon("fas","eye"), order_dispute_path(dispute.order.id, dispute) %></td>
+</tr>
