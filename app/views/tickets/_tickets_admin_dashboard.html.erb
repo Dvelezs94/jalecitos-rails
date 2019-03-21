@@ -1,8 +1,0 @@
-<tr>
-  <td><%= link_to tickets_admin_dashboard.title, ticket_path(tickets_admin_dashboard) %></td>
-  <td><%= link_to tickets_admin_dashboard.user.alias, user_path(tickets_admin_dashboard.user) %></td>
-  <td><%= tickets_admin_dashboard.priority %></td>
-  <td><%= t "tickets.turn.#{tickets_admin_dashboard.turn}" if tickets_admin_dashboard.in_progress? %></td>
-  <td><%= tickets_admin_dashboard.status %></td>
-  <td>hace <%= distance_of_time_in_words_to_now(tickets_admin_dashboard.updated_at) %></td>
-</tr>
