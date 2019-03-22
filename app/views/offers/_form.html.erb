@@ -33,7 +33,7 @@
               <div class="row justify-content-center">
                 <input type="number" name="want_win_0" min="100" max="9000" step=".01"
                 class="price-input price-input-0 styled required"
-                value="<%= (@offer.price*0.9).round(2) if params[:action] == 'edit' %>">
+                value="<%= (@offer.price).round(2) if params[:action] == 'edit' %>">
                 <%= form.hidden_field :price, id: "base-price-0" %>
               </div>
             </div>
