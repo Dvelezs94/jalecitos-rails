@@ -18,11 +18,18 @@
     </div>
 
     <div class="metodo-text">
+      <h4>Detalles de la orden</h4>
+    </div>
+
+    <%= render partial: 'orders/details', locals:{ f: f }%>
+
+    <div class="metodo-text">
       <h4>Facturación
         <%= link_to "Administrar Facturación #{icon("fa", "angle-right")}".html_safe, configuration_path(collapse: "billing", package_id: (@package.slug rescue ""), offer_id: (@offer.id rescue "")) %></h4>
     </div>
 
     <%= render partial: 'shared_user/hire/billing_profile', collection: @billing_profiles, locals:{ f: f } %>
+
 
   </div>
 </div>

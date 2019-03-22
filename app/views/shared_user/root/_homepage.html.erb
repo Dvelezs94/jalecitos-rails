@@ -6,8 +6,8 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-
 <% end %>
+
 
 <%= render 'categories/category_carousel' %>
 
@@ -20,3 +20,5 @@
 <%= gig_carousel( "Jales Verificados", :verified_gigs) %>
 
 <%= gig_carousel( "Jales Gustados", :liked_gigs, 'shared_user/gigs/liked_carousel', true) %>
+
+<%= render "shared/no_gigs" %>
