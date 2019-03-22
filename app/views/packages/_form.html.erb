@@ -63,8 +63,8 @@
                   <%= render 'shared_user/pack/hints/price_hint.html.erb' %>
                   <label id="price-calc-<%= n %>" class="label-price"></label>
                 </div>
-                <%= render "shared/see_level_table", n: n %>
-                <%= render "shared/level_table", n: n  %>
+                <%= render "shared_user/see_level_table", n: n %>
+                <%= render "shared/level_table", n: n, user: true, h: true  %>
                 </div>
               <div style="margin:0 20px;display:flex;justify-content:flex-end;">
                 <%=link_to icon("fas", "trash-alt", class: "fa-2x", style: "color: red;"), "#{n}", class: "erase-all" %>
