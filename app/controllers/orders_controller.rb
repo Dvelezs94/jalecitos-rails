@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   include UsersHelper
   include ApplicationHelper
   include OrderFunctions
+  include MoneyHelper
   layout :set_layout
   access user: :all, admin: [:complete, :refund]
   before_action only: [:create, :refund] do
@@ -30,7 +31,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @order.payout_left = calc_employee_earning(@order.purchase.price)
+    @order.payout_left = @order.purchase.price
     if @order.save
       # minimum amount to require 3d secure
       min_3d_amount = 2999

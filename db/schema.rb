@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_06_025643) do
+ActiveRecord::Schema.define(version: 2019_03_22_064528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -255,6 +255,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_025643) do
     t.string "bank_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "level"
     t.index ["user_id"], name: "index_payouts_on_user_id"
   end
 
@@ -423,6 +424,8 @@ ActiveRecord::Schema.define(version: 2019_03_06_025643) do
     t.integer "employee_score_times", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "level", default: 1
+    t.integer "orders_count", default: 0
   end
 
   create_table "users", force: :cascade do |t|
