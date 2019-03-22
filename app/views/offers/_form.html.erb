@@ -41,7 +41,8 @@
               <p class="price-text form-title">Precio final:</p>
               <label id="price-calc-0" class="label-price"></label>
             </div>
-            <p class="text-center" style="color: var(--gray);">Se te cobrará un porcentaje de tus ganancias de acuerdo a tu nivel</p>  
+            <%= render "shared_user/see_level_table", n: 0 %>
+            <%= render "shared/level_table", n: 0, user: true, h: true  %>
           </div>
 
           <div style="margin: 0 20px;">

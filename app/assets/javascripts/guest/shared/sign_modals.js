@@ -14,4 +14,7 @@ $(document).on('turbolinks:load', function() {
 if($('#ready_to').length > 0) {
   modals('sign_up', 'upModal', "ready_to");
 }
+if ( $("#nogigmess").length > 0 ) {
+  modals('sign_up', 'upModal', "nogigmess");
+}
 });

@@ -18,9 +18,9 @@ class OrdersController < ApplicationController
   before_action only: [:complete] do
     init_openpay("fee")
   end
-  before_action :get_order_by_uuid, only: [:request_start, :start, :request_complete, :complete, :refund, :details, :update_details]
+  before_action :get_order_by_uuid, only: [:request_start, :start, :request_complete, :complete, :refund]
   before_action :verify_order_employee, only: [:start, :request_complete]
-  before_action :verify_order_owner, only: [:complete, :details, :update_details]
+  before_action :verify_order_owner, only: [:complete]
   before_action :verify_owner_or_employee, only: [:refund]
   before_action :verify_charge_response, except: [:create]
   before_action :verify_availability, only: [:create]
@@ -44,14 +44,14 @@ class OrdersController < ApplicationController
         "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}. orden ID: #{@order.uuid}",
         "device_session_id" => params[:device_id],
         "use_3d_secure" => (@order.total > min_3d_amount) ? true : false,
-        "redirect_url" => details_order_url(@order.uuid)
+        "redirect_url" => finance_url(table: "purchases")
       }
       #create charge on openpay
       begin
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.update(response_order_id: response["id"])
         flash[:success] = "Se ha creado la orden."
-        redirect_to (@order.total > min_3d_amount) ? response["payment_method"]["url"] : details_order_path(@order.uuid)
+        redirect_to (@order.total > min_3d_amount) ? response["payment_method"]["url"] : finance_path(:table => "purchases")
       rescue OpenpayTransactionException => e
         @order.update(response_order_id: "failed")
         @order.denied!
@@ -145,28 +145,12 @@ class OrdersController < ApplicationController
     redirect_to finance_path(:table => "purchases")
   end
 
-  def details
-  end
-
-  def update_details
-    if @order.update_attributes(order_details_params)
-      flash[:success] = "Se ha actualizado la orden con los nuevos detalles."
-    else
-      flash[:error] = "Hubo un error actualizando los datos."
-    end
-    redirect_to finance_url(:table => "purchases")
-  end
-
   private
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      order_params = params.require(:order).permit(:card_id, :purchase, :purchase_type, :billing_profile_id)
+      order_params = params.require(:order).permit(:card_id, :purchase, :purchase_type, :billing_profile_id, :details, :address)
       order_params = set_defaults(order_params)
-    end
-
-    def order_details_params
-      order_params = params.require(:order).permit(:details, :address)
     end
 
     def set_defaults parameters

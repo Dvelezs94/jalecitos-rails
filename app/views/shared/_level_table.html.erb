@@ -1,0 +1,25 @@
+<table class="<%="level-table lt-#{n} table table-striped table-sm text-center #{"hidden" if h == true }"%>" >
+  <thead>
+    <tr>
+      <%= render "shared/comision_ths", user: user %>
+    </tr>
+  </thead>
+  <tbody>
+    <% lq = levels_quantity %>
+    <% levels_fee.each do |key, value| %>
+    <tr>
+      <td><%= key %></td>
+      <td><%= "#{((1 - value)* 100  ).round(0) }%" %></td>
+      <% if lq[key] == lq.values.last %>
+        <td><%= number_to_currency(lq[key], precision: 0)%> o más</td>
+      <% else %>
+        <td><%= number_to_currency(lq[key], precision: 0)%> a <%= number_to_currency(lq[key+1] - 1, precision: 0) %></td>
+      <% end %>
+      <% if user == true %>
+        <td><%= current_user.score.level == key ? "✓" : "" %></td>
+      <% end %>
+    </tr>
+    <% end %>
+
+  </tbody>
+</table>
