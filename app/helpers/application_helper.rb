@@ -78,7 +78,7 @@ module ApplicationHelper
   end
 
   def notification_generator_helper msg, flash_type
-     js add_gritter(msg, :image => flash_type, :title=>"Jalecitos", :sticky => false, :time => 2000 )
+     js add_gritter(msg, :image => flash_type, :title=>"Jalecitos", :sticky => false, :time => 5000 )
   end
 
   def image_display_helper image

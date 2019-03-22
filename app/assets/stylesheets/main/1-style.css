@@ -548,6 +548,11 @@ p.COAH3 {
 }
 .no_gigs {
   text-align: center;
+  margin-top: 20px;
+}
+
+.cached #gritter-notice-wrapper {
+  display: none !important;
 }
 
 .headertop {
