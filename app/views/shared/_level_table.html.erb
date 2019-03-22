@@ -1,0 +1,26 @@
+<table class="<%="table table-striped table-sm text-center level-table-#{n} hidden"%>" >
+  <thead>
+    <tr>
+      <th>Nivel</th>
+      <th>Comisión</th>
+      <th>Número de órdenes</th>
+      <th>Actual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% lq = levels_quantity %>
+    <% levels_fee.each do |key, value| %>
+    <tr>
+      <td><%= key %></td>
+      <td><%= "#{((1 - value)* 100  ).round(0) }%" %></td>
+      <% if lq[key] == lq.values.last %>
+      <td><%= lq[key]%> o más</td>
+      <% else %>
+      <td><%= lq[key]%> a <%= lq[key+1] - 1 %></td>
+      <% end %>
+      <td><%= current_user.score.level == key ? "✓" : "" %></td>
+    </tr>
+    <% end %>
+
+  </tbody>
+</table>
