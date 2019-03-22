@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @order.payout_left = calc_employee_earning(@order.purchase.price)
+    @order.payout_left = @order.purchase.price
     if @order.save
       # minimum amount to require 3d secure
       min_3d_amount = 2999

@@ -7,8 +7,6 @@ class OrderInvoiceGeneratorWorker
   def perform(order_id)
     order = Order.find(order_id)
     zip_code = 25204
-    iva = 0.16
-    base_earning = 10.0
     subtotal = (order.purchase.price).round(2)
     total = order.total
     recipient = {"nombre": "#{order.billing_profile.name}",
@@ -30,7 +28,7 @@ class OrderInvoiceGeneratorWorker
                        "base": subtotal + base_earning,
                        "tipo_factor": "Tasa",
                        "tasa": iva,
-                       "importe": (order_tax(subtotal) + (base_earning * iva)).round(2)
+                       "importe": (order_tax(subtotal)
                    }
                ]
               }]
