@@ -98,7 +98,7 @@ end
 
   def validate_create
     params[:packages].each do |pack|
-      flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 111 && pack[:price] != "")
+      flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 100 && pack[:price] != "")
       flash.now[:error] = "No puedes ganar arriba de de 9,000 MXN" if (pack[:price].to_f > 10000)
       flash.now[:error] = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
       flash.now[:error] = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
@@ -112,7 +112,7 @@ end
   def validate_update
     @gig.gig_packages.each do |record|
       pack = params[:packages]["#{record.slug}"]
-      flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 111 && pack[:price] != "")
+      flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 100 && pack[:price] != "")
       flash.now[:error] = "No puedes ganar arriba de de 9,000 MXN" if (pack[:price].to_f > 10000)
       flash.now[:error] = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
       flash.now[:error] = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
