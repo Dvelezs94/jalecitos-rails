@@ -63,9 +63,7 @@
                   <%= render 'shared_user/pack/hints/price_hint.html.erb' %>
                   <label id="price-calc-<%= n %>" class="label-price"></label>
                 </div>
-                <p class="level-toggler t-<%= n %> text-center mar-0-auto">
-                <a href="#" style="color: var(--gray);">Se te cobrará una comisión sobre tus ganancias al retirar tu dinero de acuerdo a tu nivel de experto, click aquí para ver tabla de comisión</a>
-               </p>
+                <%= render "shared/see_level_table", n: n %>
                 <%= render "shared/level_table", n: n  %>
                 </div>
               <div style="margin:0 20px;display:flex;justify-content:flex-end;">
