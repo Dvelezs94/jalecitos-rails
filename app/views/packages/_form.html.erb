@@ -32,7 +32,7 @@
             <hr>
             <div class="form-block form-group-<%= n %> row col-lg-11 centered-form">
               <div class="flex-space-bet">
-                <p class="form-title">Lo que realizaré</p>
+                <p class="form-title">Lo que realizaré:</p>
               </div>
 
                  <%= pa.text_area :description, id: "description#{n}", maxlength: 1000,
@@ -46,12 +46,12 @@
             <div class="form-block form-group-<%= n %> pack-price-class row col-lg-11 centered-form">
 
               <div class="row will-earn justify-content-center col-lg-6 col-md-6 col-sm-12 col-12">
-                <p class="price-text form-title">Lo que ganaré (Libres):</p>
+                <p class="price-text form-title">Lo que ganaré:</p>
                 <div class="row justify-content-center w-100">
                   <%= icon "fas","dollar", class: "fa-2x", id: "price-symbol" %>
                   <input type="number" name="want_win_<%= n %>" min="100" max="9000" step=".01"
                    class="price-input price-input-<%= n %> form-control"
-                   value="<%= (@gig.packages[n].price*0.9).round(2) if params[:action] == 'edit_packages' && @gig.packages[n].price.present? %>">
+                   value="<%= (@gig.packages[n].price).round(2) if params[:action] == 'edit_packages' && @gig.packages[n].price.present? %>">
                   <%= pa.hidden_field :price, id: "base-price-#{n}", class: "form_fields_#{n}" %>
                   <span class="error error_span_<%= 3*n+3 %>"></span>
                   </div>
@@ -63,7 +63,7 @@
                   <%= render 'shared_user/pack/hints/price_hint.html.erb' %>
                   <label id="price-calc-<%= n %>" class="label-price"></label>
                 </div>
-
+              <p class="text-center mar-0-auto" style="color: var(--gray);">Se te cobrará un porcentaje de tus ganancias de acuerdo a tu nivel</p>  
               </div>
               <div style="margin:0 20px;display:flex;justify-content:flex-end;">
                 <%=link_to icon("fas", "trash-alt", class: "fa-2x", style: "color: red;"), "#{n}", class: "erase-all" %>

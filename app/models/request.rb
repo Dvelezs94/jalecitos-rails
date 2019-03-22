@@ -35,7 +35,7 @@ class Request < ApplicationRecord
   has_many :offers, dependent: :destroy
   belongs_to :employee, class_name: "User", optional: true
   #Validations
-  validates_presence_of :name, :description, :budget, :category_id, :profession
+  validates_presence_of :name, :description, :budget, :category_id
   validate  :tag_length, :no_spaces_in_tag, :maximum_amount_of_tags
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
   validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
@@ -61,7 +61,7 @@ class Request < ApplicationRecord
   end
 
   def title
-    "Busco #{to_downcase(self.profession)} #{to_downcase(self.name)}"
+    "Busco #{to_downcase(self.name)}"
   end
 
   def budget_options

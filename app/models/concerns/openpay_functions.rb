@@ -42,8 +42,8 @@ module OpenpayFunctions
   def pay_to_customer(order, transfer)
     request_hash = {
       "customer_id" => ENV.fetch("OPENPAY_PREDISPERSION_CLIENT"),
-      "amount" => calc_employee_earning(order.purchase.price),
-      "description" => "Pago de orden #{order.uuid} por la cantidad de #{calc_employee_earning(order.purchase.price)}",
+      "amount" => order.purchase.price,
+      "description" => "Pago de orden #{order.uuid} por la cantidad de #{order.purchase.price}",
       "order_id" => "#{order.uuid}-complete"
     }
     begin
@@ -70,7 +70,7 @@ module OpenpayFunctions
 
   def charge_tax(order, fee)
     request_tax_hash={"customer_id" => order.employer.openpay_id,
-                   "amount" => order_tax(order.purchase.price + 10),
+                   "amount" => order_tax(order.purchase.price),
                    "description" => "Cobro de impuesto por la orden #{order.uuid}",
                    "order_id" => "#{order.uuid}-tax"
                   }
@@ -95,4 +95,6 @@ module OpenpayFunctions
       order.update(response_openpay_tax_id: "failed")
     end
   end
+
+
 end
