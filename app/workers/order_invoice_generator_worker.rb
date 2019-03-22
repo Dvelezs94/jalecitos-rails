@@ -2,13 +2,12 @@ class OrderInvoiceGeneratorWorker
   include Sidekiq::Worker
   sidekiq_options retry: false, dead: false
   include ApplicationHelper
+  include MoneyHelper
   require 'net/http'
 
   def perform(order_id)
     order = Order.find(order_id)
     zip_code = 25204
-    iva = 0.16
-    base_earning = 10.0
     subtotal = (order.purchase.price).round(2)
     total = order.total
     recipient = {"nombre": "#{order.billing_profile.name}",
@@ -19,29 +18,29 @@ class OrderInvoiceGeneratorWorker
     concept = [{"identificador": "Orden #{order.uuid}",
                "cantidad": 1,
                "unidad": "Orden",
-               "valor_unitario": subtotal + base_earning,
+               "valor_unitario": (sprintf "%.2f", invoice_unitary(subtotal)),
                "descripcion": "Servicios profesionales para la orden #{order.uuid}",
-               "importe": subtotal + base_earning,
+               "importe": (sprintf "%.2f", invoice_unitary(subtotal)),
                "clave": "80141600",
                "clave_unidad": "E48",
                "traslados": [
                    {
                        "impuesto": "002",
-                       "base": subtotal + base_earning,
+                       "base": (sprintf "%.2f", invoice_unitary(subtotal)),
                        "tipo_factor": "Tasa",
-                       "tasa": iva,
-                       "importe": (order_tax(subtotal) + (base_earning * iva)).round(2)
+                       "tasa": $iva,
+                       "importe": (sprintf "%.2f", (order_tax(subtotal)))
                    }
                ]
               }]
       impuestos_traslado =  [{"impuesto": "002",
-                              "tasa": iva,
+                              "tasa": $iva,
                               "importe": concept[0][:traslados][0][:importe],
                               "tipo_factor": "Tasa"
                             }]
       invoice = {"invoice_id": "#{order.uuid}",
                  "total": total,
-                 "subtotal": subtotal + base_earning,
+                 "subtotal": (sprintf "%.2f", invoice_unitary(subtotal)),
                  "forma_pago": "04",
                  "hide_total_items": true,
                  "hide_total_taxes": true,

@@ -16,12 +16,11 @@ function init_price_count() {
 }
 
 function price_calculation() {
-  number = $(this)[0].value;
+  number = parseFloat($(this)[0].value);
   input = $(this)[0].className.split(" ")[1].match(/\d+$/)[0];
   if (number >= 100) {
-    base_price = number / 9 * 10
-    $("#price-calc-" + input).text("$" + (((base_price) + 10) * 1.16).toFixed(2) + " MXN");
-    $("#base-price-" + input).val(base_price);
+    $("#price-calc-" + input).text("$" + ( ((number+10) * 1.04) * 1.16).toFixed(2) + " MXN");
+    $("#base-price-" + input).val(number);
   } else {
     $("#price-calc-" + input).text("-");
     $("#base-price-" + input).val("");

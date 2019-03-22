@@ -15,13 +15,21 @@
 
           <div class="form_block form_section row">
             <div class="flex-space-bet">
+              <p class="form-title">¿A quién buscas? (Opcional):</p>
+              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
+            </div>
+            <%= render 'shared_user/requests/forms/hints/profession_hint.html.erb' %>
+            <%= form.text_field :profession, class: "styled req-prof-input", maxlength: 50, placeholder: "Ej: Fotógrafo" %>
+          </div>
+
+          <div class="form_block form_section row">
+            <div class="flex-space-bet">
               <p class="form-title">Define tu pedido:</p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
             <%= render 'shared_user/requests/forms/hints/name_hint.html.erb' %>
             <span class="action action-req">Busco ...</span>
-            <%= form.text_field :profession, class: "styled req-prof-input", required: true, maxlength: 50, placeholder: "Ej: Fotógrafo" %>
-            <%= form.text_area :name, class: 'name-class name-0 styled required', placeholder: "que me tome unas fotografías.", maxlength: 100 %>
+            <%= form.text_area :name, class: 'name-class name-0 styled required', placeholder: "a alguien que me tome unas fotografías.", maxlength: 100 %>
 
           </div>
           <div class="form_block form_section row ">
@@ -56,7 +64,7 @@
 
             <%= render 'shared_user/requests/forms/hints/city_hint.html.erb' %>
             <%= form.text_field :location, class: 'required font-awesome styled', id: "form_autocomplete", size: 50, placeholder: '&#xf3c5; Busca tu ciudad...'.html_safe, value: (request.location(true) != nil)? request.location : current_user.location(true) %>
-            <%= form.hidden_field :city_id, class: "city", value: current_user.city_id %>
+            <%= form.hidden_field :city_id, class: "city", value: (request.city_id != nil)? request.city_id : current_user.city_id %>
 
           </div>
 

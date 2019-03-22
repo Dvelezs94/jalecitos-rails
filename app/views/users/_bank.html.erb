@@ -2,7 +2,7 @@
   <div class="Cuenta-box-text">
     <h4><%= bank["alias"] %></h4>
     <p><%= bank["clabe"] %></p>
-    <span><%= link_to "Retirar Fondos", payouts_path(bank_id: bank["id"]), method: :post, data: ( current_user.balance > 4999 ? {confirm: "El maximo a retirar por exhibición es de $5000.00 MXN, por lo cual deberas hacer mas de un retiro para obtener todo tu dinero. El costo por la transaccion es de $8 MXN + IVA."} : {confirm: "El costo por la transaccion es de $8 MXN + IVA."}) %></span>
+    <span><%= link_to "Retirar Fondos", payouts_path(bank_id: bank["id"]), method: :post, data: ( current_user.balance > 4999 ? {confirm: "El maximo a retirar por exhibición es de $5000.00 MXN, por lo cual deberas hacer mas de un retiro para obtener todo tu dinero. El costo por la transaccion es de #{get_payout_charge_in_view} MXN."} : {confirm: "El costo por la transaccion es de #{get_payout_charge_in_view} MXN."}) %></span>
     <%= link_to icon("far","trash-alt", class: "fa-lg"), user_bank_path(current_user.slug, bank["id"]), method: :delete, data: { confirm: 'Seguro quieres borrar esta cuenta?' } %>
   </div>
 </div>
