@@ -3051,3 +3051,7 @@ div.form {
 .hidden {
   display: none !important;
 }
+
+.see-lev-table {
+  color: black;
+}

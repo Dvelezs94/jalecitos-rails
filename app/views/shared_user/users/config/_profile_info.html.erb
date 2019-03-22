@@ -72,6 +72,12 @@
             <%= current_user.score.level %>
           </li>
         </div>
+        <div>
+          <label for="">Ventas totales</label>
+          <li class="nav-item dropdown">
+            <%= number_to_currency(current_user.score.total_sales, precision: 2) %>
+          </li>
+        </div>
       </ul>
     </div>
 
