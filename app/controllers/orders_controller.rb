@@ -51,12 +51,13 @@ class OrdersController < ApplicationController
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.update(response_order_id: response["id"])
         flash[:success] = "Se ha creado la orden."
+        redirect_to (@order.total > min_3d_amount) ? response["payment_method"]["url"] : finance_path(:table => "purchases")
       rescue OpenpayTransactionException => e
         @order.update(response_order_id: "failed")
         @order.denied!
         flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
+        redirect_to finance_path(:table => "purchases")
       end
-      redirect_to finance_path(:table => "purchases")
     else
       redirect_to request.referer, alert: "No se pudo crear tu orden, asegurate de elegir un método de pago."
     end
@@ -142,15 +143,6 @@ class OrdersController < ApplicationController
         flash[:error] = "Ocurrio un error al intentar de reembolsar la orden"
       end
     redirect_to finance_path(:table => "purchases")
-  end
-
-  def update_details
-    if @order.update_attributes(order_details_params)
-      flash[:success] = "Se ha actualizado la orden con los nuevos detalles."
-    else
-      flash[:error] = "Hubo un error actualizando los datos."
-    end
-    redirect_to finance_url(:table => "purchases")
   end
 
   private
