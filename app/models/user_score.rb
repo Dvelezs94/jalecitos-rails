@@ -5,7 +5,6 @@ class UserScore < ApplicationRecord
   before_update :gain_level
 
   def gain_level
-    puts "X"*500
     lq = levels_quantity #get level and sales needed
     lq.each do |key, value|
       if self.total_sales >= value
