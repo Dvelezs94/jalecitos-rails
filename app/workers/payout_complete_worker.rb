@@ -4,7 +4,7 @@ class PayoutCompleteWorker
   include OrderFunctions
   include ApplicationHelper
   include OpenpayHelper
-  include LevelFunctions
+  include LevelHelper
 
   def perform(payout_id)
     # get payout id
