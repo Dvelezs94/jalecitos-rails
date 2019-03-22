@@ -1,16 +1,16 @@
 module MoneyHelper
-  cons = 10 #the constant added to base
-  fee = 0.04 #the percentage added to the base (includes contant)
-  iva = 0.16
+  $cons = 10 #the constant added to base
+  $fee = 0.04 #the percentage added to the base (includes contant)
+  $iva = 0.16
 
 
   # Earning for order hiring
   def get_order_earning base
-     ((fee+1) * (x+cons) - (1+ iva ) * (fee+1) * ( x+ cons ) * ( 0.03364 ) - 2.9 - x).round(2)
+     (($fee+1) * (base+$cons) - (1+ $iva ) * ($fee+1) * ( base + $cons ) * ( 0.03364 ) - 2.9 - x).round(2)
   end
 
   def order_tax price
-    purchase_order_total(price)*iva.round(2)
+    purchase_order_total(price)*$iva.round(2)
   end
 
   ######
@@ -25,7 +25,7 @@ module MoneyHelper
 
   # Get toal price of order, with taxes included
   def purchase_order_total price
-    (fee+1) * (price+cons)
+    ($fee+1) * (price+$cons)
   end
 
 
