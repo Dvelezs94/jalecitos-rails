@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   include UsersHelper
   include ApplicationHelper
   include OrderFunctions
+  include MoneyHelper
   layout :set_layout
   access user: :all, admin: [:complete, :refund]
   before_action only: [:create, :refund] do
