@@ -2,31 +2,44 @@ module MoneyHelper
   $cons = 10 #the constant added to base
   $fee = 0.04 #the percentage added to the base (includes contant)
   $iva = 0.16
+  $openpay_fee = 0.029 #percent
+  $openpay_base = 2.5 #MXN pesos
 
 
   # Earning for order hiring
   def get_order_earning base
-     (($fee+1) * (base+$cons) - (1+ $iva ) * ($fee+1) * ( base + $cons ) * ( 0.03364 ) - 2.9 - x).round(2)
+     (($fee+1) * (base+$cons) - (1+ $iva ) * ($fee+1) * ( base + $cons ) * ( 0.03364 ) - 2.9 - base).round(2)
   end
 
   def order_tax price
-    purchase_order_total(price)*$iva.round(2)
+    (((price + $cons) * (1 + $fee)) * $iva).round(2)
   end
 
-  ######
+  def invoice_unitary price
+    (($fee+1) * (price+$cons)).round(2)
+  end
+
+  #####
 
   def calc_openpay_tax (order_total)
-    openpay_fee = 0.029 #percent
-    openpay_base = 2.5 #MXN pesos
-    pre_iva = (order_total * openpay_fee + openpay_base).round(2)
-    tax_iva = pre_iva * iva
+    pre_iva = (order_total * $openpay_fee + $openpay_base).round(2)
+    tax_iva = pre_iva * $iva
     (pre_iva + tax_iva).round(2)
   end
 
   # Get toal price of order, with taxes included
   def purchase_order_total price
-    ($fee+1) * (price+$cons)
+    ($fee+1) * (price+$cons) * (1+$iva)
   end
+
+  # used for hire view
+  def calc_hire_view price
+    # Constant Increment to keep our loss at minimum
+    subtotal = (price)*(1+$iva).round(2)
+    buy_fee = (purchase_order_total(price) - subtotal).round(2)
+    {"fee": buy_fee, "subtotal": subtotal}
+  end
+
 
 
   # Method to get results in console, this has no real use in the app

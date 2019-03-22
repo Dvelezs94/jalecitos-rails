@@ -2,6 +2,7 @@ class OffersController < ApplicationController
   layout 'logged'
   include OffersHelper
   include OpenpayHelper
+  include MoneyHelper
   before_action :authenticate_user!
   before_action :set_request
   before_action :allow_owner, only: :hire
