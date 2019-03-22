@@ -92,8 +92,7 @@
 }
 
 .details-form {
-  margin-top: 30px;
-  padding-bottom: 10vh;
+  margin-top: 20px;
   width: 100%;
 }
 
@@ -117,6 +116,11 @@
 .label-bold {
   font-weight: 700;
   font-size: 18px;
+}
+
+.details-label {
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .gmap-canvas {
