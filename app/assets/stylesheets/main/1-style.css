@@ -532,6 +532,29 @@ p.COAH3 {
   z-index: 10000;
 }
 
+.no_gigs i {
+  font-size: 30px;
+  color: #fff;
+}
+
+.no_gigs a {
+  background: #39C27B;
+  color: white;
+  line-height: 40px;
+  padding: 5px 10px;
+  text-align: center;
+  border-radius: 4px;
+
+}
+.no_gigs {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.cached #gritter-notice-wrapper {
+  display: none !important;
+}
+
 .headertop {
   display: none;
 }

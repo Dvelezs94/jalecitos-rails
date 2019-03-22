@@ -39,7 +39,7 @@
             <div class="tab-pane fade show active paginator-container" id="query-gigs" role="tabpanel" aria-labelledby="nav-gigs-tab">
               <div class="transacciones-tab-content paginated-gigs row">
                 <%= render partial: 'shared/queries/gig', collection: @gigs %>
-                <%= "<div class='container'>No hay nada para mostrar</div>".html_safe if @gigs.total_count == 0 %>
+                <%= render "shared/no_gigs" if @gigs.total_count == 0 %>
               </div>
               <%= paginate @gigs, param_name: :gigs %>
             </div>
