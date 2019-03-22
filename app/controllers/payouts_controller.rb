@@ -2,7 +2,7 @@ class PayoutsController < ApplicationController
   include ApplicationHelper
   include OpenpayHelper
   include OrderFunctions
-  include LevelFunctions
+  include LevelHelper
   before_action :authenticate_user!
   access user: :all
   before_action :set_payouts, only: :show
