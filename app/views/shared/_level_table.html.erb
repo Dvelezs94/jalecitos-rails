@@ -1,10 +1,7 @@
-<table class="<%="level-table lt-#{n} table table-striped table-sm text-center hidden"%>" >
+<table class="<%="level-table lt-#{n} table table-striped table-sm text-center #{"hidden" if h == true }"%>" >
   <thead>
     <tr>
-      <th>Nivel</th>
-      <th>Comisión</th>
-      <th>Ventas</th>
-      <th>Actual</th>
+      <%= render "shared/comision_ths", user: user %>
     </tr>
   </thead>
   <tbody>
@@ -14,11 +11,13 @@
       <td><%= key %></td>
       <td><%= "#{((1 - value)* 100  ).round(0) }%" %></td>
       <% if lq[key] == lq.values.last %>
-      <td><%= number_to_currency(lq[key], precision: 0)%> o más</td>
+        <td><%= number_to_currency(lq[key], precision: 0)%> o más</td>
       <% else %>
-      <td><%= number_to_currency(lq[key], precision: 0)%> a <%= number_to_currency(lq[key+1] - 1, precision: 0) %></td>
+        <td><%= number_to_currency(lq[key], precision: 0)%> a <%= number_to_currency(lq[key+1] - 1, precision: 0) %></td>
       <% end %>
-      <td><%= current_user.score.level == key ? "✓" : "" %></td>
+      <% if user == true %>
+        <td><%= current_user.score.level == key ? "✓" : "" %></td>
+      <% end %>
     </tr>
     <% end %>
 
