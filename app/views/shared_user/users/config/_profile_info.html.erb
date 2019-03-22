@@ -8,7 +8,7 @@
       </button>
     </h5>
   </div>
-  <div id="collapseOne" class="collapse <%= "show" if params[:collapse].nil? || params[:collapse] == "profile_info" %>" aria-labelledby="headingOne" data-parent="#accordion">
+  <div id="collapseOne" class="collapse <%= " show" if params[:collapse].nil? || params[:collapse] == " profile_info" %>" aria-labelledby="headingOne" data-parent="#accordion">
     <div class="card-body">
       <div class="tab-use-content">
         <div class="tab-user">
@@ -29,21 +29,18 @@
       <div class="Nombre-completo-text">
         <label for="">Nombre completo</label>
         <div class="inp-area">
-          <%= best_in_place current_user, :name, url: update_users_path, style: "padding: 5px;", :data => {:name => "nombre"},
-           :place_holder => "Edítame", id: "change_user_name", inner_class: "best_input" %>
+          <%= best_in_place current_user, :name, url: update_users_path, style: "padding: 5px;", :data => {:name => "nombre"}, :place_holder => "Edítame", id: "change_user_name", inner_class: "best_input" %>
           <%= icon("fas", "pencil-alt", class: "toggable") %>
         </div>
         <label for="">Alias</label>
         <div class="inp-area">
-          <%= best_in_place current_user, :alias, class: "change_user_alias", url: update_users_path,
-           style: "padding: 5px;", :data => {:name => "alias"}, id: "change_user_alias", inner_class: "best_input" %>
+          <%= best_in_place current_user, :alias, class: "change_user_alias", url: update_users_path, style: "padding: 5px;", :data => {:name => "alias"}, id: "change_user_alias", inner_class: "best_input" %>
           <%= icon("fas", "pencil-alt", class: "toggable") %>
         </div>
         <label for="">Sobre mí</label>
         <div class="textarea-area">
-          <%= best_in_place current_user, :bio, as: :textarea, :place_holder => "Edítame",
-           :html_attrs => {:maxlength => 500}, url: update_users_path, class: "change_bio",
-            inner_class: "best_input change_bio_input", :data => {:name => "biografía"}, id: "change_user_bio" %>
+          <%= best_in_place current_user, :bio, as: :textarea, :place_holder => "Edítame", :html_attrs => {:maxlength => 500}, url: update_users_path, class: "change_bio", inner_class: "best_input change_bio_input", :data => {:name => "biografía"}, id:
+          "change_user_bio" %>
           <%= icon("fas", "pencil-alt", class: "toggable") %>
         </div>
         <div class="inp-area marker-ex">
@@ -56,29 +53,32 @@
       </div>
 
       <ul class="nav nav-tabs">
-        <div class="">
+        <div >
           <label for="">Edad</label>
           <li class="nav-item dropdown">
-            <%= best_in_place current_user, :age, :as => :select, :collection => (0..100).map { |i| [i, "#{i} años"]},
-             :place_holder => "Indefinido", url: update_users_path, :data => {:name => "edad"}, id: "change_user_age" %>
+            <%= best_in_place current_user, :age, :as => :select, :collection => (0..100).map { |i| [i, "#{i} años"]}, :place_holder => "Indefinido", url: update_users_path, :data => {:name => "edad"}, id: "change_user_age" %>
           </li>
         </div>
-        <div class="">
+        <div>
           <label for="">Disponibilidad</label>
           <li class="nav-item dropdown">
-            <%= best_in_place current_user, :available, :as => :select,
-             :collection => { "Tiempo completo" => "Tiempo completo", "Medio tiempo" => "Medio tiempo", "Fin de semana" => "Fin de semana", "Esporádico" => "Esporádico" },
-              :place_holder => "Indefinido",
-             url: update_users_path, :data => {:name => "disponibilidad"}, id: "change_user_available" %>
+            <%= best_in_place current_user, :available, :as => :select, :collection => { "Tiempo completo" => "Tiempo completo", "Medio tiempo" => "Medio tiempo", "Fin de semana" => "Fin de semana", "Esporádico" => "Esporádico" }, :place_holder => "Indefinido",
+            url: update_users_path, :data => {:name => "disponibilidad"}, id: "change_user_available" %>
           </li>
-
-        </ul>
-      </div>
-
-      <!-- <div class="tab-radio-btn"> <p>Rol</p> <div class="Vendedor-text"> <label class="tab-btn">Vendedor <input type="radio" checked="checked" name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Comprador <input type="radio"
-      name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Ambos <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div> </div> -->
-
+        </div>
+        <div>
+          <label for="">Nivel</label>
+          <li class="nav-item dropdown">
+            <%= current_user.score.level %>
+          </li>
+        </div>
+      </ul>
     </div>
+
+    <!-- <div class="tab-radio-btn"> <p>Rol</p> <div class="Vendedor-text"> <label class="tab-btn">Vendedor <input type="radio" checked="checked" name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Comprador <input type="radio"
+    name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Ambos <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div> </div> -->
+
   </div>
+</div>
 </div>
 </div>
