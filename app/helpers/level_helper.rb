@@ -13,10 +13,10 @@ module LevelHelper
   def levels_quantity
     {
       1 => 0,
-      2 => 5,
-      3 => 20,
-      4 => 100,
-      5 => 200
+      2 => 1000,
+      3 => 5000,
+      4 => 20000,
+      5 => 50000
     }
   end
   def calc_level_percent(level)

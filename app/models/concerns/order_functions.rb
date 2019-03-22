@@ -2,6 +2,8 @@ module OrderFunctions
   extend ActiveSupport::Concern
 
   def increment_count(order)
+    emp_score = order.employee.score
+    emp_score.update!(:total_sales => emp_score.total_sales + order.total)
     if order.purchase_type == "Package"
       order.purchase.gig.increment!(:order_count)
     end
