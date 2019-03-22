@@ -51,7 +51,7 @@
                   <%= icon "fas","dollar", class: "fa-2x", id: "price-symbol" %>
                   <input type="number" name="want_win_<%= n %>" min="100" max="9000" step=".01"
                    class="price-input price-input-<%= n %> form-control"
-                   value="<%= (@gig.packages[n].price*0.9).round(2) if params[:action] == 'edit_packages' && @gig.packages[n].price.present? %>">
+                   value="<%= (@gig.packages[n].price).round(2) if params[:action] == 'edit_packages' && @gig.packages[n].price.present? %>">
                   <%= pa.hidden_field :price, id: "base-price-#{n}", class: "form_fields_#{n}" %>
                   <span class="error error_span_<%= 3*n+3 %>"></span>
                   </div>
