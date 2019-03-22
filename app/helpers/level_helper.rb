@@ -1,13 +1,26 @@
 module LevelHelper
   # calculate payout corresponding to user
-  def calc_level_percent(level)
-    l = {
+  def levels_fee
+    {
       1 => 0.9,
       2 => 0.95,
       3 => 0.96,
       4 => 0.97,
       5 => 0.98
     }
+  end
+
+  def levels_quantity
+    {
+      1 => 0,
+      2 => 1000,
+      3 => 5000,
+      4 => 20000,
+      5 => 50000
+    }
+  end
+  def calc_level_percent(level)
+    l = levels_fee
     l[level]
   end
 
