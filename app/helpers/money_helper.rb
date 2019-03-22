@@ -1,54 +1,31 @@
 module MoneyHelper
-  # Earning for the worker
-  def get_order_earning base
-    # Constant Increment to keep our loss at minimum
-    ci = 10
-    # Formula to get earnings based on the base  price (package or offer number)
-    ((0.9609776)*( base + ci ) - 2.91  - calc_employee_earning(base)).round(2)
+  cons = 10 #the constant added to base
+  fee = 0.04 #the percentage added to the base (includes contant)
+  iva = 0.16
 
-  end
-  # this is used for the hire view, to calculate the subtotal and our fee + iva
-  def calc_hire_view price
-    # Constant Increment to keep our loss at minimum
-    ci = 10
-    iva = 1.16
-    fee = (((price * 0.1) + ci) * iva).round(2)
-    subtotal = ((price * 0.9) * iva).round(2)
-    {"fee": fee, "subtotal": subtotal}
+
+  # Earning for order hiring
+  def get_order_earning base
+     ((fee+1) * (x+cons) - (1+ iva ) * (fee+1) * ( x+ cons ) * ( 0.03364 ) - 2.9 - x).round(2)
   end
 
   def order_tax price
-    (price * 0.16).round(2)
-  end
-  ###### These two should always sum 1
-  def get_order_fee price
-    # Get our fee of base price
-    (price * 0.10).round(2)
+    purchase_order_total(price)*iva.round(2)
   end
 
-  def calc_employee_earning base
-    (base * 0.9).round(2)
-  end
   ######
-  # the difference with the one above is that this one calculates all the orders minus fees and taxes
-  def calc_employee_orders_earning(orders_total, orders_count)
-    (((orders_total / 116) * 100 - (10 * orders_count)) * 0.90).round(2)
-    # (45/58) * orders_total - 9 * orders.count
-  end
 
   def calc_openpay_tax (order_total)
     openpay_fee = 0.029 #percent
     openpay_base = 2.5 #MXN pesos
     pre_iva = (order_total * openpay_fee + openpay_base).round(2)
-    tax_iva = pre_iva * 0.16
+    tax_iva = pre_iva * iva
     (pre_iva + tax_iva).round(2)
   end
 
   # Get toal price of order, with taxes included
   def purchase_order_total price
-    const_added = price + 10
-    iva = order_tax(const_added)
-    (const_added + iva).round(2)
+    (fee+1) * (price+cons)
   end
 
 
@@ -60,6 +37,18 @@ module MoneyHelper
     p "base + iva = #{purchase_order_total(base)}"
     p "openpay = #{openpay_earning}"
     p "jalecitos = #{jalecitos_earning}"
+    return true
+  end
+
+  def example x, c, p
+    iva = 0.16
+    #x is user win
+    #c is constant added
+    #p is percentage added
+    g = (p+1) * (x+c) - (1+ iva ) * (p+1) * ( x+ c ) * ( 0.03364 ) - 2.9 - x
+    costo = (x)
+    p "ganancia #{g}"
+    p "costo #{((p+1) * (x+c))*1.16}"
     return true
   end
 end
