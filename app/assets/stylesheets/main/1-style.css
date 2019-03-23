@@ -1861,6 +1861,7 @@ button:focus {
 .headerd-area {
   padding: 15px 0;
   border-bottom: 1px solid #E5E5E5;
+  background: white;
 }
 
 .headerd-mainmenu ul li a:last-child {}
@@ -3054,4 +3055,16 @@ div.form {
 
 .see-lev-table {
   color: black;
+}
+
+#main_menu {
+  position: fixed;
+  width: 100%;
+  transition: top 0.5s;
+  top: 0;
+  z-index: 100;
+}
+
+.main_container {
+  padding-top: 7vh;
 }
