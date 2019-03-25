@@ -26,9 +26,9 @@
 
   <body id="page-top">
     <%= google_tag_manager %>
+    <%= render 'shared/menu/main_nav_bar' %>
     <div class="main_container">
       <%= notification_helper %>
-      <%= render 'shared/menu/main_nav_bar' %>
       <% if  ! (current_page?(root_path) || current_page?(new_user_session_path)) || params[:query] %>
         <div class="gap"></div>
       <% end  %>
