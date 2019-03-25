@@ -1,0 +1,11 @@
+@media (min-width: 1200px) {
+  .main_container {
+    padding-top: 8vh;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .main_container {
+    padding-top: 9vh;
+  }
+}
