@@ -3060,11 +3060,11 @@ div.form {
 #main_menu {
   position: fixed;
   width: 100%;
-  transition: top 0.5s;
+  transition: top 0.7s;
   top: 0;
   z-index: 100;
 }
 
 .main_container {
-  padding-top: 7vh;
+  margin-top: 7vh;
 }
