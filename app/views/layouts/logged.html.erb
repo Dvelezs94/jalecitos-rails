@@ -36,9 +36,9 @@
 
   <body id="page-top">
     <%= google_tag_manager %>
+    <%= render 'shared/menu/main_nav_bar' %>
     <div class="main_container">
       <%= notification_helper %>
-      <%= render 'shared/menu/main_nav_bar' %>
       <div class="gap"></div>
       <%= yield %>
       <% if params[:review] && @reviews.present? %>
