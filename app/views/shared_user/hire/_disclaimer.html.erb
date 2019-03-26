@@ -1,9 +1,9 @@
 <% if defined? @package %>
 <p>Revisa la disponibilidad del experto antes de realizar cualquier pago.
-  <%= link_to "Contactar al vendedor", conversations_path(user_id: @package.gig.user.slug) %>
+  <%= link_to "Contactar al vendedor", conversations_path(user_id: @package.gig.user.slug, model_id: @package.gig.id, model: "Gig") %>
 </p>
 <% else %>
 <p>Revisa la disponibilidad del experto antes de realizar cualquier pago.
-  <%= link_to "Contactar al vendedor", conversations_path(user_id: @offer.user.slug) %>
+  <%= link_to "Contactar al vendedor", conversations_path(user_id: @offer.user.slug, model_id: @offer.request.id, model: "Request") %>
 </p>
 <% end %>
