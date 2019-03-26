@@ -13,7 +13,7 @@
     </div>
    <% if current_user != @gig.user %>
     <div class="page3-comment">
-      <%=link_to( icon("fas", "comment", title: "Contactar"), conversations_path( user_id: @gig.user.slug) )%>
+      <%=link_to( icon("fas", "comment", title: "Contactar"), conversations_path( user_id: @gig.user.slug, model_id: @gig.id, model: "Gig") )%>
     </div>
   <% end %>
   </div>
