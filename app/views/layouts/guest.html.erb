@@ -18,7 +18,7 @@
    <meta name="apple-mobile-web-app-capable" content="yes">
    <!--  -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#2B8261" />
     <%= meta_tags %>
     <%= ios_pwa_tags %>
@@ -26,9 +26,9 @@
 
   <body id="page-top">
     <%= google_tag_manager %>
+    <%= render 'shared/menu/main_nav_bar' %>
     <div class="main_container">
       <%= notification_helper %>
-      <%= render 'shared/menu/main_nav_bar' %>
       <% if  ! (current_page?(root_path) || current_page?(new_user_session_path)) || params[:query] %>
         <div class="gap"></div>
       <% end  %>
