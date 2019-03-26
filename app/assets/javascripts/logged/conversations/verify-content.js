@@ -3,7 +3,7 @@ $(document).on('turbolinks:load', function() {
     $('#new_message').submit(function() {
       if ($("#message_body")[0].value.replace(/\s/g, "") != "" || $("#message_image").val() != "") { //check if theres a message or image
         $('#attach-i').show();
-        $(this).submit();
+        return true;
        }
       else {
         $("#message_body")[0].value = "";
