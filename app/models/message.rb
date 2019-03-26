@@ -34,7 +34,7 @@ class Message < ApplicationRecord
     if self.related_to_type.present?
       allowed = ["Gig", "Request"]
       if ! allowed.include?(self.related_to_type)
-        errors.add(:base, "No se admite este modelo") #esto no se usa ya que es por ajax el mensaje y un usuario normal no modificaria eso
+        errors.add(:base, "No se admite este modelo") #this isnt used because message is created by ajax
       end
     end
   end
