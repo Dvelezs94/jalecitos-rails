@@ -61,7 +61,7 @@
           <span><%= link_to @gig.user.alias, user_path(@gig.user.slug) %></span>
           <%= "#{icon("fas", "check-square", title: "Verificado")}".html_safe if @gig.user.verified %>
         </div>
-        <%=link_to( "#{icon("fas", "comment", title: "Contactar")} Contactar".html_safe, conversations_path( user_id: @gig.user.slug, model_id: @gig.id, model: "Gig") )%>
+        <%=link_to( "#{icon("fas", "comment", title: "Contactar")} Contactar".html_safe, conversations_path( user_id: @gig.user.slug, model_id: @gig.id, model: "Gig") ) if current_user != @gig.user%>
 
       </div>
     </div>
