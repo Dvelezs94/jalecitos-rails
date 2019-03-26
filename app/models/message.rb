@@ -11,6 +11,7 @@ class Message < ApplicationRecord
   #Associations
   belongs_to :user
   belongs_to :conversation
+  belongs_to :related_to, polymorphic: true, optional: true
   #Validations
   validates :body,
     length: {maximum: 500},

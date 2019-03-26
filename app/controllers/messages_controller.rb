@@ -19,7 +19,7 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:body, :image)
+    params.require(:message).permit(:body, :image, :related_to_id, :related_to_type)
   end
 
   def verify_participants
