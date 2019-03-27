@@ -1,4 +1,3 @@
-<%= render 'categories/category_carousel' %>
 <% if controller.action_name == "home" %>
   <% if current_user.confirmed_at.nil? %>
   <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
@@ -9,6 +8,7 @@
     </button>
   </div>
   <% end %>
+  <%= render 'categories/category_carousel' %>
 
   <%= gig_carousel( "Jales Populares", :popular_gigs) %>
 
