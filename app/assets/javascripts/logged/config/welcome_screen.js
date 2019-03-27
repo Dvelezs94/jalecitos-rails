@@ -2,7 +2,7 @@ function redirectToHome() {
   window.location.href = "/";
 }
 $(document).on('turbolinks:load', function() {
-  if (($.getUrlVar("wizard") === "true")) {
+  if (window.location.pathname == "/wizard") {
     if (screen.width <= 991) {
       var intro = introJs();
       intro.setOptions({
@@ -14,12 +14,12 @@ $(document).on('turbolinks:load', function() {
             intro: "Gracias por registrarte en Jalecitos! Te daremos un recorrido por la aplicacion."
           },
           {
-            element: document.getElementsByClassName("popular_gigs")[0],
+            element: document.getElementsByClassName("wizard_gigs")[0],
             intro: "Esta es la seccion de jales, aqui podras contratar servicios.",
             position: 'top'
           },
           {
-            element: document.getElementsByClassName("recent_requests")[0],
+            element: document.getElementsByClassName("wizard_requests")[0],
             intro: "Estos son los pedidos que hay, en los cuales puedes ofertar.",
             position: 'top'
           },
@@ -55,12 +55,12 @@ $(document).on('turbolinks:load', function() {
             intro: "Gracias por registrarte en Jalecitos! Te daremos un recorrido por la aplicacion."
           },
           {
-            element: document.getElementsByClassName("popular_gigs")[0],
+            element: document.getElementsByClassName("wizard_gigs")[0],
             intro: "Esta es la seccion de jales, aqui podras contratar servicios.",
             position: 'bottom'
           },
           {
-            element: document.getElementsByClassName("recent_requests")[0],
+            element: document.getElementsByClassName("wizard_requests")[0],
             intro: "Estos son los pedidos que hay, en los cuales puedes ofertar.",
             position: 'top'
           },
