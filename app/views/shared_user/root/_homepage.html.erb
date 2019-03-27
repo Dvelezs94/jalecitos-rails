@@ -1,24 +1,28 @@
-<% if current_user.confirmed_at.nil? %>
-<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-   Tienes <%= ((current_user.created_at+15.days - Time.now )/1.day).to_i %> días para confirmar tu correo. <br>
-    <%= link_to "No recibí mi correo de confirmación.", send_new_confirmation_email_users_path %>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+<% if controller.action_name == "home" %>
+  <% if current_user.confirmed_at.nil? %>
+  <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+     Tienes <%= ((current_user.created_at+15.days - Time.now )/1.day).to_i %> días para confirmar tu correo. <br>
+      <%= link_to "No recibí mi correo de confirmación.", send_new_confirmation_email_users_path %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <% end %>
+  <%= render 'categories/category_carousel' %>
+
+  <%= gig_carousel( "Jales Populares", :popular_gigs) %>
+
+  <%= req_carousel("Pedidos Recientes", :recent_requests) %>
+
+  <%= gig_carousel( "Agregados recientemente", :recent_gigs) %>
+
+  <%= gig_carousel( "Jales Verificados", :verified_gigs) %>
+
+  <%= gig_carousel( "Jales Gustados", :liked_gigs, 'shared_user/gigs/liked_carousel', true) %>
+
+  <%= render "shared/no_gigs" %>
+<% else %>
+  <%= gig_carousel( "Jales", :wizard_gigs) %>
+
+  <%= req_carousel("Pedidos", :wizard_requests) %>
 <% end %>
-
-
-<%= render 'categories/category_carousel' %>
-
-<%= gig_carousel( "Jales Populares", :popular_gigs) %>
-
-<%= req_carousel("Pedidos Recientes", :recent_requests) %>
-
-<%= gig_carousel( "Agregados recientemente", :recent_gigs) %>
-
-<%= gig_carousel( "Jales Verificados", :verified_gigs) %>
-
-<%= gig_carousel( "Jales Gustados", :liked_gigs, 'shared_user/gigs/liked_carousel', true) %>
-
-<%= render "shared/no_gigs" %>

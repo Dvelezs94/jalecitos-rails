@@ -1,20 +1,31 @@
+function redirectToHome() {
+  window.location.href = "/";
+}
 $(document).on('turbolinks:load', function() {
-  if (($.getUrlVar("wizard") === "true")) {
+  if (window.location.pathname == "/wizard") {
     if (screen.width <= 991) {
       var intro = introJs();
       intro.setOptions({
-        steps: [
-          {
+        nextLabel: ">",
+        prevLabel: "<",
+        skipLabel: "Saltar",
+        doneLabel: "Terminar",
+        steps: [{
             intro: "Gracias por registrarte en Jalecitos! Te daremos un recorrido por la aplicacion."
           },
           {
-            element: document.getElementById("configuration-page"),
-            intro: "Aqui podras configurar tu cuenta, agregar  tarjetas y retirar dinero.",
-            position: 'bottom'
+            element: document.getElementsByClassName("wizard_gigs")[0],
+            intro: "Esta es la seccion de jales, aqui podras contratar servicios.",
+            position: 'top'
+          },
+          {
+            element: document.getElementsByClassName("wizard_requests")[0],
+            intro: "Estos son los pedidos que hay, en los cuales puedes ofertar.",
+            position: 'top'
           },
           {
             element: document.getElementById("phone-welcome-menu"),
-            intro: "En la barra inferior podras crear jales, ver tus transacciones, ir al inicio, al igual que ver tus mensajes y notificaciones.",
+            intro: "En la barra de navegacion podras crear Jales y Pedidos, ver tus transacciones, ir al inicio, al igual que ver tus mensajes y notificaciones.",
             position: 'top'
           },
           {
@@ -31,24 +42,31 @@ $(document).on('turbolinks:load', function() {
             intro: 'Si tienes dudas, puedes consultar las guias de usuario en nuestro <a href="https://blog.jalecitos.com/blog/" target="_blank">blog</a>',
           }
         ],
-        showStepNumbers:false
+        showStepNumbers: false
       });
-      intro.start();
     } else {
       var intro = introJs();
       intro.setOptions({
-        steps: [
-          {
+        nextLabel: "Siguiente",
+        prevLabel: "Anterior",
+        skipLabel: "Saltar",
+        doneLabel: "Terminar",
+        steps: [{
             intro: "Gracias por registrarte en Jalecitos! Te daremos un recorrido por la aplicacion."
           },
           {
-            element: document.getElementById("configuration-page"),
-            intro: "Aqui podras configurar tu cuenta, agregar  tarjetas y retirar dinero.",
+            element: document.getElementsByClassName("wizard_gigs")[0],
+            intro: "Esta es la seccion de jales, aqui podras contratar servicios.",
             position: 'bottom'
           },
           {
-            element: document.getElementById('newelementbtndesktop'),
-            intro: "Con este boton podras crear nuevos jales y pedidos",
+            element: document.getElementsByClassName("wizard_requests")[0],
+            intro: "Estos son los pedidos que hay, en los cuales puedes ofertar.",
+            position: 'top'
+          },
+          {
+            element: document.getElementById("newelementbtndesktop"),
+            intro: "Desde aqui podras crear jales y pedidos",
             position: 'left'
           },
           {
@@ -58,16 +76,25 @@ $(document).on('turbolinks:load', function() {
           },
           {
             element: document.getElementById("search-form"),
-            intro: 'Este buscador sirve para encontrar jales y pedidos dentro de la zona.'
+            intro: 'Este buscador sirve para encontrar jales y pedidos.'
           },
           {
             intro: 'Si tienes dudas, puedes consultar las guias de usuario en nuestro <a href="https://blog.jalecitos.com/blog/" target="_blank">blog</a>',
           }
         ],
-        showStepNumbers:false
+        showStepNumbers: false
       });
-      intro.start();
     }
+    intro.start()
 
+      // clicking 'Done'
+      .oncomplete(function() {
+        redirectToHome()
+      })
+
+      // clicking 'Skip'
+      .onexit(function() {
+        redirectToHome()
+      });
   }
 });

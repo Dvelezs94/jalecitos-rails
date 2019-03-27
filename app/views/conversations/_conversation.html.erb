@@ -1,6 +1,6 @@
 <div class="chat-right-side-text" data-conversation-id="<%= conversation.id %>" id="conversation_div">
     <div class="Harold-Bates-text">
-        <h3 style="margin-bottom:0;"><%= link_to icon("fa", "arrow-left"), conversations_path %> <%= link_to opposite_user.alias, user_path(opposite_user.alias), style: "color: #000;" %></h3>
+        <h3 style="margin-bottom:0;"><%= link_to icon("fa", "arrow-left"), conversations_path %> <%= link_to opposite_user.alias, user_path(opposite_user.slug), style: "color: #000;" %></h3>
           <span>Activo hace <%= opposite_user.current_sign_in_at != nil ? distance_of_time_in_words_to_now(opposite_user.current_sign_in_at) : "nunca" %></span>
     </div>
 <!--

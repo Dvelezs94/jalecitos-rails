@@ -1,11 +1,9 @@
 $(document).on('turbolinks:load', function() {
-  const isIos = () => {
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    return /iphone|ipad|ipod/.test( userAgent );
-  }
   var prevScrollpos = window.pageYOffset;
+  // dont move nav bar on ios
   if ( ! isIos()) {
-    if ($("#configuration-page").length == 0) {
+    // dont move nav bar when wizard is up
+    if (!(window.location.pathname == "/wizard")) {
       window.onscroll = function() {
         var currentScrollPos = window.pageYOffset;
         if (prevScrollpos >= currentScrollPos) {

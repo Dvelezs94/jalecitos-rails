@@ -1,8 +1,4 @@
 $(document).on('turbolinks:load', function() {
-  const isIos = () => {
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    return /iphone|ipad|ipod/.test( userAgent );
-  }
   // this js applies some styles so iphone x looks good
   if (isIos()) {
     // Detect if the ios device has a notch function

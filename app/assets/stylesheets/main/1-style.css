@@ -95,6 +95,10 @@ input:focus {
   padding: 20px 0;
 }
 
+.separation {
+  height: 30px;
+}
+
 .contact-us p {
   text-align: left;
 }
@@ -2365,6 +2369,7 @@ p.fof {
 }
 .gig-content {
   padding: 8px 10px;
+  background: white;
 }
 p.gig-score-times {
   color: var(--gray);
