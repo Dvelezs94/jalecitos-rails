@@ -17,11 +17,12 @@
         <% end %>
         <% if message.related_to.present? %>
         <% item = message.related_to %>
+        <a href="<%= message.related_to_type == "Gig"? user_gig_path(item.user.slug, item) : request_path(item) %>">
         <div class="related_to_item">
           Relacionado a:
-          <a href="<%= message.related_to_type == "Gig"? user_gig_path(item.user.slug, item) : request_path(item) %>">
-            <%= message.related_to.title %> </a> <br>
+          <span><%= message.related_to.title %></span>
         </div>
+        </a>
         <% end %>
       </div>
     </div>
