@@ -60,7 +60,7 @@ $(document).on('turbolinks:load', function() {
       fillCarousel(this);
     });
   });
-  var gig_show = new Swiper('.gig-show-carousel', {
+  window.gig_show = new Swiper('.gig-show-carousel', {
     loop: true,
     slidesPerView: 1,
     autoplay: {
@@ -68,7 +68,12 @@ $(document).on('turbolinks:load', function() {
     }
   });
   if ($(".show-slide").length - 2 == 1) {
-    gig_show.autoplay.stop();
+    window.gig_show.autoplay.stop();
+  }
+  if(window.gig_show){    
+    $(window.gig_show).resize(function(){
+      window.gig_show.reInit();
+    });
   }
   // try to fix ios swiper long images on view
   $(window).resize(function(){
