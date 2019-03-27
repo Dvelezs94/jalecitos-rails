@@ -3073,5 +3073,6 @@ div.form {
 }
 
 .main_container {
-  margin-top: 7vh;
+  padding-top: 7vh;
+  min-height: 99vh;
 }

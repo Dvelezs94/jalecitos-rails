@@ -9,15 +9,3 @@ $(document).on('turbolinks:load', function() {
   $('#config_autocomplete').focus();
   });
 });
-
-function updateURL(name, value, focusAfterReload="") { //removes all other query string and puts the new specified
-  if (history.pushState) {
-    if (focusAfterReload=="") {
-      var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?'+name+'='+value;
-    }
-    else { //focus something after change location reload
-      var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?'+name+'='+value+'&focusAfterReload='+focusAfterReload;
-    }
-      window.history.pushState({path:newurl},'',newurl);
-  }
-}
