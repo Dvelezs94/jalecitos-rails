@@ -1,7 +1,4 @@
 @media (min-width: 768px) and (max-width: 991px) {
-   .Probar-Notificaciones-content {
-  	margin-bottom: 30px;
-  }
    .Nueva-tarjeta-btn a {
   	color: #fff ;
   	font-size: 19px ;
@@ -57,9 +54,6 @@
 
   .tab-section {
   	display: none;
-  }
-   .Probar-Notificaciones-content {
-  	margin-bottom: 30px;
   }
    .Nueva-tarjeta-btn a {
   	color: #fff ;

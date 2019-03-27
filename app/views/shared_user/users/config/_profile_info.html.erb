@@ -22,11 +22,16 @@
             <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar")%>
             <%= form.file_field :image, class: 'form-control', accept: ".png, .jpg, .jpeg" %>
           </label>
+
         <% end %>
+
         <p>EMAIL
           <span><%= @user.email %></span></p>
       </div>
       <div class="Nombre-completo-text">
+        <div>
+          <button type="button" class="btn btn-primary" onclick="$('#user_image').click();">Editar foto de perfil</button>
+        </div>
         <label for="">Nombre completo</label>
         <div class="inp-area">
           <%= best_in_place current_user, :name, url: update_users_path, style: "padding: 5px;", :data => {:name => "nombre"}, :place_holder => "Edítame", id: "change_user_name", inner_class: "best_input" %>
