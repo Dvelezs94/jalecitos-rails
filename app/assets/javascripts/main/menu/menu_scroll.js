@@ -1,7 +1,9 @@
 $(document).on('turbolinks:load', function() {
   var prevScrollpos = window.pageYOffset;
+  // dont move nav bar on ios
   if ( ! isIos()) {
-    if (!($.getUrlVar("wizard") === "true")) {
+    // dont move nav bar when wizard is up
+    if (!(window.location.pathname == "/wizard")) {
       window.onscroll = function() {
         var currentScrollPos = window.pageYOffset;
         if (prevScrollpos >= currentScrollPos) {
