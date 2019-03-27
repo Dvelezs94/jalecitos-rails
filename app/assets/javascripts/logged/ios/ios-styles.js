@@ -6,20 +6,6 @@ $(document).on('turbolinks:load', function() {
   // this js applies some styles so iphone x looks good
   if (isIos()) {
     // Detect if the ios device has a notch function
-    function hasNotch() {
-      if (CSS.supports('padding-bottom: env(safe-area-inset-bottom)')) {
-        let div = document.createElement('div');
-        div.style.paddingBottom = 'env(safe-area-inset-bottom)';
-        document.body.appendChild(div);
-        let calculatedPadding = parseInt(window.getComputedStyle(div).paddingBottom, 10);
-        document.body.removeChild(div);
-        if (calculatedPadding > 0) {
-          return true;
-        }
-      }
-      return false;
-    }
-
     if ($(".tablet-mobile-top-ber").length > 0) {
       $(".tablet-mobile-top-ber").css("padding-top", "env(safe-area-inset-top)");
     }
@@ -30,16 +16,26 @@ $(document).on('turbolinks:load', function() {
       $(".pagar-area-for-tablet-mobile").css("padding-bottom", "env(safe-area-inset-bottom)");
     }
 
+    // fix messages when ios keyboard is up
     if ($("#message_body").length > 0) {
       $('input').on("blur",function (e) {
         window.scrollTo(0,0);
       });
     }
     // change main_container margin top on notched devices
-    if (hasNotch()){
-      if ($(".main_container").length > 0) {
-        $(".main_container").css("margin-top", "90px");
+    // if less than 60 px, means notch device
+    var checkMenu = setInterval(function() {
+      window.menu_height = $("#main_menu").height();
+      if (window.menu_height > 70) {
+        $(".main_container").css("padding-top", "90px");
+        clearInterval(checkMenu);
       }
-    }
+      else{
+        window.tries_count_3 += 1;
+      }
+      if (window.tries_count_3 == 10) { //if no notification, this will run always
+        clearInterval(checkMenu);
+      }
+    }, 200)
   }
 });
