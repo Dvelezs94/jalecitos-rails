@@ -55,7 +55,7 @@ class Gig < ApplicationRecord
   message: 'no puedes tener más de 5 imágenes'
   }
   #Custom fields
-  enum status: { draft: 0, published: 1, banned: 2}
+  enum status: { draft: 0, published: 1, banned: 2, wizard: 3}
   mount_uploaders :images, GigUploader
   #Actions
 
