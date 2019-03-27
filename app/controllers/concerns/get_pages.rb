@@ -17,6 +17,29 @@ module GetPages
     end
   end
 
+  def wizard_paginate
+    if params[:wizard_gigs]
+      get_wizard_gigs
+    elsif params[:wizard_requests]
+      get_wizard_requests
+    end
+  end
+
+  def wizard_get_all
+    get_wizard_gigs
+    get_wizard_requests
+  end
+
+  def get_wizard_gigs
+    @wizard_gigs =  Gig.includes(:gigs_packages, :user, :likes, city: [state: :country]).where(status: "wizard").
+    page(params[:wizard_gigs]).per(15)
+  end
+
+  def get_wizard_requests
+    @wizard_requests = Request.includes(city: [state: :country]).where(status: "wizard").
+    page(params[:wizard_requests]).per(15)
+  end
+
   def get_popular_gigs bool=false
     @popular_gigs = Gig.search("*",
        includes: [:gigs_packages, :user, :likes, city: [state: :country]],
@@ -93,9 +116,11 @@ module GetPages
   def conditions string=nil
     if current_user
       if current_user.location(true) && string == "verified"
-        {status: "published", city_id: current_user.city_id, verified: true}
+        # {status: "published", city_id: current_user.city_id, verified: true}
+        {status: "published", verified: true}
       elsif current_user.location(true)
-        {status: "published", city_id: current_user.city_id}
+        # {status: "published", city_id: current_user.city_id}
+        {status: "published"}
       elsif string == "verified"
         {status: "published", verified: true}
       else
