@@ -1,11 +1,7 @@
 $(document).on('turbolinks:load', function() {
-  const isIos = () => {
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    return /iphone|ipad|ipod/.test( userAgent );
-  }
   var prevScrollpos = window.pageYOffset;
   if ( ! isIos()) {
-    if ($("#configuration-page").length == 0) {
+    if (!($.getUrlVar("wizard") === "true")) {
       window.onscroll = function() {
         var currentScrollPos = window.pageYOffset;
         if (prevScrollpos >= currentScrollPos) {
