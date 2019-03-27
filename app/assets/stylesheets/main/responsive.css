@@ -2048,7 +2048,7 @@
   }
   /*dont display menu in front of bottom content*/
   .main_container{
-    margin-bottom: 8vh;
+    padding-bottom: 8vh;
   }
 
   .phone_links a {
