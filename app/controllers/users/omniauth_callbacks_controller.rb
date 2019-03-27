@@ -28,7 +28,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @new_user.save
       log_in_and_remember(@new_user)
       #  the z is just to fix the fb issue that is appending #_=_ to the last url param
-      redirect_to root_path(wizard: "true", z: "e")
+      redirect_to wizard_path
       else
         flash[:notice] = "No se permiten cuentas de Facebook sin correo electronico."
         redirect_to new_user_registration_path
