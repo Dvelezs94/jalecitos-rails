@@ -71,10 +71,12 @@ $(document).on('turbolinks:load', function() {
     gig_show.autoplay.stop();
   }
   // try to fix ios swiper long images on view
-  $(window).resize(function(){
-     gig_show.reInit();
-   });
-   // 
+  if ($(".show-slide").length > 0){
+    $(window).resize(function(){
+       gig_show.update();
+     });
+  }
+   //
   if ($(".swiper-container-initialized").length > 0 ){
     window.dispatchEvent(new Event('resize')); //this fixes the bug of slider loading with turbolinks and cache
   }

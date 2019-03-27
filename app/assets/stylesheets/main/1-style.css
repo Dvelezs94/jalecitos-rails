@@ -2365,6 +2365,7 @@ p.fof {
 }
 .gig-content {
   padding: 8px 10px;
+  background: white;
 }
 p.gig-score-times {
   color: var(--gray);
