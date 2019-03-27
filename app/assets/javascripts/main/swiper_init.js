@@ -70,6 +70,9 @@ $(document).on('turbolinks:load', function() {
   if ($(".show-slide").length - 2 == 1) {
     gig_show.autoplay.stop();
   }
+  $(window).resize(function(){
+    gig_show.reInit();
+  });
   if ($(".swiper-container-initialized").length > 0 ){
     window.dispatchEvent(new Event('resize')); //this fixes the bug of slider loading with turbolinks and cache
   }
