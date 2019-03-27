@@ -14,6 +14,8 @@ class PagesController < ApplicationController
     end
   end
 
+
+
   def request_index
     @requests = Request.includes(:user).published.order(created_at: :desc).page(params[:page])
   end
@@ -52,6 +54,13 @@ class PagesController < ApplicationController
   end
 
   def wizard
+    if params[:current] #if some pagination is present...
+      wizard_paginate
+      render template: "shared/carousels/add_items_carousel.js.erb"
+    else
+      wizard_get_all
+      render "home"
+    end
   end
 
   def sitemap

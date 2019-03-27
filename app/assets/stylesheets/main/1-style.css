@@ -95,6 +95,10 @@ input:focus {
   padding: 20px 0;
 }
 
+.separation {
+  height: 30px;
+}
+
 .contact-us p {
   text-align: left;
 }

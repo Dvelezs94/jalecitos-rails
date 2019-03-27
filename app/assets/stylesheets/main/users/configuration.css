@@ -69,6 +69,12 @@
 }
 .tab-user {
 	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.sales_info {
+	background-color: white !important;
 }
 
 #config_tag_hint {
@@ -81,11 +87,8 @@
 }
 
 .tab-user p {
-	position: absolute;
-	top: 50%;
-	margin-left: 100px;
+	margin-left: 2vw;
 	font-weight: 700;
-	margin-top: -25px;
 }
 .tab-user p span {
   display: block;
