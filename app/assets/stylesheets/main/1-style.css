@@ -3,6 +3,8 @@
 
 
 /* Base CSS */
+
+
 body {
   font-family: 'Nunito', sans-serif;
   font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
@@ -506,6 +508,7 @@ p.COAH3 {
 /*anotherfooter*/
 .phone-bottom-menu {
   display: none;
+
 }
 
 /*anotherfooter*/
@@ -513,6 +516,10 @@ p.COAH3 {
 .plusarea i {
   font-size: 30px;
   color: #fff;
+}
+
+.right-bottom-chat-write {
+  z-index: 10;
 }
 
 .plusarea a {

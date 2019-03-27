@@ -1,11 +1,11 @@
 $(document).on('turbolinks:load', function() {
-  if ( $("#main_menu").length > 0 ) {    
-    const isIos = () => {
-      const userAgent = window.navigator.userAgent.toLowerCase();
-      return /iphone|ipad|ipod/.test( userAgent );
-    }
-    var prevScrollpos = window.pageYOffset;
-    if ( ! isIos()) {
+  const isIos = () => {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test( userAgent );
+  }
+  var prevScrollpos = window.pageYOffset;
+  if ( ! isIos()) {
+    if ($("#configuration-page").length == 0) {
       window.onscroll = function() {
         var currentScrollPos = window.pageYOffset;
         if (prevScrollpos >= currentScrollPos) {
@@ -16,5 +16,5 @@ $(document).on('turbolinks:load', function() {
         prevScrollpos = currentScrollPos;
       }
     }
-  }
+   }
 });
