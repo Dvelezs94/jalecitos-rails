@@ -22,11 +22,16 @@
             <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar")%>
             <%= form.file_field :image, class: 'form-control', accept: ".png, .jpg, .jpeg" %>
           </label>
+
         <% end %>
+
         <p>EMAIL
           <span><%= @user.email %></span></p>
       </div>
       <div class="Nombre-completo-text">
+        <div>
+          <button type="button" class="btn btn-primary" onclick="$('#user_image').click();">Editar foto de perfil</button>
+        </div>
         <label for="">Nombre completo</label>
         <div class="inp-area">
           <%= best_in_place current_user, :name, url: update_users_path, style: "padding: 5px;", :data => {:name => "nombre"}, :place_holder => "Edítame", id: "change_user_name", inner_class: "best_input" %>
@@ -66,19 +71,28 @@
             url: update_users_path, :data => {:name => "disponibilidad"}, id: "change_user_available" %>
           </li>
         </div>
-        <div>
-          <label for="">Nivel</label>
-          <li class="nav-item dropdown">
-            <%= current_user.score.level %>
-          </li>
-        </div>
-        <div>
-          <label for="">Ventas totales</label>
-          <li class="nav-item dropdown">
-            <%= number_to_currency(current_user.score.total_sales, precision: 2) %>
-          </li>
-        </div>
       </ul>
+      <div class="separation"></div>
+      <div class="form_block">
+        <div style="display:flex;">
+          <ul class="nav nav-tabs">
+            <div>
+              <label for="">Nivel</label>
+              <li class="nav-item sales_info">
+                <%= current_user.score.level %>
+              </li>
+            </div>
+            <div>
+              <label for="">Ventas totales</label>
+              <li class="nav-item sales_info">
+                <%= number_to_currency(current_user.score.total_sales, precision: 2) %>
+              </li>
+            </div>
+          </ul>
+          <%= icon("fas", "question-circle", class: "question_hint toggler") %>
+        </div>
+          <%= render 'shared_user/config/hints/sales_hint.html.erb' %>
+      </div>
     </div>
 
     <!-- <div class="tab-radio-btn"> <p>Rol</p> <div class="Vendedor-text"> <label class="tab-btn">Vendedor <input type="radio" checked="checked" name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Comprador <input type="radio"

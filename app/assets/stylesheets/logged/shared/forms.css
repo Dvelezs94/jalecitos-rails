@@ -9,6 +9,9 @@
   margin: 5px;
 }
 
+.price-input {
+  text-align: center;
+}
 
 .current_images {
   justify-content: center;
