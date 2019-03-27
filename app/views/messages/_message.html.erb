@@ -20,7 +20,7 @@
         <a href="<%= message.related_to_type == "Gig"? user_gig_path(item.user.slug, item) : request_path(item) %>">
         <div class="related_to_item">
           Relacionado a:
-          <span><%= message.related_to.title %></span>  <br>
+          <span><%= message.related_to.title %></span>
         </div>
         </a>
         <% end %>
