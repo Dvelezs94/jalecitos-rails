@@ -71,19 +71,28 @@
             url: update_users_path, :data => {:name => "disponibilidad"}, id: "change_user_available" %>
           </li>
         </div>
-        <div>
-          <label for="">Nivel</label>
-          <li class="nav-item dropdown">
-            <%= current_user.score.level %>
-          </li>
-        </div>
-        <div>
-          <label for="">Ventas totales</label>
-          <li class="nav-item dropdown">
-            <%= number_to_currency(current_user.score.total_sales, precision: 2) %>
-          </li>
-        </div>
       </ul>
+      <div class="separation"></div>
+      <div class="form_block">
+        <div style="display:flex;">
+          <ul class="nav nav-tabs">
+            <div>
+              <label for="">Nivel</label>
+              <li class="nav-item sales_info">
+                <%= current_user.score.level %>
+              </li>
+            </div>
+            <div>
+              <label for="">Ventas totales</label>
+              <li class="nav-item sales_info">
+                <%= number_to_currency(current_user.score.total_sales, precision: 2) %>
+              </li>
+            </div>
+          </ul>
+          <%= icon("fas", "question-circle", class: "question_hint toggler") %>
+        </div>
+          <%= render 'shared_user/config/hints/sales_hint.html.erb' %>
+      </div>
     </div>
 
     <!-- <div class="tab-radio-btn"> <p>Rol</p> <div class="Vendedor-text"> <label class="tab-btn">Vendedor <input type="radio" checked="checked" name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Comprador <input type="radio"

@@ -1,0 +1,18 @@
+<span class="tooltiptext" id="config_tag_hint">
+  <figure>
+    <div style="display:flex;">
+      <%= icon("fas", "question-circle", class: "question_hint") %>
+      <h3 class="p-t-10">Nivel de usuario</h3>
+    </div>
+    <p>Tu nivel de usuario va de acuerdo al total de ventas realizadas en la plataforma como puedes ver en la siguiente tabla.
+    </p>
+    <%= render "shared/level_table", h: false, n: 0, user: true %>
+    <p>Mientras mayor sea tu nivel, menos comisión se te cobrará al realizar tus retiros.
+    </p>
+    <p class="example">
+      <span>Importante:
+      </span>
+      Mientras mayor sea tu nivel, mayor preferencia tendrás en las búsquedas de otros usuarios. Por ejemplo, si tienes un jale de repostería y
+    alguien busca algo relacionado a ello, tu jale estará en los primeros resultados.</p>
+  </figure>
+</span>
