@@ -10,7 +10,6 @@ body {
   font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
   margin: 0 0 4px;
   font-weight: 400;
-  min-height: 80vh;
 }
 
 pre {
