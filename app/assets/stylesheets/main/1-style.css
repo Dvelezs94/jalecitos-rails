@@ -124,12 +124,17 @@ input:focus {
   margin-bottom: 8vh;
 }
 
-.app-download-div{
+.app-download-div {
   text-align: center;
 }
 
-.app-download {
+.app-download-div img{
   width: 200px;
+  height: auto;
+}
+
+.app-download-ios {
+  padding: 3%;
 }
 
 .default-secondary-btn {
@@ -1341,14 +1346,18 @@ p.limpi2 sub {
 
 .servico-authoristd {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 5px;
+  top: 15px;
 }
 
 .servico-singleteam {}
 
 .loyed1 i {
   padding-left: 12px;
+}
+
+.level-table {
+  margin-top: 20px;
 }
 
 p.loyed1 {
@@ -2413,6 +2422,7 @@ p.gig-score-times {
 /*rating and reviews*/
 .icon-review {
   width: 72px;
+  height: 72px;
   border-radius: 50%;
 }
 .rating-score {

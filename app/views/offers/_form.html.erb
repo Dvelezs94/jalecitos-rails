@@ -20,6 +20,19 @@
             class: "description-class description-0 styled required", rows: 5 %>
           </div>
 
+          <div class="form_block form_section row">
+            <div class="checkmark-area">
+              <label class="check-btn">Incluye material y servicio
+                 <%= form.radio_button :materials, true %>
+                <span class="checkmark"></span>
+              </label>
+              <label class="check-btn">Incluye SOLAMENTE servicio
+                 <%= form.radio_button :materials, false %>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+
 
           <div class="form_block form_section row">
             <div class="flex-space-bet">

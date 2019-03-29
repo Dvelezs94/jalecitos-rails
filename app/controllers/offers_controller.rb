@@ -72,14 +72,16 @@ class OffersController < ApplicationController
     def offer_params_update
       offer_params = params.require(:offer).permit(:description,
                                                    :price,
-                                                   :hours
+                                                   :hours,
+                                                   :materials
                                                   )
     end
 
     def offer_params_create
       offer_params = params.require(:offer).permit(:description,
                                                    :price,
-                                                   :hours
+                                                   :hours,
+                                                   :materials
                                                  ).merge(:request_id => @request.id, :user_id => current_user.id)
     end
 
