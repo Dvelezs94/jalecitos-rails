@@ -116,11 +116,11 @@ module GetPages
   def conditions string=nil
     if current_user
       if current_user.location(true) && string == "verified"
-        # {status: "published", city_id: current_user.city_id, verified: true}
-        {status: "published", verified: true}
+        {status: "published", city_id: current_user.city_id, verified: true}
+        # {status: "published", verified: true}
       elsif current_user.location(true)
-        # {status: "published", city_id: current_user.city_id}
-        {status: "published"}
+        {status: "published", city_id: current_user.city_id}
+        # {status: "published"}
       elsif string == "verified"
         {status: "published", verified: true}
       else
