@@ -70,15 +70,10 @@ $(document).on('turbolinks:load', function() {
   if ($(".show-slide").length - 2 == 1) {
     window.gig_show.autoplay.stop();
   }
-  if(window.gig_show){    
-    $(window.gig_show).resize(function(){
-      window.gig_show.reInit();
-    });
-  }
   // try to fix ios swiper long images on view
   if ($(".show-slide").length > 0){
     $(window).resize(function(){
-       gig_show.update();
+       window.gig_show.update();
      });
   }
    //

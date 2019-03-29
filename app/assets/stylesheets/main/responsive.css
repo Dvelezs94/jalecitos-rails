@@ -1166,6 +1166,10 @@
     display: none;
   }
 
+  .app-download-div img{
+    width: 170px;
+  }
+
   .space {
     display: none;
   }
