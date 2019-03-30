@@ -13,8 +13,13 @@ $(document).on('turbolinks:load', function() {
     }
 
     // fix messages when ios keyboard is up
-    if ($("#message_body").length > 0) {
+    if ($("input").length > 0) {
       $('input').on("blur",function (e) {
+        window.scrollTo(0,0);
+      });
+    }
+    if ($("select").length > 0) {
+      $('select').on("blur",function (e) {
         window.scrollTo(0,0);
       });
     }

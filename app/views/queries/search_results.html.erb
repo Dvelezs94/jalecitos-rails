@@ -7,7 +7,7 @@
     <%= f.hidden_field :lon, value: params[:lon] %>
     <%= icon "fas", "search", style: "cursor:pointer;z-index:3;", onclick: "$('.submit-query').click();" %>
     <%= icon "fas", "arrow-right", style: "cursor:pointer;z-index:3;", onclick: "$('.submit-query').click();" %>
-    <%= f.submit "Continuar", class: "submit-query",style: "display: none;" %>
+    <%= f.submit "Continuar", class: "submit-query",style: "visibility:hidden; position: absolute;" %>
     <% end %>
   </div>
 </div>

@@ -1,10 +1,10 @@
-<div id="main_menu">  
+<div id="main_menu">
   <% if current_page?(user_mobile_search_path) || params[:device] == "mobile" %>
   <div class="tablet-mobile-top-ber">
     <%= form_with url: user_search_path(), method: :get ,:html => {class: "mobile-search-form"} , local: true do |f|%>
     <%= icon("fas", "search", onclick: "$(this).closest('form').find('input[type=submit]').click()", style: "cursor: pointer;") %>
     <%= f.text_field :query, value: params[:query], class: "mobile-query", placeholder: "Busca algo" %>
-    <%= f.submit "continuar", style: "display:none;" %>
+    <%= f.submit "continuar", style: "visibility:hidden; position: absolute;" %>
     <%= icon("fas", "times", onclick: "$('#query').val('')", style: "cursor: pointer;") %>
     <nav class="filters navbar navbar-expand-lg navbar-light bg-light" style="<%= "display:none;" if params[:device] != "mobile" %>">
       <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50, tabindex: -1,
@@ -32,7 +32,7 @@
               <div class="form">
                 <%= icon("fas", "search", onclick: "$(this).closest('form').find('input[type=submit]').click()", style: "cursor: pointer;") %>
                 <%= f.text_field :query, value: params[:query], class: " desktop-query", placeholder: "Busca algo" %>
-                <%= f.submit "continuar", style: "display:none;" %>
+                <%= f.submit "continuar", style: "visibility:hidden; position: absolute;" %>
               </div>
               <div class="button-area">
                 <nav class="filters navbar navbar-expand-lg navbar-light bg-light">
