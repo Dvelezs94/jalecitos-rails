@@ -99,8 +99,30 @@ input:focus {
   height: 30px;
 }
 
+/* Stop IOS from applying their own styles into the input fields */
+textarea,
+select,
+input.text,
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+.input-checkbox {
+-webkit-appearance: none;
+border-radius: 0;
+}
+
 .contact-us p {
   text-align: left;
+}
+
+.close-modal {
+  cursor: pointer;
+  text-align: right;
+}
+
+.close-modal span {
+  font-weight: bold;
+  color: grey;
 }
 
 .primary-jale-btn {
