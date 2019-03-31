@@ -26,6 +26,8 @@ function displayTab() {
   var hidden_pack = $(".pack-names a.nav-item:hidden");
   hidden_pack[0].style.display = "block";
   hidden_pack[0].click();
+  pack_num = hidden_pack[0].getAttribute("href");
+  $(pack_num).addClass("has_validate");
   if (hidden_pack.length == 1) {
     $("a.pack-tab-displayer")[0].style.display = "none";
   }
@@ -50,7 +52,8 @@ function deleteFormContent(formNumber) {
     $(".pack-names a.nav-item")[formNumber - 1].click();
     //show the trash icon of earlier form
     $("a.erase-all")[formNumber - 1].style.display = "block";
-
+    //remove class
+    $(pack_num).removeClass("has_validate");
   }
   $("a.pack-tab-displayer")[0].style.display = "block";
   $(".name-" + formNumber)[0].value = "";
@@ -58,5 +61,4 @@ function deleteFormContent(formNumber) {
   $(".description-" + formNumber)[0].value = "";
   $(".price-input-" + formNumber)[0].value = "";
   $("#price-calc-" + formNumber).html("-");
-  $("#base-price-" + formNumber).val("");
 }

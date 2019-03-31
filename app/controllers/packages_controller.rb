@@ -32,11 +32,10 @@ end
           pack[:pack_type] = pack_type
           pack[:gig_id] = @gig.id
           @pack = Package.new(pack)
-          @pack.save
+          @success = @pack.save
       end
       @gig.published! if @gig.gig_packages[0].present? && @gig.gig_packages[0].name != "" && @gig.gig_packages[0].description != "" && @gig.gig_packages[0].price != nil && @gig.gig_packages[0].price >= 100
     end
-    redirect_to user_gig_path(params[:user_id], @gig), notice: 'Tu Jale se ha publicado exitosamente'
   end
 
   def edit_packages
@@ -63,34 +62,25 @@ end
       my_params.permit(:name, :description, :price )
     end
 
-    def prepare_packages
-      define_pack_names
-      @new_packages =[]
-      3.times do
-        @new_packages << Package.new
-      end
-    end
-
   def set_gig_by_package
     @package = Package.includes(gig: :user).friendly.find(params[:id])
   end
 
   def set_gig_and_packages
-    @gig = Gig.includes(:gig_packages).friendly.find(params[:gig_id])
+    @gig = Gig.includes(:gig_packages).find_by_slug(params[:gig_slug])
   end
 
   def create_redirect
-    redirect_to( edit_user_gig_packages_path(params[:user_id],@gig) ) if (@gig.gig_packages.any?)
+    redirect_to( edit_packages_path(params[:gig_slug]) ) if (@gig.gig_packages.any?)
   end
 
   def update_redirect
-    redirect_to( new_user_gig_package_path(params[:user_id], @gig) ) if (@gig.gig_packages.none?)
+    redirect_to( new_user_gig_package_path(params[:gig_slug]) ) if (@gig.gig_packages.none?)
   end
 
 
   def check_gig_ownership
-    @gig = Gig.friendly.find(params[:gig_id])
-    redirect_to(root_path) if (current_user.nil? || current_user.id != @gig.user_id)
+    head(:no_content) if (current_user.nil? || current_user.id != @gig.user_id)
   end
 
   def check_no_ownership
@@ -99,13 +89,12 @@ end
 
   def validate_create
     params[:packages].each do |pack|
-      flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 100 && pack[:price] != "")
-      flash.now[:error] = "No puedes ganar arriba de de 9,000 MXN" if (pack[:price].to_f > 10000)
-      flash.now[:error] = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
-      flash.now[:error] = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
-      if flash.now[:error]
-        prepare_packages
-        render :new
+      @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 100 && pack[:price] != "")
+      @error = "No puedes ganar arriba de de 9,000 MXN" if (pack[:price].to_f > 10000)
+      @error = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
+      @error = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
+      if @error
+        render "error"
         break
       end
     end
@@ -113,13 +102,12 @@ end
   def validate_update
     @gig.gig_packages.each do |record|
       pack = params[:packages]["#{record.slug}"]
-      flash.now[:error] = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 100 && pack[:price] != "")
-      flash.now[:error] = "No puedes ganar arriba de de 9,000 MXN" if (pack[:price].to_f > 10000)
-      flash.now[:error] = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
-      flash.now[:error] = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
-      if flash.now[:error]
-        define_pack_names
-        render :edit_packages
+      @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 100 && pack[:price] != "")
+      @error = "No puedes ganar arriba de de 9,000 MXN" if (pack[:price].to_f > 10000)
+      @error = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
+      @error = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
+      if @error
+        render "error"
         break
       end
     end
