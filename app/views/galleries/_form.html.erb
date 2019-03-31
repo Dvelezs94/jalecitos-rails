@@ -1,4 +1,4 @@
-<%= form_with(model: gig,url: user_gig_galleries_path(current_user.slug, gig), method: :post, :html => { :id => "new_image" }, local: false) do |form| %>
+<%= form_with(model: Gig,url: galleries_path, method: :post, :html => { :id => "new_image" }, local: false) do |form| %>
 <% if gig.errors.any? %>
   <%gig.errors.full_messages.each do |error| %>
     <%= notification_generator_helper error, :error %>
@@ -35,20 +35,6 @@
             <div class="bounce3"></div>
           </div>
 
-          <!-- 3 end -->
-          <div style="margin: 0 20px;">
-
-            <div class="flex-space-bet">
-
-                <%= link_to 'Cancelar', user_path(current_user.slug), :data => {:confirm => 'Tu progreso hasta ahora NO se guardará'}, class: "btn back-button" %>
-
-
-              <%= link_to 'Continuar', edit_user_gig_packages_path(current_user.slug, gig ), class: "btn continue-button",
-                  id: "continue-process", onclick: "return (window.sentRequests==0)? true: false" %>
-
-
-            </div>
-          </div>
         </div>
         <!-- form box -->
         <!-- -->

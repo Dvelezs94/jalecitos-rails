@@ -3,7 +3,6 @@ jQuery ->
     #initialize file upload
     $("#new_image").fileupload(
       dataType: "script"
-
       fail: (e, data) ->
         #decrement one ajax
         ajaxRecieved()
