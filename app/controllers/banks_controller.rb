@@ -26,7 +26,7 @@ class BanksController < ApplicationController
     rescue OpenpayTransactionException => e
         # e.http_code
         # e.error_code
-        flash[:error] = "#{e.description}, por favor intentalo de nuevo más tarde."
+        flash[:error] = "#{e.description}, por favor inténtalo de nuevo más tarde."
         redirect_to configuration_path(collapse: "withdraw")
     end
   end

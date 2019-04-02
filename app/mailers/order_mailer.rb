@@ -45,7 +45,7 @@ class OrderMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
-            "GIG_URL": user_gig_url(@order.purchase.gig.user, @order.purchase.gig),
+            "GIG_URL": gig_url(@order.purchase.gig),
             "GIG_NAME": @order.purchase.gig.title,
             "EMPLOYER": @order.employer.alias,
             "EMPLOYEE": @order.employee.alias,
@@ -81,7 +81,7 @@ class OrderMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
-            "GIG_URL": user_gig_url(@order.purchase.gig.user, @order.purchase.gig),
+            "GIG_URL": gig_url(@order.purchase.gig),
             "GIG_NAME": @order.purchase.gig.title,
             "EMPLOYER": @order.employer.alias,
             "EMPLOYEE": @order.employee.alias,

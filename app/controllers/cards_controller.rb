@@ -27,7 +27,7 @@ class CardsController < ApplicationController
     ref_params = referer_params(request.referer)
     if ref_params["package_id"] != [""] && ref_params["package_id"].present?
       package = Package.find_by_slug(ref_params["package_id"])
-      redirect_to hire_user_gig_package_path(package.gig.user, package.gig, package)
+      redirect_to hire_package_path(package)
     elsif ref_params["offer_id"] != [""] && ref_params["offer_id"].present?
       offer = Offer.find_by_id(ref_params["offer_id"])
       redirect_to hire_request_offer_path(offer.request, offer)

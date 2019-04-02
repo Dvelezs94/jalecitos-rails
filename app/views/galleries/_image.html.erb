@@ -1,6 +1,6 @@
 <div class="current_img img-thumbnail", style="position: relative;">
   <%= link_to image_tag(image.url, width: 250, class: "delete-image"),
-      user_gig_gallery_path(current_user.slug, @gig.slug, image.file.filename),
+      gallery_path(image.file.filename, gig_id: @gig.id),
       method: :delete, data: {confirm: "¿Estás seguro de borrar este elemento?"},
       remote: true%>
       <%= icon("fas","trash", class: "del-img-icon fa-4x", onclick: "$(this).closest('div.current_img').find('img.delete-image').click();") %>

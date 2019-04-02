@@ -15,6 +15,15 @@ Rails.application.routes.draw do
       get :orders
     end
   end
+  
+  resources :gigs, except: :index do
+    resource :reports, only: [:create], as: "report"
+    member do
+           get :toggle_status
+           get :ban_gig, as: 'ban'
+      end
+    resource :like, only: [:create, :destroy]
+  end
 
   resources :reviews, only: [:update]
 
@@ -36,6 +45,15 @@ Rails.application.routes.draw do
      confirmations: "users/confirmations",
      passwords: "users/passwords"
    }
+   resources :galleries, only: [:create, :destroy]
+   resources :packages, except: [:destroy,:show,:index, :new, :edit, :update] do
+     collection do
+       patch 'update_packages', to: 'packages#update_packages', as: 'update'
+     end
+     member do
+       get :hire
+     end
+   end
    resources :users, only: [:show] do
      collection do
        put :update_user, as: "update"
@@ -46,26 +64,6 @@ Rails.application.routes.draw do
      resources :banks, only: [:create, :destroy]
      resources :cards, only: [:create, :destroy]
      resources :billing_profiles, only: [:create, :destroy]
-
-     resources :gigs, except: :index do
-       resource :reports, only: [:create], as: "report"
-       resources :galleries, only: [:index, :create, :destroy]
-       member do
-              get :toggle_status
-              get :ban_gig, as: 'ban'
-         end
-         resource :like, only: [:create, :destroy]
-         resources :packages, except: [:destroy,:show,:index, :edit, :update] do
-           collection do
-
-             get 'edit_packages', to: 'packages#edit_packages', as: 'edit'
-             patch 'update_packages', to: 'packages#update_packages', as: 'update'
-           end
-           member do
-             get :hire
-           end
-         end
-     end
    end
 
    resources :requests, except: :index do
