@@ -28,7 +28,6 @@ build:
     - docker push $DOCKER_IMAGE_CI
   only:
     - master
-    - development
     - staging
   tags:
     - docker
