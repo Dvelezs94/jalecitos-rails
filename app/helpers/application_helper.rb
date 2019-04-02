@@ -174,7 +174,7 @@ module ApplicationHelper
   end
 
   def meta_tags
-    if @gig.present? && current_page?( user_gig_path(@gig.user, @gig) )
+    if @gig.present? && current_page?( gig_path(@gig) )
         "<title>#{@gig.profession} en #{@gig.location} para #{@gig.name}</title>
         <meta name='description' content='#{@gig.profession} en #{@gig.location} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos.'>
         <meta name='keywords' content='#{@gig.location},#{@gig.profession},#{@gig.tag_list.join(',')}'>

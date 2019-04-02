@@ -32,6 +32,23 @@ class GigsController < ApplicationController
     end
   end
 
+  def ban_gig
+    (@gig.published? || @gig.draft?) ? @gig.banned! : @gig.draft!
+    redirect_to root_path, notice: "Gig status has been updated"
+  end
+
+  def toggle_status
+    check_if_banned
+    check_first_package
+    if flash[:error]
+      redirect_to user_path(current_user.slug)
+    else
+      change_status
+      flash[:success] = "Se ha cambiado el estado del Jale exitosamente"
+      redirect_to user_path(current_user.slug)
+    end
+  end
+
   # GET /gigs/new
   def new
     @gig = Gig.new
@@ -80,7 +97,7 @@ class GigsController < ApplicationController
   # DELETE /gigs/1
   def destroy
     @gig.destroy
-    redirect_to user_path(params[:user_id]), notice: 'El Jale fue destruido.'
+    redirect_to user_path(current_user.slug), notice: 'El Jale fue destruido.'
   end
 
   private

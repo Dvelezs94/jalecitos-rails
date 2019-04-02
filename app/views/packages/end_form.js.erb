@@ -5,10 +5,10 @@
   <% else %>
     <% flash[:notice] = 'Tu Jale se ha publicado exitosamente' %>
   <% end %>
-  window.location = "<%= user_gig_path(current_user.slug, @gig) %>"
+  window.location = "<%= gig_path(@gig) %>"
 <% elsif @active_orders %> //used in update
   <% flash[:alert] = 'Tus paquetes no pudieron ser actualizados ya que hay ordenes en activo.' %>
-  window.location = "<%= user_gig_path(current_user.slug, @gig) %>"
+  window.location = "<%= gig_path(@gig) %>"
 <% else %>
   alert("Ha ocurrido un error, por favor, inténtelo más tarde");
 <% end %>
