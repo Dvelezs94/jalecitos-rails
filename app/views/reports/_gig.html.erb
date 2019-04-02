@@ -12,7 +12,7 @@
                <h4>Reportar Jale</h4>
 
                <div class="divi-new js-form-join-section" data-section="1"></div>
-               <%= form_with model: Report, url: user_gig_report_path(@gig.user.slug, @gig.slug), id: "ReportGigForm", remote: true do |f| %>
+               <%= form_with model: Report, url: gig_report_path(@gig.slug), id: "ReportGigForm", remote: true do |f| %>
                  <%= f.select :cause, @report_options, {include_blank: "Cual es la causa del reporte"}, class: "custom-select required" %>
                  <%= f.text_field :comment, placeholder: "(Opcional) Comentarios" %>
                  <br>

@@ -1,0 +1,14 @@
+<% if @success %>
+  window.success = true
+  <% if params[:action] == "update_packages" %>
+    <% flash[:notice] = 'Tu Jale se ha actualizado exitosamente' %>
+  <% else %>
+    <% flash[:notice] = 'Tu Jale se ha publicado exitosamente' %>
+  <% end %>
+  window.location = "<%= gig_path(@gig) %>"
+<% elsif @active_orders %> //used in update
+  <% flash[:alert] = 'Tus paquetes no pudieron ser actualizados ya que hay ordenes en activo.' %>
+  window.location = "<%= gig_path(@gig) %>"
+<% else %>
+  alert("Ha ocurrido un error, por favor, inténtelo más tarde");
+<% end %>

@@ -1,12 +1,12 @@
 class GalleriesController < ApplicationController
   layout 'logged'
-  before_action :set_gig, only: [:index, :create, :destroy]
+  before_action :set_gig, only: [:create, :destroy]
+  before_action :check_gig_ownership, only: [:create, :destroy]
+  before_action :check_if_content, only: [:create]
   skip_before_action :verify_authenticity_token
-  before_action :check_gig_ownership, only:[:index, :create, :destroy]
+
   access user: :all
 
-  def index
-  end
 
   def create
     @uploaded = params[:gig][:images] #get uploaded image
@@ -55,18 +55,25 @@ class GalleriesController < ApplicationController
 
   private
   def set_gig
-    @gig = Gig.friendly.find(params[:gig_id])
+    @gig = Gig.find(params[:gig_id])
   end
 
+
   def check_gig_ownership
-    redirect_to(root_path) if (current_user.nil? || current_user.id != @gig.user_id)
+    head(:no_content) if (current_user.nil? || current_user.id != @gig.user_id)
+  end
+
+  def check_if_content
+    if params[:gig].nil? #no images (just clicking next)
+      @next = true
+      render "create"
+    end
   end
 
   def gig_params
     gig_params = params.require(:gig).permit(
                                 {images: []}
                               )
-
   end
 
 

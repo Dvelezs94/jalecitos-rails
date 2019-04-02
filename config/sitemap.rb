@@ -19,7 +19,7 @@ SitemapGenerator::Sitemap.create do
   add root_path, :changefreq => 'daily'
 
   Gig.published.find_each do |gig|
-    add user_gig_path(gig.user.slug, gig.slug), :lastmod => gig.updated_at
+    add gig_path(gig.slug), :lastmod => gig.updated_at
   end
 
   User.active.find_each do |user|

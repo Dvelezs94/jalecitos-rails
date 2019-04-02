@@ -7,11 +7,11 @@ $(document).on('turbolinks:load', function() {
 function init_char_D_count() {
 
   descInputs = $(".description-class");
-    $(".description-class").keyup(char_D_count);
-  for (var i = 0; i < descInputs.length; i++) {
-    $(".description-" + i).before("<label id='count_D_" + i + "' class='count'></label>");
-    $(".description-" + i).keyup();
-  }
+  descInputs.keyup(char_D_count);
+  $.each(descInputs, function( index, input ) {
+    $(input).before("<label id='count_D_" + $(input)[0].className.split(" ")[1].match(/\d+$/)[0] + "' class='count'></label>");
+    $(input).keyup();
+  });
 }
 function char_D_count() {
   number = $(this)[0].className.split(" ")[1].match(/\d+$/)[0];

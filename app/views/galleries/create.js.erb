@@ -5,8 +5,10 @@ if (window.sentRequests == 0){
   $(".loading").hide();
 }
 //do the render
-<% if @success %>
+<% if @success %> //loads an image
   $(".current_images").append("<%= j render partial: 'galleries/image', collection: [@gig.images.last] %>");
+<% elsif @next %> //clicks next form
+  window.success = true;
 <% else %>
   alert("<%= j @gig.errors[:images][0].html_safe %>");
 <% end %>

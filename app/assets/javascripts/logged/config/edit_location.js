@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function() {
   $('html, body').animate({
     scrollTop: ($("#config_autocomplete").offset().top-200)
   }, 1000);
-  updateURL("collapse", "notifications", "config_tags_input"); //send back to tags collapse on reload
+  updateURL(["collapse"], ["notifications"], "config_tags_input"); //send back to tags collapse on reload
   $('#config_autocomplete').focus();
   });
 });
