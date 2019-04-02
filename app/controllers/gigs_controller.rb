@@ -41,11 +41,11 @@ class GigsController < ApplicationController
     check_if_banned
     check_first_package
     if flash[:error]
-      redirect_to user_path(current_user.slug)
+      redirect_to gig_path(@gig)
     else
       change_status
-      flash[:success] = "Se ha cambiado el estado del Jale exitosamente"
-      redirect_to user_path(current_user.slug)
+      flash[:success] = "Estado actual del Jale: #{t("gigs.status.#{@gig.status}")}"
+      redirect_to gig_path(@gig)
     end
   end
 
@@ -57,6 +57,10 @@ class GigsController < ApplicationController
 
   # GET /gigs/1/edit
   def edit
+    if @gig.gig_packages.none?
+      prepare_packages
+    end
+
   end
 
   # POST /gigs
@@ -125,7 +129,7 @@ class GigsController < ApplicationController
 
 
     def set_gig_with_first_pack
-      @gig = Gig.includes(:gig_first_pack).friendly.find(params[:id])
+      @gig = Gig.includes(:gig_packages).friendly.find(params[:id])
     end
 
     def set_gig_with_all_asc

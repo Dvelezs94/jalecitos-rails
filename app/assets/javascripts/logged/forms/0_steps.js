@@ -5,6 +5,11 @@ $(document).on('turbolinks:load', function() {
     headerTag: "h3",
     bodyTag: "section",
     transitionEffect: "slideLeft",
+    labels: {
+      previous: "Anterior",
+      next: "Siguiente",
+      finish: "Finalizar"
+    },
     onStepChanging: function(event, currentIndex, newIndex) {
       // Allways allow previous action even if the current form is not valid!
       if (currentIndex > newIndex) {
@@ -26,16 +31,6 @@ $(document).on('turbolinks:load', function() {
         return false
       }
 
-    },
-    onStepChanged: function(event, currentIndex, priorIndex) {
-      // Used to skip the "Warning" step if the user is old enough.
-      if (currentIndex === 2 && Number($("#age-2").val()) >= 18) {
-        form_cont.steps("next");
-      }
-      // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
-      if (currentIndex === 2 && priorIndex === 3) {
-        form_cont.steps("previous");
-      }
     },
     onFinishing: function(event, currentIndex) {
       form = form_cont.find("#section_parent-p-" + currentIndex + " form");

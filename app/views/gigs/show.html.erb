@@ -1,4 +1,16 @@
 <div class="top-gig innerpages3-area">
+  <% if @gig.gig_packages.none? || (@gig.draft? && @gig.gig_packages.any?) %>
+  <div class="alert alert-warning alert-dismissible fade show text-center" role="alert" style="margin-bottom:0 !important;">
+    <% if @gig.gig_packages.none? %>
+      <%= link_to("Agrega paquetes al Jale para publicarlo.", edit_gig_path(@gig))%>
+    <% else %>
+      <%= link_to("¡Tu jale está listo para publicarse! <br> Haz click aquí para publicarlo.".html_safe, toggle_status_gig_path(@gig)) %>
+    <% end %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <% end %>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-7 small-padding">

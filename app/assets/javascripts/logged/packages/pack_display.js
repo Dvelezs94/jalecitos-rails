@@ -35,7 +35,6 @@ function displayTab() {
 }
 function displayTrash() {
   var displayed_navs = $(".package-nav").length - $(".package-nav.hidden").length - 1;
-  console.log(displayed_navs);
   trashes = $(".erase-all");
   $.each(trashes, function( index, trash ) {
     if (index == displayed_navs) {

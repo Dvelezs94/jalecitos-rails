@@ -22,20 +22,10 @@ class PackagesController < ApplicationController
   def create
     @gig.with_lock do
       if @gig.gig_packages.count == 0 && params[:packages].count == 3 #just if there are no packages and packages sent to server are 3
-        params[:packages].each_with_index do |pack, pack_type|
-            pack = package_params(pack)
-            pack[:pack_type] = pack_type
-            pack[:gig_id] = @gig.id
-            @pack = Package.new(pack)
-            @success = @pack.save
-        end
+        create_the_packages
         @gig.published! if @gig.gig_packages[0].present? && @gig.gig_packages[0].name != "" && @gig.gig_packages[0].description != "" && @gig.gig_packages[0].price != nil && @gig.gig_packages[0].price >= 100
       end
-      respond_to do |format|
-        format.js {
-          render "end_form"
-         }
-      end
+      end_form
     end
   end
 
@@ -53,19 +43,35 @@ class PackagesController < ApplicationController
             break
           end
         end
-        respond_to do |format|
-          format.js {
-            render "end_form"
-           }
-        end
+      elsif @gig.gig_packages.count == 0 && params[:packages].count == 3
+        create_the_packages #when user creates gig and leaves empy packages, then in update it has to create them
       end
     end
+    end_form
   end
 
   private
   # Only allow a trusted parameter "white list" through.
   def package_params(my_params)
     my_params.permit(:name, :description, :price )
+  end
+
+  def end_form
+    respond_to do |format|
+      format.js {
+        render "end_form"
+       }
+    end
+  end
+
+  def create_the_packages
+    params[:packages].each_with_index do |pack, pack_type|
+        pack = package_params(pack)
+        pack[:pack_type] = pack_type
+        pack[:gig_id] = @gig.id
+        @pack = Package.new(pack)
+        @success = @pack.save
+    end
   end
 
   def set_gig_by_package
