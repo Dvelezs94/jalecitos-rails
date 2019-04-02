@@ -11,11 +11,11 @@ module ApplicationHelper
           model.location
         end
       else #homepage
-        # if current_user.city_id.present?
-        #   model.profession
-        # else
+        if current_user.city_id.present?
+          model.profession
+        else
           model.location
-        # end
+        end
       end
     else # is guest
       if params[:lat].present? #query with location
