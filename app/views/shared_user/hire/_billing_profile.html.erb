@@ -1,6 +1,6 @@
 <div class="Razon-Social">
    <label class="check-btn">Razón Social
-     <%= f.check_box :billing_profile_id, {}, billing_profile.id, nil  %>
+     <%= f.check_box :billing_profile_id, {checked: true}, billing_profile.id, nil  %>
     <span class="checkmark"></span>
    </label>
   <p><%= billing_profile.name %></p>
