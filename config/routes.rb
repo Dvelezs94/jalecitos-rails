@@ -15,6 +15,15 @@ Rails.application.routes.draw do
       get :orders
     end
   end
+  
+  resources :gigs, except: :index do
+    resource :reports, only: [:create], as: "report"
+    member do
+           get :toggle_status
+           get :ban_gig, as: 'ban'
+      end
+    resource :like, only: [:create, :destroy]
+  end
 
   resources :reviews, only: [:update]
 
@@ -55,15 +64,6 @@ Rails.application.routes.draw do
      resources :banks, only: [:create, :destroy]
      resources :cards, only: [:create, :destroy]
      resources :billing_profiles, only: [:create, :destroy]
-
-     resources :gigs, except: :index do
-       resource :reports, only: [:create], as: "report"
-       member do
-              get :toggle_status
-              get :ban_gig, as: 'ban'
-         end
-         resource :like, only: [:create, :destroy]
-     end
    end
 
    resources :requests, except: :index do

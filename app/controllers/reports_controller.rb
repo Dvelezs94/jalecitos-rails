@@ -9,7 +9,7 @@ class ReportsController < ApplicationController
     @report = Report.new(report_params)
 
     # create reportable object
-    if params[:user_id] && params[:gig_id]
+    if params[:gig_id]
       @gig = Gig.friendly.find(params[:gig_id])
       @report.reportable = @gig
     # check if report is going to request
