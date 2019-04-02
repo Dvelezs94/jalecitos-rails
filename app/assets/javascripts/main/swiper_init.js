@@ -3,6 +3,7 @@ $(document).on('turbolinks:load', function() {
   var cat_csl = new Swiper('.category-carousel', {
     breakpointsInverse: true,
     slidesPerView: 6.5,
+    freeMode: true,
     loop: false,
     spaceBetween: 10,
     breakpoints: {
@@ -25,6 +26,7 @@ $(document).on('turbolinks:load', function() {
       slidesPerView: "auto",
       centeredSlides: false,
       loop: false,
+      freeMode: true,
       observer: true,
       autoplay: {
         delay: 7000
