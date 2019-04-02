@@ -14,7 +14,7 @@
   <h3>Paquetes</h3>
   <section>
     <div class="container">
-      <%= render 'packages/form', package: @gig.gig_packages %>
+      <%= render 'packages/form', package: (@gig.gig_packages.any?)? @gig.gig_packages : @new_packages %>
     </div>
   </section>
 </div>
