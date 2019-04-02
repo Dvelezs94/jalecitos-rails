@@ -5,13 +5,12 @@ $(document).on('turbolinks:load', function() {
 });
 
 function init_char_N_count() {
-
   nameInputs = $(".name-class");
-    $(".name-class").keyup(char_N_count);
-  for (var i = 0; i < nameInputs.length; i++) {
-    $(".name-" + i).before("<label id='count_N_" + i + "' class='count'></label>");
-    $(".name-" + i).keyup();
-  }
+  nameInputs.keyup(char_N_count);
+  $.each(nameInputs, function(index, input) {
+    $(input).before("<label id='count_N_" + $(input)[0].className.split(" ")[1].match(/\d+$/)[0] + "' class='count'></label>");
+    $(input).keyup();
+  });
 }
 function char_N_count() {
   number = $(this)[0].className.split(" ")[1].match(/\d+$/)[0];

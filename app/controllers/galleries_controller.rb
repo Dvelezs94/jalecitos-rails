@@ -1,14 +1,12 @@
 class GalleriesController < ApplicationController
   layout 'logged'
-  before_action :set_gig, only: [:index, :create, :destroy]
-  before_action :check_gig_ownership, only:[:index, :create, :destroy]
+  before_action :set_gig, only: [:create, :destroy]
+  before_action :check_gig_ownership, only: [:create, :destroy]
   before_action :check_if_content, only: [:create]
   skip_before_action :verify_authenticity_token
 
   access user: :all
 
-  def index
-  end
 
   def create
     @uploaded = params[:gig][:images] #get uploaded image
@@ -57,8 +55,9 @@ class GalleriesController < ApplicationController
 
   private
   def set_gig
-    @gig = Gig.find_by_slug(params[:gig_slug])
+    @gig = Gig.find(params[:gig_id])
   end
+
 
   def check_gig_ownership
     head(:no_content) if (current_user.nil? || current_user.id != @gig.user_id)

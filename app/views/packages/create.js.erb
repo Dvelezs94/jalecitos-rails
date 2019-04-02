@@ -1,7 +1,0 @@
-<% if @success %>
-  window.success = true
-  <% flash[:notice] = 'Tu Jale se ha publicado exitosamente' %>
-  window.location = "<%= user_gig_path(current_user.slug, @gig) %>"
-<% else %>
-  alert("Ha ocurrido un error, por favor, inténtelo más tarde");
-<% end %>
