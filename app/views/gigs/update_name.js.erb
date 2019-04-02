@@ -1,5 +1,7 @@
 <% if params[:gig_id].nil? && @success  # if the gig was created, if edits on creation now update form db%>
 updateFormURL(["gig_id"], ["<%= @gig.id %>"]); //forms uses this url in ajax requests
-updateURL(["gig_id"], ["<%= @gig.id %>"]); //if user changes name (slug) and reloads it will grab gig_id to find gig
+  <% if params[:action] == "update" %>
+  updateURL(["gig_id"], ["<%= @gig.id %>"]); //if user changes name (slug) and reloads it will grab gig_id to find gig
+  <% end %>
 <% end %>
 window.success = <%= @success %>
