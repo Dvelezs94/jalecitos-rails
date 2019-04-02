@@ -36,11 +36,9 @@ Rails.application.routes.draw do
      confirmations: "users/confirmations",
      passwords: "users/passwords"
    }
-   resources :galleries, only: [:index, :create, :destroy]
-   resources :packages, except: [:destroy,:show,:index, :edit, :update] do
+   resources :galleries, only: [:create, :destroy]
+   resources :packages, except: [:destroy,:show,:index, :new, :edit, :update] do
      collection do
-
-       get 'edit_packages', to: 'packages#edit_packages', as: 'edit'
        patch 'update_packages', to: 'packages#update_packages', as: 'update'
      end
      member do

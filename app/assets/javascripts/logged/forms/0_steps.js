@@ -57,7 +57,7 @@ $(document).on('turbolinks:load', function() {
 function syncAjax(form) {
   window.success = false;
   return $.ajax({
-    type: form[0].method,
+    type: form.find("[name='_method']").val() || form[0].method,
     url: form[0].action,
     dataType: "script",
     data: form.find("[name!='_method']").serialize(),

@@ -1,6 +1,6 @@
 module PackagesHelper
   def package_form_url_helper
-    if params[:action] == "edit_packages" || params[:action] == "update_packages"
+    if params[:action] == "edit" || params[:action] == "update"
       update_packages_path
     else
       packages_path

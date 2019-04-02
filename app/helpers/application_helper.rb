@@ -165,7 +165,7 @@ module ApplicationHelper
   end
 
   def form_method_helper
-    actions = ["edit", "update", "edit_packages", "update_packages"]
+    actions = ["edit", "update"]
     if actions.include?(params[:action])
       :patch
     else

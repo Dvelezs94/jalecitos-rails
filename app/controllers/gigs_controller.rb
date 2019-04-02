@@ -4,11 +4,12 @@ class GigsController < ApplicationController
   include PackTypes
   include SetLayout
   include ReportFunctions
-  before_action :set_gig, only: [:edit, :update, :destroy, :ban_gig]
+  before_action :set_gig, only: [:destroy, :ban_gig]
   before_action :set_gig_with_first_pack, only: :toggle_status
   before_action :set_gig_with_all_asc, only: :show
   before_action :check_published, only: :show
   before_action :set_gig_create, only: [:create]
+  before_action :set_gig_update, only: [:edit, :update]
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status, :create]
   before_action :max_gigs, only: [:new, :create]
   before_action :check_running_orders, only: :destroy
@@ -43,7 +44,7 @@ class GigsController < ApplicationController
 
   # POST /gigs
   def create
-    if params[:gig_slug].present? #editing in creation
+    if params[:gig_id].present? #editing in creation
       @success = @gig.update(gig_params)
       if !@success
         render :new
@@ -55,28 +56,26 @@ class GigsController < ApplicationController
       end
     end
     respond_to do |format|
-      format.js {  }
+      format.js {
+        render "update_name"
+       }
     end
   end
 
   # PATCH/PUT /gigs/1
   def update
-    if @gig.update(gig_params)
-      @package = Package.find_by_gig_id(@gig)
-      redirect_to user_gig_galleries_path(current_user.slug, @gig)
+    @success = @gig.update(gig_params)
+    if @success
+      # @package = Package.find_by_gig_id(@gig)
+      respond_to do |format|
+        format.js {
+          render "update_name"
+         }
+      end
     else
       render :edit
     end
   end
-
-  def hire
-    @openpay_id = current_user.openpay_id
-    @order = Order.new
-    @user_cards = get_openpay_resource("card", @openpay_id)
-    @billing_profiles = current_user.billing_profiles.enabled
-    @price = calc_hire_view(@package.price)
-  end
-
 
   # DELETE /gigs/1
   def destroy
@@ -91,12 +90,22 @@ class GigsController < ApplicationController
     end
 
     def set_gig_create
-      if params[:gig_slug].present? #edit in creation
-        @gig = Gig.find_by_slug(params[:gig_slug])
+      if params[:gig_id].present? #edit in creation
+        @gig = Gig.find(params[:gig_id])
       else #create
         @gig = Gig.new(gig_params)
       end
     end
+
+    def set_gig_update
+      if params[:gig_id].present? #after edit name in update, slug changes
+        @gig = Gig.find(params[:gig_id])
+      else #before changing name it can be finded by original name
+        @gig = Gig.friendly.find(params[:id])
+      end
+    end
+
+
 
     def set_gig_with_first_pack
       @gig = Gig.includes(:gig_first_pack).friendly.find(params[:id])
@@ -127,15 +136,14 @@ class GigsController < ApplicationController
     end
 
     def max_gigs
-      if current_user.gigs.count >= 20 && params[:gig_slug].nil?
-        puts "ENTRO"*50
+      if current_user.gigs.count >= 20 && params[:gig_id].nil?
         flash[:error] = "Sólo puedes tener como máximo 20 Jales"
         redirect_to( my_account_users_path )
       end
     end
 
     def check_gig_ownership
-      head(:no_content) if (current_user.nil? || current_user.id != @gig.user_id)
+        redirect_to(root_path, notice: "Este jale no te pertenece") if (current_user.nil? || current_user.id != @gig.user_id)
     end
 
     # Check if there are running orders before destroying

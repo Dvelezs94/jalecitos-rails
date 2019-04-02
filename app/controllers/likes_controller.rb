@@ -31,7 +31,7 @@ class LikesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def like_params
-      gig = params.require(:like).permit(:gig_slug)
+      gig = params.require(:like).permit(:gig_slug) #PENDIENTE
       like_params[gig] = Gig.friendly.find(gig)
       like_params[user] = current_user
       like_params

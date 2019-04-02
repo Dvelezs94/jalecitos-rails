@@ -73,4 +73,9 @@ class Gig < ApplicationRecord
   def title
     "Voy a #{to_downcase(self.name)}"
   end
+
+  private
+  def should_generate_new_friendly_id?
+    name_changed?
+  end
 end
