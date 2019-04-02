@@ -11,6 +11,7 @@ class MessageMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
+            "ALIAS": @message.conversation.opposed_user(@message.user.id).alias,
             "MSG_ALIAS": @message.user.alias,
             "MSG_CONTENT": @message.body,
             "CONVERSATION_URL": conversations_url(user_id: @message.user.slug)
