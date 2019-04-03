@@ -75,7 +75,7 @@ class Gig < ApplicationRecord
   end
 
   private
-  def should_generate_new_friendly_id?
-    name_changed?
-  end
+  # def should_generate_new_friendly_id? #this is used to change url every time name if changed, its not used now because problems of google indexing pages
+  #   name_changed?
+  # end
 end
