@@ -1,8 +1,7 @@
 $(document).on('turbolinks:load', function() {
-  //detecting changes on each form, it could fail because i can click without write on input
-  $(document).on("keypress", function() {
+  //detecting changes on each form
+  $(document).on('change keyup paste', ':input', function() {
     window.changed = true;
-    console.log(window.changed);
   })
   var form_cont = $("#section_parent");
   form_cont.steps({
@@ -14,6 +13,14 @@ $(document).on('turbolinks:load', function() {
       next: "Siguiente",
       finish: "Finalizar"
     },
+    onInit: function (event, currentIndex) {
+      form = $(".gig_form");
+      //this input exist only when form has method different than post or get, so i am confirming if i am on update (patch)
+      if (form.find("[name='_method']").val()) {
+        $(".steps.clearfix li").not(":eq(0)").removeClass("disabled");
+        $(".steps.clearfix li").not(":eq(0)").addClass("done");
+      }
+     },
     onStepChanging: function(event, currentIndex, newIndex) {
       // Allways allow previous action even if the current form is not valid!
       if (currentIndex > newIndex) {
@@ -52,7 +59,7 @@ $(document).on('turbolinks:load', function() {
       }
     },
     onFinished: function(event, currentIndex) {
-      // nothing yet
+      window.finished_form = true;
     }
   })
 });
