@@ -1,6 +1,10 @@
 $(document).on('turbolinks:load', function() {
+  //detecting changes on each form, it could fail because i can click without write on input
+  $(document).on("keypress", function() {
+    window.changed = true;
+    console.log(window.changed);
+  })
   var form_cont = $("#section_parent");
-
   form_cont.steps({
     headerTag: "h3",
     bodyTag: "section",
@@ -31,6 +35,10 @@ $(document).on('turbolinks:load', function() {
         return false
       }
 
+    },
+    onStepChanged: function (event, currentIndex, newIndex) {
+      window.changed = false; //restart at no changes
+      return true;
     },
     onFinishing: function(event, currentIndex) {
       form = form_cont.find("#section_parent-p-" + currentIndex + " form");

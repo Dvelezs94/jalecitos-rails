@@ -76,7 +76,7 @@
 }
 
 .wizard>.steps .current a, .wizard>.steps .current a:hover, .wizard>.steps .current a:active {
-  background: #2184be;
+  background-color: #39C27A;
   color: #fff;
   cursor: default
 }
@@ -92,10 +92,10 @@
 }
 
 .wizard>.content {
-  background: #eee;
+  /* background: #eee; */
   display: block;
   margin: .5em;
-  min-height: 35em;
+  min-height: 15em;
   overflow: hidden;
   position: relative;
   width: auto;
@@ -283,7 +283,7 @@
 
 @media(max-width:600px) {
   .wizard>.steps>ul>li {
-    width: 50%
+    width: 33.3%;
   }
 
   .wizard>.steps a, .wizard>.steps a:hover, .wizard>.steps a:active {
@@ -306,6 +306,7 @@
 
 @media(max-width:480px) {
   .wizard>.steps>ul>li {
-    width: 100%
+    width: 33.3%;
+    font-size: 12px;
   }
 }

@@ -17,7 +17,12 @@ function leave_options() {
     if ($(".steps.clearfix li.disabled").length == 0) {
       //i am in gig tab, so maybe i have gig changes and package changes
       if ( $(".steps.clearfix li").first().hasClass("current") ) {
-        return "Tus cambios en el Jale y paquetes no se guardarán";
+        if (window.changed) {
+          return "Tus cambios en el Jale y paquetes no se guardarán";
+        }
+        else {
+          return "Tus cambios en los paquetes no se guardarán";
+        }
       }
       //not in gig tab and visited all tabs, so just package changes may not be saved
       else {
@@ -28,7 +33,12 @@ function leave_options() {
     if ($(".steps.clearfix li.disabled").length == 1) {
       //i am in gig
       if ( $(".steps.clearfix li").first().hasClass("current")){
-        return "No has completado el proceso, tus cambios en el Jale no se guardarán";
+        if (window.changed) {
+          return "No has completado el proceso, tus cambios en el Jale no se guardarán";
+        }
+        else {
+          return "No has terminado el proceso, pero tu Jale se ha guardado y puedes reanudarlo cuando desees.";
+        }
       }
       //i am in gallery
       else if ( !$(".steps.clearfix li").first().hasClass("current")) {
