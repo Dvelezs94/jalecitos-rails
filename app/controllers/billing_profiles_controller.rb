@@ -19,7 +19,7 @@ class BillingProfilesController < ApplicationController
       referer_params = referer_params(request.referer)
       if referer_params["package_id"].join("") != ""
         package = Package.find_by_slug(referer_params["package_id"])
-        redirect_to hire_user_gig_package_path(package.gig.user, package.gig, package)
+        redirect_to hire_package_path(package)
       elsif referer_params["offer_id"].join("") != ""
         offer = Offer.find_by_id(referer_params["offer_id"])
         redirect_to hire_request_offer_path(offer.request, offer)

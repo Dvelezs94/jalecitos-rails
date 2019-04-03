@@ -1,13 +1,34 @@
 function updateURL(name, value, focusAfterReload="") { //removes all other query string and puts the new specified
+  var strings = "";
+  $.each(name, function( index, nam ) {
+    strings += nam + "=" + value[index];
+    if (index < name.length - 1) {
+      strings += "&"
+    }
+  });
+  if (focusAfterReload != "") { // if i want to focus something after reload (like tag in config)
+    strings += "&focusAfterReload="+focusAfterReload
+  }
   if (history.pushState) {
-    if (focusAfterReload=="") {
-      var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?'+name+'='+value;
-    }
-    else { //focus something after change location reload
-      var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?'+name+'='+value+'&focusAfterReload='+focusAfterReload;
-    }
+      var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?'+strings;
       window.history.pushState({path:newurl},'',newurl);
   }
+}
+
+function updateFormURL(name, value) {
+  var strings = "";
+  //prepare all the query strings
+  $.each(name, function( index, nam ) {
+    strings += nam + "=" + value[index];
+    if (index < name.length - 1) {
+      strings += "&"
+    }
+  });
+  forms = $("#section_parent form");
+  //append query strings to all forms
+  $.each(forms, function( index, f ) {
+    f.action = f.action.split("?")[0] + "?" + strings;
+  });
 }
 
 function updateConvURL(name, value) { //removes all other query string and puts the new specified

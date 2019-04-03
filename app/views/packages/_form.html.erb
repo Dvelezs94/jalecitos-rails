@@ -1,18 +1,18 @@
-<%= form_with(model: package, url: package_form_url_helper, method: form_method_helper, local: true, :html => { :id => "packages_form", class: "current_form" }) do |form|%>
+<%= form_with(model: package, url: package_form_url_helper, method: form_method_helper, local: true, :html => { :id => "packages_form", class: "pack_form" }) do |form|%>
 <div class="container-fluid section centered-form packages-builder">
   <h3 id="how-many-pack">Define tus paquetes</h3>
   <div class="col-lg-8 mar-0-auto">
     <nav class="pack-names">
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link package-nav active" id="pack-tab-0" data-toggle="tab" href="#package-0" role="tab" aria-selected="true">Básico</a>
-        <a class="nav-item nav-link package-nav" id="pack-tab-1" data-toggle="tab" href="#package-1" role="tab" aria-selected="false" style="<%= "display:none;" if params[:action] == 'new' || @gig.packages[1].name == "" %>">Éstandar</a>
-        <a class="nav-item nav-link package-nav" id="pack-tab-2" data-toggle="tab" href="#package-2" role="tab" aria-selected="false" style="<%= "display:none;" if params[:action] == 'new' || @gig.packages[2].name == "" %>">Premium</a>
-        <a href="#" class="pack-tab-displayer" style="<%= "display:none;" if params[:action] == 'edit_packages' && @gig.packages[2].name != '' %>"><%= icon("fas", "plus") %></a>
+        <a class="nav-item nav-link package-nav <%= "hidden" if params[:action] == 'new' || @gig.gig_packages.none? || @gig.gig_packages[1].name == "" %>" id="pack-tab-1" data-toggle="tab" href="#package-1" role="tab" aria-selected="false">Éstandar</a>
+        <a class="nav-item nav-link package-nav <%= "hidden" if params[:action] == 'new' || @gig.gig_packages.none? || @gig.gig_packages[2].name == "" %>" id="pack-tab-2" data-toggle="tab" href="#package-2" role="tab" aria-selected="false">Premium</a>
+        <a href="#" class="pack-tab-displayer <%= "hidden" if params[:action] == 'edit' && (@gig.gig_packages.any? && @gig.gig_packages[2].name != '') %>"><%= icon("fas", "plus") %></a>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
       <% package.each_with_index do |pack, n| %>
-        <div class="tab-pane fade <%= " show active" if n==0 %>" id="package-<%= n %>" role="tabpanel" aria-labelledby="pack-tab-<%= n %>">
+        <div class="tab-pane fade <%= "show active" if n==0 %>" id="package-<%= n %>" role="tabpanel" aria-labelledby="pack-tab-<%= n %>">
 
           <div class="form_box pack_form_col">
             <% if pack.errors.any? %>
@@ -25,8 +25,9 @@
 
             <div class="form-block form-group-<%= n %> row col-lg-11 centered-form">
               <strong class="form-title">Nombre del paquete</strong>
-              <%= pa.text_field :name, class: "name-class name-#{n} form_fields_#{n} styled",maxlength: 100, placeholder: "Fotos tamaño infantil" %>
-              <span class="error error_span_<%= 3*n+1 %>"></span>
+              <%= pa.text_field :name, class: "name-class name-#{n} form_fields_#{n} styled is_input",maxlength: 100,
+               placeholder: "Fotos tamaño infantil" %>
+              <span class="span-error error_span_<%= 3*n+1 %>"></span>
             </div>
 
             <hr>
@@ -37,9 +38,9 @@
 
                  <%= pa.text_area :description, id: "description#{n}", maxlength: 1000,
                  placeholder: "5 fotos tamaño infantil a color",
-                 class: "description-class description-#{n} form_fields_#{n} styled required", rows: 5 %>
+                 class: "description-class description-#{n} form_fields_#{n} styled is_input", rows: 5 %>
 
-              <span class="error error_span_<%= 3*n+2 %>"></span>
+              <span class="span-error error_span_<%= 3*n+2 %>"></span>
             </div>
             <hr>
 
@@ -49,14 +50,12 @@
                 <p class="price-text form-title">Lo que ganaré:</p>
                 <div class="row justify-content-center w-100">
                   <%= icon "fas","dollar", class: "fa-2x", id: "price-symbol" %>
-                  <input type="number" name="want_win_<%= n %>" min="100" max="9000" step=".01"
-                   class="price-input price-input-<%= n %> form-control"
-                   value="<%= (@gig.packages[n].price).round(2) if params[:action] == 'edit_packages' && @gig.packages[n].price.present? %>">
-                  <%= pa.hidden_field :price, id: "base-price-#{n}", class: "form_fields_#{n}" %>
-                  <span class="error error_span_<%= 3*n+3 %>"></span>
+                  <%= pa.number_field :price, min: "100", max: "10000", step: ".01",
+                   class: "price-input price-input-#{n} form-control is_input form_fields_#{n}" %>
+                  <span class="span-error error_span_<%= 3*n+3 %>"></span>
                   </div>
                 </div>
-                <div class=" form_block row will-show col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="form_block row will-show col-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="flex-space-bet">
                     <p class="price-text form-title">Precio final:  <%= icon("fas", "question-circle", class: "question_hint toggler") %></p>
                   </div>
@@ -73,12 +72,9 @@
           </div>
 
         </div>
-        <% n += 1  %><% end %>
+        <% n += 1  %>
+        <% end %>
 
-        <div class="form-group submit-button submit-pack-buttons">
-          <%= link_to 'Cancelar', user_path(current_user.slug), :data => {:confirm => 'Tu jale se ha guardado, pero tus paquetes NO'}, class: "btn back-button" %>
-          <%= form.submit "Publicar", class: "btn continue-button" %>
-        </div>
         <div class="error error-messages"></div>
 
       </div>

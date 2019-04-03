@@ -2,6 +2,14 @@ $(document).on('turbolinks:load', function() {
   if($(".current_form").length > 0){
    $(".current_form").validate();
   }
+  if($(".gig_form").length > 0){
+   $(".gig_form").validate();
+  }
+  if($(".pack_form").length > 0){
+   $(".pack_form").validate({
+     ignore: []
+   });
+  }
   if($(".new_card").length > 0){
    $(".new_card").validate();
   }

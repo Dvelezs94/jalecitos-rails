@@ -17,7 +17,17 @@
   justify-content: center;
 }
 
-.form_box.post_form_col {
+.isDisabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.isDisabled > a {
+  color: currentColor;
+  display: inline-block;  /* For IE11/ MS Edge bug */
+  pointer-events: none;
+  text-decoration: none;
+}
+.actions.clearfix {
   margin-bottom: 5vh;
 }
 
@@ -64,7 +74,7 @@ span.action {
 
 span.action-gig {
   position: absolute;
-  top: 39%;
+  top: 36px;
   left: 3%;
 }
 .action-indent,
@@ -474,7 +484,9 @@ button[disabled] {pointer-events:none}
 
 }
 span.error,
-div.error{
+div.error,
+.span-error,
+.error-messages{
   color: red;
 }
 

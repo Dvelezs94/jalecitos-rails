@@ -1,1 +1,18 @@
-<%= render 'form', gig: @gig %>
+<div class="separation">
+
+</div>
+<div id="section_parent">
+  <h3>Jale</h3>
+  <section>
+    <%= render 'form', gig: @gig %>
+  </section>
+  <h3>Galería</h3>
+  <section>
+    <%= render 'galleries/form', gig: @gig %>
+  </section>
+
+  <h3>Paquetes</h3>
+  <section>
+      <%= render 'packages/form', package: (@gig.gig_packages.any?)? @gig.gig_packages : @new_packages %>
+  </section>
+</div>
