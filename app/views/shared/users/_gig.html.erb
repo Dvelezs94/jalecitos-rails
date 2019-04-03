@@ -1,5 +1,5 @@
 <div class="gig-profile col-xl-4 col-lg-4">
-  <%= link_to user_gig_path(gig.user.slug, gig.slug) do %>
+  <%= link_to gig_path(gig.slug) do %>
   <div class="gig-query-content" style="display:flex;flex-wrap:wrap;">
     <div class="col-xl-12 col-lg-12 col-md-4 col-sm-4 col-5 padingminus1" style="padding: 0;">
         <%= image_tag( image_display_helper(gig.images[0]), class: "gig-image", lazy: true) %>

@@ -24,39 +24,40 @@ $(document).on('turbolinks:load', function() {
 function displayTab() {
   //display the tab
   var hidden_pack = $(".pack-names a.nav-item:hidden");
-  hidden_pack[0].style.display = "block";
+  hidden_pack.first().removeClass("hidden")
   hidden_pack[0].click();
+  pack_num = hidden_pack[0].getAttribute("href");
   if (hidden_pack.length == 1) {
-    $("a.pack-tab-displayer")[0].style.display = "none";
+    $("a.pack-tab-displayer").first().addClass("hidden");
   }
   //hide other trash icons
   displayTrash();
 }
 function displayTrash() {
-  var displayed_navs = $(".package-nav:visible").length - 1;
-  for (i = 0; i < $(".erase-all").length; i++) {
-    if (i == displayed_navs) {
-      $("a.erase-all")[i].style.display = "block";
+  var displayed_navs = $(".package-nav").length - $(".package-nav.hidden").length - 1;
+  trashes = $(".erase-all");
+  $.each(trashes, function( index, trash ) {
+    if (index == displayed_navs) {
+      $(trash).removeClass("hidden");
     } else {
-      $("a.erase-all")[i].style.display = "none";
+      $(trash).addClass("hidden");
     }
-  }
+  });
+
 }
 
 function deleteFormContent(formNumber) {
   if (formNumber > 0) {
     //hide the nav link
-    $(".pack-names a.nav-item")[formNumber].style.display = "none";
+    $($(".pack-names a.nav-item")[formNumber]).addClass("hidden");
     $(".pack-names a.nav-item")[formNumber - 1].click();
     //show the trash icon of earlier form
-    $("a.erase-all")[formNumber - 1].style.display = "block";
-
+    $($("a.erase-all")[formNumber - 1]).removeClass("hidden");
   }
-  $("a.pack-tab-displayer")[0].style.display = "block";
+  $("a.pack-tab-displayer").first().removeClass("hidden");
   $(".name-" + formNumber)[0].value = "";
   $(".name-" + formNumber).keyup();
   $(".description-" + formNumber)[0].value = "";
   $(".price-input-" + formNumber)[0].value = "";
   $("#price-calc-" + formNumber).html("-");
-  $("#base-price-" + formNumber).val("");
 }

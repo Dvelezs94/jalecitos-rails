@@ -11,7 +11,7 @@ module InitProfessions
      "Marinero", "Mecánico", "Meteorólogo", "Minero", "Modelo", "Modista", "Monje", "Médico", "Niñera", "Obrero", "Oficinista", "Panadero", "Pastelero, repostero",
      "Payaso", "Peluquero", "Periodista", "Persona de limpieza", "Pescador", "Pintor", "Plomero", "Policía", "Político", "Portero, conserje", "Profesor",
      "Programador", "Psicólogo", "Psiquiatra", "Químico, farmaceútico", "Recepcionista", "Secretario", "Socorrista", "Taxista", "Telefonista",
-     "Trabajador social", "Vendedor", "Veterinario", "Vidente","Zapatero", "Deportista"
+     "Trabajador social", "Vendedor", "Veterinario", "Vidente","Zapatero", "Deportista", "Influencer", "Transportista"
     ]
   end
 end

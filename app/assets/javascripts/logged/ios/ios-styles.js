@@ -12,6 +12,10 @@ $(document).on('turbolinks:load', function() {
       $(".pagar-area-for-tablet-mobile").css("padding-bottom", "env(safe-area-inset-bottom)");
     }
 
+    if ($(".right-bottom-chat-write").length > 0) {
+      $(".right-bottom-chat-write").css("padding-bottom", "env(safe-area-inset-bottom)");
+    }
+
     // fix messages when ios keyboard is up
     if ($("input").length > 0) {
       $('input').on("blur",function (e) {
