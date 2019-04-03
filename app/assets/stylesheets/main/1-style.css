@@ -105,7 +105,6 @@ select,
 input.text,
 input[type="text"],
 input[type="button"],
-input[type="submit"],
 .input-checkbox {
 -webkit-appearance: none;
 border-radius: 0;

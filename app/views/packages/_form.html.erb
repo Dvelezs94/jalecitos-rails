@@ -8,8 +8,6 @@
         <a class="nav-item nav-link package-nav <%= "hidden" if params[:action] == 'new' || @gig.gig_packages.none? || @gig.gig_packages[1].name == "" %>" id="pack-tab-1" data-toggle="tab" href="#package-1" role="tab" aria-selected="false">Éstandar</a>
         <a class="nav-item nav-link package-nav <%= "hidden" if params[:action] == 'new' || @gig.gig_packages.none? || @gig.gig_packages[2].name == "" %>" id="pack-tab-2" data-toggle="tab" href="#package-2" role="tab" aria-selected="false">Premium</a>
         <a href="#" class="pack-tab-displayer <%= "hidden" if params[:action] == 'edit' && (@gig.gig_packages.any? && @gig.gig_packages[2].name != '') %>"><%= icon("fas", "plus") %></a>
-        <%= puts "x"*500 %>
-        <%= puts params[:action] == 'edit' && (@gig.gig_packages.none? || @gig.gig_packages[2].name != '') %>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
