@@ -38,7 +38,6 @@ deploy:
     - sh ecs-deploy.sh
   only:
     - master
-    - development
     - staging
   tags:
     - docker
