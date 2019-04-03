@@ -27,7 +27,7 @@
   pointer-events: none;
   text-decoration: none;
 }
-.form_box.post_form_col {
+.actions.clearfix {
   margin-bottom: 5vh;
 }
 
