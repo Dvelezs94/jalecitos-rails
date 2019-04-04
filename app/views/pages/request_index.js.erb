@@ -1,8 +1,0 @@
-$(".paginated-elements").append('<%= j render(@requests) %>');
-
-<% if @requests.next_page %>
-  $('.pag-and-load').replaceWith('<%= j paginate(@requests) %>');
-<% else %>
-  $('.pag-and-load').remove();
-<% end %>
-<% sleep 1 %>

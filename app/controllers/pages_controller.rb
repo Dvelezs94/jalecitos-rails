@@ -14,12 +14,6 @@ class PagesController < ApplicationController
     end
   end
 
-
-
-  def request_index
-    @requests = Request.includes(:user).published.order(created_at: :desc).page(params[:page])
-  end
-
   def finance
     if params[:purchases]
       get_purchases(true)

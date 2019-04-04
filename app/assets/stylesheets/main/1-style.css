@@ -104,6 +104,7 @@ textarea,
 select,
 input.text,
 input[type="text"],
+input[type="search"],
 input[type="button"],
 .input-checkbox {
 -webkit-appearance: none;
@@ -2809,7 +2810,7 @@ div.form {
   height: 40px;
   margin: auto 0;
   background: #fff;
-  padding: 8px 19px;
+  padding: 8px 10px 8px 19px;
   border-radius: 3px;
   width: 300px;
   position: relative;
@@ -2974,7 +2975,7 @@ div.form {
 
 .mobile-query {
   width: 100%;
-  padding: 10px 45px;
+  padding: 10px 10px 10px 45px;
   border: none;
   border-radius: 4px;
   color: #39C27B;
