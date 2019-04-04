@@ -5,12 +5,17 @@
     min-width: 1200px;
   }
 
+  .img-show {
+    max-height: 534px;
+    object-fit: cover;
+  }
+
   .gig-profile {
     margin: 8px 0px;
   }
 
   .gig-query .gig-image, .gig-profile .gig-image {
-    max-height: 26vh;
+    max-height: 180px;
   }
 
   .gig-query .hearted1,
@@ -132,16 +137,16 @@
     font-size: 21px;
   }
   .img-show {
-    max-height: 32vh;
+    max-height: 427px;
     object-fit: cover;
   }
   .page3single-slidersd .singleslidepd img {
-      max-height: 11vh;
+      max-height: 145px;
       object-fit: cover;
   }
 
   .gig-query .gig-image, .gig-profile .gig-image {
-    max-height: 20vh;
+    max-height: 140px;
   }
   .gig-profile {
     margin: 8px 0px;
@@ -408,14 +413,14 @@
     right: 10px;
   }
   .img-show {
-    max-height: 40vh;
+    max-height: 279px;
   }
   .page3single-slidersd .singleslidepd img {
-      max-height: 21vh;
+      max-height: 145px;
       object-fit: cover;
   }
   .gig-query .gig-image, .gig-profile .gig-image {
-    max-height: 22vh;
+    max-height: 154px;
   }
 
   .catagorisingle-slide i {
@@ -1193,14 +1198,14 @@
     display: none;
   }
   .gig-query .gig-image, .gig-profile .gig-image {
-    max-height: 19vh;
+    max-height: 129px;
   }
   .img-show {
-    max-height: 36vh;
+    max-height: 213px;
     object-fit: cover;
   }
   .page3single-slidersd .singleslidepd img {
-      max-height: 16vh;
+      max-height: 90px;
       object-fit: cover;
   }
 
