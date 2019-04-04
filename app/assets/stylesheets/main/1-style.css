@@ -1549,6 +1549,10 @@ p.verified {
   position: relative;
 }
 
+.page3single-slidersd .singleslidepd img {
+  max-height: 16vh;
+}
+
 .doopli button {
   cursor: pointer;
   border: none;
@@ -1856,10 +1860,6 @@ p.gig-title {
 
 .califico-about.nulla {
   display: none;
-}
-
-.singleslidepd {
-  position: relative;
 }
 
 .hearted1 i {
