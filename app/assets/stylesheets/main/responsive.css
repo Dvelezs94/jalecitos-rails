@@ -1197,17 +1197,6 @@
   #main-logo {
     display: none;
   }
-  .gig-query .gig-image, .gig-profile .gig-image {
-    max-height: 129px;
-  }
-  .img-show {
-    max-height: 213px;
-    object-fit: cover;
-  }
-  .page3single-slidersd .singleslidepd img {
-      max-height: 90px;
-      object-fit: cover;
-  }
 
   .app-download-div img{
     width: 143px;
@@ -2160,6 +2149,17 @@
     top: 70px;
     right: 10px;
   }
+  .gig-query .gig-image, .gig-profile .gig-image {
+    max-height: 129px;
+  }
+  .img-show {
+    max-height: 213px;
+    object-fit: cover;
+  }
+  .page3single-slidersd .singleslidepd img {
+      max-height: 90px;
+      object-fit: cover;
+  }
 }
 
 @media only screen and (min-width: 351px) and (max-width: 480px) {
@@ -2167,5 +2167,30 @@
   .gig-req-carousel .hearted1 {
     top: 90px;
     right: 10px;
+  }
+  .gig-query .gig-image, .gig-profile .gig-image {
+    max-height: 123px;
+  }
+  .img-show {
+    max-height: 213px;
+    object-fit: cover;
+  }
+  .page3single-slidersd .singleslidepd img {
+      max-height: 137px;
+      object-fit: cover;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+  .gig-query .gig-image, .gig-profile .gig-image {
+    max-height: 134px;
+  }
+  .img-show {
+    max-height: 350px;
+    object-fit: cover;
+  }
+  .page3single-slidersd .singleslidepd img {
+      max-height: 155px;
+      object-fit: cover;
   }
 }
