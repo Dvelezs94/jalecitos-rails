@@ -9,6 +9,7 @@
     width: 190px !important;
     height: 190px !important;
     border-radius: 0px !important;
+    object-fit: cover;
 }
 
 .empty-state {
