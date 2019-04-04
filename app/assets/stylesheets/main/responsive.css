@@ -133,9 +133,11 @@
   }
   .img-show {
     max-height: 32vh;
+    object-fit: cover;
   }
   .page3single-slidersd .singleslidepd img {
       max-height: 11vh;
+      object-fit: cover;
   }
 
   .gig-query .gig-image, .gig-profile .gig-image {
@@ -410,6 +412,7 @@
   }
   .page3single-slidersd .singleslidepd img {
       max-height: 21vh;
+      object-fit: cover;
   }
   .gig-query .gig-image, .gig-profile .gig-image {
     max-height: 22vh;
@@ -1194,9 +1197,11 @@
   }
   .img-show {
     max-height: 36vh;
+    object-fit: cover;
   }
   .page3single-slidersd .singleslidepd img {
       max-height: 16vh;
+      object-fit: cover;
   }
 
   .app-download-div img{
