@@ -4,7 +4,10 @@ module GetGig
     @related_gigs = Gig.search("*",
        includes: [:user, :related_pack,
           :likes, city: [state: :country]],
-           where: { category_id: @gig.category_id, status: "published", _id: { not: @gig.id }, city_id: @gig.city_id },
+           where: { category_id: @gig.category_id, status: "published",
+            _id: { not: @gig.id },
+            _or: [{city_id: @gig.city_id}, {city_id: nil}]
+           },
             page: params[:related_gigs], per_page: 10, execute: bool)
   end
 

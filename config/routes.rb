@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       get :orders
     end
   end
-  
+
   resources :gigs, except: :index do
     resource :reports, only: [:create], as: "report"
     member do
@@ -66,7 +66,7 @@ Rails.application.routes.draw do
      resources :billing_profiles, only: [:create, :destroy]
    end
 
-   resources :requests, except: :index do
+   resources :requests, except: [:index] do
      resources :offers, except: [:index, :show] do
        member do
          get :hire
@@ -121,7 +121,6 @@ Rails.application.routes.draw do
   get 'mobile_sign_in', to: 'mobiles#log_in'
   get 'mobile_sign_up', to: 'mobiles#register'
   get 'configuration', to: 'users#configuration'
-  get 'requests', to: 'pages#request_index'
   get 'wizard', to: 'pages#wizard'
   get 'finance', to: 'pages#finance'
   get 'disputes', to: 'disputes#index'

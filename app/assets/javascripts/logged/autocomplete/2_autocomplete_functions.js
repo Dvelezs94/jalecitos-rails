@@ -10,20 +10,22 @@ $(document).on('turbolinks:load', function() {
 function autocom_loc_func(id) {
   //remove info on click
   $(id).on("focus", function(e) {
+    var city_id = get_city_input(e.target);
     window.location_val = $(this).val();
-    window.city_val = $(e.target).closest("form").find(".city").val()
+    window.city_val = city_id.val();
     $(this).val("");
   });
 
   //if its search autocomplete, needs some filter behaviours
   if (id == "#search_autocomplete") {
     $(id).on("keydown", function(e) {
+      var city_id = get_city_input(e.target);
       //if value of city is same...
-      if (e.keyCode == 13 && $(e.target).closest("form").find(".city").val() == window.city_val) {
+      if (e.keyCode == 13 && city_id.val() == window.city_val) {
         event.preventDefault(); // prevent submitting form if user clicks enter, we will validate that
         //and if location is empty, user wants to search in all mexico
         if ($(this).val() == "") {
-          $(e.target).closest("form").find(".city").val("");
+          city_id.val("");
           $(e.target).closest("form").submit();
         }
       }
@@ -31,8 +33,9 @@ function autocom_loc_func(id) {
   }
 
   $(id).on("keydown", function(e) {
+    var city_id = get_city_input(e.target);
     //erase value of location if something random is typped
-    if (e.keyCode == 13 && $(e.target).closest("form").find(".city").val() == window.city_val && window.location_val != $(this).val()) {
+    if (e.keyCode == 13 && city_id.val() == window.city_val && window.location_val != $(this).val()) {
       alert("Debes elegir alguna de las opciones proporcionadas");
       $(this).val("");
     }
@@ -40,10 +43,14 @@ function autocom_loc_func(id) {
   });
   if (id == "#form_autocomplete") {
     $(id).blur(function(e) {
-      //if id is same, retype location
-      if ($(e.target).closest("form").find(".city").val() == window.city_val) {
-        $(this).val(window.location_val);
-      }
+      var city_id = get_city_input(e.target);
+      //if id is same...
+      if (city_id.val() == window.city_val) {
+        //and value isnt empty, retype location
+        if ($(this).val() != "") {
+          $(this).val(window.location_val);
+        }
+       }
     });
   } else {
     //retype the location if nothing is set
@@ -51,4 +58,8 @@ function autocom_loc_func(id) {
       $(this).val(window.location_val);
     });
   }
+}
+
+function get_city_input(loc_input) {
+  return $(loc_input).closest("form").find(".city");
 }
