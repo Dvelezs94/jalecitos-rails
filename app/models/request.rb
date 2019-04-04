@@ -31,7 +31,7 @@ class Request < ApplicationRecord
   #Associations
   belongs_to :user
   belongs_to :category
-  belongs_to :city
+  belongs_to :city, optional: true
   has_many :offers, dependent: :destroy
   belongs_to :employee, class_name: "User", optional: true
   #Validations
