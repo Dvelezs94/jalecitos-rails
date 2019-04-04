@@ -2536,6 +2536,7 @@ p.gig-score-times {
   p.fof {
     font-weight: 700;
     font-size: 14px;
+    min-height: 21px;
   }
   p.jkl {
     color: #000;
@@ -3111,4 +3112,8 @@ div.form {
 .main_container {
   padding-top: 7vh;
   min-height: 99vh;
+}
+
+.search_results {
+  margin-top: 110px;
 }
