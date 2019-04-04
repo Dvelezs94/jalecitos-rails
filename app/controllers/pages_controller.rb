@@ -12,12 +12,7 @@ class PagesController < ApplicationController
     else
       home_get_all
     end
-  end
-
-
-
-  def request_index
-    @requests = Request.includes(:user).published.order(created_at: :desc).page(params[:page])
+    update_push_subscription
   end
 
   def finance
@@ -110,6 +105,10 @@ class PagesController < ApplicationController
     (user_signed_in? && params[:review] == "true" && request.format.html?)? true : false
   end
 
-
+  def update_push_subscription
+    if cookies[:FcmToken]
+      PushSubscription.create(user: current_user, auth_key: cookies[:FcmToken])
+    end
+  end
 
 end

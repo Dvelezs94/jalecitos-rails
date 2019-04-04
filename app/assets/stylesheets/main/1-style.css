@@ -104,6 +104,7 @@ textarea,
 select,
 input.text,
 input[type="text"],
+input[type="search"],
 input[type="button"],
 .input-checkbox {
 -webkit-appearance: none;
@@ -1531,7 +1532,7 @@ p.gig-price {
 
 .gig-req-carousel .hearted1 {
   position: absolute;
-  top: 34%;
+  top: 120px;
   right: 10px;
 }
 p.verified {
@@ -1550,7 +1551,7 @@ p.verified {
 }
 
 .page3single-slidersd .singleslidepd img {
-  max-height: 16vh;
+  max-height: 145px;
 }
 
 .doopli button {
@@ -2446,6 +2447,7 @@ p.gig-score-times {
   width: 72px;
   height: 72px;
   border-radius: 50%;
+  object-fit: cover;
 }
 .rating-score {
   color: #ffc107;
@@ -2809,7 +2811,7 @@ div.form {
   height: 40px;
   margin: auto 0;
   background: #fff;
-  padding: 8px 19px;
+  padding: 8px 10px 8px 19px;
   border-radius: 3px;
   width: 300px;
   position: relative;
@@ -2974,7 +2976,7 @@ div.form {
 
 .mobile-query {
   width: 100%;
-  padding: 10px 45px;
+  padding: 10px 10px 10px 45px;
   border: none;
   border-radius: 4px;
   color: #39C27B;

@@ -8,11 +8,11 @@ module SearchFunctions
 
   def user_where_filter
     if params[:category_id] != "" && params[:city_id] != ""
-      {status: "published", category_id: params[:category_id], city_id: params[:city_id]}
+      {status: "published", category_id: params[:category_id], _or: [{city_id: params[:city_id]}, {city_id: nil}]}
     elsif params[:category_id] != ""
       {status: "published", category_id: params[:category_id]}
     elsif  params[:city_id] != ""
-      {status: "published", city_id: params[:city_id]}
+      {status: "published", _or: [{city_id: params[:city_id]}, {city_id: nil}]}
     else
       {status: "published"}
     end
@@ -23,7 +23,7 @@ module SearchFunctions
       begin
         loc = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{params[:lat]},#{params[:lon]}"
         city_id = get_city_id_in_db(loc.city, loc.state_name, "MX")
-        {status: "published", city_id: city_id}
+        {status: "published", _or: [{city_id: city_id}, {city_id: nil}]}
       rescue
         {status: "published"}
       end
