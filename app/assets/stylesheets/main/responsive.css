@@ -1,8 +1,13 @@
 /* XL Device :1200px. */
 @media (min-width: 1200px) {
 
-  .container {
+  .container { /*if this is removed, profile image of menu in computer will be wrong*/
     min-width: 1200px;
+  }
+
+  .img-show {
+    max-height: 534px;
+    object-fit: cover;
   }
 
   .gig-profile {
@@ -10,7 +15,7 @@
   }
 
   .gig-query .gig-image, .gig-profile .gig-image {
-    max-height: 26vh;
+    max-height: 180px;
   }
 
   .gig-query .hearted1,
@@ -132,16 +137,16 @@
     font-size: 21px;
   }
   .img-show {
-    max-height: 32vh;
+    max-height: 427px;
     object-fit: cover;
   }
   .page3single-slidersd .singleslidepd img {
-      max-height: 11vh;
+      max-height: 145px;
       object-fit: cover;
   }
 
   .gig-query .gig-image, .gig-profile .gig-image {
-    max-height: 20vh;
+    max-height: 140px;
   }
   .gig-profile {
     margin: 8px 0px;
@@ -408,14 +413,14 @@
     right: 10px;
   }
   .img-show {
-    max-height: 40vh;
+    max-height: 279px;
   }
   .page3single-slidersd .singleslidepd img {
-      max-height: 21vh;
+      max-height: 145px;
       object-fit: cover;
   }
   .gig-query .gig-image, .gig-profile .gig-image {
-    max-height: 22vh;
+    max-height: 154px;
   }
 
   .catagorisingle-slide i {
@@ -1191,17 +1196,6 @@
 @media only screen and (min-width: 320px) and (max-width: 767px) {
   #main-logo {
     display: none;
-  }
-  .gig-query .gig-image, .gig-profile .gig-image {
-    max-height: 19vh;
-  }
-  .img-show {
-    max-height: 36vh;
-    object-fit: cover;
-  }
-  .page3single-slidersd .singleslidepd img {
-      max-height: 16vh;
-      object-fit: cover;
   }
 
   .app-download-div img{
@@ -2152,15 +2146,66 @@
 @media only screen and (min-width: 320px) and (max-width: 350px) {
 
   .gig-req-carousel .hearted1 {
-    top: 28%;
+    top: 70px;
     right: 10px;
+  }
+  .gig-query .gig-image, .gig-profile .gig-image {
+    max-height: 129px;
+  }
+  .img-show {
+    max-height: 213px;
+    object-fit: cover;
+  }
+  .page3single-slidersd .singleslidepd img {
+      max-height: 90px;
+      object-fit: cover;
   }
 }
 
 @media only screen and (min-width: 351px) and (max-width: 480px) {
 
   .gig-req-carousel .hearted1 {
-    top: 32%;
+    top: 90px;
     right: 10px;
+  }
+  .gig-query .gig-image, .gig-profile .gig-image {
+    max-height: 123px;
+  }
+  .img-show {
+    max-height: 213px;
+    object-fit: cover;
+  }
+  .page3single-slidersd .singleslidepd img {
+      max-height: 137px;
+      object-fit: cover;
+  }
+}
+
+@media only screen and (min-width: 351px) and (max-width: 400px) {
+  .gig-req-carousel .hearted1 {
+    top: 84px;
+    right: 10px;
+  }
+}
+
+@media only screen and (min-width: 401px) and (max-width: 480px) {
+  .gig-req-carousel .hearted1 {
+    top: 90px;
+    right: 10px;
+  }
+}
+
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+  .gig-query .gig-image, .gig-profile .gig-image {
+    max-height: 134px;
+  }
+  .img-show {
+    max-height: 350px;
+    object-fit: cover;
+  }
+  .page3single-slidersd .singleslidepd img {
+      max-height: 155px;
+      object-fit: cover;
   }
 }
