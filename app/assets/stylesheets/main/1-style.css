@@ -2367,6 +2367,7 @@ button:focus {
   border-radius: 50%;
   height: 176px;
   width: 176px;
+  object-fit: cover;
 }
 /*Sliders*/
 
@@ -2744,6 +2745,7 @@ h6.req_location {
   width: 40px;
   margin-top: -30px;
   border-radius: 50%;
+  object-fit: cover;
 }
 #profile_tabs {
   justify-content: space-between;
@@ -2857,6 +2859,7 @@ div.form {
   width: 100%;
   height: 100%;
   border-radius: 4px 4px 0 0 ;
+  object-fit: cover;
 }
 
 .gig-query .gig-query-content {
