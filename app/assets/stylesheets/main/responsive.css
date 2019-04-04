@@ -1,6 +1,10 @@
 /* XL Device :1200px. */
 @media (min-width: 1200px) {
 
+  .container { /*if this is removed, profile image of menu in computer will be wrong*/
+    min-width: 1200px;
+  }
+
   .gig-profile {
     margin: 8px 0px;
   }
