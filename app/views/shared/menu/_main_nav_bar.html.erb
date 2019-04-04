@@ -1,5 +1,5 @@
 <div id="main_menu">
-  <% if current_page?(user_mobile_search_path) || params[:device] == "mobile" %>
+  <% if current_page?(user_mobile_search_path) || is_mobile? %>
   <div class="tablet-mobile-top-ber">
     <%= form_with url: user_search_path(), method: :get ,:html => {class: "mobile-search-form"} , local: true do |f|%>
     <%= icon("fas", "search", onclick: "$(this).closest('form').find('input[type=submit]').click()", style: "cursor: pointer;") %>
@@ -12,7 +12,6 @@
       <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Todas las categorías",
       :selected => params[:category_id] }, class: 'form-control', id: "category-select",
       onchange: "$(this).closest('form').submit()") %>
-      <%= f.hidden_field :device, value: "mobile" %>
     </nav>
 
     <% end %>
