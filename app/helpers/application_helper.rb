@@ -1,6 +1,8 @@
 module ApplicationHelper
 
   def prof_or_loc model  #this function is used in home and queries
+     puts "X"*500
+     puts controller.controller_name
     profession = model.profession.present? ? model.profession : "Sin profesión"
     if controller.controller_name == "gigs" #if gig show carousel (user or guest)
       profession #related gigs are searched in same city

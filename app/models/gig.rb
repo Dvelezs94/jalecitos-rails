@@ -31,7 +31,7 @@ class Gig < ApplicationRecord
   friendly_id :name, use: :slugged
   #Associations
   belongs_to :user
-  belongs_to :city
+  belongs_to :city, optional: true
   #belongs_to :active_user, { where(:users => { status: "active" }) }, :class_name => "User"
   has_many :likes, dependent: :destroy
   belongs_to :category

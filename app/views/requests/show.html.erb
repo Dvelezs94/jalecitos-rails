@@ -16,7 +16,7 @@
                         <h3><%= @request.title %></h3>
                     </div>
                     <div class="Saltillo">
-                        <a href=""><%= @request.location %></a>
+                        <a><%= @request.location %></a>
                         <span>Publicado hace <%= distance_of_time_in_words(@request.created_at, Time.now) %></span>
                     </div>
                     <span class="show_req_budget">Presupuesto: <%= @request.budget %> MXN</span>

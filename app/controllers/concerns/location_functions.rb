@@ -3,7 +3,7 @@ module LocationFunctions
     if city
       "#{city.name}, #{city.state.name}, #{city.state.country.name}"
     elsif empty_if_nil == false
-      "Ciudad Indefinida"
+      "Cualquier lugar en México"
     else
       nil
     end

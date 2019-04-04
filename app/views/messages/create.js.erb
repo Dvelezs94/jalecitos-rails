@@ -1,3 +1,4 @@
-$("#new_message").children('input').val(''); //clear message field and the related_to (if there is any)
+$("#message_body").val(""); //clear message field
+$("#message_related_to_id").val(''); //clear the related_to (if there is any)
 updateConvURL("related_to", "sent") //when user send the related, change url because if he reloads he cant do it again
 $('#file-name')[0].innerText = ""
