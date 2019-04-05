@@ -16,7 +16,7 @@ class MobilesController < ApplicationController
 
   def verify_logged
     if user_signed_in?
-      redirect_to root_path(review: "true")
+      redirect_to root_path #default root path on mobile
     end
   end
 
