@@ -37,7 +37,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     elsif @user.persisted?
       log_in_and_remember(@user)
       #  the z is just to fix the fb issue that is appending #_=_ to the last url param
-      redirect_to root_path(notifications: "enable", review: true, z: "e")
+      redirect_to root_path(notifications: "enable", z: "e")
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
       redirect_to new_user_registration_url, notice: "Error al tratar de acceder"

@@ -35,4 +35,5 @@ function showLoading() {
   $(".main_container").addClass("hidden");
   $("#the_footer").addClass("hidden");
   $(".modal").css("display", "none"); // also hide modals
+  $("#notifications .toast__container").remove() //remove app notifications
 }

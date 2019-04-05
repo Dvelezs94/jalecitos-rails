@@ -120,7 +120,7 @@ module ApplicationHelper
        request_path(object.slug)
     when object.class ==  Offer || object.class ==  Package
       if notification.action == "ha finalizado" || notification.action == "Se ha finalizado"
-       finance_path(:table => notification.query_url, :review => true, :notification => notification.id)
+       finance_path(:table => notification.query_url, :notification => notification.id)
       else
        finance_path(:table => notification.query_url)
      end
