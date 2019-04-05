@@ -1558,6 +1558,8 @@ p.verified {
 
 .page3single-slidersd .singleslidepd img {
   max-height: 145px;
+  min-height: 145px;
+  object-fit: cover;
 }
 
 .doopli button {
