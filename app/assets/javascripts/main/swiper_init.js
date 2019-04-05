@@ -29,7 +29,7 @@ $(document).on('turbolinks:load', function() {
       freeMode: true,
       observer: true,
       autoplay: {
-        delay: 7000
+        delay: 3500
       },
       spaceBetween: 20,
       breakpointsInverse: true,
