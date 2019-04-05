@@ -9,7 +9,7 @@
           <p class="ticket-description"><%= response.message %></p>
           <% if response.image? %>
           <div class="col-lg-12" style="display:flex;flex-wrap:wrap;">
-              <div class="current_img img-thumbnail">
+              <div class="current_img img-thum">
                 <%= link_to image_tag(response.image.url, size: '50x50'), response.image.url, data: {lity: true}  %>
               </div>
           </div>
@@ -30,7 +30,7 @@
           <p class="ticket-description"><%= response.message %></p>
           <% if response.image? %>
           <div class="col-lg-12" style="display:flex;flex-wrap:wrap;">
-              <div class="current_img img-thumbnail">
+              <div class="current_img img-thum">
                 <%= link_to image_tag(response.image.url, size: '50x50'), response.image.url, data: {lity: true}  %>
               </div>
           </div>

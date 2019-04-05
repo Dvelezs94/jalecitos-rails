@@ -4,7 +4,7 @@ class GigUploader < CarrierWave::Uploader::Base
    include CarrierWave::MiniMagick
 
    #resize uploaded image
-   process resize_to_fill: [600, 400]
+   process resize_to_fit: [600, 400]
   # Choose what kind of storage to use for this uploader:
     storage :aws
 

@@ -3,8 +3,14 @@
   width: 70px;
   text-align: center;
 }
+#transition {
+  margin: 45vh auto 0;
+  width: 70px;
+  text-align: center;
+}
 
-.loading > div {
+.loading > div,
+#transition > div {
   width: 18px;
   height: 18px;
   background-color: #39c27b;
@@ -15,12 +21,14 @@
   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 }
 
-.loading .bounce1 {
+.loading .bounce1,
+#transition .bounce1 {
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
 
-.loading .bounce2 {
+.loading .bounce2,
+#transition .bounce2 {
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
