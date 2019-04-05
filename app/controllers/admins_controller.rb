@@ -22,7 +22,7 @@ class AdminsController < ApplicationController
   end
 
   def orders
-    @orders =  Order.order(:created_at).page(params[:order]).per(25)
+    @orders =  Order.order(created_at: :desc).page(params[:order]).per(25)
     set_paginator
   end
 

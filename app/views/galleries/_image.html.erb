@@ -1,4 +1,4 @@
-<div class="current_img img-thumbnail", style="position: relative;">
+<div class="current_img img-thum", style="position: relative;">
   <%= link_to image_tag(image.url, width: 250, class: "delete-image"),
       gallery_path(image.file.filename, gig_id: @gig.id),
       method: :delete, data: {confirm: "¿Estás seguro de borrar este elemento?"},
