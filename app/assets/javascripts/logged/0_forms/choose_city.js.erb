@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function() {
 
 function displayLocInput() {
   if ($('#chooseCity').prop('checked')) { //user choose city
-    $("#form_autocomplete").css("display", "block");
+    $(".form_autocomplete").removeClass("hidden");
     //set again the deleted city_id if existed
     if (window.city_val)
     {
@@ -13,7 +13,7 @@ function displayLocInput() {
     }
   }
   else { //user doesnt choose city
-    $("#form_autocomplete").css("display", "none");
+    $(".form_autocomplete").addClass("hidden");
     //i have to delete city_id
     window.city_val = $("#form_autocomplete_id").val();
     $("#form_autocomplete_id").val("");

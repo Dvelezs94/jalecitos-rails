@@ -12,10 +12,18 @@
 }
 
 /* XL Device :1200px. */
-@media (min-width: 1200px) and (max-width: 1449px) {
+@media (min-width: 1200px) {
 
 .chat-box-man {
 	margin-top: 27px;
+}
+
+.chat-single-box img {
+	width: 50px;
+	height: 50px;
+	box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.07);
+	object-fit: cover;
+	border-radius: 50%;
 }
 
 .mensajes-chat h2 {
@@ -27,9 +35,17 @@
 /* LG Device :992px. */
 @media (min-width: 992px) and (max-width: 1199px) {
 
-    .logo a img {
+.logo a img {
 	border-radius: 50%;
 	width: 45px;
+}
+
+.chat-single-box img {
+	width: 50px;
+	height: 50px;
+	box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.07);
+	object-fit: cover;
+	border-radius: 50%;
 }
 
 .logo {
@@ -71,6 +87,14 @@
 @media (min-width: 768px) and (max-width: 991px) {
 .notifarea {
 	width: 100%;
+}
+
+.chat-single-box img {
+	width: 50px;
+	height: 50px;
+	box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.07);
+	object-fit: cover;
+	border-radius: 50%;
 }
 
 .chat-box-man {
@@ -242,10 +266,6 @@
  .mensajes-chat {
 	margin-bottom: 28px;
 }
-.single-box-text p {
-	font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1800 - 320)));
-  color: var(--gray);
-}
 
 .single-box-text h4 {
 	margin: 0 0 4px;
@@ -257,10 +277,11 @@
 	height: 33px;
 	box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.07);
 	object-fit: cover;
+	border-radius: 50%;
 }
 
 .single-box-text {
-	margin-left: 48px;
+	margin-left: 20px;
 }
 
 
