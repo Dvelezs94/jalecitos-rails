@@ -28,6 +28,7 @@
     <%= google_tag_manager %>
     <%=hidden_field_tag :new_message, (flash.any?)? "true" : "false" %><%# useful for gritter behaviour (dont display notifications of cache) %>
     <%= render 'shared/menu/main_nav_bar' %>
+    <%= render "shared/transition/transition-icon" %>
     <div class="main_container">
       <%= notification_helper %>
       <% if  ! (current_page?(root_path) || current_page?(new_user_session_path)) || params[:query] %>

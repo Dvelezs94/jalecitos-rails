@@ -680,6 +680,7 @@ p.quam1 {
   visibility: visible;
   opacity: 1;
   top: 78px;
+  padding: 5px;
 }
 
 /*notification dropdown*/
@@ -3126,4 +3127,8 @@ div.form {
 .main_container {
   padding-top: 7vh;
   min-height: 99vh;
+}
+/*loading*/
+#transition {
+  margin: 45vh auto 0;
 }
