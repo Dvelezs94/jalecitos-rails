@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   include SetLayout
   include GetPages
   before_action :admin_redirect, only: :home
-  before_action :pending_review, only: [:home, :finance], :if => :signed_and_rev
+  before_action :pending_review, only: [:home], :if => :signed_and_rev
   layout :set_layout
   access user: :all, admin: [:home], all: [:work, :home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots, :sitemap]
   def home
@@ -74,7 +74,6 @@ class PagesController < ApplicationController
 
 
   def pending_review
-    puts "X"*500
     #if the review is specific... (when employer finishes work)
     if params[:identifier] && is_number?(params[:identifier])
       #find it and keep it in an array
