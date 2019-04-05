@@ -102,7 +102,9 @@ class PagesController < ApplicationController
 
   def signed_and_rev
     #format html helps to not query pending reviews when pagination triggers
-    (user_signed_in? && params[:review] == "true" && request.format.html?)? true : false
+    #params[:review] == "true" && request.format.html? OLD
+    #request.env["HTTP_TURBOLINKS_REFERRER"].present? tells me if turbolinks visit (no turbolink visit only log in and reload of home)
+    (user_signed_in? && request.env["HTTP_TURBOLINKS_REFERRER"].nil? && request.format.html?)? true : false
   end
 
   def update_push_subscription
