@@ -66,7 +66,7 @@
 
             <%= render 'shared_user/requests/forms/hints/city_hint.html.erb' %>
             <%= render "shared_user/forms/choose_city"%>
-            <%= form.text_field :location, class: 'required font-awesome styled', id: "form_autocomplete", size: 50, placeholder: '&#xf3c5; Busca tu ciudad...'.html_safe, value: (request.location(true) != nil)? request.location : current_user.location(true) %>
+            <%= form.text_field :location, class: 'required font-awesome styled form_autocomplete', id: "form_autocomplete", size: 50, placeholder: '&#xf3c5; Busca tu ciudad...'.html_safe, value: (request.location(true) != nil)? request.location : current_user.location(true) %>
             <%= form.hidden_field :city_id, class: "city", id: "form_autocomplete_id",
              value: (request.city_id != nil)? request.city_id : current_user.city_id %>
           </div>
