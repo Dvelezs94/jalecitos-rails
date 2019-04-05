@@ -42,8 +42,8 @@
       <%= notification_helper %>
       <div class="gap"></div>
       <%= yield %>
-      <% if params[:review] && @reviews.present? %>
-        <%= render partial: 'reviews/review', collection: [@reviews.first]%>
+      <% if @p_reviews.present? %>
+        <%= render partial: 'reviews/review', collection: [@p_reviews.first]%>
       <% end %>
     </div>
     <div class="plusarea">
