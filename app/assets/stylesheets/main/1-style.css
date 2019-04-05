@@ -680,6 +680,7 @@ p.quam1 {
   visibility: visible;
   opacity: 1;
   top: 78px;
+  padding: 5px;
 }
 
 /*notification dropdown*/
@@ -797,6 +798,11 @@ button:focus {
 
 p {
 
+}
+
+.mobile_search_bar {
+  background-color: #39C27B;
+  padding: 15px 0;
 }
 
 .contactars p {
@@ -1552,6 +1558,8 @@ p.verified {
 
 .page3single-slidersd .singleslidepd img {
   max-height: 145px;
+  min-height: 145px;
+  object-fit: cover;
 }
 
 .doopli button {
@@ -3092,6 +3100,7 @@ div.form {
 }
 .img-show {
   width: 100%;
+  object-fit: contain;
 }
 
 .space {
@@ -3116,6 +3125,15 @@ div.form {
   transition: top 0.5s;
   top: 0;
   z-index: 100;
+}
+
+.img-thum img{
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  max-width: 100%;
+  height: auto;
 }
 
 .main_container {
