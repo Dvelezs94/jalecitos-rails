@@ -580,7 +580,7 @@ div.error,
 .del-img-icon{
   visibility: hidden;
   position: absolute;
-  top: 28%;
+  top: -72%;
   right: 40%;
   cursor: pointer;
   color: black;
