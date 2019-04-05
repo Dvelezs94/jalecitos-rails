@@ -3,6 +3,9 @@ $(document).on('turbolinks:load', function() {
   $('form.confirm_leave').submit(function() {
     window.finished_form = true;
   });
+  // $('form.confirm_leave').on('change keyup paste', ':input', function() {
+  //   console.log("jaja");
+  // });
 });
 
 //alert for leaving page
