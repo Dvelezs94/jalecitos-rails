@@ -799,6 +799,11 @@ p {
 
 }
 
+.mobile_search_bar {
+  background-color: #39C27B;
+  padding: 15px 0;
+}
+
 .contactars p {
   color: #0067F4 !important;
   padding-top: 2px;

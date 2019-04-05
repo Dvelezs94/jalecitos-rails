@@ -34,8 +34,4 @@ class ApplicationController < ActionController::Base
     true if Float(string) rescue false
   end
 
-  def is_mobile?
-    cookies.permanent.signed[:mb].present?
-  end
-
 end

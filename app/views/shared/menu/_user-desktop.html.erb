@@ -1,0 +1,34 @@
+<div class="header-to-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 col-md-7">
+        <div class="header-left-content">
+          <div class="logo">
+            <%= link_to image_tag('https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/favicon.png'), root_path %>
+          </div>
+          <div class="input-area">
+            <%= form_with url: user_search_path, method: :get ,:html => {class: "search-form"}, id: "search-form" , local: true do |f|%>
+            <div class="form">
+              <%= icon("fas", "search", onclick: "$(this).closest('form').find('input[type=submit]').click()", style: "cursor: pointer;") %>
+              <%= f.search_field :query, value: params[:query], class: " desktop-query", placeholder: "Busca algo" %>
+              <%= f.submit "continuar", style: "visibility:hidden; position: absolute;" %>
+            </div>
+            <div class="button-area">
+              <nav class="filters navbar navbar-expand-lg navbar-light bg-light">
+                <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50,
+                placeholder: "Ubicación", value: (params[:location].nil?)? current_user.location(true) : params[:location] %>
+                <%= f.hidden_field :city_id, class: "city", value: (params[:city_id].nil?)? current_user.city_id : params[:city_id] %>
+                <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría",
+                :selected => params[:category_id] }, class: 'form-control', id: "category-select",
+                onchange: "$(this).closest('form').submit()") %>
+              </nav>
+            </div>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+      <%= nav_links_helper %>
+    </div>
+  </div>
+</div>
