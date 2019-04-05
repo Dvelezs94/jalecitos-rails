@@ -1,4 +1,4 @@
-<%= form_with(model: request, url: request_form_url_helper,method: form_method_helper, :html => { :class=> "current_form" }, local: true) do |form| %>
+<%= form_with(model: request, url: request_form_url_helper,method: form_method_helper, :html => { :class=> "current_form confirm_leave" }, local: true) do |form| %>
 <% if request.errors.any? %>
   <%request.errors.full_messages.each do |error| %>
     <%= notification_generator_helper error, :error %>

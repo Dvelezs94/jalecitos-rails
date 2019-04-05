@@ -1,7 +1,8 @@
-<div class="current_img img-thumbnail", style="position: relative;">
-  <%= link_to image_tag(image.url, width: 250, class: "delete-image"),
-      gallery_path(image.file.filename, gig_id: @gig.id),
+<div class="current_img img-thum">
+  <%= link_to gallery_path(image.file.filename, gig_id: @gig.id),
       method: :delete, data: {confirm: "¿Estás seguro de borrar este elemento?"},
-      remote: true%>
-      <%= icon("fas","trash", class: "del-img-icon fa-4x", onclick: "$(this).closest('div.current_img').find('img.delete-image').click();") %>
+      remote: true, style: "position: relative;" do %>
+      <%= image_tag(image.url, width: 250, class: "delete-image") %>
+      <%= icon("fas","trash", class: "del-img-icon fa-4x", onclick: "$(this).closest('img.delete-image').click();") %>
+      <% end %>
 </div>
