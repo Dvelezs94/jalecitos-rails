@@ -23,6 +23,7 @@
 	height: 50px;
 	box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.07);
 	object-fit: cover;
+	border-radius: 50%;
 }
 
 .mensajes-chat h2 {
@@ -44,6 +45,7 @@
 	height: 50px;
 	box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.07);
 	object-fit: cover;
+	border-radius: 50%;
 }
 
 .logo {
@@ -92,6 +94,7 @@
 	height: 50px;
 	box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.07);
 	object-fit: cover;
+	border-radius: 50%;
 }
 
 .chat-box-man {
@@ -274,6 +277,7 @@
 	height: 33px;
 	box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.07);
 	object-fit: cover;
+	border-radius: 50%;
 }
 
 .single-box-text {
