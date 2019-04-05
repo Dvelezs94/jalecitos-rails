@@ -24,7 +24,7 @@ class GigUploader < CarrierWave::Uploader::Base
     "#{original_filename}" if original_filename
   end
   def extension_whitelist
-    %w(jpg jpeg png)
+    %w(jpg jpeg png gif)
   end
 
   # Permissions for file upload
