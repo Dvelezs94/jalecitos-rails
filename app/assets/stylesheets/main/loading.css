@@ -3,14 +3,8 @@
   width: 70px;
   text-align: center;
 }
-#transition {
-  margin: 45vh auto 0;
-  width: 70px;
-  text-align: center;
-}
 
-.loading > div,
-#transition > div {
+.loading > div {
   width: 18px;
   height: 18px;
   background-color: #39c27b;
@@ -21,14 +15,12 @@
   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 }
 
-.loading .bounce1,
-#transition .bounce1 {
+.loading .bounce1 {
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
 
-.loading .bounce2,
-#transition .bounce2 {
+.loading .bounce2 {
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
@@ -46,4 +38,52 @@
     -webkit-transform: scale(1.0);
     transform: scale(1.0);
   }
+}
+/*transition*/
+
+#transition {
+  margin: 35vh auto 0;
+  text-align: center;
+}
+@keyframes lds-dual-ring {
+ 0% {
+   -webkit-transform: rotate(0);
+   transform: rotate(0);
+ }
+ 100% {
+   -webkit-transform: rotate(360deg);
+   transform: rotate(360deg);
+ }
+}
+@-webkit-keyframes lds-dual-ring {
+ 0% {
+   -webkit-transform: rotate(0);
+   transform: rotate(0);
+ }
+ 100% {
+   -webkit-transform: rotate(360deg);
+   transform: rotate(360deg);
+ }
+}
+.lds-dual-ring {
+ position: relative;
+ margin: 0 auto;
+}
+.lds-dual-ring div {
+ position: absolute;
+ width: 48px;
+ height: 48px;
+ top: 76px;
+ left: 76px;
+ border-radius: 50%;
+ border: 6px solid #000;
+ border-color: #c7c7c7 transparent #c7c7c7 transparent;
+ -webkit-animation: lds-dual-ring 3s linear infinite;
+ animation: lds-dual-ring 3s linear infinite;
+}
+.lds-dual-ring {
+ width: 200px !important;
+ height: 200px !important;
+ -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+ transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
 }
