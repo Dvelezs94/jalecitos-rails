@@ -121,7 +121,7 @@ class OrdersController < ApplicationController
         flash[:error] = "Hubo un error en tu solicitud"
       end
     end
-    redirect_to finance_path(:table => "purchases", :identifier => @employer_review.id)
+    redirect_to root_path(:identifier => @employer_review.id)
   end
 
 
