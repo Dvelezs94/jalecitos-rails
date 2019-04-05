@@ -1,12 +1,12 @@
 <% model = (params[:controller] == "requests")? :request : :gig %>
 <% object = (params[:controller] == "requests")? @request : @gig %>
 <div>
-  <div class="custom-control custom-radio">
+  <div class="custom-control custom-radio margin-10px-0">
     <input type="radio" class="custom-control-input choose_or_any" id="anyCity" name="chooseoranycity"
     <%= "checked" if ( params[:action] == "create" && params[model][:city_id] == "") || ( params[:action] == "update" && object.city_id.nil? ) || (params[:action] == "edit" && object.city_id.nil?) || (params[:action] == "new" && !current_user.location(true)) %>>
     <label class="custom-control-label" for="anyCity">Cualquier ciudad de México</label>
   </div>
-  <div class="custom-control custom-radio">
+  <div class="custom-control custom-radio margin-10px-0">
     <input type="radio" class="custom-control-input choose_or_any" id="chooseCity" name="chooseoranycity"
     <%= "checked" if ( params[:action] == "create" && params[model][:city_id] != "" )|| ( params[:action] == "update" && object.city_id.present? ) || ((params[:action] == "edit" && object.city_id.present?)) || (params[:action] == "new"  && current_user.location(true)) %> >
     <label class="custom-control-label" for="chooseCity">Elegir ciudad</label>
