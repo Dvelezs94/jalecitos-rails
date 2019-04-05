@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     else
       home_get_all
     end
-    update_push_subscription
+    update_push_subscription if user_signed_in?
   end
 
   def finance
