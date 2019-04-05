@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function() {
   //detecting changes on each form
   $(document).on('change keyup paste', ':input', function() {
     window.changed = true;
-  })
+  });
   var form_cont = $("#section_parent");
   form_cont.steps({
     headerTag: "h3",
