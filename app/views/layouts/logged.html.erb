@@ -33,12 +33,11 @@
     <%= ios_pwa_tags %>
 
   </head>
-
-
   <body id="page-top">
     <%= google_tag_manager %>
-    <%=hidden_field_tag :new_message, (flash.any?)? "true" : "false" %><%# useful for gritter behaviour (dont display notifications of cache) %> 
+    <%=hidden_field_tag :new_message, (flash.any?)? "true" : "false" %><%# useful for gritter behaviour (dont display notifications of cache) %>
     <%= render 'shared/menu/main_nav_bar' %>
+    <%= render "shared/transition/transition-icon" %>
     <div class="main_container">
       <%= notification_helper %>
       <div class="gap"></div>
