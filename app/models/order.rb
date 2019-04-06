@@ -2,17 +2,18 @@ class Order < ApplicationRecord
   include ActiveModel::Dirty
   include OpenpayHelper
   include OrderFunctions
-  #search
-  searchkick language: "spanish"
-
-  def search_data
-    {
-      employer_id: employer_id,
-      employee_id: employee_id,
-      status: status,
-      updated_at: updated_at
-     }
-  end
+  # #search
+  #callbacks false make sync off so records are not added automatically
+   searchkick language: "spanish",callbacks: false
+  #
+  # def search_data
+  #   {
+  #     employer_id: employer_id,
+  #     employee_id: employee_id,
+  #     status: status,
+  #     updated_at: updated_at
+  #    }
+  # end
   #Actions
   after_create :set_access_uuid
   belongs_to :employer, foreign_key: :employer_id, class_name: "User"

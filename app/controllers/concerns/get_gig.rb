@@ -11,12 +11,10 @@ module GetGig
             page: params[:related_gigs], per_page: 10, execute: bool)
   end
 
-  def get_reviews bool=false
+  def get_reviews
     #get the associated reviews that doesnt belong to gig owner
-    @reviews = Review.search("*",
-       includes: [:giver, :gig_rating],
-        where: { reviewable_id: @gig.id, reviewable_type: "Gig", receiver_id: @gig.user.id, status: "completed" },
-         order: [{ updated_at: { order: :desc, unmapped_type: :long}}],
-          page: params[:reviews], per_page: 5, execute: bool)
+    @reviews = Review.includes(:giver, :gig_rating).
+    where(reviewable_id: @gig.id, reviewable_type: "Gig", receiver_id: @gig.user.id, status: "completed").order(updated_at: :desc).
+    page(params[:reviews]).per(5)
   end
 end
