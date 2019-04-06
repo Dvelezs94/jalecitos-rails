@@ -5,6 +5,7 @@ class FinishOrderWorker
   include OrderFunctions
   include OpenpayHelper
   include ApplicationHelper
+  include MoneyHelper
 
   def perform(order_id)
     @order = Order.find(order_id)
