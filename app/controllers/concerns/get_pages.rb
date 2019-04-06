@@ -7,8 +7,8 @@ module GetPages
       get_recent_requests
       get_recent_gigs
       get_verified_gigs
+      Searchkick.multi_search([@popular_gigs, @recent_requests, @verified_gigs, @recent_gigs])
       get_liked_gigs
-      Searchkick.multi_search([@popular_gigs, @recent_requests, @verified_gigs, @liked_gigs, @recent_gigs])
       get_liked_gigs_items
     else
       get_recent_gigs
@@ -71,31 +71,23 @@ module GetPages
           page: params[:verified_gigs], per_page: 15, execute: bool)
   end
 
-  def get_liked_gigs bool=false
-    @liked_gigs = Like.search( "*",
-       where: {user_id: current_user.id},
-        order: [{ created_at: { order: :desc, unmapped_type: :long}}],
-         page: params[:liked_gigs], per_page: 15, execute: bool)
+  def get_liked_gigs
+    @liked_gigs = Like.where(user_id: current_user.id).order(created_at: :desc).page(params[:liked_gigs]).per(15)
   end
 
   def get_liked_gigs_items
     @liked_gigs_items = Gig.includes(:gigs_packages, :user, :likes, city: [state: :country])
-    .where(id: @liked_gigs.results.pluck(:gig_id))
+    .where(id: @liked_gigs.pluck(:gig_id))
     .order(created_at: :desc)
   end
 
-  def get_purchases bool=false
-    @purchases = Order.search("*",
-       where: {employer_id: current_user.id},
-        order: [{ updated_at: { order: :desc, unmapped_type: :long}}],
-         per_page: 20, page: params[:purchases], execute: bool)
+  def get_purchases
+    @purchases = Order.where(employer_id: current_user.id).order(updated_at: :desc).page(params[:purchases]).per(20)
   end
 
-  def get_sales bool=false
-    @sales = Order.search("*",
-       where: {employee_id: current_user.id, status: {not: "denied"}},
-        order: [{ updated_at: { order: :desc, unmapped_type: :long}}],
-         per_page: 20, page: params[:sales], execute: bool)
+  def get_sales
+    @sales = Order.where(employee_id: current_user.id).where.not(status: "denied").
+    order(updated_at: :desc).page(params[:sales]).per(20)
   end
 
   def home_paginate
@@ -108,7 +100,7 @@ module GetPages
     elsif params[:recent_gigs]
       get_recent_gigs(true)
     elsif params[:liked_gigs]
-      get_liked_gigs(true)
+      get_liked_gigs
       get_liked_gigs_items
     end
   end

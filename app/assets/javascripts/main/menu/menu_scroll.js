@@ -11,6 +11,9 @@ $(document).on('turbolinks:load', function() {
           main_menu.style.top = "0";
         } else {
           main_menu.style.top = "-"+main_menu.offsetHeight+"px";
+          if ($(window).width() >= 992){ // if desktop and notifications is open, hide it
+            $(".belldropdownarea.notification-items").removeClass("activee");
+          }
         }
         prevScrollpos = currentScrollPos;
       }
