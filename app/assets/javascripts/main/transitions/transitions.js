@@ -2,7 +2,6 @@
 
 //at visit on link show loading and hide anything of content
 $(document).on('turbolinks:visit', function() {
-  console.log(event);
   showLoading();
 });
 

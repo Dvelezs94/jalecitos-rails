@@ -15,7 +15,7 @@ class FinishOrderWorker
           init_openpay("transfer")
           init_openpay("fee")
           @order.completed!
-          #pat to customer openpay account
+          #pay to customer openpay account
           pay_to_customer(@order, @transfer)
           #charge fee
           charge_fee(@order, @fee)
