@@ -74,7 +74,7 @@ class OrdersController < ApplicationController
         if ENV.fetch("RAILS_ENV") == "production"
           FinishOrderWorker.perform_in(72.hours, @order.id)
         else
-          FinishOrderWorker.perform_in(30.seconds, @order.id)
+          FinishOrderWorker.perform_in(10.seconds, @order.id)
         end
       else
         flash[:error] = "Hubo un error en tu solicitud"
@@ -97,13 +97,13 @@ class OrdersController < ApplicationController
     #if the order is disputed just the admin can complete it
     @order.with_lock do #prevent double execution if worker completes at same time
       if @order.in_progress? ||( @order.disputed? && current_user.has_roles?(:admin) )
-        #Openpay call to transfer the fee to the Employee
-        pay_to_customer(@order, @transfer)
         # End openpay call
         if @order.completed!
           if @order.dispute
             @order.dispute.proceeded!
           end
+          #Openpay call to transfer the fee to the Employee
+          pay_to_customer(@order, @transfer)
           #Charge the fee
           charge_fee(@order, @fee)
           #charge tax
@@ -114,14 +114,13 @@ class OrdersController < ApplicationController
           create_reviews(@order)
           OrderMailer.order_finished(@order).deliver
           create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales", @employee_review.id)
-        else
-          flash[:error] = "Hubo un error en tu solicitud"
-        end
-      else
-        flash[:error] = "Hubo un error en tu solicitud"
+          redirect_to root_path(:identifier => @employer_review.id)
+        end # end of order.completed!
+      else #not in progress
+        flash[:notice] = "La orden ya fue completada antes"
+        redirect_to root_path
       end
     end
-    redirect_to root_path(:identifier => @employer_review.id)
   end
 
 
