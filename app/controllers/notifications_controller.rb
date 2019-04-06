@@ -5,15 +5,17 @@ class NotificationsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @notifications = Notification.search("*", where:{recipient_id: current_user.id}, includes: [:user, :notifiable], order: [{ created_at: { order: :desc, unmapped_type: :long}}], limit: 15)
+    @notifications = Notification.includes(:user, :notifiable).where(recipient_id: current_user.id).
+    order(created_at: :desc).limit(15)
   end
 
   def all
-    @notifications = Notification.search("*", where:{recipient_id: current_user.id}, includes: [:user, :notifiable], order: [{ created_at: { order: :desc, unmapped_type: :long}}], page: params[:page], per_page: 20)
+    @notifications = Notification.includes(:user, :notifiable).where(recipient_id: current_user.id).
+    order(created_at: :desc).page(params[:page]).per(20)
   end
 
   def mark_as_read
-    @unread_notifications = Notification.search("*", where:{recipient_id: current_user.id, read_at: nil})
+    @unread_notifications = Notification.where(recipient_id: current_user.id, read_at: nil)
     if @unread_notifications.count > 0
       @unread_notifications.each do |notification|
         notification.update(read_at: Time.zone.now)

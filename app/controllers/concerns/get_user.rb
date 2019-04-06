@@ -1,11 +1,9 @@
 module GetUser
   private
-  def get_reviews bool=false #used in my_account and show
-    @reviews = Review.search("*",
-       includes: [:giver, :reviewable,:prof_rating],
-        where: {receiver_id: @user.id, status: "completed"},
-         order: [{ updated_at: { order: :desc, unmapped_type: :long}}],
-          page: params[:reviews], per_page: 20, execute: bool)
+  def get_reviews #used in my_account and show
+    @reviews = Review.includes(:giver, :reviewable,:prof_rating).
+    where(receiver_id: @user.id, status: "completed").order(updated_at: :desc).
+    page(params[:reviews]) .per(20)
   end
   def get_gigs bool=false #used in my_account and show
     @gigs = Gig.search("*",
