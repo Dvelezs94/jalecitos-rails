@@ -37,6 +37,10 @@ class GalleriesController < ApplicationController
     end
   end
 
+  def create_video
+
+  end
+
   def destroy
     @gig.with_lock do #one delete at time
       @images = @gig.images #get all the images
@@ -51,6 +55,10 @@ class GalleriesController < ApplicationController
       @success = true if @gig.save
     end
     head :no_content #response with no content
+  end
+
+  def destroy_video
+
   end
 
   private
