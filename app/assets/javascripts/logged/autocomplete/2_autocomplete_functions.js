@@ -19,7 +19,6 @@ function autocom_loc_func(id) {
 
   //if its search autocomplete, needs some filter behaviours
   if (id == "#search_autocomplete" || id == "#search_autocomplete_mobile") {
-    console.log(1);
     $(id).on("keydown", function(e) {
       var city_id = get_city_input(e.target);
       //if value of city is same...
