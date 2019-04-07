@@ -45,7 +45,14 @@ Rails.application.routes.draw do
      confirmations: "users/confirmations",
      passwords: "users/passwords"
    }
-   resources :galleries, only: [:create, :destroy]
+   resources :galleries, only: [:create, :destroy] do
+     collection do
+       post :create_video
+     end
+     member do
+       delete :destroy_video
+     end
+   end
    resources :packages, except: [:destroy,:show,:index, :new, :edit, :update] do
      collection do
        patch 'update_packages', to: 'packages#update_packages', as: 'update'

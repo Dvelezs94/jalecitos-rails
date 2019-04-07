@@ -1,16 +1,22 @@
-<%= form_with(model: Gig,url: galleries_path, method: :post, :html => { :id => "new_image" }, local: false) do |form| %>
-<% if gig.errors.any? %>
-  <%gig.errors.full_messages.each do |error| %>
-    <%= notification_generator_helper error, :error %>
-  <% end %>
-<% end %>
-<!-- ---post request form -->
 <div class="container-fluid section ">
+<!-- post request form -->
   <div class="container">
     <div class="row">
       <div class="col-lg-7 col-md-12 centered-form">
-        <h3>Agrega tu galería de imágenes</h3>
+        <h3 style="text-align: center;">Agrega tu galería de imágenes y video</h3>
         <div class="form_box post_form_col">
+          <%= form_with(model: Gig, url: create_video_galleries_path, method: :post, :html => { :id => "new_video" }, local: false) do |form| %>
+          <div class="form_block form_section row">
+            <div class="flex-space-bet">
+              <p class="form-title">Video de Youtube (<strong>Opcional</strong>)</p>
+              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
+            </div>
+              <%= render 'shared_user/gigs/forms/hints/videos_hint.html.erb' %>
+              <%= form.text_field :youtube_url, class: "styled", maxlength: 100, placeholder: "Ej: https://www.youtube.com/watch?v=fTjhQc6Yiy0" %>
+          </div>
+          <% end %>
+
+          <%= form_with(model: Gig, url: galleries_path, method: :post, :html => { :id => "new_image" }, local: false) do |form| %>
           <div class="form_block form_section row">
             <div class="flex-space-bet">
               <p class="form-title">Imágenes a subir (<strong>Opcional</strong>)

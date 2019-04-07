@@ -61,10 +61,16 @@ $(document).on('turbolinks:load', function() {
     el.on('slideChange', function() {
       fillCarousel(this);
     });
+
   });
+
   window.gig_show = new Swiper('.gig-show-carousel', {
     loop: true,
     slidesPerView: 1,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
     autoplay: {
       delay: 3000
     }
