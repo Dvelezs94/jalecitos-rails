@@ -19,7 +19,7 @@ module GigsHelper
          return img
        end
      end
-     #no gifs, so return image
+     #no gifs, so return image, if no images this returns nil also
      return images[0]
    end
 end
