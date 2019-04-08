@@ -88,9 +88,11 @@ module ApplicationHelper
      js add_gritter(msg, :image => flash_type, :title=>"Jalecitos", :sticky => false, :time => 5000 )
   end
 
-  def image_display_helper image
-    if image.nil?
+  def image_display_helper image, yt_url
+    if image.nil? && ! yt_url.present?
       "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/app_images/gig-no-image-2.png"
+    elsif image.nil?
+      YouTubeRails.extract_video_image(yt_url, "medium")
     else
       image.url
     end

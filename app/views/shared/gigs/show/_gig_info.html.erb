@@ -14,7 +14,7 @@
             <% if @gig.youtube_url.present? %>
             <div class='swiper-slide show-slide youtube_video'>
               <!-- Youtube iframe -->
-              <%=  YouTubeRails.youtube_embed_url(@gig.youtube_url,"100%","100%", ssl: true, disable_suggestion: true).html_safe %>
+              <%=  YouTubeRails.youtube_embed_url(@gig.youtube_url,"100%", "100%", ssl: true, disable_suggestion: true).html_safe %>
             </div>
             <% end %>
             <!-- Slides -->
