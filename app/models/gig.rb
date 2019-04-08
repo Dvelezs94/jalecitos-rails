@@ -72,7 +72,7 @@ class Gig < ApplicationRecord
   end
 
   def title
-    "Voy a #{to_downcase(self.name)}"
+    "Ofrezco #{to_downcase(self.name)}"
   end
 
   private
