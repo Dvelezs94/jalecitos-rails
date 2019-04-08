@@ -2,7 +2,7 @@
   <%= link_to gig_path(gig.slug) do %>
   <div class="gig-query-content" style="display:flex;flex-wrap:wrap;">
     <div class="col-xl-12 col-lg-12 col-md-4 col-sm-4 col-5 padingminus1" style="padding: 0;">
-        <%= image_tag( image_display_helper(default_gig_img(gig.images)), class: "gig-image") %>
+        <%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), class: "gig-image") %>
     </div>
     <div class="gig-text col-xl-12 col-lg-12 col-md-8 col-sm-8 col-7">
       <div style="padding:5px;">
