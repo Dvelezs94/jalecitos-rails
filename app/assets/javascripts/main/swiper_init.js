@@ -61,20 +61,30 @@ $(document).on('turbolinks:load', function() {
     el.on('slideChange', function() {
       fillCarousel(this);
     });
+
   });
+
   window.gig_show = new Swiper('.gig-show-carousel', {
     loop: true,
     slidesPerView: 1,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
     autoplay: {
       delay: 3000
     }
   });
-  if ($(".show-slide").length - 2 == 1) {
+  window.gig_show.on("slideChange", function() {
+    stopVideos();
+  });
+  if ($(".show-slide").length - 2 == 1 || $(".youtube_video").length > 0) {
     window.gig_show.autoplay.stop();
   }
-  if ($(".swiper-container-initialized").length > 0 ){
+  if ($(".swiper-container-initialized").length > 0) {
     window.dispatchEvent(new Event('resize')); //this fixes the bug of slider loading with turbolinks and cache
   }
+
 });
 
 function fillCarousel(carousel) {
@@ -86,4 +96,11 @@ function fillCarousel(carousel) {
       $.getScript(url);
     }
   }
+}
+function stopVideos() {
+  $.each($('iframe[src*="youtube.com"]'), function( index, elem ) {
+    var src = $(elem).attr('src');
+    $(elem).attr('src', '');
+    $(elem).attr('src', src);
+  });
 }

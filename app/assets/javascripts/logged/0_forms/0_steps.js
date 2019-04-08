@@ -32,12 +32,9 @@ $(document).on('turbolinks:load', function() {
         form_cont.find(".body:eq(" + newIndex + ") label.error").remove();
         form_cont.find(".body:eq(" + newIndex + ") .error").removeClass("error");
       }
-      form = form_cont.find("#section_parent-p-" + currentIndex + " form");
+      form = form_cont.find("#section_parent-p-" + currentIndex + " form").first();
       if (form.valid()) {
-        return syncAjax(form).done(function(data, textStatus, jqXHR) {
-          //wait until server response and return true or false
-          proceed();
-        });
+        return syncAjax(form)
       } else {
         return false
       }
@@ -50,10 +47,7 @@ $(document).on('turbolinks:load', function() {
     onFinishing: function(event, currentIndex) {
       form = form_cont.find("#section_parent-p-" + currentIndex + " form");
       if (form.valid() && validatePackages()) {
-        return syncAjax(form).done(function(data, textStatus, jqXHR) {
-          //wait until server response and return true or false
-          proceed();
-        });
+        return syncAjax(form)
       } else {
         return false
       }
@@ -61,11 +55,10 @@ $(document).on('turbolinks:load', function() {
     onFinished: function(event, currentIndex) {
       window.finished_form = true;
     }
-  })
+  });
 });
 
 function syncAjax(form) {
-  window.success = false;
   return $.ajax({
     type: form.find("[name='_method']").val() || form[0].method,
     url: form[0].action,
@@ -74,14 +67,4 @@ function syncAjax(form) {
     success: function() {},
     error: function() {}
   });
-}
-
-function proceed() {
-  //window.success is set by server
-  if (window.success) {
-    return true;
-  } else {
-    return false;
-    alert("Ha ocurrido un error, por favor, inténtelo de nuevo.");
-  }
 }

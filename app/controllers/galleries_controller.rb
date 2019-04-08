@@ -1,7 +1,7 @@
 class GalleriesController < ApplicationController
   layout 'logged'
-  before_action :set_gig, only: [:create, :destroy]
-  before_action :check_gig_ownership, only: [:create, :destroy]
+  before_action :set_gig, only: [:create, :destroy, :save_video]
+  before_action :check_gig_ownership, only: [:create, :destroy, :save_video]
   before_action :check_if_content, only: [:create]
   skip_before_action :verify_authenticity_token
 
@@ -11,6 +11,7 @@ class GalleriesController < ApplicationController
   def create
     @uploaded = params[:gig][:images] #get uploaded image
     @uploaded[0].original_filename = SecureRandom.uuid + File.extname(@uploaded[0].original_filename) #generate a name (useful when duplicated)
+    puts @uploaded[0].original_filename
     begin
     @gig.with_lock do #one update at time
       @images = @gig.images #get current images
@@ -34,6 +35,12 @@ class GalleriesController < ApplicationController
       else
         raise error
       end
+    end
+  end
+
+  def save_video #also for destroying
+    if @gig.youtube_url != params[:gig][:youtube_url]
+      @success = @gig.update(:youtube_url => params[:gig][:youtube_url])
     end
   end
 
@@ -63,7 +70,7 @@ class GalleriesController < ApplicationController
     head(:no_content) if (current_user.nil? || current_user.id != @gig.user_id)
   end
 
-  def check_if_content
+  def check_if_content #this isnt used because now on changing the form of video url is sent
     if params[:gig].nil? #no images (just clicking next)
       @next = true
       render "create"
