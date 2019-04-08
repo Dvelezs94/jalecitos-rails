@@ -2,7 +2,7 @@
   <a href="<%= gig_path(gig) %>">
     <div class="page3single-slidersd">
       <div class="singleslidepd">
-        <%= image_tag( image_display_helper( default_gig_img(gig.images) ) ) %>
+        <%= image_tag( image_display_helper( default_gig_img(gig.images), gig.youtube_url ) ) %>
         <%= "<p class='verified'>Verificado</p>".html_safe if gig.user.verified %>
       </div>
       <div class="gig-content">
