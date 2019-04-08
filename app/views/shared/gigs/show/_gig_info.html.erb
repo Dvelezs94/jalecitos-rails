@@ -11,8 +11,8 @@
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Youtube video -->
-            <% if @gig.youtube_url %>
-            <div class='swiper-slide show-slide'>
+            <% if @gig.youtube_url.present? %>
+            <div class='swiper-slide show-slide youtube_video'>
               <!-- Youtube iframe -->
               <%=  YouTubeAddy.youtube_embed_url(@gig.youtube_url,"100%","100%").html_safe %>
             </div>

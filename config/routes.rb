@@ -47,10 +47,7 @@ Rails.application.routes.draw do
    }
    resources :galleries, only: [:create, :destroy] do
      collection do
-       post :create_video
-     end
-     member do
-       delete :destroy_video
+       post :save_video
      end
    end
    resources :packages, except: [:destroy,:show,:index, :new, :edit, :update] do
