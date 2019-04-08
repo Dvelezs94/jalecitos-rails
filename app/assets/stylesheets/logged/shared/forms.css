@@ -79,19 +79,19 @@ span.action-gig {
 }
 .action-indent,
 .action-indent::-webkit-input-placeholder {
-  text-indent: 10% !important;
+  text-indent: 13% !important;
 }
 @media screen and (min-width: 480px) and (max-width: 520px) {
   .action-indent,
   .action-indent::-webkit-input-placeholder {
-    text-indent: 12% !important;
+    text-indent: 14% !important;
   }
 
 }
 @media screen and (min-width: 390px) and (max-width: 479px) {
   .action-indent,
   .action-indent::-webkit-input-placeholder {
-    text-indent: 20% !important;
+    text-indent: 22% !important;
   }
   span.action-gig {
     left: 5%;
@@ -100,7 +100,7 @@ span.action-gig {
 @media screen and (min-width: 320px) and (max-width: 389px) {
   .action-indent,
   .action-indent::-webkit-input-placeholder {
-    text-indent: 25% !important;
+    text-indent: 28% !important;
   }
   span.action-gig {
     left: 7%;
