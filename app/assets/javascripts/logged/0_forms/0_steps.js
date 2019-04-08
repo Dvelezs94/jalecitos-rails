@@ -55,7 +55,7 @@ $(document).on('turbolinks:load', function() {
     onFinished: function(event, currentIndex) {
       window.finished_form = true;
     }
-  })
+  });
 });
 
 function syncAjax(form) {
