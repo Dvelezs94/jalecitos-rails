@@ -1,6 +1,7 @@
 class Message < ApplicationRecord
   #search
-  # searchkick language: "spanish"
+  #callbacks false make sync off so records are not added automatically
+   searchkick language: "spanish",callbacks: false
   #
   # def search_data
   #   {

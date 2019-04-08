@@ -120,7 +120,7 @@ module ApplicationHelper
        request_path(object.slug)
     when object.class ==  Offer || object.class ==  Package
       if notification.action == "ha finalizado" || notification.action == "Se ha finalizado"
-       finance_path(:table => notification.query_url, :notification => notification.id)
+       root_path(:notification => notification.id)
       else
        finance_path(:table => notification.query_url)
      end
@@ -159,9 +159,9 @@ module ApplicationHelper
       when object == nil #deleted gig (package also)
         text += "un <strong>Jale eliminado</strong>"
       when object.class == Package
-        text = "el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
+        text += "el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
       when object.class == Offer
-        text = "el pedido #{object.request.title}"
+        text += "el pedido #{object.request.title}"
       end
     end
     if html == true

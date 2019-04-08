@@ -12,4 +12,14 @@ module GigsHelper
    def checked_helper option_status
      opions = (@gig.status == option_status) ?  {checked: true} : {checked: false}
    end
+
+   def default_gig_img images
+     images.each do |img|
+       if img.file.extension.downcase == "gif"
+         return img
+       end
+     end
+     #no gifs, so return image, if no images this returns nil also
+     return images[0]
+   end
 end
