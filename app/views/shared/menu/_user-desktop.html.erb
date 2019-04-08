@@ -15,7 +15,7 @@
             </div>
             <div class="button-area">
               <nav class="filters navbar navbar-expand-lg navbar-light bg-light">
-                <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50,
+                <%= f.text_field :location, class: 'form-control search_autocomplete', id: "search_autocomplete", size: 50,
                 placeholder: "Ubicación", value: (params[:location].nil?)? current_user.location(true) : params[:location] %>
                 <%= f.hidden_field :city_id, class: "city", value: (params[:city_id].nil?)? current_user.city_id : params[:city_id] %>
                 <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría",

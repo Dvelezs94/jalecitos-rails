@@ -2,15 +2,14 @@
 $(document).on('turbolinks:load', function() {
   //location autocompletes needs this events to better ui experience
   autocom_loc_func("#mobile_menu_autocomplete");
-  autocom_loc_func("#search_autocomplete");
-  autocom_loc_func("#search_autocomplete_mobile");
+  autocom_loc_func(".search_autocomplete");
   autocom_loc_func("#form_autocomplete");
   autocom_loc_func("#config_autocomplete");
 });
 
-function autocom_loc_func(id) {
+function autocom_loc_func(id_or_class) {
   //remove info on click
-  $(id).on("focus", function(e) {
+  $(id_or_class).on("focus", function(e) {
     var city_id = get_city_input(e.target);
     window.location_val = $(this).val();
     window.city_val = city_id.val();
@@ -18,8 +17,8 @@ function autocom_loc_func(id) {
   });
 
   //if its search autocomplete, needs some filter behaviours
-  if (id == "#search_autocomplete" || id == "#search_autocomplete_mobile") {
-    $(id).on("keydown", function(e) {
+  if (id_or_class== ".search_autocomplete") {
+    $(id_or_class).on("keydown", function(e) {
       var city_id = get_city_input(e.target);
       //if value of city is same...
       if (e.keyCode == 13 && city_id.val() == window.city_val) {
@@ -33,7 +32,7 @@ function autocom_loc_func(id) {
     });
   }
 
-  $(id).on("keydown", function(e) {
+  $(id_or_class).on("keydown", function(e) {
     var city_id = get_city_input(e.target);
     //erase value of location if something random is typped
     if (e.keyCode == 13 && city_id.val() == window.city_val && window.location_val != $(this).val()) {
@@ -42,8 +41,8 @@ function autocom_loc_func(id) {
     }
 
   });
-  if (id == "#form_autocomplete") {
-    $(id).blur(function(e) {
+  if (id_or_class == "#form_autocomplete") {
+    $(id_or_class).blur(function(e) {
       var city_id = get_city_input(e.target);
       //if id is same...
       if (city_id.val() == window.city_val) {
@@ -55,7 +54,7 @@ function autocom_loc_func(id) {
     });
   } else {
     //retype the location if nothing is set
-    $(id).blur(function(e) {
+    $(id_or_class).blur(function(e) {
       $(this).val(window.location_val);
     });
   }
