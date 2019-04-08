@@ -21,6 +21,9 @@
   width: 80px;
   top: 50%;
   margin-top: -25px;
+	max-width: 80px;
+	max-height: 50px;
+	object-fit: cover;
 }
 .consectetur-text h4 {
 	font-size: 20px;
