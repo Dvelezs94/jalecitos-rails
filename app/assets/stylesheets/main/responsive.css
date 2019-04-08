@@ -1196,6 +1196,14 @@
     display: none;
   }
 
+  .swiper-button-prev,
+  .swiper-button-next {
+    top: 50%% !important;
+    background-color: rgba(0,0,0,.5);
+    height: 80px !important;
+    padding: 16px;
+  }
+
   .app-download-div img{
     width: 143px;
   }
