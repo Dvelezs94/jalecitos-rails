@@ -10,6 +10,13 @@
     <div class="gig-show-carousel">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
+            <!-- Youtube video -->
+            <% if @gig.youtube_url.present? %>
+            <div class='swiper-slide show-slide youtube_video'>
+              <!-- Youtube iframe -->
+              <%=  YouTubeRails.youtube_embed_url(@gig.youtube_url,"100%","100%", ssl: true, disable_suggestion: true).html_safe %>
+            </div>
+            <% end %>
             <!-- Slides -->
             <% if @gig.images.count > 0 %>
               <% @gig.images.each do |image| %>
@@ -23,6 +30,8 @@
               </div>
             <% end %>
         </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
     <div class="pacificobg-socialicon">
       <div class="arroweee">

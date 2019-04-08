@@ -1,5 +1,4 @@
 <% if @success %>
-  window.success = true
   <% if params[:action] == "update_packages" && ! @gig.published? %>
     <% flash[:notice] = 'Tu Jale se ha actualizado exitosamente y está listo para que lo publiques' %>
   <% elsif params[:action] == "update_packages" %>

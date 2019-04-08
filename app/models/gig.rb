@@ -48,11 +48,12 @@ class Gig < ApplicationRecord
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
   validates_length_of :description, :maximum => 1000, :message => "debe contener como máximo 1000 caracteres."
   validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
+  validates_length_of :youtube_url, :maximum => 250, :message => "debe contener como máximo 250 caracteres." #this message doesnt get shown, i didnt displayed it
   validate :location_validate
   #Gallery validations
   validates :images, length: {
   maximum: 5,
-  message: 'no puedes tener más de 5 imágenes'
+  message: 'no puedes tener más de 5 elementos'
   }
   #Custom fields
   enum status: { draft: 0, published: 1, banned: 2, wizard: 3}
