@@ -52,7 +52,7 @@ class Gig < ApplicationRecord
   #Gallery validations
   validates :images, length: {
   maximum: 5,
-  message: 'no puedes tener más de 5 imágenes'
+  message: 'no puedes tener más de 5 elementos'
   }
   #Custom fields
   enum status: { draft: 0, published: 1, banned: 2, wizard: 3}

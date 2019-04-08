@@ -3,6 +3,7 @@ $(document).on('turbolinks:load', function() {
   //location autocompletes needs this events to better ui experience
   autocom_loc_func("#mobile_menu_autocomplete");
   autocom_loc_func("#search_autocomplete");
+  autocom_loc_func("#search_autocomplete_mobile");
   autocom_loc_func("#form_autocomplete");
   autocom_loc_func("#config_autocomplete");
 });
@@ -17,7 +18,7 @@ function autocom_loc_func(id) {
   });
 
   //if its search autocomplete, needs some filter behaviours
-  if (id == "#search_autocomplete") {
+  if (id == "#search_autocomplete" || id == "#search_autocomplete_mobile") {
     $(id).on("keydown", function(e) {
       var city_id = get_city_input(e.target);
       //if value of city is same...

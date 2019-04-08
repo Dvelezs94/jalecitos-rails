@@ -19,7 +19,7 @@ class GigsController < ApplicationController
   # GET /gigs/1
   def show
     if params[:reviews]
-      get_reviews(true)
+      get_reviews
     elsif params[:related_gigs]
       get_related_gigs(true)
       render template: "shared/carousels/add_items_carousel.js.erb"
@@ -27,7 +27,7 @@ class GigsController < ApplicationController
       define_pack_names
       get_reviews
       get_related_gigs
-      Searchkick.multi_search([@related_gigs, @reviews])
+      Searchkick.multi_search([@related_gigs])
       report_options
     end
   end

@@ -11,6 +11,7 @@ class GalleriesController < ApplicationController
   def create
     @uploaded = params[:gig][:images] #get uploaded image
     @uploaded[0].original_filename = SecureRandom.uuid + File.extname(@uploaded[0].original_filename) #generate a name (useful when duplicated)
+    puts @uploaded[0].original_filename
     begin
     @gig.with_lock do #one update at time
       @images = @gig.images #get current images
