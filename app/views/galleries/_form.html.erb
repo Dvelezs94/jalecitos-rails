@@ -19,7 +19,7 @@
           <%= form_with(model: gig, url: galleries_path, method: :post, :html => { :id => "new_image" }, local: false) do |form| %>
           <div class="form_block form_section row">
             <div class="flex-space-bet">
-              <p class="form-title">Imágenes a subir (<strong>Opcional</strong>)
+              <p class="form-title">Imágenes y gifs a subir (<strong>Opcional</strong>)
               </p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
@@ -33,7 +33,7 @@
                 Subir imágenes
               </label>
             </div>
-              <%= form.file_field :images, multiple: true, id: "file-input", accept: ".png, .jpg, .jpeg, .gif", style: "display:none;"%>
+              <%= form.file_field :images, multiple: true, id: "file-input", accept: ".png, .jpg, .jpeg, .gif", style: "display:none;" %>
           </div>
           <div class="loading row justify-content-center" style="text-align: center; display: none;">
             <div class="bounce1"></div>
