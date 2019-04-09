@@ -3135,6 +3135,11 @@ div.form {
   height: 50px;
 }
 
+.card-msg {
+  color: var(--green);
+  margin: 10px 0px;
+}
+
 .hidden {
   display: none !important;
 }
