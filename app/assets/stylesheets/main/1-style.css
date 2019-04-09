@@ -2470,7 +2470,6 @@ p.gig-score-times {
 .page3slide-stard img {
   width: 16px;
   height: 16px;
-  margin-right: 5px;
 }
 
 .page3slide-stard h6 {
@@ -3133,6 +3132,10 @@ div.form {
 
 .space {
   height: 50px;
+}
+
+.review-star {
+  margin-right: 2px;
 }
 
 .card-msg {

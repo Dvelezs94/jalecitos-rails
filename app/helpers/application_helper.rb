@@ -218,19 +218,19 @@ module ApplicationHelper
       html = ""
       #number of complete stars
       number.to_i.times do
-        html << image_tag("star-on.svg", title: rounded)
+        html << image_tag("star-on.svg", title: rounded, class: "review-star")
       end
       #if has decimal...
       if decimal > 0
-        html << image_tag("star-off.svg", title: rounded) if decimal < 0.25
+        html << image_tag("star-off.svg", title: rounded, class: "review-star") if decimal < 0.25
 
-        html << image_tag("star-half.svg", title: rounded) if decimal.between?( 0.25, 0.75 )
+        html << image_tag("star-half.svg", title: rounded, class: "review-star") if decimal.between?( 0.25, 0.75 )
 
-        html << image_tag("star-on.svg", title: rounded) if decimal > 0.75
+        html << image_tag("star-on.svg", title: rounded, class: "review-star") if decimal > 0.75
       end
       #stars that doesnt have
       ( (5-number).to_i ).times do
-        html << image_tag("star-off.svg", title: rounded)
+        html << image_tag("star-off.svg", title: rounded, class: "review-star")
       end
       #return it
       html.html_safe
