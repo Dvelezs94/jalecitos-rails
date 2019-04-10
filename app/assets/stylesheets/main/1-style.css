@@ -142,6 +142,16 @@ border-radius: 0;
   border: none;
 }
 
+.invite-friends-card {
+  background-color: #f2f2f2;
+  border: none;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
 .top-gig .page3slides-area3 {
   margin-bottom: 8vh;
 }
