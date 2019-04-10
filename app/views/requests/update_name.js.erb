@@ -1,0 +1,8 @@
+<% if params[:req_id].nil? && @success  # if the gig was created, if edits on creation now update form db%>
+  updateFormURL(["req_id"], ["<%= @request.id %>"]); //forms uses this url in ajax requests
+  <% if params[:action] == "update" %>
+    updateURL(["req_id"], ["<%= @request.id %>"]); //if user changes name (slug) and reloads it will grab req_id to find request
+  <% else %>
+    <%= add_gritter("Tu pedido se ha publicado, puedes agregar algunas imágenes", :image => :success, :title => "Éxito", :time => 5000)%>
+  <% end %>
+<% end %>
