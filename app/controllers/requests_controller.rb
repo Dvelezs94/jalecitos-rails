@@ -2,10 +2,12 @@ class RequestsController < ApplicationController
   include SetLayout
   include GetRequest
   before_action :authenticate_user!, except: :show
-  before_action :set_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_request, only: [:show, :destroy]
+  before_action :set_req_update, only: [:edit, :update]
+  before_action :set_req_create, only: [:create]
   access all: [:show], user: :all
   before_action :check_request_ban, only: [:show]
-  before_action :check_request_ownership, only:[:edit, :update, :destroy]
+  before_action :check_request_ownership, only:[:edit, :update, :destroy, :create]
   before_action :verify_no_employee, only: [:edit, :update, :destroy]
   layout :set_layout
 
@@ -37,18 +39,35 @@ class RequestsController < ApplicationController
 
   # POST /requests
   def create
-    @request = Request.new( request_params )
-    if @request.save
-      redirect_to request_path(@request), notice: 'Tu pedido fue creado.'
-    else
-      render :new
+    if params[:req_id].present? #editing in creation
+      @success = @request.update(request_params)
+      if !@success
+        render :new
+      end
+    else #create
+      @success = @request.save
+      if !@success
+        render :new
+      end
     end
+    respond_to do |format|
+      format.js {
+        render "update_name"
+       }
+    end
+
   end
 
   # PATCH/PUT /requests/1
   def update
-    if @request.update(request_params)
-      redirect_to request_path(@request), notice: 'El pedido ha sido actualizado.'
+    @success = @request.update(request_params)
+    if @success
+      # @package = Package.find_by_gig_id(@gig)
+      respond_to do |format|
+        format.js {
+          render "update_name"
+         }
+      end
     else
       render :edit
     end
@@ -70,19 +89,12 @@ class RequestsController < ApplicationController
     def request_params
       request_params = params.require(:request).permit(:name,
                                   :description,
-                                  :image,
                                   :city_id,
                                   :category_id,
                                   :budget,
                                   :tag_list,
                                   :profession
-                                )
-      request_params = set_owner(request_params)
-    end
-
-    def set_owner parameters
-      parameters[:user_id] = current_user.id
-      parameters
+                                ).merge(:user_id => current_user.id)
     end
 
     def check_request_ownership
@@ -97,6 +109,22 @@ class RequestsController < ApplicationController
 
     def report_options
       @report_options = ["Uso de palabras ofensivas", "Contenido Sexual", "Violencia", "Spam", "Engaño o fraude", "Otro"]
+    end
+
+    def set_req_create
+      if params[:req_id].present? #edit in creation
+        @request = Request.find(params[:req_id])
+      else #create
+        @request = Request.new(request_params)
+      end
+    end
+
+    def set_req_update
+      if params[:req_id].present? #after edit name in update, slug changes
+        @request = Request.find(params[:req_id])
+      else #before changing name it can be finded by original name
+        @request = Request.friendly.find(params[:id])
+      end
     end
 
     #check if there is no empoyee yet, so we can edit or delete the gig

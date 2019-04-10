@@ -1,7 +1,8 @@
 class GalleriesController < ApplicationController
   layout 'logged'
-  before_action :set_gig, only: [:create, :destroy, :save_video]
-  before_action :check_gig_ownership, only: [:create, :destroy, :save_video]
+  before_action :set_item, only: [:create, :save_video]
+  before_action :set_item_destroy, only: [:destroy]
+  before_action :check_item_ownership, only: [:create, :destroy, :save_video]
   before_action :check_if_content, only: [:create]
   skip_before_action :verify_authenticity_token
 
@@ -9,12 +10,12 @@ class GalleriesController < ApplicationController
 
 
   def create
-    @uploaded = params[:gig][:images] #get uploaded image
+    @uploaded = (params[:gig].present?)? params[:gig][:images] : params[:request][:images]#get uploaded image
     @uploaded[0].original_filename = SecureRandom.uuid + File.extname(@uploaded[0].original_filename) #generate a name (useful when duplicated)
     puts @uploaded[0].original_filename
     begin
-    @gig.with_lock do #one update at time
-      @images = @gig.images #get current images
+    @item.with_lock do #one update at time
+      @images = @item.images #get current images
       @images.each do |image| #verify its unique
         begin
           raise if @uploaded[0].original_filename == image.file.filename
@@ -24,8 +25,8 @@ class GalleriesController < ApplicationController
         end
       end
       @images += @uploaded #append new image
-      @gig.images = @images
-      @success = true if @gig.save  #save all
+      @item.images = @images
+      @success = true if @item.save  #save all
     end
     rescue ActiveRecord::QueryCanceled => error
       @retries ||= 0
@@ -39,41 +40,55 @@ class GalleriesController < ApplicationController
   end
 
   def save_video #also for destroying
-    if @gig.youtube_url != params[:gig][:youtube_url]
-      @success = @gig.update(:youtube_url => params[:gig][:youtube_url])
+    if @item.youtube_url != params[:gig][:youtube_url]
+      @success = @item.update(:youtube_url => params[:gig][:youtube_url])
     end
   end
 
   def destroy
-    @gig.with_lock do #one delete at time
-      @images = @gig.images #get all the images
+    @item.with_lock do #one delete at time
+      @images = @item.images #get all the images
       @images.delete_if do |image| #delete the matching image
         true if File.basename(image.file.filename, ".*") == params[:id] #compare filenames without extension
       end
       if @images.count == 0 #if there is no image left...
-        @gig.remove_images! #remove everything
+        @item.remove_images! #remove everything
       else
-        @gig.images = @images  #save with image removed
+        @item.images = @images  #save with image removed
       end
-      @success = true if @gig.save
+      @success = true if @item.save
     end
     head :no_content #response with no content
   end
 
   private
-  def set_gig
-    @gig = Gig.find(params[:gig_id])
+  def set_item
+    if params[:gig_id].present?
+      @item = Gig.find(params[:gig_id])
+    else
+      @item = Request.find(params[:req_id])
+    end
   end
 
 
-  def check_gig_ownership
-    head(:no_content) if (current_user.nil? || current_user.id != @gig.user_id)
+  def check_item_ownership
+    head(:no_content) if (current_user.nil? || current_user.id != @item.user_id)
   end
 
-  def check_if_content #this isnt used because now on changing the form of video url is sent
-    if params[:gig].nil? #no images (just clicking next)
-      @next = true
-      render "create"
+  def set_item_destroy
+    model = params[:class].constantize
+    @item = model.find(params[:item_id])
+  end
+  def check_if_content
+    if params[:gig].nil? && params[:request].nil?  #no images (just clicking next)
+      if params[:gig_id].present?
+        @next = true
+        render "create"
+      end
+      if params[:req_id].present?
+        @req_end = true
+        render "create"
+      end
     end
   end
 

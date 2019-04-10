@@ -1,1 +1,13 @@
-<%= render 'form', request: @request %>
+<div class="separation">
+
+</div>
+<div id="section_parent">
+  <h3>Pedido</h3>
+  <section>
+    <%= render 'form', request: @request %>
+  </section>
+  <h3>Galería</h3>
+  <section>
+    <%= render 'galleries/form', item: @request %>
+  </section>
+</div>
