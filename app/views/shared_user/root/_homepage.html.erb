@@ -16,6 +16,8 @@
 
   <%= gig_carousel( "Agregados recientemente", :recent_gigs) %>
 
+  <%= render 'shared_user/root/invite_user' %>
+
   <%= gig_carousel( "Jales Verificados", :verified_gigs) %>
 
   <%= gig_carousel( "Jales Gustados", :liked_gigs, 'shared_user/gigs/liked_carousel', true) %>

@@ -142,6 +142,16 @@ border-radius: 0;
   border: none;
 }
 
+.invite-friends-card {
+  background-color: #f2f2f2;
+  border: none;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
 .top-gig .page3slides-area3 {
   margin-bottom: 8vh;
 }
@@ -2470,7 +2480,6 @@ p.gig-score-times {
 .page3slide-stard img {
   width: 16px;
   height: 16px;
-  margin-right: 5px;
 }
 
 .page3slide-stard h6 {
@@ -3133,6 +3142,15 @@ div.form {
 
 .space {
   height: 50px;
+}
+
+.review-star {
+  margin-right: 2px;
+}
+
+.card-msg {
+  color: var(--green);
+  margin: 10px 0px;
 }
 
 .hidden {
