@@ -1,5 +1,6 @@
+<% item = @item || @gig || @request %>
 <div class="current_img img-thum">
-  <%= link_to gallery_path(image.file.filename, gig_id: @gig.id),
+  <%= link_to gallery_path(image.file.filename, item_id: item.id, class: item.class),
       method: :delete, data: {confirm: "¿Estás seguro de borrar este elemento?"},
       remote: true, style: "position: relative;" do %>
       <%= image_tag(image.url, width: 250, class: "delete-image") %>

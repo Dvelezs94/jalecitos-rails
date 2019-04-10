@@ -78,8 +78,13 @@ $(document).on('turbolinks:load', function() {
   window.gig_show.on("slideChange", function() {
     stopVideos();
   });
-  if ($(".show-slide").length - 2 == 1 || $(".youtube_video").length > 0) {
+  if ($(".show-slide").length == 3 || $(".youtube_video").length > 0) { //one image only or video(can have many images) doesnt need autoplay
     window.gig_show.autoplay.stop();
+  }
+  //one image only or video only (and image for sizing) doesnt need arrows
+  if ($(".show-slide").length == 3 || ($(".default-img").length == 2 && $(".youtube_video").length == 2)) {
+    $('.swiper-button-prev').hide();
+    $('.swiper-button-next').hide();
   }
   if ($(".swiper-container-initialized").length > 0) {
     window.dispatchEvent(new Event('resize')); //this fixes the bug of slider loading with turbolinks and cache

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_06_005434) do
+ActiveRecord::Schema.define(version: 2019_04_10_002458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -332,7 +332,6 @@ ActiveRecord::Schema.define(version: 2019_04_06_005434) do
     t.string "description"
     t.bigint "category_id"
     t.string "budget"
-    t.string "image"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -341,6 +340,7 @@ ActiveRecord::Schema.define(version: 2019_04_06_005434) do
     t.string "profession"
     t.bigint "city_id"
     t.integer "offers_count", default: 0
+    t.json "images"
     t.index ["category_id"], name: "index_requests_on_category_id"
     t.index ["city_id"], name: "index_requests_on_city_id"
     t.index ["slug"], name: "index_requests_on_slug", unique: true

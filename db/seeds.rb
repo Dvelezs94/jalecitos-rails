@@ -47,7 +47,7 @@ if ENV.fetch("RAILS_ENV") != "production"
           request.city_id = Faker::Number.between(1, 5)
           request.category_id = Faker::Number.between(1, 10)
           request.budget = options_for_budget[Faker::Number.between(0, (options_for_budget.count - 1))]
-          request.status = Faker::Number.between(0, 4)
+          request.status = Faker::Number.between(0, 6)
           request.profession = Profession.find( Faker::Number.between(1, 20) ).name
         end
       end
