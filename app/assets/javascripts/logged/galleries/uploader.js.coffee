@@ -10,7 +10,6 @@ $(document).on "turbolinks:load", ->
           #show alert
           alert("Algo salió mal. Por favor, inténtalo de nuevo.")
         add: (e, data) ->
-        add: (e, data) ->
           types = /(\.|\/)(jpe?g|png|gif)$/i
           file = data.files[0]
           #validate type of image
