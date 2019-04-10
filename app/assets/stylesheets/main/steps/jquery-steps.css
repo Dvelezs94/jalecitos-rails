@@ -13,6 +13,10 @@
   padding: 0;
   margin: 0
 }
+.wizard ul {
+  display: flex;
+  justify-content: center;
+}
 
 .wizard ul>li, .tabcontrol ul>li {
   display: block;

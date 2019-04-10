@@ -60,7 +60,26 @@ function leave_options() {
       return "Tus progreso no se guardará.";
     }
   }
-  //not in gig form
+  else if ($(".req_form").length > 0) {
+    if ($(".steps.clearfix li.disabled").length == 0) { //visited all tabs
+      //i am in request tab, so maybe i have request changes
+      if ($(".steps.clearfix li").first().hasClass("current")) {
+        if (window.changed) {
+          return "No se guardarán los cambios hechos al pedido";
+        }
+        else {
+          return "Tus cambios se han guardado, puedes volver a editarlo cuando desees"
+        }
+      }
+      else { //i am in gallery tab
+        return "Tus cambios se han guardado, puedes volver a editarlo cuando desees";
+      }
+    }
+    else if ($(".steps.clearfix li.disabled").length == 1) { //not visited gallery
+      return "Tu progreso no se guardará";
+    }
+  }
+  //not in gig form or request form
   else {
     return "Tus progreso no se guardará.";
   }
