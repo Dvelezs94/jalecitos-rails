@@ -33,7 +33,7 @@
               <% if @dispute.images.present? %>
               <% @dispute.images.each do |image| %>
               <div class="current_img img-thum">
-                <%=link_to image_tag(image.url, size: '150x150'), image.url  %>
+                <%=link_to image_tag(image.url, size: '150x150', data: {lity: true}), image.url  %>
               </div>
               <% end %>
               <% else %>

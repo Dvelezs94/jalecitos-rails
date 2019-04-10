@@ -9,7 +9,6 @@ $(document).on "turbolinks:load", ->
           ajaxRecieved()
           #show alert
           alert("Algo salió mal. Por favor, inténtalo de nuevo.")
-
         add: (e, data) ->
           types = /(\.|\/)(jpe?g|png|gif)$/i
           file = data.files[0]

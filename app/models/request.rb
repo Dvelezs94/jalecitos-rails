@@ -45,7 +45,11 @@ class Request < ApplicationRecord
   validate :budget_options
 
   #Custom fields
-  mount_uploader :image, RequestUploader
+  mount_uploaders :images, RequestUploader
+  validates :images, length: {
+    maximum: 3,
+    message: 'no puedes tener más de 3 imágenes'
+  }
 
   #notify users when new request is made
   after_commit -> { NotifyNewRequestWorker.perform_async(self.id) }, on: :create

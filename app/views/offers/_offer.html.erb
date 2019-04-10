@@ -16,11 +16,9 @@
   </div>
   <% if current_user == offer.user || current_user == offer.request.user %>
     <div class="ipsum-text">
-    <% if offer.materials %>
-    <pre><strong>El precio establecido cubre material a utilizar.</strong></pre>
-    <% else %>
-    <pre><strong>El precio establecido NO cubre material a utilizar </strong></pre>
-    <% end %>
+
+    <pre><strong>El precio establecido<%= (offer.materials) ? " " : " NO " %>cubre material a utilizar.</strong></pre>
+
     <pre><p><%=offer.description %></p></pre>
     </div>
   <% end %>
