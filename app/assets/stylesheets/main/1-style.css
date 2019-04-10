@@ -2521,6 +2521,7 @@ p.gig-score-times {
 .req-in_progress {
   color: #0067F4;
   border: 1px solid #0067F4;
+  min-width: 90px;
 }
 
 .req-completed {
@@ -3180,6 +3181,10 @@ div.form {
   border-radius: 0.25rem;
   max-width: 100%;
   height: auto;
+}
+
+.req_img_show img {
+  width: 25vw;
 }
 
 .main_container {
