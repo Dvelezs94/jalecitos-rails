@@ -3,5 +3,5 @@
 }
 
 .unlike {
-  color: #fff !important;
+  color: var(--light-mid-gray) !important;
 }
