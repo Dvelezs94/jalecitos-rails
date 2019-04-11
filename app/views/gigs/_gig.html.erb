@@ -15,14 +15,16 @@
             MXN
           </p>
         </div>
-        <div class="page3slide-stard">
+        <div class="div-space-between">
+        <div class="page3slide-stard" style="padding-top: 5px;">
           <%= star_display_helper( gig.score_average ) %>
           <%= "<h6>(#{gig.score_times})</h6>".html_safe if gig.score_times > 0%>
+        </div>
+        <div class="hearted1 likes-<%= gig.slug %>">
+          <%= render "gigs/likes", gig: gig %>
+        </div>
         </div>
       </div>
     </div>
   </a>
-  <div class="hearted1 likes-<%= gig.slug %>">
-    <%= render "gigs/likes", gig: gig %>
-  </div>
 </div>
