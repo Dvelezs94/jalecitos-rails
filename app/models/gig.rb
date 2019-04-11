@@ -26,6 +26,8 @@ class Gig < ApplicationRecord
   end
   #Tags
   acts_as_taggable
+  #punching bag
+  acts_as_punchable
   #Slugs
   extend FriendlyId
   friendly_id :name, use: :slugged

@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/Dvelezs94/punching_bag
+  revision: eb9569c05073de32b76e58e542d8987717e5d9a8
+  specs:
+    punching_bag (0.6.0)
+      railties (>= 3.2)
+      voight_kampff (~> 0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -862,6 +870,7 @@ GEM
     httparty (0.16.4)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
+    httpclient (2.8.3)
     i18n (1.5.3)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
@@ -1103,6 +1112,9 @@ GEM
       unf_ext
     unf_ext (0.0.7.5)
     unicode_utils (1.4.0)
+    voight_kampff (0.2.2)
+      httpclient (~> 2.2)
+      nokogiri (~> 1.6)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
@@ -1169,6 +1181,7 @@ DEPENDENCIES
   petergate (~> 1.9, >= 1.9.1)
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
+  punching_bag!
   railroady (~> 1.5, >= 1.5.3)
   rails (~> 5.2.1)
   ratyrate (~> 1.2.2.alpha)
