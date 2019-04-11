@@ -1,5 +1,5 @@
 <div class="gig-profile col-xl-4 col-lg-4">
-  <%= link_to gig_path(gig.slug) do %>
+  <%= link_to gig_path(city_slug(gig.city),gig.slug) do %>
   <div class="gig-query-content" style="display:flex;flex-wrap:wrap;">
     <div class="col-xl-12 col-lg-12 col-md-4 col-sm-4 col-5 padingminus1" style="padding: 0;">
         <%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), class: "gig-image", lazy: true) %>

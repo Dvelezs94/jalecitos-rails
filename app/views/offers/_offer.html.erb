@@ -30,7 +30,7 @@
   <% end %>
   <% if current_user == offer.request.user && @hires_open %>
     <div class="Borrar-btn">
-      <%= link_to("Mensaje", conversations_path(user_id: offer.user.alias, model_id: @request.id, model: "Request"), class: "Contratar-b") %>
+      <%= link_to("Mensaje", conversations_path(user_id: offer.user.slug, model_id: @request.id, model: "Request"), class: "Contratar-b") %>
       <%= link_to("Contratar", hire_request_offer_path(offer.request.slug, offer), class: "Contratar-b") %>
     </div>
   <% end %>

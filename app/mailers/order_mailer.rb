@@ -1,4 +1,5 @@
 class OrderMailer < ApplicationMailer
+  include ApplicationHelper
   def error_worker(order_id)
     data = {
       "personalizations": [
@@ -45,7 +46,7 @@ class OrderMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
-            "GIG_URL": gig_url(@order.purchase.gig),
+            "GIG_URL": gig_url(city_slug(@order.purchase.gig.city), @order.purchase.gig),
             "GIG_NAME": @order.purchase.gig.title,
             "EMPLOYER": @order.employer.alias,
             "EMPLOYEE": @order.employee.alias,
@@ -81,7 +82,7 @@ class OrderMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
-            "GIG_URL": gig_url(@order.purchase.gig),
+            "GIG_URL": gig_url(city_slug(@order.purchase.gig.city), @order.purchase.gig),
             "GIG_NAME": @order.purchase.gig.title,
             "EMPLOYER": @order.employer.alias,
             "EMPLOYEE": @order.employee.alias,
