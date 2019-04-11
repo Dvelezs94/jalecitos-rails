@@ -77,7 +77,7 @@ class AdminsController < ApplicationController
     begin
       fee.create(request_predispersion_hash)
       flash[:success] = "El saldo predispersion ha sido depositado a la cuenta raiz por la cantidad de #{@balance}"
-    rescue => e
+    rescue OpenpayTransactionException => e
       flash[:error] = "Fallo al realizar el deposito: #{e}"
      end
      redirect_to root_path
