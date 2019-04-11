@@ -2,7 +2,7 @@
   <% if @gig.gig_packages.none? || (@gig.draft? && @gig.gig_packages.any?) %>
   <div class="alert alert-warning alert-dismissible fade show text-center" role="alert" style="margin-bottom:0 !important;">
     <% if @gig.gig_packages.none? %>
-      <%= link_to("Agrega paquetes al Jale para publicarlo.", edit_gig_path(@gig))%>
+      <%= link_to("Agrega paquetes al Jale para publicarlo.", edit_gig_path(city_slug(@gig.city),@gig))%>
     <% else %>
       <%= link_to("¡Tu jale está listo para publicarse! <br> Haz click aquí para publicarlo.".html_safe, toggle_status_gig_path(@gig)) %>
     <% end %>
