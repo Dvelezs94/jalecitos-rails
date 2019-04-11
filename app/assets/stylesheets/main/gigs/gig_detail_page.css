@@ -379,14 +379,6 @@ a.continue_purchase {
   display: flex;
 }
 
-.like {
-  color: #EF2235 !important;
-}
-
-.visit-count {
-  font-weight: 800;
-}
-
 .gig_action_icon {
   padding: 0 4px;
 }
