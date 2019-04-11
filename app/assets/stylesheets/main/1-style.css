@@ -1890,10 +1890,17 @@ p.gig-title {
   color: var(--gray);
 }
 
+.div-space-between .hearted1 a {
+  font-size: calc(12px + (20 - 12) * ((100vw - 300px) / (1600 - 300)));
+}
+
 .hearted1 a {
   color: var(--gray);
-  font-size: calc(12px + (20 - 12) * ((100vw - 300px) / (1600 - 300)));
   font-weight: 800;
+}
+
+.hearted1 a:hover {
+  color: var(--gray);
 }
 
 .div-space-between {
@@ -2443,7 +2450,8 @@ p.gig-score-times {
   margin-left: 10px;
   margin-top: -2px;
 }
-.swiper-container-horizontal .swiper-slide .page3slide-stard img {
+.swiper-container-horizontal .swiper-slide .page3slide-stard img,
+.tabstar-no img {
   width: auto !important;
   height: calc(12px + (16 - 12) * ((100vw - 300px) / (1800 - 300)));
 }
