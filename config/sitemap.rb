@@ -1,4 +1,5 @@
 # Set the host name for URL creation
+SitemapGenerator::Interpreter.send :include, ApplicationHelper
 SitemapGenerator::Sitemap.default_host = "https://www.jalecitos.com"
 SitemapGenerator::Sitemap.compress = false
 SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(fog_provider: 'AWS',
