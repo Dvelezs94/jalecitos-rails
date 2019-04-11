@@ -30,9 +30,6 @@ class GigsController < ApplicationController
       Searchkick.multi_search([@related_gigs])
       report_options
     end
-    if current_user != @gig.user
-      @gig.punch(request)
-    end
   end
 
   def ban_gig
@@ -137,7 +134,6 @@ class GigsController < ApplicationController
 
     def set_gig_with_all_asc
       @gig = Gig.includes(:gig_packages, :category, :user).friendly.find(params[:id])
-      @gig_hits = @gig.hits
     end
 
     def check_published
