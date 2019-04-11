@@ -2,6 +2,11 @@ module ApplicationHelper
 
   private
 
+  def city_slug city
+    slug = (city.present?)? city.name : "México"
+    return slug.parameterize
+  end
+
   def is_mobile?
     cookies.permanent.signed[:mb].present?
   end
@@ -183,7 +188,7 @@ module ApplicationHelper
   end
 
   def meta_tags
-    if @gig.present? && current_page?( gig_path(@gig) )
+    if @gig.present? && current_page?( gig_path(city_slug(@gig.city),@gig) )
         "<title>#{@gig.profession} en #{@gig.location} para #{@gig.name}</title>
         <meta name='description' content='#{@gig.profession} en #{@gig.location} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos.'>
         <meta name='keywords' content='#{@gig.location},#{@gig.profession},#{@gig.tag_list.join(',')}'>

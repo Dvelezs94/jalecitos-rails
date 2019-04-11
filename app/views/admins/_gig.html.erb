@@ -1,5 +1,5 @@
 <tr>
-  <td><%= link_to gig.name, gig_path(gig.slug)%></td>
+  <td><%= link_to gig.name, gig_path(city_slug(@gig.city),gig.slug)%></td>
   <td><%= link_to gig.user.alias,  user_path(gig.user.slug) %></td>
   <td><%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), width: "200px", height: "auto" ) %></td>
   <td>Published <%= distance_of_time_in_words(gig.created_at, Time.now) %> ago</td>
