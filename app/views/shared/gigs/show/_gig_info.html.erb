@@ -2,7 +2,10 @@
 <div class="innerpage-leftsidejata">
   <div class="verificos-title">
     <h3><%= @gig.title %></h3>
-    <p><%= @gig.location %></p>
+    <div class="div-space-between">
+      <p><%= @gig.location %></p>
+      <small class="visit-count"><%= "#{@gig_hits} visitas" %></small>
+    </div>
   </div>
 
 
@@ -41,7 +44,6 @@
       </div>
       <% if current_user != @gig.user %>
       <div class="other_gig_actions">
-
         <div class="hearted1 likes-<%= @gig.slug %>">
           <%= render "gigs/likes", gig: @gig %>
         </div>
@@ -78,7 +80,10 @@
 
   <div class="sedcontent-wrap">
     <div class="sed-content">
-      <h5><%= @gig.location %></h5>
+      <div class="div-space-between">
+        <h5><%= @gig.location %></h5>
+        <small class="visit-count"><%= "#{@gig_hits} visitas" %></small>
+      </div>
       <h2><%= @gig.title %></h2>
       <br>
       <pre> <p><%= gig_description %></p> </pre>
