@@ -88,7 +88,7 @@ class PackagesController < ApplicationController
   end
 
   def check_no_ownership
-    redirect_to( gig_path(@package.gig), notice: "No puedes contratarte a ti mismo." ) if (current_user == @package.gig.user )
+    redirect_to( gig_path(city_slug(@package.gig.city),@package.gig), notice: "No puedes contratarte a ti mismo." ) if (current_user == @package.gig.user )
   end
 
   def validate_create
