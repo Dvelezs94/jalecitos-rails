@@ -1556,12 +1556,6 @@ p.gig-price {
   display: none;
 }
 
-
-.gig-req-carousel .hearted1 {
-  position: absolute;
-  top: 120px;
-  right: 10px;
-}
 p.verified {
   position: absolute;
   top: 100px;
@@ -1893,7 +1887,18 @@ p.gig-title {
 }
 
 .hearted1 i {
-  color: #fff;
+  color: var(--gray);
+}
+
+.hearted1 a {
+  color: var(--gray);
+  font-size: calc(12px + (20 - 12) * ((100vw - 300px) / (1600 - 300)));
+  font-weight: 800;
+}
+
+.div-space-between {
+  display: flex;
+  justify-content: space-between;
 }
 
 .doopli button {

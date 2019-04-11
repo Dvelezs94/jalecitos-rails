@@ -2164,10 +2164,6 @@
 
 @media only screen and (min-width: 320px) and (max-width: 350px) {
 
-  .gig-req-carousel .hearted1 {
-    top: 70px;
-    right: 10px;
-  }
   .gig-query .gig-image, .gig-profile .gig-image {
     max-height: 129px;
   }
@@ -2182,10 +2178,6 @@
 
 @media only screen and (min-width: 351px) and (max-width: 480px) {
 
-  .gig-req-carousel .hearted1 {
-    top: 90px;
-    right: 10px;
-  }
   .gig-query .gig-image, .gig-profile .gig-image {
     max-height: 123px;
   }
@@ -2195,20 +2187,6 @@
   .page3single-slidersd .singleslidepd img {
       max-height: 120px;
       min-height: 120px;
-  }
-}
-
-@media only screen and (min-width: 351px) and (max-width: 400px) {
-  .gig-req-carousel .hearted1 {
-    top: 90px;
-    right: 10px;
-  }
-}
-
-@media only screen and (min-width: 401px) and (max-width: 480px) {
-  .gig-req-carousel .hearted1 {
-    top: 90px;
-    right: 10px;
   }
 }
 
