@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get :openpay_dashboard
       get :tickets
       get :orders
+      post :predispersion_fee
     end
   end
 

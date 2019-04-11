@@ -85,9 +85,12 @@ h6 {
   --black: #000000;
 }
 
-input:focus {
+input:focus,
+button:focus,
+a:focus {
  outline: none;
 }
+
 
 .legal-document {
   width: 60%;
@@ -130,6 +133,8 @@ border-radius: 0;
   padding: 5px 30px;
   float: right;
 }
+
+
 .default-btn {
   font-family: 'Nunito', sans-serif;
   font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
@@ -140,6 +145,11 @@ border-radius: 0;
   padding: 10px 20px;
   border-radius: 4px;
   border: none;
+}
+
+.default-btn:focus,
+.default-btn:hover {
+  color: var(--light-mid-gray);
 }
 
 .invite-friends-card {

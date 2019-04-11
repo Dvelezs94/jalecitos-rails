@@ -3,9 +3,10 @@ class AdminsController < ApplicationController
   access admin: :all
   include OpenpayHelper
   before_action :set_vars
-  before_action only: [:create_openpay_user, :openpay_dashboard] do
+  before_action only: [:create_openpay_user, :openpay_dashboard, :predispersion_fee] do
     init_openpay("customer")
   end
+  before_action :set_balance, only: [:openpay_dashboard, :predispersion_fee]
 
   def index_dashboard
     @gigs = Gig.includes(:user).order(updated_at: :desc).page(params[:gig]).per(25)
@@ -47,7 +48,6 @@ class AdminsController < ApplicationController
   end
 
   def openpay_dashboard
-    @balance = @customer.get(ENV.fetch("OPENPAY_PREDISPERSION_CLIENT"))["balance"] if ENV.fetch("OPENPAY_PREDISPERSION_CLIENT") != ""
     @balance ||= "cuenta predispersion no seteada"
   end
 
@@ -67,6 +67,21 @@ class AdminsController < ApplicationController
     end
     redirect_to root_path
   end
+  # deposit predispersion balance to our openpay account, so we can move it later to dispersion
+  def predispersion_fee
+    fee = init_openpay("fee")
+    request_predispersion_hash={"customer_id" => ENV.fetch("OPENPAY_PREDISPERSION_CLIENT"),
+                   "amount" => @balance,
+                   "description" => "Retiro de cuenta predispersion"
+                  }
+    begin
+      fee.create(request_predispersion_hash)
+      flash[:success] = "El saldo predispersion ha sido depositado a la cuenta raiz por la cantidad de #{@balance}"
+    rescue OpenpayTransactionException => e
+      flash[:error] = "Fallo al realizar el deposito: #{e}"
+     end
+     redirect_to root_path
+  end
 
   private
   def set_vars
@@ -83,5 +98,9 @@ class AdminsController < ApplicationController
 
   def set_paginator
     render "pagination" if request.format.js?
+  end
+
+  def set_balance
+    @balance = @customer.get(ENV.fetch("OPENPAY_PREDISPERSION_CLIENT"))["balance"] if ENV.fetch("OPENPAY_PREDISPERSION_CLIENT") != ""
   end
 end
