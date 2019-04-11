@@ -41,11 +41,11 @@ class GigsController < ApplicationController
     check_if_banned
     check_first_package
     if flash[:error]
-      redirect_to gig_path(@gig)
+      redirect_to gig_path(city_slug(@gig.city),@gig)
     else
       change_status
       flash[:success] = "Estado actual del Jale: #{t("gigs.status.#{@gig.status}")}"
-      redirect_to gig_path(@gig)
+      redirect_to gig_path(city_slug(@gig.city),@gig)
     end
   end
 

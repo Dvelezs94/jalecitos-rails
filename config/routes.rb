@@ -16,8 +16,16 @@ Rails.application.routes.draw do
       post :predispersion_fee
     end
   end
-
-  resources :gigs, except: :index do
+  #custom routes for city_id
+  get '/jale/:city_slug/:id' => 'gigs#show', as: "gig"
+  get '/jale/:city_slug/:id/edit' => 'gigs#edit', as: "edit_gig"
+  patch '/jale/:city_slug/:id' => 'gigs#update'
+  put '/jale/:city_slug/:id' => 'gigs#update'
+  delete '/jale/:city_slug/:id' => 'gigs#destroy'
+  #doesnt need to be declared, just for spanish friendly url for user
+  get '/jales/nuevo' => 'gigs#new', as: "new_gig"
+  #post "/jales" => "gigs#create", as: "gigs" #doesnt need to be declared
+  resources :gigs, except: [:index, :show, :edit, :update, :destroy, :new] do
     resource :reports, only: [:create], as: "report"
     member do
            get :toggle_status
