@@ -71,12 +71,12 @@ class AdminsController < ApplicationController
   def predispersion_fee
     fee = init_openpay("fee")
     request_predispersion_hash={"customer_id" => ENV.fetch("OPENPAY_PREDISPERSION_CLIENT"),
-                   "amount" => @balance,
+                   "amount" => @balance95,
                    "description" => "Retiro de cuenta predispersion"
                   }
     begin
       fee.create(request_predispersion_hash)
-      flash[:success] = "El saldo predispersion ha sido depositado a la cuenta raiz por la cantidad de #{@balance}"
+      flash[:success] = "El saldo predispersion ha sido depositado a la cuenta raiz por la cantidad de #{@balance95} (95%)"
     rescue OpenpayTransactionException => e
       flash[:error] = "Fallo al realizar el deposito: #{e}"
      end
@@ -101,6 +101,7 @@ class AdminsController < ApplicationController
   end
 
   def set_balance
-    @balance = @customer.get(ENV.fetch("OPENPAY_PREDISPERSION_CLIENT"))["balance"] if ENV.fetch("OPENPAY_PREDISPERSION_CLIENT") != ""
+    @balance = (@customer.get(ENV.fetch("OPENPAY_PREDISPERSION_CLIENT"))["balance"]) if ENV.fetch("OPENPAY_PREDISPERSION_CLIENT") != ""
+    @balance95 = (@balance * 0.95).round(2)
   end
 end

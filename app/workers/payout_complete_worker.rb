@@ -23,8 +23,8 @@ class PayoutCompleteWorker
       update_orders_status(calc_payout(@jalecitos_payout.orders)[0][:orders])
       begin
         @jalecitos_payout.completed!
-        charge_payout_fee
         PayoutMailer.successful_payout(@jalecitos_payout.user, @employee_balance_minus_fee).deliver
+        charge_payout_fee
       end
     rescue => exception
       Bugsnag.notify(exception)
