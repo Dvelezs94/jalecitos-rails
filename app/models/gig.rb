@@ -78,7 +78,7 @@ class Gig < ApplicationRecord
 
   def punch(request = nil)
     if request.try(:bot?)
-      false
+      true
     else
       self.increment!(:visits)
     end

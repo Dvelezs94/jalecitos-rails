@@ -1886,7 +1886,7 @@ p.gig-title {
   display: none;
 }
 
-.hearted1 i {
+.div-space-between .hearted1 i {
   color: var(--gray);
 }
 
@@ -1906,6 +1906,7 @@ p.gig-title {
 .div-space-between {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .doopli button {
@@ -3204,6 +3205,11 @@ div.form {
   border-radius: 0.25rem;
   max-width: 100%;
   height: auto;
+}
+
+a.like:hover,
+a.unlike:hover {
+  color: inherit;
 }
 
 .req_img_show img {
