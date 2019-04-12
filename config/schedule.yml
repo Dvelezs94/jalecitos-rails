@@ -2,7 +2,3 @@ generate_sitemap_job:
   # cron: "*/1 * * * *"
   cron: "0 1 * * *"
   class: "RegenerateSitemapWorker"
-
-combine_punching_hits:
-  cron: "0 2 * * *"
-  class: "CombineHitsWorker"
