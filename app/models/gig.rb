@@ -4,6 +4,7 @@ class Gig < ApplicationRecord
   include LocationFunctions
   include FilterRestrictions
   include GigRequestFunctions
+  require 'voight_kampff'
   #search
   searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
   def search_data
@@ -26,8 +27,6 @@ class Gig < ApplicationRecord
   end
   #Tags
   acts_as_taggable
-  #punching bag
-  acts_as_punchable
   #Slugs
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -75,6 +74,14 @@ class Gig < ApplicationRecord
 
   def title
     "Ofrezco #{to_downcase(self.name)}"
+  end
+
+  def punch(request = nil)
+    if request.try(:bot?)
+      false
+    else
+      self.increment!(:visits)
+    end
   end
 
   private
