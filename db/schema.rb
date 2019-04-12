@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_11_204514) do
+ActiveRecord::Schema.define(version: 2019_04_11_222611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 2019_04_11_204514) do
     t.string "profession"
     t.bigint "city_id"
     t.string "youtube_url"
+    t.integer "visits", default: 0
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["city_id"], name: "index_gigs_on_city_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true
@@ -267,17 +268,6 @@ ActiveRecord::Schema.define(version: 2019_04_11_204514) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "punches", id: :serial, force: :cascade do |t|
-    t.integer "punchable_id", null: false
-    t.string "punchable_type", limit: 20, null: false
-    t.datetime "starts_at", null: false
-    t.datetime "ends_at", null: false
-    t.datetime "average_time", null: false
-    t.integer "hits", default: 1, null: false
-    t.index ["average_time"], name: "index_punches_on_average_time"
-    t.index ["punchable_type", "punchable_id"], name: "punchable_index"
   end
 
   create_table "push_subscriptions", force: :cascade do |t|

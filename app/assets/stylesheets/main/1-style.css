@@ -1886,7 +1886,7 @@ p.gig-title {
   display: none;
 }
 
-.div-space-between .hearted1 i {
+.hearted1 i {
   color: var(--gray);
 }
 
@@ -1906,7 +1906,6 @@ p.gig-title {
 .div-space-between {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .doopli button {
