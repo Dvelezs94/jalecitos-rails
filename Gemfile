@@ -165,3 +165,5 @@ gem 'groupdate', '~> 4.1', '>= 4.1.1'
 gem 'chartkick', '~> 3.0', '>= 3.0.2'
 # Youtube embeded parser
 gem 'youtube_rails', '~> 1.2', '>= 1.2.2'
+#bot checking
+gem 'voight_kampff', '~> 1.1', '>= 1.1.3'
