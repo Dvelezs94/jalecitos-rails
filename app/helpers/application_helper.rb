@@ -187,15 +187,23 @@ module ApplicationHelper
     end
   end
 
+  def seo_location(city)
+    if city
+      "#{city.name}, #{city.state.name}"
+    else
+      "México"
+    end
+  end
+
   def meta_tags
     if @gig.present? && current_page?( gig_path(city_slug(@gig.city),@gig) )
-        "<title>#{@gig.profession} en #{@gig.location} para #{@gig.name}</title>
+        "<title>#{@gig.profession} en #{seo_location(@gig.city)} para #{@gig.name}</title>
         <meta name='description' content='#{@gig.profession} en #{@gig.location} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos.'>
         <meta name='keywords' content='#{@gig.location},#{@gig.profession},#{@gig.tag_list.join(',')}'>
         <meta name='category' content='#{@gig.category.name}'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
     elsif @request.present? && current_page?( request_path(@request) )
-        "<title>Trabajo de #{@request.profession} en #{@request.location} | Encontrar trabajo de #{@request.profession} por internet.</title>
+        "<title>Trabajo de #{@request.profession} en #{seo_location(@request.city)} | Encontrar trabajo de #{@request.profession} por internet.</title>
         <meta name='description' content='Se solicita #{@request.profession} en #{@request.location} para #{@request.name}. Regístrate hoy en Jalecitos para encontrar trabajo.'>
         <meta name='keywords' content='#{@request.location},#{@request.profession},#{@request.tag_list.join(',')}'>
         <meta name='category' content='#{@request.category.name}'>
