@@ -7,8 +7,9 @@ module MoneyHelper
 
 
   # Earning for order hiring
+  #  2.91 because some operations fail with a missing 0.01
   def get_order_earning base
-     (($fee+1) * (base+$cons) - (1+ $iva ) * ($fee+1) * ( base + $cons ) * ( 0.03364 ) - 2.9 - base).round(2)
+     (($fee+1) * (base+$cons) - (1+ $iva ) * ($fee+1) * ( base + $cons ) * ( 0.03364 ) - 2.91 - base).round(2)
   end
 
   def order_tax price
