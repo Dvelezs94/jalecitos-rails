@@ -1,7 +1,11 @@
 <div class="col-lg-8">
   <div class="checkout-left-content">
     <div class="consectetur-text">
-      <%= image_tag( image_display_helper(default_gig_img(@package.gig.images), @package.gig.youtube_url)) if (defined? @package) %>
+      <% if defined? @package %>
+        <%= image_tag( image_display_helper(default_gig_img(@package.gig.images), @package.gig.youtube_url)) %>
+      <% else %>
+        <%= image_tag( image_display_helper(default_gig_img(@offer.request.images), nil)) %>
+      <% end %>
       <h4><%= (defined? @package) ? @package.gig.title  : @offer.request.title%></h4>
     </div>
     <div class="metodo-text">
