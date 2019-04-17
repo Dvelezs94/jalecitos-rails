@@ -8,15 +8,13 @@
       <div style="padding:5px;">
         <div class="tabbigissue1-total">
           <p class="location truncate"><%=prof_or_loc gig%></p>
-          <p class="coa2 multi-line-truncate-2"><%= gig.title%></p>
-          <p class="coa3">Desde
+          <h4 class="gig-title multi-line-truncate-2 min-height-30px"><%= gig.min_title%></h4>
+          <p class="gig-price truncate">Desde
             <%= number_to_currency(purchase_order_total(gig.query_pack.first.price)) %>
-            MXN</p>
+            <!-- MXN--></p> 
         </div>
         <div class="tabstar-no" style="display:flex;align-items:center;">
-          <%= star_display_helper(gig.score_average) %>
-
-          <%= "<span>(#{gig.score_times})</span>".html_safe if gig.score_times > 0 %>
+          <%= one_star_disp_help gig %>
         </div>
       </div>
     </div>

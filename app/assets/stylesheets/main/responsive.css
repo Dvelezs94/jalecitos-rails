@@ -1580,10 +1580,6 @@
     font-size: 15px;
   }
 
-  .coa2 {
-    font-size: 12px;
-  }
-
   .author2total {
     text-align: center;
   }
@@ -2121,8 +2117,8 @@
   }
   .gig-query .hearted1,
   .gig-profile .hearted1 {
-    bottom: 3px;
-    right: 20px;
+    bottom: 11px;
+    right: 22px;
   }
 }
 
