@@ -8,21 +8,20 @@
       <div class="gig-content">
         <div class="page3slides-contentrd">
           <h6 class="location truncate"><%= prof_or_loc gig%></h6>
-          <h4 class="gig-title multi-line-truncate-3 min-height-66px"><%= gig.title %>
+          <h4 class="gig-title multi-line-truncate-2 min-height-30px"><%= gig.min_title %>
           </h4>
           <p class="gig-price truncate">Desde
             <%= query_home_or_profile_helper(gig) %>
-            MXN
+            <!-- MXN -->
           </p>
-        </div>
-        <div class="div-space-between">
-        <div class="page3slide-stard" style="padding-top: 4px;">
-          <%= star_display_helper( gig.score_average ) %>
-          <%= "<h6>(#{gig.score_times})</h6>".html_safe if gig.score_times > 0%>
-        </div>
-        <div class="hearted1 likes-<%= gig.slug %>">
-          <%= render "gigs/likes", gig: gig %>
-        </div>
+          <div class="div-space-between-no-align">
+            <div class="page3slide-stard">
+              <%= one_star_disp_help gig %>
+            </div>
+            <div class="hearted1 likes-<%= gig.slug %>" style="margin-top: -3px;">
+              <%= render "gigs/likes", gig: gig %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
