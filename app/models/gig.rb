@@ -76,6 +76,12 @@ class Gig < ApplicationRecord
     "Ofrezco #{to_downcase(self.name)}"
   end
 
+  def min_title #used in miniatures of gigs
+    title = self.name
+    title[0] = title[0].upcase # make upcase first char
+    title
+  end
+
   def punch(request = nil)
     if request.try(:bot?)
       true

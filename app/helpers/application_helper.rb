@@ -250,6 +250,17 @@ module ApplicationHelper
     end
   end
 
+  def one_star_disp_help gig
+    html = ""
+     if gig.score_times > 0
+       html += "#{image_tag("star-on.svg", title: gig.score_average, class: "review-star")}"
+       html += "<p class='gig-score-average'> #{gig.score_average}  <span class='gig-score-times'>(#{gig.score_times})</span> </p>"
+    else
+      html += "<h6>N/A</h6>"
+    end
+    html.html_safe
+  end
+
   def score_average us, return_number=true
     if us.employee_score_times == 0.0 && us.employer_score_times == 0.0 && return_number == true
       0.0
