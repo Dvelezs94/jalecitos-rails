@@ -31,10 +31,10 @@ class User < ApplicationRecord
   before_create :set_location
   # Create default values
   before_validation :set_defaults, on: :create
-  before_update :set_roles
   # Create User Score
   after_commit :create_user_score
 
+  before_update :set_roles
   # Create openpay user
   after_commit :create_openpay_account
   # Validates uniqueness of id

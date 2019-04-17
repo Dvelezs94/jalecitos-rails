@@ -844,15 +844,6 @@ p {
   color: #F9B732;
 }
 
-.coa3 {
-  color: #53CA8D;
-  margin: 0;
-}
-
-.coa2 {
-  color: black;
-}
-
 .rightsidetab-content .nav-tabs {
   border-bottom: none;
 }
@@ -869,20 +860,10 @@ p {
   color: #39C27B !important;
 }
 
-
-
 .maintabroll3 {
   margin-top: 27px;
   margin-bottom: 42px;
   min-width: 100%;
-}
-
-.tabstar-no span {
-  color: #000;
-  padding-left: 3px;
-}
-.tabstar-no {
-  color: black;
 }
 
 .rightsidetab-content {
@@ -1463,11 +1444,10 @@ p.loyed3 {
 
 p.gig-price {
   color: var(--green);
-  margin: 0 0 8px;
+  margin: 0 0 8px 0;
 }
 
 .page3slides-contentrd {
-  margin-top: 10px;
   min-height: 94px;
 }
 
@@ -1830,10 +1810,6 @@ p.loyed3 {
 }
 
 
-p.gig-title {
-  color: #000;
-}
-
 .catagorislide-area.innerpages3-area {
   padding-bottom: 10px;
 }
@@ -1907,6 +1883,11 @@ p.gig-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.div-space-between-no-align {
+  display: flex;
+  justify-content: space-between;
 }
 
 .doopli button {
@@ -2586,7 +2567,6 @@ p.gig-score-times {
   }
   p.jkl {
     color: #000;
-    font-weight: 700;
     font-size: 15px;
   }
   p.jhh {
@@ -2911,10 +2891,6 @@ div.form {
   margin-top: 27px;
   margin-bottom: 42px;
 }
-.gig-query .coa2,
-.gig-profile .coa2 {
-  font-weight: bold;
-}
 
 .gig-query .gig-query-content,
 .gig-profile .gig-query-content {
@@ -3025,6 +3001,16 @@ div.form {
   color: #39C27B;
 }
 
+h4.gig-title {
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+h4.req_title {
+  font-weight: normal;
+}
+
+
 /*active menu*/
 .phone_links .active {
   color: var(--blue) !important;
@@ -3118,6 +3104,10 @@ div.form {
   min-height: 42px;
 }
 
+.min-height-48px {
+  min-height: 48px;
+}
+
 .min-height-66px {
   min-height: 66px;
 }
@@ -3129,7 +3119,12 @@ div.form {
 .min-height-44px {
   min-height: 44px;
 }
-
+.min-height-57px {
+  min-height: 57px;
+}
+.min-height-30px {
+  min-height: 30px;
+}
 .swiper-container-initialized {
   overflow: hidden;
 }
@@ -3219,4 +3214,15 @@ a.unlike:hover {
 .main_container {
   padding-top: 7vh;
   min-height: 99vh;
+}
+
+.gig-score-average {
+  margin-top: -3px;
+  color: var(--yellow);
+  font-weight: bold;
+  margin-bottom: 0;
+}
+.gig-score-times {
+  color: var(--gray);
+  font-size: calc(11px + (14 - 11) * ((100vw - 320px) / (1800 - 320)));
 }
