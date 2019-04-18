@@ -56,6 +56,15 @@ module GetPages
           page: params[:recent_gigs], per_page: 15, execute: bool)
   end
 
+  def get_random_gigs
+    @random_gigs   = Gig.search("*",
+      includes: [:gigs_packages, :user, :likes, city: [state: :country]],
+                          body: random_conditions,
+                          page: params[:random_gigs],
+                          per_page: 15,
+                          execute: bool)
+  end
+
   def get_recent_requests bool=false
     @recent_requests = Request.search("*",
        includes: [city: [state: :country]],
@@ -121,5 +130,40 @@ module GetPages
     else # is guest
       {status: "published"}
     end
+  end
+
+  def random_conditions
+    #need to test with guests, on guest have to remove filter of city
+    seed = Time.zone.now.to_i
+    {
+      query: {
+        function_score: {
+          query: {
+            bool: {
+              must: [
+                {
+                  term: { status: "published" }
+                },
+                {
+                  bool: {
+                    should: [
+                      { term: { city_id: current_user.city_id } },
+                      bool: {
+                        must_not: {
+                          exists: { field: "city_id" }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          random_score: {
+            seed: seed
+          }
+        }
+      }
+    }
   end
 end
