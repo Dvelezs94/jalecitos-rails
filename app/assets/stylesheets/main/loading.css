@@ -44,6 +44,7 @@
 #transition {
   margin: 35vh auto 0;
   text-align: center;
+  padding-bottom: 40vh;
 }
 @keyframes lds-dual-ring {
  0% {

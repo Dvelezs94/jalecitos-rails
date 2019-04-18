@@ -256,7 +256,7 @@ module ApplicationHelper
        html += "#{image_tag("star-on.svg", title: gig.score_average, class: "review-star")}"
        html += "<p class='gig-score-average'> #{gig.score_average}  <span class='gig-score-times'>(#{gig.score_times})</span> </p>"
     else
-      html += "<h6>N/A</h6>"
+      html += "<h6 class='na'>N/A</h6>"
     end
     html.html_safe
   end
