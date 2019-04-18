@@ -24,7 +24,7 @@ module ApplicationHelper
         end
       else #homepage
         if current_user.city_id.present?
-          model.location
+          profession
         else
           model.location
         end
