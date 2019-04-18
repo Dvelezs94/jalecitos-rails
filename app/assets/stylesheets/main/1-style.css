@@ -2447,10 +2447,6 @@ p.gig-score-times {
   display: flex;
 }
 
-.page3slide-stard h6 {
-  color: var(--gray);
-}
-
 .swiper-container-horizontal a:hover{
   color: #007bff;
 }
@@ -2477,6 +2473,9 @@ p.gig-score-times {
   color: #ffc107;
   vertical-align: middle;
 }
+.na {
+  color: var(--gray);
+}
 .single-star {
   margin-left: 12px;
   position: relative;
@@ -2487,9 +2486,6 @@ p.gig-score-times {
   height: 16px;
 }
 
-.page3slide-stard h6 {
-  margin: 0px;
-}
 
 .review-avatar {
   width: 100px;
