@@ -8,7 +8,9 @@ $(document).on('turbolinks:load', function() {
 function margin_top_results() {
   //if mobile search bar is visible need a margin top in results
   if ($(".mobile_search_bar").is(":visible")){
-    $(".search_results").css("margin-top", "110px");
+    quantity = $("#main_menu").height() - parseInt($(".main_container").css("padding-top"))
+    pixels = quantity + "px"
+    $(".search_results").css("margin-top", pixels);
   }
   else {
     $(".search_results").css("margin-top", "0");
