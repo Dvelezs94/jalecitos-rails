@@ -14,7 +14,7 @@
       </div>
       <div class="inner-comment">
       <% if my_profile %>
-        <%= button_to configuration_path, :method => :get, :data => { :disable_with => "<i class='fa fa-cog fa-spin'></i> Configuración" } do %>
+        <%= link_to configuration_path do %>
         <%= " #{icon('fas', 'cog')} Configuración ".html_safe %>
         <% end %>
       <% else %>
