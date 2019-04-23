@@ -13,7 +13,7 @@ module GigsHelper
      opions = (@gig.status == option_status) ?  {checked: true} : {checked: false}
    end
 
-   def default_gig_img images
+   def default_gig_img images #used just in min versions
      images.each do |img|
        if img.file.extension.downcase == "gif"
          return img
