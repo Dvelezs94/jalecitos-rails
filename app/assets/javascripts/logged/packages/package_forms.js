@@ -1,60 +1,79 @@
-function generate_error(form_number) {
-  for (var i = 0; i < 3; i++) {
-    if ($(".form_fields_" + form_number)[i].value == "") {
-      var err_span = $(".error_span_" + (form_number * 3 + i + 1));
+function generate_error(form_number, index, input) {
+  console.log(input);
+  var err_span = $(input).next();
+  err_span.html("Por favor, llene este campo");
+  $(input).addClass("error");
+  //add an event to remove errors when writes
+  $(input).on("keyup", function() {
+    if ($(this).val() != "") {
+      err_span.html("");
+      $(this).removeClass("error");
+    } else {
       err_span.html("Por favor, llene este campo");
-      input = $(".error_span_" + (form_number * 3 + i + 1)).closest(".form-block").find(".is_input");
-      input.addClass("error");
-      //add an event to remove errors when writes
-      $(input).on("keyup", function() {
-        if ($(this).val() != "") {
-          err_span.html("");
-          $(this).removeClass("error");
-        } else {
-          err_span.html("Por favor, llene este campo");
-          $(this).addClass("error");
-        }
-        if ($(".is_input.error").length == 0) {
-          $(".error-messages").html("");
-        }
-      });
-      break;
+      $(this).addClass("error");
     }
-  }
+    if ($(".is_input.error").length == 0) {
+      $(".error-messages").html("");
+    }
+  });
+  return false;
 }
 
 function validatePackages() {
+  window.some_error = false;
   a = 0, b = 0, c = 0;
-  for (var i = 0; i < 3; i++) {
-    if ($(".form_fields_0")[i].value != "") {
-      a += 1;
-    }
+  a_form = $(".form_fields_0:not([pack_validate='false'])");
+  b_form = $(".form_fields_1:not([pack_validate='false'])");
+  c_form = $(".form_fields_2:not([pack_validate='false'])");
 
-    if ($(".form_fields_1")[i].value != "") {
-      b += 1;
-    }
-
-    if ($(".form_fields_2")[i].value != "") {
-      c += 1;
-    }
-
+  if( (is_filled(a_form) && is_empty(b_form) && is_empty(c_form)) || (is_filled(a_form) && is_filled(b_form) && is_empty(c_form)) || (is_filled(a_form) && is_filled(b_form) && is_filled(c_form)) ) {
+    return true;
   }
-  if ((a == 3 && b == 0 && c == 0) || (a == 3 && b == 3 && c == 0) || (a == 3 && b == 3 && c == 3)) {
-    return true
-  } else {
-    $(".error-messages").html("");
-    $(".span-error").html("");
-
-    if (a != 3) {
+  //something is wrong if not returns true
+  $.each(a_form, function(index, input) {
+    if (input.value == "") {
       $(".error-messages").html("Por favor, llene el paquete básico");
-      generate_error(0);
-    } else if (b != 3) {
-      $(".error-messages").html("Por favor, llene el paquete estándar o borre su contenido");
-      generate_error(1);
-    } else {
-      $(".error-messages").html("Por favor, llene el paquete premium o borre su contenido");
-      generate_error(2);
+      window.some_error = true;
+      return generate_error(0, index, input);
     }
-    return false
-  }
+  });
+  if (window.some_error==true) return false;
+  $.each(b_form, function(index, input) {
+    if (input.value == "") {
+      $(".error-messages").html("Por favor, llene el paquete estándar");
+      window.some_error = true;
+      return generate_error(1, index, input);
+    }
+  });
+  if (window.some_error==true) return false;
+  $.each(c_form, function(index, input) {
+    if (input.value == "") {
+      $(".error-messages").html("Por favor, llene el paquete premium");
+      window.some_error = true;
+      return generate_error(2, index, input);
+    }
+  });
+  if (window.some_error==true) return false;
+}
+
+function is_filled (inputs) {
+  var fill = true;
+  $.each(inputs, function(index, input) {
+    if (input.value == "") { //input is empty
+      fill = false;
+      return false;
+    }
+  });
+  return fill;
+}
+
+function is_empty (inputs) {
+  var empty = true;
+  $.each(inputs, function(index, input) {
+    if (input.value != "") { //input is empty
+      empty = false;
+      return false;
+    }
+  });
+  return empty;
 }
