@@ -23,7 +23,8 @@ class PackagesController < ApplicationController
     @gig.with_lock do
       if @gig.gig_packages.count == 0 && params[:packages].count == 3 #just if there are no packages and packages sent to server are 3
         create_the_packages
-        @gig.published! if @gig.gig_packages[0].present? && @gig.gig_packages[0].name != "" && @gig.gig_packages[0].description != "" && @gig.gig_packages[0].price != nil && @gig.gig_packages[0].price >= 100
+        fp = @gig.gig_packages[0] #fp = first package
+        @gig.published! if fp.present? && fp.name != "" && fp.description != "" && fp.price != nil && ((fp.max_amount.present?)? fp.price >= 1 : fp.price >= 100)
       end
       end_form
     end
@@ -33,8 +34,8 @@ class PackagesController < ApplicationController
     @gig.with_lock do
       if @gig.gig_packages.count == 3 #just if the packages exist
         @gig.gig_packages.each do |record|
-          pack = params[:packages]["#{record.slug}"]
-          pack = package_params(pack)
+          pack = pack_params(record.slug)
+          # pack = package_params(pack)
           if record.update(pack)
             @success = true
           else
@@ -51,9 +52,21 @@ class PackagesController < ApplicationController
   end
 
   private
-  # Only allow a trusted parameter "white list" through.
+  # used in create
   def package_params(my_params)
-    my_params.permit(:name, :description, :price )
+    my_params.permit(:name, :description, :price, :max_amount, :unit_type )
+  end
+  # used in update
+  def pack_params(slug)
+    pack_params = params[:packages].require(slug).permit(:name,
+                                :description,
+                                :price,
+                                :max_amount,
+                                :unit_type
+                              )
+    pack_params[:max_amount] ||= "" #if max amount is not sent, maybe user changed from units to service, so add it for deletion if necessary
+    pack_params[:unit_type] ||= ""
+    pack_params
   end
 
   def end_form
@@ -93,8 +106,14 @@ class PackagesController < ApplicationController
 
   def validate_create
     params[:packages].each do |pack|
-      @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 100 && pack[:price] != "")
-      @error = "No puedes ganar arriba de de 9,000 MXN" if (pack[:price].to_f > 10000)
+      if (pack[:max_amount]).present?
+        @error = "La cantidad máxima de unidades a vender multiplicadas por su precio unitario supera los 10,000 MXN" if (pack[:price].to_f * pack[:max_amount].to_f > 10000)
+        @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price] != "" && pack[:price].to_f < 1)
+        @error = "No puedes ganar arriba de de 5000 MXN por unidad" if (pack[:price] != "" && pack[:price].to_f > 5000)
+      else
+        @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price] != "" && pack[:price].to_f < 100)
+        @error = "No puedes ganar arriba de de 10,000 MXN" if (pack[:price] != "" && pack[:price].to_f > 10000)
+      end
       @error = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
       @error = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
       if @error
@@ -106,8 +125,14 @@ class PackagesController < ApplicationController
   def validate_update
     @gig.gig_packages.each do |record|
       pack = params[:packages]["#{record.slug}"]
-      @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price].to_f < 100 && pack[:price] != "")
-      @error = "No puedes ganar arriba de de 9,000 MXN" if (pack[:price].to_f > 10000)
+      if (pack[:max_amount]).present?
+        @error = "La cantidad máxima de unidades a vender multiplicadas por su precio unitario supera los 10,000 MXN" if (pack[:price].to_f * pack[:max_amount].to_f > 10000)
+        @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price] != "" && pack[:price].to_f < 1)
+        @error = "No puedes ganar arriba de de 5000 MXN por unidad" if (pack[:price] != "" && pack[:price].to_f > 5000)
+      else
+        @error = "El precio es demasiado bajo o no se proporcionó" if ( pack[:price] != "" && pack[:price].to_f < 100)
+        @error = "No puedes ganar arriba de de 10,000 MXN" if (pack[:price] != "" && pack[:price].to_f > 10000)
+      end
       @error = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
       @error = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
       if @error
@@ -116,4 +141,5 @@ class PackagesController < ApplicationController
       end
     end
   end
+
 end

@@ -6,4 +6,29 @@ module PackagesHelper
       packages_path
     end
   end
+  def unit_options
+    [
+      ['Cantidad',
+        [
+          ['Pieza', "piece"],
+          ['Docena', "dozen"],
+        ]
+      ],
+      ['Distancia',
+        [
+          ['Centímetro', "centimeter"],
+          ['Metro', "meter"],
+          ['Kilómetro', "kilometer"],
+        ]
+      ],
+      ['Tiempo',
+        [
+          ['Segundo', "sec"],
+          ['Minuto', "minute"],
+          ['Hora', "hour"],
+          ['Día', "day"]
+        ]
+      ]
+    ]
+  end
 end

@@ -55,9 +55,8 @@ function deleteFormContent(formNumber) {
     $($("a.erase-all")[formNumber - 1]).removeClass("hidden");
   }
   $("a.pack-tab-displayer").first().removeClass("hidden");
-  $(".name-" + formNumber)[0].value = "";
-  $(".name-" + formNumber).keyup();
-  $(".description-" + formNumber)[0].value = "";
-  $(".price-input-" + formNumber)[0].value = "";
+  $("div#package-" + formNumber).find(":input").val("");
+  $(".name-" + formNumber).keyup(); //reinit count
+  $(".description-" + formNumber).keyup(); //reinit count
   $("#price-calc-" + formNumber).html("-");
 }
