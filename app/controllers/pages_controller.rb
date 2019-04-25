@@ -64,6 +64,9 @@ class PagesController < ApplicationController
   def work
   end
 
+  def install
+  end
+
   private
 
   def admin_redirect
