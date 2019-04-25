@@ -155,6 +155,7 @@ Rails.application.routes.draw do
   get 'condiciones-de-venta', to: 'pages#sales_conditions'
   get '/robots.:format' => 'pages#robots'
   get '/sitemap', to: 'pages#sitemap'
+  get '/install', to: 'pages#install'
   get 'reglas-prestador-empleador', to: 'pages#employer_employee_rules'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
