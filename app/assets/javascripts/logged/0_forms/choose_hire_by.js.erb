@@ -12,16 +12,16 @@ function displayHireByInputs() {
       container.removeClass("hidden");
     }
     else {
+      container.find(":input").prop( "disabled", true ); //disable hidden inputs
       container.find(":input").attr("pack_validate", "false"); //mark as unused so package validation doesnt use it
+      container.find(":input").val(""); //empty the price value of the hidden container
     }
   });
 }
 
 function displayHireInput () {
   the_id = this.id;
-  $(".price-input:visible").prop( "disabled", true ); //disable the visible price input
-  hidden_price = $(this).closest(".form-block").find(".price-input:hidden");
-  hidden_price.prop( "disabled", false ) //enable the price input that is about to be shown
+
   max_amount = $(this).closest(".form-block").find(".max_amount"); //get the quantity input
   if ( max_amount.is(":visible") ) { //i am changing from unit to service...
     max_amount.attr("old_val", max_amount.val()); //save old value
@@ -30,10 +30,14 @@ function displayHireInput () {
   else { //changing from service to unit
     max_amount.val(max_amount.attr("old_val")); //restore the old value
   }
+
   old_block = $(this).closest(".form-block").find("[display_id]:visible");
   old_block.addClass("hidden"); //hide the visible block
+  old_block.find(":input").prop( "disabled", true ); //disable the old inputs
   old_block.find(":input").attr("pack_validate", "false"); // mark inputs for no validation
+
   new_block = $("[display_id="+the_id+"]");
   new_block.removeClass("hidden"); //show the hidden block
+  new_block.find(":input").prop( "disabled", false ); //enable the new inputs
   new_block.find(":input").attr("pack_validate", "true"); // mark inputs for validation
 }
