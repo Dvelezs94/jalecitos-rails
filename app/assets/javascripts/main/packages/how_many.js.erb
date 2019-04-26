@@ -1,0 +1,23 @@
+$(document).on('turbolinks:load', function() {
+  $('.unit_range').on('input', function (e) {
+    field = $(this).closest("[unit_container]").find('.unit_quantity');
+    field.val(e.target.value);
+  });
+
+  $('.unit_quantity').on('input', function (e) {
+    var value = parseInt( $(this).val() ); //actual value
+    var range = $(this).closest("[unit_container]").find('.unit_range');
+
+    if (value > $(this).attr("max")) { //value is more than limit
+      $(this).val($(this).attr("max"));
+      range.val($(this).attr("max"));
+    }
+    else if ( 1 <= value && value <= $(this).attr("max")) { //value is correct
+      range.val(e.target.value);
+    }
+    else { //less than 1 or empty
+      $(this).val(1);
+      range.val(1);
+    }
+  });
+});
