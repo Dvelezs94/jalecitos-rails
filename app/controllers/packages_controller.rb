@@ -16,7 +16,8 @@ class PackagesController < ApplicationController
     @order = Order.new
     @user_cards = get_openpay_resource("card", @openpay_id)
     @billing_profiles = current_user.billing_profiles.enabled
-    @price = calc_hire_view(@package.price)
+    @base_price = (params[:quantity].present?)? @package.price*params[:quantity].to_i : @package.price
+    @price = calc_hire_view(@base_price)
   end
 
   def create
