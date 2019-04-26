@@ -2,6 +2,7 @@ $(document).on('turbolinks:load', function() {
   $('.unit_range').on('input', function (e) {
     field = $(this).closest("[unit_container]").find('.unit_quantity');
     field.val(e.target.value);
+    change_price(this);
   });
 
   $('.unit_quantity').on('input', function (e) {
@@ -19,5 +20,14 @@ $(document).on('turbolinks:load', function() {
       $(this).val(1);
       range.val(1);
     }
+    change_price(this);
   });
 });
+
+function change_price (elem) {
+  unit_price = $(elem).closest("[pack_price]").attr("pack_price");
+  quantity = parseInt($(elem).val());
+  base_price = quantity * unit_price ;
+  price_label = $(elem).closest("[pack_container]").find('.packa-price');
+  price_label.html("$" + ( ((base_price+10) * 1.04) * 1.16).toFixed(2) + "<sub>MXN</sub>");
+}

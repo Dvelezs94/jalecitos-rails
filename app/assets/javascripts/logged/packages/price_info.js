@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+  $(document).on('turbolinks:load', function() {
   if ($(".price-input").length > 0) {
     init_price_count();
   }
