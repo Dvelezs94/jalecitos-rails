@@ -22,7 +22,7 @@ class Package < ApplicationRecord
   end
 
   private
-  def should_generate_new_friendly_id?
-    name_changed?
-  end
+  # def should_generate_new_friendly_id? #this generates a bug when goes back to edit, the package doesnt have same slug and nothing happens when send
+  #   name_changed?
+  # end
 end

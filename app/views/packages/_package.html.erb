@@ -6,8 +6,18 @@
         <p class="limpi2"><%=number_to_currency(purchase_order_total(package.price), precision: 2) %><sub>MXN</sub></p>
         <pre> <p class="limpi3"><%= package.description %></p> </pre>
       </div>
-      <div class="page3-btn">
-        <%= link_to("Contratar", hire_package_path(package)) %>
+      <div class="page3-btn" unit_container>
+        <%= form_with(url: hire_package_path(package), method: :get, :html => { :class => "" }, local: true) do |f| %>
+          <%= f.submit "Contratar", class: "hire-pack" %>
+          <% if package.unit_type != nil && package.max_amount != nil%>
+            <hr>
+            <div class="div-space-between">
+              <input type="number" name="quantity" class="unit_quantity form-control" value="1" min="1" max="<%= package.max_amount %>">
+              <h3><span class="badge"><%= t("packages.unit_type.plural.#{package.unit_type}") %></span></h3>
+            </div>
+          <% end %>
+        <% end %>
+        <input type="range" class="range-pack unit_range" value="1" min="1" max="<%= package.max_amount %>">
       </div>
     </div>
   </div>
