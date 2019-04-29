@@ -163,6 +163,7 @@ class OrdersController < ApplicationController
         parameters[:employer_id] = current_user.id
         parameters[:purchase] = pack
         if parameters[:quantity].present?
+          validate_quantity_range(pack, parameters[:quantity].to_i)
           parameters[:total] = (calc_packages_units(pack.price * parameters[:quantity].to_i))
           parameters.delete :quantity
         else
@@ -170,6 +171,14 @@ class OrdersController < ApplicationController
         end
         parameters
     end
+
+    def validate_quantity_range (package, quantity)
+      if quantity < package.min_amount || package.max_amount < quantity
+        redirect_to root_path, alert: "Rango de compra no admitido."
+        return false
+      end
+    end
+
     def check_user_ownership
       if ! my_profile
         flash[:error] = "No tienes permisos para acceder aquí"
