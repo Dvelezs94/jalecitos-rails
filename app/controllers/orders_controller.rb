@@ -148,7 +148,7 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      order_params = params.require(:order).permit(:card_id, :purchase, :purchase_type, :billing_profile_id, :details, :address)
+      order_params = params.require(:order).permit(:card_id, :purchase, :purchase_type, :billing_profile_id, :details, :address, :quantity)
       order_params = set_defaults(order_params)
     end
 
@@ -162,7 +162,13 @@ class OrdersController < ApplicationController
       end
         parameters[:employer_id] = current_user.id
         parameters[:purchase] = pack
-        parameters[:total] = purchase_order_total(pack.price).round(2)
+        if parameters[:quantity].present?
+          parameters[:total] = (purchase_order_total(pack.price) * parameters[:quantity].to_i).round(2)
+          parameters.delete :quantity
+        else
+          parameters[:total] = purchase_order_total(pack.price).round(2)
+        end
+        p parameters
         parameters
     end
     def check_user_ownership
