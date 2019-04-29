@@ -87,6 +87,14 @@
                   </div>
                 </div>
                 <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
+                  <p class="price-text form-title">Mínima cantidad a vender:</p>
+                  <div class="row justify-content-center w-100">
+                    <%= pa.number_field :min_amount, min: "1", max: "99999", step: "1", id: "min_amount_#{n}",
+                    class: "form-control form_fields_#{n} min_amount text-center"  %>
+                    <span class="span-error"></span>
+                  </div>
+                </div>
+                <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
                   <p class="price-text form-title">Máxima cantidad a vender:</p>
                   <div class="row justify-content-center w-100">
                     <%= pa.number_field :max_amount, min: "2", max: "10000", step: "1", id: "max_amount_#{n}",
