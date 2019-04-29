@@ -4,9 +4,16 @@ $(document).on('turbolinks:load', function() {
     //show the correct trash
     displayTrash();
     //attach the event to the plus
-    $("a.pack-tab-displayer").on("click", function() {
+    $(".pack-tab-displayer").on("click", function() {
       event.preventDefault();
       displayTab();
+      //move to up if button 2
+      if(this.id == "new-package-2") {
+        console.log("NET")      
+        $('html, body').animate({
+          scrollTop: ($("nav.pack-names").offset().top-200)
+        }, 1000);
+      }
     });
 
     $("a.erase-all").on("click", function() {
@@ -28,7 +35,7 @@ function displayTab() {
   hidden_pack[0].click();
   pack_num = hidden_pack[0].getAttribute("href");
   if (hidden_pack.length == 1) {
-    $("a.pack-tab-displayer").first().addClass("hidden");
+    $(".pack-tab-displayer").addClass("hidden");
   }
   //hide other trash icons
   displayTrash();
@@ -54,7 +61,7 @@ function deleteFormContent(formNumber) {
     //show the trash icon of earlier form
     $($("a.erase-all")[formNumber - 1]).removeClass("hidden");
   }
-  $("a.pack-tab-displayer").first().removeClass("hidden");
+  $(".pack-tab-displayer").removeClass("hidden");
   $("div#package-" + formNumber).find(":input").val("");
   $(".name-" + formNumber).keyup(); //reinit count
   $(".description-" + formNumber).keyup(); //reinit count
