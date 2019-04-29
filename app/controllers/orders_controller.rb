@@ -168,7 +168,6 @@ class OrdersController < ApplicationController
         else
           parameters[:total] = purchase_order_total(pack.price).round(2)
         end
-        p parameters
         parameters
     end
     def check_user_ownership

@@ -109,7 +109,7 @@ class PackagesController < ApplicationController
   end
 
   def check_quantity
-    if (params[:quantity].present? && (@package.max_amount.nil? || (params[:quantity].to_i < 1 && @package.max_amount < params[:quantity].to_i) ) ) || (!params[:quantity].present? && @package.max_amount.present?)
+    if (params[:quantity].present? && (@package.min_amount.nil? || @package.max_amount.nil? || params[:quantity].to_i < @package.min_amount || @package.max_amount < params[:quantity].to_i ) ) || (!params[:quantity].present? && (@package.max_amount.present? || @package.min_amount.present?))
       #if quantity is present and if ( package doesnt support quantity or the value is not in admitted range )
       #if quantity isnt present and package supports unit_quantity
       flash[:error] = "Solicitud de contratación inválida"
