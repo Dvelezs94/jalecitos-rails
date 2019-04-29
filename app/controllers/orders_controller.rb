@@ -172,9 +172,9 @@ class OrdersController < ApplicationController
         parameters
     end
 
-    def validate_quantity_range (package, quantity)
-      if quantity < package.min_amount || package.max_amount < quantity
-        redirect_to root_path, alert: "Rango de compra no admitido."
+    def validate_quantity_range (pa, quan) # pa = package, quan = quantity
+      if pa.min_amount.nil? || pa.max_amount.nil? || quan < pa.min_amount || pa.max_amount < quan
+        redirect_to request.referrer, alert: "Rango de compra no admitido."
         return false
       end
     end
