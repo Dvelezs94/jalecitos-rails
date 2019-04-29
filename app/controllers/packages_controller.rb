@@ -7,6 +7,7 @@ class PackagesController < ApplicationController
   before_action :check_gig_ownership, only: [ :create, :update_packages]
   before_action :set_gig_by_package, only: [:hire]
   before_action :check_no_ownership, only: [:hire]
+  before_action :check_quantity, only: [:hire]
   before_action :validate_create, only: [:create]
   before_action :validate_update, only: [:update_packages]
   access user: :all
@@ -103,6 +104,15 @@ class PackagesController < ApplicationController
 
   def check_no_ownership
     redirect_to( gig_path(city_slug(@package.gig.city),@package.gig), notice: "No puedes contratarte a ti mismo." ) if (current_user == @package.gig.user )
+  end
+
+  def check_quantity
+    if (params[:quantity].present? && (@package.max_amount.nil? || (params[:quantity].to_i < 1 && @package.max_amount < params[:quantity].to_i) ) ) || (!params[:quantity].present? && @package.max_amount.present?)
+      #if quantity is present and if ( package doesnt support quantity or the value is not in admitted range )
+      #if quantity isnt present and package supports unit_quantity
+      flash[:error] = "Solicitud de contratación inválida"
+      redirect_to( gig_path(city_slug(@package.gig.city),@package.gig))
+    end
   end
 
   def validate_create

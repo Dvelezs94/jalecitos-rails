@@ -22,6 +22,9 @@ $(document).on('turbolinks:load', function() {
     }
     change_price(this);
   });
+  $.each($('.unit_range'), function( index, inp ) { //is user goes back, update the label to show the current ammount
+    change_price(inp);
+  });
 });
 
 function change_price (elem) {

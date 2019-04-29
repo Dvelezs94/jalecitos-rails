@@ -265,7 +265,7 @@ class OrdersController < ApplicationController
     end
 
     def cancel_execution
-      flash[:error] = "Este jale no está disponible"
+      flash[:error] = "Este recurso no está disponible"
       redirect_to root_path
       return
     end
