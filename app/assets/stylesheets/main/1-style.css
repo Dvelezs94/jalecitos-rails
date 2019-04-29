@@ -910,6 +910,7 @@ p {
 
 .inner-reportarcontent p.edad11 {
   color: #4A4A4A !important;
+  word-break: break-all;
 }
 
 .inner-reportarcontent p.edad1 {
