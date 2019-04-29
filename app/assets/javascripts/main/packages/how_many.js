@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(document).on('turbolinks:load', function() { //used in gig show
   $('.unit_range').on('input', function (e) {
     field = $(this).closest("[unit_container]").find('.unit_quantity');
     field.val(e.target.value);

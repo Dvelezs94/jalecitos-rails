@@ -56,7 +56,7 @@ class PackagesController < ApplicationController
   private
   # used in create
   def package_params(my_params)
-    my_params.permit(:name, :description, :price, :max_amount, :unit_type )
+    my_params.permit(:name, :description, :price, :max_amount, :min_amount, :unit_type )
   end
   # used in update
   def pack_params(slug)
@@ -64,10 +64,12 @@ class PackagesController < ApplicationController
                                 :description,
                                 :price,
                                 :max_amount,
+                                :min_amount,
                                 :unit_type
                               )
     pack_params[:max_amount] ||= "" #if max amount is not sent, maybe user changed from units to service, so add it for deletion if necessary
     pack_params[:unit_type] ||= ""
+    pack_params[:min_amount] ||= ""
     pack_params
   end
 
@@ -117,8 +119,10 @@ class PackagesController < ApplicationController
 
   def validate_create
     params[:packages].each do |pack|
-      if (pack[:max_amount]).present?
+      if pack[:max_amount].present?
         @error = "La cantidad máxima de unidades a vender multiplicadas por su precio unitario supera los 10,000 MXN" if (pack[:price].to_f * pack[:max_amount].to_f > 10000)
+        @error = "No puedes vender menos de 1 unidad" if (pack[:min_amount].to_f < 1 )
+        @error = "El mínimo de unidades debe ser menor al mayor número de unidades" if (pack[:min_amount].to_f >= pack[:max_amount].to_f )
         @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price] != "" && pack[:price].to_f < 1)
         @error = "No puedes ganar arriba de de 5000 MXN por unidad" if (pack[:price] != "" && pack[:price].to_f > 5000)
       else
@@ -136,8 +140,10 @@ class PackagesController < ApplicationController
   def validate_update
     @gig.gig_packages.each do |record|
       pack = params[:packages]["#{record.slug}"]
-      if (pack[:max_amount]).present?
-        @error = "La cantidad máxima de unidades a vender multiplicadas por su precio unitario supera los 10,000 MXN" if (pack[:price].to_f * pack[:max_amount].to_f > 10000)
+      if pack[:max_amount].present?
+        @error = "La cantidad máxima de unidades a vender multiplicadas por su precio unitario supera los 10,000 MXN" if (pack[:price].to_f * pack[:max_amount].to_i > 10000)
+        @error = "No puedes vender menos de 1 unidad" if (pack[:min_amount].to_i < 1 )
+        @error = "El mínimo de unidades debe ser menor al mayor número de unidades" if (pack[:min_amount].to_i >= pack[:max_amount].to_i )
         @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price] != "" && pack[:price].to_f < 1)
         @error = "No puedes ganar arriba de de 5000 MXN por unidad" if (pack[:price] != "" && pack[:price].to_f > 5000)
       else

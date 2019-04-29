@@ -16,20 +16,17 @@ function displayHireByInputs() {
       container.find(":input").attr("pack_validate", "false"); //mark as unused so package validation doesnt use it
       container.find(":input").val(""); //empty the price value of the hidden container
     }
+    min_amount = container.find(".min_amount");
+    if (min_amount.val()== "") { //put min amount default value if no one
+      min_amount.val(1);
+    }
   });
 }
 
 function displayHireInput () {
   the_id = this.id;
 
-  max_amount = $(this).closest(".form-block").find(".max_amount"); //get the quantity input
-  if ( max_amount.is(":visible") ) { //i am changing from unit to service...
-    max_amount.attr("old_val", max_amount.val()); //save old value
-    max_amount.val(""); // remove its val
-  }
-  else { //changing from service to unit
-    max_amount.val(max_amount.attr("old_val")); //restore the old value
-  }
+  min_amount = $(this).closest(".form-block").find(".min_amount");
 
   old_block = $(this).closest(".form-block").find("[display_id]:visible");
   old_block.addClass("hidden"); //hide the visible block
