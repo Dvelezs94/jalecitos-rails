@@ -163,7 +163,7 @@ class OrdersController < ApplicationController
         parameters[:employer_id] = current_user.id
         parameters[:purchase] = pack
         if parameters[:quantity].present?
-          parameters[:total] = (purchase_order_total(pack.price) * parameters[:quantity].to_i).round(2)
+          parameters[:total] = (calc_packages_units(pack.price * parameters[:quantity].to_i))
           parameters.delete :quantity
         else
           parameters[:total] = purchase_order_total(pack.price).round(2)
