@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @order.payout_left = @order.purchase.price
+    @order.payout_left = reverse_price_calc(@order.total)
     if @order.save
       # minimum amount to require 3d secure
       min_3d_amount = 2999
