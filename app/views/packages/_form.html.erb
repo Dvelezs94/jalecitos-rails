@@ -1,4 +1,5 @@
 <%= form_with(model: package, url: package_form_url_helper, method: form_method_helper, local: true, :html => { :id => "packages_form", class: "pack_form" }) do |form|%>
+<% has_all_pack = params[:action] == 'edit' && (@gig.gig_packages.any? && @gig.gig_packages[2].name != '') %>
 <div class="container-fluid section centered-form packages-builder">
   <h3 id="how-many-pack">Define tus paquetes</h3>
   <div class="col-lg-8 mar-0-auto">
@@ -7,7 +8,7 @@
         <a class="nav-item nav-link package-nav active" id="pack-tab-0" data-toggle="tab" href="#package-0" role="tab" aria-selected="true">Básico</a>
         <a class="nav-item nav-link package-nav <%= "hidden" if params[:action] == 'new' || @gig.gig_packages.none? || @gig.gig_packages[1].name == "" %>" id="pack-tab-1" data-toggle="tab" href="#package-1" role="tab" aria-selected="false">Éstandar</a>
         <a class="nav-item nav-link package-nav <%= "hidden" if params[:action] == 'new' || @gig.gig_packages.none? || @gig.gig_packages[2].name == "" %>" id="pack-tab-2" data-toggle="tab" href="#package-2" role="tab" aria-selected="false">Premium</a>
-        <a href="#" class="pack-tab-displayer <%= "hidden" if params[:action] == 'edit' && (@gig.gig_packages.any? && @gig.gig_packages[2].name != '') %>"><%= icon("fas", "plus") %></a>
+        <a href="#" class="pack-tab-displayer <%= "hidden" if has_all_pack %>" id="new-package-1" ><%= icon("fas", "plus") %></a>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
@@ -115,7 +116,9 @@
         </div>
         <% n += 1  %>
         <% end %>
-
+        <div class="row justify-content-center">
+          <%= button_tag "Nuevo paquete", class: "btn btn-success pack-tab-displayer #{ "hidden" if has_all_pack}", id: "new-package-2" %>
+        </div>
       </div>
     </div>
   </div>
