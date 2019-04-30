@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   before_action :pending_review, only: [:home], :if => :signed_and_rev
   layout :set_layout
-  access user: :all, admin: [:home], all: [:work, :home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots, :sitemap]
+  access user: :all, admin: [:home], all: [:work, :home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots, :sitemap, :install]
   def home
     if params[:current] #if some pagination is present...
       home_paginate
@@ -62,6 +62,9 @@ class PagesController < ApplicationController
   end
 
   def work
+  end
+
+  def install
   end
 
   private
