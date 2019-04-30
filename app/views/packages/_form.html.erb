@@ -74,7 +74,7 @@
                 <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
                   <p class="price-text form-title">Tipo de unidad:</p>
                   <div class="row justify-content-center w-100">
-                    <%= pa.select :unit_type, grouped_options_for_select(unit_options),{},
+                    <%= pa.select :unit_type, grouped_options_for_select(unit_options, selected: pack.unit_type),{},
                      class:"form-control form_fields_#{n} text-center", style: "text-align-last:center;"%>
                     <span class="span-error"></span>
                   </div>
