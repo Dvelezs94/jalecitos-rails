@@ -41,6 +41,16 @@ module MoneyHelper
     {"fee": buy_fee, "subtotal": subtotal}
   end
 
+  # price must be package_order_price * units
+  def calc_packages_units (price)
+    (((price +10) * 1.04) * 1.16).round(2)
+  end
+
+  #get original package/offer price
+  def reverse_price_calc (final_price)
+    (((((final_price/(((1 + $iva) * 100).round())) * 100)/104) * 100) - 10).round(2)
+  end
+
 
 
   # Method to get results in console, this has no real use in the app
