@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @order.payout_left = @order.purchase.price
+    @order.payout_left = reverse_price_calc(@order.total)
     if @order.save
       # minimum amount to require 3d secure
       min_3d_amount = 2999
@@ -148,7 +148,7 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      order_params = params.require(:order).permit(:card_id, :purchase, :purchase_type, :billing_profile_id, :details, :address)
+      order_params = params.require(:order).permit(:card_id, :purchase, :purchase_type, :billing_profile_id, :details, :address, :quantity)
       order_params = set_defaults(order_params)
     end
 
@@ -162,9 +162,23 @@ class OrdersController < ApplicationController
       end
         parameters[:employer_id] = current_user.id
         parameters[:purchase] = pack
-        parameters[:total] = purchase_order_total(pack.price).round(2)
+        if parameters[:quantity].present?
+          validate_quantity_range(pack, parameters[:quantity].to_i)
+          parameters[:total] = (calc_packages_units(pack.price * parameters[:quantity].to_i))
+          parameters.delete :quantity
+        else
+          parameters[:total] = purchase_order_total(pack.price).round(2)
+        end
         parameters
     end
+
+    def validate_quantity_range (pa, quan) # pa = package, quan = quantity
+      if pa.min_amount.nil? || pa.max_amount.nil? || quan < pa.min_amount || pa.max_amount < quan
+        redirect_to request.referrer, alert: "Rango de compra no admitido."
+        return false
+      end
+    end
+
     def check_user_ownership
       if ! my_profile
         flash[:error] = "No tienes permisos para acceder aquí"
@@ -265,7 +279,7 @@ class OrdersController < ApplicationController
     end
 
     def cancel_execution
-      flash[:error] = "Este jale no está disponible"
+      flash[:error] = "Este recurso no está disponible"
       redirect_to root_path
       return
     end

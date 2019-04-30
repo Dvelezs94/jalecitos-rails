@@ -1,13 +1,26 @@
 <% if @show_packages == true  && package.name != "" && package.description != "" && package.price != nil%>
-  <div class="tab-pane fade  <%= "active show" if package.pack_type == "basic" %>" id="<%= "#{package.pack_type}#{device}"%>" role="tabpanel" aria-labelledby="<%= package.pack_type %>-tab">
+<% unit_pack = (package.unit_type != nil && package.max_amount != nil && package.min_amount != nil) ? true: false %>
+  <div class="tab-pane fade  <%= "active show" if package.pack_type == "basic" %>" id="<%= "#{package.pack_type}#{device}"%>" role="tabpanel" aria-labelledby="<%= package.pack_type %>-tab" pack_container pack_price="<%= package.price %>">
     <div class="earnlist-mewrapt">
       <div class="earnlist-me">
         <p class="limpi1"><%= package.name %></p>
-        <p class="limpi2"><%=number_to_currency(purchase_order_total(package.price), precision: 2) %><sub>MXN</sub></p>
+        <p class="packa-price"><%=number_to_currency(purchase_order_total(package.price), precision: 2) %><sub>MXN</sub></p>
         <pre> <p class="limpi3"><%= package.description %></p> </pre>
       </div>
-      <div class="page3-btn">
-        <%= link_to("Contratar", hire_package_path(package)) %>
+      <div class="page3-btn" unit_container>
+        <%= form_with(url: hire_package_path(package), method: :get, :html => { :class => "" }, local: true) do |f| %>
+          <%= f.submit "Contratar", class: "hire-pack" %>
+          <% if unit_pack %>
+            <hr>
+            <div class="div-space-between">
+              <input type="number" name="quantity" class="unit_quantity form-control" value="<%= package.min_amount %>" min="<%= package.min_amount %>" max="<%= package.max_amount %>">
+              <h3><span class="badge"><%= t("packages.unit_type.plural.#{package.unit_type}") %></span></h3>
+            </div>
+          <% end %>
+        <% end %>
+        <% if unit_pack%>
+          <input type="range" class="range-pack unit_range" value="<%= package.min_amount %>" min="<%= package.min_amount %>" max="<%= package.max_amount %>">
+        <% end %>
       </div>
     </div>
   </div>
