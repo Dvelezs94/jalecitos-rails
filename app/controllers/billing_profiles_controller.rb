@@ -16,18 +16,15 @@ class BillingProfilesController < ApplicationController
       else
         flash[:alert] = "Error al crear perfil."
       end
-      referer_params = referer_params(request.referer)
-      begin
-        if referer_params["package_id"].join("") != ""
-          package = Package.find_by_slug(referer_params["package_id"])
-          redirect_to hire_package_path(package)
-        elsif referer_params["offer_id"].join("") != ""
-          offer = Offer.find_by_id(referer_params["offer_id"])
-          redirect_to hire_request_offer_path(offer.request, offer)
-        else
-          redirect_to configuration_path(collapse: "billing")
-        end
-      rescue
+      ref_params = referer_params(request.referer)
+      quantity = ref_params["quantity"].blank? ? nil : ref_params["quantity"][0]
+      if ref_params["package_id"].join("") != ""
+        package = Package.find_by_slug(ref_params["package_id"])
+        redirect_to hire_package_path(package, quantity: quantity)
+      elsif ref_params["offer_id"].join("") != ""
+        offer = Offer.find_by_id(ref_params["offer_id"])
+        redirect_to hire_request_offer_path(offer.request, offer)
+      else
         redirect_to configuration_path(collapse: "billing")
       end
     end

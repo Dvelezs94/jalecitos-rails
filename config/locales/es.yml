@@ -10,6 +10,20 @@ es:
       standard: "Estándar"
       premium: "Premium"
 
+  packages:
+    unit_type:
+      plural:
+        piece: "Piezas"
+        dozen: "Docenas"
+        centimeter: "Centímetros"
+        meter: "Metros"
+        kilometer: "Kilómetros"
+        sec: "Segundos"
+        minute: "Minutos"
+        hour: "Horas"
+        day: "Días"
+
+
   requests:
     status:
       published: "Publicado"
