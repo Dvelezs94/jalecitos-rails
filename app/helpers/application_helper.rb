@@ -200,7 +200,7 @@ module ApplicationHelper
   def meta_tags
     if @gig.present? && current_page?( gig_path(city_slug(@gig.city),@gig) )
         "<title>#{@gig.profession} en #{seo_location(@gig.city)} para #{@gig.name}</title>
-        <meta name='description' content='#{@gig.profession} en #{@gig.location} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos.'>
+        <meta name='description' content='#{@gig.profession} en #{seo_location(@gig.city)} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos.'>
         <meta name='keywords' content='#{@gig.location},#{@gig.profession},#{@gig.tag_list.join(',')}'>
         <meta name='category' content='#{@gig.category.name}'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe

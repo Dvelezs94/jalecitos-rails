@@ -10,8 +10,9 @@ module PackagesHelper
     [
       ['Cantidad',
         [
+          ['Unidad', "unit"],
           ['Pieza', "piece"],
-          ['Docena', "dozen"],
+          ['Docena', "dozen"]
         ]
       ],
       ['Distancia',
@@ -27,6 +28,12 @@ module PackagesHelper
           ['Minuto', "minute"],
           ['Hora', "hour"],
           ['Día', "day"]
+        ]
+      ],
+      ['Área',
+        [
+          ['Centímetro cuadrado', "square_centimeter"],
+          ['Metro cuadrado', "square_meter"]
         ]
       ]
     ]

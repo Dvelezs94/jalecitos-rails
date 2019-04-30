@@ -3253,7 +3253,8 @@ input[type=range].range-pack::-webkit-slider-thumb { /*thing that moves*/
   height: 25px;
   width: 25px;
   border-radius: 50%;
-  background: #fff;
+  border: none;
+  background: #39C27B;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -7px;
@@ -3274,7 +3275,8 @@ input[type=range].range-pack::-moz-range-thumb { /*thing that moves*/
   height: 25px;
   width: 25px;
   border-radius: 50%;
-  background: #fff;
+  border: none;
+  background: #39C27B;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -7px;
@@ -3307,7 +3309,8 @@ input[type=range].range-pack::-ms-thumb { /*thing that moves*/
   height: 25px;
   width: 25px;
   border-radius: 50%;
-  background: #fff;
+  border: none;
+  background: #39C27B;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -7px;

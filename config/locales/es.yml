@@ -22,6 +22,9 @@ es:
         minute: "Minutos"
         hour: "Horas"
         day: "Días"
+        unit: "Unidades"
+        square_centimeter: "centímetros cuadrados"
+        square_meter: "metros cuadrados"
 
 
   requests:
