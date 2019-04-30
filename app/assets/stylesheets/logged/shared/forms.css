@@ -489,8 +489,7 @@ button[disabled] {pointer-events:none}
 }
 span.error,
 div.error,
-.span-error,
-.error-messages{
+.span-error{
   color: red;
 }
 
@@ -558,9 +557,6 @@ div.error,
 .remove-add{
   margin: 0 5px;
 }
-.error-messages{
-  text-align: center;
-}
 .will-show{
   margin-left: auto;
 }
@@ -568,7 +564,7 @@ div.error,
   .will-show{
     margin: 2vh auto;
   }
-  .will-earn{
+  .centered{
     margin: 0 auto;
     text-align: center;
   }

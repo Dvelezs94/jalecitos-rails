@@ -4,7 +4,7 @@
             <%= render "shared_user/hire/disclaimer" %>
         </div>
         <div class="paquete-text">
-          <strong><%= number_to_currency(purchase_order_total(@package.price), precision: 2) %> MXN</strong>
+          <strong><%= number_to_currency(purchase_order_total(@base_price), precision: 2) %> MXN</strong>
             <h4>Paquete <%= t "gigs.packages.#{@package.pack_type}" %></h4>
 
         </div>
@@ -13,14 +13,18 @@
            <pre><%= @package.description %></pre>
         </div>
         <div class="total-a">
+          <% if params[:quantity].present? %>
+          <p> <strong>Cantidad</strong><span><%= params[:quantity] %> <%= t("packages.unit_type.plural.#{@package.unit_type}") %></span></p>
+          <% end %>
           <p> <strong>Subtotal</strong><span><%= number_to_currency(@price[:subtotal]) %> MXN</span></p>
           <p><strong>Comisión</strong><span><%= number_to_currency(@price[:fee]) %> MXN</span></p>
-          <p><strong>Total</strong><span><%= number_to_currency(purchase_order_total(@package.price), precision: 2) %> MXN</span></p>
+          <p><strong>Total</strong><span><%= number_to_currency(purchase_order_total(@base_price), precision: 2) %> MXN</span></p>
         </div>
         <div class="continuars-btn">
           <%= f.hidden_field :purchase, :value => params[:id] %>
           <%= f.hidden_field :purchase_type, :value => "Package" %>
-          <div class="">
+          <%= f.hidden_field :quantity, :value => params[:quantity] if params[:quantity].present?  %>
+          <div>
               <%= f.button "Continuar", class: "btn btn-success", id: "purchase", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Comprando.."} %>
           </div>
         </div>

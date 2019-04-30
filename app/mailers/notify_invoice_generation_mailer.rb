@@ -9,7 +9,7 @@ class NotifyInvoiceGenerationMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
-            "ALIAS": user.alias,
+            "ALIAS": (user.name || user.alias),
             "PDF_LINK": pdf_link,
             "XML_LINK": xml_link,
             "ORDER_ID": order_id

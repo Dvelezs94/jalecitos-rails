@@ -1,0 +1,40 @@
+$(document).on('turbolinks:load', function() {
+  displayHireByInputs();
+  $(".hire_by").change(displayHireInput);
+});
+
+function displayHireByInputs() {
+  inputs = $(".hire_by"); //get all checkbox inputs
+  $.each(inputs, function( index, inp ) {
+    the_id = inp.id;
+    container = $("[display_id="+the_id+"]")
+    if ( $(inp).prop('checked') ) { //if checked, remove class hidden of its corresponding area
+      container.removeClass("hidden");
+    }
+    else {
+      container.find(":input").prop( "disabled", true ); //disable hidden inputs
+      container.find(":input").attr("pack_validate", "false"); //mark as unused so package validation doesnt use it
+      container.find(":input").val(""); //empty the price value of the hidden container
+    }
+    min_amount = container.find(".min_amount");
+    if (min_amount.val()== "") { //put min amount default value if no one
+      min_amount.val(1);
+    }
+  });
+}
+
+function displayHireInput () {
+  the_id = this.id;
+
+  min_amount = $(this).closest(".form-block").find(".min_amount");
+
+  old_block = $(this).closest(".form-block").find("[display_id]:visible");
+  old_block.addClass("hidden"); //hide the visible block
+  old_block.find(":input").prop( "disabled", true ); //disable the old inputs
+  old_block.find(":input").attr("pack_validate", "false"); // mark inputs for no validation
+
+  new_block = $("[display_id="+the_id+"]");
+  new_block.removeClass("hidden"); //show the hidden block
+  new_block.find(":input").prop( "disabled", false ); //enable the new inputs
+  new_block.find(":input").attr("pack_validate", "true"); // mark inputs for validation
+}
