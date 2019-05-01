@@ -1,0 +1,26 @@
+<h1>Verificacion del usuario <%= @verification.user.alias %></h1>
+
+<h2>CURP</h2>
+<p><%= @verification.curp %></p>
+
+<h2>Identificacion</h2>
+<% @verification.identification_urls.each do |id| %>
+  <%=  image_tag(id)  %>
+<% end %>
+
+<h2>Comprobande de Domicilio</h2>
+<%= image_tag @verification.address.url %>
+
+<h2>Carta no antecedentes</h2>
+<%= image_tag @verification.criminal_letter.url %>
+
+<% if @verification.pending? %>
+<h2>Validar</h2>
+<%= link_to "Aprobar", approve_verification_path(@verification.id), title: "aceptar", class: "fa-2x", :data => {:confirm => 'Seguro que quieres aprovar?'}, method: :put %>
+
+
+<%= form_for @verification, url:  deny_verification_path, method: :put do |f| %>
+  <%= f.text_area :denial_details %>
+  <%= f.submit "Create" %>
+<% end %>
+<% end %>

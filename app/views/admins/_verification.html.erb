@@ -1,16 +1,5 @@
 <tr>
   <td><%= link_to "#{verification.user.slug}", user_path(verification.user) %></td>
-  <td><%= verification.curp %></td>
-  <td>
-  <% verification.identification_urls.each do |id| %>
-    <%=  link_to icon("fas","eye"), id, target: :_blank  %>
-  <% end %>
-  </td>
-  <td><%= link_to icon("fas","eye"), verification.address.url, target: :_blank %></td>
-  <td><%= link_to icon("fas","eye"), verification.criminal_letter.url, target: :_blank %></td>
   <td><%= verification.status %></td>
-  <% if verification.status == "pending" %>
-  <td><%= link_to icon("fas","check"), approve_verification_path(verification.id), title: "aceptar", class: "fa-2x", method: :put %></td>
-  <td><%= link_to icon("fas","times"), deny_verification_path(verification.id), title: "denegar", class: "fa-2x", :data => {:confirm => 'Seguro que quieres denegar?'}, method: :put %></td>
-  <% end %>
+  <td><%= link_to "ver", show_verification_admins_path(verification) %></td>
 </tr>

@@ -3254,7 +3254,7 @@ input[type=range].range-pack::-webkit-slider-thumb { /*thing that moves*/
   width: 25px;
   border-radius: 50%;
   border: none;
-  background: #39C27B;
+  background: var(--dark-green);
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -7px;
