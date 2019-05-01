@@ -9,7 +9,7 @@ class VerificationMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
-            "ALIAS": verification.user.slug
+            "ALIAS": (verification.user.name || verification.user.alias)
           }
         }
       ],
@@ -33,8 +33,8 @@ class VerificationMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
-            "ALIAS": verification.user.slug,
-            "DETAILS": verification.denial_details
+            "ALIAS": (verification.user.name || verification.user.alias),
+            "DETAILS": (verification.denial_details ||  "Sin informacion extra.")
           }
         }
       ],

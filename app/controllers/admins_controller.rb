@@ -18,7 +18,8 @@ class AdminsController < ApplicationController
   end
 
   def users
-    @users =  User.order(id: :asc).page(params[:user]).per(25)
+    @users =  User.order(created_at: :desc).page(params[:user]).per(25)
+    @malformed_users =  User.where(slug: nil)
     set_paginator
   end
 
@@ -40,6 +41,10 @@ class AdminsController < ApplicationController
   def verifications
     @verifications = Verification.order(status: :asc).page(params[:verification]).per(25)
     set_paginator
+  end
+
+  def show_verification
+      @verification = Verification.find(params[:id])
   end
 
   def tickets
