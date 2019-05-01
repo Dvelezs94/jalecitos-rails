@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get :disputes
       get :bans
       get :verifications
+      get '/verifications/:id' => 'admins#show_verification', as: "show_verification"
       post :create_openpay_user
       get :openpay_dashboard
       get :tickets
