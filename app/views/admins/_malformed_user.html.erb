@@ -1,0 +1,8 @@
+<tr>
+  <td><%= malformed_user.name %></td>
+  <td><%= malformed_user.email %></td>
+  <td><%= malformed_user.roles %></td>
+  <td>Member since <%= distance_of_time_in_words(malformed_user.created_at, Time.now) %> ago</td>
+  <td><%= malformed_user.slug %></td>
+  <td><%= malformed_user.alias %></td>
+</tr>

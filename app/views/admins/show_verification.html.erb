@@ -5,14 +5,14 @@
 
 <h2>Identificacion</h2>
 <% @verification.identification_urls.each do |id| %>
-  <%=  image_tag(id)  %>
+  <%=  image_tag(id, style: 'height:auto;max-width:50vw;', :data => {lity: true})  %>
 <% end %>
 
 <h2>Comprobande de Domicilio</h2>
-<%= image_tag @verification.address.url %>
+<%= image_tag @verification.address.url, style: 'height:auto;max-width:50vw;', :data => {lity: true} %>
 
 <h2>Carta no antecedentes</h2>
-<%= image_tag @verification.criminal_letter.url %>
+<%= image_tag @verification.criminal_letter.url, style: 'height:auto;max-width:50vw;', :data => {lity: true} %>
 
 <% if @verification.pending? %>
 <h2>Validar</h2>
@@ -20,7 +20,7 @@
 
 
 <%= form_for @verification, url:  deny_verification_path, method: :put do |f| %>
-  <%= f.text_area :denial_details %>
-  <%= f.submit "Create" %>
+  <%= f.text_area :denial_details, required: true %>
+  <%= f.submit "Denegar" %>
 <% end %>
 <% end %>
