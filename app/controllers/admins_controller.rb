@@ -19,6 +19,7 @@ class AdminsController < ApplicationController
 
   def users
     @users =  User.order(created_at: :desc).page(params[:user]).per(25)
+    @malformed_users =  User.where(slug: nil)
     set_paginator
   end
 
