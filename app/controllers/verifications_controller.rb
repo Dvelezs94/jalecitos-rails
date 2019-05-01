@@ -25,6 +25,7 @@ class VerificationsController < ApplicationController
   end
 
   def deny
+    @verification.update!(denial_details: params[:verification][:denial_details])
     @verification.denied!
     redirect_to root_path, notice: "El usuario ha sido denegado y notificado"
   end
