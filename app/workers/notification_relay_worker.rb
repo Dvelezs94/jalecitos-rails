@@ -10,6 +10,11 @@ class NotificationRelayWorker
 
     # Create push notification
     @message = {
+      priority: 'high',
+      data: {
+          title: "Jalecitos",
+          message: build_notification_text(notification, notification.notifiable, false)
+      },
       notification: {
         title: "Jalecitos",
         body:  build_notification_text(notification, notification.notifiable, false),
