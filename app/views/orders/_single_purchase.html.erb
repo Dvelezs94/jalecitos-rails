@@ -25,6 +25,9 @@
         <div class="Paquete-Básico">
             <% if single_purchase.purchase_type == "Package"%>
             <h5>Paquete <%= t "gigs.packages.#{single_purchase.purchase.pack_type}" rescue "Eliminado"%></h5>
+            <% if single_purchase.unit_type && single_purchase.unit_count %>
+            <h5>Numero de <%= t("packages.unit_type.plural.#{single_purchase.unit_type}") %>: <%= single_purchase.unit_count %></h5>
+            <% end %>
             <% else %>
             <h5>Pedido</h5>
             <% end %>

@@ -165,6 +165,8 @@ class OrdersController < ApplicationController
         if parameters[:quantity].present?
           validate_quantity_range(pack, parameters[:quantity].to_i)
           parameters[:total] = (calc_packages_units(pack.price * parameters[:quantity].to_i))
+          parameters[:unit_type] = pack.unit_type
+          parameters[:unit_count] = parameters[:quantity]
           parameters.delete :quantity
         else
           parameters[:total] = purchase_order_total(pack.price).round(2)
