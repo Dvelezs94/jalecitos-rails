@@ -26,7 +26,7 @@ class Package < ApplicationRecord
   private
   def check_orders
     if self.orders.where(status: [:in_progress, :pending, :disputed]).limit(1).any?
-      puts "AQUI"*100
+      throw :abort
     end
   end
 
