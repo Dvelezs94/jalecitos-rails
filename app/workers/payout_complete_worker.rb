@@ -57,6 +57,10 @@ class PayoutCompleteWorker
 
   def send_payout_push
     @message = {
+      data: {
+          title: "Jalecitos",
+          message: "Los fondos por la cantidad de #{@balance_left} han sido depositados"
+      },
       notification: {
         title: "Fondos Depositados",
         body:  "Los fondos por la cantidad de #{@balance_left} han sido depositados",
