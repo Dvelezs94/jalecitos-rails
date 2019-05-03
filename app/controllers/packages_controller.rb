@@ -43,6 +43,7 @@ class PackagesController < ApplicationController
           else
             @success = false
             @active_orders = true
+            @error = record.errors.full_messages.first
             break
           end
         end
@@ -119,19 +120,20 @@ class PackagesController < ApplicationController
 
   def validate_create
     params[:packages].each do |pack|
-      if pack[:max_amount].present?
-        @error = "La cantidad máxima de unidades a vender multiplicadas por su precio unitario supera los 10,000 MXN" if (pack[:price].to_f * pack[:max_amount].to_f > 10000)
-        @error = "No puedes vender menos de 1 unidad" if (pack[:min_amount].to_f < 1 )
-        @error = "El mínimo de unidades debe ser menor al mayor número de unidades" if (pack[:min_amount].to_f >= pack[:max_amount].to_f )
-        @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price] != "" && pack[:price].to_f < 1)
-        @error = "No puedes ganar arriba de de 5000 MXN por unidad" if (pack[:price] != "" && pack[:price].to_f > 5000)
-      else
-        @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price] != "" && pack[:price].to_f < 100)
-        @error = "No puedes ganar arriba de de 10,000 MXN" if (pack[:price] != "" && pack[:price].to_f > 10000)
-      end
-      @error = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
-      @error = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
-      if @error
+      @pack = Package.new( package_params(pack).merge(:gig_required => false) )
+      # if pack[:max_amount].present?
+      #   @error = "La cantidad máxima de unidades a vender multiplicadas por su precio unitario supera los 10,000 MXN" if (pack[:price].to_f * pack[:max_amount].to_f > 10000)
+      #   @error = "No puedes vender menos de 1 unidad" if (pack[:min_amount].to_f < 1 )
+      #   @error = "El mínimo de unidades debe ser menor al mayor número de unidades" if (pack[:min_amount].to_f >= pack[:max_amount].to_f )
+      #   @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price] != "" && pack[:price].to_f < 1)
+      #   @error = "No puedes ganar arriba de de 5000 MXN por unidad" if (pack[:price] != "" && pack[:price].to_f > 5000)
+      # else
+      #   @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price] != "" && pack[:price].to_f < 100)
+      #   @error = "No puedes ganar arriba de de 10,000 MXN" if (pack[:price] != "" && pack[:price].to_f > 10000)
+      # end
+      # @error = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
+      # @error = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
+      if is_filled(@pack) && ! @pack.valid? #the package is filled and isnt valid
         render "error"
         break
       end
@@ -139,23 +141,31 @@ class PackagesController < ApplicationController
   end
   def validate_update
     @gig.gig_packages.each do |record|
-      pack = params[:packages]["#{record.slug}"]
-      if pack[:max_amount].present?
-        @error = "La cantidad máxima de unidades a vender multiplicadas por su precio unitario supera los 10,000 MXN" if (pack[:price].to_f * pack[:max_amount].to_i > 10000)
-        @error = "No puedes vender menos de 1 unidad" if (pack[:min_amount].to_i < 1 )
-        @error = "El mínimo de unidades debe ser menor al mayor número de unidades" if (pack[:min_amount].to_i >= pack[:max_amount].to_i )
-        @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price] != "" && pack[:price].to_f < 1)
-        @error = "No puedes ganar arriba de de 5000 MXN por unidad" if (pack[:price] != "" && pack[:price].to_f > 5000)
-      else
-        @error = "El precio es demasiado bajo o no se proporcionó" if ( pack[:price] != "" && pack[:price].to_f < 100)
-        @error = "No puedes ganar arriba de de 10,000 MXN" if (pack[:price] != "" && pack[:price].to_f > 10000)
-      end
-      @error = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
-      @error = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
-      if @error
+      @pack = Package.new( pack_params(record.slug).merge(:gig_required => false) )
+      # if pack[:max_amount].present?
+      #   @error = "La cantidad máxima de unidades a vender multiplicadas por su precio unitario supera los 10,000 MXN" if (pack[:price].to_f * pack[:max_amount].to_i > 10000)
+      #   @error = "No puedes vender menos de 1 unidad" if (pack[:min_amount].to_i < 1 )
+      #   @error = "El mínimo de unidades debe ser menor al mayor número de unidades" if (pack[:min_amount].to_i >= pack[:max_amount].to_i )
+      #   @error = "El precio es demasiado bajo o no se proporcionó" if (pack[:price] != "" && pack[:price].to_f < 1)
+      #   @error = "No puedes ganar arriba de de 5000 MXN por unidad" if (pack[:price] != "" && pack[:price].to_f > 5000)
+      # else
+      #   @error = "El precio es demasiado bajo o no se proporcionó" if ( pack[:price] != "" && pack[:price].to_f < 100)
+      #   @error = "No puedes ganar arriba de de 10,000 MXN" if (pack[:price] != "" && pack[:price].to_f > 10000)
+      # end
+      # @error = "Sólo se admiten como máximo 1000 caracteres en la descripción" if pack[:description].length > 1000
+      # @error = "El nombre contiene más de 100 caracteres" if pack[:name].length > 100
+      if is_filled(@pack) && ! @pack.valid? #the package is filled and isnt valid
         render "error"
         break
       end
+    end
+  end
+
+  def is_filled pack
+    if pack[:name].present? || pack[:description].present? || pack[:price].present?
+      return true
+    else
+      return false
     end
   end
 

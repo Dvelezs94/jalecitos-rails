@@ -10,7 +10,7 @@
             <%= form_with url: user_search_path, method: :get ,:html => {class: "search-form"}, id: "search-form" , local: true do |f|%>
             <div class="form">
               <%= icon("fas", "search", onclick: "$(this).closest('form').find('input[type=submit]').click()", style: "cursor: pointer;") %>
-              <%= f.search_field :query, value: params[:query], class: " desktop-query", placeholder: "Busca algo" %>
+              <%= f.search_field :query, value: params[:query], class: " desktop-query ahead-query", placeholder: "Busca algo" %>
               <%= f.submit "continuar", style: "visibility:hidden; position: absolute;" %>
             </div>
             <div class="button-area">
