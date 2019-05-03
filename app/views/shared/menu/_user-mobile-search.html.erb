@@ -2,7 +2,7 @@
 
   <%= form_with url: user_search_path(), method: :get ,:html => {class: "mobile-search-form"} , local: true do |f|%>
   <%= icon("fas", "search", onclick: "$(this).closest('form').find('input[type=submit]').click()", style: "cursor: pointer;") %>
-  <%= f.search_field :query, value: params[:query], class: "mobile-query", placeholder: "Busca algo" %>
+  <%= f.search_field :query, value: params[:query], class: "mobile-query ahead-query", placeholder: "Busca algo" %>
   <%= f.submit "continuar", style: "visibility:hidden; position: absolute;" %>
   <nav class="filters navbar navbar-expand-lg navbar-light bg-light" style="<%= "display:none;" if !current_page?(user_search_path) %>">
     <%= f.text_field :location, class: 'form-control', id: "search_autocomplete_mobile", size: 50, tabindex: -1,
