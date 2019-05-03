@@ -6,7 +6,7 @@ module PushFunctions
     @user = User.find(user_id)
     @user_subscriptions = @user.push_subscriptions.pluck(:auth_key)
     fcm = FCM.new(ENV.fetch("GCM_SERVER_KEY"))
-    if @user_subscriptions.count > 0
+    if @user_subscriptions.length > 0
       response = fcm.send(@user_subscriptions, options)
       # delete unused push subsciptions
       response[:not_registered_ids].each do |ps|

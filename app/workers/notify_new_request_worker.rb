@@ -34,6 +34,11 @@ class NotifyNewRequestWorker
       @notify_to -= [request.user_id]
       #build notification
       @message = {
+        priority: 'high',
+        data: {
+            title: "Jalecitos",
+            message: "¡Encontramos un pedido que puede interesarte! - #{request.title}"
+        },
         notification: {
           title: "Jalecitos",
           body:  "¡Encontramos un pedido que puede interesarte! - #{request.title}",
