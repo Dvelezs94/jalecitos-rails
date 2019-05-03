@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_24_012247) do
+ActiveRecord::Schema.define(version: 2019_05_03_173310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,6 +213,8 @@ ActiveRecord::Schema.define(version: 2019_04_24_012247) do
     t.string "address"
     t.string "details"
     t.float "payout_left"
+    t.string "unit_type"
+    t.integer "unit_count"
     t.index ["billing_profile_id"], name: "index_orders_on_billing_profile_id"
     t.index ["employer_id", "employee_id"], name: "index_orders_on_employer_id_and_employee_id"
     t.index ["payout_id"], name: "index_orders_on_payout_id"
@@ -238,8 +240,8 @@ ActiveRecord::Schema.define(version: 2019_04_24_012247) do
     t.bigint "gig_id"
     t.string "slug"
     t.integer "max_amount"
-    t.integer "unit_type"
     t.integer "min_amount"
+    t.integer "unit_type"
     t.index ["gig_id"], name: "index_packages_on_gig_id"
     t.index ["slug"], name: "index_packages_on_slug", unique: true
   end
