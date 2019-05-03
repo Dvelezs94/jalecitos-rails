@@ -8,8 +8,7 @@ $(document).on('turbolinks:load', function() {
       event.preventDefault();
       displayTab();
       //move to up if button 2
-      if(this.id == "new-package-2") {
-        console.log("NET")      
+      if(this.id == "new-package-2") {   
         $('html, body').animate({
           scrollTop: ($("nav.pack-names").offset().top-200)
         }, 1000);
