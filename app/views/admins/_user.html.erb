@@ -1,6 +1,9 @@
 <tr>
-  <td><%= user.name %></td>
+  <td><%= link_to(user.name, user_path(user.slug)) %></td>
   <td><%= user.email %></td>
   <td><%= user.roles %></td>
   <td>Member since <%= distance_of_time_in_words(user.created_at, Time.now) %> ago</td>
+  <% if user.verified? %>
+  <td><%= link_to(icon("fas", "id-badge"), cancel_verification_path(user.slug), method: :put, :data => {:confirm => "seguro quieres cancelar la suscripcion del usuario #{user.slug}?"}) %></td>
+  <% end %>
 </tr>
