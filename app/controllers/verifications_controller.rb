@@ -3,7 +3,8 @@ class VerificationsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_current_verifications
   before_action :set_verification, only: [:approve, :deny]
-  access user: [:new, :create], admin: [:approve, :deny]
+  before_action :verify_previous_work, only: [:new, :create]
+  access user: [:new, :create], admin: [:approve, :deny, :cancel]
 
   def new
     @verification = Verification.new
@@ -30,6 +31,12 @@ class VerificationsController < ApplicationController
     redirect_to root_path, notice: "El usuario ha sido denegado y notificado"
   end
 
+  def cancel
+    @user = User.find_by_slug(params[:id])
+    @user.update(verified: false)
+    redirect_to root_path, notice: "Se ha actualizado el usuario"
+  end
+
   private
 
   def set_verification
@@ -50,6 +57,13 @@ class VerificationsController < ApplicationController
       return false
     elsif (current_user.verifications.pending.any?)
       redirect_to root_path, notice: "Ya tienes una verificacion en proceso"
+      return false
+    end
+  end
+
+  def verify_previous_work
+    if current_user.sales.completed.length <= 10
+      redirect_to root_path, notice: "Debes tener más de 10 ventas para solicitar una verificación"
       return false
     end
   end
