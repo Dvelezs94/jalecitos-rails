@@ -130,6 +130,7 @@ Rails.application.routes.draw do
     member do
       put :approve
       put :deny
+      put :cancel
     end
   end
   get 'mobile_sign_in', to: 'mobiles#log_in'

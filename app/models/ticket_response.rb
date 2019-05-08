@@ -16,6 +16,10 @@ class TicketResponse < ApplicationRecord
   end
 
   def support_email
-    TicketMailer.support_responded(self).deliver if self.user.has_role?(:admin)
+    if self.user.has_role?(:admin)
+      TicketMailer.support_responded(self).deliver
+    else
+      TicketMailer.user_responded(self).deliver
+    end
   end
 end
