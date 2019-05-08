@@ -1458,7 +1458,19 @@ p.gig-price {
   display: none;
 }
 
-.profileview-total span a {
+.user_info_row {
+  align-items: center;
+  max-width: 70%;
+}
+.user_info_row p {
+  margin-bottom: 0;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.user_name_tablet_phone {
   color: #000;
   font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
   font-weight: 700;

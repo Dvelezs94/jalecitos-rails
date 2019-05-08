@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  if ( $(".gig_form").length > 0 ) {    
+  if ( $(".gig_form").length > 0 ) {
     //detecting changes on each form
     $(document).on('change keyup paste', ':input', function() {
       window.changed = true;
@@ -35,9 +35,11 @@ $(document).on('turbolinks:load', function() {
         }
         form = form_cont.find("#section_parent-p-" + currentIndex + " form").first();
         if (form.valid()) {
-          return syncAjax(form)
+          respons = syncAjax(form);
+          console.log();
+          return respons.status
         } else {
-          return false
+          return false;
         }
 
       },
@@ -48,9 +50,12 @@ $(document).on('turbolinks:load', function() {
       onFinishing: function(event, currentIndex) {
         form = form_cont.find("#section_parent-p-" + currentIndex + " form");
         if (form.valid() && validatePackages()) {
-          return syncAjax(form)
+          sent = syncAjax(form);
+          console.log(sent);
+          console.log(window.success);
+          return sent;
         } else {
-          return false
+          return false;
         }
       },
       onFinished: function(event, currentIndex) {
@@ -60,13 +65,16 @@ $(document).on('turbolinks:load', function() {
   }
 });
 
-function syncAjax(form) {
-  return $.ajax({
-    type: form.find("[name='_method']").val() || form[0].method,
-    url: form[0].action,
-    dataType: "script",
-    data: form.find("[name!='_method']").serialize(),
-    success: function() {},
-    error: function() {}
-  });
+async function syncAjax(form) {
+    return await $.ajax({
+      type: form.find("[name='_method']").val() || form[0].method,
+      url: form[0].action,
+      dataType: "script",
+      data: form.find("[name!='_method']").serialize(),
+      success: function() {},
+      error: function() {}
+    });
+}
+function get_response() {
+  alert("RECIBIDO!!");
 }
