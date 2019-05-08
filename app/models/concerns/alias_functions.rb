@@ -11,4 +11,8 @@ module AliasFunctions
       end
     end
   end
+
+  def test_mail mail
+    mail.split("@").first.gsub(/[^a-zA-Z0-9\-\_]/,"")
+  end
 end

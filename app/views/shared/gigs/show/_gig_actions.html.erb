@@ -1,6 +1,6 @@
 <div class="gig_actions">
   <%= link_to icon("fas","share-alt", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
   <%= link_to status_text_helper(@gig), toggle_status_gig_path(@gig) unless @gig.banned? || @gig.gig_packages[0].nil? %>
-  <%= link_to icon("fas","pen", class: "fa-lg gig_action_icon", title: "Editar"), edit_gig_path(@gig) %>
-  <%= link_to icon("fas","trash", class: "fa-lg gig_action_icon", title: "Eliminar"), gig_path(@gig), method: :delete, data: { confirm: '¿Estás seguro de querer borrar este trabajo?' }%>
+  <%= link_to icon("fas","pen", class: "fa-lg gig_action_icon", title: "Editar"), edit_gig_path(city_slug(@gig.city), @gig) %>
+  <%= link_to icon("fas","trash", class: "fa-lg gig_action_icon", title: "Eliminar"), gig_path(city_slug(@gig.city),@gig), method: :delete, data: { confirm: '¿Estás seguro de querer borrar este trabajo?' }%>
 </div>

@@ -1,22 +1,20 @@
 <div class="gig-query col-xl-3 col-lg-3">
-  <%= link_to gig_path(gig.slug) do %>
+  <%= link_to gig_path(city_slug(gig.city),gig.slug) do %>
   <div class="gig-query-content" style="display:flex;flex-wrap:wrap;">
     <div class="col-xl-12 col-lg-12 col-md-4 col-sm-4 col-5 padingminus1" style="padding: 0;">
-        <%= image_tag( image_display_helper(gig.images[0]), class: "gig-image") %>
+        <%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), class: "gig-image") %>
     </div>
     <div class="gig-text col-xl-12 col-lg-12 col-md-8 col-sm-8 col-7">
       <div style="padding:5px;">
         <div class="tabbigissue1-total">
           <p class="location truncate"><%=prof_or_loc gig%></p>
-          <p class="coa2 multi-line-truncate-2"><%= gig.title%></p>
-          <p class="coa3">Desde
-            <%= number_to_currency(purchase_order_total(gig.query_pack.first.price)) %>
-            MXN</p>
+          <h4 class="gig-title multi-line-truncate-2 min-height-30px"><%= gig.min_title%></h4>
+          <p class="gig-price truncate">Desde
+            <%= query_home_or_profile_helper(gig) %>
+            <!-- MXN--></p>
         </div>
         <div class="tabstar-no" style="display:flex;align-items:center;">
-          <%= star_display_helper(gig.score_average) %>
-
-          <%= "<span>(#{gig.score_times})</span>".html_safe if gig.score_times > 0 %>
+          <%= one_star_disp_help gig %>
         </div>
       </div>
     </div>

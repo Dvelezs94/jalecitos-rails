@@ -1,4 +1,5 @@
 class OrderMailer < ApplicationMailer
+  include ApplicationHelper
   def error_worker(order_id)
     data = {
       "personalizations": [
@@ -45,10 +46,10 @@ class OrderMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
-            "GIG_URL": gig_url(@order.purchase.gig),
+            "GIG_URL": gig_url(city_slug(@order.purchase.gig.city), @order.purchase.gig),
             "GIG_NAME": @order.purchase.gig.title,
             "EMPLOYER": @order.employer.alias,
-            "EMPLOYEE": @order.employee.alias,
+            "EMPLOYEE": (@order.employee.name || @order.employee.alias),
             "TRANSACTION_URL": finance_url(:table => "sales"),
             "PACKAGE": @order.purchase.pack_type
           }
@@ -81,9 +82,9 @@ class OrderMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
-            "GIG_URL": gig_url(@order.purchase.gig),
+            "GIG_URL": gig_url(city_slug(@order.purchase.gig.city), @order.purchase.gig),
             "GIG_NAME": @order.purchase.gig.title,
-            "EMPLOYER": @order.employer.alias,
+            "EMPLOYER": (@order.employer.name || @order.employer.alias),
             "EMPLOYEE": @order.employee.alias,
             "PACKAGE": @order.purchase.pack_type,
             "PACKAGE_DESCRIPTION": @order.purchase.description,
@@ -122,7 +123,7 @@ class OrderMailer < ApplicationMailer
             "REQUEST_NAME": @order.purchase.request.name,
             "REQUEST_INFORMATION": @order.purchase.request.description,
             "EMPLOYER": @order.employer.alias,
-            "EMPLOYEE": @order.employee.alias,
+            "EMPLOYEE": (@order.employee.name || @order.employee.alias),
             "TRANSACTION_URL": finance_url(:table => "purchases"),
             "OFFER_TOTAL":  @order.purchase.price
           }
@@ -157,7 +158,7 @@ class OrderMailer < ApplicationMailer
           "dynamic_template_data": {
             "REQUEST_URL": request_url(@order.purchase.request.slug),
             "REQUEST_NAME": @order.purchase.request.name,
-            "EMPLOYER": @order.employer.alias,
+            "EMPLOYER": (@order.employer.name || @order.employer.alias),
             "EMPLOYEE": @order.employee.alias,
             "OFFER_DESCRIPTION": @order.purchase.description,
             "TOTAL":  @order.total
@@ -186,7 +187,7 @@ class OrderMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
-            "EMPLOYER": @order.employer.alias,
+            "EMPLOYER": (@order.employer.name || @order.employer.alias),
             "EMPLOYEE": @order.employee.alias,
             "ORDER_ID": @order.uuid
           }
@@ -214,7 +215,7 @@ class OrderMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
-            "EMPLOYER": @order.employer.alias,
+            "EMPLOYER": (@order.employer.name || @order.employer.alias),
             "EMPLOYEE": @order.employee.alias,
             "ORDER_ID": @order.uuid
           }
@@ -243,7 +244,7 @@ class OrderMailer < ApplicationMailer
           ],
           "dynamic_template_data": {
             "EMPLOYER": @order.employer.alias,
-            "EMPLOYEE": @order.employee.alias,
+            "EMPLOYEE": (@order.employee.name || @order.employee.alias),
             "ORDER_ID": @order.uuid
           }
         }
@@ -275,7 +276,7 @@ class OrderMailer < ApplicationMailer
             }
           ],
           "dynamic_template_data": {
-            "ALIAS": @order.employer.alias,
+            "ALIAS": (@order.employer.name || @order.employer.alias),
             "ORDER_ID": @order.uuid
           }
         }

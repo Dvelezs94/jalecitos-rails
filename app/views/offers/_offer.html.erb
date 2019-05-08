@@ -16,11 +16,9 @@
   </div>
   <% if current_user == offer.user || current_user == offer.request.user %>
     <div class="ipsum-text">
-    <% if offer.materials %>
-    <pre><strong>El precio establecido cubre material a utilizar.</strong></pre>
-    <% else %>
-    <pre><strong>El precio establecido NO cubre material a utilizar </strong></pre>
-    <% end %>
+
+    <pre><strong>El precio establecido<%= (offer.materials) ? " " : " NO " %>cubre material a utilizar.</strong></pre>
+
     <pre><p><%=offer.description %></p></pre>
     </div>
   <% end %>
@@ -32,7 +30,7 @@
   <% end %>
   <% if current_user == offer.request.user && @hires_open %>
     <div class="Borrar-btn">
-      <%= link_to("Mensaje", conversations_path(user_id: offer.user.alias, model_id: @request.id, model: "Request"), class: "Contratar-b") %>
+      <%= link_to("Mensaje", conversations_path(user_id: offer.user.slug, model_id: @request.id, model: "Request"), class: "Contratar-b") %>
       <%= link_to("Contratar", hire_request_offer_path(offer.request.slug, offer), class: "Contratar-b") %>
     </div>
   <% end %>

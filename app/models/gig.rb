@@ -4,6 +4,7 @@ class Gig < ApplicationRecord
   include LocationFunctions
   include FilterRestrictions
   include GigRequestFunctions
+  require 'voight_kampff'
   #search
   searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
   def search_data
@@ -48,11 +49,12 @@ class Gig < ApplicationRecord
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
   validates_length_of :description, :maximum => 1000, :message => "debe contener como máximo 1000 caracteres."
   validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
+  validates_length_of :youtube_url, :maximum => 250, :message => "debe contener como máximo 250 caracteres." #this message doesnt get shown, i didnt displayed it
   validate :location_validate
   #Gallery validations
   validates :images, length: {
   maximum: 5,
-  message: 'no puedes tener más de 5 imágenes'
+  message: 'no puedes tener más de 5 elementos'
   }
   #Custom fields
   enum status: { draft: 0, published: 1, banned: 2, wizard: 3}
@@ -71,7 +73,21 @@ class Gig < ApplicationRecord
   end
 
   def title
-    "Voy a #{to_downcase(self.name)}"
+    "Ofrezco #{to_downcase(self.name)}"
+  end
+
+  def min_title #used in miniatures of gigs
+    title = self.name
+    title[0] = title[0].upcase # make upcase first char
+    title
+  end
+
+  def punch(request = nil)
+    if request.try(:bot?)
+      true
+    else
+      self.increment!(:visits)
+    end
   end
 
   private

@@ -1,8 +1,8 @@
 <div class="gig-profile col-xl-4 col-lg-4">
-  <%= link_to gig_path(gig.slug) do %>
+  <%= link_to gig_path(city_slug(gig.city),gig.slug) do %>
   <div class="gig-query-content" style="display:flex;flex-wrap:wrap;">
     <div class="col-xl-12 col-lg-12 col-md-4 col-sm-4 col-5 padingminus1" style="padding: 0;">
-        <%= image_tag( image_display_helper(gig.images[0]), class: "gig-image", lazy: true) %>
+        <%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), class: "gig-image", lazy: true) %>
     </div>
     <div class="gig-text col-xl-12 col-lg-12 col-md-8 col-sm-8 col-7">
       <div style="padding:5px;">
@@ -11,15 +11,13 @@
             <p class="location truncate"><%= gig.location%></p>
             <%= "<span class='gig-status gig-#{gig.status}'> #{t "gigs.status."+gig.status}</span>".html_safe if gig.user == current_user %>
           </div>
-          <p class="coa2 multi-line-truncate-2 min-height-42px"><%= gig.title %></p>
-          <p class="coa3">Desde
+          <h4 class="gig-title multi-line-truncate-2 min-height-30px"><%= gig.min_title %></h4>
+          <p class="gig-price truncate">Desde
             <%= query_home_or_profile_helper gig %>
-            MXN</p>
+            <!-- MXN --></p>
         </div>
         <div class="tabstar-no" style="display:flex;align-items:center;">
-          <%= star_display_helper(gig.score_average) %>
-
-          <%= "<span>(#{gig.score_times})</span>".html_safe if gig.score_times > 0 %>
+          <%= one_star_disp_help gig %>
         </div>
       </div>
     </div>

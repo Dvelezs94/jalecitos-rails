@@ -1,8 +1,9 @@
 class RequestUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
-
+  include CarrierWave::MiniMagick
+  #resize uploaded image
+  process resize_to_fit: [600, 400]
   # Choose what kind of storage to use for this uploader:
   storage :aws
   # storage :fog
@@ -23,7 +24,9 @@ class RequestUploader < CarrierWave::Uploader::Base
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
-
+  def extension_whitelist
+    %w(jpg jpeg png)
+  end
   # Permissions for file upload
   def aws_acl
     "public-read"
@@ -42,9 +45,6 @@ class RequestUploader < CarrierWave::Uploader::Base
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  def extension_whitelist
-    %w(jpg jpeg png)
-  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.

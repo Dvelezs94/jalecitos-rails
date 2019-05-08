@@ -9,14 +9,24 @@ Rails.application.routes.draw do
       get :disputes
       get :bans
       get :verifications
+      get '/verifications/:id' => 'admins#show_verification', as: "show_verification"
       post :create_openpay_user
       get :openpay_dashboard
       get :tickets
       get :orders
+      post :predispersion_fee
     end
   end
-
-  resources :gigs, except: :index do
+  #custom routes for city_id
+  get '/jale/:city_slug/:id' => 'gigs#show', as: "gig"
+  get '/jale/:city_slug/:id/edit' => 'gigs#edit', as: "edit_gig"
+  patch '/jale/:city_slug/:id' => 'gigs#update'
+  put '/jale/:city_slug/:id' => 'gigs#update'
+  delete '/jale/:city_slug/:id' => 'gigs#destroy'
+  #doesnt need to be declared, just for spanish friendly url for user
+  get '/jales/nuevo' => 'gigs#new', as: "new_gig"
+  #post "/jales" => "gigs#create", as: "gigs" #doesnt need to be declared
+  resources :gigs, except: [:index, :show, :edit, :update, :destroy, :new] do
     resource :reports, only: [:create], as: "report"
     member do
            get :toggle_status
@@ -45,7 +55,11 @@ Rails.application.routes.draw do
      confirmations: "users/confirmations",
      passwords: "users/passwords"
    }
-   resources :galleries, only: [:create, :destroy]
+   resources :galleries, only: [:create, :destroy] do
+     collection do
+       post :save_video
+     end
+   end
    resources :packages, except: [:destroy,:show,:index, :new, :edit, :update] do
      collection do
        patch 'update_packages', to: 'packages#update_packages', as: 'update'
@@ -142,6 +156,7 @@ Rails.application.routes.draw do
   get 'condiciones-de-venta', to: 'pages#sales_conditions'
   get '/robots.:format' => 'pages#robots'
   get '/sitemap', to: 'pages#sitemap'
+  get '/install', to: 'pages#install'
   get 'reglas-prestador-empleador', to: 'pages#employer_employee_rules'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

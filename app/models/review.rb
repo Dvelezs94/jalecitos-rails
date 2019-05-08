@@ -1,17 +1,18 @@
 class Review < ApplicationRecord
-  #search
-  searchkick language: "spanish"
-
-  def search_data
-    {
-      giver_id: giver_id,
-      receiver_id: receiver_id,
-      reviewable_type: reviewable_type,
-      reviewable_id: reviewable_id,
-      status: status,
-      updated_at: updated_at
-    }
-  end
+  # #search
+  #callbacks false make sync off so records are not added automatically
+   searchkick language: "spanish",callbacks: false
+  #
+  # def search_data
+  #   {
+  #     giver_id: giver_id,
+  #     receiver_id: receiver_id,
+  #     reviewable_type: reviewable_type,
+  #     reviewable_id: reviewable_id,
+  #     status: status,
+  #     updated_at: updated_at
+  #   }
+  # end
 
   #Associations
   belongs_to :order

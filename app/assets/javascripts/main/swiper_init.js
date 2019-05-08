@@ -29,7 +29,7 @@ $(document).on('turbolinks:load', function() {
       freeMode: true,
       observer: true,
       autoplay: {
-        delay: 7000
+        delay: 3500
       },
       spaceBetween: 20,
       breakpointsInverse: true,
@@ -61,20 +61,35 @@ $(document).on('turbolinks:load', function() {
     el.on('slideChange', function() {
       fillCarousel(this);
     });
+
   });
+
   window.gig_show = new Swiper('.gig-show-carousel', {
     loop: true,
     slidesPerView: 1,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
     autoplay: {
       delay: 3000
     }
   });
-  if ($(".show-slide").length - 2 == 1) {
+  window.gig_show.on("slideChange", function() {
+    stopVideos();
+  });
+  if ($(".show-slide").length == 3 || $(".youtube_video").length > 0) { //one image only or video(can have many images) doesnt need autoplay
     window.gig_show.autoplay.stop();
   }
-  if ($(".swiper-container-initialized").length > 0 ){
+  //one image only or video only (and image for sizing) doesnt need arrows
+  if ($(".show-slide").length == 3 || ($(".default-img").length == 2 && $(".youtube_video").length == 2)) {
+    $('.swiper-button-prev').hide();
+    $('.swiper-button-next').hide();
+  }
+  if ($(".swiper-container-initialized").length > 0) {
     window.dispatchEvent(new Event('resize')); //this fixes the bug of slider loading with turbolinks and cache
   }
+
 });
 
 function fillCarousel(carousel) {
@@ -86,4 +101,11 @@ function fillCarousel(carousel) {
       $.getScript(url);
     }
   }
+}
+function stopVideos() {
+  $.each($('iframe[src*="youtube.com"]'), function( index, elem ) {
+    var src = $(elem).attr('src');
+    $(elem).attr('src', '');
+    $(elem).attr('src', src);
+  });
 }

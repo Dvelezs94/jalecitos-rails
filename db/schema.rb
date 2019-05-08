@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_29_213436) do
+ActiveRecord::Schema.define(version: 2019_05_03_173310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,8 @@ ActiveRecord::Schema.define(version: 2019_03_29_213436) do
     t.integer "score_times", default: 0
     t.string "profession"
     t.bigint "city_id"
+    t.string "youtube_url"
+    t.integer "visits", default: 0
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["city_id"], name: "index_gigs_on_city_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true
@@ -211,6 +213,8 @@ ActiveRecord::Schema.define(version: 2019_03_29_213436) do
     t.string "address"
     t.string "details"
     t.float "payout_left"
+    t.string "unit_type"
+    t.integer "unit_count"
     t.index ["billing_profile_id"], name: "index_orders_on_billing_profile_id"
     t.index ["employer_id", "employee_id"], name: "index_orders_on_employer_id_and_employee_id"
     t.index ["payout_id"], name: "index_orders_on_payout_id"
@@ -235,6 +239,9 @@ ActiveRecord::Schema.define(version: 2019_03_29_213436) do
     t.datetime "updated_at", null: false
     t.bigint "gig_id"
     t.string "slug"
+    t.integer "max_amount"
+    t.integer "unit_type"
+    t.integer "min_amount"
     t.index ["gig_id"], name: "index_packages_on_gig_id"
     t.index ["slug"], name: "index_packages_on_slug", unique: true
   end
@@ -331,7 +338,6 @@ ActiveRecord::Schema.define(version: 2019_03_29_213436) do
     t.string "description"
     t.bigint "category_id"
     t.string "budget"
-    t.string "image"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -340,6 +346,7 @@ ActiveRecord::Schema.define(version: 2019_03_29_213436) do
     t.string "profession"
     t.bigint "city_id"
     t.integer "offers_count", default: 0
+    t.json "images"
     t.index ["category_id"], name: "index_requests_on_category_id"
     t.index ["city_id"], name: "index_requests_on_city_id"
     t.index ["slug"], name: "index_requests_on_slug", unique: true

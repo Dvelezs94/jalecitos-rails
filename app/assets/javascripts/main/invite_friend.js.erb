@@ -1,0 +1,22 @@
+// Share API action
+$(document).on('turbolinks:load', function() {
+  $('#invite-friend').click(function (event) {
+    let url = "https://www.jalecitos.com/sign_up/"
+
+    if (navigator.share) {
+      navigator.share({
+          title: document.title,
+          text: "¡Unete a Jalecitos y oferta tus servicios en linea hoy mismo!",
+          url: url
+      })
+    } else {
+      new Clipboard('#invite-friend', {
+        text: function() {
+          return `Unete a Jalecitos y oferta tus servicios en linea hoy mismo en ${url}`;
+        }
+      });
+      alert("La invitacion ha sido copiada. ¡Compartela con tus amigos para que se unan!");
+    }
+    event.preventDefault();
+  });
+});

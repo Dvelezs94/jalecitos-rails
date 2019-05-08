@@ -7,8 +7,9 @@ module MoneyHelper
 
 
   # Earning for order hiring
+  #  2.91 because some operations fail with a missing 0.01
   def get_order_earning base
-     (($fee+1) * (base+$cons) - (1+ $iva ) * ($fee+1) * ( base + $cons ) * ( 0.03364 ) - 2.9 - base).round(2)
+     (($fee+1) * (base+$cons) - (1+ $iva ) * ($fee+1) * ( base + $cons ) * ( 0.03364 ) - 2.91 - base).round(2)
   end
 
   def order_tax price
@@ -38,6 +39,16 @@ module MoneyHelper
     subtotal = (price)*(1+$iva).round(2)
     buy_fee = (purchase_order_total(price) - subtotal).round(2)
     {"fee": buy_fee, "subtotal": subtotal}
+  end
+
+  # price must be package_order_price * units
+  def calc_packages_units (price)
+    (((price +10) * 1.04) * 1.16).round(2)
+  end
+
+  #get original package/offer price
+  def reverse_price_calc (final_price)
+    (((((final_price/(((1 + $iva) * 100).round())) * 100)/104) * 100) - 10).round(2)
   end
 
 

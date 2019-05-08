@@ -1,25 +1,33 @@
-<%= form_with(model: Gig,url: galleries_path, method: :post, :html => { :id => "new_image" }, local: false) do |form| %>
-<% if gig.errors.any? %>
-  <%gig.errors.full_messages.each do |error| %>
-    <%= notification_generator_helper error, :error %>
-  <% end %>
-<% end %>
-<!-- ---post request form -->
 <div class="container-fluid section ">
+<!-- post request form -->
   <div class="container">
     <div class="row">
       <div class="col-lg-7 col-md-12 centered-form">
-        <h3>Agrega tu galería de imágenes</h3>
+        <h3 style="text-align: center;">Agrega tu galería de imágenes<%= (item.class == Gig) ? " y vídeo" : ""%></h3>
         <div class="form_box post_form_col">
+          <% if item.class == Gig %>
+            <%= form_with(model: item, url: save_video_galleries_path, method: :post, :html => { :id => "new_video" }, local: false) do |form| %>
+            <div class="form_block form_section row">
+              <div class="flex-space-bet">
+                <p class="form-title">Video de Youtube (<strong>Opcional</strong>)</p>
+                <%= icon("fas", "question-circle", class: "question_hint toggler") %>
+              </div>
+                <%= render 'shared_user/gigs/forms/hints/videos_hint.html.erb' %>
+                <%= form.text_field :youtube_url, class: "styled", maxlength: 100, placeholder: "Ej: https://www.youtube.com/watch?v=fTjhQc6Yiy0" %>
+            </div>
+            <% end %>
+          <% end %>
+
+          <%= form_with(model: item, url: galleries_path, method: :post, :html => { :id => "new_image" }, local: false) do |form| %>
           <div class="form_block form_section row">
             <div class="flex-space-bet">
-              <p class="form-title">Imágenes a subir (<strong>Opcional</strong>)
+              <p class="form-title">Imágenes<%= (item.class == Gig) ? " y gifs " : " "%>a subir (<strong>Opcional</strong>)
               </p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
-            <%= render 'shared_user/gigs/forms/hints/images_hint.html.erb' %>
+            <%= render "shared_user/#{item.class.to_s.downcase}s/forms/hints/images_hint.html.erb" %>
             <div class="current_images" style="display:flex;width:100%;flex-wrap:wrap;">
-              <%= render partial: "galleries/image", collection: @gig.images %>
+              <%= render partial: "galleries/image", collection: item.images %>
             </div>
 
             <div style="width:100%;text-align:center;">
@@ -27,7 +35,8 @@
                 Subir imágenes
               </label>
             </div>
-              <%= form.file_field :images, multiple: true, id: "file-input", accept: ".png, .jpg, .jpeg", style: "display:none;"%>
+              <% allowed_ext = (item.class == Gig)? ".png, .jpg, .jpeg, .gif" : ".png, .jpg, .jpeg" %>
+              <%= form.file_field :images, multiple: true, id: "file-input", accept: allowed_ext, style: "display:none;" %>
           </div>
           <div class="loading row justify-content-center" style="text-align: center; display: none;">
             <div class="bounce1"></div>

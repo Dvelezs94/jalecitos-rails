@@ -15,6 +15,11 @@ class MessageNotificationWorker
     end
     @receiver = opposite_conversation_user(message.conversation, message.user)
     @message = {
+        priority: 'high',
+        data: {
+            title: "Jalecitos",
+            message: "#{message.user.slug}: #{message.body}"
+        },
          notification: {
             title: "Jalecitos",
             body:  "#{message.user.slug}: #{message.body}",

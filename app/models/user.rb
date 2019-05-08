@@ -31,10 +31,10 @@ class User < ApplicationRecord
   before_create :set_location
   # Create default values
   before_validation :set_defaults, on: :create
-  before_update :set_roles
   # Create User Score
   after_commit :create_user_score
 
+  before_update :set_roles
   # Create openpay user
   after_commit :create_openpay_account
   # Validates uniqueness of id
@@ -52,6 +52,8 @@ class User < ApplicationRecord
   belongs_to :score, foreign_key: :score_id, class_name: "UserScore", optional: true
   # update user timezone if location changed
   before_update :update_time_zone, :if => :city_id_changed?
+  # update verified gigs when account is verified
+  before_update :verify_gigs, :if => :verified_changed?
   # Avatar image
   mount_uploader :image, AvatarUploader
   # Associations
@@ -101,6 +103,10 @@ class User < ApplicationRecord
 
   def unpaid_orders
     Order.where(employee: self, status: "completed", paid_at: nil)
+  end
+
+  def verify_gigs
+      self.gigs.each { |gig| gig.touch }
   end
   ############################################################################################
   ## PeterGate Roles                                                                        ##

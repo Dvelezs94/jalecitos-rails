@@ -1,4 +1,5 @@
 # Set the host name for URL creation
+SitemapGenerator::Interpreter.send :include, ApplicationHelper
 SitemapGenerator::Sitemap.default_host = "https://www.jalecitos.com"
 SitemapGenerator::Sitemap.compress = false
 SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(fog_provider: 'AWS',
@@ -19,7 +20,7 @@ SitemapGenerator::Sitemap.create do
   add root_path, :changefreq => 'daily'
 
   Gig.published.find_each do |gig|
-    add gig_path(gig.slug), :lastmod => gig.updated_at
+    add gig_path(city_slug(gig.city),gig.slug), :lastmod => gig.updated_at
   end
 
   User.active.find_each do |user|

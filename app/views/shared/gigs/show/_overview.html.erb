@@ -2,8 +2,7 @@
   <div class="row gig_header_2">
 
       <div class="<%= (current_user == @gig.user)? 'col-lg-9 col-md-9 col-sm-8 col-7' : 'col-lg-12 col-md-12 col-sm-12 col-12' %>">
-        <h3>Voy a
-          <%= @gig.name %></h3>
+        <h3><%= @gig.title %></h3>
       </div>
       <% if current_user != @gig.user %>
         <%= link_to icon("fas","share-alt", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>

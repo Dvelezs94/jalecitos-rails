@@ -26,7 +26,7 @@
                     class: "custom-select required col-lg-4 col-md-4 col-sm-4 col-4", id: "exp_month", :data => { :openpay_card => "expiration_month"} %>
                    <%= f.select :exp_year, options_for_select( (Date.today.year..8.years.from_now.year).map {|year| [ year, year.to_s.last(2) ]} ),{include_blank: "Año"},
                     class: "custom-select required col-lg-4 col-md-4 col-sm-4 col-4", id: "exp_year", :data => { :openpay_card => "expiration_year"} %>
-                   <%= f.text_field :card_cvv, class: "required col-lg-4 col-md-4 col-sm-4 col-4",
+                   <%= f.password_field :card_cvv, class: "required col-lg-4 col-md-4 col-sm-4 col-4",
                     placeholder: "CVV", minlength: 3, maxlength: 4, onkeypress: "allowNumbersOnly(event)", :data => { :openpay_card => "cvv2"} %>
                  </div>
 
@@ -34,6 +34,10 @@
                style: "width:100%;",
                 data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Guardando.."} %>
              <% end %>
+           </div>
+           <div class="card-msg">
+             <small>Se realizará un cargo por $1 MXN para comprobar la autenticidad de la tarjeta, cuando éste se complete se devolverá la cantidad mencionada.</small>
+
            </div>
            <hr>
            <div class="">

@@ -8,7 +8,7 @@ class OrderInvoiceGeneratorWorker
   def perform(order_id)
     order = Order.find(order_id)
     zip_code = 25204
-    subtotal = (order.purchase.price).round(2)
+    subtotal = reverse_price_calc(order.total)
     total = order.total
     recipient = {"nombre": "#{order.billing_profile.name}",
                 "rfc": "#{order.billing_profile.rfc}",

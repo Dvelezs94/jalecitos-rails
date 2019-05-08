@@ -4,7 +4,7 @@ class GigUploader < CarrierWave::Uploader::Base
    include CarrierWave::MiniMagick
 
    #resize uploaded image
-   process resize_to_fit: [600, 400]
+   #process resize_to_fit: [600, 400]
   # Choose what kind of storage to use for this uploader:
     storage :aws
 
@@ -51,14 +51,18 @@ class GigUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process resize_to_fit: [50, 50]
-  # end
+  version :carousel, :if => :not_gif?  do #we dont resize the gifs
+    process resize_to_fill: [218, 145]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
+  protected
+  def not_gif?(new_file)
+    !new_file.content_type.include? 'gif'
+  end
 
 end

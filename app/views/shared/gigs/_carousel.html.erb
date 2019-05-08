@@ -1,6 +1,6 @@
 <div class="container page3slides-area3">
     <div class="page3slide-titles1">
-      <h1><%= title %></h1>
+      <h2><%= title %></h2>
     </div>
 
 
@@ -8,7 +8,11 @@
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
+          <% if param_name == :popular_gigs %>
+            <%= render gigs.results.shuffle %>
+          <% else %>
             <%= render gigs %>
+          <% end %>
           <% if gigs.next_page %>
               <div class="swiper-slide">
                 <%= link_to_next_page(gigs, "Oculto".html_safe,

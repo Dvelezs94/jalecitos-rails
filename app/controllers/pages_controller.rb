@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   before_action :pending_review, only: [:home], :if => :signed_and_rev
   layout :set_layout
-  access user: :all, admin: [:home], all: [:work, :home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots, :sitemap]
+  access user: :all, admin: [:home], all: [:work, :home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots, :sitemap, :install]
   def home
     if params[:current] #if some pagination is present...
       home_paginate
@@ -17,13 +17,12 @@ class PagesController < ApplicationController
 
   def finance
     if params[:purchases]
-      get_purchases(true)
+      get_purchases
     elsif params[:sales]
-      get_sales(true)
+      get_sales
     else
       get_purchases
       get_sales
-      Searchkick.multi_search([@purchases, @sales])
     end
   end
 
@@ -65,6 +64,9 @@ class PagesController < ApplicationController
   def work
   end
 
+  def install
+  end
+
   private
 
   def admin_redirect
@@ -77,25 +79,19 @@ class PagesController < ApplicationController
     #if the review is specific... (when employer finishes work)
     if params[:identifier] && is_number?(params[:identifier])
       #find it and keep it in an array
-      @p_reviews = [ Review.find( params[:identifier] ) ]
-      #verify its own and pending
-      @p_reviews = @p_reviews.select{ |r| r.pending? && r.giver_id == current_user.id  } if @p_reviews.present?
+      @p_review = Review.find_by( id: params[:identifier], giver_id: current_user.id, status: "pending" )
     #if employee clicked a notification of finished work
     elsif params[:notification]  && is_number?(params[:notification])
       #get the notification
       notification = Notification.find(params[:notification])
       #get the gig or request
       object = (notification.notifiable.class == Package )? notification.notifiable.gig : notification.notifiable.request
-      #get the reviews of the user with object attributes (if a work has done 2 times, they can be more than 1 review)
-      @p_reviews = Review.search('*', where: { giver_id: current_user.id, reviewable_id: object.id, reviewable_type: object.class.to_s, status: "pending" }, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 1)
-      #obtain the one that we are looking and check if its still pending
-      @p_reviews = @p_reviews.select{ |r| r.pending? } if @p_reviews.present?
+      #get the reviews of the user with object attributes (if a work has done x times, they can be more than 1 review) (starting from oldest)
+      @p_review = Review.find_by( giver_id: current_user.id, reviewable: object, status: "pending" )
     #or if its not specific
     else
-      #get the recent pending reviews (searchkick just index pending reviews)
-      @p_reviews = Review.search("*", where: { giver_id: current_user.id, status: "pending" }, order: [{ updated_at: { order: :desc, unmapped_type: :long}}], limit: 1)
-      #verify the reviews that are pending (searchkick takes some time to update its records)
-      @p_reviews = @p_reviews.select{ |r| r.pending? } if @p_reviews.present?
+      #get the pending reviews (starting from oldest)
+      @p_review = Review.find_by( giver_id: current_user.id, status: "pending" )
     end
   end
 
@@ -104,7 +100,8 @@ class PagesController < ApplicationController
     #format html helps to not query pending reviews when pagination triggers
     #params[:review] == "true" && request.format.html? OLD
     #request.env["HTTP_TURBOLINKS_REFERRER"].present? tells me if turbolinks visit (no turbolink visit only log in and reload of home)
-    (user_signed_in? && request.env["HTTP_TURBOLINKS_REFERRER"].nil? && request.format.html?)? true : false
+    #also if params[:notification] is present (used in app notifications or finished orders)
+    (user_signed_in? && request.format.html? && (request.env["HTTP_TURBOLINKS_REFERRER"].nil? || params[:notification].present?))? true : false
   end
 
   def update_push_subscription

@@ -33,7 +33,7 @@
               <% if @dispute.images.present? %>
               <% @dispute.images.each do |image| %>
               <div class="current_img img-thum">
-                <%=link_to image_tag(image.url, size: '150x150'), image.url  %>
+                <%=link_to image_tag(image.url, size: '150x150', data: {lity: true}), image.url  %>
               </div>
               <% end %>
               <% else %>
@@ -46,7 +46,7 @@
                 <h3>Detalles de la disputa</h3>
                 <p><strong>Numero de Orden: </strong><%= @dispute.order.uuid %></p>
                 <% if @dispute.order.purchase_type == "Package" %>
-                <p><strong>Jale: </strong><%= @dispute.order.purchase ? link_to(@dispute.order.purchase.gig.title, gig_path(@dispute.order.purchase.gig.slug)) : "Borrado" %></p>
+                <p><strong>Jale: </strong><%= @dispute.order.purchase ? link_to(@dispute.order.purchase.gig.title, gig_path(city_slug(@dispute.order.purchase.gig.city),@dispute.order.purchase.gig.slug)) : "Borrado" %></p>
                 <p><strong>Paquete: </strong><%= @dispute.order.purchase ? @dispute.order.purchase.pack_type : "Borrado" %></p>
                 <% else %>
                 <p><strong>Pedido: </strong><%= link_to(@dispute.order.purchase.request.title, request_path(@dispute.order.purchase.request.slug)) %></p>

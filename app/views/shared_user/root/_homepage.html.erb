@@ -10,11 +10,14 @@
   <% end %>
   <%= render 'categories/category_carousel' %>
 
+  <%= gig_carousel( "Agregados recientemente", :recent_gigs) %>
+  
   <%= gig_carousel( "Jales Populares", :popular_gigs) %>
 
   <%= req_carousel("Pedidos Recientes", :recent_requests) %>
 
-  <%= gig_carousel( "Agregados recientemente", :recent_gigs) %>
+
+  <%= render 'shared_user/root/invite_user' %>
 
   <%= gig_carousel( "Jales Verificados", :verified_gigs) %>
 

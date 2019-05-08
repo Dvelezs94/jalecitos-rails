@@ -4,7 +4,7 @@
       <h5 class="<%= single_purchase.status %>"><%= t("orders.status.#{single_purchase.status}") %> <%= order_hint_employer(single_purchase.status) %></h5>
       <h4># <%= single_purchase.uuid %></h4>
       <% if single_purchase.purchase_type == "Package"%>
-      <p><%= link_to single_purchase.purchase.gig.title, gig_path(single_purchase.purchase.gig.slug), class: "order-title" rescue "Jale Eliminado" %></p>
+      <p><%= link_to single_purchase.purchase.gig.title, gig_path(city_slug(single_purchase.purchase.gig.city),single_purchase.purchase.gig.slug), class: "order-title" rescue "Jale Eliminado" %></p>
       <% else %>
       <p><%= link_to single_purchase.purchase.request.title, request_path(single_purchase.purchase.request.slug), class: "order-title" rescue "Orden Eliminada" %>.</p>
       <% end %>
@@ -25,6 +25,9 @@
         <div class="Paquete-Básico">
             <% if single_purchase.purchase_type == "Package"%>
             <h5>Paquete <%= t "gigs.packages.#{single_purchase.purchase.pack_type}" rescue "Eliminado"%></h5>
+            <% if single_purchase.unit_type && single_purchase.unit_count %>
+            <h5>Numero de <%= t("packages.unit_type.plural.#{single_purchase.unit_type}") %>: <%= single_purchase.unit_count %></h5>
+            <% end %>
             <% else %>
             <h5>Pedido</h5>
             <% end %>
