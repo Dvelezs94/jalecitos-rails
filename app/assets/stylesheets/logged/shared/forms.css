@@ -17,6 +17,10 @@
   justify-content: center;
 }
 
+#gig_images_hint {
+  top: -20%;
+}
+
 .isDisabled {
   cursor: not-allowed;
   opacity: 0.5;
@@ -79,19 +83,19 @@ span.action-gig {
 }
 .action-indent,
 .action-indent::-webkit-input-placeholder {
-  text-indent: 10% !important;
+  text-indent: 13% !important;
 }
 @media screen and (min-width: 480px) and (max-width: 520px) {
   .action-indent,
   .action-indent::-webkit-input-placeholder {
-    text-indent: 12% !important;
+    text-indent: 14% !important;
   }
 
 }
 @media screen and (min-width: 390px) and (max-width: 479px) {
   .action-indent,
   .action-indent::-webkit-input-placeholder {
-    text-indent: 20% !important;
+    text-indent: 22% !important;
   }
   span.action-gig {
     left: 5%;
@@ -100,7 +104,7 @@ span.action-gig {
 @media screen and (min-width: 320px) and (max-width: 389px) {
   .action-indent,
   .action-indent::-webkit-input-placeholder {
-    text-indent: 25% !important;
+    text-indent: 28% !important;
   }
   span.action-gig {
     left: 7%;
@@ -485,8 +489,7 @@ button[disabled] {pointer-events:none}
 }
 span.error,
 div.error,
-.span-error,
-.error-messages{
+.span-error{
   color: red;
 }
 
@@ -554,9 +557,6 @@ div.error,
 .remove-add{
   margin: 0 5px;
 }
-.error-messages{
-  text-align: center;
-}
 .will-show{
   margin-left: auto;
 }
@@ -564,7 +564,7 @@ div.error,
   .will-show{
     margin: 2vh auto;
   }
-  .will-earn{
+  .centered{
     margin: 0 auto;
     text-align: center;
   }

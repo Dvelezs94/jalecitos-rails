@@ -4,7 +4,7 @@
       <h5 class="<%= single_sale.status %>"><%= t "orders.status.#{single_sale.status}" %> <%= order_hint_employee(single_sale.status) %></h5>
       <h4># <%= single_sale.uuid %></h4>
       <% if single_sale.purchase_type == "Package"%>
-      <p><%= link_to(single_sale.purchase.gig.title, gig_path(single_sale.purchase.gig.slug), class: "order-title") rescue "Jale Eliminado" %></p>
+      <p><%= link_to(single_sale.purchase.gig.title, gig_path(city_slug(single_sale.purchase.gig.city),single_sale.purchase.gig.slug), class: "order-title") rescue "Jale Eliminado" %></p>
       <% else %>
       <p><%= link_to single_sale.purchase.request.title, request_path(single_sale.purchase.request.slug), class: "order-title" rescue "Orden Eliminada"%>.</p>
       <% end %>
@@ -25,22 +25,27 @@
         <div class="Paquete-Básico">
             <% if single_sale.purchase_type == "Package"%>
             <h5>Paquete <%= t "gigs.packages.#{single_sale.purchase.pack_type}" rescue "Eliminado" %></h5>
+            <% if single_sale.unit_type && single_sale.unit_count %>
+            <h5>Numero de <%= t("packages.unit_type.plural.#{single_sale.unit_type}") %>: <%= single_sale.unit_count %></h5>
+            <% end %>
             <% else %>
             <h5>Pedido</h5>
             <% end %>
             <span><%= date_time_to_format(single_sale.created_at, current_user.time_zone) %></span>
             <h4><%= "#{number_to_currency(single_sale.total)} MXN" %></h4>
-            <% if single_sale.details? %>
-            <br>
-            <strong>Detalles extras: </strong><p class="inline"><%= single_sale.details %></p>
-            <% end %>
-            <% if single_sale.address? %>
-            <br>
-            <strong>Dirección: </strong><p class="inline"><%= single_sale.address %></p>
-            <iframe defer async width="100%" height="170" frameborder="0" style="border:0"
-            src='https://www.google.com/maps/embed/v1/place?key=<%= ENV.fetch("GOOGLE_MAP_API") %>&q=<%= CGI.escape(single_sale.address) %>'
-            allowfullscreen="allowfullscreen">
-            </iframe>
+            <% if single_sale.in_progress? || single_sale.pending? %>
+              <% if single_sale.details? %>
+              <br>
+              <strong>Detalles extras: </strong><p class="inline"><%= single_sale.details %></p>
+              <% end %>
+              <% if single_sale.address? %>
+              <br>
+              <strong>Dirección: </strong><p class="inline"><%= single_sale.address %></p>
+              <iframe defer async width="100%" height="170" frameborder="0" style="border:0"
+              src='https://www.google.com/maps/embed/v1/place?key=<%= ENV.fetch("GOOGLE_MAP_API") %>&q=<%= CGI.escape(single_sale.address) %>'
+              allowfullscreen="allowfullscreen">
+              </iframe>
+              <% end %>
             <% end %>
             <div class="diego-velez-btn">
               <% if single_sale.pending? %>

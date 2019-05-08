@@ -19,7 +19,7 @@ class GigsController < ApplicationController
   # GET /gigs/1
   def show
     if params[:reviews]
-      get_reviews(true)
+      get_reviews
     elsif params[:related_gigs]
       get_related_gigs(true)
       render template: "shared/carousels/add_items_carousel.js.erb"
@@ -27,8 +27,12 @@ class GigsController < ApplicationController
       define_pack_names
       get_reviews
       get_related_gigs
-      Searchkick.multi_search([@related_gigs, @reviews])
+      Searchkick.multi_search([@related_gigs])
       report_options
+    end
+    # increment gig visit
+    if current_user != @gig.user
+      punch_gig
     end
   end
 
@@ -41,11 +45,11 @@ class GigsController < ApplicationController
     check_if_banned
     check_first_package
     if flash[:error]
-      redirect_to gig_path(@gig)
+      redirect_to gig_path(city_slug(@gig.city),@gig)
     else
       change_status
       flash[:success] = "Estado actual del Jale: #{t("gigs.status.#{@gig.status}")}"
-      redirect_to gig_path(@gig)
+      redirect_to gig_path(city_slug(@gig.city),@gig)
     end
   end
 
@@ -109,6 +113,26 @@ class GigsController < ApplicationController
     def set_gig
       @gig = Gig.friendly.find(params[:id])
     end
+    # increment visits
+    def punch_gig
+      # if cookies are disabled, return true and nothing else
+      return true if request.cookies.blank?
+      if cookies[:visits_time].present? && cookies[:gig_visits].present?
+        array = JSON.parse(cookies.permanent[:gig_visits])
+        if ! cookies[:visits_time]
+          @gig.punch(request)
+          cookies[:visits_time] = {value: 30.minutes.from_now.to_s, expires: 30.minutes.from_now}
+          cookies.permanent[:gig_visits] = array.push(@gig.id).to_s
+        elsif ! array.include?(@gig.id)
+          @gig.punch(request)
+          cookies.permanent[:gig_visits] = array.push(@gig.id).to_s
+        end
+      else
+        cookies[:visits_time] = {value: 30.minutes.from_now.to_s, expires: 30.minutes.from_now}
+        cookies.permanent[:gig_visits] = "[#{@gig.id}]"
+        @gig.punch(request)
+      end
+    end
 
     def set_gig_create
       if params[:gig_id].present? #edit in creation
@@ -134,6 +158,7 @@ class GigsController < ApplicationController
 
     def set_gig_with_all_asc
       @gig = Gig.includes(:gig_packages, :category, :user).friendly.find(params[:id])
+      @gig_hits = @gig.visits
     end
 
     def check_published

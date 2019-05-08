@@ -9,9 +9,8 @@ $(document).on "turbolinks:load", ->
           ajaxRecieved()
           #show alert
           alert("Algo salió mal. Por favor, inténtalo de nuevo.")
-
         add: (e, data) ->
-          types = /(\.|\/)(jpe?g|png)$/i
+          types = /(\.|\/)(jpe?g|png|gif)$/i
           file = data.files[0]
           #validate type of image
           if types.test(file.type) || types.test(file.name)
@@ -23,5 +22,5 @@ $(document).on "turbolinks:load", ->
             else
               alert("El tamaño máximo por imagen no debe exceder de 10MB")
           else
-            alert("Sólo se admiten imágenes jpg, jpeg, o png")
+            alert("Sólo se admiten imágenes jpg, jpeg, png o gif")
         )

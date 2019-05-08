@@ -19,7 +19,7 @@
 
   .gig-query .hearted1,
   .gig-profile .hearted1 {
-    top: 45%;
+    bottom: 12%;
     right: 9%;
   }
   .phone_links i {
@@ -154,7 +154,7 @@
   }
   .gig-query .hearted1,
   .gig-profile .hearted1 {
-    top: 41%;
+    bottom: 14%;
     right: 9%;
   }
 
@@ -1196,6 +1196,18 @@
     display: none;
   }
 
+  ::-webkit-scrollbar {
+    display: none;
+}
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    top: 50% !important;
+    background-color: rgba(0,0,0,.5);
+    height: 80px !important;
+    padding: 16px;
+  }
+
   .app-download-div img{
     width: 143px;
   }
@@ -1568,10 +1580,6 @@
     font-size: 15px;
   }
 
-  .coa2 {
-    font-size: 12px;
-  }
-
   .author2total {
     text-align: center;
   }
@@ -1716,7 +1724,7 @@
     padding-left: 15px;
   }
 
-  p.limpi2 {
+  p.packa-price {
     display: inline-block;
     padding-left: 20px;
     float: right;
@@ -1727,7 +1735,7 @@
     display: inline-block;
   }
 
-  p.limpi2 sub {
+  p.packa-price sub {
     bottom: 0;
   }
 
@@ -2109,8 +2117,8 @@
   }
   .gig-query .hearted1,
   .gig-profile .hearted1 {
-    bottom: 2%;
-    left: 5%;
+    bottom: 11px;
+    right: 22px;
   }
 }
 
@@ -2137,16 +2145,21 @@
 @media only screen and (min-width: 320px) and (max-width: 479px) {
 
   p.verified{
-    top: 68px;
+    top: 92px;
+  }
+  .req_img_show img {
+    width: 40vw;
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 779px) {
+  .req_img_show img {
+    width: 36vw;
   }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 350px) {
 
-  .gig-req-carousel .hearted1 {
-    top: 70px;
-    right: 10px;
-  }
   .gig-query .gig-image, .gig-profile .gig-image {
     max-height: 129px;
   }
@@ -2161,10 +2174,6 @@
 
 @media only screen and (min-width: 351px) and (max-width: 480px) {
 
-  .gig-req-carousel .hearted1 {
-    top: 90px;
-    right: 10px;
-  }
   .gig-query .gig-image, .gig-profile .gig-image {
     max-height: 123px;
   }
@@ -2174,20 +2183,6 @@
   .page3single-slidersd .singleslidepd img {
       max-height: 120px;
       min-height: 120px;
-  }
-}
-
-@media only screen and (min-width: 351px) and (max-width: 400px) {
-  .gig-req-carousel .hearted1 {
-    top: 84px;
-    right: 10px;
-  }
-}
-
-@media only screen and (min-width: 401px) and (max-width: 480px) {
-  .gig-req-carousel .hearted1 {
-    top: 90px;
-    right: 10px;
   }
 }
 

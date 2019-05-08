@@ -11,7 +11,7 @@
     </div>
     <div class="col-10 col-sm-12 col-md-12 col-lg-6 text-center mar-0-auto">
       <h4>Por Ciudad</h4>
-      <%= pie_chart City.joins(:users).group(:name).count %>
+      <%= bar_chart City.joins(:users).group(:name).count %>
     </div>
   </div>
   <div class="table-responsive paginator_container">
@@ -21,9 +21,30 @@
           <th>Name</th>
           <th>Email</th>
           <th>Role</th>
+          <th>Date</th>
+          <th>Slug</th>
+          <th>Alias</th>
         </tr>
       </thead>
       <tbody class="paginated_users">
+          <h3>Users that dont have slug</h3>
+          <%= render partial: 'admins/user', collection: @malformed_users %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-responsive paginator_container">
+    <table class="admin-table table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody class="paginated_users">
+          <h3>Users by creation order</h3>
           <%= render partial: 'admins/user', collection: @users %>
       </tbody>
     </table>

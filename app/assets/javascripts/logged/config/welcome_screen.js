@@ -16,7 +16,7 @@ $(document).on('turbolinks:load', function() {
           {
             element: document.getElementsByClassName("wizard_gigs")[0],
             intro: "Esta es la seccion de jales, aqui podras contratar servicios.",
-            position: 'top'
+            position: 'bottom'
           },
           {
             element: document.getElementsByClassName("wizard_requests")[0],

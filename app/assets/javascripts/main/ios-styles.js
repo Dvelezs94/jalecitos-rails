@@ -5,6 +5,11 @@ $(document).on('turbolinks:load', function() {
     if ($(".tablet-mobile-top-ber").length > 0) {
       $(".tablet-mobile-top-ber").css("padding-top", "env(safe-area-inset-top)");
     }
+
+    if ($(".mobile_search_bar").length > 0) {
+      $(".mobile_search_bar").css("padding-top", "env(safe-area-inset-top)");
+    }
+
     if ($(".phone-bottom-menu").length > 0) {
       $(".phone-bottom-menu").css("padding-bottom", "env(safe-area-inset-bottom)");
     }

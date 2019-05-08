@@ -163,4 +163,7 @@ gem 'introjs-rails', '~> 1.0'
 gem 'groupdate', '~> 4.1', '>= 4.1.1'
 # create charts
 gem 'chartkick', '~> 3.0', '>= 3.0.2'
-# Good looking alerts
+# Youtube embeded parser
+gem 'youtube_rails', '~> 1.2', '>= 1.2.2'
+#bot checking
+gem 'voight_kampff', '~> 1.1', '>= 1.1.3'

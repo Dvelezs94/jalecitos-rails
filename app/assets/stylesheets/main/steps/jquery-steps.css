@@ -13,6 +13,10 @@
   padding: 0;
   margin: 0
 }
+.wizard ul {
+  display: flex;
+  justify-content: center;
+}
 
 .wizard ul>li, .tabcontrol ul>li {
   display: block;
@@ -135,7 +139,8 @@
 }
 
 .wizard>.content>.body input.error,
-.wizard>.content>.body textarea.error {
+.wizard>.content>.body textarea.error,
+.wizard>.content>.body select.error {
   background: #fbe3e4;
   border: 1px solid #fbc2c4;
   color: #8a1f11

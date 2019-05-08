@@ -1,7 +1,14 @@
 <div>
 <p>cuenta predispersion</p>
-<p>saldo: <%= @balance %></p>
+<div class="col-12">
+  <p>saldo: <%= @balance %></p>
+  <p>saldo 95% (recomendado retirar): <strong><%= @balance95 %></strong></p>
+</div>
+<div class="col6">
+  <%= button_to "Depositar fondos predispersion", predispersion_fee_admins_path, class: "btn btn-warning", :data => {:confirm => "Seguro que quieres retirar los fondos por la cantidad de #{@balance95}"}  %>
+</div>
+<br>
 
-<button id="create-openpay-user">Nueva Cuenta Openpay</button>
+<button id="create-openpay-user" class="btn btn-success">Nueva Cuenta Openpay</button>
 </div>
 <%= render 'admins/create_openpay_account' %>

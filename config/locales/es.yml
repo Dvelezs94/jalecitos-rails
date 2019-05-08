@@ -10,6 +10,23 @@ es:
       standard: "Estándar"
       premium: "Premium"
 
+  packages:
+    unit_type:
+      plural:
+        piece: "Piezas"
+        dozen: "Docenas"
+        centimeter: "Centímetros"
+        meter: "Metros"
+        kilometer: "Kilómetros"
+        sec: "Segundos"
+        minute: "Minutos"
+        hour: "Horas"
+        day: "Días"
+        unit: "Unidades"
+        square_centimeter: "centímetros cuadrados"
+        square_meter: "metros cuadrados"
+
+
   requests:
     status:
       published: "Publicado"

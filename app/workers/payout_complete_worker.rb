@@ -5,6 +5,7 @@ class PayoutCompleteWorker
   include ApplicationHelper
   include OpenpayHelper
   include LevelHelper
+  include PushFunctions
 
   def perform(payout_id)
     # get payout id
@@ -16,16 +17,16 @@ class PayoutCompleteWorker
     # get balance
     @employee_balance = calc_payout(@jalecitos_payout.orders)[0][:count]
     @employee_balance_minus_fee = (@employee_balance * (1 - calc_level_percent(@jalecitos_payout.level))).round(2)
+    @balance_left = @employee_balance - @employee_balance_minus_fee - 9.28
     if ! @jalecitos_payout.pending?
       return true
     end
     begin
       update_orders_status(calc_payout(@jalecitos_payout.orders)[0][:orders])
-      begin
-        @jalecitos_payout.completed!
-        charge_payout_fee
-        PayoutMailer.successful_payout(@jalecitos_payout.user, @employee_balance_minus_fee).deliver
-      end
+      @jalecitos_payout.completed!
+      PayoutMailer.successful_payout(@jalecitos_payout.user, @balance_left).deliver
+      send_payout_push
+      charge_payout_fee
     rescue => exception
       Bugsnag.notify(exception)
       PayoutMailer.notify_inconsistency(@jalecitos_payout.user).deliver
@@ -52,5 +53,28 @@ class PayoutCompleteWorker
                    "description" => "Cobro de impuesto por payout #{@jalecitos_payout.id}",
                   }
     @fee.create(request_payout_fee)
+  end
+
+  def send_payout_push
+    @message = {
+      data: {
+          title: "Jalecitos",
+          message: "Los fondos por la cantidad de #{@balance_left} han sido depositados"
+      },
+      notification: {
+        title: "Fondos Depositados",
+        body:  "Los fondos por la cantidad de #{@balance_left} han sido depositados",
+        icon: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo_Jalecitos-01.png",
+        click_action: "https://www.jalecitos.com/",
+        badge: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo_Jalecitos-01.png"
+      },
+      webpush: {
+        headers: {
+          Urgency: "high"
+        }
+     }
+    }
+
+    createFirebasePush(@jalecitos_payout.user_id, @message)
   end
 end

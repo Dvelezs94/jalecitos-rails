@@ -2,6 +2,11 @@ module ApplicationHelper
 
   private
 
+  def city_slug city
+    slug = (city.present?)? city.name : "México"
+    return slug.parameterize
+  end
+
   def is_mobile?
     cookies.permanent.signed[:mb].present?
   end
@@ -88,11 +93,15 @@ module ApplicationHelper
      js add_gritter(msg, :image => flash_type, :title=>"Jalecitos", :sticky => false, :time => 5000 )
   end
 
-  def image_display_helper image
-    if image.nil?
+  def image_display_helper image, yt_url #used in min versions
+    if image.nil? && ! yt_url.present?
       "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/app_images/gig-no-image-2.png"
-    else
+    elsif image.nil?
+      YouTubeRails.extract_video_image(yt_url, "medium")
+    elsif image.file.extension == "gif"
       image.url
+    else
+      image.url(:carousel)
     end
   end
 
@@ -120,7 +129,7 @@ module ApplicationHelper
        request_path(object.slug)
     when object.class ==  Offer || object.class ==  Package
       if notification.action == "ha finalizado" || notification.action == "Se ha finalizado"
-       finance_path(:table => notification.query_url, :notification => notification.id)
+       root_path(:notification => notification.id)
       else
        finance_path(:table => notification.query_url)
      end
@@ -159,9 +168,9 @@ module ApplicationHelper
       when object == nil #deleted gig (package also)
         text += "un <strong>Jale eliminado</strong>"
       when object.class == Package
-        text = "el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
+        text += "el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
       when object.class == Offer
-        text = "el pedido #{object.request.title}"
+        text += "el pedido #{object.request.title}"
       end
     end
     if html == true
@@ -180,15 +189,23 @@ module ApplicationHelper
     end
   end
 
+  def seo_location(city)
+    if city
+      "#{city.name}, #{city.state.name}"
+    else
+      "México"
+    end
+  end
+
   def meta_tags
-    if @gig.present? && current_page?( gig_path(@gig) )
-        "<title>#{@gig.profession} en #{@gig.location} para #{@gig.name}</title>
-        <meta name='description' content='#{@gig.profession} en #{@gig.location} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos.'>
+    if @gig.present? && current_page?( gig_path(city_slug(@gig.city),@gig) )
+        "<title>#{@gig.profession} en #{seo_location(@gig.city)} para #{@gig.name}</title>
+        <meta name='description' content='#{@gig.profession} en #{seo_location(@gig.city)} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos.'>
         <meta name='keywords' content='#{@gig.location},#{@gig.profession},#{@gig.tag_list.join(',')}'>
         <meta name='category' content='#{@gig.category.name}'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
     elsif @request.present? && current_page?( request_path(@request) )
-        "<title>Trabajo de #{@request.profession} en #{@request.location} | Encontrar trabajo de #{@request.profession} por internet.</title>
+        "<title>Trabajo de #{@request.profession} en #{seo_location(@request.city)} | Encontrar trabajo de #{@request.profession} por internet.</title>
         <meta name='description' content='Se solicita #{@request.profession} en #{@request.location} para #{@request.name}. Regístrate hoy en Jalecitos para encontrar trabajo.'>
         <meta name='keywords' content='#{@request.location},#{@request.profession},#{@request.tag_list.join(',')}'>
         <meta name='category' content='#{@request.category.name}'>
@@ -216,23 +233,34 @@ module ApplicationHelper
       html = ""
       #number of complete stars
       number.to_i.times do
-        html << image_tag("star-on.svg", title: rounded)
+        html << image_tag("star-on.svg", title: rounded, class: "review-star")
       end
       #if has decimal...
       if decimal > 0
-        html << image_tag("star-off.svg", title: rounded) if decimal < 0.25
+        html << image_tag("star-off.svg", title: rounded, class: "review-star") if decimal < 0.25
 
-        html << image_tag("star-half.svg", title: rounded) if decimal.between?( 0.25, 0.75 )
+        html << image_tag("star-half.svg", title: rounded, class: "review-star") if decimal.between?( 0.25, 0.75 )
 
-        html << image_tag("star-on.svg", title: rounded) if decimal > 0.75
+        html << image_tag("star-on.svg", title: rounded, class: "review-star") if decimal > 0.75
       end
       #stars that doesnt have
       ( (5-number).to_i ).times do
-        html << image_tag("star-off.svg", title: rounded)
+        html << image_tag("star-off.svg", title: rounded, class: "review-star")
       end
       #return it
       html.html_safe
     end
+  end
+
+  def one_star_disp_help gig
+    html = ""
+     if gig.score_times > 0
+       html += "#{image_tag("star-on.svg", title: gig.score_average, class: "review-star")}"
+       html += "<p class='gig-score-average'> #{gig.score_average}  <span class='gig-score-times'>(#{gig.score_times})</span> </p>"
+    else
+      html += "<h6 class='na'>N/A</h6>"
+    end
+    html.html_safe
   end
 
   def score_average us, return_number=true
