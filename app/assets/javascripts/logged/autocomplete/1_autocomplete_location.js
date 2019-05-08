@@ -12,9 +12,11 @@ $(document).on('turbolinks:load', function() {
   }).on('typeahead:selected', function(e, data) {
     $(event.target).closest("form").find(".city").val(data.id);
     $(event.target).closest("form").submit();
+    showLoading();
   }).on('typeahead:autocompleted', function(e, data) {
     $(event.target).closest("form").find(".city").val(data.id);
     $(event.target).closest("form").submit();
+    showLoading();
   });
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   $('#search_autocomplete').typeahead(null, {
