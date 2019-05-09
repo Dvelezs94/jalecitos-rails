@@ -182,7 +182,7 @@ class GigsController < ApplicationController
     end
 
     def max_gigs
-      if current_user.gigs.count >= 1000 && params[:gig_id].nil?
+      if current_user.gigs.count >= 20 && params[:gig_id].nil?
         flash[:error] = "Sólo puedes tener como máximo 20 Jales"
         redirect_to( my_account_users_path )
       end
