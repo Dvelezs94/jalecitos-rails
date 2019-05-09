@@ -13,7 +13,7 @@ if (window.sentRequests == 0){
 <% if request.referrer.include?("/edit?") %>
   <% flash[:notice] = 'Tu pedido se ha actualizado.' %>
 <% else %>
-  <% flash[:notice] = 'Has concluido el proceso.' %>
+  <% flash[:notice] = 'Te notificaremos cuando alguien se postule en tu pedido' %>
 <% end %>
   window.location = "<%= request_path(@item) %>"
 <% else %>
