@@ -24,7 +24,7 @@ function updateFormURL(name, value) {
       strings += "&"
     }
   });
-  forms = $("#section_parent form");
+  forms = $(".wizard form");
   //append query strings to all forms
   $.each(forms, function( index, f ) {
     f.action = f.action.split("?")[0] + "?" + strings;

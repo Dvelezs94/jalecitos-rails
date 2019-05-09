@@ -1,11 +1,11 @@
 $(document).on('turbolinks:load', function() {
-  if ( $(".gig_form").length > 0 ) {
+  if ($(".gig_form").length > 0) {
     //detecting changes on each form
     $(document).on('change keyup paste', ':input', function() {
       window.changed = true;
     });
-    var form_cont = $("#section_parent");
-    form_cont.steps({
+    var form_cont = $("#section_parent_gig");
+    window.gig_step = form_cont.steps({
       headerTag: "h3",
       bodyTag: "section",
       transitionEffect: "slideLeft",
@@ -14,7 +14,7 @@ $(document).on('turbolinks:load', function() {
         next: "Siguiente",
         finish: "Finalizar"
       },
-      onInit: function (event, currentIndex) {
+      onInit: function(event, currentIndex) {
         form = $(".gig_form");
         //this input exist only when form has method different than post or get, so i am confirming if i am on update (patch)
         if (form.find("[name='_method']").val()) {
@@ -33,27 +33,23 @@ $(document).on('turbolinks:load', function() {
           form_cont.find(".body:eq(" + newIndex + ") label.error").remove();
           form_cont.find(".body:eq(" + newIndex + ") .error").removeClass("error");
         }
-        form = form_cont.find("#section_parent-p-" + currentIndex + " form").first();
+        form = form_cont.find("#section_parent_gig-p-" + currentIndex + " form").first();
         if (form.valid()) {
-          respons = syncAjax(form);
-          console.log();
-          return respons.status
+          syncAjaxGig(form);
+          return true;
         } else {
           return false;
         }
-
       },
-      onStepChanged: function (event, currentIndex, newIndex) {
+      onStepChanged: function(event, currentIndex, newIndex) {
         window.changed = false; //restart at no changes
         return true;
       },
-      onFinishing: function(event, currentIndex) {
-        form = form_cont.find("#section_parent-p-" + currentIndex + " form");
+      onFinishing: async function(event, currentIndex) {
+        form = form_cont.find("#section_parent_gig-p-" + currentIndex + " form");
         if (form.valid() && validatePackages()) {
-          sent = syncAjax(form);
-          console.log(sent);
-          console.log(window.success);
-          return sent;
+          syncAjaxGig(form);
+          return true;
         } else {
           return false;
         }
@@ -65,16 +61,31 @@ $(document).on('turbolinks:load', function() {
   }
 });
 
-async function syncAjax(form) {
-    return await $.ajax({
-      type: form.find("[name='_method']").val() || form[0].method,
-      url: form[0].action,
-      dataType: "script",
-      data: form.find("[name!='_method']").serialize(),
-      success: function() {},
-      error: function() {}
-    });
+function syncAjaxGig(form) {
+  $.ajax({
+    type: form.find("[name='_method']").val() || form[0].method,
+    url: form[0].action,
+    dataType: "script",
+    data: form.find("[name!='_method']").serialize(),
+    success: function() {},
+    error: function() {
+      if (form.hasClass("gig_form")) { //if its gig form, go again to it...
+        show_error("Parece que no estás conectado a internet, intenta guardar de nuevo");
+        setTimeout(function() { //if steps changes rapidly between steps, it crashes, i have to wait
+          window.gig_step.steps("setStep", 0);
+        }, 800);
+      }
+    }
+  });
 }
-function get_response() {
-  alert("RECIBIDO!!");
-}
+
+$.fn.steps.setStep = function(step) {
+  var currentIndex = $(this).steps('getCurrentIndex');
+  for (var i = 0; i < Math.abs(step - currentIndex); i++) {
+    if (step > currentIndex) {
+      $(this).steps('next');
+    } else {
+      $(this).steps('previous');
+    }
+  }
+};
