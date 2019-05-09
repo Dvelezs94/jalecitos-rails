@@ -91,13 +91,13 @@ class AdminsController < ApplicationController
   private
   def set_vars
     if request.format.html?
-      @pending_verifications = Verification.pending.count
-      @pending_bans = Ban.pending.count
-      @pending_disputes = Dispute.waiting_for_support.count
-      @open_tickets = Ticket.in_progress.count
-      @user_count = User.count
-      @orders_count = Order.count
-      @gigs_count = Gig.count
+      @pending_verifications = Verification.all.pending.length
+      @pending_bans = Ban.pending.length
+      @pending_disputes = Dispute.waiting_for_support.length
+      @open_tickets = Ticket.in_progress.length
+      @user_count = User.all.length
+      @orders_count = Order.all.length
+      @gigs_count = Gig.all.length
     end
   end
 
