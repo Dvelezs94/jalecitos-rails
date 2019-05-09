@@ -26,7 +26,7 @@
                      </div>
                      <div class="container row" style="margin: 0 auto 20px auto">
                        <% @request.images.each do |image| %>
-                       <div class="current_img img-thum req_img_show">
+                       <div class="current_img img-thum resp_img_show">
                          <%=link_to image_tag(image.url, size: '150x150', data: {lity: true}), image.url  %>
                        </div>
                        <% end %>
