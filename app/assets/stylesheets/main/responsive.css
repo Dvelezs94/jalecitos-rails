@@ -2147,13 +2147,13 @@
   p.verified{
     top: 92px;
   }
-  .req_img_show img {
+  .resp_img_show img {
     width: 40vw;
   }
 }
 
 @media only screen and (min-width: 480px) and (max-width: 779px) {
-  .req_img_show img {
+  .resp_img_show img {
     width: 36vw;
   }
 }
