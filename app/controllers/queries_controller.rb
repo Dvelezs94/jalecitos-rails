@@ -29,8 +29,18 @@ class QueriesController < ApplicationController
   end
 
   def user_search
-    if params[:gigs]
-      get_user_gig(true)
+    if params[:state_id] && params[:gigs]
+      get_user_gig_by_state(true)
+    elsif params[:gigs]
+      if params[:city_last_page] == "true" && params[:city_id].present?
+      get_user_gig(false)
+      get_user_gig_by_state(false)
+      Searchkick.multi_search([@gigs, @gigs_by_state])
+      else
+        get_user_gig(true)
+      end
+    elsif params[:state_id] && params[:requests]
+      get_user_request_by_state(true)
     elsif params[:requests]
       get_user_request(true)
     else

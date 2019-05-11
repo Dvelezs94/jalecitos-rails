@@ -24,10 +24,26 @@ module GetQuery
          per_page: 20, execute: bool, operator: "or", misspellings: misspellings)
   end
 
+  def get_user_gig_by_state bool=false
+    @gigs_by_state = Gig.search(filter_query,
+       includes: [:query_pack, :likes, :user, city: [state: :country]],
+        where: user_state_where_filter, page: params[:gigs],
+        order: by_score,
+         per_page: 20, execute: bool, operator: "or", misspellings: misspellings)
+  end
+
   def get_user_request bool=false
     @requests = Request.search(filter_query,
        includes: [:offers, city: [state: :country]],
         where: user_where_filter,
+         page: params[:requests], per_page: 20,
+          execute: bool, operator: "or", misspellings: misspellings)
+  end
+
+  def get_user_request_by_state bool=false
+    @requests_by_state = Request.search(filter_query,
+       includes: [:offers, city: [state: :country]],
+        where: user_state_where_filter,
          page: params[:requests], per_page: 20,
           execute: bool, operator: "or", misspellings: misspellings)
   end

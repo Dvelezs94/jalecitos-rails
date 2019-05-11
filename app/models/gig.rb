@@ -14,6 +14,7 @@ class Gig < ApplicationRecord
       description: no_special_chars(description),
       tags: tag_list.join(" "),
       city_id: city_id,
+      state_id: (city.present?)? city.state.id : nil,
       category_id: category_id,
       status: status,
       profession: profession,

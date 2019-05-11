@@ -18,6 +18,14 @@ module SearchFunctions
     end
   end
 
+  def user_state_where_filter
+    if params[:category_id] != ""
+      {status: "published", category_id: params[:category_id], state_id: params[:state_id] }
+    else
+      {status: "published", state_id: params[:state_id] }
+    end
+  end
+
   def guest_where_filter
     if params[:lon] != "" && params[:lat] != ""
       begin

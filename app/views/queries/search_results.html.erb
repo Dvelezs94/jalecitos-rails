@@ -41,7 +41,7 @@
                 <%= render partial: 'shared/queries/gig', collection: @gigs %>
                 <%= render "shared/no_gigs" if @gigs.total_count == 0 %>
               </div>
-              <%= paginate @gigs, param_name: :gigs %>
+              <%= paginate @gigs, param_name: :gigs, params: { city_last_page: (collection.total_pages - collection.current_page) == 1, by_city: true } %>
             </div>
             <div class="tab-pane fade paginator-container" id="query-requests" role="tabpanel" aria-labelledby="nav-requests-tab">
               <div class="transacciones-tab-content paginated-requests row">
