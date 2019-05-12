@@ -4,6 +4,8 @@ class QueriesController < ApplicationController
   include LocationFunctions
   include GetQuery
   layout :set_layout
+  before_action :user_set_state, only: [:user_search]
+  before_action :guest_set_state, only: [:guest_search]
   access user: [:user_search, :user_autocomplete_search, :autocomplete_profession, :user_mobile_search], admin: :all, all: [:guest_search, :guest_autocomplete_search, :autocomplete_location]
 
   def guest_search
@@ -78,5 +80,20 @@ class QueriesController < ApplicationController
 
   def user_mobile_search
 
+  end
+  private
+  def user_set_state
+    @state_id = City.find(params[:city_id]).state_id if params[:city_id] != ""
+  end
+
+  def guest_set_state
+    if params[:lon] != "" && params[:lat] != ""
+      begin
+        loc = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{params[:lat]},#{params[:lon]}"
+        get_city_and_state_in_db(loc.city, loc.state_name, "MX") #this makes global variables for using
+      rescue
+        #nothing
+      end
+    end
   end
 end

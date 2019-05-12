@@ -8,25 +8,19 @@ module SearchFunctions
 
   def user_where_filter
     if params[:category_id] != "" && params[:city_id] != ""
-      {status: "published", category_id: params[:category_id], _or: [{city_id: params[:city_id]}, {city_id: nil}]}
+      {status: "published", category_id: params[:category_id], _or: [{state_id: @state_id}, {state_id: nil}]}
     elsif params[:category_id] != ""
       {status: "published", category_id: params[:category_id]}
     elsif  params[:city_id] != ""
-      {status: "published", _or: [{city_id: params[:city_id]}, {city_id: nil}]}
+      {status: "published", _or: [{state_id: @state_id}, {state_id: nil}]}
     else
       {status: "published"}
     end
   end
 
   def guest_where_filter
-    if params[:lon] != "" && params[:lat] != ""
-      begin
-        loc = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{params[:lat]},#{params[:lon]}"
-        city_id = get_city_id_in_db(loc.city, loc.state_name, "MX")
-        {status: "published", _or: [{city_id: city_id}, {city_id: nil}]}
-      rescue
-        {status: "published"}
-      end
+    if @city.present?
+      {status: "published", _or: [{state_id: @state.id}, {state_id: nil}]}
     else
       {status: "published"}
     end
