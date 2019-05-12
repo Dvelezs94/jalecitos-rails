@@ -43,8 +43,8 @@ module GetPages
   def get_popular_gigs bool=false
     @popular_gigs = Gig.search("*",
        includes: [:gigs_packages, :user, :likes, city: [state: :country]],
-        where: conditions,
-         order: [{ order_count: { order: :desc, unmapped_type: :long}}],
+        where: conditions, boost_where: {city_id: {value: current_user.city_id, factor: 5}},
+         boost_where: boost_where_condition, boost_by: {order_count: {factor: 100}},
           page: params[:popular_gigs], per_page: 15, execute: bool)
   end
 
@@ -76,7 +76,7 @@ module GetPages
     @verified_gigs = Gig.search("*",
        includes: [:gigs_packages, :user],
         where: conditions("verified"),
-         order: [{ updated_at: { order: :desc, unmapped_type: :long}}],
+         boost_where: boost_where_condition, boost_by: {order_count: {factor: 100}},
           page: params[:verified_gigs], per_page: 15, execute: bool)
   end
 
@@ -117,10 +117,10 @@ module GetPages
   def conditions string=nil
     if current_user
       if current_user.location(true) && string == "verified"
-        {status: "published", _or: [{city_id: current_user.city_id}, {city_id: nil}], verified: true}
+        {status: "published", _or: [{state_id: current_user.city.state_id}, {state_id: nil}], verified: true}
         # {status: "published", verified: true}
       elsif current_user.location(true)
-        {status: "published", _or: [{city_id: current_user.city_id}, {city_id: nil}]}
+        {status: "published", _or: [{state_id: current_user.city.state_id}, {state_id: nil}]}
         # {status: "published"}
       elsif string == "verified"
         {status: "published", verified: true}
@@ -130,6 +130,10 @@ module GetPages
     else # is guest
       {status: "published"}
     end
+  end
+
+  def boost_where_condition
+    {city_id: {value: current_user.city_id, factor: 5}}
   end
 
   def random_conditions
