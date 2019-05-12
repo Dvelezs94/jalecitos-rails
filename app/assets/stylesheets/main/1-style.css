@@ -1171,7 +1171,7 @@ p.limpi1 {
   font-weight: 700;
   border-radius: 5px;
   border-color: transparent;
-  width: 100%;
+  width: 50%;
   text-align: center;
 }
 
@@ -1872,6 +1872,11 @@ p.loyed3 {
 .div-space-between {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.div-space-left {
+  display: flex;
+  justify-content: left;
   align-items: center;
 }
 
@@ -3146,6 +3151,20 @@ h4.req_title {
   object-fit: contain;
 }
 
+.hire_pack_info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+.unit_quantity {
+  width: 25vw;
+}
+
+.flex {
+  display: flex;
+}
+
 .space {
   height: 50px;
 }
@@ -3310,3 +3329,11 @@ input[type=range].range-pack::-ms-thumb { /*thing that moves*/
 input[type=range].range-pack:focus::-ms-fill-upper {
   background: var(--yellow);
 } */
+
+.mar-bot-0 {
+  margin-bottom: 0;
+}
+
+.unit_text {
+  color: var(--blue);
+}
