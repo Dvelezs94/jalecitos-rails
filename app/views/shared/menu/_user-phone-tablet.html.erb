@@ -5,12 +5,48 @@
       <div class="col-3">
         <div class="tablet-mobile-input">
           <div class="mobile-input-icon">
+            <% if (@gig.present? && @gig.name.present? && current_page?( gig_path(city_slug(@gig.city),@gig))) || (@request.present? && @request.name.present? && current_page?( request_path(@request) )) %>
+            <i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.go(-1);"></i>
+            <% else %>
             <a class="menu-open" id="menu-open" href="<%= user_mobile_search_path %>">
               <i class="fa fa-search"></i>
             </a>
+            <% end %>
           </div>
         </div>
       </div>
+      <% if @gig.present? && @gig.name.present? && current_page?( gig_path(city_slug(@gig.city),@gig) ) %>
+      <div class="col-9 text-right">
+        <div class="tablet-mobile-user">
+          <% if current_user != @gig.user %>
+          <div class="other_gig_actions">
+            <div class="hearted1 likes-<%= @gig.slug %>">
+              <%= render "gigs/likes", gig: @gig %>
+            </div>
+            <%= link_to icon("fas", "share-alt", title: "Compartir"), {}, id: "share" %>
+            <% if user_signed_in? %>
+              <%= icon("fas", "flag", class: "gig_action_icon cursor_pointer reportgig", title: "Reportar", id: "reportgigbtn") %>
+            <% end %>
+          </div>
+          <% else %>
+            <%= render "shared/gigs/show/gig_actions" %>
+          <% end %>
+        </div>
+      </div>
+      <% elsif @request.present? && @request.name.present? && current_page?( request_path(@request) ) %>
+      <div class="col-9 text-right">
+        <div class="tablet-mobile-user">
+          <% if current_user != @request.user %>
+          <div class="other_gig_actions">
+            <%= link_to icon("fas", "share-alt", title: "Compartir"), {}, id: "share" %>
+            <% if user_signed_in? %>
+              <%= icon("fas", "flag", class: "gig_action_icon cursor_pointer reportreq", title: "Reportar", id: "reportrequestbtn") %>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <% else %>
       <div class="col-6 justify-content-center text-center" style="display:flex;align-items:center;">
 
         <%= form_with model: User, url: update_users_path, method: :put , local: true do |f|%>
@@ -30,6 +66,7 @@
           <%=link_to image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "user_pic", lazy: true, id: "user_pic"), user_path(current_user)%>
         </div>
       </div>
+      <% end %>
     </div>
   </div>
 </div>
