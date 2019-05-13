@@ -69,8 +69,8 @@ function syncAjaxGig(form) {
     data: form.find("[name!='_method']").serialize(),
     success: function() {},
     error: function() {
+      show_error("Parece que no estás conectado a internet, intenta guardar de nuevo");
       if (form.hasClass("gig_form")) { //if its gig form, go again to it...
-        show_error("Parece que no estás conectado a internet, intenta guardar de nuevo");
         setTimeout(function() { //if steps changes rapidly between steps, it crashes, i have to wait
           window.gig_step.steps("setStep", 0);
         }, 800);

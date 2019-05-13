@@ -1,5 +1,5 @@
 <tr>
-  <td><%= link_to(user.name, user_path(user.slug)) %></td>
+  <td><%= link_to(((user.name.present?)? user.name : "N/A"  ), user_path(user.slug)) %></td>
   <td><%= user.email %></td>
   <td><%= user.roles %></td>
   <td>Member since <%= distance_of_time_in_words(user.created_at, Time.now) %> ago</td>
