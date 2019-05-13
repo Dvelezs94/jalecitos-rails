@@ -4,7 +4,7 @@ module GetQuery
     @gigs = Gig.search(filter_query,
        includes: [:query_pack, :likes, :user, city: [state: :country]],
         where: guest_where_filter,
-        order: by_score,
+        boost_where: guest_boost_where_condition, boost_by: {score: {factor: 100}},
          page: params[:gigs], per_page: 20,
           execute: bool, operator: "or", misspellings: misspellings)
   end
@@ -12,7 +12,9 @@ module GetQuery
   def get_guest_request bool=false
     @requests = Request.search(filter_query,
        includes: [:offers, city: [state: :country]],
-        where: guest_where_filter, page: params[:requests], per_page: 20,
+        where: guest_where_filter,
+        boost_where: guest_boost_where_condition,
+        page: params[:requests], per_page: 20,
         execute: bool, operator: "or", misspellings: misspellings)
   end
 
@@ -20,15 +22,16 @@ module GetQuery
     @gigs = Gig.search(filter_query,
        includes: [:query_pack, :likes, :user, city: [state: :country]],
         where: user_where_filter, page: params[:gigs],
-        order: by_score,
+         boost_where: boost_where_condition, boost_by: {score: {factor: 100}},
          per_page: 20, execute: bool, operator: "or", misspellings: misspellings)
   end
 
   def get_user_request bool=false
     @requests = Request.search(filter_query,
        includes: [:offers, city: [state: :country]],
-        where: user_where_filter,
-         page: params[:requests], per_page: 20,
+        where: user_where_filter, page: params[:requests],
+        boost_where: boost_where_condition,
+         per_page: 20,
           execute: bool, operator: "or", misspellings: misspellings)
   end
 
@@ -37,6 +40,22 @@ module GetQuery
     #below : if the results are lower than 20, misspellings are activated (default is 1 edit_distance, but with this word have to match exactly)
     #edit_distance : intertions, deletions of sustitutions to match words
     {prefix_length: 3, below: 20, edit_distance: 3}
+  end
+
+  def boost_where_condition
+    if params[:city_id] != ""
+      {city_id: {value: params[:city_id], factor: 5}}
+    else #no city so i cant boost "Any place of Mexico"
+      {}
+    end
+  end
+
+  def guest_boost_where_condition
+    if @city.present?
+      {city_id: {value: @city.id, factor: 5}}
+    else #no city so i cant boost "Any place of Mexico"
+      {}
+    end
   end
 
   def by_score

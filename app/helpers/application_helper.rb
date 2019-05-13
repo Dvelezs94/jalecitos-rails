@@ -11,29 +11,19 @@ module ApplicationHelper
     cookies.permanent.signed[:mb].present?
   end
 
-  def prof_or_loc model  #this function is used in home and queries
+  def prof_and_loc model  #this function is used in home and queries
     profession = model.profession.present? ? model.profession : "Sin profesión"
-    if controller.controller_name == "gigs" #if gig show carousel (user or guest)
-      profession #related gigs are searched in same city
-    elsif current_user #if user
-      if params[:query].present? # if query
-        if params[:city_id].present?
-          profession
-        else
-          model.location
-        end
-      else #homepage
-        if current_user.city_id.present?
-          profession
-        else
-          model.location
-        end
+    if current_user #if user
+      if model.city_id != nil && model.city_id == current_user.city_id #element has my location
+        profession + " (Mi ciudad)"
+      else #element hasnt my location
+        "#{profession} (#{model.location})"
       end
     else # is guest
-      if params[:lat].present? #query with location
-        profession
-      else #homepage
-        model.location
+      if @city.present? && @city.id == model.city_id #query and element has my location
+        profession + " (Mi ciudad)"
+      else#element has other location (or i didnt had set one location or home)
+        "#{profession} (#{model.location})"
       end
     end
   end

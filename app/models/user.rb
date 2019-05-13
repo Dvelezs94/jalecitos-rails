@@ -13,6 +13,8 @@ class User < ApplicationRecord
   include AliasFunctions
   #tags
   include TagRestrictions
+  # Avatar image
+  mount_uploader :image, AvatarUploader
   #search
   searchkick language: "spanish"
   # only send these fields to elasticsearch
@@ -28,15 +30,10 @@ class User < ApplicationRecord
   acts_as_taggable
   #enum
   enum status: { active: 0, disabled: 1, banned: 2}
-  before_create :set_location
+
   # Create default values
   before_validation :set_defaults, on: :create
-  # Create User Score
-  after_commit :create_user_score
-
-  before_update :set_roles
-  # Create openpay user
-  after_commit :create_openpay_account
+  friendly_id :alias, use: :slugged #this is after the alias is generated because if not then it will generate a number slug because alias isnt set yet
   # Validates uniqueness of id
   validates :email, :alias,  uniqueness: true
   validates_numericality_of :age, greater_than_or_equal_to: 0, less_than: 101, allow_blank: true
@@ -46,17 +43,23 @@ class User < ApplicationRecord
   validate :maximum_amount_of_tags, :no_spaces_in_tag, :tag_length
   # validate :location_syntax
   validates_length_of :bio, maximum: 500
-  validates_presence_of :alias
+  validates_presence_of :alias, :slug
   validates :alias, format: { :with => /\A[a-zA-Z0-9\-\_]+\z/, message: "sólo puede contener caracteres alfanuméricos, guión y guión bajo." }
-  # User Score
-  belongs_to :score, foreign_key: :score_id, class_name: "UserScore", optional: true
+  # Create User Score and openpay user
+  after_validation :create_user_score
+  after_validation :create_openpay_account
+
+  before_create :set_location
   # update user timezone if location changed
   before_update :update_time_zone, :if => :city_id_changed?
   # update verified gigs when account is verified
   before_update :verify_gigs, :if => :verified_changed?
-  # Avatar image
-  mount_uploader :image, AvatarUploader
+  before_update :set_roles
+
   # Associations
+  # User Score
+  belongs_to :score, foreign_key: :score_id, class_name: "UserScore", optional: true
+
   belongs_to :city, optional: true
   # reports
   has_many :reports
@@ -155,7 +158,6 @@ class User < ApplicationRecord
       UserScore.create do |user_score|
         self.score = user_score
       end
-      save
     end
    end
 
@@ -169,14 +171,9 @@ class User < ApplicationRecord
      end
    end
 
-   #alias
-   friendly_id :alias, use: :slugged
-
 
 
    private
-   #if alias changes, also slug
-
    def set_roles
      if self.roles_word.present?
        case self.roles_word
@@ -199,7 +196,7 @@ class User < ApplicationRecord
    end
 
    def should_generate_new_friendly_id?
-     slug.blank? || alias_changed?
+     new_record? || slug.blank? || alias_changed? || super
    end
 
    def update_time_zone
