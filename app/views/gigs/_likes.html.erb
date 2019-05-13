@@ -1,4 +1,4 @@
-<% if gig.present? && current_page?( gig_path(city_slug(gig.city),gig) ) %>
+<% if gig.present? && (request.path.split("/").third == request.referer.split("/").last rescue false) %>
   <% if current_user && gig.likes.select{|l| l.user_id == current_user.id}.present? %>
     <%= link_to "#{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'like')}".html_safe, gig_like_path(gig.slug), method: :delete, class: 'like', remote: true %>
   <% else %>
