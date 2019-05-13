@@ -1,6 +1,6 @@
 // Share API action
 $(document).on('turbolinks:load', function() {
-  $('#share').click(function (event) {
+  $('.fa-share-alt').click(function (event) {
     let url = document.location.href;
     const canonicalElement = document.querySelector('link[rel=canonical]');
 

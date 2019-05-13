@@ -2,9 +2,31 @@
 <div class="innerpage-leftsidejata">
   <div class="verificos-title">
     <h1><%= @gig.title %></h1>
+    <small class="visit-count gig-visits-likes"><%= "#{@gig_hits} Vistas" %> ● <%= "#{@gig.likes.length} Me gusta" %></small>
     <div class="div-space-between">
       <p><%= @gig.location %></p>
-      <small class="visit-count"><%= "#{@gig_hits} visitas" %></small>
+      <div class="pacificobg-socialicon">
+        <div class="arroweee">
+          <a href="">
+            <%= link_to icon("fas", "arrow-left"), 'javascript:history.go(-1);' %>
+          </a>
+        </div>
+        <% if current_user != @gig.user %>
+        <div class="other_gig_actions media-btns">
+          <div class="hearted1 likes-<%= @gig.slug %>">
+            <%= render "gigs/likes", gig: @gig %>
+          </div>
+          <%= link_to icon("fas", "share-alt", title: "Compartir"), {}, id: "share" %>
+          <% if user_signed_in? %>
+            <%= icon("fas", "flag", class: "fa-lg gig_action_icon cursor_pointer", title: "Reportar", id: "reportgigbtn") %>
+          <% end %>
+        </div>
+        <% else %>
+        <div class="gig_actions_desktop">
+          <%= render "shared/gigs/show/gig_actions" %>
+        </div>
+        <% end %>
+      </div>
     </div>
   </div>
 
@@ -36,26 +58,6 @@
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
     </div>
-    <div class="pacificobg-socialicon">
-      <div class="arroweee">
-        <a href="">
-          <%= link_to icon("fas", "arrow-left"), 'javascript:history.go(-1);' %>
-        </a>
-      </div>
-      <% if current_user != @gig.user %>
-      <div class="other_gig_actions">
-        <div class="hearted1 likes-<%= @gig.slug %>">
-          <%= render "gigs/likes", gig: @gig %>
-        </div>
-        <%= link_to icon("fas", "share-alt", title: "Compartir"), {}, id: "share" %>
-        <% if user_signed_in? %>
-          <%= icon("fas", "flag", class: "fa-lg gig_action_icon cursor_pointer", title: "Reportar", id: "reportgigbtn") %>
-        <% end %>
-      </div>
-      <% else %>
-        <%= render "shared/gigs/show/gig_actions" %>
-      <% end %>
-    </div>
     <% if @gig.user.verified %>
       <div class="varificado-btn3">
         <a href="">VERIFICADO</a>
@@ -74,7 +76,7 @@
             <% end %>
           <%= "#{icon("fas", "check-square", title: "Verificado")}".html_safe if @gig.user.verified %>
         </div>
-        <%=link_to( "#{icon("fas", "comment", title: "Contactar")} Contactar".html_safe, conversations_path( user_id: @gig.user.slug, model_id: @gig.id, model: "Gig") ) if current_user != @gig.user%>
+        <%=link_to( "#{icon("fas", "comment-alt", title: "Mensaje")} Mensaje".html_safe, conversations_path( user_id: @gig.user.slug, model_id: @gig.id, model: "Gig"), style: "font-weight: 700;" ) if current_user != @gig.user%>
 
       </div>
     </div>
@@ -84,9 +86,9 @@
     <div class="sed-content">
       <div class="div-space-between">
         <h5><%= @gig.location %></h5>
-        <small class="visit-count"><%= "#{@gig_hits} visitas" %></small>
       </div>
       <h2><%= @gig.title %></h2>
+      <small class="visit-count gig-visits-likes"><%= "#{@gig_hits} Vistas" %> ● <%= "#{@gig.likes.length} Me gusta" %></small>
       <br>
       <pre> <p><%= gig_description %></p> </pre>
       <br>
