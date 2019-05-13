@@ -28,7 +28,7 @@
       <%= f.text_field :body, autofocus: true, size: 499, autocomplete: "off", placeholder: "Escribe un mensaje" %>
       <%= f.hidden_field :related_to_id, value: params[:model_id] %>
       <%= f.hidden_field :related_to_type, value: params[:model] %>
-      <%= button_tag( :class => "btn btn-success send-message", id: "send-message", :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i>" }) do %>
+      <%= button_tag( :class => "btn send-message", id: "send-message", :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i>" }) do %>
       <%= "Enviar" %>
         <% end %>
       <% end %>
