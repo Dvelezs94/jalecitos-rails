@@ -15,6 +15,18 @@ module PackagesHelper
           ['Docena', "dozen"]
         ]
       ],
+      ['Masa',
+        [
+          ['Gramo', "gram"],
+          ['Kilogramo', "kilogram"],
+        ]
+      ],
+      ['Capacidad',
+        [
+          ['Mililitro', "milliliter"],
+          ['Litro', "liter"],
+        ]
+      ],
       ['Distancia',
         [
           ['Centímetro', "centimeter"],
