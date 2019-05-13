@@ -74,6 +74,7 @@ h6 {
   --green: #39c27b;
   --dark-green: #27825f;
   --blue: #0067f4;
+  --light-blue: #E2F3FF;
   --yellow: #f9b732;
   --red: #ef2235;
   --disabled: rgba(142, 142, 147, 0.5);
@@ -3262,10 +3263,18 @@ input[type=range].range-pack::-webkit-slider-thumb { /*thing that moves*/
   width: 25px;
   border-radius: 50%;
   border: none;
-  background: var(--dark-green);
+  background: var(--blue);
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -7px;
+}
+
+input.unit_quantity {
+  color: var(--blue);
+  border: none;
+  text-align: center;
+  font-weight: 700;
+  background-color: var(--light-blue);
 }
 
 /*Firefox*/
