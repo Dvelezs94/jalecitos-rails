@@ -23,8 +23,12 @@ es:
         hour: "Horas"
         day: "Días"
         unit: "Unidades"
-        square_centimeter: "centímetros cuadrados"
-        square_meter: "metros cuadrados"
+        square_centimeter: "Centímetros cuadrados"
+        square_meter: "Metros cuadrados"
+        gram: "Gramos"
+        kilogram: "Kilogramos"
+        milliliter: "Mililitros"
+        liter: "Litros"
 
 
   requests:
