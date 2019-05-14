@@ -20,15 +20,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def generic_auth
     @auth = request.env["omniauth.auth"]
-
-    if ! @user = User.find_by_email(@auth.info.email)
+    @user = User.find_by_email(@auth.info.email)
+    if ! @user
       if @auth.info.email.present?
-      @new_user = User.new(provider: @auth.provider, email: @auth.info.email, password: Devise.friendly_token[0,20], name: @auth.info.name, image: @auth.info.image, lat: request.env["omniauth.params"]["lat"], lon: request.env["omniauth.params"]["lon"])
-      @new_user.skip_confirmation!
-      @new_user.save
-      log_in_and_remember(@new_user)
-      #  the z is just to fix the fb issue that is appending #_=_ to the last url param
-      redirect_to wizard_path
+        @new_user = User.new(provider: @auth.provider, email: @auth.info.email, password: Devise.friendly_token[0,20], name: @auth.info.name, image: @auth.info.image, lat: request.env["omniauth.params"]["lat"], lon: request.env["omniauth.params"]["lon"])
+        @new_user.skip_confirmation!
+        success = @new_user.save
+        if success
+          log_in_and_remember(@new_user)
+          #  the z is just to fix the fb issue that is appending #_=_ to the last url param
+          redirect_to wizard_path
+        else
+          flash[:notice] = "Ha ocurrido un error al tratar de crear tu cuenta, inténtalo de nuevo. Si el error persiste, por favor, contacta a soporte."
+          redirect_to new_user_registration_path
+        end
       else
         flash[:notice] = "No se permiten cuentas de Facebook sin correo electronico."
         redirect_to new_user_registration_path
