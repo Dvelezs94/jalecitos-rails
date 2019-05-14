@@ -1,6 +1,7 @@
-<% @old_url = Rails.application.routes.recognize_path(request.referrer) %>
-<% if @old_url[:controller] == "gigs" && @old_url[:action] == "show" %> //i am in gig show
-  $(".likes-<%= j @gig.slug %>").html("<%= j render 'gigs/likes', gig: @gig, with_number: false %>")
-<% else %>
-  $(".likes-<%= j @gig.slug %>").html("<%= j render 'gigs/likes', gig: @gig ,with_number: true %>")
-<% end %>
+item = $(".likes-<%= j @gig.slug %>");
+if( item.hasClass("with_number") ) {
+  item.html("<%= j render 'gigs/likes', gig: @gig, with_number: true %>")
+}
+else {
+  item.html("<%= j render 'gigs/likes', gig: @gig, with_number: false %>")
+}
