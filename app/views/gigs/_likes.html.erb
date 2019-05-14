@@ -1,4 +1,4 @@
-<% if gig.present? && (request.path.split("/").third == request.referer.split("/").last rescue false || current_page?(gig_path(city_slug(gig.city), gig))) %>
+<% if with_number == false %>
   <% if current_user && gig.likes.select{|l| l.user_id == current_user.id}.present? %>
     <%= link_to "#{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'like')}".html_safe, gig_like_path(gig.slug), method: :delete, class: 'like', remote: true %>
   <% else %>
@@ -6,8 +6,8 @@
   <% end %>
 <% else %>
   <% if current_user && gig.likes.select{|l| l.user_id == current_user.id}.present? %>
-    <%= link_to "#{gig.likes.length}  #{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'like')}".html_safe, gig_like_path(gig.slug), method: :delete, class: 'like', remote: true %>
+    <%= link_to "#{gig.likes.length}  #{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'like with_number')}".html_safe, gig_like_path(gig.slug), method: :delete, class: 'like', remote: true %>
   <% else %>
-    <%= link_to "#{gig.likes.length if gig.likes.length > 0}  #{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'unlike')}".html_safe, gig_like_path(gig.slug), method: :post, class: 'unlike', remote: true %>
+    <%= link_to "#{gig.likes.length if gig.likes.length > 0}  #{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'unlike with_number')}".html_safe, gig_like_path(gig.slug), method: :post, class: 'unlike', remote: true %>
   <% end %>
 <% end %>

@@ -7,7 +7,7 @@ module AliasFunctions
         hex = SecureRandom.hex(5)
         self.alias = "#{ login_part.first(19)}-#{ hex }" #alias is maximum 30 chars, 19 from mail (max), the "-", and 10 from hex
       rescue
-        self.alias = "usuario-#{SecureRandom.hex(8)}" #esto nunca se va a usar de seguro porque si entra el mail es porque es bueno, entonces se generara bien todo el alias
+        self.alias = "Usuario-#{SecureRandom.hex(11)}" #esto nunca se va a usar de seguro porque si entra el mail es porque es bueno, entonces se generara bien todo el alias
       end
     end
   end

@@ -36,7 +36,18 @@ form.new_message {
 }
 button.send-message{
   margin-left: 5px;
-  padding: 0px 5px;
+  padding: 10px 5px;
+  border: none;
+  background-color: var(--blue);
+  color: #fff;
+}
+
+button.send-message i{
+  color: #fff;
+}
+
+button.send-message:hover {
+  color: #fff;
 }
 
 .user_conversations {

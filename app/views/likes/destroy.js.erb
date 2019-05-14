@@ -1,1 +1,7 @@
-$(".likes-<%= j @gig.slug %>").html("<%= j render 'gigs/likes', gig: @gig %>")
+item = $(".likes-<%= j @gig.slug %>");
+if( item.find(".with_number").length > 0 ) {
+  item.html("<%= j render 'gigs/likes', gig: @gig, with_number: true %>")
+}
+else {
+  item.html("<%= j render 'gigs/likes', gig: @gig, with_number: false %>")
+}
