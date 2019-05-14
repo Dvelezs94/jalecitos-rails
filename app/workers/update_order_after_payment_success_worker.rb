@@ -10,7 +10,7 @@ class UpdateOrderAfterPaymentSuccessWorker
       # finish job if id doesnt exist
       return true if @order.blank?
       #  handle double send from openpay
-      return true if (! @order.waiting_for_bank_approval?) 
+      return true if (! @order.waiting_for_bank_approval?)
 
       if @order.purchase.nil? #gig or was deleted
         @order.denied!
@@ -31,7 +31,6 @@ class UpdateOrderAfterPaymentSuccessWorker
         end
         create_notification(@order.employer, @order.employee, "te contrató", @order.purchase, "sales")
         create_notification(@order.employee, @order.employer, "Se ha validado", @order.purchase, "purchases")
-        puts "X"*500
       end
     end
   end

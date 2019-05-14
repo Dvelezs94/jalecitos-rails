@@ -155,6 +155,8 @@ module ApplicationHelper
     else
       text = "#{notification.action} "
       case
+      when notification.action == "Se ha validado" && object == nil #when a request has a validated payment, it cant be deleted, so just package can have this situation
+        text += "el pago del <strong>Jale eliminado</strong>"
       when notification.action == "Se ha validado" && object.class == Package
         text += "el pago del jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
       when notification.action == "Se ha validado" && object.class == Offer
