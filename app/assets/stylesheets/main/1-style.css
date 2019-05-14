@@ -2670,7 +2670,8 @@ p.gig-score-times {
 /*error*/
 label.error,
 span.error,
-div.error{
+div.error,
+p.error{
   color: red !important;
 }
 /*Notifications*/
@@ -3357,4 +3358,11 @@ input[type=range].range-pack:focus::-ms-fill-upper {
 
 .unit_text {
   color: var(--blue);
+}
+
+a.disabled {
+  /* Make the disabled links grayish*/
+  background-color: gray !important;
+  /* And disable the pointer events */
+  pointer-events: none;
 }

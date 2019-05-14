@@ -61,15 +61,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # DELETE /resource
-  def destroy
-    if current_user.valid_password?(params[:password])
-      if current_user.disabled!
-        flash[:success] = "Tu cuenta ha sido desactivada."
-        redirect_to after_destroy_account_path
-      else
-        flash[:notice] = "No se pudo borrar esta cuenta"
-        redirect_to configuration_path
-      end
+  # def destroy
+  #
+  # end
+
+  def disable
+    if current_user.provider.present? #confirmation was in the view
+      disable_account()
+    elsif current_user.valid_password?(params[:password])
+      disable_account() #no provider, but user entered his passord
     else
       flash[:notice] = "La contraseña no es válida"
       redirect_to configuration_path
@@ -118,6 +118,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.validate # Look for any other validation errors besides Recaptcha
       flash[:error] = "Por favor, confirma que no eres un robot en tu registro."
       redirect_to after_inactive_sign_up_path_for(resource)
+    end
+  end
+  def disable_account
+    if current_user.disabled!
+      sign_out(current_user)
+      flash[:success] = "Tu cuenta ha sido desactivada"
+      redirect_to after_destroy_account_path()
+    else
+      flash[:notice] = "No se pudo borrar esta cuenta"
+      redirect_to configuration_path
     end
   end
 end
