@@ -15,5 +15,7 @@
 <%= render 'users/new_bank' %>
 <%= render 'users/new_card' %>
 <%= render 'users/new_billing_profile' %>
-<%= render 'devise/passwords/edit' %>
+<% if current_user.provider.nil? %>
+  <%= render 'devise/passwords/edit' %>
+<% end %>
 <%= render 'users/confirm_modals/confirm_delete_account' %>

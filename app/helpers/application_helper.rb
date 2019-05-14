@@ -134,7 +134,7 @@ module ApplicationHelper
 
   def build_notification_text (notification, object, html=true)
     text = ""
-    if notification.action != "Se ha finalizado" #need to have user
+    if /[[:lower:]]/.match(notification.action[0]) #need to have user because isnt capital
       text = "<strong>#{notification.user.slug}</strong> #{notification.action} "
       case
       when object == nil #deleted gig (package also)
@@ -155,6 +155,10 @@ module ApplicationHelper
     else
       text = "#{notification.action} "
       case
+      when notification.action == "Se ha validado" && object.class == Package
+        text += "el pago del jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
+      when notification.action == "Se ha validado" && object.class == Offer
+        text += "el pago del pedido #{object.request.title}"
       when object == nil #deleted gig (package also)
         text += "un <strong>Jale eliminado</strong>"
       when object.class == Package
