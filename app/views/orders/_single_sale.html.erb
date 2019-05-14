@@ -18,7 +18,7 @@
         <% end %>
         <% if single_sale.status == "pending" || single_sale.status == "in_progress" %>
           <%= link_to conversations_path(user_id: single_sale.employer.slug), class: "transaction-message-icon" do %>
-            <strong><%= icon("fas", "comment") %> Mensaje</strong>
+            <strong><%= icon("fas", "comment-alt") %> Mensaje</strong>
           <% end %>
         <% end %>
       </div>
