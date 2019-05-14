@@ -9,9 +9,13 @@
                    <span aria-hidden="true">Cerrar</span>
                  </div>
                <!--  -->
-               <h3>Borrar cuenta</h3>
-               <%= form_with url: user_registration_path(resource_name), method: :delete do |f| %>
-                <%= f.password_field :password, placeholder: "Digita tu contraseña actual" %>
+               <%= form_with url: user_disable_path, method: :post, local: true do |f| %>
+               <h3>¿Estás seguro? Esta operación es irreversible.</h3>
+                <% if current_user.provider.nil? %>
+                  <%= f.password_field :password, placeholder: "Digita tu contraseña actual" %>
+                <% else %>
+                  <%= f.submit "Si, cancelar cuenta", class: "default-deny-btn",:data => {:confirm => 'Por última vez, ¿estás seguro de cancelar tu cuenta?'} %>
+                <% end %>
                <% end %>
              </div>
          </div>
