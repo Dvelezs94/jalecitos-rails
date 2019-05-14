@@ -12,11 +12,15 @@
     <div class="card-body">
       <div class="Cuenta-content">
         <% if ! @user.verified? %>
+        <% @cant_verify = current_user.sales.completed.length <= 10 %>
           <div class="perfil-text">
             <h4>Verificación de perfil
-              <a href="<%= new_verification_path %>">Solicitar verificacion</a>
+              <%= link_to "Solicitar verificacion",new_verification_path, class: "#{ "disabled" if (@cant_verify) }" %>
             </h4>
           </div>
+          <% if @cant_verify %>
+          <p class="error">Debes tener más de 10 ventas para solicitar una verificación</p>
+          <% end %>
         <% else %>
           <div class="verificado-btn">
             <button class="default-btn">¡Felicidades!
@@ -24,12 +28,14 @@
               Tu perfil ha sido verificado.</button>
           </div>
         <% end %>
-        <br>
-        <div class="perfil-text">
-          <h4>Contraseña
-            <button id="changepassbtn2" class="default-btn">Cambiar Contraseña</button>
-          </h4>
-        </div>
+        <% if current_user.provider.nil? %>
+          <br>
+          <div class="perfil-text">
+            <h4>Contraseña
+              <button id="changepassbtn2" class="default-btn">Cambiar Contraseña</button>
+            </h4>
+          </div>
+        <% end %>
         <div class="Eliminar-cuenta">
           <h4>Eliminar cuenta</h4>
           <h5>¿Qué pasa cuando elimino mi cuenta?</h5>
