@@ -10,7 +10,7 @@ class UpdateOrderAfterPaymentSuccessWorker
       # finish job if id doesnt exist
       return true if @order.blank?
       #  handle double send from openpay
-      return true if (! @order.waiting_for_bank_approval?) || @order.denied?
+      return true if (! @order.waiting_for_bank_approval?) 
 
       if @order.purchase.nil? #gig or was deleted
         @order.denied!
