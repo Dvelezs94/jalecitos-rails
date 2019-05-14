@@ -55,6 +55,9 @@ Rails.application.routes.draw do
      confirmations: "users/confirmations",
      passwords: "users/passwords"
    }
+   devise_scope :user do
+     post 'user/disable', :to => 'users/registrations#disable'
+   end
    resources :galleries, only: [:create, :destroy] do
      collection do
        post :save_video

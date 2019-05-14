@@ -63,7 +63,7 @@ class VerificationsController < ApplicationController
 
   def verify_previous_work
     if current_user.sales.completed.length <= 10
-      redirect_to root_path, notice: "Debes tener más de 10 ventas para solicitar una verificación"
+      redirect_to configuration_path(collapse: "account"), notice: "Debes tener más de 10 ventas para solicitar una verificación"
       return false
     end
   end
