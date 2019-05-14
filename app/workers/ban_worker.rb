@@ -1,10 +1,11 @@
 class BanWorker
   include Sidekiq::Worker
+  sidekiq_options retry: false, dead: false
 
   def perform(report_id)
     report = Report.find(report_id)
     # number of reports needed to create a ban record
-    report_creation_count = 20
+    report_creation_count = 1
     # Get Similar Open reports made
     @reports = Report.where(["reportable_type = ? and reportable_id = ?", report.reportable_type, report.reportable_id]).open
     # Create Ban if the treshold has been reached
