@@ -161,11 +161,11 @@ module ApplicationHelper
         text += "el pago del jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
       when notification.action == "Se ha validado" && object.class == Offer
         text += "el pago del pedido #{object.request.title}"
-      when object == nil #deleted gig (package also)
+      when notification.action == "Se ha finalizado" && object == nil #deleted gig (package also)
         text += "un <strong>Jale eliminado</strong>"
-      when object.class == Package
+      when notification.action == "Se ha finalizado" && object.class == Package
         text += "el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
-      when object.class == Offer
+      when notification.action == "Se ha finalizado" && object.class == Offer
         text += "el pedido #{object.request.title}"
       end
     end
