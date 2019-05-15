@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   include SetLayout
   include GetPages
   before_action :admin_redirect, only: :home
-  before_action :pending_review, only: [:home], :if => :signed_and_rev
+  before_action :pending_review, only: [:home], :if => :search_pending_review?
   layout :set_layout
   access user: :all, admin: [:home], all: [:work, :home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots, :sitemap, :install]
   def home
@@ -96,7 +96,7 @@ class PagesController < ApplicationController
   end
 
 
-  def signed_and_rev
+  def search_pending_review?
     #format html helps to not query pending reviews when pagination triggers
     #params[:review] == "true" && request.format.html? OLD
     #request.env["HTTP_TURBOLINKS_REFERRER"].present? tells me if turbolinks visit (no turbolink visit only log in and reload of home)
