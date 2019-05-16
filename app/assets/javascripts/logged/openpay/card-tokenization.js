@@ -2,6 +2,7 @@ $(document).on('turbolinks:load', function() {
   if ($("#cardForm").length > 0) {
     $('#save-card').on('click', function(event) {
       if ($("#cardForm").valid()) {
+        $(this).html("Guardando...");
         event.preventDefault();
         $("#save-card").prop("disabled", true);
         OpenPay.token.extractFormAndCreate('cardForm', success_callbak, error_callbak);
@@ -20,6 +21,7 @@ $(document).on('turbolinks:load', function() {
       $('#cardForm').submit();
     };
     var error_callbak = function(response) {
+      $("#save-card").html("Guardar");
       var desc = response.data.description != undefined ? response.data.description : response.message;
       alert("ERROR [" + response.status + "] " + desc);
       $("#save-card").prop("disabled", false);
