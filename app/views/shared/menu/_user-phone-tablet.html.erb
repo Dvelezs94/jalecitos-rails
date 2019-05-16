@@ -5,7 +5,7 @@
       <div class="col-3">
         <div class="tablet-mobile-input">
           <div class="mobile-input-icon">
-            <% if (@gig.present? && current_page?( gig_path(city_slug(@gig.city),@gig))) || (@request.present? && current_page?( request_path(@request) )) %>
+            <% if (@gig.present? && @gig.name.present? && current_page?( gig_path(city_slug(@gig.city),@gig))) || (@request.present? && @request.name.present? && current_page?( request_path(@request) )) %>
             <i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.go(-1);"></i>
             <% else %>
             <a class="menu-open" id="menu-open" href="<%= user_mobile_search_path %>">
@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-      <% if @gig.present? && current_page?( gig_path(city_slug(@gig.city),@gig) ) %>
+      <% if @gig.present? && @gig.name.present? && current_page?( gig_path(city_slug(@gig.city),@gig) ) %>
       <div class="col-9 text-right">
         <div class="tablet-mobile-user">
           <% if current_user != @gig.user %>
@@ -33,7 +33,7 @@
           <% end %>
         </div>
       </div>
-      <% elsif @request.present? && current_page?( request_path(@request) ) %>
+      <% elsif @request.present? && @request.name.present? && current_page?( request_path(@request) ) %>
       <div class="col-9 text-right">
         <div class="tablet-mobile-user">
           <% if current_user != @request.user %>
