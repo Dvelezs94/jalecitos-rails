@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-      <% if @gig.present? && @gig.name.present? && current_page?( gig_path(city_slug(@gig.city),@gig) ) %>
+      <% if @gig.present? && current_page?( gig_path(city_slug(@gig.city),@gig) ) %>
       <div class="col-9 text-right">
         <div class="tablet-mobile-user">
           <% if current_user != @gig.user %>
