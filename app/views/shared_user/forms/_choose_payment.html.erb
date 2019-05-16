@@ -1,12 +1,12 @@
 <% check_first = (params[:action] == "create" && params[:packages][pack.slug][:max_amount] == "") || ( params[:action] == "update" && pack.max_amount.nil? ) || (params[:action] == "edit" && pack.max_amount.nil?) || (params[:action] == "new") %>
 <div>
   <div class="custom-control custom-radio margin-10px-0">
-    <input type="radio" class="custom-control-input hire_by" id="by_service_<%= n %>" name="hire_by_<%= n %>"
+    <input type="radio" class="custom-control-input hire_by by_service" id="by_service_<%= n %>" name="hire_by_<%= n %>"
     <%= "checked" if ( check_first ) %>>
     <label class="custom-control-label" for="by_service_<%= n %>">Por servicio</label>
   </div>
   <div class="custom-control custom-radio margin-10px-0">
-    <input type="radio" class="custom-control-input hire_by" id="by_units_<%= n %>" name="hire_by_<%= n %>"
+    <input type="radio" class="custom-control-input hire_by by_unit" id="by_units_<%= n %>" name="hire_by_<%= n %>"
     <%= "checked" if ( !check_first ) %> >
     <label class="custom-control-label" for="by_units_<%= n %>">Por unidades</label>
   </div>

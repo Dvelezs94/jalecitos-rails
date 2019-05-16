@@ -53,7 +53,7 @@
               </div>
               <%# render 'shared_user/gigs/forms/hints/city_hint.html.erb'%>
               <%= render "shared_user/forms/choose_payment",  n: n, pack: package[n] %>
-              <div class="row hidden" display_id="by_service_<%= n %>">
+              <div class="row hidden" display_id="by_service_<%= n %>" display_class="by_service">
                 <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-12 col-12">
                   <p class="price-text form-title">Lo que ganaré:</p>
                   <div class="row justify-content-center w-100">
@@ -70,12 +70,12 @@
                   <label id="price-calc-<%= n %>" class="label-price"></label>
                 </div>
               </div>
-              <div class="row hidden" display_id="by_units_<%= n %>">
+              <div class="row hidden" display_id="by_units_<%= n %>" display_class="by_unit">
                 <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
                   <p class="price-text form-title">Tipo de unidad:</p>
                   <div class="row justify-content-center w-100">
                     <%= pa.select :unit_type, grouped_options_for_select(unit_options, selected: pack.unit_type),{},
-                     class:"form-control form_fields_#{n} text-center", style: "text-align-last:center;"%>
+                     class:"form-control form_fields_#{n} text-center unit_type", style: "text-align-last:center;"%>
                     <span class="span-error"></span>
                   </div>
                 </div>

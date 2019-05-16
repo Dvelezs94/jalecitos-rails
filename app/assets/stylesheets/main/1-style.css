@@ -3352,10 +3352,6 @@ input[type=range].range-pack:focus::-ms-fill-upper {
   background: var(--yellow);
 } */
 
-.mar-bot-0 {
-  margin-bottom: 0;
-}
-
 .unit_text {
   color: var(--blue);
 }
@@ -3365,4 +3361,13 @@ a.disabled {
   background-color: gray !important;
   /* And disable the pointer events */
   pointer-events: none;
+}
+.padd-0 {
+  padding: 0;
+}
+.mar-bot-0 {
+  margin-bottom: 0 !important;
+}
+.height-43 {
+  height: 43px;
 }

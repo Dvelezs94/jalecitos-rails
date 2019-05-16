@@ -20,7 +20,7 @@
 }
 @media only screen and (min-width: 320px) and (max-width: 991px) {
   .main_container{
-    padding-top: 64px;
+    padding-top: 62px;
   }
   .mobile_search_bar {
     display: block;
