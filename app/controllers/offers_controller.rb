@@ -36,7 +36,7 @@ class OffersController < ApplicationController
   def create
     @offer = Offer.new( offer_params_create )
     if @offer.save
-      create_notification(@offer.user, @offer.request.user, "oferto", @offer.request)
+      create_notification(@offer.user, @offer.request.user, "ofertó", @offer.request)
       OfferMailer.new_offer(@offer).deliver if @offer.request.user.transactional_emails
       redirect_to request_path(params[:request_id]), notice: 'La oferta ha sido creada con éxito.'
     else
