@@ -1284,6 +1284,7 @@ pre p.limpi3 {
 
 .mentos-title2 {
   margin-top: 20px;
+  word-break: break-word;
 }
 
 p.hace2 {
@@ -2773,7 +2774,6 @@ h6.req_location {
 .user_pic {
   height: 40px;
   width: 40px;
-  margin-top: -30px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -2787,12 +2787,6 @@ h6.req_location {
   color: #C7C7CC;
 }
 /*MENU*/
-.tablet-mobile-user img {
-	width: 34px;
-  height: 34px;
-  margin-top: 0px;
-  box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.07);
-}
 .tablet-mobile-top-ber {
 	background: #39C27B;
 	padding: 15px 0;
@@ -3207,7 +3201,7 @@ h4.req_title {
 #main_menu {
   position: fixed;
   width: 100%;
-  transition: top 0.5s;
+  transition: top .7s;
   top: 0;
   z-index: 100;
 }
@@ -3368,6 +3362,16 @@ a.disabled {
 .mar-bot-0 {
   margin-bottom: 0 !important;
 }
+.mar-top--3 {
+  margin-top: -3px;
+}
+.mar-bot-7 {
+  margin-bottom: 7px !important;
+}
 .height-43 {
   height: 43px;
+}
+.gig_actions_desktop a i,
+.req_actions_desktop a i{
+  color: var(--gray);
 }

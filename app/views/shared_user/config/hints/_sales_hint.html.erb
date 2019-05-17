@@ -4,7 +4,9 @@
       <%= icon("fas", "question-circle", class: "question_hint") %>
       <h3 class="p-t-10">Nivel de usuario</h3>
     </div>
-    <p>Tu nivel de usuario va de acuerdo al total de ventas realizadas en la plataforma como puedes ver en la siguiente tabla.
+    <p>Las ventas totales son el monto acumulado por la venta de tus servicios incluyendo comisiones.
+    </p>
+    <p>Tu nivel de usuario va de acuerdo a las ventas totales realizadas en la plataforma como puedes ver en la siguiente tabla.
     </p>
     <%= render "shared/level_table", h: false, n: 0, user: true %>
     <p>Mientras mayor sea tu nivel, menos comisión se te cobrará al realizar tus retiros.
