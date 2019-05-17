@@ -19,7 +19,7 @@
               <%= one_star_disp_help gig %>
             </div>
             <% if current_user %>
-              <div class="hearted1 likes-<%= gig.slug %>" style="margin-top: -3px;">
+              <div class="hearted1 likes-<%= gig.slug %> mar-top--3">
                 <%= render "gigs/likes", gig: gig, with_number: true %>
               </div>
             <% end %>
