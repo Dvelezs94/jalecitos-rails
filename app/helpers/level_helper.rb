@@ -1,7 +1,21 @@
 module LevelHelper
+  def set_level_fee
+    @ally_code = current_user.ally_code
+    if @ally_code.present?
+      if @ally_code.level_enabled
+        current_user.level
+      else
+        # 0 stands for ally level
+        0
+      end
+    else
+      current_user.level
+    end
+  end
   # calculate payout corresponding to user
   def levels_fee
     {
+      0 => 1,
       1 => 0.9,
       2 => 0.95,
       3 => 0.96,
