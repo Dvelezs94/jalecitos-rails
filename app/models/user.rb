@@ -115,6 +115,20 @@ class User < ApplicationRecord
   def verify_gigs
       self.gigs.each { |gig| gig.touch }
   end
+
+  def level_enabled?
+    @ally_code = self.ally_code
+    if @ally_code.present?
+      if @ally_code.level_enabled
+        true
+      else
+        # 0 stands for ally level, which in this case is disabled
+        false
+      end
+    else
+      true
+    end
+  end
   ############################################################################################
   ## PeterGate Roles                                                                        ##
   ## The :user role is added by default and shouldn't be included in this list.             ##
