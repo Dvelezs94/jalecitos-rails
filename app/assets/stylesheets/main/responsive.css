@@ -2084,8 +2084,8 @@
     margin-top: 10px;
   }
 
-  .gig_actions a i,
-  .req_actions a i{
+  .gig_actions_mobile a i,
+  .req_actions_mobile a i{
     padding-top: 10px;
     color: white;
     font-size: 20px;
@@ -2094,8 +2094,7 @@
   }
 
 
-  .gig_actions_desktop,
-  .req_actions_desktop {
+  .hide_less_than_992 {
     display: none;
   }
 

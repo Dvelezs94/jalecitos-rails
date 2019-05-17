@@ -1284,6 +1284,7 @@ pre p.limpi3 {
 
 .mentos-title2 {
   margin-top: 20px;
+  word-break: break-word;
 }
 
 p.hace2 {
@@ -3360,6 +3361,9 @@ a.disabled {
 }
 .mar-bot-0 {
   margin-bottom: 0 !important;
+}
+.mar-bot-7 {
+  margin-bottom: 7px !important;
 }
 .height-43 {
   height: 43px;

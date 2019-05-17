@@ -5,12 +5,10 @@
                 <div class="refrigerador-content">
                     <div class="icon-areas">
                         <i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.go(-1);"></i>
-                        <div class="icon-link">
-                            <%= render "shared_user/requests/show/req_actions", desktop: true %>
-                        </div>
                     </div>
-                    <div class="arreglar-title">
+                    <div class="arreglar-title flex-space-bet">
                         <h3><%= @request.title %></h3>
+                        <%= render "shared_user/requests/show/req_actions", desktop: true %>
                     </div>
                     <div class="Saltillo">
                         <a><%= @request.location %></a>
