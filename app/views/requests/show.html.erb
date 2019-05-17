@@ -6,10 +6,7 @@
                     <div class="icon-areas">
                         <i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.go(-1);"></i>
                         <div class="icon-link">
-                          <% if user_signed_in? && (@request.user != current_user) %>
-                          <%= link_to icon("fa","flag", title: "Reportar"), {}, id: "reportrequestbtn" %>
-                          <% end %>
-                          <%= link_to icon("fa","share-alt", title: "Compartir"), {}, id: "share" %>
+                            <%= render "shared_user/requests/show/req_actions", desktop: true %>
                         </div>
                     </div>
                     <div class="arreglar-title">
@@ -35,12 +32,9 @@
 
                      <div class="Postularme-btn">
                      <% if @hires_open %>
-                       <% if current_user == @request.user %>
-                        <%= link_to 'Editar', edit_request_path(@request), class: "btn btn-primary" %>
-                        <%= link_to 'Borrar', request_path(@request), class: "btn btn-danger", method: :delete, :data => {:confirm => 'Confirma que quieres borrar este pedido'}  %>
-                       <% elsif  current_user && @my_offer.present?  %>
+                       <% if current_user != @request.user && @my_offer.present?  %>
                         <p class="text-muted">Tu oferta está postulada</p>
-                       <% else %>
+                       <% elsif current_user != @request.user %>
                         <%= link_to 'Postularme', new_request_offer_path(@request), class: "btn btn-success postularme-offer" %>
                        <% end %>
                      <% end %>

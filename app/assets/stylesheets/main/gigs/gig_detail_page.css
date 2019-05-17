@@ -369,14 +369,13 @@ a.continue_purchase {
   padding: 5px 5px;
 }
 
-.gig_actions,
-.other_gig_actions {
+.gig_actions {
   margin-left: auto;
   margin-right: 15px;
-}
-
-.other_gig_actions {
   display: flex;
+  color: white;
+  align-items: baseline;
+  justify-content: flex-end;
 }
 
 .like {
