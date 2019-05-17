@@ -13,7 +13,7 @@
       <div class="Facturacion-content">
         <div class="perfil-text">
           <%= form_with url: trade_ally_codes_path, remote: false do |f| %>
-          <%= f.text_field :token_id, placeholder: "Código" %>
+          <%= f.text_field :code_id, placeholder: "Código" %>
           <%= f.submit "Canjear", class: "btn btn-success" %>
           <% end %>
         </div>

@@ -32,7 +32,7 @@ class AllyCodesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_ally_code
       begin
-        @ally_code = AllyCode.find_by_token(params[:token_id])
+        @ally_code = AllyCode.find_by_token(params[:code_id])
         raise "El código no existe." if @ally_code.nil?
       rescue RuntimeError => e
         redirect_to configuration_path, alert: e
