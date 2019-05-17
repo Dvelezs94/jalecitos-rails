@@ -2092,6 +2092,10 @@
     align-items: center;
     margin-right: 15px;
   }
+  .gig_actions_mobile,
+  .req_actions_mobile{
+    color: white;
+  }
 
 
   .hide_less_than_992 {
