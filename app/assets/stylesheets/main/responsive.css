@@ -2092,8 +2092,7 @@
     align-items: center;
     margin-right: 15px;
   }
-  .gig_actions_mobile,
-  .req_actions_mobile{
+  .gig_actions_mobile { /*for flag of ban gig*/
     color: white;
   }
 
