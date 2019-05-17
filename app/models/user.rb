@@ -61,6 +61,10 @@ class User < ApplicationRecord
   belongs_to :score, foreign_key: :score_id, class_name: "UserScore", optional: true
 
   belongs_to :city, optional: true
+  # ally code in case it has one
+  belongs_to :ally_code, optional: true
+  #after_update :decrement_ally_code_times_left, :if => :ally_code_id_changed?
+  before_save :decrement_ally_code_times_left, if: :will_save_change_to_ally_code_id?
   # reports
   has_many :reports
   # Ticket system
@@ -205,5 +209,15 @@ class User < ApplicationRecord
      @url = "https://maps.googleapis.com/maps/api/timezone/json?key=#{ENV.fetch("GOOGLE_MAP_API")}&location=#{@loc.lat},#{@loc.lng}&timestamp=#{Time.now.getutc.to_i}"
      @res = JSON.parse(Net::HTTP.get(URI.parse("#{@url}")))
      self.time_zone = @res["timeZoneId"] if TZInfo::Timezone.all_country_zone_identifiers.include? @res["timeZoneId"]
+   end
+
+   # when a user uses the ally code, decrement the times it can be used
+   def decrement_ally_code_times_left
+      if self.ally_code.present?
+       code_times_left = self.ally_code.times_left
+       self.ally_code.update!(times_left: code_times_left - 1)
+      else
+        true
+      end
    end
 end

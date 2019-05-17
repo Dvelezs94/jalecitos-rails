@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get :openpay_dashboard
       get :tickets
       get :orders
+      get :ally_codes
       post :predispersion_fee
     end
   end
@@ -36,6 +37,11 @@ Rails.application.routes.draw do
   end
 
   resources :reviews, only: [:update]
+  resources :ally_codes, only: [:create] do
+    collection do
+      post :trade
+    end
+  end
 
   resources :conversations, only: [:index, :create] do
     collection do

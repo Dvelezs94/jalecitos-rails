@@ -14,7 +14,7 @@ class PayoutsController < ApplicationController
   def create
     @orders = current_user.unpaid_orders
     if @orders.count > 0
-      @jalecitos_payout = Payout.new(user: current_user, bank_id: params[:bank_id], level: current_user.score.level)
+      @jalecitos_payout = Payout.new(user: current_user, bank_id: params[:bank_id], level: set_level_fee)
       # calculate orders and money to give to the user.
       # this function collects the ids that fit on a desired amount (eg 5000)
       #  it returns the ids that fit
