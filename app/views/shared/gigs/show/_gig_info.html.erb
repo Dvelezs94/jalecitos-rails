@@ -11,21 +11,7 @@
             <%= link_to icon("fas", "arrow-left"), 'javascript:history.go(-1);' %>
           </a>
         </div>
-        <% if current_user != @gig.user %>
-        <div class="other_gig_actions media-btns">
-          <div class="hearted1 likes-<%= @gig.slug %>">
-            <%= render "gigs/likes", gig: @gig, with_number: false %>
-          </div>
-          <%= link_to icon("fas", "share-alt", title: "Compartir"), {}, id: "share" %>
-          <% if user_signed_in? %>
-            <%= icon("fas", "flag", class: "fa-lg gig_action_icon cursor_pointer", title: "Reportar", id: "reportgigbtn") %>
-          <% end %>
-        </div>
-        <% else %>
-        <div class="gig_actions_desktop">
-          <%= render "shared/gigs/show/gig_actions" %>
-        </div>
-        <% end %>
+          <%= render "shared_user/gigs/show/gig_actions", desktop: true %>
       </div>
     </div>
   </div>

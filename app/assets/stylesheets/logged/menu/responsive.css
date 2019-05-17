@@ -11,6 +11,9 @@
   .mobile_search_bar {
     display: none;
   }
+  .user_pic {
+    margin-top: -30px;
+  }
 }
 
 @media (min-width: 992px) {

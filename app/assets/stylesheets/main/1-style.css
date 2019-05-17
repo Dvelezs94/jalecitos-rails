@@ -2773,7 +2773,6 @@ h6.req_location {
 .user_pic {
   height: 40px;
   width: 40px;
-  margin-top: -30px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -2787,12 +2786,6 @@ h6.req_location {
   color: #C7C7CC;
 }
 /*MENU*/
-.tablet-mobile-user img {
-	width: 34px;
-  height: 34px;
-  margin-top: 0px;
-  box-shadow: 0px 0px 0px 4px rgba(0,0,0,0.07);
-}
 .tablet-mobile-top-ber {
 	background: #39C27B;
 	padding: 15px 0;
@@ -3370,4 +3363,8 @@ a.disabled {
 }
 .height-43 {
   height: 43px;
+}
+.gig_actions_desktop a i,
+.req_actions_desktop a i{
+  color: var(--gray);
 }
