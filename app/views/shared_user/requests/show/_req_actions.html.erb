@@ -1,4 +1,10 @@
-<div class="req_actions  <%= "req_actions_desktop" if desktop == true %>">
+<% if desktop == false %> <%#the menu icons %>
+<div class="gig_actions req_actions_mobile">
+<% elsif desktop == true && current_user %><%#hide desktop icons from 991 to less because menu icons exist %>
+  <div class="req_actions req_actions_desktop hide_less_than_992">
+<% else %><%# is guest, so i dont hide the icons in any resolution because menu icons doesnt exist %>
+  <div class="req_actions req_actions_desktop">
+<% end %>
   <%= link_to icon("fas","share-alt", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
   <% if user_signed_in? && (@request.user == current_user) %>
     <%= link_to icon("fas","pen", class: "fa-lg gig_action_icon", title: "Editar"), edit_request_path(@request) %>

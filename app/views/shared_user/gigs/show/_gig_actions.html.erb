@@ -1,4 +1,10 @@
-<div class="gig_actions <%= "gig_actions_desktop" if (desktop == true) %>">
+<% if desktop == false %>
+<div class="gig_actions gig_actions_mobile">
+<% elsif desktop == true && current_user %>
+  <div class="gig_actions gig_actions_desktop hide_less_than_992">
+<% else %>
+  <div class="gig_actions gig_actions_desktop">
+<% end %>
   <%= link_to icon("fas","share-alt", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
   <% if user_signed_in? && (@gig.user == current_user) %>
     <%= link_to status_text_helper(@gig), toggle_status_gig_path(@gig) unless @gig.banned? || @gig.gig_packages[0].nil? %>
