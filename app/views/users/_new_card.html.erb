@@ -16,12 +16,12 @@
                <%= form_with url: user_cards_path(current_user), id: "cardForm", class: "new_card" do |f| %>
                <%= f.hidden_field :token_id %>
 
-                 <%= f.text_field :holder_name, class: "required", id: "holder_name", placeholder: "Nombre del Titular", :data => { :openpay_card => "holder_name"} %>
+                 <%= f.text_field :holder_name, class: "required", id: "holder_name", placeholder: "Nombre del Titular", :data => { :openpay_card => "holder_name"}, value: current_user.name %>
                  <%= f.text_field :card_number, class: "required", id: "card_number", placeholder: "Numero de tarjeta",
                      minlength: 15, maxlength: 16, :data => { :openpay_card => "card_number"}, onkeypress: "allowNumbersOnly(event)" %>
 
 
-                 <div class="row">
+                 <div class="row mar-bot-7">
                    <div class="col-lg-4 col-md-4 col-sm-4 col-4 padd-0">
                      <%= f.select :exp_month, options_for_select( (1..12).map {|month| [month, month.to_s.last(2)]} ),{include_blank: "Mes"},
                      class: "custom-select required height-43", id: "exp_month", :data => { :openpay_card => "expiration_month"} %>
