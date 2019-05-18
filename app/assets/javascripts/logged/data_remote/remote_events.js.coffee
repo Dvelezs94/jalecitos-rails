@@ -41,3 +41,8 @@ $ ->
   #reload page when mobile change location is successful
   $(document).on "ajax:success", "#mobile_autocomplete", (event, data) ->
     location.reload();
+  #update bank and card forms name when it is changed
+  $(document).on "ajax:success", "#change_user_name", (event, data) ->
+    new_name = $(this).html()
+    $("#holder_name").val(new_name);
+    $("#bank_holder_name").val(new_name);
