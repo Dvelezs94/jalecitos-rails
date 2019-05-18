@@ -6,10 +6,6 @@
   	position: relative;
   	padding: 10px 0;
   }
-   .Editar-b {
-  	position: absolute;
-  	right: 0;
-  }
 
   .chat-box {
   	display: none;
@@ -57,10 +53,6 @@
   .Borrar-btn {
   	position: relative;
   	padding: 10px 0;
-  }
-   .Editar-b {
-  	position: absolute;
-  	right: 0;
   }
   .modal-content, .modal-content-transparent {
   	width: 85%;

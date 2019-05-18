@@ -12,9 +12,9 @@
                 <h3>Nuevo Banco</h3>
                 <div class="divi-new js-form-join-section" data-section="1"></div>
                 <%= form_with url: user_banks_path(current_user), class: "new_bank" do |f| %>
-                  <%= f.text_field :clabe, class: "required", placeholder: "CLABE",  maxlength: "18", onkeypress: "allowNumbersOnly(event)" %>
-                  <%= f.text_field :bank_holder_name, class: "required", placeholder: "Nombre del Titular" %>
-                  <%= f.text_field :alias, class: "required", placeholder: "Alias (identificador)" %>
+                  <%= f.text_field :bank_holder_name, class: "required", placeholder: "Nombre del Titular", value: current_user.name %>
+                  <%= f.text_field :clabe, class: "required", placeholder: "CLABE",  maxlength: "18", onkeypress: "allowNumbersOnly(event)", autocomplete: "off" %>
+                  <%= f.text_field :alias, class: "required", placeholder: "Alias (ejemplo: banco 1)" %>
                   <br>
                   <%= f.button 'Continuar', :class => 'btn continue-button', style: "width:100%;", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Guardando.."} %>
                 <% end %>

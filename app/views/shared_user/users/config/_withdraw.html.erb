@@ -1,3 +1,4 @@
+<% @unpaid_money = @user.balance %>
 <div class="card">
   <div class="card-header" id="headingFive">
     <h5 class="mb-0">
@@ -12,8 +13,11 @@
     <div class="card-body">
       <div class="Retirar-fondos-content loading-zone">
         <div class="Saldo-disponible">
+          <% if @unpaid_money > 0 && @unpaid_money < 100 %>
+          <p class="error">Para poder retirar necesitas tener mínimo $100 MXN</p>
+          <% end %>
           <h3>Saldo disponible
-            <strong><%= number_to_currency(@user.balance || 0) %>
+            <strong><%= number_to_currency(@unpaid_money) %>
               MXN</strong>
           </h3>
         </div>
