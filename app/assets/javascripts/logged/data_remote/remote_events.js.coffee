@@ -44,5 +44,12 @@ $ ->
   #update bank and card forms name when it is changed
   $(document).on "ajax:success", "#change_user_name", (event, data) ->
     new_name = $(this).html()
-    $("#holder_name").val(new_name);
-    $("#bank_holder_name").val(new_name);
+    $("#holder_name").val(new_name)
+    $("#bank_holder_name").val(new_name)
+    #if card or bank form was before the name changed, then open modal again
+    if window.bank_after_rename
+      $("#bankModal").show()
+      $("#clabe").focus()
+    else if window.card_after_rename
+      $("#cardModal").show()
+      $("#card_number").focus()
