@@ -134,7 +134,7 @@ class OrdersController < ApplicationController
         @order.refund_in_progress!
         @order.update(response_refund_id: response["id"])
         if current_user == @order.employer
-          flash[:success] = "La orden esta en proceso de reembolso, recibiras un correo cuando la orden ya haya sido reembolsada"
+          flash[:success] = "La orden esta en proceso de reembolso, recibirás un correo cuando la orden ya haya sido reembolsada"
         else
           create_notification(@order.employee, @order.employer, "te ha reembolsado", @order, "purchases")
         end

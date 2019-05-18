@@ -17,7 +17,7 @@
           <p class="error">Para poder retirar necesitas tener mínimo $100 MXN</p>
           <% end %>
           <h3>Saldo disponible
-            <strong><%= number_to_currency(@unpaid_money || 0) %>
+            <strong><%= number_to_currency(@unpaid_money) %>
               MXN</strong>
           </h3>
         </div>

@@ -30,7 +30,7 @@ class PayoutsController < ApplicationController
 
         response = @payout.create(request_hash, @jalecitos_payout.user.openpay_id)
         @jalecitos_payout.update(transaction_id: response["id"])
-        flash[:success] = "Tu pago esta en proceso. Recibiras una notificacion por correo una vez que se haya procesado."
+        flash[:success] = "Tu pago esta en proceso. Recibirás una notificacion por correo una vez que se haya procesado."
       rescue
         flash[:error] = "El pago no pudo ser concretado. Intenta de nuevo mas tarde o comunicate con soporte para resolverlo."
         @jalecitos_payout.failed!
