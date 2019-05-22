@@ -26,7 +26,10 @@ class PayoutCompleteWorker
       @jalecitos_payout.completed!
       PayoutMailer.successful_payout(@jalecitos_payout.user, @balance_left).deliver
       send_payout_push
-      charge_payout_fee
+      # charge fee if the level is above 0, which means level is enabled
+      if @jalecitos_payout.level > 0
+        charge_payout_fee
+      end
     rescue => exception
       Bugsnag.notify(exception)
       PayoutMailer.notify_inconsistency(@jalecitos_payout.user).deliver

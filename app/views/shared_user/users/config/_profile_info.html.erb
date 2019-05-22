@@ -79,7 +79,7 @@
             <div>
               <label for="">Nivel</label>
               <li class="nav-item sales_info">
-                <%= current_user.score.level %>
+                <%= current_user.ally_code.present? ? "Aliado" : current_user.score.level %>
               </li>
             </div>
             <div>
@@ -88,13 +88,14 @@
                 <%= number_to_currency(current_user.score.total_sales, precision: 2) %>
               </li>
             </div>
+            <div >
+            </div>
           </ul>
           <%= icon("fas", "question-circle", class: "question_hint toggler") %>
         </div>
           <%= render 'shared_user/config/hints/sales_hint.html.erb' %>
       </div>
     </div>
-
     <!-- <div class="tab-radio-btn"> <p>Rol</p> <div class="Vendedor-text"> <label class="tab-btn">Vendedor <input type="radio" checked="checked" name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Comprador <input type="radio"
     name="radio"> <span class="checkmark"></span> </label> <label class="tab-btn">Ambos <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div> </div> -->
 
