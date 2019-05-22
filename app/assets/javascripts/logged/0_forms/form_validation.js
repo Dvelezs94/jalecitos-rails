@@ -16,6 +16,9 @@ $(document).on('turbolinks:load', function() {
   if($(".new_bank").length > 0){
    $(".new_bank").validate();
   }
+  if($(".reportForm").length > 0){
+   $(".reportForm").validate();
+  }
   if($(".review_form").length > 0){
     review_validation();
   }

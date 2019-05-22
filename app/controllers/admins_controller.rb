@@ -34,7 +34,7 @@ class AdminsController < ApplicationController
   end
 
   def bans
-    @bans = Ban.order(status: :asc).page(params[:ban]).per(25)
+    @bans = Ban.includes(:reports).order(status: :asc).page(params[:ban]).per(25)
     set_paginator
   end
 

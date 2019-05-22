@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_03_173310) do
+ActiveRecord::Schema.define(version: 2019_05_21_213853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -323,11 +323,12 @@ ActiveRecord::Schema.define(version: 2019_05_03_173310) do
     t.string "reportable_type"
     t.integer "reportable_id"
     t.integer "status", default: 0
-    t.string "cause"
+    t.string "cause_str"
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "ban_id"
+    t.integer "cause"
     t.index ["ban_id"], name: "index_reports_on_ban_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end

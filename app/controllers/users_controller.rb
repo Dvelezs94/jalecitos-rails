@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   include SetLayout
   include GetUser
   include UsersHelper
-  include ReportFunctions
   respond_to :html, :json, :js
   layout :set_layout
   before_action :check_if_my_profile, only: :show
@@ -25,7 +24,6 @@ class UsersController < ApplicationController
     if params[:reviews]
       get_reviews
     else
-      report_options
       get_reviews
       get_gigs
       Searchkick.multi_search([@gigs])
@@ -39,7 +37,6 @@ class UsersController < ApplicationController
     elsif params[:requests]
       get_requests(true)
     else
-      report_options
       get_reviews
       get_gigs
       get_requests
