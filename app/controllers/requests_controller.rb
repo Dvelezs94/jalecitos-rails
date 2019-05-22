@@ -17,7 +17,6 @@ class RequestsController < ApplicationController
     if params[:page]
       get_other_offers
     else
-      report_options
       @hires_open = (@request.employee.nil?) ? true : false
       if @request.offers_count > 0 #search offers is there some
         get_other_offers
@@ -105,10 +104,6 @@ class RequestsController < ApplicationController
 
     def check_request_ban
      flash[:error]='Este Pedido está baneado' if @request.banned?
-    end
-
-    def report_options
-      @report_options = ["Uso de palabras ofensivas", "Contenido Sexual", "Violencia", "Spam", "Engaño o fraude", "Otro"]
     end
 
     def set_req_create

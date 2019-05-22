@@ -22,7 +22,7 @@ class ReportsController < ApplicationController
     end
 
 
-    @report.save
+    @success = @report.save
   end
 
   private
@@ -40,6 +40,7 @@ class ReportsController < ApplicationController
 
     def verify_report_count
       if current_user.reports.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count >= 5
+        @too_many_today = true
         render :create
       end
     end

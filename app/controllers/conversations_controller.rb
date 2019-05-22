@@ -1,5 +1,5 @@
 class ConversationsController < ApplicationController
-  include ReportFunctions
+
   include ConversationFunctions
   layout 'logged'
   before_action :authenticate_user!
@@ -19,7 +19,6 @@ class ConversationsController < ApplicationController
             get_messages
             mark_as_read
           end
-          report_options
         }
         format.js{}
       end
@@ -35,7 +34,6 @@ class ConversationsController < ApplicationController
         get_messages
         mark_as_read
       end
-      report_options
     end
   end
 
