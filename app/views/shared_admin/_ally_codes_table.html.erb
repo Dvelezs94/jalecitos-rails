@@ -1,0 +1,36 @@
+  <h2>Codigos de Alianza</h2>
+  <div class="table-responsive paginator_container">
+      <%= form_for @ally_code do |f| %>
+        <div class="form-group">
+          <label for="ally_code_name">Name</label>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <label for="ally_code_ltimes_left">Veces para utilizar</label>
+          <%= f.number_field :times_left, class: "form-control"  %>
+        </div>
+        <div class="form-group">
+          <label for="ally_code_level_enabled">Habilitar nivel Normal</label>
+          <%= f.check_box :level_enabled, class: "form-check-label" %>
+          <br>
+        </div>
+          <%= f.submit "Create", class: "btn btn-primary" %>
+      <% end %>
+
+    <table class="admin-table table table-striped table-sm ban">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Token</th>
+          <th>Times left</th>
+          <th>level enabled</th>
+          <th>More Info</th>
+        </tr>
+      </thead>
+      <tbody class="paginated_tickets">
+        <%= render partial: 'admins/ally_code', collection: @ally_codes %>
+      </tbody>
+    </table>
+    <%= paginate @ally_codes, param_name: :ally_code,
+     :params => {:current => :ally_code} %>
+  </div>

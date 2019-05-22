@@ -283,7 +283,7 @@
 	margin-right: 70px;
   text-align: center;
   color: #39C27B;
-	padding: 5px 10px;
+	padding: 5px 0px;
 }
 .tab-use-content .dropdown-toggle::after {
 	display: inline-block;
