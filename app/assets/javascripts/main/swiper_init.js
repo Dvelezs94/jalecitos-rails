@@ -48,7 +48,7 @@ $(document).on('turbolinks:load', function() {
         768: {
           slidesPerView: 3,
         },
-        1000: {
+        992: {
           slidesPerView: 4,
         },
         1200: {

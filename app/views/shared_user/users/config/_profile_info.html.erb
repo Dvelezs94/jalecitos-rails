@@ -35,7 +35,7 @@
         <label for="">Nombre completo</label>
         <div class="inp-area">
           <%= best_in_place current_user, :name, url: update_users_path, style: "padding: 5px;", :data => {:name => "nombre"}, :place_holder => "Edítame", id: "change_user_name", inner_class: "best_input" %>
-          <%= icon("fas", "pencil-alt", class: "toggable") %>
+          <%= icon("fas", "pencil-alt", class: "toggable", id: "name-pencil") %>
         </div>
         <label for="">Alias</label>
         <div class="inp-area">

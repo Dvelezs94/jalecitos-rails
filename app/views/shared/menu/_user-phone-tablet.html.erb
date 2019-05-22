@@ -5,7 +5,7 @@
       <div class="col-3">
         <div class="tablet-mobile-input">
           <div class="mobile-input-icon">
-            <% if (@gig.present? && @gig.name.present? && current_page?( gig_path(city_slug(@gig.city),@gig))) || (@request.present? && @request.name.present? && current_page?( request_path(@request) )) %>
+            <% if (@gig.present? && @gig.slug.present? && current_page?( gig_path(city_slug(@gig.city),@gig))) || (@request.present? && @request.slug.present? && current_page?( request_path(@request) )) %>
             <i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.go(-1);"></i>
             <% else %>
             <a class="menu-open" id="menu-open" href="<%= user_mobile_search_path %>">
@@ -15,36 +15,13 @@
           </div>
         </div>
       </div>
-      <% if @gig.present? && @gig.name.present? && current_page?( gig_path(city_slug(@gig.city),@gig) ) %>
+      <% if @gig.present? && @gig.slug.present? && current_page?( gig_path(city_slug(@gig.city),@gig) ) %>
       <div class="col-9 text-right">
-        <div class="tablet-mobile-user">
-          <% if current_user != @gig.user %>
-          <div class="other_gig_actions">
-            <div class="hearted1 likes-<%= @gig.slug %>">
-              <%= render "gigs/likes", gig: @gig, with_number: false %>
-            </div>
-            <%= link_to icon("fas", "share-alt", title: "Compartir"), {}, id: "share" %>
-            <% if user_signed_in? %>
-              <%= icon("fas", "flag", class: "gig_action_icon cursor_pointer reportgig", title: "Reportar", id: "reportgigbtn") %>
-            <% end %>
-          </div>
-          <% else %>
-            <%= render "shared/gigs/show/gig_actions" %>
-          <% end %>
-        </div>
+          <%= render "shared_user/gigs/show/gig_actions", desktop: false %>
       </div>
-      <% elsif @request.present? && @request.name.present? && current_page?( request_path(@request) ) %>
+      <% elsif @request.present? && @request.slug.present? && current_page?( request_path(@request) ) %>
       <div class="col-9 text-right">
-        <div class="tablet-mobile-user">
-          <% if current_user != @request.user %>
-          <div class="other_gig_actions">
-            <%= link_to icon("fas", "share-alt", title: "Compartir"), {}, id: "share" %>
-            <% if user_signed_in? %>
-              <%= icon("fas", "flag", class: "gig_action_icon cursor_pointer reportreq", title: "Reportar", id: "reportrequestbtn") %>
-            <% end %>
-          </div>
-          <% end %>
-        </div>
+            <%= render "shared_user/requests/show/req_actions", desktop: false %>
       </div>
       <% else %>
       <div class="col-6 justify-content-center text-center" style="display:flex;align-items:center;">
