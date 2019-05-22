@@ -3,29 +3,15 @@
   <div class="verificos-title">
     <h1><%= @gig.title %></h1>
     <small class="visit-count gig-visits-likes"><%= "#{@gig_hits} Vistas" %> ● <%= "#{@gig.likes.length} Me gusta" %></small>
-    <div class="div-space-between">
-      <p><%= @gig.location %></p>
+    <div class="div-space-between mar-bot-7">
+      <p class="mar-bot-0"><%= @gig.location %></p>
       <div class="pacificobg-socialicon">
         <div class="arroweee">
           <a href="">
             <%= link_to icon("fas", "arrow-left"), 'javascript:history.go(-1);' %>
           </a>
         </div>
-        <% if current_user != @gig.user %>
-        <div class="other_gig_actions media-btns">
-          <div class="hearted1 likes-<%= @gig.slug %>">
-            <%= render "gigs/likes", gig: @gig, with_number: false %>
-          </div>
-          <%= link_to icon("fas", "share-alt", title: "Compartir"), {}, id: "share" %>
-          <% if user_signed_in? %>
-            <%= icon("fas", "flag", class: "fa-lg gig_action_icon cursor_pointer", title: "Reportar", id: "reportgigbtn") %>
-          <% end %>
-        </div>
-        <% else %>
-        <div class="gig_actions_desktop">
-          <%= render "shared/gigs/show/gig_actions" %>
-        </div>
-        <% end %>
+          <%= render "shared_user/gigs/show/gig_actions", desktop: true %>
       </div>
     </div>
   </div>
@@ -86,6 +72,7 @@
     <div class="sed-content">
       <div class="div-space-between">
         <h5><%= @gig.location %></h5>
+        <%= render "shared_user/gigs/show/gig_actions", desktop: true %>
       </div>
       <h2><%= @gig.title %></h2>
       <small class="visit-count gig-visits-likes"><%= "#{@gig_hits} Vistas" %> ● <%= "#{@gig.likes.length} Me gusta" %></small>

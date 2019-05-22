@@ -1,0 +1,15 @@
+<% if desktop == false %> <%#the menu icons %>
+<div class="req_actions req_actions_mobile">
+<% elsif desktop == true && current_user %><%#hide desktop icons from 991 to less because menu icons exist %>
+  <div class="req_actions req_actions_desktop hide_less_than_992">
+<% else %><%# is guest, so i dont hide the icons in any resolution because menu icons doesnt exist %>
+  <div class="req_actions req_actions_desktop">
+<% end %>
+  <%= link_to icon("fas","share-alt", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
+  <% if user_signed_in? && (@request.user == current_user) %>
+    <%= link_to icon("fas","pen", class: "fa-lg gig_action_icon", title: "Editar"), edit_request_path(@request) %>
+    <%= link_to icon("fas","trash", class: "fa-lg gig_action_icon", title: "Eliminar"), request_path(@request), method: :delete, :data => {:confirm => 'Confirma que quieres borrar este pedido'}  %>
+  <% elsif user_signed_in?%>
+    <%= link_to icon("fa","flag", title: "Reportar"), {}, id: "reportrequestbtn" %>
+  <% end %>
+</div>

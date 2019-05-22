@@ -45,6 +45,9 @@ class User < ApplicationRecord
   validates_length_of :bio, maximum: 500
   validates_presence_of :alias, :slug
   validates :alias, format: { :with => /\A[a-zA-Z0-9\-\_]+\z/, message: "sólo puede contener caracteres alfanuméricos, guión y guión bajo." }
+  validates :name, format: { :with => /\A[a-zA-Z\p{L}\p{M}\s]+\z/, message: "Sólo puede contener letras y espacios" }, :allow_blank => true #allow blank because on creation it doesnt have
+  validates_presence_of :name, if: :name_changed?  #dont allow blank again if value is filled
+
   # Create User Score and openpay user
   after_validation :create_user_score
   after_validation :create_openpay_account

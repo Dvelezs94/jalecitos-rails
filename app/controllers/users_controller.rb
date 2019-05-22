@@ -51,10 +51,10 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   #aqui la parte del usuario de la url no importa, ya que aqui adentro se usa current_user, esto para darle seguridad a los usuarios de solo editar su perfil
   def update_user
-    if params[:user]["name"]
+    if params[:user]["name"].present?
       update_openpay_name(params[:user]["name"])
     end
-    @success = true if current_user.update_attributes(user_params)
+    @success = current_user.update(user_params)
     respond_to do |format|
       # if params[:user]["alias"]
       #   # flash[:success] = 'Tu alias ha sido actualizado.'
@@ -138,7 +138,7 @@ class UsersController < ApplicationController
       begin
         @customer.update(request_hash, current_user.openpay_id)
       rescue
-        flash[:error] = "Error interno, el usuario no pudo ser actualizado"
+        flash[:error] = "Error interno, el nombre no pudo ser actualizado, por favor, intente más tarde"
         redirect_to configuration_path
         false
       end

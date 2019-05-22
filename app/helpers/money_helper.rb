@@ -43,7 +43,7 @@ module MoneyHelper
 
   # price must be package_order_price * units
   def calc_packages_units (price)
-    (((price +10) * 1.04) * 1.16).round(2)
+    (($fee+1) * (price+$cons) * (1+$iva)).round(2)
   end
 
   #get original package/offer price
