@@ -58,6 +58,8 @@ class User < ApplicationRecord
   # update verified gigs when account is verified
   before_update :verify_gigs, :if => :verified_changed?
   before_update :set_roles
+  #when user is banned, unbanned or disabled...
+  before_update :enable_disable_stuff, :if => :status_changed?
 
   # Associations
   # User Score
@@ -143,9 +145,9 @@ class User < ApplicationRecord
    #  end
    # end
    # Override the method to support canceled accounts
-   def active_for_authentication?
-       super && self.active?
-   end
+   # def active_for_authentication? #this was used before for disabled and banned users but i want to display a custom message, so this is now on session controller
+   #     super && self.active?
+   # end
    def balance
      @orders_total = self.unpaid_orders
      @orders_total.sum(:payout_left)
@@ -208,5 +210,30 @@ class User < ApplicationRecord
      @url = "https://maps.googleapis.com/maps/api/timezone/json?key=#{ENV.fetch("GOOGLE_MAP_API")}&location=#{@loc.lat},#{@loc.lng}&timestamp=#{Time.now.getutc.to_i}"
      @res = JSON.parse(Net::HTTP.get(URI.parse("#{@url}")))
      self.time_zone = @res["timeZoneId"] if TZInfo::Timezone.all_country_zone_identifiers.include? @res["timeZoneId"]
+   end
+
+   def enable_disable_stuff
+     case status
+     when "active"
+       self.gigs.each do |g|
+         g.update(status: "draft")
+       end
+     when "banned"
+       self.gigs.each do |g|
+         g.update(status: "banned")
+       end
+       self.requests.each do |r|
+         r.update(status: "banned")
+       end
+     when "disabled"
+       self.gigs.each do |g|
+         if g.status != "banned"
+           g.update(status: "draft")
+         end
+       end
+       self.requests.each do |r|
+         r.update(status: "closed")
+       end
+     end
    end
 end
