@@ -3,8 +3,12 @@
   <td> <%= link_to "#{report_name(report.reportable)}: #{report.reportable.name || "N/A"}", object_url(report.reportable) %> </td>
   <td><%= report.cause %></td>
   <td><%= report.comment %></td>
-  <td>
-    <%= link_to "<button type='button' class='btn btn-success'> #{icon('fas', 'check', title: 'Recurso legítimo')}</button>".html_safe , deny_report_path(report.id), data: {confirm: "Confirmar marcado de reporte como ilegítimo"}, remote: true, method: :put  %>
-    <%= link_to "<button type='button' class='btn btn-danger'> #{icon('fas', 'ban', title: 'Bloquear recurso')}</button>".html_safe , create_ban_url(report.id), class: "createABan", data: { cause: report.cause }  %>
+  <td class="flex-wrap">
+    <%= button_to deny_report_path(report.id), method: :put, remote: true,
+     class: "btn btn-success",  :data => { :confirm => 'Confirmar marcado de reporte como ilegítimo', :disable_with => "<i class='fa fa-spinner fa-spin'></i>" } do %>
+     <%= icon('fas', 'check', title: 'Recurso legítimo') %>
+     <% end %>
+    <%= link_to "<button type='button' class='btn btn-danger'> #{icon('fas', 'ban', title: 'Bloquear recurso')}</button>".html_safe,
+     create_ban_url(report.id), class: "createABan", data: { cause: report.cause }  %>
   </td>
 </tr>
