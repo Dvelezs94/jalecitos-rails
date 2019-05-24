@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get :categories
       get :users
       get :disputes
+      get :reports
       get :bans
       get :verifications
       get '/verifications/:id' => 'admins#show_verification', as: "show_verification"
@@ -106,7 +107,7 @@ Rails.application.routes.draw do
     end
   end
   resources :categories
-  resources :bans, only: [] do
+  resources :bans, only: [:create] do
     member do
       put :proceed
       put :deny

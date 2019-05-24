@@ -1,0 +1,6 @@
+<% if @need_cause %>
+  show_error("Necesitas proporcionar una causa para el bloqueo");
+<% elsif @success %>
+  <% flash[:success] = "se ha bloqueado el recurso" %>
+  location.reload();
+<% end %>

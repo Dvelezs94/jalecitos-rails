@@ -8,7 +8,7 @@
     </td>
     <td>
       <% if ban.pending? %>
-        <%= link_to icon("fas","check"),deny_ban_path(ban.id), method: :put, title: "Es legitimo", :data => {:confirm => 'Marcar como legitimo?'}, style: "float: right;" %>
+        <%= link_to icon("fas","check"),deny_ban_path(ban.id), method: :put, title: "Es legítimo", :data => {:confirm => 'Marcar como legitimo?'}, style: "float: right;" %>
         <%= link_to icon("fas","ban"),proceed_ban_path(ban.id), method: :put, title: "Bloquear", :data => {:confirm => 'Este recurso se bloqueara, estas seguro?'}, style: "float: right;" %>
       <% end %>
     </td>

@@ -40,12 +40,26 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     # if the user already exists, just log in
     elsif @user.persisted?
-      log_in_and_remember(@user)
-      #  the z is just to fix the fb issue that is appending #_=_ to the last url param
-      redirect_to root_path(notifications: "enable", z: "e")
+      if check_if_banned_or_disabled(@user)
+        redirect_to cookies.permanent.signed[:mb].present? ? mobile_sign_in_path : root_path
+      else
+        log_in_and_remember(@user)
+        #  the z is just to fix the fb issue that is appending #_=_ to the last url param
+        redirect_to root_path(notifications: "enable", z: "e")
+      end
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
       redirect_to new_user_registration_url, notice: "Error al tratar de acceder"
+    end
+  end
+  private
+  def check_if_banned_or_disabled(user)
+    if user.banned?
+      flash[:error] = "Esta cuenta está bloqueada, favor de comunicarte con soporte para más información"
+      return true
+    elsif user.disabled?
+      flash[:error] = "Has deshabilitado esta cuenta, favor de comunicarte con soporte para más información "
+      return true
     end
   end
 end

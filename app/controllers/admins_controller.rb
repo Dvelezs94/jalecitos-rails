@@ -33,6 +33,11 @@ class AdminsController < ApplicationController
     set_paginator
   end
 
+  def reports
+    @reports = Report.open.order(created_at: :asc).page(params[:report]).per(25)
+    set_paginator
+  end
+
   def bans
     @bans = Ban.includes(:reports).order(status: :asc).page(params[:ban]).per(25)
     set_paginator
@@ -92,6 +97,7 @@ class AdminsController < ApplicationController
   def set_vars
     if request.format.html?
       @pending_verifications = Verification.all.pending.length
+      @open_reports = Report.open.length
       @pending_bans = Ban.pending.length
       @pending_disputes = Dispute.waiting_for_support.length
       @open_tickets = Ticket.in_progress.length

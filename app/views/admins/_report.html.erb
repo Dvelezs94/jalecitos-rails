@@ -1,6 +1,10 @@
 <tr>
-  <td>--</td>
+  <td>Hace <%= distance_of_time_in_words_to_now(report.created_at) %></td>
+  <td> <%= link_to "#{report_name(report.reportable)}: #{report.reportable.name || "N/A"}", object_url(report.reportable) %> </td>
   <td><%= report.cause %></td>
   <td><%= report.comment %></td>
-  <td>Hace <%= distance_of_time_in_words_to_now(report.created_at) %></td>
+  <td>
+    <button type="button" class="btn btn-success"><%= icon("fas", "check", title: "Recurso legítimo") %></button>
+    <%= link_to "<button type='button' class='btn btn-danger'> #{icon('fas', 'ban', title: 'Bloquear recurso')}</button>".html_safe , create_ban_url(report.id), class: "createABan", data: { cause: report.cause }  %>
+  </td>
 </tr>

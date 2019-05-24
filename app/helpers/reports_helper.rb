@@ -28,4 +28,17 @@ module ReportsHelper
       request_report_path(object.slug)
     end
   end
+
+  def object_url object
+    if object.class == User
+      user_path(object.slug)
+    elsif object.class == Gig
+      gig_path(city_slug(object.city), object.slug)
+    else
+      request_path(object.slug)
+    end
+  end
+  def create_ban_url report_id
+    url = bans_path(report_id: report_id)
+  end
 end
