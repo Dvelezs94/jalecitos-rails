@@ -4,7 +4,7 @@
   <td><%= report.cause %></td>
   <td><%= report.comment %></td>
   <td>
-    <button type="button" class="btn btn-success"><%= icon("fas", "check", title: "Recurso legítimo") %></button>
+    <%= link_to "<button type='button' class='btn btn-success'> #{icon('fas', 'check', title: 'Recurso legítimo')}</button>".html_safe , deny_report_path(report.id), data: {confirm: "Confirmar marcado de reporte como ilegítimo"}, remote: true, method: :put  %>
     <%= link_to "<button type='button' class='btn btn-danger'> #{icon('fas', 'ban', title: 'Bloquear recurso')}</button>".html_safe , create_ban_url(report.id), class: "createABan", data: { cause: report.cause }  %>
   </td>
 </tr>

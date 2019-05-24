@@ -54,6 +54,7 @@ class Users::SessionsController < Devise::SessionsController
     # (Rails.application.routes.recognize_path(request.referrer)[:controller] == "users/sessions")? root_path : request.referrer + "?review=true"
   end
 
+  #this is just for accounts that have email and password, the filter of fb and google accounts is in omniauth_calbacks_controller
   def check_if_banned_or_disabled(user)
     if user.banned?
       flash[:error] = "Esta cuenta está bloqueada, favor de comunicarte con soporte para más información"

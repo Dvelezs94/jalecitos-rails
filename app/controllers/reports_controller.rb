@@ -1,11 +1,11 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
-  access user: :all
+  access user: [:create], admin: :all
   before_action :verify_report_count, only: :create
+  before_action :set_report, only: :deny
 
   # POST /reports
   def create
-
     @report = Report.new(report_params)
 
     # create reportable object
@@ -20,9 +20,15 @@ class ReportsController < ApplicationController
       @user = User.friendly.find(params[:user_id])
       @report.reportable = @user
     end
-
-
     @success = @report.save
+  end
+
+  def deny
+    if @report.open?
+      @success = @report.denied!
+    elsif @report.denied?
+      @already_denied = true
+    end
   end
 
   private

@@ -53,6 +53,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
   private
+  #this is for fb and google accounts
   def check_if_banned_or_disabled(user)
     if user.banned?
       flash[:error] = "Esta cuenta está bloqueada, favor de comunicarte con soporte para más información"

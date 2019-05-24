@@ -9,7 +9,7 @@
             <%= f.select :cause, report_options, {include_blank: "Causa del bloqueo"}, class: "custom-select required", id: "ban_cause" %>
             <%= f.text_field :comment, placeholder: "(Opcional) Comentarios", autocomplete: "off" %>
             <br>
-            <%= f.submit 'Continuar', :class => 'btn continue-button w-100' %>
+            <%= f.submit 'Continuar', :class => 'btn continue-button w-100', data: {disable_with: "Bloqueando..."} %>
           <% end %>
         </div>
       </div>

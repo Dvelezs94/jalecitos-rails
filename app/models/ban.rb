@@ -4,12 +4,17 @@ class Ban < ApplicationRecord
   enum status: { banned: 0, unbanned: 1}
   enum cause: {offensive: 0, sexual: 1, violence: 2, spam: 3, fraud: 4, other: 5}
   validates_presence_of :cause
-  validates_uniqueness_of :baneable_id, :scope => [:baneable_type, :baneable_id]
-
   after_validation :ban_the_stuff, on: :create
+  after_validation :close_related_reports, on: :create
 
   private
   def ban_the_stuff
     baneable.banned!
+  end
+  def close_related_reports
+    reports = Report.where(reportable: baneable, status: "open") #open reports related to this are going to be accepted
+    reports.each do |r|
+      r.accepted!
+    end
   end
 end

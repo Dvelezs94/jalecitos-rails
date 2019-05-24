@@ -137,6 +137,7 @@ Rails.application.routes.draw do
       put :cancel
     end
   end
+  put "deny_report/:id", to: "reports#deny", as: "deny_report"
   get 'mobile_sign_in', to: 'mobiles#log_in'
   get 'mobile_sign_up', to: 'mobiles#register'
   get 'configuration', to: 'users#configuration'
