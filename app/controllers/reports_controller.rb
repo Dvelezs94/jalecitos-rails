@@ -28,6 +28,8 @@ class ReportsController < ApplicationController
       @success = @report.denied!
     elsif @report.denied?
       @already_denied = true
+    elsif @report.accepted?
+      @already_accepted = true 
     end
   end
 
