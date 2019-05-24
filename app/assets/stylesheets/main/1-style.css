@@ -3381,3 +3381,7 @@ a.disabled-by-text {
 .req_actions_desktop a i{
   color: var(--gray);
 }
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
