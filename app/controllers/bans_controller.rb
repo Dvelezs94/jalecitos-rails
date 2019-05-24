@@ -2,6 +2,7 @@ class BansController < ApplicationController
   before_action :authenticate_user!
   before_action :check_cause_present, only: :create
   before_action :set_report, only: :create
+  before_action :check_if_ban_exist, only: :create
 
   access admin: :all
   before_action :set_ban, only: [:proceed, :deny]
@@ -47,12 +48,19 @@ class BansController < ApplicationController
     if params[:report_id].present?
       @report = Report.find_by(status: "open", id: params[:report_id].to_i)
     else
-      head :no_content 
+      head :no_content
     end
   end
   def check_cause_present #these are the admitted models for ban
     if !params[:ban][:cause].present?
       @need_cause = true
+      render "create"
+    end
+  end
+  def check_if_ban_exist
+    ban = Ban.find_by(baneable: @report.reportable, status: "banned")
+    if ban.present?
+      @already_banned = true
       render "create"
     end
   end
