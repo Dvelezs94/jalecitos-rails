@@ -176,7 +176,9 @@ class User < ApplicationRecord
      end
    end
 
-
+   def unban!
+     self.update(status: "active")
+   end
 
    private
    def set_roles
@@ -216,7 +218,9 @@ class User < ApplicationRecord
      case status
      when "active"
        self.gigs.each do |g|
-         g.update(status: "draft")
+         if g.status != "banned"
+          g.update(status: "draft")
+         end
        end
      when "banned"
        self.gigs.each do |g|

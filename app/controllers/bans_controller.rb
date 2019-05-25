@@ -1,39 +1,33 @@
 class BansController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_ban, only: [:unban]
   before_action :check_cause_present, only: :create
   before_action :no_system_ban, only: :create
   before_action :set_report, only: :create
   access admin: :all
-  before_action :set_ban, only: [:proceed, :deny]
 
-  def proceed
-    case @ban.baneable_type
-      when "Gig"
-        @ban.baneable.banned!
-        @ban.banned!
-      when "Request"
-        @ban.baneable.banned!
-        @ban.banned!
-      when "User"
-        @ban.baneable.banned!
-        @ban.banned!
+  def unban
+    if @ban.banned? && @ban.baneable_type != "Request"
+      @ban.unbanned!
+      @success = true
+    elsif @ban.unbanned?
+      @already_unbanned = true
+    elsif @ban.deleted_resource?
+      @deleted_resource = true
+    elsif @ban.baneable_type == "Request"
+      @cant_unban_request = true
     end
-    redirect_to bans_admins_path
-  end
-
-  def deny
-    @ban.denied!
-    redirect_to bans_admins_path
   end
 
   def create
     ban = Ban.new(ban_params)
     if ban.valid?
       @success = ban.save
-    elsif ban.errors.full_messages.first.include?("Status") #of "Status", gives error of status in use when the resource is banned
+    elsif ban.errors.full_messages.first.include?("Baneable") #the resource is already banned
+      old_ban = Ban.find_by(baneable: @report.reportable, status: "banned")
+      @report.update!( ban: old_ban, status: "accepted" )
       @already_banned = true
     end
-    render "create"
   end
 
   private

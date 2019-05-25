@@ -93,6 +93,9 @@ class Gig < ApplicationRecord
     end
   end
 
+  def unban!
+    self.update(status: "draft")
+  end
   private
   # def should_generate_new_friendly_id? #this is used to change url every time name if changed, its not used now because problems of google indexing pages
   #   name_changed?
