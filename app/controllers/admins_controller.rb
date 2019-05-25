@@ -98,7 +98,7 @@ class AdminsController < ApplicationController
     if request.format.html?
       @pending_verifications = Verification.all.pending.length
       @open_reports = Report.open.length
-      @banned_bans = Ban.banned.length
+      @banned_bans = Ban.banned.where.not(baneable_type: "Request").length
       @pending_disputes = Dispute.waiting_for_support.length
       @open_tickets = Ticket.in_progress.length
       @user_count = User.all.length
