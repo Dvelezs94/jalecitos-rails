@@ -4,7 +4,7 @@ class Gig < ApplicationRecord
   include LocationFunctions
   include FilterRestrictions
   include GigRequestFunctions
-  include AfterDestroyFunctions
+  include BeforeDestroyFunctions
   require 'voight_kampff'
   #search
   searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]

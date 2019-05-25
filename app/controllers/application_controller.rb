@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :update_sign_in_at_periodically
-  before_action :check_if_banned
+  before_action :check_if_user_banned
   UPDATE_LOGIN_PERIOD = 1.hours
   include ApplicationHelper
 
@@ -11,9 +11,11 @@ class ApplicationController < ActionController::Base
    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :country])
  end
 
- def check_if_banned
+ def check_if_user_banned
    if current_user && current_user.banned?
      sign_out(current_user) #i cant put a flash and redirect, it doesnt work. So i just end session
+     flash[:success] = "jaja"
+     redirect_to(root_path)
    end
  end
 

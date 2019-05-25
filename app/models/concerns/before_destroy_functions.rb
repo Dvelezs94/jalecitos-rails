@@ -1,4 +1,4 @@
-module AfterDestroyFunctions
+module BeforeDestroyFunctions
   private
   def mark_reports_and_bans
     #is one or another, if there are open reports, it cant be a ban and vice versa

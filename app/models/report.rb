@@ -1,5 +1,4 @@
 class Report < ApplicationRecord
-  include AfterDestroyFunctions
   belongs_to :user
   belongs_to :reportable, polymorphic: true
   belongs_to :ban, optional: true
@@ -9,5 +8,4 @@ class Report < ApplicationRecord
   validates :user_id, :uniqueness => { :scope => [:reportable_type, :reportable_id] }
   validates_presence_of :cause
   after_commit -> { BanWorker.perform_async(self.id) }, on: :create
-  after_destroy :mark_reports_and_bans
 end
