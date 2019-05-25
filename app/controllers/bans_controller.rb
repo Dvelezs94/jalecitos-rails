@@ -1,9 +1,8 @@
 class BansController < ApplicationController
   before_action :authenticate_user!
   before_action :check_cause_present, only: :create
+  before_action :no_system_ban, only: :create
   before_action :set_report, only: :create
-  before_action :check_if_ban_exist, only: :create
-
   access admin: :all
   before_action :set_ban, only: [:proceed, :deny]
 
@@ -29,7 +28,12 @@ class BansController < ApplicationController
 
   def create
     ban = Ban.new(ban_params)
-    @success = ban.save
+    if ban.valid?
+      @success = ban.save
+    elsif ban.errors.full_messages.first.include?("Status") #of "Status", gives error of status in use when the resource is banned
+      @already_banned = true
+    end
+    render "create"
   end
 
   private
@@ -57,11 +61,10 @@ class BansController < ApplicationController
       render "create"
     end
   end
-  def check_if_ban_exist
-    ban = Ban.find_by(baneable: @report.reportable, status: "banned")
-    if ban.present?
-      @already_banned = true
-      render "create"
-    end
+
+  def no_system_ban
+    #only system can do system_ban
+    head(:no_content) if params[:ban][:cause] == "system_ban"
   end
+
 end

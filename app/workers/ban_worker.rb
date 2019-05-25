@@ -5,26 +5,18 @@ class BanWorker
   def perform(report_id)
     new_report = Report.find(report_id)
     # number of reports needed to create a ban record
-    report_creation_count = 1
+    create_ban_at = 5
     # Get Similar Open reports made
-    @open_reports = Report.where(["reportable_type = ? and reportable_id = ? and status = 0", new_report.reportable_type, new_report.reportable_id]) #status = 0 means open
+    @open_reports = Report.where(reportable: new_report.reportable, status: "open")
     #try to create a ban
-    if @open_reports.length >= report_creation_count
-      #search if a ban exist
-      ban = Ban.where( baneable: report.reportable, status: "pending")
-      if ban.exists? #attach the ban to the report
-        new_report.update(ban: ban)
+    if @open_reports.length >= create_ban_at
+      #search if a ban exist for that object
+      ban = Ban.find_by( baneable: new_report.reportable, status: "banned")
+      if ban.present? #attach the ban to the report, this isnt going to be used never, unless at the exact time of ban a report enters
+        new_report.update(ban: ban, status: "accepted")
       else #create the ban and attach to all reports
-        Ban.create(baneable: report.reportable) do |new_ban|
-          @open_reports.each do |r|
-            r.ban = new_ban
-            r.save
-          end
-        end
+        Ban.create(baneable: new_report.reportable, cause: "system_ban")
       end
-
-
-
     end
   end
 end
