@@ -39,7 +39,7 @@ class AdminsController < ApplicationController
   end
 
   def bans
-    @bans = Ban.includes(:reports).order(status: :asc).page(params[:ban]).per(25)
+    @bans = Ban.banned.where.not(baneable_type: "Request").order(status: :asc).page(params[:ban]).per(25)
     set_paginator
   end
 

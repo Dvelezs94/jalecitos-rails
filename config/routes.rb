@@ -109,8 +109,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :bans, only: [:create] do
     member do
-      put :proceed
-      put :deny
+      put :unban
     end
   end
   resources :orders, only: [:create] do

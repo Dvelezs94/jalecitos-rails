@@ -1,7 +1,8 @@
 <% if @need_cause %>
   show_error("Necesitas proporcionar una causa para el bloqueo");
 <% elsif @already_banned %>
-  show_error("Este recurso ya está bloqueado");
+  <% flash[:notice] = "Este recurso ya había sido bloqueado" %>
+  location.reload();
 <% elsif @success %>
   <% flash[:success] = "se ha bloqueado el recurso" %>
   location.reload();

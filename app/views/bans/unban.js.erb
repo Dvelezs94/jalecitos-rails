@@ -1,0 +1,10 @@
+<% if @success %>
+<% flash[:success] = "se ha desbloqueado el recurso" %>
+<% elsif @already_unbanned %>
+  <% flash[:notice] = "Este recurso ya había sido desbloqueado" %>
+<% elsif @deleted_resource %>
+  <% flash[:notice] = "El recurso ya no existe, puede que el propietario lo haya destruido" %>
+<% elsif @cant_unban_request %>
+<% flash[:error] = "No puedes desbloquear un pedido" %>
+<% end %>
+location.reload();

@@ -7,7 +7,6 @@ class ReportsController < ApplicationController
   # POST /reports
   def create
     @report = Report.new(report_params)
-
     # create reportable object
     if params[:gig_id]
       @gig = Gig.friendly.find(params[:gig_id])
@@ -29,7 +28,7 @@ class ReportsController < ApplicationController
     elsif @report.denied?
       @already_denied = true
     elsif @report.accepted?
-      @already_accepted = true 
+      @already_accepted = true
     end
   end
 

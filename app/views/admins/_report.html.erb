@@ -1,6 +1,6 @@
 <tr>
   <td>Hace <%= distance_of_time_in_words_to_now(report.created_at) %></td>
-  <td> <%= link_to "#{report_name(report.reportable)}: #{report.reportable.name || "N/A"}", object_url(report.reportable) %> </td>
+  <td> <%= link_to "#{reportable_type(report.reportable)}: #{report.reportable.name || "N/A"}", object_url(report.reportable) %> </td>
   <td><%= report.cause %></td>
   <td><%= report.comment %></td>
   <td class="flex-wrap">

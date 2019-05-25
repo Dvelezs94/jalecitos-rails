@@ -10,7 +10,7 @@ module ReportsHelper
      ]
   end
 
-  def report_name object
+  def reportable_type object
     if object.class == User
       "Usuario"
     elsif object.class == Gig
