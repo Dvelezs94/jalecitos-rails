@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :check_if_user_banned, if: :not_in_home?
+  before_action :check_if_user_banned, if: :important_route?
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :update_sign_in_at_periodically
   UPDATE_LOGIN_PERIOD = 1.hours
@@ -11,16 +11,16 @@ class ApplicationController < ActionController::Base
    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :country])
  end
 
- def check_if_user_banned #just if not in devise controller because other way its infinite loop
+ def check_if_user_banned
    if current_user && current_user.banned?
      sign_out(current_user)
-     redirect_to(cookies.permanent.signed[:mb].present? ? mobile_sign_in_path : root_path)
+     redirect_to(user_session_path)
    end
  end
 
-def not_in_home? #just log out the banned user if the request is html format and location is different from the home and devise controllers
-  #cant logout on home because if i log out it doesnt redirect because i can go home without an user, so mobile users goes to desktop user home at logout, and its wrong
-  unless (params[:controller] == "pages" && params[:action] == "home") || devise_controller? || ! request.format.html?
+def important_route? #just log out the banned user if the request is html and specified routes
+  #cant logout on home or gig because if i log out it doesnt redirect because i can go home or gig without an user, so mobile users goes to desktop user home at logout, and its wrong
+  if (params[:action] == "hire" || params[:action] == "finance" ||  params[:action] == "configuration" || params[:controller] == "conversations") && request.format.html?
     return true
   else
     return false
