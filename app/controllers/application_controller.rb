@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
+  before_action :check_if_user_banned, if: :not_in_home?
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :update_sign_in_at_periodically
-  before_action :check_if_user_banned
   UPDATE_LOGIN_PERIOD = 1.hours
   include ApplicationHelper
 
@@ -11,13 +11,21 @@ class ApplicationController < ActionController::Base
    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :country])
  end
 
- def check_if_user_banned
+ def check_if_user_banned #just if not in devise controller because other way its infinite loop
    if current_user && current_user.banned?
-     sign_out(current_user) #i cant put a flash and redirect, it doesnt work. So i just end session
-     flash[:success] = "jaja"
-     redirect_to(root_path)
+     sign_out(current_user)
+     redirect_to(cookies.permanent.signed[:mb].present? ? mobile_sign_in_path : root_path)
    end
  end
+
+def not_in_home? #just log out the banned user if the request is html format and location is different from the home and devise controllers
+  #cant logout on home because if i log out it doesnt redirect because i can go home without an user, so mobile users goes to desktop user home at logout, and its wrong
+  unless (params[:controller] == "pages" && params[:action] == "home") || devise_controller? || ! request.format.html?
+    return true
+  else
+    return false
+  end
+end
 
  def update_sign_in_at_periodically
     # use session cookie to avoid hammering the database
