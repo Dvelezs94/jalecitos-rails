@@ -73,8 +73,6 @@ class PagesController < ApplicationController
     redirect_to(dashboard_admins_path) if (current_user && current_user.has_role?(:admin))
   end
 
-
-
   def pending_review
     #if the review is specific... (when employer finishes work)
     if params[:identifier] && is_number?(params[:identifier])

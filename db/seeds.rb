@@ -31,7 +31,7 @@ if ENV.fetch("RAILS_ENV") != "production"
   end
   20.times do |x|
     User.create! do |user|
-      user.name = Faker::Name.name
+      user.name = Faker::Name.first_name
       user.email = Faker::Internet.email + "#{x}"
       user.role = "user"
       user.password = "1234aA"
