@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get :categories
       get :users
       get :disputes
+      get :reports
       get :bans
       get :verifications
       get '/verifications/:id' => 'admins#show_verification', as: "show_verification"
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
       get :openpay_dashboard
       get :tickets
       get :orders
+      get :ally_codes
       post :predispersion_fee
     end
   end
@@ -36,6 +38,11 @@ Rails.application.routes.draw do
   end
 
   resources :reviews, only: [:update]
+  resources :ally_codes, only: [:create] do
+    collection do
+      post :trade
+    end
+  end
 
   resources :conversations, only: [:index, :create] do
     collection do
@@ -106,10 +113,9 @@ Rails.application.routes.draw do
     end
   end
   resources :categories
-  resources :bans, only: [] do
+  resources :bans, only: [:create] do
     member do
-      put :proceed
-      put :deny
+      put :unban
     end
   end
   resources :orders, only: [:create] do
@@ -136,6 +142,7 @@ Rails.application.routes.draw do
       put :cancel
     end
   end
+  put "deny_report/:id", to: "reports#deny", as: "deny_report"
   get 'mobile_sign_in', to: 'mobiles#log_in'
   get 'mobile_sign_up', to: 'mobiles#register'
   get 'configuration', to: 'users#configuration'

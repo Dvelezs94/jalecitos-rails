@@ -3201,7 +3201,7 @@ h4.req_title {
 #main_menu {
   position: fixed;
   width: 100%;
-  transition: top .7s;
+  transition: top .4s;
   top: 0;
   z-index: 100;
 }
@@ -3380,4 +3380,8 @@ a.disabled-by-text {
 .gig_actions_desktop a i,
 .req_actions_desktop a i{
   color: var(--gray);
+}
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
 }

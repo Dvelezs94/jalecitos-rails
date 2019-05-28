@@ -1,4 +1,4 @@
-<div class="modal" id="reportRequestModal">
+<div class="modal" id="reportObjectModal">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -7,11 +7,11 @@
                <h4>Reportar Pedido</h4>
 
                <div class="divi-new js-form-join-section" data-section="1"></div>
-               <%= form_with model: Report, url: request_report_path(@request.slug), id: "ReportRequestForm", remote: true do |f| %>
-                 <%= f.select :cause, @report_options, {include_blank: "Cual es la causa del reporte"}, class: "custom-select required" %>
+               <%= form_with model: Report, url: request_report_path(@request.slug), id: "ReportRequestForm", class: "reportForm", remote: true do |f| %>
+                 <%= f.select :cause, report_options, {include_blank: "Causa del reporte"}, class: "custom-select required" %>
                  <%= f.text_field :comment, placeholder: "(Opcional) Comentarios" %>
                  <br>
-                 <%= f.submit 'Continuar', :class => 'btn btn-success' %>
+                 <%= f.submit 'Continuar', :class => 'btn continue-button w-100' %>
                <% end %>
              </div>
          </div>

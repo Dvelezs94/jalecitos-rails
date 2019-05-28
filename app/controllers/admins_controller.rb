@@ -33,13 +33,24 @@ class AdminsController < ApplicationController
     set_paginator
   end
 
+  def reports
+    @reports = Report.open.order(created_at: :asc).page(params[:report]).per(25)
+    set_paginator
+  end
+
   def bans
-    @bans = Ban.order(status: :asc).page(params[:ban]).per(25)
+    @bans = Ban.banned.where.not(baneable_type: "Request").order(status: :asc).page(params[:ban]).per(25)
     set_paginator
   end
 
   def verifications
     @verifications = Verification.order(status: :asc).page(params[:verification]).per(25)
+    set_paginator
+  end
+
+  def ally_codes
+    @ally_codes = AllyCode.order(created_at: :desc).page(params[:ally_code]).per(25)
+    @ally_code = AllyCode.new
     set_paginator
   end
 
@@ -92,7 +103,8 @@ class AdminsController < ApplicationController
   def set_vars
     if request.format.html?
       @pending_verifications = Verification.all.pending.length
-      @pending_bans = Ban.pending.length
+      @open_reports = Report.open.length
+      @banned_bans = Ban.banned.where.not(baneable_type: "Request").length
       @pending_disputes = Dispute.waiting_for_support.length
       @open_tickets = Ticket.in_progress.length
       @user_count = User.all.length

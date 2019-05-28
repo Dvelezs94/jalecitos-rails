@@ -6,7 +6,7 @@
   </thead>
   <tbody>
     <% lq = levels_quantity %>
-    <% levels_fee.each do |key, value| %>
+    <% levels_fee.without(0).each do |key, value| %>
     <tr>
       <td><%= key %></td>
       <td><%= "#{((1 - value)* 100  ).round(0) }%" %></td>

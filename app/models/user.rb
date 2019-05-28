@@ -58,12 +58,18 @@ class User < ApplicationRecord
   # update verified gigs when account is verified
   before_update :verify_gigs, :if => :verified_changed?
   before_update :set_roles
+  #when user is banned, unbanned or disabled...
+  before_update :enable_disable_stuff, :if => :status_changed?
 
   # Associations
   # User Score
   belongs_to :score, foreign_key: :score_id, class_name: "UserScore", optional: true
 
   belongs_to :city, optional: true
+  # ally code in case it has one
+  belongs_to :ally_code, optional: true
+  #after_update :decrement_ally_code_times_left, :if => :ally_code_id_changed?
+  before_save :decrement_ally_code_times_left, if: :will_save_change_to_ally_code_id?
   # reports
   has_many :reports
   # Ticket system
@@ -114,6 +120,20 @@ class User < ApplicationRecord
   def verify_gigs
       self.gigs.each { |gig| gig.touch }
   end
+
+  def level_enabled?
+    @ally_code = self.ally_code
+    if @ally_code.present?
+      if @ally_code.level_enabled
+        true
+      else
+        # 0 stands for ally level, which in this case is disabled
+        false
+      end
+    else
+      true
+    end
+  end
   ############################################################################################
   ## PeterGate Roles                                                                        ##
   ## The :user role is added by default and shouldn't be included in this list.             ##
@@ -143,9 +163,9 @@ class User < ApplicationRecord
    #  end
    # end
    # Override the method to support canceled accounts
-   def active_for_authentication?
-       super && self.active?
-   end
+   # def active_for_authentication? #this was used before for disabled and banned users but i want to display a custom message, so this is now on session controller
+   #     super && self.active?
+   # end
    def balance
      @orders_total = self.unpaid_orders
      @orders_total.sum(:payout_left)
@@ -174,7 +194,9 @@ class User < ApplicationRecord
      end
    end
 
-
+   def unban!
+     self.update(status: "active")
+   end
 
    private
    def set_roles
@@ -208,5 +230,48 @@ class User < ApplicationRecord
      @url = "https://maps.googleapis.com/maps/api/timezone/json?key=#{ENV.fetch("GOOGLE_MAP_API")}&location=#{@loc.lat},#{@loc.lng}&timestamp=#{Time.now.getutc.to_i}"
      @res = JSON.parse(Net::HTTP.get(URI.parse("#{@url}")))
      self.time_zone = @res["timeZoneId"] if TZInfo::Timezone.all_country_zone_identifiers.include? @res["timeZoneId"]
+   end
+
+   def enable_disable_stuff
+     case status
+     when "active"
+       self.gigs.each do |g|
+         if g.status != "banned"
+          g.update(status: "draft")
+         end
+       end
+     when "banned"
+       self.gigs.each do |g|
+         if g.status != "banned"
+           g.update(status: "draft")
+         end
+       end
+       self.requests.each do |r|
+         if r.status == "published"
+           r.update(status: "closed")
+         end
+       end
+     when "disabled"
+       self.gigs.each do |g|
+         if g.status != "banned"
+           g.update(status: "draft")
+         end
+       end
+       self.requests.each do |r|
+         if r.status == "published"
+           r.update(status: "closed")
+         end
+       end
+     end
+   end
+
+   # when a user uses the ally code, decrement the times it can be used
+   def decrement_ally_code_times_left
+      if self.ally_code.present?
+       code_times_left = self.ally_code.times_left
+       self.ally_code.update!(times_left: code_times_left - 1)
+      else
+        true
+      end
    end
 end

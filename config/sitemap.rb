@@ -27,5 +27,11 @@ SitemapGenerator::Sitemap.create do
     add user_path(user.slug), :lastmod => user.updated_at
   end
 
+  Profession.all.each do |profession|
+    City.all.each do |city|
+      add guest_search_path(query: profession.name, city: city.name, state: city.state.name)
+    end
+  end
+
   add '/trabaja'
 end

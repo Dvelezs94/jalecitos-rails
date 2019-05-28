@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_03_173310) do
+ActiveRecord::Schema.define(version: 2019_05_23_172651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ally_codes", force: :cascade do |t|
+    t.string "token"
+    t.integer "times_left", default: 1
+    t.boolean "enabled", default: true
+    t.string "name"
+    t.boolean "level_enabled", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "average_caches", force: :cascade do |t|
     t.bigint "rater_id"
@@ -35,6 +45,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_173310) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cause"
   end
 
   create_table "billing_profiles", force: :cascade do |t|
@@ -323,11 +334,11 @@ ActiveRecord::Schema.define(version: 2019_05_03_173310) do
     t.string "reportable_type"
     t.integer "reportable_id"
     t.integer "status", default: 0
-    t.string "cause"
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "ban_id"
+    t.integer "cause"
     t.index ["ban_id"], name: "index_reports_on_ban_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
@@ -475,6 +486,8 @@ ActiveRecord::Schema.define(version: 2019_05_03_173310) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.bigint "ally_code_id"
+    t.index ["ally_code_id"], name: "index_users_on_ally_code_id"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -532,6 +545,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_173310) do
   add_foreign_key "ticket_responses", "tickets"
   add_foreign_key "ticket_responses", "users"
   add_foreign_key "tickets", "users"
+  add_foreign_key "users", "ally_codes"
   add_foreign_key "users", "cities"
   add_foreign_key "verifications", "users"
 end

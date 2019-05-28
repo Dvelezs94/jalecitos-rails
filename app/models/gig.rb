@@ -4,6 +4,7 @@ class Gig < ApplicationRecord
   include LocationFunctions
   include FilterRestrictions
   include GigRequestFunctions
+  include BeforeDestroyFunctions
   require 'voight_kampff'
   #search
   searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
@@ -57,6 +58,7 @@ class Gig < ApplicationRecord
   maximum: 5,
   message: 'no puedes tener más de 5 elementos'
   }
+  before_destroy :mark_reports_and_bans
   #Custom fields
   enum status: { draft: 0, published: 1, banned: 2, wizard: 3}
   mount_uploaders :images, GigUploader
@@ -91,6 +93,9 @@ class Gig < ApplicationRecord
     end
   end
 
+  def unban!
+    self.update(status: "draft")
+  end
   private
   # def should_generate_new_friendly_id? #this is used to change url every time name if changed, its not used now because problems of google indexing pages
   #   name_changed?
