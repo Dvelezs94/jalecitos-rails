@@ -224,11 +224,13 @@ class User < ApplicationRecord
        end
      when "banned"
        self.gigs.each do |g|
-         g.update(status: "banned")
+         if g.status != "banned"
+           g.update(status: "draft")
+         end
        end
        self.requests.each do |r|
          if r.status == "published"
-           r.update(status: "banned")
+           r.update(status: "closed")
          end
        end
      when "disabled"
