@@ -263,6 +263,7 @@ class User < ApplicationRecord
          end
        end
      end
+   end
 
    # when a user uses the ally code, decrement the times it can be used
    def decrement_ally_code_times_left
