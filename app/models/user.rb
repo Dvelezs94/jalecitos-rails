@@ -58,6 +58,8 @@ class User < ApplicationRecord
   # update verified gigs when account is verified
   before_update :verify_gigs, :if => :verified_changed?
   before_update :set_roles
+  #when user is banned, unbanned or disabled...
+  before_update :enable_disable_stuff, :if => :status_changed?
 
   # Associations
   # User Score
@@ -161,9 +163,9 @@ class User < ApplicationRecord
    #  end
    # end
    # Override the method to support canceled accounts
-   def active_for_authentication?
-       super && self.active?
-   end
+   # def active_for_authentication? #this was used before for disabled and banned users but i want to display a custom message, so this is now on session controller
+   #     super && self.active?
+   # end
    def balance
      @orders_total = self.unpaid_orders
      @orders_total.sum(:payout_left)
@@ -192,7 +194,9 @@ class User < ApplicationRecord
      end
    end
 
-
+   def unban!
+     self.update(status: "active")
+   end
 
    private
    def set_roles
@@ -227,6 +231,38 @@ class User < ApplicationRecord
      @res = JSON.parse(Net::HTTP.get(URI.parse("#{@url}")))
      self.time_zone = @res["timeZoneId"] if TZInfo::Timezone.all_country_zone_identifiers.include? @res["timeZoneId"]
    end
+
+   def enable_disable_stuff
+     case status
+     when "active"
+       self.gigs.each do |g|
+         if g.status != "banned"
+          g.update(status: "draft")
+         end
+       end
+     when "banned"
+       self.gigs.each do |g|
+         if g.status != "banned"
+           g.update(status: "draft")
+         end
+       end
+       self.requests.each do |r|
+         if r.status == "published"
+           r.update(status: "closed")
+         end
+       end
+     when "disabled"
+       self.gigs.each do |g|
+         if g.status != "banned"
+           g.update(status: "draft")
+         end
+       end
+       self.requests.each do |r|
+         if r.status == "published"
+           r.update(status: "closed")
+         end
+       end
+     end
 
    # when a user uses the ally code, decrement the times it can be used
    def decrement_ally_code_times_left

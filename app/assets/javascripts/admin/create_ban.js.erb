@@ -1,0 +1,7 @@
+$(document).on('turbolinks:load', function() {
+    $('.createABan').on('click', function () {
+      form = $("#createBanForm");
+      form.attr("action", $(this).attr("href"));
+      $("#ban_cause").val( $(this).attr("data-cause") );
+    });
+});

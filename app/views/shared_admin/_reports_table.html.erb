@@ -1,0 +1,19 @@
+<h2>Reportes</h2>
+<div class="table-responsive paginator_container">
+  <table class="admin-table table table-striped table-sm report">
+    <thead>
+      <tr>
+        <th>Creación</th>
+        <th>Objeto</th>
+        <th>Causa</th>
+        <th>Comentario</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody class="paginated_reports">
+      <%= render partial: 'admins/report', collection: @reports %>
+    </tbody>
+  </table>
+  <%= paginate @reports, param_name: :report,
+   :params => {:current => :report} %>
+</div>

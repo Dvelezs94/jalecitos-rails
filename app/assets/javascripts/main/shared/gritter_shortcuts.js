@@ -1,7 +1,15 @@
 function show_notice (text) {
   jQuery.gritter.add({
     image: '/assets/notice.png',
-    title: 'Notice',
+    title: 'Atención',
+    text: text
+  });
+}
+
+function show_success (text) {
+  jQuery.gritter.add({
+    image: '/assets/success.png',
+    title: 'Éxito',
     text: text
   });
 }

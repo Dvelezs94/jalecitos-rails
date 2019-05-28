@@ -3,7 +3,6 @@ class GigsController < ApplicationController
   include GetGig
   include PackTypes
   include SetLayout
-  include ReportFunctions
   before_action :set_gig, only: [:destroy, :ban_gig]
   before_action :set_gig_with_first_pack, only: :toggle_status
   before_action :set_gig_with_all_asc, only: :show
@@ -28,7 +27,6 @@ class GigsController < ApplicationController
       get_reviews
       get_related_gigs
       Searchkick.multi_search([@related_gigs])
-      report_options
     end
     # increment gig visit
     if current_user != @gig.user
