@@ -44,8 +44,24 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def after_sign_in_path_for resource
-    cookies.permanent.signed[:mb].present? ? root_path( notifications: "enable") : root_path
+    if check_if_banned_or_disabled(resource)
+      sign_out resource
+      cookies.permanent.signed[:mb].present? ? mobile_sign_in_path : root_path
+    else
+      cookies.permanent.signed[:mb].present? ? root_path( notifications: "enable") : root_path
+    end
     #if i am in localhost/sign_in path, redirect to localhost, otherwise, it will throw a too many times redirect error
     # (Rails.application.routes.recognize_path(request.referrer)[:controller] == "users/sessions")? root_path : request.referrer + "?review=true"
+  end
+
+  #this is just for accounts that have email and password, the filter of fb and google accounts is in omniauth_calbacks_controller
+  def check_if_banned_or_disabled(user)
+    if user.banned?
+      flash[:error] = "Esta cuenta está bloqueada, favor de comunicarte con soporte para más información"
+      return true
+    elsif user.disabled?
+      flash[:error] = "Has deshabilitado esta cuenta, favor de comunicarte con soporte para más información "
+      return true
+    end
   end
 end

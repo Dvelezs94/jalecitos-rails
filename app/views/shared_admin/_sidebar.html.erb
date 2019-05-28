@@ -29,7 +29,10 @@
            <%= link_to "Disputas (#{@pending_disputes})", disputes_admins_path %>
        </li>
        <li>
-           <%= link_to "Reportes Y Bloqueos (#{@pending_bans})", bans_admins_path %>
+           <%= link_to "Reportes (#{@open_reports})", reports_admins_path %>
+       </li>
+       <li>
+           <%= link_to "Bloqueos (#{@banned_bans})", bans_admins_path %>
        </li>
        <li>
           <%= link_to "Openpay", openpay_dashboard_admins_path %>

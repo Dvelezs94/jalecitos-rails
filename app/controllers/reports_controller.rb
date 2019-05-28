@@ -1,13 +1,12 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
-  access user: :all
+  access user: [:create], admin: :all
   before_action :verify_report_count, only: :create
+  before_action :set_report, only: :deny
 
   # POST /reports
   def create
-
     @report = Report.new(report_params)
-
     # create reportable object
     if params[:gig_id]
       @gig = Gig.friendly.find(params[:gig_id])
@@ -20,9 +19,17 @@ class ReportsController < ApplicationController
       @user = User.friendly.find(params[:user_id])
       @report.reportable = @user
     end
+    @success = @report.save
+  end
 
-
-    @report.save
+  def deny
+    if @report.open?
+      @success = @report.denied!
+    elsif @report.denied?
+      @already_denied = true
+    elsif @report.accepted?
+      @already_accepted = true
+    end
   end
 
   private
@@ -40,6 +47,7 @@ class ReportsController < ApplicationController
 
     def verify_report_count
       if current_user.reports.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count >= 5
+        @too_many_today = true
         render :create
       end
     end

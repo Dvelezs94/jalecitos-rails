@@ -1,0 +1,8 @@
+<% if @success %>
+  <% flash[:success] = "El reporte se ha marcado como ilegítimo" %>
+  location.reload();
+<% elsif @already_denied  %> //this maybe isnt going to be used...
+  show_notice("El reporte ya se había marcado como ilegítimo");
+<% elsif @already_accepted  %> //this maybe isnt going to be used...
+  show_notice("El reporte ya se ha aceptado, tal vez por otro reporte legítimo se bloqueo el recurso...");
+<% end %>

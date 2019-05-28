@@ -1,3 +1,3 @@
 $(document).on('turbolinks:load', function() {
-    modals('report_request', 'reportRequestModal',"reportrequestbtn");
+    modals('report_request', 'reportObjectModal',"reportrequestbtn");
 });

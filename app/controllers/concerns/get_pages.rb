@@ -86,7 +86,7 @@ module GetPages
 
   def get_liked_gigs_items
     @liked_gigs_items = Gig.includes(:gigs_packages, :user, :likes, city: [state: :country])
-    .where(id: @liked_gigs.pluck(:gig_id))
+    .where(id: @liked_gigs.pluck(:gig_id), status: "published")
     .order(created_at: :desc)
   end
 
