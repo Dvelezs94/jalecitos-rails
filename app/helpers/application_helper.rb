@@ -33,7 +33,7 @@ module ApplicationHelper
     if liked == false
       render(partial, title: title, gigs: collection, param_name: variable_name) if collection.present?
     else
-      render(partial, title: title, gigs: @liked_gigs_items, param_name: variable_name) if collection.present?
+      render(partial, title: title, gigs: @liked_gigs_items, param_name: variable_name) if @liked_gigs_items.present?
     end
   end
 
