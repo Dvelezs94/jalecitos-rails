@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :check_if_user_banned, if: :important_route?
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :update_sign_in_at_periodically
   UPDATE_LOGIN_PERIOD = 1.hours
@@ -9,6 +10,22 @@ class ApplicationController < ActionController::Base
    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :password, :password_confirmation])
    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :country])
  end
+
+ def check_if_user_banned
+   if current_user && current_user.banned?
+     sign_out(current_user)
+     redirect_to(user_session_path)
+   end
+ end
+
+def important_route? #just log out the banned user if the request is html and specified routes
+  #cant logout on home or gig because if i log out it doesnt redirect because i can go home or gig without an user, so mobile users goes to desktop user home at logout, and its wrong
+  if (params[:action] == "hire" || params[:action] == "finance" ||  params[:action] == "configuration" || params[:controller] == "conversations") && request.format.html?
+    return true
+  else
+    return false
+  end
+end
 
  def update_sign_in_at_periodically
     # use session cookie to avoid hammering the database

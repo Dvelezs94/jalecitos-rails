@@ -5,6 +5,7 @@ class Request < ApplicationRecord
   include LocationFunctions
   include FilterRestrictions
   include GigRequestFunctions
+  include BeforeDestroyFunctions
   #search
   searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
   def search_data
@@ -50,7 +51,7 @@ class Request < ApplicationRecord
     maximum: 3,
     message: 'no puedes tener más de 3 imágenes'
   }
-
+  before_destroy :mark_reports_and_bans
   #notify users when new request is made
   after_commit -> { NotifyNewRequestWorker.perform_async(self.id) }, on: :create
 

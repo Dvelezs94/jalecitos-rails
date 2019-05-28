@@ -1,15 +1,12 @@
-<tbody class="labels">
-  <tr>
-    <td colspan="5">
-      <label for="ban<%= ban.id %>"><%= ban_name_helper(ban) %></label>
-      <input type="checkbox" name="ban<%= ban.id %>" id="ban<%= ban.id %>" data-toggle="toggle">
-      <% if ban.pending? %>
-        <%= link_to icon("fas","check"),deny_ban_path(ban.id), method: :put, title: "Es legitimo", :data => {:confirm => 'Marcar como legitimo?'}, style: "float: right;" %>
-        <%= link_to icon("fas","ban"),proceed_ban_path(ban.id), method: :put, title: "Bloquear", :data => {:confirm => 'Este recurso se bloqueara, estas seguro?'}, style: "float: right;"  %>
-      <% end %>
-    </td>
-  </tr>
-</tbody>
-<tbody class="hide">
-  <%= render partial: 'admins/report', collection: ban.reports %>
-</tbody>
+<tr>
+  <td>Hace <%= distance_of_time_in_words_to_now(ban.created_at) %></td>
+  <td> <%= link_to "#{reportable_type(ban.baneable)}: #{ban.baneable.name || "N/A"}", object_url(ban.baneable) %> </td>
+  <td><%= ban.cause %></td>
+  <td><%= ban.comment %></td>
+  <td class="flex-wrap">
+    <%= button_to unban_ban_path(ban.id), method: :put, remote: true,
+     class: "btn btn-success",  :data => { :confirm => 'Confirmar desbloqueo del recurso', :disable_with => "<i class='fa fa-spinner fa-spin'></i>" } do %>
+     <%= icon('fas', 'unlock', title: 'Recurso legítimo') %>
+    <% end %>
+  </td>
+</tr>

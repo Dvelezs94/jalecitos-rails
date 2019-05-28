@@ -33,7 +33,7 @@ module ApplicationHelper
     if liked == false
       render(partial, title: title, gigs: collection, param_name: variable_name) if collection.present?
     else
-      render(partial, title: title, gigs: @liked_gigs_items, param_name: variable_name) if collection.present?
+      render(partial, title: title, gigs: @liked_gigs_items, param_name: variable_name) if @liked_gigs_items.present?
     end
   end
 
@@ -206,6 +206,12 @@ module ApplicationHelper
         <meta name='keywords' content='#{@request.location},#{@request.profession},#{@request.tag_list.join(',')}'>
         <meta name='category' content='#{@request.category.name}'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
+    elsif current_page?( guest_search_path ) && params[:city] && params[:state] && params[:query]
+        "<title>#{params[:query]} en #{params[:city]}, #{params[:state]}</title>
+        <meta name='description' content='Encuenta el mejor #{params[:query]} en #{params[:city]}, #{params[:state]}'>
+        <meta name='keywords' content='contratar, #{params[:query]}, #{params[:city]}, empleo'>
+        <meta name='category' content='Trabajo, Empleo'>
+        <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
     elsif current_page?( root_path ) && params[:query]
         "<title>Encuentra las mejores oportunidades de trabajo o Expertos para contratar  en línea utilizando Jalecitos</title>
         <meta name='description' content='Necesitas trabajo o encontrar a un experto para alguna necesidad? Utiliza Jalecitos para encontrar empleo o expertos.'>
@@ -213,9 +219,9 @@ module ApplicationHelper
         <meta name='category' content='Trabajo, Empleo'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
     else
-        "<title>Jalecitos | Ofrece tu talento por internet</title>
-        <meta name='description' content='Conoce los mejores expertos que puedes contratar por Jalecitos. Si eres experto, ¡encuentra trabajo hoy utilizando nuestra aplicación!'>
-        <meta name='keywords' content='Contratar expertos de confianza, contratar expertos por internet, contratar expertos México'>
+        "<title>Jalecitos | Contrata y ofrece servicios en internet</title>
+        <meta name='description' content='Contrata el mejor talento en México'>
+        <meta name='keywords' content='Contratar expertos de confianza, contratar expertos por internet, contratar expertos México, contratar talento por internet'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
     end
   end
