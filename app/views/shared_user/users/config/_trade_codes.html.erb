@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-header" id="headingSeven">
+    <h5 class="mb-0">
+      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#trade_codes" aria-expanded="<%= (params[:collapse] == "trade_codes")? "true" : "false" %>" aria-controls="trade_codes">
+        Canjear Codigo
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+        <i class="fa fa-angle-down" aria-hidden="true"></i>
+      </button>
+    </h5>
+  </div>
+  <div id="trade_codes" class="collapse <%= "show" if params[:collapse] == "trade_codes" %>" aria-labelledby="headingSeven" data-parent="#accordion">
+    <div class="card-body">
+      <div class="Facturacion-content">
+        <div class="perfil-text">
+          <%= form_with url: trade_ally_codes_path, remote: false do |f| %>
+          <%= f.text_field :code_id, placeholder: "Código" %>
+          <%= f.submit "Canjear", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

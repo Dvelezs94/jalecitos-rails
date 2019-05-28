@@ -87,13 +87,15 @@ class QueriesController < ApplicationController
   end
 
   def guest_set_state
-    if params[:lon] != "" && params[:lat] != ""
+    if params[:lon].present? && params[:lat].present?
       begin
         loc = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{params[:lat]},#{params[:lon]}"
         get_city_and_state_in_db(loc.city, loc.state_name, "MX") #this makes global variables for using
       rescue
         #nothing
       end
+    elsif params[:city].present? && params[:state].present?
+        get_city_and_state_in_db(params[:city], params[:state], "MX") #this makes global variables for using
     end
   end
 end

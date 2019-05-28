@@ -48,6 +48,12 @@ class AdminsController < ApplicationController
     set_paginator
   end
 
+  def ally_codes
+    @ally_codes = AllyCode.order(created_at: :desc).page(params[:ally_code]).per(25)
+    @ally_code = AllyCode.new
+    set_paginator
+  end
+
   def show_verification
       @verification = Verification.find(params[:id])
   end
