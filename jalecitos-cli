@@ -104,12 +104,17 @@ case $1 in
   expose)
     expose
   ;;
+  restart-mac)
+    $0 restart && sleep 15 && $0 reindex
+  ;;
   *)
     echo "
     Usage:
     $0 path                Export cli to your shell
     $0 build               You will need this if you want to build from scratch
     $0 start/stop          Start the project by using docker-compose
+    $0 restart             restart
+    $0 restart-mac         restart and reindex
     $0 logs                Tail logs
     $0 create-db           Run db create and migrations
     $0 run command here    Run any command inside the container
