@@ -33,8 +33,6 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.payout_left = reverse_price_calc(@order.total)
     if @order.save
-      # minimum amount to require 3d secure
-      min_3d_amount = 2999
       #prepare charge
       request_hash = {
         "method" => "card",
@@ -43,7 +41,7 @@ class OrdersController < ApplicationController
         "currency" => "MXN",
         "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}. orden ID: #{@order.uuid}",
         "device_session_id" => params[:device_id],
-        "use_3d_secure" => (@order.total > min_3d_amount) ? true : false,
+        "use_3d_secure" => secure_transaction?(@order.total),
         "redirect_url" => finance_url(table: "purchases")
       }
       #create charge on openpay
@@ -51,8 +49,16 @@ class OrdersController < ApplicationController
         response = @charge.create(request_hash, current_user.openpay_id)
         @order.update(response_order_id: response["id"])
         flash[:success] = "Se ha creado la orden."
-        redirect_to (@order.total > min_3d_amount) ? response["payment_method"]["url"] : finance_path(:table => "purchases")
+        redirect_to secure_transaction?(@order.total) ? response["payment_method"]["url"] : finance_path(:table => "purchases")
       rescue OpenpayTransactionException => e
+        p "==="
+        p e.error_code
+        if defined?(e.error_code)
+          # next transactions will be marked for 3d secure for 3 days
+          if e.error_code == 3001 || e.error_code == 3005
+            enable_secure_transactions
+          end
+        end
         @order.update(response_order_id: "failed")
         @order.denied!
         flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
@@ -172,6 +178,30 @@ class OrdersController < ApplicationController
           parameters[:total] = purchase_order_total(pack.price).round(2)
         end
         parameters
+    end
+
+    def secure_transaction?(order_total)
+      # minimum amount to require 3d secure
+      min_3d_amount = 2999
+      if order_total > min_3d_amount || current_user.secure_transaction
+        true
+      else
+        false
+      end
+    end
+
+    # Enable 3d secure transactions
+    def enable_secure_transactions
+      if current_user.secure_transaction
+        job = Sidekiq::ScheduledSet.new.find_job([current_user.secure_transaction_job_id])
+        job.delete
+        current_user.update(secure_transaction_job_id: nil)
+      else
+        current_user.update(secure_transaction: true)
+      end
+      # job to disable secure transactions after 3 days
+      secure_transaction_job = DisableSecureTransactionsWorker.perform_in(72.hours, current_user.id)
+      current_user.update(secure_transaction_job_id: secure_transaction_job)
     end
 
     def validate_quantity_range (pa, quan) # pa = package, quan = quantity
