@@ -2,6 +2,12 @@ module ApplicationHelper
 
   private
 
+  def banned_notification
+    if current_user.banned?
+      render "shared_user/banned_notification"
+    end
+  end
+
   def city_slug city
     slug = (city.present?)? city.name : "México"
     return slug.parameterize

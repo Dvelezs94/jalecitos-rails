@@ -1,6 +1,8 @@
 class Ban < ApplicationRecord
   belongs_to :baneable, polymorphic: true
   has_many :reports
+  #if banned_by is nil, it means system banned. Also if cause is system_ban
+  belongs_to :banned_by, :class_name => "User", optional: true
   #if a resource is deleted it cant be unbanned, so if resource is banned and resource is deleted, it use this enum
   enum status: { banned: 0, unbanned: 1, deleted_resource: 2}
   enum cause: {offensive: 0, sexual: 1, violence: 2, spam: 3, fraud: 4, other: 5, system_ban: 6}

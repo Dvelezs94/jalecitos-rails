@@ -146,6 +146,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :lockable, :registerable, :confirmable, :trackable,
          :recoverable, :rememberable, :secure_validatable,
          :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+  #this is useful when user is disabled... it destroys all the sessions of that user
+  def authenticatable_salt
+  "#{super}#{session_token}"
+  end
+
+  def invalidate_all_sessions!
+    self.session_token = SecureRandom.hex
+  end
    # Custom methods for OmniAuth
    def self.new_with_session(params, session)
     super.tap do |user|
@@ -251,6 +259,12 @@ class User < ApplicationRecord
            r.update(status: "closed")
          end
        end
+       my_offers = Offer.includes(:request).where(user: self)
+       my_offers.each do |o|
+         if o.request.status == "published"
+           o.destroy
+         end
+       end
      when "disabled"
        self.gigs.each do |g|
          if g.status != "banned"
@@ -260,6 +274,12 @@ class User < ApplicationRecord
        self.requests.each do |r|
          if r.status == "published"
            r.update(status: "closed")
+         end
+       end
+       my_offers = Offer.includes(:request).where(user: self)
+       my_offers.each do |o|
+         if o.request.status == "published"
+           o.destroy
          end
        end
      end

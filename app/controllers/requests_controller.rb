@@ -1,6 +1,8 @@
 class RequestsController < ApplicationController
   include SetLayout
   include GetRequest
+  include BannedFunctions
+  before_action :redirect_if_user_banned, only: [:new, :create]
   before_action :authenticate_user!, except: :show
   before_action :set_request, only: [:show, :destroy]
   before_action :set_req_update, only: [:edit, :update]
@@ -8,7 +10,7 @@ class RequestsController < ApplicationController
   access all: [:show], user: :all
   before_action :check_request_ban, only: [:show]
   before_action :check_request_ownership, only:[:edit, :update, :destroy, :create]
-  before_action :verify_no_employee, only: [:edit, :update, :destroy]
+  before_action :verify_if_published, only: [:edit, :update, :destroy]
   layout :set_layout
 
 
@@ -126,7 +128,7 @@ class RequestsController < ApplicationController
     end
 
     #check if there is no empoyee yet, so we can edit or delete the gig
-    def verify_no_employee
-      (@request.employee) ? redirect_to(request_path(@request), notice: 'El pedido ya no puede ser borrado o editado') : true
+    def verify_if_published
+     redirect_to(request_path(@request), notice: 'El pedido ya no puede ser borrado o editado') if ! @request.published?
     end
 end

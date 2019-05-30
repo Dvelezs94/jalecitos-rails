@@ -3,12 +3,14 @@ class OffersController < ApplicationController
   include OffersHelper
   include OpenpayHelper
   include MoneyHelper
+  include BannedFunctions
   before_action :authenticate_user!
+  before_action :redirect_if_user_banned, only: [:new, :create]
   before_action :set_request
   before_action :allow_owner, only: :hire
   before_action :set_offer, only: [:edit, :update, :destroy, :hire]
   access all: [:show], user: :all
-  before_action :check_banned, only: :create
+  before_action :check_req_published, only: :create
   before_action :check_offer_ownership, only:[:edit, :update, :destroy]
   before_action :check_if_offered, only: :create
   before_action :deny_owner, only: [:new, :create]
@@ -97,8 +99,8 @@ class OffersController < ApplicationController
       end
     end
 
-    def check_banned
-      if @request.banned?
+    def check_req_published
+      if ! @request.published?
         redirect_to root_path, notice: "No puedes ofertar en este pedido"
         return
       end
