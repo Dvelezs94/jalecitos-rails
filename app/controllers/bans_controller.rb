@@ -39,7 +39,7 @@ class BansController < ApplicationController
   def ban_params
     ban_params = params.require(:ban).permit(:cause,
                                 :comment
-                              ).merge(:baneable => @report.reportable)
+                              ).merge(:baneable => @report.reportable, banned_by: current_user)
   end
 
   def set_report #these are the admitted models for ban

@@ -3,6 +3,8 @@ class PackagesController < ApplicationController
   include PackTypes
   include OpenpayHelper
   include MoneyHelper
+  include BannedFunctions
+  before_action :redirect_if_user_banned, only: [:hire]
   before_action :set_gig_and_packages, only: [ :create, :update_packages]
   before_action :check_gig_ownership, only: [ :create, :update_packages]
   before_action :set_gig_by_package, only: [:hire]
@@ -26,7 +28,7 @@ class PackagesController < ApplicationController
       if @gig.gig_packages.count == 0 && params[:packages].count == 3 #just if there are no packages and packages sent to server are 3
         create_the_packages
         fp = @gig.gig_packages[0] #fp = first package
-        @gig.published! if fp.present? && fp.name != "" && fp.description != "" && fp.price != nil && ((fp.max_amount.present?)? fp.price >= 1 : fp.price >= 100)
+        @gig.published! if fp.present? && fp.name != "" && fp.description != "" && fp.price != nil && ((fp.max_amount.present?)? fp.price >= 1 : fp.price >= 100) && current_user.active?
       end
       end_form
     end

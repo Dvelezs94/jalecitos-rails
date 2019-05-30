@@ -41,6 +41,7 @@
     <div class="main_container">
       <%= notification_helper %>
       <div class="gap"></div>
+      <%= banned_notification %>
       <%= yield %>
       <% if @p_review.present? %>
         <%= render partial: 'reviews/review', collection: [@p_review]%>
