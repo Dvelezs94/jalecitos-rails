@@ -51,8 +51,6 @@ class OrdersController < ApplicationController
         flash[:success] = "Se ha creado la orden."
         redirect_to secure_transaction?(@order.total) ? response["payment_method"]["url"] : finance_path(:table => "purchases")
       rescue OpenpayTransactionException => e
-        p "==="
-        p e.error_code
         if defined?(e.error_code)
           # next transactions will be marked for 3d secure for 3 days
           if e.error_code == 3001 || e.error_code == 3005
