@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
   include MoneyHelper
   layout :set_layout
   access user: :all, admin: [:complete, :refund]
+  before_action :check_card_present, on: :create
   before_action only: [:create, :refund] do
     init_openpay("charge")
   end
@@ -30,6 +31,7 @@ class OrdersController < ApplicationController
   before_action :verify_refund_state, only: [:refund]
   before_action :check_billing_profile, only: :create
   before_action :verify_personal_information, only: :create
+  before_action :check_if_changes, only: :create
 
   def create
     @order = Order.new(order_params)
@@ -60,8 +62,8 @@ class OrdersController < ApplicationController
         flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
         redirect_to finance_path(:table => "purchases")
       end
-    else
-      redirect_to request.referer, alert: "No se pudo crear tu orden, asegurate de elegir un método de pago."
+    else #talent already hired
+      redirect_to request.referer, alert: @order.errors.full_messages.first
     end
 
   end #create end
@@ -299,6 +301,21 @@ class OrdersController < ApplicationController
       if current_user.name.blank?
         flash[:error] = "Asegurate de tener tu nombre completo en Jalecitos para proceder a comprar"
         redirect_to configuration_path(bestFocusAfterReload: "change_user_name")
+      end
+    end
+
+    def check_card_present
+      if ! params[:order][:card_id].present?
+        redirect_to request.referer, alert: "No se pudo crear tu orden, asegúrate de elegir un método de pago."
+      end
+    end
+
+    def check_if_changes
+      object = @package || @offer
+      load_time = params[:order][:load_time].to_time
+      if load_time < object.updated_at
+        flash[:notice] = "Se han hecho cambios al recurso que está a punto de contratar, por favor, verifique la información"
+        redirect_back(fallback_location: root_path)
       end
     end
 end

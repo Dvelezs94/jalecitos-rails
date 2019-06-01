@@ -15,13 +15,14 @@ class Order < ApplicationRecord
   #    }
   # end
   #Actions
+  validates_presence_of :purchase, :employer, :employee, :card_id, on: :create
+  validate :just_one_hire_in_request, :on => :create
   after_create :set_access_uuid
+  #Associations
   belongs_to :employer, foreign_key: :employer_id, class_name: "User"
   belongs_to :employee, foreign_key: :employee_id, class_name: "User"
   belongs_to :purchase, polymorphic: true, optional: true
   belongs_to :payout, optional: true
-  validates_presence_of :purchase, :employer, :employee, :card_id, on: :create
-  #Associations
   has_one :dispute
   has_many :reviews
   has_one :employer_review, -> (employer) { where(user: employer) }, class_name: 'Review'
@@ -46,5 +47,15 @@ class Order < ApplicationRecord
 
    def generate_uuid
      uuid = SecureRandom.hex(2).to_s + self.id.to_s
+   end
+
+   def just_one_hire_in_request
+     #just can try to hire one offer at time
+     if self.purchase_type == "Offer"
+       my_request_hires = Order.includes(purchase: :request).where(employer: self.employer, purchase_type: "Offer").where.not(status: "denied")
+       my_request_hires.each do |mrh|
+        errors.add(:base, "Sólo puedes contratar a un talento a la vez ") if mrh.purchase.request == self.purchase.request #if the usas has already hired someone on that request, deny the hire
+       end
+     end
    end
 end

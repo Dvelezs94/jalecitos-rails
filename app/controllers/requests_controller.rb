@@ -2,8 +2,8 @@ class RequestsController < ApplicationController
   include SetLayout
   include GetRequest
   include BannedFunctions
-  before_action :redirect_if_user_banned, only: [:new, :create]
   before_action :authenticate_user!, except: :show
+  before_action :redirect_if_user_banned, only: [:new, :create]
   before_action :set_request, only: [:show, :destroy]
   before_action :set_req_update, only: [:edit, :update]
   before_action :set_req_create, only: [:create]
@@ -16,6 +16,7 @@ class RequestsController < ApplicationController
 
   # GET /requests/1
   def show
+    check_if_already_hired
     if params[:page]
       get_other_offers
     else
@@ -130,5 +131,17 @@ class RequestsController < ApplicationController
     #check if there is no empoyee yet, so we can edit or delete the gig
     def verify_if_published
      redirect_to(request_path(@request), notice: 'El pedido ya no puede ser borrado o editado') if ! @request.published?
+    end
+
+    def check_if_already_hired
+      if current_user && @request.user == current_user
+        my_request_hires = current_user.purchases.includes(:purchase).where(purchase_type: "Offer").where.not(status: "denied")
+        my_request_hires.each do |mrh|
+          if mrh.purchase.request == @request
+            @already_hired = true
+            break
+          end
+        end
+      end
     end
 end
