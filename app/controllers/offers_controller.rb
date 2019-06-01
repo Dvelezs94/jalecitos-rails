@@ -12,6 +12,7 @@ class OffersController < ApplicationController
   access all: [:show], user: :all
   before_action :check_req_published, only: :create
   before_action :check_offer_ownership, only:[:edit, :update, :destroy]
+  before_action :redirect_if_offer_has_order, only: [:edit]
   before_action :check_if_offered, only: :create
   before_action :deny_owner, only: [:new, :create]
   before_action :check_if_already_hired
@@ -57,8 +58,12 @@ class OffersController < ApplicationController
 
   # DELETE /offers/1
   def destroy
+    begin
     @offer.destroy
     redirect_to request_path(params[:request_id]), notice: 'Oferta destruida.'
+    rescue => e
+      redirect_to request_path(params[:request_id]), notice: e
+    end
   end
 
   private
@@ -126,4 +131,10 @@ class OffersController < ApplicationController
         return
       end
     end
+
+    def redirect_if_offer_has_order
+      order = Order.where(purchase: @offer).where.not(status: "denied").limit(1).first
+      redirect_to request_path(@request), notice: "No puedes editar tu oferta ya que se está validando un pago para ella" if order.present?
+    end
+
 end
