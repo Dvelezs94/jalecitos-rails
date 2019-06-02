@@ -53,6 +53,30 @@ module OpenpayFunctions
     end
   end
 
+  def create_order order, request_hash, min_3d_amount
+    response = @charge.create(request_hash, current_user.openpay_id)
+    order.update(response_order_id: response["id"])
+    flash[:success] = "Se ha creado la orden."
+    redirect_to (order.total > min_3d_amount) ? response["payment_method"]["url"] : finance_path(:table => "purchases")
+  end
+
+  def create_order_failed order, e
+    order.update(response_order_id: "failed")
+    order.denied!
+    flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
+    redirect_to finance_path(:table => "purchases")
+  end
+
+  def try_to_refund order
+    request_hash = {
+      "description" => "Monto de la orden #{order.uuid} devuelto por la cantidad de #{order.total}",
+      "amount" => order.total
+    }
+    response = @charge.refund(order.response_order_id ,request_hash, order.employer.openpay_id)
+    order.refund_in_progress!
+    order.update(response_refund_id: response["id"])
+  end
+
   def charge_fee(order, fee)
     request_fee_hash={"customer_id" => order.employer.openpay_id,
                    "amount" => get_order_earning(order.purchase.price),

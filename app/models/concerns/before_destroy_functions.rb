@@ -10,5 +10,4 @@ module BeforeDestroyFunctions
     ban = Ban.find_by(status: "banned", baneable: self)
     ban.update!(status: "deleted_resource") if ban.present?
   end
-
 end

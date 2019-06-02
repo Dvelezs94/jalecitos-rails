@@ -41,9 +41,12 @@ class Request < ApplicationRecord
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
   validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
   validates_length_of :description, :maximum => 1000, :message => "debe contener como máximo 1000 caracteres."
-
   validate :location_validate
   validate :budget_options
+  validate :invalid_change, on: :update
+  validate :finished_request, on: :update
+  #trabajando en esto
+  #before_update :refund_money, if: :in_progress_to_banned
 
   #Custom fields
   mount_uploaders :images, RequestUploader
@@ -59,6 +62,30 @@ class Request < ApplicationRecord
   #capitalize before save
   def profession=(val)
     write_attribute(:profession, no_multi_spaces(val.strip.capitalize))
+  end
+
+  def finished_request
+    if status_changed?(to: "completed") || status_changed?(to: "closed")
+      reports = Report.where(status: "open", reportable: self)
+      reports.each do |r|
+        r.update!(status: "finished_resource") #the resource wasnt treated, the users finished it
+      end
+    end
+  end
+
+  def invalid_change
+    if status_changed?(from: "completed", to: "banned")
+      errors.add(:base, "El recurso ya se ha completado, así que no tiene sentido bloquearlo")
+    end
+    if status_changed?(from: "wizard", to: "banned")
+      errors.add(:base, "No se puede bloquear un recurso de jalecitos")
+    end
+    if status_changed?(from: "closed", to: "banned")
+      errors.add(:base, "El pedido ya se ha cerrado antes")
+    end
+    if status_changed?(from: "disputed", to: "banned")
+      errors.add(:base, "El pedido ya está en disputa")
+    end
   end
 
   def description=(val)
