@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
   include MoneyHelper
   layout :set_layout
   access user: :all, admin: [:complete, :refund]
-  before_action :check_card_present, on: :create
   before_action only: [:create, :refund] do
     init_openpay("charge")
   end
@@ -26,9 +25,13 @@ class OrdersController < ApplicationController
   before_action :verify_order_owner, only: [:complete]
   before_action :verify_owner_or_employee, only: [:refund]
   before_action :verify_charge_response, except: [:create]
+  before_action :verify_refund_state, only: [:refund]
+  before_action :check_if_request_banned, only: [:start, :request_complete, :complete, :refund]
+
+  #just create validators
+  before_action :check_card_present, only: :create
   before_action :verify_availability, only: [:create]
   before_action :verify_order_limit, only: [:create]
-  before_action :verify_refund_state, only: [:refund]
   before_action :check_billing_profile, only: :create
   before_action :verify_personal_information, only: :create
   before_action :check_if_changes, only: :create
@@ -40,27 +43,12 @@ class OrdersController < ApplicationController
       # minimum amount to require 3d secure
       min_3d_amount = 2999
       #prepare charge
-      request_hash = {
-        "method" => "card",
-        "source_id" => order_params[:card_id],
-        "amount" => @order.total,
-        "currency" => "MXN",
-        "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}. orden ID: #{@order.uuid}",
-        "device_session_id" => params[:device_id],
-        "use_3d_secure" => (@order.total > min_3d_amount) ? true : false,
-        "redirect_url" => finance_url(table: "purchases")
-      }
+      request_hash = the_request_hash(min_3d_amount)
       #create charge on openpay
       begin
-        response = @charge.create(request_hash, current_user.openpay_id)
-        @order.update(response_order_id: response["id"])
-        flash[:success] = "Se ha creado la orden."
-        redirect_to (@order.total > min_3d_amount) ? response["payment_method"]["url"] : finance_path(:table => "purchases")
+        create_order(@order, request_hash, min_3d_amount)
       rescue OpenpayTransactionException => e
-        @order.update(response_order_id: "failed")
-        @order.denied!
-        flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
-        redirect_to finance_path(:table => "purchases")
+        create_order_failed(@order, e)
       end
     else #talent already hired
       redirect_to request.referer, alert: @order.errors.full_messages.first
@@ -129,21 +117,15 @@ class OrdersController < ApplicationController
 
 
   def refund
-      request_hash = {
-        "description" => "Monto de la orden #{@order.uuid} devuelto por la cantidad de #{@order.total}",
-        "amount" => @order.total
-      }
       begin
-        response = @charge.refund(@order.response_order_id ,request_hash, @order.employer.openpay_id)
-        @order.refund_in_progress!
-        @order.update(response_refund_id: response["id"])
+        try_to_refund(@order)
         if current_user == @order.employer
-          flash[:success] = "La orden esta en proceso de reembolso, recibirás un correo cuando la orden ya haya sido reembolsada"
+          flash[:success] = "La orden está en proceso de reembolso, recibirás un correo cuando la orden ya haya sido reembolsada"
         else
           create_notification(@order.employee, @order.employer, "te ha reembolsado", @order, "purchases")
         end
       rescue
-        flash[:error] = "Ocurrio un error al intentar de reembolsar la orden"
+        flash[:error] = "Ocurrió un error al intentar de reembolsar la orden"
       end
     redirect_to finance_path(:table => "purchases")
   end
@@ -312,10 +294,41 @@ class OrdersController < ApplicationController
 
     def check_if_changes
       object = @package || @offer
-      load_time = params[:order][:load_time].to_time
+      load_time = params[:order][:load_time].to_time - 0.5.seconds #the time is when server is in the view, i need the time of controller (when get info of resource), so i  subtract half of second
       if load_time < object.updated_at
         flash[:notice] = "Se han hecho cambios al recurso que está a punto de contratar, por favor, verifique la información"
         redirect_back(fallback_location: root_path)
+      end
+    end
+
+    def the_request_hash(min_3d_amount)
+      {
+        "method" => "card",
+        "source_id" => order_params[:card_id],
+        "amount" => @order.total,
+        "currency" => "MXN",
+        "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}. orden ID: #{@order.uuid}",
+        "device_session_id" => params[:device_id],
+        "use_3d_secure" => (@order.total > min_3d_amount) ? true : false,
+        "redirect_url" => finance_url(table: "purchases")
+      }
+    end
+
+    def check_if_request_banned
+      if @order.purchase_type == "Offer" #is an order of a request
+        request = @order.purchase.request
+        if request.banned?
+          flash[:notice] = "El recurso está bloqueado, se reembolsará el dinero"
+          redirect_to_table(@order)
+        end
+      end
+    end
+
+    def redirect_to_table order
+      if order.employer == current_user
+        redirect_to finance_path(table: "purchases")
+      else
+        redirect_to finance_path(table: "sales")
       end
     end
 end

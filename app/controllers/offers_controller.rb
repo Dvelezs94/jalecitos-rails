@@ -10,7 +10,7 @@ class OffersController < ApplicationController
   before_action :allow_owner, only: :hire
   before_action :set_offer, only: [:edit, :update, :destroy, :hire]
   access all: [:show], user: :all
-  before_action :check_req_published, only: :create
+  before_action :check_req_published, only: [:new, :create, :edit, :update, :destroy, :hire]
   before_action :check_offer_ownership, only:[:edit, :update, :destroy]
   before_action :redirect_if_offer_has_order, only: [:edit]
   before_action :check_if_offered, only: :create
@@ -106,7 +106,8 @@ class OffersController < ApplicationController
 
     def check_req_published
       if ! @request.published?
-        redirect_to root_path, notice: "No puedes ofertar en este pedido"
+        flash[:notice] = "Este recurso ya no está disponible"
+        redirect_to root_path #cant redirect back because the request is also banned, so a loop is triggered
         return
       end
     end
