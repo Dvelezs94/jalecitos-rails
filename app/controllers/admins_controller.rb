@@ -63,6 +63,12 @@ class AdminsController < ApplicationController
     set_paginator
   end
 
+  def marketing_notifications
+    @marketing_notifications = MarketingNotification.order(scheduled_at: :desc).page(params[:marketing_notification]).per(25)
+    @marketing_notification = MarketingNotification.new
+    set_paginator
+  end
+
   def openpay_dashboard
     @balance ||= "cuenta predispersion no seteada"
   end

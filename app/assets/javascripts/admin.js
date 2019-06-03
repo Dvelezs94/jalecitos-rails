@@ -23,3 +23,5 @@
 //= require_tree ./admin
 
 //= require clipboard
+
+//= require rails_emoji_picker

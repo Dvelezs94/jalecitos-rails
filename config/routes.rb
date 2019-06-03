@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get :orders
       get :ally_codes
       post :predispersion_fee
+      get :marketing_notifications
     end
   end
   #custom routes for city_id
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
   #doesnt need to be declared, just for spanish friendly url for user
   get '/jales/nuevo' => 'gigs#new', as: "new_gig"
   #post "/jales" => "gigs#create", as: "gigs" #doesnt need to be declared
+  resources :marketing_notifications
   resources :gigs, except: [:index, :show, :edit, :update, :destroy, :new] do
     resource :reports, only: [:create], as: "report"
     member do
