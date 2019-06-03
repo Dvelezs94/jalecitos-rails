@@ -18,6 +18,8 @@ class Order < ApplicationRecord
   validates_presence_of :purchase, :employer, :employee, :card_id, on: :create
   validate :just_one_hire_in_request, :on => :create
   after_create :set_access_uuid
+  validate :check_valid_refund, if: :change_to_refund_in_progress?, :on => :update
+  validate :cant_change_from_refunded, :on => :update
   #Associations
   belongs_to :employer, foreign_key: :employer_id, class_name: "User"
   belongs_to :employee, foreign_key: :employee_id, class_name: "User"
@@ -56,6 +58,26 @@ class Order < ApplicationRecord
        my_request_hires.each do |mrh|
         errors.add(:base, "Sólo puedes contratar a un talento a la vez ") if mrh.purchase.request == self.purchase.request #if the usas has already hired someone on that request, deny the hire
        end
+     end
+   end
+
+   def change_to_refund_in_progress?
+    return true  if status_changed?(to: "refund_in_progress")
+   end
+
+   def check_valid_refund
+     if !(status_changed?(from: "pending") || status_changed?(from: "in_progress"))
+       errors.add(:base, "EL recurso no puede ser reembolsado")
+     end
+   end
+
+   def cant_change_from_refunded
+     if status_changed?(from: "refunded")
+       errors.add(:base, "EL recurso no puede ser actualizado ya que ha sido reembolsado")
+     elsif status_changed?(from: "refund_in_progress", to: "refunded")
+       return true
+     elsif status_changed?(from: "refund_in_progress")
+       errors.add(:base, "EL recurso no puede ser actualizado ya que hay un reembolso en progreso")
      end
    end
 end

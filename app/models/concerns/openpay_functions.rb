@@ -73,8 +73,7 @@ module OpenpayFunctions
       "amount" => order.total
     }
     response = @charge.refund(order.response_order_id ,request_hash, order.employer.openpay_id)
-    order.refund_in_progress!
-    order.update(response_refund_id: response["id"])
+    order.update(response_refund_id: response["id"], status: "refund_in_progress")
   end
 
   def charge_fee(order, fee)
