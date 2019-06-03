@@ -142,17 +142,15 @@ module ApplicationHelper
       when object == nil #deleted gig (package also)
         text += "un <strong>Jale eliminado</strong>"
       when object.class == Request
-        text += "en el pedido #{object.title}"
+        text += "en el pedido <strong>#{object.title}</strong>"
       when object.class == Package
-        text += "el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
+        text += "el jale <strong>#{object.gig.title}</strong> por el paquete <strong>"+ I18n.t("gigs.packages.#{object.pack_type}") +"</strong>"
       when object.class == Dispute
-        text += "en la orden #{object.order.uuid}"
+        text += "en la orden <strong>#{object.order.uuid}</strong>"
       when object.class == Offer
-        text += "el pedido #{object.request.title}"
-      when object.class == Order
-        text += "la orden #{object.uuid} por la cantidad de $#{object.total} MXN. Ten en cuenta que puede tardar hasta 72 hrs para aparecer en tu cuenta bancaria."
+        text += "en el pedido <strong>#{object.request.title}</strong>"
       when object.class == Reply
-        text += "en la disputa de la orden #{object.dispute.order.uuid}"
+        text += "en la disputa de la orden <strong>#{object.dispute.order.uuid}</strong>"
       end
     else
       text = "#{notification.action} "
@@ -160,19 +158,21 @@ module ApplicationHelper
       when notification.action == "Se ha validado" && object == nil #when a request has a validated payment, it cant be deleted, so just package can have this situation
         text += "el pago del <strong>Jale eliminado</strong>"
       when notification.action == "Se ha validado" && object.class == Package
-        text += "el pago del jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
+        text += "el pago del jale <strong>#{object.gig.title}</strong> por el paquete <strong>"+ I18n.t("gigs.packages.#{object.pack_type}") + "</strong>"
       when notification.action == "Se ha validado" && object.class == Offer
-        text += "el pago del pedido #{object.request.title}"
+        text += "el pago del pedido <strong>#{object.request.title}</strong>"
       when notification.action == "Se ha finalizado" && object == nil #deleted gig (package also)
         text += "un <strong>Jale eliminado</strong>"
       when notification.action == "Se ha finalizado" && object.class == Package
-        text += "el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
+        text += "el jale <strong>#{object.gig.title}</strong> por el paquete <strong>"+ I18n.t("gigs.packages.#{object.pack_type}") + "</strong>"
       when notification.action == "Se ha finalizado" && object.class == Offer
-        text += "el pedido #{object.request.title}"
-      when notification.action == "Se ha reembolsado" && object.class == Request
-        text += "el pedido <strong> #{object.title} </strong>"
-      when notification.action == "Se te reembolsará" && object.class == Request
-        text += "el pedido <strong> #{object.title} </strong> porque el recurso fue bloqueado"
+        text += "el pedido <strong>#{object.request.title}</strong>"
+      when notification.action == "Se te ha reembolsado" && object.class == Order
+        text += "la orden <strong>#{object.uuid}</strong> por la cantidad de <strong>$#{object.total} MXN</strong>. Ten en cuenta que puede tardar hasta 72 hrs para aparecer en tu cuenta bancaria."
+      when notification.action == "Se ha reembolsado" && object.class == Order
+        text += "la orden <strong>#{object.uuid}</strong>"
+      when notification.action == "Se te reembolsará" && object.class == Request #request banned or closed
+        text += "el pedido <strong>#{object.title}</strong>"
       end
     end
     if html == true

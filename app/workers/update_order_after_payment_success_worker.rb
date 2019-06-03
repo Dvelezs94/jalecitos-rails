@@ -24,9 +24,8 @@ class UpdateOrderAfterPaymentSuccessWorker
         if @order.purchase_type == "Offer"
           request = @order.purchase.request
           #check if request is banned, and try to refund because the request was banned when payment was still approving
-          if request.banned?
-            create_notification(@order.employee, @order.employer, "Se te reembolsará", request, "purchases")
-            request.refund_money(false) #notify just to employer
+          if request.banned? || request.closed?
+            request.refund_money
             return true
           end
           # set request in progress, so no more offers are made

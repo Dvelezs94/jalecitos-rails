@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
   include MoneyHelper
   layout :set_layout
   access user: :all, admin: [:complete, :refund]
-  before_action only: [:create, :refund] do
+  before_action only: [:create] do
     init_openpay("charge")
   end
   before_action only: [:create, :complete, :refund] do
@@ -117,16 +117,14 @@ class OrdersController < ApplicationController
 
 
   def refund
-      begin
-        try_to_refund(@order)
-        if current_user == @order.employer
-          flash[:success] = "La orden está en proceso de reembolso, recibirás un correo cuando la orden ya haya sido reembolsada"
-        else
-          create_notification(@order.employee, @order.employer, "te ha reembolsado", @order, "purchases")
-        end
-      rescue
-        flash[:error] = "Ocurrió un error al intentar de reembolsar la orden"
+    @success = @order.update(status: "refund_in_progress")
+    if @success
+      if current_user == @order.employer
+        flash[:success] = "La orden está en proceso de reembolso, recibirás un correo cuando la orden ya haya sido reembolsada"
       end
+    else
+      flash[:error] = @order.errors.full_messages.first
+    end
     redirect_to finance_path(:table => "purchases")
   end
 

@@ -122,11 +122,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
   def disable_account
     #cant disable banned accounts
-    if current_user.active? && current_user.disabled!
-      current_user.invalidate_all_sessions!
-      sign_out(current_user)
-      flash[:success] = "Tu cuenta ha sido desactivada."
-      redirect_to after_destroy_account_path()
+    if current_user.active?
+      @success = current_user.update(status: "disabled")
+      if @success
+        current_user.invalidate_all_sessions!
+        sign_out(current_user)
+        flash[:success] = "Tu cuenta ha sido desactivada."
+        redirect_to after_destroy_account_path()
+      else
+        flash[:notice] = current_user.errors.full_messages.first
+        redirect_to configuration_path
+      end
     elsif current_user.banned?
       flash[:notice] = "No se pudo desactivar la cuenta ya que está bloqueada."
       redirect_to configuration_path

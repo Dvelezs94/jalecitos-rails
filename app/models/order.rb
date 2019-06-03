@@ -1,7 +1,9 @@
 class Order < ApplicationRecord
   include ActiveModel::Dirty
-  include OpenpayHelper
   include OrderFunctions
+  include OpenpayHelper
+  include OpenpayFunctions
+  include ApplicationHelper
   # #search
   #callbacks false make sync off so records are not added automatically
    searchkick language: "spanish",callbacks: false
@@ -18,7 +20,7 @@ class Order < ApplicationRecord
   validates_presence_of :purchase, :employer, :employee, :card_id, on: :create
   validate :just_one_hire_in_request, :on => :create
   after_create :set_access_uuid
-  validate :check_valid_refund, if: :change_to_refund_in_progress?, :on => :update
+  validate :try_to_refund, if: :change_to_refund_in_progress?, :on => :update
   validate :cant_change_from_refunded, :on => :update
   #Associations
   belongs_to :employer, foreign_key: :employer_id, class_name: "User"
@@ -62,22 +64,34 @@ class Order < ApplicationRecord
    end
 
    def change_to_refund_in_progress?
-    return true  if status_changed?(to: "refund_in_progress")
+     status_changed?(to: "refund_in_progress")
    end
 
-   def check_valid_refund
+   def try_to_refund
      if !(status_changed?(from: "pending") || status_changed?(from: "in_progress"))
-       errors.add(:base, "EL recurso no puede ser reembolsado")
+       errors.add(:base, "El recurso no puede ser reembolsado por su estado actual")
+     else
+       begin
+         init_openpay("charge")
+         request_hash = {
+           "description" => "Monto de la orden #{self.uuid} devuelto por la cantidad de #{self.total}",
+           "amount" => self.total
+         }
+         response = @charge.refund(self.response_order_id ,request_hash, self.employer.openpay_id)
+         self.response_refund_id = response["id"]
+       rescue
+        errors.add(:base, "Ocurrió un error al intentar de reembolsar la orden") #openpay connection error
+       end
      end
    end
 
    def cant_change_from_refunded
      if status_changed?(from: "refunded")
-       errors.add(:base, "EL recurso no puede ser actualizado ya que ha sido reembolsado")
+       errors.add(:base, "El recurso no puede ser actualizado ya que ha sido reembolsado")
      elsif status_changed?(from: "refund_in_progress", to: "refunded")
        return true
      elsif status_changed?(from: "refund_in_progress")
-       errors.add(:base, "EL recurso no puede ser actualizado ya que hay un reembolso en progreso")
+       errors.add(:base, "El recurso no puede ser actualizado ya que hay un reembolso en progreso")
      end
    end
 end
