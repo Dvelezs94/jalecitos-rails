@@ -1,0 +1,45 @@
+class RunMarketingNotificationsWorker
+  include Sidekiq::Worker
+  sidekiq_options retry: false, dead: false
+  include PushFunctions
+  def perform()
+    @marketing_notifications = MarketingNotification.pending
+
+    @marketing_notifications.each do |mn|
+      @message = {
+        priority: 'high',
+        data: {
+            title: "Jalecitos",
+            message: mn.content
+        },
+        notification: {
+          title: "Jalecitos",
+          body:  mn.content,
+          click_action: (mn.url || "/"),
+          badge: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo_Jalecitos-01.png"
+        },
+        webpush: {
+          headers: {
+            Urgency: "high"
+          }
+       }
+      }
+      # check if the notification is valid or not
+      if mn.scheduled_at.future?
+        break
+      end
+
+      begin
+        p "running campaign: #{mn.name}"
+        mn.running!
+        User.active.each do |user|
+          createFirebasePush(user.id, @message)
+        end
+      rescue => e
+        p "failed due to: #{e}"
+        mn.failed!
+      end
+      mn.finished!
+    end
+  end
+end
