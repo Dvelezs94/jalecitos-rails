@@ -25,9 +25,9 @@ class OrdersController < ApplicationController
   before_action :verify_order_owner, only: [:complete]
   before_action :verify_owner_or_employee, only: [:refund]
   before_action :verify_charge_response, except: [:create]
-  before_action :verify_refund_state, only: [:refund]
+  before_action :check_if_can_refund, only: [:refund]
   before_action :check_if_request_banned, only: [:start, :request_complete, :complete, :refund]
-
+  before_action :check_if_order_refunded, only: [:start, :request_complete, :complete, :refund]
   #just create validators
   before_action :check_card_present, only: :create
   before_action :verify_availability, only: [:create]
@@ -105,7 +105,7 @@ class OrdersController < ApplicationController
           flash[:success] = "La orden ha finalizado"
           create_reviews(@order)
           OrderMailer.order_finished(@order).deliver
-          create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, "sales", @employee_review.id)
+          create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, nil, @employee_review.id)
           redirect_to root_path(:identifier => @employer_review.id)
         end # end of order.completed!
       else #not in progress
@@ -213,7 +213,7 @@ class OrdersController < ApplicationController
       end
     end
 
-    def cancel_state(state)
+    def invalid_state(state)
       state.each do |s|
         if @order.status == s
           flash[:error] = "No se puede completar la transacción"
@@ -229,18 +229,18 @@ class OrdersController < ApplicationController
       end
     end
 
-    def verify_refund_state
+    def check_if_can_refund
       # check if is not admin (it shoould be a normal user)
       if ! current_user.has_roles?(:admin)
         # Cancel transaction if the order is on any of these states
-        cancel_state(["completed", "disputed", "refunded"])
+        invalid_state(["completed", "disputed", "refund_in_progress", "refunded", "denied", "waiting_for_bank_approval"])
         #employer cant refund orders in progress
         if @order.in_progress? && (current_user == @order.employer)
-          cancel_state(["in_progress"])
+          invalid_state(["in_progress"])
         end
       #if i am the admin...
       else
-        cancel_state(["completed", "refunded"])
+        invalid_state(["completed", "refunded"])
       end
       #if something is wrong
       if flash[:error]
@@ -329,6 +329,13 @@ class OrdersController < ApplicationController
         redirect_to finance_path(table: "purchases")
       else
         redirect_to finance_path(table: "sales")
+      end
+    end
+
+    def check_if_order_refunded
+      if @order.refund_in_progress? || @order.refunded?
+        flash[:error] = "La orden no pudo ser actualizada"
+        redirect_to_table(@order)
       end
     end
 end

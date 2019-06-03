@@ -255,7 +255,7 @@ class User < ApplicationRecord
          end
        end
        self.requests.each do |r|
-         if r.status == "published"
+         if r.status == "published" || r.status == "in_progress"
            r.update(status: "closed")
          end
        end
@@ -272,7 +272,7 @@ class User < ApplicationRecord
          end
        end
        self.requests.each do |r|
-         if r.status == "published"
+         if r.status == "published" || r.status == "in_progress"
            r.update(status: "closed")
          end
        end

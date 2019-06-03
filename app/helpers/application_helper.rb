@@ -121,18 +121,14 @@ module ApplicationHelper
 
   def url_generator_helper (notification, object)
     case
+    when notification.query_url.present?
+      finance_path(:table => notification.query_url)
     when object.class == Request
-       request_path(object.slug)
+      request_path(object.slug)
     when object.class ==  Offer || object.class ==  Package
-      if notification.action == "ha finalizado" || notification.action == "Se ha finalizado"
-       root_path(:notification => notification.id)
-      else
-       finance_path(:table => notification.query_url)
-     end
+      root_path(:notification => notification.id)
     when object.class == Dispute
        order_dispute_path(object.order.uuid, object)
-    when object.class == Order
-       finance_path(:table => notification.query_url)
     when object.class == Reply
        order_dispute_path(object.dispute.order.uuid, object.dispute)
     end
@@ -173,6 +169,10 @@ module ApplicationHelper
         text += "el jale #{object.gig.title} por el paquete "+ I18n.t("gigs.packages.#{object.pack_type}")
       when notification.action == "Se ha finalizado" && object.class == Offer
         text += "el pedido #{object.request.title}"
+      when notification.action == "Se ha reembolsado" && object.class == Request
+        text += "el pedido <strong> #{object.title} </strong>"
+      when notification.action == "Se te reembolsará" && object.class == Request
+        text += "el pedido <strong> #{object.title} </strong> porque el recurso fue bloqueado"
       end
     end
     if html == true

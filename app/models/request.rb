@@ -6,6 +6,9 @@ class Request < ApplicationRecord
   include FilterRestrictions
   include GigRequestFunctions
   include BeforeDestroyFunctions
+  include OpenpayFunctions
+  include OpenpayHelper
+  include ApplicationHelper
   #search
   searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
   def search_data
@@ -45,8 +48,7 @@ class Request < ApplicationRecord
   validate :budget_options
   validate :invalid_change, on: :update
   validate :finished_request, on: :update
-  #trabajando en esto
-  #before_update :refund_money, if: :in_progress_to_banned
+  before_update :refund_money, if: :interrupting_request?
 
   #Custom fields
   mount_uploaders :images, RequestUploader
@@ -70,6 +72,24 @@ class Request < ApplicationRecord
       reports.each do |r|
         r.update!(status: "finished_resource") #the resource wasnt treated, the users finished it
       end
+    end
+  end
+
+  def interrupting_request?
+    if status_changed?(from: "in_progress", to: "banned") || status_changed?(from: "in_progress", to: "closed")
+      return true
+    end
+  end
+
+  def refund_money(notify_employee = true)
+    begin
+      init_openpay("charge")
+      active_order = self.active_order
+      try_to_refund(active_order)
+      create_notification(active_order.employee, active_order.employer, "Se ha reembolsado", self, "purchases")
+      create_notification(active_order.employer, active_order.employee, "Se ha reembolsado", self, "sales") if notify_employee
+    rescue # if openpay is down, the job will do it later
+      true
     end
   end
 
@@ -100,5 +120,22 @@ class Request < ApplicationRecord
     if ! options_for_budget.include?(self.budget)
       errors.add(:base, "No seleccionaste un presupuesto válido.")
     end
+  end
+
+  #a request can have many orders becuse payment can be denied
+  #the active order is the one that is hired (payment was successful), it can just exist one
+  def active_order
+    request_offers = self.offers
+    the_active_order = Order.where(employer_id: self.user_id, purchase: request_offers).where.not(status: ["denied", "waiting_for_bank_approval"]).limit(1).first
+  end
+  def active_order?
+    request_offers = self.offers
+    the_active_order = Order.where(employer_id: self.user_id, purchase: request_offers).where.not(status: ["denied", "waiting_for_bank_approval"]).limit(1).first
+    return the_active_order.present?
+  end
+
+  def all_orders
+    request_offers = self.offers
+    the_active_order = Order.where(employer_id: self.user_id, purchase: request_offers)
   end
 end
