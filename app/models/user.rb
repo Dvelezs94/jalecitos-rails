@@ -47,6 +47,7 @@ class User < ApplicationRecord
   validates :alias, format: { :with => /\A[a-zA-Z0-9\-\_]+\z/, message: "sólo puede contener caracteres alfanuméricos, guión y guión bajo." }
   validates :name, format: { :with => /\A[a-zA-Z\p{L}\p{M}\s]+\z/, message: "Sólo puede contener letras y espacios" }, :allow_blank => true #allow blank because on creation it doesnt have
   validates_presence_of :name, if: :name_changed?  #dont allow blank again if value is filled
+  validate :check_running_orders, if: :user_disabled?, on: :update
 
   # Create User Score and openpay user
   after_validation :create_user_score
@@ -206,6 +207,15 @@ class User < ApplicationRecord
      self.update(status: "active")
    end
 
+   def active_orders
+     Order.where("(employee_id=? OR employer_id=?)", self, self).where(status: ["pending", "in_progress", "disputed"])
+   end
+
+   def active_orders?
+     active_orders = Order.where("(employee_id=? OR employer_id=?)", self, self).where(status: ["pending", "in_progress", "disputed"])
+     active_orders.any?
+   end
+
    private
    def set_roles
      if self.roles_word.present?
@@ -293,5 +303,13 @@ class User < ApplicationRecord
       else
         true
       end
+   end
+
+   def user_disabled?
+     status_changed?(to: "disabled")
+   end
+
+   def check_running_orders
+     errors.add(:base, "No puedes cancelar tu cuenta ya que tienes órdenes activas") if self.active_orders?
    end
 end

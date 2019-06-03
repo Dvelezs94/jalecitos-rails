@@ -6,8 +6,6 @@ class Request < ApplicationRecord
   include FilterRestrictions
   include GigRequestFunctions
   include BeforeDestroyFunctions
-  include OpenpayFunctions
-  include OpenpayHelper
   include ApplicationHelper
   #search
   searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
@@ -81,13 +79,20 @@ class Request < ApplicationRecord
     end
   end
 
-  def refund_money(notify_employee = true)
+  def refund_money
     begin
-      init_openpay("charge")
       active_order = self.active_order
-      try_to_refund(active_order)
-      create_notification(active_order.employee, active_order.employer, "Se ha reembolsado", self, "purchases")
-      create_notification(active_order.employer, active_order.employee, "Se ha reembolsado", self, "sales") if notify_employee
+      create_notification(active_order.employee, active_order.employer, "Se te reembolsará", self, "purchases")
+      active_order.update(status: "refund_in_progress")
+    rescue # if openpay is down, the job will do it later
+      true
+    end
+  end
+
+  def refund_money_for_worker # no notification again
+    begin
+      active_order = self.active_order
+      active_order.update(status: "refund_in_progress")
     rescue # if openpay is down, the job will do it later
       true
     end
