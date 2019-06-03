@@ -167,3 +167,5 @@ gem 'chartkick', '~> 3.0', '>= 3.0.2'
 gem 'youtube_rails', '~> 1.2', '>= 1.2.2'
 #bot checking
 gem 'voight_kampff', '~> 1.1', '>= 1.1.3'
+# emojis
+gem 'rails_emoji_picker', '~> 0.1.5'
