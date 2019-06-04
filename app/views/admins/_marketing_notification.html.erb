@@ -4,4 +4,7 @@
   <td><%= marketing_notification.url %></td>
   <td><%= marketing_notification.scheduled_at %></td>
   <td><%= marketing_notification.status %></td>
+  <% if marketing_notification.pending? %>
+  <td><%= link_to "cancelar", marketing_notification_path(marketing_notification), method: :delete, data: {:confirm => "Seguro que quieres cancelar la campaña?" } %></td>
+  <% end %>
 </tr>

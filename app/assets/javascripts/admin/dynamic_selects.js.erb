@@ -1,0 +1,10 @@
+$(document).on('turbolinks:load', function() {
+  $("#row-key").change(function() {
+      var val = $(this).val();
+      if (val == "state_id") {
+          $("#row-value").html("<%= State.all.map { |st| "<option value=#{st.id}>#{st.name}</option>".html_safe }.join() %>");
+      } else if (val == "has_gigs") {
+          $("#row-value").html("<option value='false'>false</option><option value='true'>true</option>");
+      }
+  });
+});

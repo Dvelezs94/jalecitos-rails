@@ -26,10 +26,12 @@ class MarketingNotificationsController < ApplicationController
 
   private
     def marketing_notification_params
-      params.require(:marketing_notification).permit(:name, :content, :url, :scheduled_at)
+      marketing_params = params.require(:marketing_notification).permit(:name, :content, :url, :scheduled_at, :filters)
+      marketing_params[:filters] = eval(marketing_params[:filters])
+      marketing_params
     end
 
     def set_marketing_notification
-      @marketing_notification = MarketingNotification.find(params[:marketing_notification_id])
+      @marketing_notification = MarketingNotification.find(params[:id])
     end
 end
