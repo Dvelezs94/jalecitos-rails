@@ -2,6 +2,8 @@ class RunMarketingNotificationsWorker
   include Sidekiq::Worker
   sidekiq_options retry: false, dead: false
   include PushFunctions
+  include FilterMarketingCampaign
+  
   def perform()
     @marketing_notifications = MarketingNotification.pending
 
@@ -32,7 +34,7 @@ class RunMarketingNotificationsWorker
       begin
         p "running campaign: #{mn.name}"
         mn.running!
-        User.active.each do |user|
+        get_users(mn.filters).each do |user|
           p "sending campaign to: #{user.email}"
           createFirebasePush(user.id, @message)
         end
