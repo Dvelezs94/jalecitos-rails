@@ -265,33 +265,49 @@ class User < ApplicationRecord
          end
        end
        self.requests.each do |r|
-         if r.status == "published" || r.status == "in_progress"
-           r.update(status: "closed")
+         r.with_lock do
+           if r.status == "published" || r.status == "in_progress"
+             r.update(status: "closed")
+           end
          end
        end
-       my_offers = Offer.includes(:request).where(user: self)
-       my_offers.each do |o|
-         if o.request.status == "published"
-           o.destroy
-         end
-       end
-     when "disabled"
+       # my_offers = Offer.includes(:request).where(user: self)
+       # my_offers.each do |o|
+       #   o.with_lock do
+       #     if o.request.status == "published"
+       #       begin
+       #        o.destroy
+       #      rescue #offer cant be destroyed because someone hired it
+       #        true
+       #       end
+       #     end
+       #   end
+       # end
+     when "disabled" #cant disale if has active orders
        self.gigs.each do |g|
          if g.status != "banned"
            g.update(status: "draft")
          end
        end
        self.requests.each do |r|
-         if r.status == "published" || r.status == "in_progress"
-           r.update(status: "closed")
-         end
+         r.with_lock do
+           if r.status == "published"
+             r.update(status: "closed")
+           end
+        end
        end
-       my_offers = Offer.includes(:request).where(user: self)
-       my_offers.each do |o|
-         if o.request.status == "published"
-           o.destroy
-         end
-       end
+       # my_offers = Offer.includes(:request).where(user: self)
+       # my_offers.each do |o|
+       #  o.with_lock do
+       #     if o.request.status == "published"
+       #       begin
+       #        o.destroy
+       #      rescue #offer cant be destroyed because someone hired it
+       #        true
+       #       end
+       #     end
+       #  end
+       # end
      end
    end
 

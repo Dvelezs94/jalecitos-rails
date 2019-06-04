@@ -169,10 +169,10 @@ module ApplicationHelper
         text += "el pedido <strong>#{object.request.title}</strong>"
       when notification.action == "Se te ha reembolsado" && object.class == Order
         text += "la orden <strong>#{object.uuid}</strong> por la cantidad de <strong>$#{object.total} MXN</strong>. Ten en cuenta que puede tardar hasta 72 hrs para aparecer en tu cuenta bancaria."
-      when notification.action == "Se ha reembolsado" && object.class == Order
+      when (notification.action == "Se ha reembolsado" || notification.action == "Se te reembolsará" ) && object.class == Order
         text += "la orden <strong>#{object.uuid}</strong>"
-      when notification.action == "Se te reembolsará" && object.class == Request #request banned or closed
-        text += "el pedido <strong>#{object.title}</strong>"
+      when notification.action == "El talento" && object.class == Order
+        text += " ya no se encuentra disponible, se te reembolsará la orden <strong>#{object.uuid}</strong>, intenta contratar a alguien más"
       end
     end
     if html == true

@@ -20,7 +20,7 @@ class RequestsController < ApplicationController
     if params[:page]
       get_other_offers
     else
-      @hires_open = (@request.employee.nil?) ? true : false
+      # @hires_open = (@request.employee.nil?) ? true : false
       if @request.offers_count > 0 #search offers is there some
         get_other_offers
        if @other_offers.length < @request.offers_count #that means the user has an offer
@@ -134,8 +134,12 @@ class RequestsController < ApplicationController
     end
 
     def check_if_already_hired
+      if @request.employee.present?
+        @already_hired = true
+        return true
+      end
       if current_user && @request.user == current_user
-        my_request_hires = current_user.purchases.includes(:purchase).where(purchase_type: "Offer").where.not(status: "denied")
+        my_request_hires = current_user.purchases.includes(:purchase).where(purchase_type: "Offer").where.not(status: ["denied", "refund_in_progress", "refunded"])
         my_request_hires.each do |mrh|
           if mrh.purchase.request == @request
             @already_hired = true

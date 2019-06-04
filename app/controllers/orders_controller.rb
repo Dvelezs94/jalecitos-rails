@@ -117,15 +117,25 @@ class OrdersController < ApplicationController
 
 
   def refund
-    @success = @order.update(status: "refund_in_progress")
-    if @success
-      if current_user == @order.employer
-        flash[:success] = "La orden está en proceso de reembolso, recibirás un correo cuando la orden ya haya sido reembolsada"
+    @order.with_lock do
+      if @order.purchase_type == "Offer"
+        request = @order.purchase.request
+        request.with_lock do
+          @success = request.update(status: "closed", passed_active_order: @order) #refund and also closes request, its fast to pass the order than search it in model, this triggers request.refund_money
+        end
+      else
+        create_notification(@order.employee, @order.employer, "Se te reembolsará", @order, "purchases")
+        @success = @order.update(status: "refund_in_progress") #refund gig
       end
-    else
-      flash[:error] = @order.errors.full_messages.first
+      if @success
+        if current_user == @order.employer
+          flash[:success] = "La orden está en proceso de reembolso, recibirás un correo cuando la orden ya haya sido reembolsada"
+        end
+      else
+        flash[:error] = @order.errors.full_messages.first
+      end
+      redirect_to finance_path(:table => "purchases")
     end
-    redirect_to finance_path(:table => "purchases")
   end
 
   private
