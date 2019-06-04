@@ -6,6 +6,9 @@
 <% elsif @treated_report %>
   <% flash[:notice] = "Este recurso ya había sido tratado" %>
   location.reload();
+<% elsif @openpay_error %>
+  <% flash[:error] = @openpay_error %>
+  location.reload();
 <% elsif @success %>
   <% flash[:success] = "se ha bloqueado el recurso" %>
   location.reload();

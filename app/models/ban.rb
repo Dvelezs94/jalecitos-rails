@@ -9,13 +9,20 @@ class Ban < ApplicationRecord
   validates_presence_of :cause
   #when create a ban, check if object was already banned...
   validates :baneable_id, :uniqueness => { :scope => [:baneable_type, :status] }, on: :create
-  after_validation :ban_the_stuff, on: :create
   after_commit :close_related_reports, on: :create
   before_update :unban_stuff, if: :status_changed?
+  validate :ban_the_stuff, on: :create
 
   private
   def ban_the_stuff
-    baneable.banned!
+    #used to catch error if an order of a request cant be refunded because openpay error, so the request cant be updated
+    #gig can be banned without problems
+    #user is banned and the requests that fails do it silently
+    begin
+      baneable.banned!
+    rescue
+      errors.add(:base, baneable.errors.full_messages.first)
+    end
   end
 
   def unban_stuff

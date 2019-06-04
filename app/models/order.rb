@@ -86,7 +86,7 @@ class Order < ApplicationRecord
          self.response_refund_id = response["id"]
          self.dispute.update(status: "refunded") if self.dispute
        rescue
-        errors.add(:base, "Ocurrió un error al intentar de reembolsar la orden") #openpay connection error
+        errors.add(:base, "Ocurrió un error al intentar conectar con el servidor de pagos, por favor, inténtalo más tarde") #openpay connection error
        end
      end
    end

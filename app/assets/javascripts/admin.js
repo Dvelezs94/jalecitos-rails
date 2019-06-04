@@ -10,8 +10,6 @@
 
 //= require gritter
 
-//= require lazyload
-
 //= require jquery.validate
 
 //= require Chart.bundle
