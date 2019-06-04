@@ -45,6 +45,10 @@ class BansController < ApplicationController
   def set_report #these are the admitted models for ban
     if params[:report_id].present?
       @report = Report.find_by(status: "open", id: params[:report_id].to_i)
+      if !@report #report was treated and not open now
+        @treated_report = true
+        render "create"
+      end
     else
       head :no_content
     end

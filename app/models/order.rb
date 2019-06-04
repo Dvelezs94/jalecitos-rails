@@ -73,7 +73,7 @@ class Order < ApplicationRecord
    end
 
    def try_to_refund
-     if !(status_changed?(from: "pending") || status_changed?(from: "in_progress"))
+     if !( status_changed?(from: "pending") || status_changed?(from: "in_progress") || status_changed?(from: "disputed") )
        errors.add(:base, "El recurso no puede ser reembolsado por su estado actual")
      else
        begin
@@ -84,6 +84,7 @@ class Order < ApplicationRecord
          }
          response = @charge.refund(self.response_order_id ,request_hash, self.employer.openpay_id)
          self.response_refund_id = response["id"]
+         self.dispute.update(status: "refunded") if self.dispute
        rescue
         errors.add(:base, "Ocurrió un error al intentar de reembolsar la orden") #openpay connection error
        end
