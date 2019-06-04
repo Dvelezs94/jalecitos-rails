@@ -12,25 +12,23 @@ class Offer < ApplicationRecord
   #numericallity also allows its prescence unless if allow nil
   validates :price, numericality: { greater_than_or_equal_to: 100, less_than_or_equal_to: 10000 }
   validates :hours, numericality: { only_integer: true,   greater_than_or_equal_to: 1, allow_nil: true }
-  validate :has_order, on: :update
+  validate :cant_edit, if: :has_order, on: :update
 
   def description=(val)
     write_attribute(:description, no_multi_spaces(val.strip))
   end
 
-  def has_order
-    if offer_has_order
-      errors.add(:base, "No puedes editar tu oferta ya que se está validando un pago para ella")
-    end
+  def cant_edit
+    errors.add(:base, "No puedes editar tu oferta ya que pertenece a una orden")
   end
 
   def destroy
-    raise "No puedes borrar tu oferta ya que se está validando un pago para ella" if offer_has_order #cant erase offer because maybe its being validating payment or working with that order.
+    raise "No puedes borrar tu oferta ya que pertenece a una orden" if has_order #cant erase offer because maybe its being validating payment or working with that order.
     # ... ok, go ahead and destroy
     super
   end
   private
-  def offer_has_order
+  def has_order
     order = Order.where(purchase_type: "Offer", purchase_id: self.id).where.not(status: "denied").limit(1).first
     return order.present?
   end

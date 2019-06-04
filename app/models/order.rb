@@ -56,10 +56,15 @@ class Order < ApplicationRecord
    def just_one_hire_in_request
      #just can try to hire one offer at time
      if self.purchase_type == "Offer"
-       my_request_hires = Order.includes(purchase: :request).where(employer: self.employer, purchase_type: "Offer").where.not(status: "denied")
-       my_request_hires.each do |mrh|
-        errors.add(:base, "Sólo puedes contratar a un talento a la vez ") if mrh.purchase.request == self.purchase.request #if the usas has already hired someone on that request, deny the hire
-       end
+       request = self.purchase.request
+       if request.employee.present?
+         errors.add(:base, "Sólo puedes contratar a un talento a la vez")
+       else #maybe a payment is in process, so i have to consider it
+         my_request_hires = Order.includes(purchase: :request).where(employer: self.employer, purchase_type: "Offer").where.not(status: ["denied", "refund_in_progress", "refunded"])
+         my_request_hires.each do |mrh|
+          errors.add(:base, "Sólo puedes contratar a un talento a la vez") if mrh.purchase.request == self.purchase.request #if the usas has already hired someone on that request, deny the hire
+         end
+      end
      end
    end
 

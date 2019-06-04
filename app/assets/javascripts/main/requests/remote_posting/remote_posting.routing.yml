@@ -1,0 +1,6 @@
+insert_post:
+  path: /remote_posting
+  defaults:
+    _controller: 'Drupal\remote_posting\Controller\RPA::main'
+  requirements: 
+    _permission: 'access content'

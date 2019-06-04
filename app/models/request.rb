@@ -1,4 +1,5 @@
 class Request < ApplicationRecord
+  attr_accessor :passed_active_order, :payment_success_and_request_banned_or_closed_or_employer_inactive, :payment_success_and_employee_not_active
   #includes
   include TagRestrictions
   include RequestsHelper
@@ -47,7 +48,6 @@ class Request < ApplicationRecord
   validate :invalid_change, on: :update
   validate :finished_request, on: :update
   before_update :refund_money, if: :interrupting_request?
-
   #Custom fields
   mount_uploaders :images, RequestUploader
   validates :images, length: {
@@ -74,15 +74,17 @@ class Request < ApplicationRecord
   end
 
   def interrupting_request?
-    if status_changed?(from: "in_progress", to: "banned") || status_changed?(from: "in_progress", to: "closed")
-      return true
-    end
+    status_changed?(from: "in_progress", to: "banned") || status_changed?(from: "in_progress", to: "closed") || payment_success_and_request_banned_or_closed_or_employer_inactive || payment_success_and_employee_not_active
   end
 
   def refund_money
     begin
-      active_order = self.active_order
-      create_notification(active_order.employee, active_order.employer, "Se te reembolsará", self, "purchases")
+      active_order = passed_active_order || self.active_order
+      if payment_success_and_employee_not_active
+        create_notification(active_order.employee, active_order.employer, "El talento", active_order, "purchases")
+      else #request banned, closed, or payment success but request banned or closed, or some user refunded or employer inactive
+        create_notification(active_order.employee, active_order.employer, "Se te reembolsará", active_order, "purchases")
+      end
       active_order.update(status: "refund_in_progress")
     rescue # if openpay is down, the job will do it later
       true
