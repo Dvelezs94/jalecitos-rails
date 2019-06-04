@@ -233,7 +233,7 @@ class OrdersController < ApplicationController
 
     def verify_order_limit
       if current_user.purchases.pending.count >= 5
-        flash[:error] = "No puedes tener más de 5 jales pendientes"
+        flash[:error] = "No puedes tener más de 5 compras pendientes"
         redirect_to finance_path(:table => "purchases")
       end
     end

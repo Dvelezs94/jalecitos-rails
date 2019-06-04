@@ -60,7 +60,7 @@ class User < ApplicationRecord
   before_update :verify_gigs, :if => :verified_changed?
   before_update :set_roles
   #when user is banned, unbanned or disabled...
-  before_update :enable_disable_stuff, :if => :status_changed?
+  after_validation :enable_disable_stuff, :if => :status_changed? #this is after updates so dont refund nothing and reverse everything is some validation fails, it would be a big trouble because refund will send to openpay the request and if validation fails then the status of the order will reset to in progress, for example, and refund was requested... trouble
 
   # Associations
   # User Score
@@ -267,7 +267,7 @@ class User < ApplicationRecord
        self.requests.each do |r|
          r.with_lock do
            if r.status == "published" || r.status == "in_progress"
-             r.update(status: "closed")
+             r.update(status: "closed") #if fails dont raise error because if openpay error, job will ban it later
            end
          end
        end
@@ -292,7 +292,7 @@ class User < ApplicationRecord
        self.requests.each do |r|
          r.with_lock do
            if r.status == "published"
-             r.update(status: "closed")
+             r.update(status: "closed") #if fails dont raise error because if openpay error, job will ban it later
            end
         end
        end

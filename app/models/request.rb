@@ -80,8 +80,7 @@ class Request < ApplicationRecord
   def refund_money
     begin
       active_order = passed_active_order || self.active_order
-      @success = active_order.update(status: "refund_in_progress")
-      raise 'Openpay connection error' if ! @success
+      active_order.update!(status: "refund_in_progress") # i want to trigger error if fails so i used "!"
       #the notification of will refund is after the refund because no sense of sending it if refund fails... i dont know is the refund notification can arrive first
       if payment_success_and_employee_not_active
         create_notification(active_order.employee, active_order.employer, "El talento", active_order, "purchases")

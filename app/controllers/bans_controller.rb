@@ -21,12 +21,15 @@ class BansController < ApplicationController
 
   def create
     ban = Ban.new(ban_params)
-    if ban.valid?
-      @success = ban.save
-    elsif ban.errors.full_messages.first.include?("Baneable") #the resource is already banned
-      old_ban = Ban.find_by(baneable: @report.reportable, status: "banned")
-      @report.update!( ban: old_ban, status: "accepted" )
-      @already_banned = true
+    @success = ban.save
+    if ! @success
+      if ban.errors.full_messages.first.include?("Baneable") #the resource is already banned
+        old_ban = Ban.find_by(baneable: @report.reportable, status: "banned")
+        @report.update!( ban: old_ban, status: "accepted" )
+        @already_banned = true
+      else #openpay error
+        @openpay_error = ban.errors.full_messages.first
+      end
     end
   end
 
