@@ -110,9 +110,9 @@ class Request < ApplicationRecord
     if status_changed?(from: "closed", to: "banned")
       errors.add(:base, "El pedido ya se ha cerrado antes")
     end
-    if status_changed?(from: "disputed", to: "banned")
-      errors.add(:base, "El pedido ya está en disputa")
-    end
+    # if status_changed?(from: "disputed", to: "banned")
+    #   errors.add(:base, "El pedido ya está en disputa")
+    # end
   end
 
   def description=(val)

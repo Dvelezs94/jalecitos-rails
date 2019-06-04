@@ -207,7 +207,8 @@ class OrdersController < ApplicationController
     end
 
     def verify_owner_or_employee
-      if ! (@order.employer != current_user ||  @order.employee != current_user)
+      #normal users, except admin and owners can pass this
+      if @order.employer != current_user && @order.employee != current_user && ! current_user.has_role?(:admin)
         flash[:error] = "No tienes permiso para acceder aquí"
         redirect_to root_path
         return
