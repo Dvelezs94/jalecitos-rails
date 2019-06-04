@@ -47,7 +47,7 @@ class Request < ApplicationRecord
   validate :budget_options
   validate :invalid_change, on: :update
   validate :finished_request, on: :update
-  before_update :refund_money, if: :interrupting_request?
+  validate :refund_money, if: :interrupting_request?, on: :update
   #Custom fields
   mount_uploaders :images, RequestUploader
   validates :images, length: {
@@ -80,14 +80,16 @@ class Request < ApplicationRecord
   def refund_money
     begin
       active_order = passed_active_order || self.active_order
+      @success = active_order.update(status: "refund_in_progress")
+      raise 'Openpay connection error' if ! @success
+      #the notification of will refund is after the refund because no sense of sending it if refund fails... i dont know is the refund notification can arrive first
       if payment_success_and_employee_not_active
         create_notification(active_order.employee, active_order.employer, "El talento", active_order, "purchases")
       else #request banned, closed, or payment success but request banned or closed, or some user refunded or employer inactive
         create_notification(active_order.employee, active_order.employer, "Se te reembolsará", active_order, "purchases")
       end
-      active_order.update(status: "refund_in_progress")
     rescue # if openpay is down, the job will do it later
-      true
+      errors.add(:base, active_order.errors.full_messages.first) #openpay connection error
     end
   end
 

@@ -60,8 +60,8 @@ class OrdersController < ApplicationController
       @order.completed_at = Time.now.in_time_zone.strftime("%Y-%m-%d %H:%M:%S")
       if @order.save
         flash[:success] = "La orden se actualizó correctamente"
-        OrderMailer.order_request_finish(@order).deliver
         create_notification(@order.employee, @order.employer, "solicitó finalizar", @order.purchase, "purchases")
+        OrderMailer.order_request_finish(@order).deliver
         # Queue job to finish the order in 72 hours
         if ENV.fetch("RAILS_ENV") == "production"
           FinishOrderWorker.perform_in(72.hours, @order.id)
@@ -77,8 +77,8 @@ class OrdersController < ApplicationController
   def start
       if @order.in_progress!
         flash[:success] = "La orden está en progreso"
-        OrderMailer.order_started(@order).deliver
         create_notification(@order.employee, @order.employer, "ha comenzado", @order.purchase, "purchases")
+        OrderMailer.order_started(@order).deliver
       else
         flash[:error] = "Hubo un error en tu solicitud"
       end
@@ -124,15 +124,15 @@ class OrdersController < ApplicationController
           @success = request.update(status: "closed", passed_active_order: @order) #refund and also closes request, its fast to pass the order than search it in model, this triggers request.refund_money
         end
       else
-        create_notification(@order.employee, @order.employer, "Se te reembolsará", @order, "purchases")
         @success = @order.update(status: "refund_in_progress") #refund gig
+        create_notification(@order.employee, @order.employer, "Se te reembolsará", @order, "purchases") if @success # if openpay connected!!
       end
       if @success
         if current_user == @order.employer
           flash[:success] = "La orden está en proceso de reembolso, recibirás un correo cuando la orden ya haya sido reembolsada"
         end
       else
-        flash[:error] = @order.errors.full_messages.first
+        flash[:error] = (request.present?)? request.errors.full_messages.first : @order.errors.full_messages.first
       end
       redirect_to finance_path(:table => "purchases")
     end
