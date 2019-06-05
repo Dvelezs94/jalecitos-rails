@@ -1,0 +1,68 @@
+<h2>Notificaciones de Marketing</h2>
+<div class="table-responsive paginator_container">
+    <%= form_for @marketing_notification do |f| %>
+      <div class="form-group">
+        <label for="marketing_notification_name">Nombre de la campaña</label>
+        <%= f.text_field :name, class: "form-control", required: true %>
+      </div>
+      <div class="form-group">
+        <label for="marketing_notification_content">Mensaje</label>
+        <p class="emoji-picker-container">
+          <%= f.text_field :content, class: "form-control", data: { emojiable: true }, required: true  %>
+        </p>
+      </div>
+      <div class="form-group">
+        <label for="marketing_notification_content">URL (Opcional)</label>
+          <%= f.text_field :url, class: "form-control"  %>
+      </div>
+      <div class="form-group">
+        <label for="marketing_notification_scheculed_at">Agendar para..</label>
+        <%= f.datetime_select :scheduled_at %>
+        <br>
+      </div>
+      <label>Filtros</label>
+      <div class="form-group">
+        <%= f.text_field :filters, hidden: true, value: '{}'  %>
+        <select id="row-key">
+            <option value=""></option>
+            <option value="state_id">state</option>
+            <!-- <option value="has_gigs">has gigs</option> -->
+        </select>
+        <!-- this gets updated dynamically on dynamic_selects -->
+        <select id="row-value">
+            <option value="">-- select one -- </option>
+        </select>
+    	  <input type="button" class="add-row" value="Add Row">
+        <table id="filters">
+          <thead>
+          <tr>
+              <th></th>
+              <th>Key</th>
+              <th>Value</th>
+          </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+        <button type="button" class="delete-row">Delete Row</button>
+      </div>
+        <%= f.submit "Create", class: "btn btn-primary" %>
+    <% end %>
+
+  <table class="admin-table table table-striped table-sm ban">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Contenido</th>
+        <th>url</th>
+        <th>Agendado para la fecha</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody class="paginated_tickets">
+      <%= render partial: 'admins/marketing_notification', collection: @marketing_notifications %>
+    </tbody>
+  </table>
+  <%= paginate @marketing_notifications, param_name: :marketing_notification,
+   :params => {:current => :marketing_notification} %>
+</div>

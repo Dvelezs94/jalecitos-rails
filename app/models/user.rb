@@ -69,8 +69,8 @@ class User < ApplicationRecord
   belongs_to :city, optional: true
   # ally code in case it has one
   belongs_to :ally_code, optional: true
-  #after_update :decrement_ally_code_times_left, :if => :ally_code_id_changed?
-  before_save :decrement_ally_code_times_left, if: :will_save_change_to_ally_code_id?
+
+  before_save :decrement_ally_code_times_left, :if => :ally_code_id_changed?
   # reports
   has_many :reports
   # Ticket system
