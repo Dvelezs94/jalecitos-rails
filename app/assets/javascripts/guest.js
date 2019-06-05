@@ -15,8 +15,6 @@
 
 //= require jquery.nicescroll.js
 
-//= require lazyload
-
 //= require_tree ./main
 
 //= require_tree ./guest

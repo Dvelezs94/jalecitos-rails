@@ -25,8 +25,8 @@ class FinishOrderWorker
           openpay_tax(@order, @fee)
           # Create reviews and notifications
           create_reviews(@order)
-          create_notification(@order.employer, @order.employee, "Se ha finalizado", @order.purchase, "sales", @employee_review.id)
-          create_notification(@order.employee, @order.employer, "Se ha finalizado", @order.purchase, "purchases", @employer_review.id)
+          create_notification(@order.employer, @order.employee, "Se ha finalizado", @order.purchase, nil, @employee_review.id)
+          create_notification(@order.employee, @order.employer, "Se ha finalizado", @order.purchase, nil, @employer_review.id)
           # send email notifying the user
           OrderMailer.completed_after_72_hours(@order).deliver
         rescue

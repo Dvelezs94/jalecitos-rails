@@ -11,10 +11,11 @@ class NotifyRefundWorker
         #change dispute status to refunded
         @order.dispute.refunded!
       end
-      if @order.purchase_type == "Offer"
-        @order.purchase.request.closed!
-      end
     end
+    #on worker of payment success if the request is banned, the employee doesnt recieve notification of being hired, because it inmediately gets refunded, so when refunded is successful, employee doesnt need to know that
+    employee_has_hire_notification = Notification.find_by(notifiable: @order.purchase, recipient: @order.employee).present?
+    create_notification(@order.employee, @order.employer, "Se te ha reembolsado", @order, "purchases")
+    create_notification(@order.employer, @order.employee, "Se ha reembolsado", @order, "sales") if employee_has_hire_notification
     ChargesMailer.charge_refunded(@order).deliver
   end
 end

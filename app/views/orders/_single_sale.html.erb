@@ -6,7 +6,7 @@
       <% if single_sale.purchase_type == "Package"%>
       <p><%= link_to(single_sale.purchase.gig.title, gig_path(city_slug(single_sale.purchase.gig.city),single_sale.purchase.gig.slug), class: "order-title") rescue "Jale Eliminado" %></p>
       <% else %>
-      <p><%= link_to single_sale.purchase.request.title, request_path(single_sale.purchase.request.slug), class: "order-title" rescue "Orden Eliminada"%>.</p>
+      <p><%= link_to single_sale.purchase.request.title, request_path(single_sale.purchase.request.slug), class: "order-title" rescue "Orden Eliminada"%></p>
       <% end %>
    </div>
 

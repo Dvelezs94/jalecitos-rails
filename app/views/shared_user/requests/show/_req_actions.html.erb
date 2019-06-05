@@ -6,10 +6,10 @@
   <div class="req_actions req_actions_desktop">
 <% end %>
   <%= link_to icon("fas","share-alt", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
-  <% if user_signed_in? && (@request.user == current_user) %>
+  <% if user_signed_in? && @request.user == current_user && @request.published? %>
     <%= link_to icon("fas","pen", class: "fa-lg gig_action_icon", title: "Editar"), edit_request_path(@request) %>
     <%= link_to icon("fas","trash", class: "fa-lg gig_action_icon", title: "Eliminar"), request_path(@request), method: :delete, :data => {:confirm => 'Confirma que quieres borrar este pedido'}  %>
-  <% elsif user_signed_in?%>
+  <% elsif user_signed_in? && @request.user != current_user%>
     <%= link_to icon("fa","flag", title: "Reportar"), {}, id: "reportrequestbtn" %>
   <% end %>
 </div>

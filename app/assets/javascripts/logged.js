@@ -26,8 +26,6 @@
 
 //= require jquery-fileupload/basic
 
-//= require lazyload
-
 //= require_tree ./main
 
 //= require_tree ./logged
