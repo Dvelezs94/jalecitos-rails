@@ -61,6 +61,12 @@ module OpenpayFunctions
   end
 
   def create_order_failed order, e
+    if defined?(e.error_code)
+      # next transactions will be marked for 3d secure for 3 days
+      if e.error_code == 3001 || e.error_code == 3005
+        enable_secure_transactions
+      end
+    end
     order.update(response_order_id: "failed")
     order.denied!
     flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
