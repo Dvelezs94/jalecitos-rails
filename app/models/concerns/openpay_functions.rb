@@ -67,8 +67,7 @@ module OpenpayFunctions
         enable_secure_transactions
       end
     end
-    order.update(response_order_id: "failed")
-    order.denied!
+    order.update(response_order_id: "failed", status: "denied")
     flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
     redirect_to finance_path(:table => "purchases")
   end

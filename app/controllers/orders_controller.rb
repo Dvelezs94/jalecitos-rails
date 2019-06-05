@@ -40,9 +40,8 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.payout_left = reverse_price_calc(@order.total)
     if @order.save
-      #prepare charge
+      min_3d_amount = 2999
       request_hash = the_request_hash(min_3d_amount)
-      #create charge on openpay
       begin
         create_order(@order, request_hash, min_3d_amount)
       rescue OpenpayTransactionException => e
@@ -165,17 +164,6 @@ class OrdersController < ApplicationController
         end
         parameters
     end
-
-    def secure_transaction?(order_total)
-      # minimum amount to require 3d secure
-      min_3d_amount = 2999
-      if order_total > min_3d_amount || current_user.secure_transaction
-        true
-      else
-        false
-      end
-    end
-
     # Enable 3d secure transactions
     def enable_secure_transactions
       if current_user.secure_transaction
