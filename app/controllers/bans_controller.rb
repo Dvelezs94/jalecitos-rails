@@ -27,7 +27,7 @@ class BansController < ApplicationController
         old_ban = Ban.find_by(baneable: @report.reportable, status: "banned")
         @report.update!( ban: old_ban, status: "accepted" )
         @already_banned = true
-      else #openpay error
+      else
         @unknown_error = ban.errors.full_messages.first
       end
     end
