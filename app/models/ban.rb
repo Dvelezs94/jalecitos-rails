@@ -15,9 +15,6 @@ class Ban < ApplicationRecord
 
   private
   def ban_the_stuff
-    #used to catch error if an order of a request cant be refunded because openpay error, so the request cant be updated
-    #gig can be banned without problems
-    #user is banned and the requests that fails do it silently
     begin
       baneable.banned!
     rescue

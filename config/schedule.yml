@@ -2,3 +2,7 @@ generate_sitemap_job:
   # cron: "*/1 * * * *"
   cron: "0 1 * * *"
   class: "RegenerateSitemapWorker"
+pending_refunds_job:
+  # cron: "*/1 * * * *"
+  cron: "0 2 * * *"
+  class: "PendingRefundsWorker"
