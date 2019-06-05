@@ -3,13 +3,16 @@ class OffersController < ApplicationController
   include OffersHelper
   include OpenpayHelper
   include MoneyHelper
+  include BannedFunctions
   before_action :authenticate_user!
+  before_action :redirect_if_user_banned, only: [:new, :create]
   before_action :set_request
   before_action :allow_owner, only: :hire
   before_action :set_offer, only: [:edit, :update, :destroy, :hire]
   access all: [:show], user: :all
-  before_action :check_banned, only: :create
+  before_action :check_req_published, only: [:new, :create, :edit, :update, :destroy, :hire]
   before_action :check_offer_ownership, only:[:edit, :update, :destroy]
+  before_action :redirect_if_offer_has_order, only: [:edit]
   before_action :check_if_offered, only: :create
   before_action :deny_owner, only: [:new, :create]
   before_action :check_if_already_hired
@@ -55,8 +58,12 @@ class OffersController < ApplicationController
 
   # DELETE /offers/1
   def destroy
+    begin
     @offer.destroy
     redirect_to request_path(params[:request_id]), notice: 'Oferta destruida.'
+    rescue => e
+      redirect_to request_path(params[:request_id]), notice: e
+    end
   end
 
   private
@@ -97,9 +104,10 @@ class OffersController < ApplicationController
       end
     end
 
-    def check_banned
-      if @request.banned?
-        redirect_to root_path, notice: "No puedes ofertar en este pedido"
+    def check_req_published
+      if ! @request.published?
+        flash[:notice] = "Este recurso ya no está disponible"
+        redirect_to root_path #cant redirect back because the request is also banned, so a loop is triggered
         return
       end
     end
@@ -124,4 +132,10 @@ class OffersController < ApplicationController
         return
       end
     end
+
+    def redirect_if_offer_has_order
+      order = Order.where(purchase: @offer).where.not(status: "denied").limit(1).first
+      redirect_to request_path(@request), notice: "No puedes editar tu oferta ya que se está validando un pago para ella" if order.present?
+    end
+
 end

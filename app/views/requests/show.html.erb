@@ -29,7 +29,7 @@
 
 
                      <div class="Postularme-btn">
-                     <% if @hires_open %>
+                     <% if !@already_hired %>
                        <% if current_user != @request.user && @my_offer.present?  %>
                         <p class="text-muted">Tu oferta está postulada</p>
                        <% elsif current_user != @request.user %>
@@ -59,13 +59,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="paginator-container fernanda-content">
+                <div class="paginator-container other_offers_container">
                     <div class="paginated-other_offers fernanda-user-box">
                         <%= render( @my_offer ) if @my_offer.present? %>
                         <%= render( @other_offers ) if @other_offers.present? %>
-                      <% if @my_offer.nil? && @other_offers.nil? %>
-                        No hay postulados
-                      <% end %>
+                      <%# if (@my_offer.nil? && @other_offers.nil?) %>
+                        <%# No hay postulados %>
+                      <%# end %>
                     </div>
                     <%= paginate @other_offers if @other_offers.present? %>
                 </div>

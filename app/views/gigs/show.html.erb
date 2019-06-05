@@ -1,5 +1,5 @@
 <div class="top-gig innerpages3-area">
-  <% if @gig.gig_packages.none? || (@gig.draft? && @gig.gig_packages.any?) %>
+  <% if current_user && current_user.active? && (@gig.gig_packages.none? || @gig.draft?) %>
   <div class="alert alert-warning alert-dismissible fade show text-center" role="alert" style="margin-bottom:0 !important;">
     <% if @gig.gig_packages.none? %>
       <%= link_to("Agrega paquetes al Jale para publicarlo.", edit_gig_path(city_slug(@gig.city),@gig))%>

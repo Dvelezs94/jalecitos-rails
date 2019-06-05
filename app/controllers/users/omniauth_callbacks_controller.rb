@@ -40,7 +40,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     # if the user already exists, just log in
     elsif @user.persisted?
-      if check_if_banned_or_disabled(@user)
+      if check_if_banned(@user)
         redirect_to cookies.permanent.signed[:mb].present? ? mobile_sign_in_path : root_path
       else
         log_in_and_remember(@user)
@@ -54,11 +54,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
   private
   #this is for fb and google accounts
-  def check_if_banned_or_disabled(user)
-    if user.banned?
-      flash[:error] = "Esta cuenta está bloqueada, favor de comunicarte con soporte para más información"
-      return true
-    elsif user.disabled?
+  # def check_if_banned_or_disabled(user)
+  #   if user.banned?
+  #     flash[:error] = "Esta cuenta está bloqueada, favor de comunicarte con soporte para más información"
+  #     return true
+  #   elsif user.disabled?
+  #     flash[:error] = "Has deshabilitado esta cuenta, favor de comunicarte con soporte para más información "
+  #     return true
+  #   end
+  # end
+
+  def check_if_banned(user)
+    if user.disabled?
       flash[:error] = "Has deshabilitado esta cuenta, favor de comunicarte con soporte para más información "
       return true
     end
