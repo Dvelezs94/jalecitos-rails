@@ -267,7 +267,7 @@ class User < ApplicationRecord
        self.requests.each do |r|
          r.with_lock do
            if r.status == "published" || r.status == "in_progress"
-             r.update(status: "closed") #if fails dont raise error because if openpay error, job will ban it later
+             r.update(status: "closed")
            end
          end
        end
@@ -292,7 +292,7 @@ class User < ApplicationRecord
        self.requests.each do |r|
          r.with_lock do
            if r.status == "published"
-             r.update(status: "closed") #if fails dont raise error because if openpay error, job will ban it later
+             r.update(status: "closed")
            end
         end
        end

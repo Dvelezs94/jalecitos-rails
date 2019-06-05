@@ -17,6 +17,7 @@ class Request < ApplicationRecord
       description: no_special_chars(description),
       tags: tag_list.join(" "),
       city_id: city_id,
+      state_id: (city_id.present?)? city.state_id : nil,
       category_id: category_id,
       status: status,
       user_id: user_id,
@@ -78,28 +79,25 @@ class Request < ApplicationRecord
   end
 
   def refund_money
-    begin
       active_order = passed_active_order || self.active_order
-      active_order.update!(status: "refund_in_progress") # i want to trigger error if fails so i used "!"
-      #the notification of will refund is after the refund because no sense of sending it if refund fails... i dont know is the refund notification can arrive first
-      if payment_success_and_employee_not_active
+      @success = active_order.update(status: "refund_in_progress")
+      if @success && payment_success_and_employee_not_active
         create_notification(active_order.employee, active_order.employer, "El talento", active_order, "purchases")
-      else #request banned, closed, or payment success but request banned or closed, or some user refunded or employer inactive
+      elsif @success #request banned, closed, or payment success but request banned or closed, or some user refunded or employer inactive
         create_notification(active_order.employee, active_order.employer, "Se te reembolsará", active_order, "purchases")
+      elsif ! @success# cant update order so i trigger that error
+        errors.add(:base, active_order.errors.full_messages.first)
       end
-    rescue # if openpay is down, the job will do it later
-      errors.add(:base, active_order.errors.full_messages.first) #openpay connection error
-    end
   end
 
-  def refund_money_for_worker # no notification again
-    begin
-      active_order = self.active_order
-      active_order.update(status: "refund_in_progress")
-    rescue # if openpay is down, the job will do it later
-      true
-    end
-  end
+  # def refund_money_for_worker # no notification again
+  #   begin
+  #     active_order = self.active_order
+  #     active_order.update(status: "refund_in_progress")
+  #   rescue # if openpay is down, the job will do it later
+  #     true
+  #   end
+  # end
 
   def invalid_change
     if status_changed?(from: "completed", to: "banned")
