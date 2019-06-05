@@ -158,6 +158,17 @@ ActiveRecord::Schema.define(version: 2019_06_04_194128) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "marketing_notifications", force: :cascade do |t|
+    t.string "name"
+    t.string "content"
+    t.datetime "scheduled_at"
+    t.integer "status", default: 0
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "filters"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text "body"
     t.bigint "user_id"
@@ -337,6 +348,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_194128) do
     t.string "reportable_type"
     t.integer "reportable_id"
     t.integer "status", default: 0
+    t.string "cause_str"
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

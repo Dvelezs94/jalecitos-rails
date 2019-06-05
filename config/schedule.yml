@@ -6,3 +6,6 @@ pending_refunds_job:
   # cron: "*/1 * * * *"
   cron: "0 2 * * *"
   class: "PendingRefundsWorker"
+run_marketing_notifications:
+  cron: "*/30 * * * *"
+  class: "RunMarketingNotificationsWorker"

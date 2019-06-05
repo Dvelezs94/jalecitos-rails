@@ -40,8 +40,6 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.payout_left = reverse_price_calc(@order.total)
     if @order.save
-      # minimum amount to require 3d secure
-      min_3d_amount = 2999
       #prepare charge
       request_hash = the_request_hash(min_3d_amount)
       #create charge on openpay
@@ -166,6 +164,30 @@ class OrdersController < ApplicationController
           parameters[:total] = purchase_order_total(pack.price).round(2)
         end
         parameters
+    end
+
+    def secure_transaction?(order_total)
+      # minimum amount to require 3d secure
+      min_3d_amount = 2999
+      if order_total > min_3d_amount || current_user.secure_transaction
+        true
+      else
+        false
+      end
+    end
+
+    # Enable 3d secure transactions
+    def enable_secure_transactions
+      if current_user.secure_transaction
+        job = Sidekiq::ScheduledSet.new.find_job([current_user.secure_transaction_job_id])
+        job.delete
+        current_user.update(secure_transaction_job_id: nil)
+      else
+        current_user.update(secure_transaction: true)
+      end
+      # job to disable secure transactions after 3 days
+      secure_transaction_job = DisableSecureTransactionsWorker.perform_in(72.hours, current_user.id)
+      current_user.update(secure_transaction_job_id: secure_transaction_job)
     end
 
     def validate_quantity_range (pa, quan) # pa = package, quan = quantity
