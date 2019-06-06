@@ -1,7 +1,15 @@
 $(document).on('turbolinks:load', function() {
-  if (firebase.messaging.isSupported()) {
-    const messaging = firebase.messaging();
+  // Check if FcmToken cookie exists, so user dont get double notifications
+  var fcmcookie = getCookie("FcmToken");
+
+  if (fcmcookie == null) {
+      true
+  } else {
+    if (firebase.messaging.isSupported()) {
+      const messaging = firebase.messaging();
+    }
   }
+
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/firebase-messaging-sw.js', { scope: '/' }).then(function(reg) {
       // updatefound is fired if service-worker.js changes.
