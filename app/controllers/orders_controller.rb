@@ -39,14 +39,10 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.payout_left = reverse_price_calc(@order.total)
+    min_3d_amount = 2999
     if @order.save
-      min_3d_amount = 2999
       request_hash = the_request_hash(min_3d_amount)
-      begin
-        create_order(@order, request_hash, min_3d_amount)
-      rescue OpenpayTransactionException => e
-        create_order_failed(@order, e)
-      end
+      create_order(@order, request_hash, min_3d_amount)
     else #talent already hired
       redirect_to request.referer, alert: @order.errors.full_messages.first
     end
@@ -164,6 +160,7 @@ class OrdersController < ApplicationController
         end
         parameters
     end
+
     # Enable 3d secure transactions
     def enable_secure_transactions
       if current_user.secure_transaction
@@ -328,7 +325,7 @@ class OrdersController < ApplicationController
         "currency" => "MXN",
         "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}. orden ID: #{@order.uuid}",
         "device_session_id" => params[:device_id],
-        "use_3d_secure" => (@order.total > min_3d_amount) ? true : false,
+        "use_3d_secure" => secure_transaction?(@order.total, min_3d_amount),
         "redirect_url" => finance_url(table: "purchases")
       }
     end
