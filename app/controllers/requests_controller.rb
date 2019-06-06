@@ -1,23 +1,26 @@
 class RequestsController < ApplicationController
   include SetLayout
   include GetRequest
+  include BannedFunctions
   before_action :authenticate_user!, except: :show
+  before_action :redirect_if_user_banned, only: [:new, :create]
   before_action :set_request, only: [:show, :destroy]
   before_action :set_req_update, only: [:edit, :update]
   before_action :set_req_create, only: [:create]
   access all: [:show], user: :all
   before_action :check_request_ban, only: [:show]
   before_action :check_request_ownership, only:[:edit, :update, :destroy, :create]
-  before_action :verify_no_employee, only: [:edit, :update, :destroy]
+  before_action :verify_if_published, only: [:edit, :update, :destroy]
   layout :set_layout
 
 
   # GET /requests/1
   def show
+    check_if_already_hired
     if params[:page]
       get_other_offers
     else
-      @hires_open = (@request.employee.nil?) ? true : false
+      # @hires_open = (@request.employee.nil?) ? true : false
       if @request.offers_count > 0 #search offers is there some
         get_other_offers
        if @other_offers.length < @request.offers_count #that means the user has an offer
@@ -126,7 +129,23 @@ class RequestsController < ApplicationController
     end
 
     #check if there is no empoyee yet, so we can edit or delete the gig
-    def verify_no_employee
-      (@request.employee) ? redirect_to(request_path(@request), notice: 'El pedido ya no puede ser borrado o editado') : true
+    def verify_if_published
+     redirect_to(request_path(@request), notice: 'El pedido ya no puede ser borrado o editado') if ! @request.published?
+    end
+
+    def check_if_already_hired
+      if @request.employee.present?
+        @already_hired = true
+        return true
+      end
+      if current_user && @request.user == current_user
+        my_request_hires = current_user.purchases.includes(:purchase).where(purchase_type: "Offer").where.not(status: ["denied", "refund_in_progress", "refunded"])
+        my_request_hires.each do |mrh|
+          if mrh.purchase.request == @request
+            @already_hired = true
+            break
+          end
+        end
+      end
     end
 end

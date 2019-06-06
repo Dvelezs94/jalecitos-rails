@@ -47,6 +47,7 @@ class User < ApplicationRecord
   validates :alias, format: { :with => /\A[a-zA-Z0-9\-\_]+\z/, message: "sólo puede contener caracteres alfanuméricos, guión y guión bajo." }
   validates :name, format: { :with => /\A[a-zA-Z\p{L}\p{M}\s]+\z/, message: "Sólo puede contener letras y espacios" }, :allow_blank => true #allow blank because on creation it doesnt have
   validates_presence_of :name, if: :name_changed?  #dont allow blank again if value is filled
+  validate :check_running_orders, if: :user_disabled?, on: :update
 
   # Create User Score and openpay user
   after_validation :create_user_score
@@ -59,7 +60,7 @@ class User < ApplicationRecord
   before_update :verify_gigs, :if => :verified_changed?
   before_update :set_roles
   #when user is banned, unbanned or disabled...
-  before_update :enable_disable_stuff, :if => :status_changed?
+  after_validation :enable_disable_stuff, :if => :status_changed? #this is after updates so dont refund nothing and reverse everything is some validation fails, it would be a big trouble because refund will send to openpay the request and if validation fails then the status of the order will reset to in progress, for example, and refund was requested... trouble
 
   # Associations
   # User Score
@@ -146,6 +147,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :lockable, :registerable, :confirmable, :trackable,
          :recoverable, :rememberable, :secure_validatable,
          :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+  #this is useful when user is disabled... it destroys all the sessions of that user
+  def authenticatable_salt
+  "#{super}#{session_token}"
+  end
+
+  def invalidate_all_sessions!
+    self.session_token = SecureRandom.hex
+  end
    # Custom methods for OmniAuth
    def self.new_with_session(params, session)
     super.tap do |user|
@@ -198,6 +207,15 @@ class User < ApplicationRecord
      self.update(status: "active")
    end
 
+   def active_orders
+     Order.where("(employee_id=? OR employer_id=?)", self, self).where(status: ["pending", "in_progress", "disputed"])
+   end
+
+   def active_orders?
+     active_orders = Order.where("(employee_id=? OR employer_id=?)", self, self).where(status: ["pending", "in_progress", "disputed"])
+     active_orders.any?
+   end
+
    private
    def set_roles
      if self.roles_word.present?
@@ -247,21 +265,49 @@ class User < ApplicationRecord
          end
        end
        self.requests.each do |r|
-         if r.status == "published"
-           r.update(status: "closed")
+         r.with_lock do
+           if r.status == "published" || r.status == "in_progress"
+             r.update(status: "closed")
+           end
          end
        end
-     when "disabled"
+       # my_offers = Offer.includes(:request).where(user: self)
+       # my_offers.each do |o|
+       #   o.with_lock do
+       #     if o.request.status == "published"
+       #       begin
+       #        o.destroy
+       #      rescue #offer cant be destroyed because someone hired it
+       #        true
+       #       end
+       #     end
+       #   end
+       # end
+     when "disabled" #cant disale if has active orders
        self.gigs.each do |g|
          if g.status != "banned"
            g.update(status: "draft")
          end
        end
        self.requests.each do |r|
-         if r.status == "published"
-           r.update(status: "closed")
-         end
+         r.with_lock do
+           if r.status == "published"
+             r.update(status: "closed")
+           end
+        end
        end
+       # my_offers = Offer.includes(:request).where(user: self)
+       # my_offers.each do |o|
+       #  o.with_lock do
+       #     if o.request.status == "published"
+       #       begin
+       #        o.destroy
+       #      rescue #offer cant be destroyed because someone hired it
+       #        true
+       #       end
+       #     end
+       #  end
+       # end
      end
    end
 
@@ -273,5 +319,13 @@ class User < ApplicationRecord
       else
         true
       end
+   end
+
+   def user_disabled?
+     status_changed?(to: "disabled")
+   end
+
+   def check_running_orders
+     errors.add(:base, "No puedes cancelar tu cuenta ya que tienes órdenes activas") if self.active_orders?
    end
 end

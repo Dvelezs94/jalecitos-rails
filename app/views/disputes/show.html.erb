@@ -10,10 +10,10 @@
               <% if current_user.has_roles?(:admin) %>
                 <% if ! (@dispute.refunded? || @dispute.proceeded?) %>
                   <div class="col-lg-6">
-                    <%= link_to "Reembolsar Orden", refund_order_path(@dispute.order), class: "post", method: :put %>
+                    <%= link_to "Reembolsar Orden", refund_order_path(@dispute.order.uuid), class: "post", method: :put %>
                   </div>
                   <div class="col-lg-6">
-                    <%= link_to "Completar Orden", complete_order_path(@dispute.order), class: "post", method: :put %>
+                    <%= link_to "Completar Orden", complete_order_path(@dispute.order.uuid), class: "post", method: :put %>
                   </div>
                   <hr>
                 <% end %>

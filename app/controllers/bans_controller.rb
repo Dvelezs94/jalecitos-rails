@@ -21,12 +21,15 @@ class BansController < ApplicationController
 
   def create
     ban = Ban.new(ban_params)
-    if ban.valid?
-      @success = ban.save
-    elsif ban.errors.full_messages.first.include?("Baneable") #the resource is already banned
-      old_ban = Ban.find_by(baneable: @report.reportable, status: "banned")
-      @report.update!( ban: old_ban, status: "accepted" )
-      @already_banned = true
+    @success = ban.save
+    if ! @success
+      if ban.errors.full_messages.first.include?("Baneable") #the resource is already banned
+        old_ban = Ban.find_by(baneable: @report.reportable, status: "banned")
+        @report.update!( ban: old_ban, status: "accepted" )
+        @already_banned = true
+      else
+        @unknown_error = ban.errors.full_messages.first
+      end
     end
   end
 
@@ -39,12 +42,16 @@ class BansController < ApplicationController
   def ban_params
     ban_params = params.require(:ban).permit(:cause,
                                 :comment
-                              ).merge(:baneable => @report.reportable)
+                              ).merge(:baneable => @report.reportable, banned_by: current_user)
   end
 
   def set_report #these are the admitted models for ban
     if params[:report_id].present?
       @report = Report.find_by(status: "open", id: params[:report_id].to_i)
+      if !@report #report was treated and not open now
+        @treated_report = true
+        render "create"
+      end
     else
       head :no_content
     end
