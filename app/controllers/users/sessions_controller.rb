@@ -44,7 +44,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def after_sign_in_path_for resource
-    if check_if_banned_or_disabled(resource)
+    if check_if_banned(resource)
       sign_out resource
       cookies.permanent.signed[:mb].present? ? mobile_sign_in_path : root_path
     else
@@ -55,11 +55,17 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   #this is just for accounts that have email and password, the filter of fb and google accounts is in omniauth_calbacks_controller
-  def check_if_banned_or_disabled(user)
-    if user.banned?
-      flash[:error] = "Esta cuenta está bloqueada, favor de comunicarte con soporte para más información"
-      return true
-    elsif user.disabled?
+  # def check_if_banned_or_disabled(user)
+  #   if user.banned?
+  #     flash[:error] = "Esta cuenta está bloqueada, favor de comunicarte con soporte para más información"
+  #     return true
+  #   elsif user.disabled?
+  #     flash[:error] = "Has deshabilitado esta cuenta, favor de comunicarte con soporte para más información "
+  #     return true
+  #   end
+  # end
+  def check_if_banned(user)
+    if user.disabled?
       flash[:error] = "Has deshabilitado esta cuenta, favor de comunicarte con soporte para más información "
       return true
     end

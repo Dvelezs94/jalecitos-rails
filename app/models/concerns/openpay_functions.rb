@@ -53,6 +53,35 @@ module OpenpayFunctions
     end
   end
 
+  def secure_transaction?(order_total, min_3d_amount)
+    # minimum amount to require 3d secure
+    min_3d_amount = 2999
+    if order_total > min_3d_amount || current_user.secure_transaction
+      true
+    else
+      false
+    end
+  end
+
+  def create_order order, request_hash, min_3d_amount
+    begin
+      response = @charge.create(request_hash, current_user.openpay_id)
+      order.update(response_order_id: response["id"])
+      flash[:success] = "Se ha creado la orden."
+      redirect_to secure_transaction?(@order.total, min_3d_amount) ? response["payment_method"]["url"] : finance_path(:table => "purchases")
+    rescue OpenpayTransactionException => e
+      if defined?(e.error_code)
+        # next transactions will be marked for 3d secure for 3 days
+        if e.error_code == 3001 || e.error_code == 3005
+          enable_secure_transactions
+        end
+      end
+      order.update(response_order_id: "failed", status: "denied")
+      flash[:error] = "#{e.description}, por favor, inténtalo de nuevo."
+      redirect_to finance_path(:table => "purchases")
+    end
+  end
+
   def charge_fee(order, fee)
     request_fee_hash={"customer_id" => order.employer.openpay_id,
                    "amount" => get_order_earning(order.purchase.price),

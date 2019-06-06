@@ -1,5 +1,7 @@
 class MessagesController < ApplicationController
+  include BannedFunctions
   before_action :authenticate_user!
+  before_action :redirect_if_user_banned, only: :create
   before_action :set_conversation
   skip_before_action :verify_authenticity_token
   before_action :verify_participants

@@ -23,9 +23,9 @@ class DisputesController < ApplicationController
       if @dispute.save
         @dispute.order.disputed!
         if current_user == @dispute.order.employee
-          create_notification(@dispute.order.employee, @dispute.order.employer, "Abrio una disputa", @dispute)
+          create_notification(@dispute.order.employee, @dispute.order.employer, "abrió una disputa", @dispute)
         else
-          create_notification(@dispute.order.employer, @dispute.order.employee, "Abrio una disputa", @dispute)
+          create_notification(@dispute.order.employer, @dispute.order.employee, "abrió una disputa", @dispute)
         end
         redirect_to order_dispute_path(@dispute.order.uuid, @dispute), notice: 'La disputa fue creada exitosamente.'
       else

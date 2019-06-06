@@ -2,7 +2,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
   connected: function() {},
   disconnected: function() {},
   received: function(data) {
-    var conv_min = $("#"+data['opposite_slug']).closest("a")
+    var conv_min = $("#"+data['opposite_slug']).closest("a");
     var conversation = $('#conversation-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
 
     //if i am filtering, i cant append new conversations to filter results...

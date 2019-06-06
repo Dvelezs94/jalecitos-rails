@@ -21,15 +21,15 @@ class CardsController < ApplicationController
     rescue OpenpayTransactionException => e
         # e.http_code
         # e.error_code
-        flash[:error] = "#{e.description}, por favor intentalo de nuevo."
+        flash[:error] = "#{e.description}, por favor, intentalo de nuevo."
     end
 
     ref_params = referer_params(request.referer)
-    quantity = ref_params["quantity"].blank? ? nil : ref_params["quantity"][0]
-    if ! ref_params["package_id"].blank?
+    if ref_params["package_id"][0] != ""
+      quantity = ref_params["quantity"].blank? ? nil : ref_params["quantity"][0]
       package = Package.find_by_slug(ref_params["package_id"])
       redirect_to hire_package_path(package, quantity: quantity)
-    elsif ! ref_params["offer_id"].blank?
+    elsif ref_params["offer_id"][0] != ""
       offer = Offer.find_by_id(ref_params["offer_id"])
       redirect_to hire_request_offer_path(offer.request, offer)
     else
@@ -62,7 +62,7 @@ class CardsController < ApplicationController
 
   def verify_personal_information
     if current_user.name.blank?
-      flash[:error] = "Asegurate de tener tu nombre completo en Jalecitos para proceder a agregar una tarjeta"
+      flash[:error] = "Asegúrate de tener tu nombre completo en Jalecitos para proceder a agregar una tarjeta"
       redirect_to configuration_path(bestFocusAfterReload: "change_user_name")
     end
   end
