@@ -29,7 +29,8 @@ es:
         kilogram: "Kilogramos"
         milliliter: "Mililitros"
         liter: "Litros"
-
+        hundred: "Centenas"
+        thousand: "Millares"
 
   requests:
     status:

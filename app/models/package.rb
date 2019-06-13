@@ -7,7 +7,7 @@ class Package < ApplicationRecord
   belongs_to :gig, optional: true
   #Custom fields
   enum pack_type: { basic: 0, standard: 1, premium: 2}
-  enum unit_type: { piece: 0, dozen: 1, centimeter: 2, meter: 3, kilometer: 4, sec: 5, minute: 6, hour: 7, day: 8, unit: 9, square_centimeter: 10, square_meter: 11, gram: 12, kilogram: 13, milliliter: 14, liter: 15 }
+  enum unit_type: { piece: 0, dozen: 1, centimeter: 2, meter: 3, kilometer: 4, sec: 5, minute: 6, hour: 7, day: 8, unit: 9, square_centimeter: 10, square_meter: 11, gram: 12, kilogram: 13, milliliter: 14, liter: 15, hundred: 16, thousand: 17 }
 
   # Orders association
   has_many :orders, as: :purchase
@@ -32,7 +32,7 @@ class Package < ApplicationRecord
 
   def max_unit_price
     if unit_type.present? && min_amount.present? && max_amount.present? #unit type
-      err = "La cantidad máxima de unidades a vender multiplicadas por su precio unitario supera los 10,000 MXN" if price * max_amount > 5000
+      err = "La cantidad máxima de unidades a vender multiplicadas por su precio unitario supera los 10,000 MXN" if price * max_amount > 10000
     end
 
     if err
