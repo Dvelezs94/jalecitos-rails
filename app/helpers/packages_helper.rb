@@ -12,7 +12,9 @@ module PackagesHelper
         [
           ['Unidad', "unit"],
           ['Pieza', "piece"],
-          ['Docena', "dozen"]
+          ['Docena', "dozen"],
+          ['Centena', "hundred"],
+          ['Millar', "thousand"]
         ]
       ],
       ['Masa',
