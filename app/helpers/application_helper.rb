@@ -225,7 +225,7 @@ module ApplicationHelper
         <meta name='category' content='Trabajo, Empleo'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
     else
-        "<title>Jalecitos | Servicios Freelance en Mexico</title>
+        "<title>Jalecitos | Encuentra talento freelance en México</title>
         <meta name='description' content='Servicios Freelance en Mexico'>
         <meta name='keywords' content='Freelancer, Freelance Mexico, Contratar expertos de confianza, contratar expertos por internet, contratar expertos México, contratar talento por internet'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
