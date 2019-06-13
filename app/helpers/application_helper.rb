@@ -215,19 +215,19 @@ module ApplicationHelper
     elsif current_page?( guest_search_path ) && params[:city] && params[:state] && params[:query]
         "<title>#{params[:query]} en #{params[:city]}, #{params[:state]}</title>
         <meta name='description' content='Encuenta el mejor #{params[:query]} en #{params[:city]}, #{params[:state]}'>
-        <meta name='keywords' content='contratar, #{params[:query]}, #{params[:city]}, empleo'>
-        <meta name='category' content='Trabajo, Empleo'>
+        <meta name='keywords' content='contratar, #{params[:query]}, #{params[:city]}, empleo, freelancer'>
+        <meta name='category' content='Trabajo, Empleo, Freelancer'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
     elsif current_page?( root_path ) && params[:query]
         "<title>Encuentra las mejores oportunidades de trabajo o Expertos para contratar  en línea utilizando Jalecitos</title>
         <meta name='description' content='Necesitas trabajo o encontrar a un experto para alguna necesidad? Utiliza Jalecitos para encontrar empleo o expertos.'>
-        <meta name='keywords' content='encontrar, trabajo, empleos, expertos, internet'>
+        <meta name='keywords' content='encontrar, trabajo, empleos, expertos, internet, freeelancer'>
         <meta name='category' content='Trabajo, Empleo'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
     else
-        "<title>Jalecitos | Contrata y ofrece servicios en internet</title>
-        <meta name='description' content='Contrata el mejor talento en México'>
-        <meta name='keywords' content='Contratar expertos de confianza, contratar expertos por internet, contratar expertos México, contratar talento por internet'>
+        "<title>Jalecitos | Servicios Freelance en Mexico</title>
+        <meta name='description' content='Servicios Freelance en Mexico'>
+        <meta name='keywords' content='Freelancer, Freelance Mexico, Contratar expertos de confianza, contratar expertos por internet, contratar expertos México, contratar talento por internet'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
     end
   end
