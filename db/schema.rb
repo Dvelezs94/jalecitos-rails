@@ -264,8 +264,8 @@ ActiveRecord::Schema.define(version: 2019_06_04_014134) do
     t.bigint "gig_id"
     t.string "slug"
     t.integer "max_amount"
-    t.integer "min_amount"
     t.integer "unit_type"
+    t.integer "min_amount"
     t.index ["gig_id"], name: "index_packages_on_gig_id"
     t.index ["slug"], name: "index_packages_on_slug", unique: true
   end
