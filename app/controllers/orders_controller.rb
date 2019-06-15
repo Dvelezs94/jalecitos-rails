@@ -39,9 +39,9 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.payout_left = reverse_price_calc(@order.total)
-    min_3d_amount = 2999
+    min_3d_amount = 100
     if @order.save
-      request_hash = the_request_hash(min_3d_amount)
+      request_hash = make_request_hash(min_3d_amount)
       create_order(@order, request_hash, min_3d_amount)
     else #talent already hired
       redirect_to request.referer, alert: @order.errors.full_messages.first
@@ -317,7 +317,7 @@ class OrdersController < ApplicationController
       end
     end
 
-    def the_request_hash(min_3d_amount)
+    def make_request_hash(min_3d_amount)
       {
         "method" => "card",
         "source_id" => order_params[:card_id],
