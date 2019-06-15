@@ -3,12 +3,15 @@
     <%= link_to image_tag(avatar_display_helper(review.giver.image_url(:thumb)), class: "icon-review"), user_path(review.giver.slug) %>
   </div>
   <div class="authoristed-contents1">
-    <p class="loyed1"> <strong><%= link_to review.giver.alias, user_path(review.giver.slug), style:"color: black;" %></strong>
-      <%= image_tag("star-on", title: review.gig_rating.stars, class: "single-star") %>
-
-      <span class="rating-score"><%= review.gig_rating.stars.to_i %></span>
-
-    </p>
+    <div class="flex align-items-center">
+      <p class="loyed1 truncate max-w-75">
+        <strong><%= link_to review.giver.alias, user_path(review.giver.slug), style:"color: black;" %></strong>
+      </p>
+      <p class="loyed1">
+        <%= image_tag("star-on", title: review.gig_rating.stars, class: "single-star") %>
+        <span class="rating-score"><%= review.gig_rating.stars.to_i %></span>
+      </p>
+    </div>
     <p class="loyed2">
       <% if review.comment.present? %>
       <% splitted_words = review.comment.split  %>
