@@ -1,7 +1,7 @@
 <% if ! current_user %>
 <div class="container">
   <div class="mail-form">
-    <%= form_with url: guest_search_path, method: :get, class: "search-form-guest" ,local: true do |f|%>
+    <%= form_with url: search_path, method: :get, class: "search-form-guest" ,local: true do |f|%>
     <%= f.text_field :query, value: params[:query], placeholder: "¿Qué necesitas contratar?", onclick: "getLocation();", required: true%>
     <%= f.hidden_field :lat, value: params[:lat] %>
     <%= f.hidden_field :lon, value: params[:lon] %>

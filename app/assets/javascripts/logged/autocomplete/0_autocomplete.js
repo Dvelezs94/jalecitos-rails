@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function() {
     datumTokenizer: Bloodhound.tokenizers.whitespace,
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     remote: {
-      url: '/user_autocomplete_search?query=%QUERY',
+      url: '/autocomplete_search?query=%QUERY',
       wildcard: '%QUERY'
     }
   });

@@ -1,10 +1,10 @@
 <div class="mobile_search_bar">
 
-  <%= form_with url: user_search_path(), method: :get ,:html => {class: "mobile-search-form"} , local: true do |f|%>
+  <%= form_with url: search_path(), method: :get ,:html => {class: "mobile-search-form"} , local: true do |f|%>
   <%= icon("fas", "search", onclick: "$(this).closest('form').find('input[type=submit]').click()", style: "cursor: pointer;") %>
   <%= f.search_field :query, value: params[:query], class: "mobile-query ahead-query", placeholder: "Busca algo" %>
   <%= f.submit "continuar", style: "visibility:hidden; position: absolute;" %>
-  <nav class="filters navbar navbar-expand-lg navbar-light bg-light" style="<%= "display:none;" if !current_page?(user_search_path) %>">
+  <nav class="filters navbar navbar-expand-lg navbar-light bg-light" style="<%= "display:none;" if !current_page?(search_path) %>">
     <%= f.text_field :location, class: 'form-control', id: "search_autocomplete_mobile", size: 50, tabindex: -1,
     placeholder: "Cualquier lugar de México", value: (params[:location].nil?)? current_user.location(true) : params[:location] %>
     <%= f.hidden_field :city_id, class: "city", value: (params[:city_id].nil?)? current_user.city_id : params[:city_id] %>
