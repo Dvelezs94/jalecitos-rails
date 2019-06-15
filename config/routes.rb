@@ -164,7 +164,7 @@ Rails.application.routes.draw do
   # get 'user_search', to: 'queries#user_search'
 
   get 'user_mobile_search', to: 'queries#user_mobile_search'
-  get 'search', to: 'queries#search'
+  get 'buscar', to: 'queries#search', as: "search"
   get 'autocomplete_search', to: 'queries#autocomplete_search'
 
 
