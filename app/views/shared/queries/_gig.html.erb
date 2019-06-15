@@ -20,7 +20,9 @@
     </div>
   </div>
 <% end %>
-<div class="hearted1 likes-<%= gig.slug %>">
-  <%= render "gigs/likes", gig: gig, with_number: true %>
-</div>
+<% if current_user %>
+  <div class="hearted1 likes-<%= gig.slug %>">
+    <%= render("gigs/likes", gig: gig, with_number: true) %>
+  </div>
+<% end %>
 </div>

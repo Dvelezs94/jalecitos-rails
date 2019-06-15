@@ -1,35 +1,18 @@
 module GetQuery
   private
-  def get_guest_gig bool=false
+
+  def get_gig bool=false
     @gigs = Gig.search(filter_query,
        includes: [:query_pack, :likes, :user, city: [state: :country]],
-        where: guest_where_filter,
-        boost_where: guest_boost_where_condition, boost_by: {score: {factor: 100}},
-         page: params[:gigs], per_page: 20,
-          execute: bool, operator: "or", misspellings: misspellings)
-  end
-
-  def get_guest_request bool=false
-    @requests = Request.search(filter_query,
-       includes: [:offers, city: [state: :country]],
-        where: guest_where_filter,
-        boost_where: guest_boost_where_condition,
-        page: params[:requests], per_page: 20,
-        execute: bool, operator: "or", misspellings: misspellings)
-  end
-
-  def get_user_gig bool=false
-    @gigs = Gig.search(filter_query,
-       includes: [:query_pack, :likes, :user, city: [state: :country]],
-        where: user_where_filter, page: params[:gigs],
+        where: where_filter, page: params[:gigs],
          boost_where: boost_where_condition, boost_by: {score: {factor: 100}},
          per_page: 20, execute: bool, operator: "or", misspellings: misspellings)
   end
 
-  def get_user_request bool=false
+  def get_request bool=false
     @requests = Request.search(filter_query,
        includes: [:offers, city: [state: :country]],
-        where: user_where_filter, page: params[:requests],
+        where: where_filter, page: params[:requests],
         boost_where: boost_where_condition,
          per_page: 20,
           execute: bool, operator: "or", misspellings: misspellings)
@@ -43,14 +26,6 @@ module GetQuery
   end
 
   def boost_where_condition
-    if params[:city_id] != ""
-      {city_id: {value: params[:city_id], factor: 5}}
-    else #no city so i cant boost "Any place of Mexico"
-      {}
-    end
-  end
-
-  def guest_boost_where_condition
     if @city.present?
       {city_id: {value: @city.id, factor: 5}}
     else #no city so i cant boost "Any place of Mexico"

@@ -156,12 +156,18 @@ Rails.application.routes.draw do
   post 'subscribe', to: 'notifications#subscribe'
   delete 'subscribe', to: 'notifications#drop_subscribe'
   # search routes
-  get 'guest_search', to: 'queries#guest_search'
-  get 'guest_autocomplete_search', to: 'queries#guest_autocomplete_search'
+  # get 'guest_search', to: 'queries#guest_search'
+  # get 'guest_autocomplete_search', to: 'queries#guest_autocomplete_search'
+
+  # get 'user_mobile_search', to: 'queries#user_mobile_search'
+  # get 'user_autocomplete_search', to: 'queries#user_autocomplete_search'
+  # get 'user_search', to: 'queries#user_search'
 
   get 'user_mobile_search', to: 'queries#user_mobile_search'
-  get 'user_search', to: 'queries#user_search'
-  get 'user_autocomplete_search', to: 'queries#user_autocomplete_search'
+  get 'search', to: 'queries#search'
+  get 'autocomplete_search', to: 'queries#autocomplete_search'
+
+
   get 'autocomplete_profession', to: 'queries#autocomplete_profession'
   get 'autocomplete_location', to: 'queries#autocomplete_location'
   get 'terminos-y-condiciones', to: 'pages#terms_and_conditions'
