@@ -4,7 +4,7 @@
       <%= image_tag(avatar_display_helper(@user.image_url()), class: "nav-avatar", data: {lity: true}, lazy: true)%>
     </div>
     <div class="activotext">
-      <h1><%= @user.alias %></h1>
+      <h2><%= @user.alias %></h2>
       <p><%= @user.location %></p>
       <div class="innersocial-list">
         <%= star_display_helper( score_average(@user.score) ) %>

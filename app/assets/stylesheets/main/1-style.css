@@ -1371,7 +1371,7 @@ h3.packa-price sub {
 .servico-authoristd {
   position: absolute;
   left: 5px;
-  top: 15px;
+  top: 5px;
 }
 
 .servico-singleteam {}
@@ -3384,4 +3384,7 @@ a.disabled-by-text {
 .flex-wrap {
   display: flex;
   flex-wrap: wrap;
+}
+.max-w-75 {
+  max-width: 75%;
 }
