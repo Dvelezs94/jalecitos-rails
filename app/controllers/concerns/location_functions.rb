@@ -35,5 +35,12 @@ module LocationFunctions
     @city = City.find_by(name: city, state: @state)
   end
 
+  #used in guest queries
+  def get_city_and_state_in_db_by_city_id(city_id)
+    @city = City.find(city_id)
+    @state = @city.state
+    @country = @state.country
+  end
+
 
 end
