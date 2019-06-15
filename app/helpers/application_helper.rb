@@ -212,7 +212,7 @@ module ApplicationHelper
         <meta name='keywords' content='#{@request.location},#{@request.profession},#{@request.tag_list.join(',')}'>
         <meta name='category' content='#{@request.category.name}'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
-    elsif current_page?( guest_search_path ) && params[:city] && params[:state] && params[:query]
+    elsif current_page?( search_path ) && params[:city] && params[:state] && params[:query] && ! current_user
         "<title>#{params[:query]} en #{params[:city]}, #{params[:state]}</title>
         <meta name='description' content='Encuenta el mejor #{params[:query]} en #{params[:city]}, #{params[:state]}'>
         <meta name='keywords' content='contratar, #{params[:query]}, #{params[:city]}, empleo, freelancer'>

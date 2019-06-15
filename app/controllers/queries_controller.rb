@@ -4,46 +4,23 @@ class QueriesController < ApplicationController
   include LocationFunctions
   include GetQuery
   layout :set_layout
-  before_action :user_set_state, only: [:user_search]
-  before_action :guest_set_state, only: [:guest_search]
-  access user: [:user_search, :user_autocomplete_search, :autocomplete_profession, :user_mobile_search], admin: :all, all: [:guest_search, :guest_autocomplete_search, :autocomplete_location]
+  before_action :set_state, only: [:search]
+  access user: [:autocomplete_profession, :user_mobile_search], admin: :all, all: [:search, :autocomplete_search, :autocomplete_location]
 
-  def guest_search
+  def search
     if params[:gigs]
-      get_guest_gig(true)
+      get_gig(true)
     elsif params[:requests]
-      get_guest_request(true)
+      get_request(true)
     else
-      get_guest_gig
-      get_guest_request
+      get_gig
+      get_request
       Searchkick.multi_search([@gigs, @requests])
     end
     render template: "queries/search_results"
   end
 
-
-  def guest_autocomplete_search
-    render json: Searchkick.search(params[:query], {
-      index_name: [Gig, Request],
-      suggest: [:name, :description, :profession, :tags],
-      where:  { status: "published" }
-    }).suggestions
-  end
-
-  def user_search
-    if params[:gigs]
-      get_user_gig(true)
-    elsif params[:requests]
-      get_user_request(true)
-    else
-      get_user_gig
-      get_user_request
-      Searchkick.multi_search([@gigs, @requests])
-    end
-    render template: "queries/search_results"
-  end
-
-  def user_autocomplete_search
+  def autocomplete_search
     render json: Searchkick.search(filter_query, {
       index_name: [Gig, Request],
       suggest: [:name, :description, :profession, :tags],
@@ -82,19 +59,18 @@ class QueriesController < ApplicationController
 
   end
   private
-  def user_set_state
-    @state_id = City.find(params[:city_id]).state_id if params[:city_id] != ""
-  end
 
-  def guest_set_state
-    if params[:lon].present? && params[:lat].present?
+  def set_state
+    if params[:city_id].present?
+      get_city_and_state_in_db_by_city_id(params[:city_id])
+    elsif params[:lon].present? && params[:lat].present?
       begin
         loc = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{params[:lat]},#{params[:lon]}"
         get_city_and_state_in_db(loc.city, loc.state_name, "MX") #this makes global variables for using
       rescue
         #nothing
       end
-    elsif params[:city].present? && params[:state].present?
+    elsif params[:city].present? && params[:state].present? #used in sitemap (i think so)
         get_city_and_state_in_db(params[:city], params[:state], "MX") #this makes global variables for using
     end
   end

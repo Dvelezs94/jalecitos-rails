@@ -29,7 +29,7 @@ SitemapGenerator::Sitemap.create do
 
   Profession.all.each do |profession|
     City.all.each do |city|
-      add guest_search_path(query: profession.name, city: city.name, state: city.state.name)
+      add search_path(query: profession.name, city: city.name, state: city.state.name)
     end
   end
 
