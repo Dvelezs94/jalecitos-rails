@@ -12,6 +12,6 @@
   <% end %>
 <% else %>
   <% if gig.likes.length > 0 %>
-  <%= link_to "#{gig.likes.length}#{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'unlike')}".html_safe, gig_like_path(gig.slug), method: :post, class: 'unlike', remote: true %>
+  <%= link_to "#{gig.likes.length}#{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'unlike')}".html_safe, "#", method: :post, class: 'unlike disabled-by-text', remote: true %>
   <% end %>
 <% end %>
