@@ -17,13 +17,14 @@ class MessageNotificationWorker
     @message = {
         priority: 'high',
         data: {
-            title: "Nuevo mensaje",
-            message: "#{message.user.slug}: #{message.body}"
+            title: "#{message.user.slug}",
+            message: "#{message.body}"
         },
          notification: {
-            title: "Jalecitos",
-            body:  "#{message.user.slug}: #{message.body}",
+            title: "#{message.user.slug}",
+            body:  "#{message.body}",
             icon: "#{avatar_display_helper(message.user.image_url(:thumb))}",
+            #click_action: conversations_url(:user_id => message.user.slug),
             tag: "message-#{message.conversation_id}"
           },
           webpush: {

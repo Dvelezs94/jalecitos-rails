@@ -18,9 +18,9 @@ class NotificationRelayWorker
       notification: {
         title: "Jalecitos",
         body:  build_notification_text(notification, notification.notifiable, false),
-        icon: avatar_display_helper(notification.user.image_url(:thumb)),
-        click_action: url_generator_helper(notification, notification.notifiable),
-        badge: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo_Jalecitos-01.png"
+        icon: avatar_display_helper(notification.user.image_url(:thumb))
+        #click_action: url_generator_helper(notification, notification.notifiable),
+        #badge: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo_Jalecitos-01.png"
       },
       webpush: {
         headers: {
