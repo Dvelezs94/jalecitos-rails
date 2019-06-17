@@ -3,7 +3,7 @@ class RunMarketingNotificationsWorker
   sidekiq_options retry: false, dead: false
   include PushFunctions
   include FilterMarketingCampaign
-  
+
   def perform()
     @marketing_notifications = MarketingNotification.pending
 
@@ -11,14 +11,14 @@ class RunMarketingNotificationsWorker
       @message = {
         priority: 'high',
         data: {
-            title: "Jalecitos",
+            title: mn.name,
             message: mn.content
         },
         notification: {
-          title: "Jalecitos",
+          title: mn.name,
           body:  mn.content,
-          click_action: (mn.url || "/"),
-          badge: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo_Jalecitos-01.png"
+          #click_action: (mn.url || "/"),
+          #badge: "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo_Jalecitos-01.png"
         },
         webpush: {
           headers: {
@@ -39,7 +39,7 @@ class RunMarketingNotificationsWorker
           createFirebasePush(user.id, @message)
         end
       rescue => e
-        p "failed due to: #{e}"
+        Bugsnag.notify(e)
         mn.failed!
       end
       mn.finished!
