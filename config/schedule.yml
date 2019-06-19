@@ -9,3 +9,6 @@ pending_refunds_job:
 run_marketing_notifications:
   cron: "*/30 * * * *"
   class: "RunMarketingNotificationsWorker"
+deny_waiting_orders:
+  cron: "0 2 * * *"
+  class: "DenyWaitingOrdersWorker"

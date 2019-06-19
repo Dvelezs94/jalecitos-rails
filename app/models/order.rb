@@ -23,7 +23,7 @@ class Order < ApplicationRecord
   after_create :set_access_uuid
   after_validation :try_to_refund, if: :change_to_refund_in_progress?, :on => :update
   after_validation :request_the_refund, if: :pending_refund_worker?, :on => :update
-  validate :cant_change_from_refunded, :on => :update
+  validate :invalid_changes, :on => :update
   #Associations
   belongs_to :employer, foreign_key: :employer_id, class_name: "User"
   belongs_to :employee, foreign_key: :employee_id, class_name: "User"
@@ -97,11 +97,11 @@ class Order < ApplicationRecord
      end
    end
 
-   def cant_change_from_refunded
+   def invalid_changes
      if status_changed?(from: "refunded")
        errors.add(:base, "El recurso no puede ser actualizado ya que ha sido reembolsado")
-     elsif status_changed?(from: "refund_in_progress", to: "refunded")
-       return true
+     elsif status_changed?(from: "denied")
+       errors.add(:base, "El recurso no puede ser actualizado ya que ha sido denegado")
      elsif status_changed?(from: "refund_in_progress")
        errors.add(:base, "El recurso no puede ser actualizado ya que hay un reembolso en progreso")
      end
