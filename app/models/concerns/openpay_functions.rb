@@ -54,8 +54,6 @@ module OpenpayFunctions
   end
 
   def secure_transaction?(order_total, min_3d_amount)
-    # minimum amount to require 3d secure
-    min_3d_amount = 2999
     if order_total > min_3d_amount || current_user.secure_transaction
       true
     else

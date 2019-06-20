@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_04_014134) do
+ActiveRecord::Schema.define(version: 2019_06_18_215446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,15 @@ ActiveRecord::Schema.define(version: 2019_06_04_014134) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_billing_profiles_on_user_id"
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.string "openpay_id"
+    t.integer "cvv"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -264,8 +273,8 @@ ActiveRecord::Schema.define(version: 2019_06_04_014134) do
     t.bigint "gig_id"
     t.string "slug"
     t.integer "max_amount"
-    t.integer "unit_type"
     t.integer "min_amount"
+    t.integer "unit_type"
     t.index ["gig_id"], name: "index_packages_on_gig_id"
     t.index ["slug"], name: "index_packages_on_slug", unique: true
   end
@@ -528,6 +537,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_014134) do
   end
 
   add_foreign_key "billing_profiles", "users"
+  add_foreign_key "cards", "users"
   add_foreign_key "cities", "states"
   add_foreign_key "countries", "states"
   add_foreign_key "disputes", "orders"
