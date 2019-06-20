@@ -1,5 +1,5 @@
 class Payout < ApplicationRecord
   belongs_to :user
   has_many :orders
-  enum status: { pending: 0, failed: 1, completed: 2} 
+  enum status: { in_review: 0, pending: 1, failed: 2, completed: 3 } 
 end

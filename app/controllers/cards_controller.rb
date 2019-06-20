@@ -16,20 +16,26 @@ class CardsController < ApplicationController
      :device_session_id => params[:device_id]
     }
     begin
-      @card.create(request_hash, current_user.openpay_id)
+      response = @card.create(request_hash, current_user.openpay_id)
+      p "x" * 500
+      p params
+      p response
+      Card.create!(openpay_id: response["id"], user: current_user, cvv: params[:card_cvv])
       flash[:success] = 'La tarjeta fue creada exitosamente.'
     rescue OpenpayTransactionException => e
         # e.http_code
         # e.error_code
         flash[:error] = "#{e.description}, por favor, intentalo de nuevo."
+    rescue
+      flash[:error] = "Error al crear la tarjeta, por favor, intentalo de nuevo."
     end
 
     ref_params = referer_params(request.referer)
-    if ref_params["package_id"][0].present?
+    if ref_params["package_id"][0]
       quantity = ref_params["quantity"].blank? ? nil : ref_params["quantity"][0]
       package = Package.find_by_slug(ref_params["package_id"])
       redirect_to hire_package_path(package, quantity: quantity)
-    elsif ref_params["offer_id"][0].present?
+    elsif ref_params["offer_id"][0]
       offer = Offer.find_by_id(ref_params["offer_id"])
       redirect_to hire_request_offer_path(offer.request, offer)
     else
