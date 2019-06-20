@@ -39,14 +39,14 @@ class Review < ApplicationRecord
   def resource_average
     #if the user rated the review and not pressed the cancel button
     if self.rating.present? && self.rating.stars != 0
-      # if the user that rated is the employer rate the employee
+      # if the user that rated is the employer
       if self.giver == self.order.employer
         # Rate the Gig if the purchase class is package
         if self.reviewable_type == "Gig"
           GigAverageWorker.perform_async(self.id)
         end
         EmployeeAverageWorker.perform_async(self.id)
-      # Rate the employer
+      # employee is rating...
       else
         EmployerAverageWorker.perform_async(self.id)
       end
