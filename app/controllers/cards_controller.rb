@@ -17,9 +17,6 @@ class CardsController < ApplicationController
     }
     begin
       response = @card.create(request_hash, current_user.openpay_id)
-      p "x" * 500
-      p params
-      p response
       Card.create!(openpay_id: response["id"], user: current_user, cvv: params[:card_cvv])
       flash[:success] = 'La tarjeta fue creada exitosamente.'
     rescue OpenpayTransactionException => e
