@@ -16,7 +16,7 @@ $(document).on('turbolinks:load', function() {
       $("#card_number").prop('disabled', true);
       $("#exp_month").prop('disabled', true);
       $("#exp_year").prop('disabled', true);
-      $("#card_cvv").prop('disabled', true);
+      //$("#card_cvv").prop('disabled', true);
       //submit
       $('#cardForm').submit();
     };
