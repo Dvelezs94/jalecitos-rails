@@ -43,8 +43,8 @@ module GetPages
   def get_popular_gigs bool=false
     @popular_gigs = Gig.search("*",
        includes: [:gigs_packages, :user, :likes, city: [state: :country]],
-        where: conditions, boost_where: {city_id: {value: current_user.city_id, factor: 5}},
-         boost_where: boost_where_condition, boost_by: {order_count: {factor: 100}},
+        where: conditions, boost_where: boost_where_condition,
+         boost_by: {order_count: {factor: 100}},
           page: params[:popular_gigs], per_page: 15, execute: bool)
   end
 

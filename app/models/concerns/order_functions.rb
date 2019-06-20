@@ -5,7 +5,8 @@ module OrderFunctions
     emp_score = order.employee.score
     emp_score.update(:total_sales => emp_score.total_sales + order.total)
     if order.purchase_type == "Package"
-      order.purchase.gig.increment!(:order_count)
+      gig = order.purchase.gig
+      gig.update( order_count: gig.order_count + 1 )
     end
   end
 

@@ -21,9 +21,9 @@ class Order < ApplicationRecord
   validates_presence_of :purchase, :employer, :employee, :card_id, on: :create
   validate :just_one_hire_in_request, :on => :create
   after_create :set_access_uuid
-  after_validation :try_to_refund, if: :change_to_refund_in_progress?, :on => :update
-  after_validation :request_the_refund, if: :pending_refund_worker?, :on => :update
-  validate :cant_change_from_refunded, :on => :update
+  before_update :try_to_refund, if: :change_to_refund_in_progress?
+  before_update :request_the_refund, if: :pending_refund_worker?
+  validate :invalid_changes, :on => :update
   #Associations
   belongs_to :employer, foreign_key: :employer_id, class_name: "User"
   belongs_to :employee, foreign_key: :employee_id, class_name: "User"
@@ -89,21 +89,23 @@ class Order < ApplicationRecord
    end
 
    def try_to_refund
-     if !( status_changed?(from: "pending") || status_changed?(from: "in_progress") || status_changed?(from: "disputed") )
-       errors.add(:base, "El recurso no puede ser reembolsado por su estado actual")
-     else
-       self.dispute.update(status: "refunded") if self.dispute
-       request_the_refund
-     end
+     self.dispute.update(status: "refunded") if self.dispute
+     request_the_refund
    end
 
-   def cant_change_from_refunded
-     if status_changed?(from: "refunded")
-       errors.add(:base, "El recurso no puede ser actualizado ya que ha sido reembolsado")
-     elsif status_changed?(from: "refund_in_progress", to: "refunded")
-       return true
-     elsif status_changed?(from: "refund_in_progress")
+   def invalid_changes
+     #try to refund when not pending, in_progress or disputed
+     if status_changed?(to: "refund_in_progress") && !( status_changed?(from: "pending") || status_changed?(from: "in_progress") || status_changed?(from: "disputed") )
+       errors.add(:base, "El recurso no puede ser reembolsado por su estado actual")
+     #when trying to refund they cant change to other state than refunded
+     elsif status_changed?(from: "refund_in_progress") && ! status_changed?(to: "refunded")
        errors.add(:base, "El recurso no puede ser actualizado ya que hay un reembolso en progreso")
+     elsif status_changed?(from: "refunded")
+       errors.add(:base, "El recurso no puede ser actualizado ya que ha sido reembolsado")
+     elsif status_changed?(from: "denied")
+       errors.add(:base, "El recurso no puede ser actualizado ya que ha sido denegado")
+     elsif status_changed?(from: "completed")
+       errors.add(:base, "El recurso no puede ser actualizado ya que ha sido completado")
      end
    end
 
