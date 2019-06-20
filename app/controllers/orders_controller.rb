@@ -321,6 +321,7 @@ class OrdersController < ApplicationController
       {
         "method" => "card",
         "source_id" => order_params[:card_id],
+        "cvv2" => (current_user.cards.find_by_openpay_id(order_params[:card_id]).cvv rescue 123),
         "amount" => @order.total,
         "currency" => "MXN",
         "description" => "Compraste #{@order.purchase_type} con el id: #{@order.purchase.id}, por la cantidad de #{@order.total}. orden ID: #{@order.uuid}",
