@@ -76,6 +76,8 @@ class User < ApplicationRecord
   # Ticket system
   has_many :tickets
   has_many :ticket_responses
+  #card relations
+  has_many :cards
   # Chat Relations
   has_many :messages
   # Request System
