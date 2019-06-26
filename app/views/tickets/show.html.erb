@@ -17,6 +17,13 @@
               </div>
             <% end %>
           </div>
+          <% if current_user.has_role?(:admin) %>
+          <hr>
+          <div class="ticket-text">
+            <p class="ticket-description"><%= @ticket.user.name %></p>
+            <p class="ticket-description"><%= @ticket.user.email %></p>
+          </div>
+          <% end %>
         </div>
       </div>
     </div>

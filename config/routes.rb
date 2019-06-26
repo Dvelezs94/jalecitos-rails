@@ -127,6 +127,8 @@ Rails.application.routes.draw do
       put :complete
       put :request_start
       put :start
+      put :pass_payment
+      put :deny_payment
     end
     resources :disputes, only: [:new, :create, :show] do
       resources :replies, only: [:create]
