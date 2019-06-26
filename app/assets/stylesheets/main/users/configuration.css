@@ -478,6 +478,10 @@
 .Saldo-disponible h3 strong {
   float: right;
 }
+.in-review-balance {
+	color: var(--dark-yellow) !important;
+	background: var(--light-yellow) !important;
+}
 .Saldo-disponible h3 img {
   margin-right: 15px;
 }

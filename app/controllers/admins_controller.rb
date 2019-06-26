@@ -24,6 +24,7 @@ class AdminsController < ApplicationController
   end
 
   def orders
+    @orders_count = Order.all.length
     @orders =  Order.order(created_at: :desc).page(params[:order]).per(25)
     set_paginator
   end
@@ -112,9 +113,9 @@ class AdminsController < ApplicationController
       @open_reports = Report.open.length
       @banned_bans = Ban.banned.where.not(baneable_type: "Request").length
       @pending_disputes = Dispute.waiting_for_support.length
-      @open_tickets = Ticket.in_progress.length
+      @open_tickets = Ticket.in_progress.where(turn: "waiting_for_support").length
       @user_count = User.all.length
-      @orders_count = Order.all.length
+      @pending_payment_orders_count = Order.payment_verification_pending.completed.length
       @gigs_count = Gig.all.length
     end
   end

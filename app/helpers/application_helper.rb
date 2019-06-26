@@ -131,6 +131,10 @@ module ApplicationHelper
        order_dispute_path(object.order.uuid, object)
     when object.class == Reply
        order_dispute_path(object.dispute.order.uuid, object.dispute)
+    when object.class == TicketResponse
+       ticket_path(object.ticket)
+    when object.class == Ticket
+       ticket_path(object)
     end
   end
 
@@ -151,6 +155,10 @@ module ApplicationHelper
         text += "en el pedido <strong>#{object.request.title}</strong>"
       when object.class == Reply
         text += "en la disputa de la orden <strong>#{object.dispute.order.uuid}</strong>"
+      when object.class == TicketResponse
+        text += "en el ticket <strong>#{object.ticket.title}</strong>"
+      when object.class == Ticket
+        text += "el ticket <strong>#{object.title}</strong>"
       end
     else
       text = "#{notification.action} "
@@ -173,6 +181,8 @@ module ApplicationHelper
         text += "la orden <strong>#{object.uuid}</strong>"
       when notification.action == "El talento" && object.class == Order
         text += " ya no se encuentra disponible, se te reembolsará la orden <strong>#{object.uuid}</strong>, intenta contratar a alguien más"
+      when notification.action == "Se abrió" && object.class == Ticket
+        text += "el ticket <strong>#{object.title}</strong>"
       end
     end
     if html == true
