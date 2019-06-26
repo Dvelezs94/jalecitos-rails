@@ -6,6 +6,7 @@
   <td><%= (order.purchase.class == Package ? order.purchase.gig.title : order.purchase.request.title) rescue "Eliminado" %></td>
   <td><%= order.completed? ? distance_of_time_in_words(order.started_at, order.completed_at) : "--" rescue "sin fecha" %></td>
   <td><%= Conversation.between(order.employer.id, order.employee.id).exists? %></td>
+  <td><%= order.completed? ? order.paid_at? : "--" %></td>
   <td><%= order.status %></td>
   <% if order.completed? && order.payment_verification_pending? %>
   <td><%= link_to(icon("fas", "check", title: "Aceptar pago"), pass_payment_order_path(order.uuid), method: :put, data: { confirm: "Confirmar pago para la orden #{order.uuid} por la cantidad de $#{order.total}" }) %>
