@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
   include OrderFunctions
   include MoneyHelper
   layout :set_layout
-  access user: :all, admin: [:complete, :refund]
+  access user: :all, admin: [:complete, :refund, :pass_payment, :deny_payment]
   before_action only: [:create] do
     init_openpay("charge")
   end
@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
   before_action only: [:complete] do
     init_openpay("fee")
   end
-  before_action :get_order_by_uuid, only: [:request_start, :start, :request_complete, :complete, :refund]
+  before_action :get_order_by_uuid, only: [:request_start, :start, :request_complete, :complete, :refund, :pass_payment, :deny_payment]
   before_action :verify_order_employee, only: [:start, :request_complete]
   before_action :verify_order_owner, only: [:complete]
   before_action :verify_owner_or_employee, only: [:refund]
@@ -69,6 +69,7 @@ class OrdersController < ApplicationController
 
   def start
       if @order.in_progress!
+        @order.update(started_at: Time.now.in_time_zone.strftime("%Y-%m-%d %H:%M:%S"))
         flash[:success] = "La orden está en progreso"
         create_notification(@order.employee, @order.employer, "ha comenzado", @order.purchase, "purchases")
         OrderMailer.order_started(@order).deliver
@@ -131,6 +132,26 @@ class OrdersController < ApplicationController
     end
   end
 
+  def pass_payment
+    if @order.payment_verification_passed!
+      flash[:success] = "Se ha actualizado el pago de la orden #{@order.uuid} a verificado"
+    else
+      flash[:error] = "Ocurrio un error al tratar de actualizar la orden #{@order.uuid}"
+    end
+    redirect_to orders_admins_path
+  end
+
+  def deny_payment
+    if @order.payment_verification_failed!
+      open_payment_ticket(@order)
+      flash[:success] = "Se ha actualizado el pago de la orden #{@order.uuid} a fallido"
+      redirect_to ticket_path(@order.employee.tickets.last)
+    else
+      flash[:error] = "Ocurrio un error al tratar de actualizar la orden #{@order.uuid}"
+      redirect_to orders_admins_path
+    end
+  end
+
   private
 
     # Only allow a trusted parameter "white list" through.
@@ -159,6 +180,22 @@ class OrdersController < ApplicationController
           parameters[:total] = purchase_order_total(pack.price).round(2)
         end
         parameters
+    end
+
+    def open_payment_ticket(order)
+      ticket_description = "Estimado usuario. Se ha detectado una anomalía en el método de pago de la orden #{order.uuid}.
+Por ese motivo para poder darle segumiento a su caso hemos creado este ticket de soporte, el cual tendrá documentado todo el proceso.
+El monto por la cantidad de #{order.total} será retenido hasta que esta situación sea clarada o hasta que hayan transcurrido un total de 90 días.
+
+Preguntas precuentes:
+1) ¿Por qué 90 dias?
+Es el periodo que se le da a una persona para aclarar la situación.
+
+2) ¿Qué debo hacer?
+Por el momento nada, nosotros intentaremos ponernos en contacto con el comprador para verificar la información"
+      Ticket.create!(title: "Pago de orden denegada #{order.uuid} por la cantidad de #{order.total}",
+        description: ticket_description,
+        priority: "low", user: order.employee, current_user: current_user)
     end
 
     # Enable 3d secure transactions

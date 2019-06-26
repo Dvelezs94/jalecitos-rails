@@ -116,8 +116,8 @@ class User < ApplicationRecord
     Dispute.where(order_id: Order.where(employer_id: self.id)).or(Dispute.where(order_id: Order.where(employee_id: self.id)))
   end
 
-  def unpaid_orders
-    Order.where(employee: self, status: "completed", paid_at: nil)
+  def unpaid_orders(verification="payment_verification_pending")
+    Order.where(employee: self, status: "completed", paid_at: nil, payment_verification: verification)
   end
 
   def verify_gigs
@@ -177,8 +177,14 @@ class User < ApplicationRecord
    # def active_for_authentication? #this was used before for disabled and banned users but i want to display a custom message, so this is now on session controller
    #     super && self.active?
    # end
-   def balance
+
+   def in_review_balance
      @orders_total = self.unpaid_orders
+     @orders_total.sum(:payout_left)
+   end
+
+   def balance
+     @orders_total = self.unpaid_orders(verification="payment_verification_passed")
      @orders_total.sum(:payout_left)
    end
 
