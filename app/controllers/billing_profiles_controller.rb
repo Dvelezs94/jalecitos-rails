@@ -17,8 +17,6 @@ class BillingProfilesController < ApplicationController
         flash[:alert] = "Error al crear perfil."
       end
       ref_params = referer_params(request.referer)
-      p "x" * 500
-      p ref_params
       redirect_to_referer(ref_params)
     end
   end
