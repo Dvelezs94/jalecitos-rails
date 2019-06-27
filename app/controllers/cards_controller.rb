@@ -28,16 +28,7 @@ class CardsController < ApplicationController
     end
 
     ref_params = referer_params(request.referer)
-    if ref_params["package_id"][0]
-      quantity = ref_params["quantity"].blank? ? nil : ref_params["quantity"][0]
-      package = Package.find_by_slug(ref_params["package_id"])
-      redirect_to hire_package_path(package, quantity: quantity)
-    elsif ref_params["offer_id"][0]
-      offer = Offer.find_by_id(ref_params["offer_id"])
-      redirect_to hire_request_offer_path(offer.request, offer)
-    else
-      redirect_to configuration_path(collapse: "payment_methods")
-    end
+    redirect_to_referer(ref_params)
   end
 
   def destroy
