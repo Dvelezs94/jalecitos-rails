@@ -41,8 +41,8 @@ class AllyCodesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def ally_code_params
-       ally_code_params = params.require(:ally_code).permit(:name, :times_left, :level_enabled)
-       ally_code_params[:token] = SecureRandom.urlsafe_base64(6)
+       ally_code_params = params.require(:ally_code).permit(:name, :times_left, :level_enabled, :token)
+       ally_code_params[:token] = SecureRandom.urlsafe_base64(6) if ally_code_params[:token].blank?
        ally_code_params
     end
 

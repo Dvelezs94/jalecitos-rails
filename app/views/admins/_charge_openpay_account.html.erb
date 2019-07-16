@@ -1,0 +1,20 @@
+<div class="modal" id="chargeOpenpayAccountModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content-transparent">
+      <div class="modal-body">
+         <div class="sign-up">
+             <div class="sign-up-form">
+               <h3>Realizar un cargo a usuario</h3>
+               <small>Este dinero se ira a la cuenta raiz</small>
+               <%= form_with url: charge_openpay_user_admins_path, local: true do |form| %>
+                 <%= form.text_field :openpay_id, placeholder: "Openpay ID", required: true %>
+                 <%= form.number_field :amount, placeholder: "Monto", required: true %>
+                 <%= form.text_field :description, placeholder: "Descripcion", required: true %>
+                 <%= form.submit %>
+               <% end %>
+             </div>
+         </div>
+      </div>
+    </div>
+  </div>
+</div>
