@@ -25,9 +25,9 @@ class OrdersController < ApplicationController
   before_action :verify_order_owner, only: [:complete]
   before_action :verify_owner_or_employee, only: [:refund]
   before_action :verify_charge_response, except: [:create]
-  before_action :check_if_can_refund, only: [:refund]
+  # before_action :check_if_can_refund, only: [:refund]
   before_action :check_if_request_banned, only: [:start, :request_complete, :complete, :refund]
-  before_action :check_if_order_refunded, only: [:start, :request_complete, :complete, :refund]
+  # before_action :check_if_order_refunded, only: [:start, :request_complete, :complete, :refund]
   #just create validators
   before_action :check_card_present, only: :create
   before_action :verify_availability, only: [:create]
@@ -118,16 +118,13 @@ class OrdersController < ApplicationController
         end
       else
         @success = @order.update(status: "refund_in_progress") #refund gig
-        create_notification(@order.employee, @order.employer, "Se te reembolsará", @order, "purchases") if @success # if openpay connected!!
       end
       if @success
-        if current_user == @order.employer
-          flash[:success] = "La orden está en proceso de reembolso, recibirás un correo cuando la orden ya haya sido reembolsada"
-        end
+        flash[:success] = "La orden está en proceso de reembolso, recibirás un correo cuando la orden ya haya sido reembolsada" if current_user == @order.employer
       else
         flash[:error] = (request.present?)? request.errors.full_messages.first : @order.errors.full_messages.first
       end
-      redirect_to finance_path(:table => "purchases")
+      redirect_to finance_path(:table => (current_user == @order.employer)? "purchases" : "sales")
     end
   end
 

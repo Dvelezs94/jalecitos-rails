@@ -90,10 +90,13 @@ class Order < ApplicationRecord
 
    def try_to_refund
      self.dispute.update(status: "refunded") if self.dispute
+     create_notification(employee, employer, "Se te reembolsará", self, "purchases") #notification for employer
      request_the_refund
    end
 
    def invalid_changes
+     puts "X"*500
+     puts status_changed?(from: "refund_in_progress")
      #try to refund when not pending, in_progress or disputed
      if status_changed?(to: "refund_in_progress") && !( status_changed?(from: "pending") || status_changed?(from: "in_progress") || status_changed?(from: "disputed") )
        errors.add(:base, "El recurso no puede ser reembolsado por su estado actual")

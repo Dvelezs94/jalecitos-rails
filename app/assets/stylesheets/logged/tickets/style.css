@@ -122,16 +122,14 @@
 .left-response-heading {
 	font-weight: 700;
 	font-size: 19px;
-	display: inline-block;
+	margin-bottom: 0;
 	border-radius: 3px;
 }
 
 .right-response-heading {
-	position: absolute;
-  right: 10px;
+	margin-bottom: 0;
   font-size: 16px;
-  margin-top: -40px;
-  top: auto;
+	margin-left: auto;
 }
 
 .ticket-title {
