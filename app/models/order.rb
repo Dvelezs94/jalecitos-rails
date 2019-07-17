@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  attr_accessor :pending_refund_worker
+  attr_accessor :pending_refund_worker, :c_user
   include ActiveModel::Dirty
   include OrderFunctions
   include OpenpayHelper
@@ -99,14 +99,21 @@ class Order < ApplicationRecord
    end
 
    def invalid_changes
-     puts "X"*500
-     puts status_changed?(from: "refund_in_progress")
      #try to refund when not pending, in_progress or disputed
      if status_changed?(to: "refund_in_progress") && !( status_changed?(from: "pending") || status_changed?(from: "in_progress") || status_changed?(from: "disputed") )
        errors.add(:base, "El recurso no puede ser reembolsado por su estado actual")
+       #only admin can refund disputed order
+     elsif status_changed?(to: "refund_in_progress")  &&  status_changed?(from: "disputed") && c_user.present? && (! c_user.has_roles?(:admin) )
+       errors.add(:base, "Sólo soporte puede reembolsar un recurso disputado")
+       #employer cant refund orders in progress
+     elsif status_changed?(to: "refund_in_progress")  &&  status_changed?(from: "in_progress") && c_user.present? && c_user.id == self.employer_id
+       errors.add(:base, "No puedes reembolsar el recurso ya que está en progreso")
      #when trying to refund they cant change to other state than refunded
      elsif status_changed?(from: "refund_in_progress") && ! status_changed?(to: "refunded")
        errors.add(:base, "El recurso no puede ser actualizado ya que hay un reembolso en progreso")
+       #if request refunded order can just change to refunded!!!
+     elsif self.purchase_type == "Offer" && self.purchase.request.banned? && ( !status_changed?(to: "refunded") )
+       errors.add(:base, "El recurso está bloqueado, se reembolsará el dinero")
      elsif status_changed?(from: "refunded")
        errors.add(:base, "El recurso no puede ser actualizado ya que ha sido reembolsado")
      elsif status_changed?(from: "denied")
