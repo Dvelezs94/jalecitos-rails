@@ -21,12 +21,12 @@ class OrdersController < ApplicationController
     init_openpay("fee")
   end
   before_action :get_order_by_uuid, only: [:request_start, :start, :request_complete, :complete, :refund, :pass_payment, :deny_payment]
-  before_action :verify_order_employee, only: [:start, :request_complete]
-  before_action :verify_order_owner, only: [:complete]
-  before_action :verify_owner_or_employee, only: [:refund]
-  before_action :verify_charge_response, except: [:create]
+  # before_action :verify_order_employee, only: [:start, :request_complete]
+  # before_action :verify_order_owner, only: [:complete]
+  # before_action :verify_owner_or_employee, only: [:refund]
+  # before_action :verify_charge_response, except: [:create]
   # before_action :check_if_can_refund, only: [:refund]
-  before_action :check_if_request_banned, only: [:start, :request_complete, :complete, :refund]
+  # before_action :check_if_request_banned, only: [:start, :request_complete, :complete, :refund]
   # before_action :check_if_order_refunded, only: [:start, :request_complete, :complete, :refund]
   #just create validators
   before_action :check_card_present, only: :create
@@ -273,7 +273,7 @@ Por el momento nada, nosotros intentaremos ponernos en contacto con el comprador
     end
 
     def verify_order_limit
-      if current_user.purchases.pending.count >= 5
+      if current_user.purchases.pending.length >= 5
         flash[:error] = "No puedes tener más de 5 compras pendientes"
         redirect_to finance_path(:table => "purchases")
       end

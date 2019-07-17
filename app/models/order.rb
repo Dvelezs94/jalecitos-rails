@@ -99,6 +99,7 @@ class Order < ApplicationRecord
    end
 
    def invalid_changes
+     # IMPORTANT: i check if c_user is present because sometimes i leave it nil, for exmpale when i ban a report, i dont place the c_user and it triggers an error because i want to get c_user.id and c_user is nil
      #try to refund when not pending, in_progress or disputed
      if status_changed?(to: "refund_in_progress") && !( status_changed?(from: "pending") || status_changed?(from: "in_progress") || status_changed?(from: "disputed") )
        errors.add(:base, "El recurso no puede ser reembolsado por su estado actual")
@@ -114,6 +115,18 @@ class Order < ApplicationRecord
        #if request refunded order can just change to refunded!!!
      elsif self.purchase_type == "Offer" && self.purchase.request.banned? && ( !status_changed?(to: "refunded") )
        errors.add(:base, "El recurso está bloqueado, se reembolsará el dinero")
+     elsif self.response_order_id.nil?
+      errors.add(:base, "Esta orden no ha sido procesada y por lo tanto no puede comenzar")
+      #if its not my order i cant change it
+     elsif c_user.present? && c_user != self.employee && c_user != self.employer && (! current_user.has_role?(:admin))
+       errors.add(:base, "No tienes permiso para acceder aquí")
+      #just employer and employee can do certain things
+     elsif status_changed?(to: "complete") && c_user.present? && c_user != self.employer && (! current_user.has_role?(:admin))
+       errors.add(:base, "Sólo el empleador puede completar la orden")
+     elsif status_changed?(to: "in_progress") && c_user.present? && c_user != self.employee && (! current_user.has_role?(:admin))
+       errors.add(:base, "Sólo el empleado puede comenzar la orden")
+     elsif completed_at_changed? && c_user.present? && c_user != self.employee && (! current_user.has_role?(:admin))
+       errors.add(:base, "Sólo el empleado puede solicitar finalizar la orden")
      elsif status_changed?(from: "refunded")
        errors.add(:base, "El recurso no puede ser actualizado ya que ha sido reembolsado")
      elsif status_changed?(from: "denied")
