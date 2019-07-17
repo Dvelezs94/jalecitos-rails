@@ -115,10 +115,10 @@ class OrdersController < ApplicationController
       if @order.purchase_type == "Offer"
         request = @order.purchase.request
         request.with_lock do
-          @success = request.update(status: "closed", passed_active_order: @order) #refund and also closes request, its fast to pass the order than search it in model, this triggers request.refund_money
+          @success = request.update(status: "closed", passed_active_order: @order, c_user: current_user) #refund and also closes request, its fast to pass the order than search it in model, this triggers request.refund_money
         end
       else
-        @success = @order.update(status: "refund_in_progress") #refund gig
+        @success = @order.update(status: "refund_in_progress", c_user: current_user) #refund gig
       end
       if @success
         flash[:success] = "La orden está en proceso de reembolso, recibirás un correo cuando la orden ya haya sido reembolsada" if current_user == @order.employer
@@ -280,17 +280,15 @@ Por el momento nada, nosotros intentaremos ponernos en contacto con el comprador
     end
 
     def check_if_can_refund
+      invalid_state(["completed", "refunded", "refund_in_progress","denied","waiting_for_bank_approval"])
       # check if is not admin (it shoould be a normal user)
       if ! current_user.has_roles?(:admin)
         # Cancel transaction if the order is on any of these states
-        invalid_state(["completed", "disputed", "refund_in_progress", "refunded", "denied", "waiting_for_bank_approval"])
+        invalid_state(["disputed"])
         #employer cant refund orders in progress
         if @order.in_progress? && (current_user == @order.employer)
           invalid_state(["in_progress"])
         end
-      #if i am the admin...
-      else
-        invalid_state(["completed", "refunded"])
       end
       #if something is wrong
       if flash[:error]
