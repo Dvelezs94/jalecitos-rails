@@ -1,4 +1,5 @@
 <% @unpaid_money = @user.balance %>
+<% @in_review_money = @user.in_review_balance %>
 <div class="card">
   <div class="card-header" id="headingFive">
     <h5 class="mb-0">
@@ -12,6 +13,16 @@
   <div id="withdraw" class="collapse <%= "show" if params[:collapse] == "withdraw" %>" aria-labelledby="headingFive" data-parent="#accordion">
     <div class="card-body">
       <div class="Retirar-fondos-content loading-zone">
+        <% if @in_review_money > 0 %>
+        <div class="Saldo-disponible">
+          <h3 class="in-review-balance">Saldo en revision
+            <strong><%= number_to_currency(@in_review_money) %>
+              MXN</strong>
+          </h3>
+
+        </div>
+        <% end %>
+        <% if @unpaid_money > 0 %>
         <div class="Saldo-disponible">
           <% if @unpaid_money > 0 && @unpaid_money < 100 %>
           <p class="error">Para poder retirar necesitas tener mínimo $100 MXN</p>
@@ -21,6 +32,7 @@
               MXN</strong>
           </h3>
         </div>
+        <% end %>
         <div class="Cuenta-box">
           <%= render partial:'users/bank', collection: @user_banks %>
           <div class="loading row justify-content-center" style="text-align: center; display: none;">
