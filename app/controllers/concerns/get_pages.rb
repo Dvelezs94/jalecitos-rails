@@ -91,11 +91,11 @@ module GetPages
   end
 
   def get_purchases
-    @purchases = Order.where(employer_id: current_user.id).order(updated_at: :desc).page(params[:purchases]).per(20)
+    @purchases = Order.includes(:purchase, :employee).where(employer_id: current_user.id).order(updated_at: :desc).page(params[:purchases]).per(20)
   end
 
   def get_sales
-    @sales = Order.where(employee_id: current_user.id).where.not(status: "denied").
+    @sales = Order.includes(:purchase, :employer).where(employee_id: current_user.id).where.not(status: "denied").
     order(updated_at: :desc).page(params[:sales]).per(20)
   end
 

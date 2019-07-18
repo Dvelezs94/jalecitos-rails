@@ -168,6 +168,7 @@ Rails.application.routes.draw do
 
   get 'user_mobile_search', to: 'queries#user_mobile_search'
   get 'buscar', to: 'queries#search', as: "search"
+  get '/guest_search', to: redirect { |path_params, req| "/buscar?#{req.params.to_query}" }
   get 'autocomplete_search', to: 'queries#autocomplete_search'
 
 
