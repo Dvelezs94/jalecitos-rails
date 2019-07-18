@@ -14,24 +14,13 @@ class OrdersController < ApplicationController
   before_action only: [:create] do
     init_openpay("charge")
   end
-  before_action only: [:create, :complete, :refund] do
+  before_action only: [:create] do
     init_openpay("transfer")
   end
-  before_action only: [:complete] do
-    init_openpay("fee")
-  end
   before_action :get_order_by_uuid, only: [:request_start, :start, :request_complete, :complete, :refund, :pass_payment, :deny_payment]
-  before_action :verify_order_employee, only: [:start, :request_complete]
-  before_action :verify_order_owner, only: [:complete]
-  before_action :verify_owner_or_employee, only: [:refund]
-  before_action :verify_charge_response, except: [:create]
-  before_action :check_if_can_refund, only: [:refund]
-  before_action :check_if_request_banned, only: [:start, :request_complete, :complete, :refund]
-  before_action :check_if_order_refunded, only: [:start, :request_complete, :complete, :refund]
   #just create validators
   before_action :check_card_present, only: :create
   before_action :verify_availability, only: [:create]
-  before_action :verify_order_limit, only: [:create]
   before_action :check_billing_profile, only: :create
   before_action :verify_personal_information, only: :create
   before_action :check_if_changes, only: :create
@@ -40,71 +29,42 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.payout_left = reverse_price_calc(@order.total)
     min_3d_amount = 100
-    if @order.save
-      request_hash = make_request_hash(min_3d_amount)
-      create_order(@order, request_hash, min_3d_amount)
-    else #talent already hired
-      redirect_to request.referer, alert: @order.errors.full_messages.first
+    current_user.with_lock do
+      flash[:error] = "No puedes tener más de 5 compras pendientes" if current_user.purchases.pending.length >= 5
+      if ! flash[:error] && @order.save
+        request_hash = make_request_hash(min_3d_amount)
+        create_order(@order, request_hash, min_3d_amount)
+      else #talent already hired or max purchases pending
+        redirect_to request.referer, alert: flash[:error] || @order.errors.full_messages.first
+      end
     end
-
   end #create end
 
   def request_complete
-      @order.completed_at = Time.now.in_time_zone.strftime("%Y-%m-%d %H:%M:%S")
-      if @order.save
-        flash[:success] = "La orden se actualizó correctamente"
-        create_notification(@order.employee, @order.employer, "solicitó finalizar", @order.purchase, "purchases")
-        OrderMailer.order_request_finish(@order).deliver
-        # Queue job to finish the order in 72 hours
-        if ENV.fetch("RAILS_ENV") == "production"
-          FinishOrderWorker.perform_in(72.hours, @order.id)
-        else
-          FinishOrderWorker.perform_in(10.seconds, @order.id)
-        end
-      else
-        flash[:error] = "Hubo un error en tu solicitud"
-      end
+    @order.with_lock do
+      @success = @order.update(completed_at: Time.now.in_time_zone.strftime("%Y-%m-%d %H:%M:%S"))
+      (@success) ? flash[:success] = "La orden se actualizó correctamente" : flash[:error] = @order.errors.full_messages.first
       redirect_to finance_path(:table => "sales")
+    end
   end
 
   def start
-      if @order.in_progress!
-        @order.update(started_at: Time.now.in_time_zone.strftime("%Y-%m-%d %H:%M:%S"))
-        flash[:success] = "La orden está en progreso"
-        create_notification(@order.employee, @order.employer, "ha comenzado", @order.purchase, "purchases")
-        OrderMailer.order_started(@order).deliver
-      else
-        flash[:error] = "Hubo un error en tu solicitud"
-      end
+    @order.with_lock do
+      @success = @order.update(started_at: Time.now.in_time_zone.strftime("%Y-%m-%d %H:%M:%S"), status: "in_progress")
+      (@success)?  flash[:success] = "La orden está en progreso" : flash[:error] = @order.errors.full_messages.first
       redirect_to finance_path(:table => "sales")
+    end
   end
 
   def complete
-    #if the order is disputed just the admin can complete it
     @order.with_lock do #prevent double execution if worker completes at same time
-      if @order.in_progress? ||( @order.disputed? && current_user.has_roles?(:admin) )
-        # End openpay call
-        if @order.completed!
-          if @order.dispute
-            @order.dispute.proceeded!
-          end
-          #Openpay call to transfer the fee to the Employee
-          pay_to_customer(@order, @transfer)
-          #Charge the fee
-          charge_fee(@order, @fee)
-          #charge tax
-          charge_tax(@order, @fee)
-          # charge openpay tax
-          openpay_tax(@order, @fee)
-          flash[:success] = "La orden ha finalizado"
-          create_reviews(@order)
-          OrderMailer.order_finished(@order).deliver
-          create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, nil, @employee_review.id)
-          redirect_to root_path(:identifier => @employer_review.id)
-        end # end of order.completed!
-      else #not in progress
-        flash[:notice] = "La orden ya fue completada antes"
-        redirect_to root_path
+      @success = @order.completed!
+      if @success
+        flash[:success] = "La orden ha finalizado"
+        redirect_to root_path(:identifier => @order.employer_review_id)
+      else
+        flash[:error] = @order.errors.full_messages.first
+        redirect_to finance_path(:table => get_table)
       end
     end
   end
@@ -115,20 +75,17 @@ class OrdersController < ApplicationController
       if @order.purchase_type == "Offer"
         request = @order.purchase.request
         request.with_lock do
-          @success = request.update(status: "closed", passed_active_order: @order) #refund and also closes request, its fast to pass the order than search it in model, this triggers request.refund_money
+          @success = request.update(status: "closed", passed_active_order: @order, c_user: current_user) #refund and also closes request, its fast to pass the order than search it in model, this triggers request.refund_money
         end
       else
-        @success = @order.update(status: "refund_in_progress") #refund gig
-        create_notification(@order.employee, @order.employer, "Se te reembolsará", @order, "purchases") if @success # if openpay connected!!
+        @success = @order.update(status: "refund_in_progress", c_user: current_user) #refund gig
       end
-      if @success
-        if current_user == @order.employer
-          flash[:success] = "La orden está en proceso de reembolso, recibirás un correo cuando la orden ya haya sido reembolsada"
-        end
-      else
+      if @success && current_user == @order.employer
+        flash[:success] = "La orden está en proceso de reembolso, recibirás un correo cuando la orden ya haya sido reembolsada"
+      elsif  ! @success
         flash[:error] = (request.present?)? request.errors.full_messages.first : @order.errors.full_messages.first
       end
-      redirect_to finance_path(:table => "purchases")
+      redirect_to finance_path(:table => get_table)
     end
   end
 
@@ -234,71 +191,12 @@ Por el momento nada, nosotros intentaremos ponernos en contacto con el comprador
       @order = Order.find_by_uuid(params[:id])
     end
 
-    def verify_order_employee
-      if @order.employee != current_user
-        flash[:error] = "No tienes permiso para acceder aquí"
-        redirect_to root_path
-        return
-      end
-    end
-
-    def verify_order_owner
-      if @order.employer != current_user && ! current_user.has_role?(:admin)
-        flash[:error] = "No tienes permiso para acceder aquí"
-        redirect_to root_path
-        return
-      end
-    end
-
-    def verify_owner_or_employee
-      #normal users, except admin and owners can pass this
-      if @order.employer != current_user && @order.employee != current_user && ! current_user.has_role?(:admin)
-        flash[:error] = "No tienes permiso para acceder aquí"
-        redirect_to root_path
-        return
-      end
-    end
-
-    def verify_charge_response
-      if @order.response_order_id.nil?
-        flash[:error] = "Esta orden no ha sido procesada y por lo tanto no puede comenzar"
-        redirect_to root_path
-      end
-    end
-
     def invalid_state(state)
       state.each do |s|
         if @order.status == s
           flash[:error] = "No se puede completar la transacción"
           break
         end
-      end
-    end
-
-    def verify_order_limit
-      if current_user.purchases.pending.count >= 5
-        flash[:error] = "No puedes tener más de 5 compras pendientes"
-        redirect_to finance_path(:table => "purchases")
-      end
-    end
-
-    def check_if_can_refund
-      # check if is not admin (it shoould be a normal user)
-      if ! current_user.has_roles?(:admin)
-        # Cancel transaction if the order is on any of these states
-        invalid_state(["completed", "disputed", "refund_in_progress", "refunded", "denied", "waiting_for_bank_approval"])
-        #employer cant refund orders in progress
-        if @order.in_progress? && (current_user == @order.employer)
-          invalid_state(["in_progress"])
-        end
-      #if i am the admin...
-      else
-        invalid_state(["completed", "refunded"])
-      end
-      #if something is wrong
-      if flash[:error]
-        redirect_to root_path
-        return
       end
     end
 
@@ -368,16 +266,6 @@ Por el momento nada, nosotros intentaremos ponernos en contacto con el comprador
       }
     end
 
-    def check_if_request_banned
-      if @order.purchase_type == "Offer" #is an order of a request
-        request = @order.purchase.request
-        if request.banned?
-          flash[:notice] = "El recurso está bloqueado, se reembolsará el dinero"
-          redirect_to_table(@order)
-        end
-      end
-    end
-
     def redirect_to_table order
       if order.employer == current_user
         redirect_to finance_path(table: "purchases")
@@ -386,10 +274,7 @@ Por el momento nada, nosotros intentaremos ponernos en contacto con el comprador
       end
     end
 
-    def check_if_order_refunded
-      if @order.refund_in_progress? || @order.refunded?
-        flash[:error] = "La orden no pudo ser actualizada"
-        redirect_to_table(@order)
-      end
+    def get_table
+      (current_user == @order.employer)? "purchases" : "sales"
     end
 end
