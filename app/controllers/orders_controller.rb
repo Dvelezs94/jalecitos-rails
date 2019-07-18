@@ -60,10 +60,8 @@ class OrdersController < ApplicationController
     @order.with_lock do #prevent double execution if worker completes at same time
       @success = @order.completed!
       if @success
-        create_reviews(@order)
-        create_notification(@order.employer, @order.employee, "ha finalizado", @order.purchase, nil, @employee_review.id)
         flash[:success] = "La orden ha finalizado"
-        redirect_to root_path(:identifier => @employer_review.id)
+        redirect_to root_path(:identifier => @order.employer_review_id)
       else
         flash[:error] = @order.errors.full_messages.first
         redirect_to finance_path(:table => get_table)
