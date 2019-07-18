@@ -1,5 +1,5 @@
 class Request < ApplicationRecord
-  attr_accessor :passed_active_order, :payment_success_and_request_banned_or_closed_or_employer_inactive, :payment_success_and_employee_not_active
+  attr_accessor :passed_active_order, :payment_success_and_request_banned_or_closed_or_employer_inactive, :payment_success_and_employee_not_active, :c_user
   #includes
   include TagRestrictions
   include RequestsHelper
@@ -79,25 +79,14 @@ class Request < ApplicationRecord
   end
 
   def refund_money
-      active_order = passed_active_order || self.active_order
-      @success = active_order.update(status: "refund_in_progress")
+      act_order = passed_active_order || self.active_order
+      @success = act_order.update(status: "refund_in_progress", c_user: c_user)
       if @success && payment_success_and_employee_not_active
-        create_notification(active_order.employee, active_order.employer, "El talento", active_order, "purchases")
-      elsif @success #request banned, closed, or payment success but request banned or closed, or some user refunded or employer inactive
-        create_notification(active_order.employee, active_order.employer, "Se te reembolsará", active_order, "purchases")
+        create_notification(act_order.employee, act_order.employer, "El talento", act_order, "purchases")
       elsif ! @success# cant update order so i trigger that error
-        errors.add(:base, active_order.errors.full_messages.first)
+        errors.add(:base, act_order.errors.full_messages.first)
       end
   end
-
-  # def refund_money_for_worker # no notification again
-  #   begin
-  #     active_order = self.active_order
-  #     active_order.update(status: "refund_in_progress")
-  #   rescue # if openpay is down, the job will do it later
-  #     true
-  #   end
-  # end
 
   def invalid_change
     if status_changed?(from: "completed", to: "banned")
@@ -142,6 +131,6 @@ class Request < ApplicationRecord
 
   def all_orders
     request_offers = self.offers
-    the_active_order = Order.where(employer_id: self.user_id, purchase: request_offers)
+    all_orders = Order.where(employer_id: self.user_id, purchase: request_offers)
   end
 end
