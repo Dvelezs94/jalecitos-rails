@@ -1,5 +1,7 @@
 class Ticket < ApplicationRecord
   extend FriendlyId
+  include ApplicationHelper
+  attr_accessor :current_user
   mount_uploaders :images, TicketUploader
   friendly_id :title, use: :slugged
   belongs_to :user
@@ -15,4 +17,14 @@ class Ticket < ApplicationRecord
     maximum: 5,
     message: 'no puedes tener más de 5 imágenes'
   }
+
+  # Create push notification if the ticket wasnt opened by the user
+  after_create :create_notification_if_isnt_user
+
+  private
+  def create_notification_if_isnt_user
+    if defined?(current_user) || current_user.has_role?(:admin)
+      create_notification(current_user, self.user, "Se abrió", self)
+    end
+  end
 end

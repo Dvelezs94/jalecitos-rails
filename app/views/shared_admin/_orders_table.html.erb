@@ -1,4 +1,5 @@
 <h2>Orders</h2>
+<h3>Ordenes totales: <%= @orders_count %></h3>
 <div class="admin-chart row">
   <div class="col-10 col-sm-12 col-md-12 col-lg-6 text-center mar-0-auto">
     <h4>Por Fecha</h4>
@@ -18,7 +19,11 @@
         <th>Employer</th>
         <th>Employee</th>
         <th>Gig / Req</th>
+        <th>Duracion</th>
+        <th>Conversation</th>
+        <th>Paid</th>
         <th>Status</th>
+        <th></th>
       </tr>
     </thead>
     <tbody class="paginated_orders">

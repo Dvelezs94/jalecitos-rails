@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get :verifications
       get '/verifications/:id' => 'admins#show_verification', as: "show_verification"
       post :create_openpay_user
+      post :charge_openpay_user
       get :openpay_dashboard
       get :tickets
       get :orders
@@ -127,6 +128,8 @@ Rails.application.routes.draw do
       put :complete
       put :request_start
       put :start
+      put :pass_payment
+      put :deny_payment
     end
     resources :disputes, only: [:new, :create, :show] do
       resources :replies, only: [:create]

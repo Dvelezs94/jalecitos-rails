@@ -2,6 +2,7 @@ class AdminsController < ApplicationController
   layout 'admin'
   access admin: :all
   include OpenpayHelper
+  include ActionView::Helpers::NumberHelper
   before_action :set_vars
   before_action only: [:create_openpay_user, :openpay_dashboard, :predispersion_fee] do
     init_openpay("customer")
@@ -24,6 +25,7 @@ class AdminsController < ApplicationController
   end
 
   def orders
+    @orders_count = Order.all.length
     @orders =  Order.order(created_at: :desc).page(params[:order]).per(25)
     set_paginator
   end
@@ -87,8 +89,24 @@ class AdminsController < ApplicationController
     rescue OpenpayTransactionException => e
       flash[:error] = "#{self.alias} issue: #{e.description}, so the user could not be created on openpay"
     end
-    redirect_to root_path
+    redirect_to openpay_dashboard_admins_path
   end
+
+  def charge_openpay_user
+    fee = init_openpay("fee")
+    request_client_hash={"customer_id" => params[:openpay_id],
+                   "amount" => params[:amount],
+                   "description" => params[:description]
+                  }
+    begin
+      fee.create(request_client_hash)
+      flash[:success] = "El saldo ha sido cobrado por la cantidad de #{number_to_currency(params[:amount].to_f)}"
+    rescue OpenpayTransactionException => e
+      flash[:error] = "Fallo al realizar el cargo: #{e.description}"
+     end
+     redirect_to openpay_dashboard_admins_path
+  end
+
   # deposit predispersion balance to our openpay account, so we can move it later to dispersion
   def predispersion_fee
     fee = init_openpay("fee")
@@ -102,7 +120,7 @@ class AdminsController < ApplicationController
     rescue OpenpayTransactionException => e
       flash[:error] = "Fallo al realizar el deposito: #{e}"
      end
-     redirect_to root_path
+     redirect_to openpay_dashboard_admins_path
   end
 
   private
@@ -112,9 +130,9 @@ class AdminsController < ApplicationController
       @open_reports = Report.open.length
       @banned_bans = Ban.banned.where.not(baneable_type: "Request").length
       @pending_disputes = Dispute.waiting_for_support.length
-      @open_tickets = Ticket.in_progress.length
+      @open_tickets = Ticket.in_progress.where(turn: "waiting_for_support").length
       @user_count = User.all.length
-      @orders_count = Order.all.length
+      @pending_payment_orders_count = Order.payment_verification_pending.completed.length
       @gigs_count = Gig.all.length
     end
   end
