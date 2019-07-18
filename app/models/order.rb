@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  attr_accessor :pending_refund_worker, :c_user, :finish_order_worker
+  attr_accessor :pending_refund_worker, :c_user, :finish_order_worker, :employer_review_id
   include ActiveModel::Dirty
   include OrderFunctions
   include OpenpayHelper
@@ -130,15 +130,20 @@ class Order < ApplicationRecord
        charge_tax(self, @fee)
        # charge openpay tax
        openpay_tax(self, @fee)
-       self.dispute.proceeded! if self.dispute
      rescue
        OrderMailer.error_worker(self.uuid).deliver if finish_order_worker #notify support that the worker failed
        errors.add(:base, "Error al conectar con el servidor de pagos, por favor, inténtalo más tarde") and return
      end
-     #send mails if no errors
+     #do all this if no errors
+     self.dispute.proceeded! if self.dispute
+     create_reviews(self)
      if finish_order_worker
+       create_notification(self.employer, self.employee, "Se ha finalizado", self.purchase, nil, @employee_review.id)
+       create_notification(self.employee, self.employer, "Se ha finalizado", self.purchase, nil, @employer_review.id)
        OrderMailer.completed_after_72_hours(self).deliver
      else
+       create_notification(self.employer, self.employee, "ha finalizado", self.purchase, nil, @employee_review.id)
+       self.employer_review_id = @employer_review.id #used to pass as argument of url to grade employee
        OrderMailer.order_finished(self).deliver
      end
    end
