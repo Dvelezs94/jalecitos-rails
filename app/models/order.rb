@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  attr_accessor :pending_refund_worker
+  attr_accessor :pending_refund_worker, :c_user
   include ActiveModel::Dirty
   include OrderFunctions
   include OpenpayHelper
@@ -23,6 +23,9 @@ class Order < ApplicationRecord
   after_create :set_access_uuid
   before_update :try_to_refund, if: :change_to_refund_in_progress?
   before_update :request_the_refund, if: :pending_refund_worker?
+  before_update :start_stuff, if: :started_at_changed?
+  before_update :request_complete_stuff, if: :completed_at_changed?
+  before_update :complete_stuff, if: :changed_to_completed
   validate :invalid_changes, :on => :update
   #Associations
   belongs_to :employer, foreign_key: :employer_id, class_name: "User"
@@ -98,15 +101,66 @@ class Order < ApplicationRecord
      request_the_refund
    end
 
+   def request_complete_stuff
+     create_notification(self.employee, self.employer, "solicitó finalizar", self.purchase, "purchases")
+     OrderMailer.order_request_finish(self).deliver
+     # Queue job to finish the order in 72 hours
+     if ENV.fetch("RAILS_ENV") == "production"
+       FinishOrderWorker.perform_in(72.hours, self.id)
+     else
+       FinishOrderWorker.perform_in(10.seconds, self.id)
+     end
+   end
+
+   def start_stuff
+     create_notification(self.employee, self.employer, "ha comenzado", self.purchase, "purchases")
+     OrderMailer.order_started(self).deliver
+   end
+
+   def complete_stuff
+     self.dispute.proceeded! if self.dispute
+     #Openpay call to transfer the fee to the Employee
+     pay_to_customer(self, @transfer)
+     #Charge the fee
+     charge_fee(self, @fee)
+     #charge tax
+     charge_tax(self, @fee)
+     # charge openpay tax
+     openpay_tax(self, @fee)
+     OrderMailer.order_finished(self).deliver
+   end
+
    def invalid_changes
-     puts "X"*500
-     puts status_changed?(from: "refund_in_progress")
+     # IMPORTANT: i check if c_user is present because sometimes i leave it nil, for exmpale when i ban a report, i dont place the c_user and it triggers an error because i want to get c_user.id and c_user is nil
      #try to refund when not pending, in_progress or disputed
      if status_changed?(to: "refund_in_progress") && !( status_changed?(from: "pending") || status_changed?(from: "in_progress") || status_changed?(from: "disputed") )
        errors.add(:base, "El recurso no puede ser reembolsado por su estado actual")
+       #only admin can refund disputed order
+     elsif status_changed?(to: "refund_in_progress")  &&  status_changed?(from: "disputed") && c_user.present? && (! c_user.has_roles?(:admin) )
+       errors.add(:base, "Sólo soporte puede reembolsar un recurso disputado")
+       #employer cant refund orders in progress
+     elsif status_changed?(to: "refund_in_progress")  &&  status_changed?(from: "in_progress") && c_user.present? && c_user.id == self.employer_id
+       errors.add(:base, "No puedes reembolsar el recurso ya que está en progreso")
      #when trying to refund they cant change to other state than refunded
      elsif status_changed?(from: "refund_in_progress") && ! status_changed?(to: "refunded")
        errors.add(:base, "El recurso no puede ser actualizado ya que hay un reembolso en progreso")
+       #if request refunded order can just change to refunded!!!
+     elsif self.purchase_type == "Offer" && self.purchase.request.banned? && ( !status_changed?(to: "refunded") )
+       errors.add(:base, "El recurso está bloqueado, se reembolsará el dinero")
+     elsif self.response_order_id.nil?
+      errors.add(:base, "Esta orden no ha sido procesada y por lo tanto no puede comenzar")
+      #if its not my order i cant change it
+    elsif c_user.present? && c_user != self.employee && c_user != self.employer && (! c_user.has_role?(:admin))
+       errors.add(:base, "No tienes permiso para acceder aquí")
+      #just employer and employee can do certain things
+    elsif status_changed?(to: "complete") && c_user.present? && c_user != self.employer && (! c_user.has_role?(:admin))
+       errors.add(:base, "Sólo el empleador puede completar la orden")
+     elsif status_changed?(to: "in_progress") && c_user.present? && c_user != self.employee && (! c_user.has_role?(:admin))
+       errors.add(:base, "Sólo el empleado puede comenzar la orden")
+     elsif completed_at_changed? && c_user.present? && c_user != self.employee && (! c_user.has_role?(:admin))
+       errors.add(:base, "Sólo el empleado puede solicitar finalizar la orden")
+     elsif status_changed?(to: "completed") && status_changed?(from: "disputed") && ( ! c_user.has_roles?(:admin) )
+      errors.add(:base, "Sólo soporte puede completar un recurso disputado")
      elsif status_changed?(from: "refunded")
        errors.add(:base, "El recurso no puede ser actualizado ya que ha sido reembolsado")
      elsif status_changed?(from: "denied")
@@ -118,5 +172,8 @@ class Order < ApplicationRecord
 
    def pending_refund_worker?
      pending_refund_worker
+   end
+   def changed_to_completed
+     status_changed?(to: "completed")
    end
 end
