@@ -58,7 +58,7 @@ class OrdersController < ApplicationController
 
   def complete
     @order.with_lock do #prevent double execution if worker completes at same time
-      @success = @order.completed!
+      @success = @order.update(status: "completed")
       if @success
         flash[:success] = "La orden ha finalizado"
         redirect_to root_path(:identifier => @order.employer_review_id)

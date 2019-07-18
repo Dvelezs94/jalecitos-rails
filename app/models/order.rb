@@ -27,7 +27,7 @@ class Order < ApplicationRecord
   before_update :request_the_refund, if: :pending_refund_worker?
   before_update :start_stuff, if: :started_at_changed?
   before_update :request_complete_stuff, if: :completed_at_changed?
-  validate :complete_stuff, if: :changed_to_completed
+  after_validation :complete_stuff, if: :changed_to_completed
   #Associations
   belongs_to :employer, foreign_key: :employer_id, class_name: "User"
   belongs_to :employee, foreign_key: :employee_id, class_name: "User"
@@ -119,6 +119,8 @@ class Order < ApplicationRecord
    end
 
    def complete_stuff
+     #after_validation runs even though validation fails, so i have to make sure that no errors to run this
+     return if self.errors.any? #if validation fails, dont do all this stuff
      init_openpay("transfer")
      init_openpay("fee")
      begin
