@@ -14,11 +14,8 @@ class OrdersController < ApplicationController
   before_action only: [:create] do
     init_openpay("charge")
   end
-  before_action only: [:create, :complete, :refund] do
+  before_action only: [:create] do
     init_openpay("transfer")
-  end
-  before_action only: [:complete] do
-    init_openpay("fee")
   end
   before_action :get_order_by_uuid, only: [:request_start, :start, :request_complete, :complete, :refund, :pass_payment, :deny_payment]
   #just create validators

@@ -47,9 +47,9 @@ module OpenpayFunctions
     }
     begin
       response = transfer.create(request_hash, order.employer.openpay_id)
-      order.update(response_completion_id: response["id"])
+      order.response_completion_id = response["id"]
     rescue
-      order.update(response_completion_id: "failed")
+      order.response_completion_id = "failed"
     end
   end
 
@@ -88,9 +88,9 @@ module OpenpayFunctions
                   }
     begin
       response_fee = fee.create(request_fee_hash)
-      order.update(response_fee_id: response_fee["id"])
+      order.response_fee_id = response_fee["id"]
     rescue
-      order.update(response_fee_id: "failed")
+      order.response_fee_id = "failed"
     end
   end
 
@@ -102,9 +102,9 @@ module OpenpayFunctions
                   }
     begin
       response_tax = fee.create(request_tax_hash)
-      order.update(response_tax_id: response_tax["id"])
+      order.response_tax_id = response_tax["id"]
     rescue
-      order.update(response_tax_id: "failed")
+      order.response_tax_id = "failed"
     end
   end
 
@@ -116,9 +116,9 @@ module OpenpayFunctions
                   }
     begin
       response_tax = fee.create(request_tax_hash)
-      order.update(response_openpay_tax_id: response_tax["id"])
+      order.response_openpay_tax_id = response_tax["id"]
     rescue
-      order.update(response_openpay_tax_id: "failed")
+      order.response_openpay_tax_id = "failed"
     end
   end
 

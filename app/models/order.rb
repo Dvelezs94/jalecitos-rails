@@ -1,9 +1,10 @@
 class Order < ApplicationRecord
-  attr_accessor :pending_refund_worker, :c_user
+  attr_accessor :pending_refund_worker, :c_user, :finish_order_worker
   include ActiveModel::Dirty
   include OrderFunctions
   include OpenpayHelper
   include OpenpayFunctions
+  include MoneyHelper
   include ApplicationHelper
   # #search
   #callbacks false make sync off so records are not added automatically
@@ -18,6 +19,7 @@ class Order < ApplicationRecord
   #    }
   # end
   #Actions
+  validate :invalid_changes, :on => :update
   validates_presence_of :purchase, :employer, :employee, :card_id, on: :create
   validate :just_one_hire_in_request, :on => :create
   after_create :set_access_uuid
@@ -25,8 +27,7 @@ class Order < ApplicationRecord
   before_update :request_the_refund, if: :pending_refund_worker?
   before_update :start_stuff, if: :started_at_changed?
   before_update :request_complete_stuff, if: :completed_at_changed?
-  before_update :complete_stuff, if: :changed_to_completed
-  validate :invalid_changes, :on => :update
+  validate :complete_stuff, if: :changed_to_completed
   #Associations
   belongs_to :employer, foreign_key: :employer_id, class_name: "User"
   belongs_to :employee, foreign_key: :employee_id, class_name: "User"
@@ -118,16 +119,28 @@ class Order < ApplicationRecord
    end
 
    def complete_stuff
-     self.dispute.proceeded! if self.dispute
-     #Openpay call to transfer the fee to the Employee
-     pay_to_customer(self, @transfer)
-     #Charge the fee
-     charge_fee(self, @fee)
-     #charge tax
-     charge_tax(self, @fee)
-     # charge openpay tax
-     openpay_tax(self, @fee)
-     OrderMailer.order_finished(self).deliver
+     init_openpay("transfer")
+     init_openpay("fee")
+     begin
+       #Openpay call to transfer the fee to the Employee
+       pay_to_customer(self, @transfer)
+       #Charge the fee
+       charge_fee(self, @fee)
+       #charge tax
+       charge_tax(self, @fee)
+       # charge openpay tax
+       openpay_tax(self, @fee)
+       self.dispute.proceeded! if self.dispute
+     rescue
+       OrderMailer.error_worker(self.uuid).deliver if finish_order_worker #notify support that the worker failed
+       errors.add(:base, "Error al conectar con el servidor de pagos, por favor, inténtalo más tarde") and return
+     end
+     #send mails if no errors
+     if finish_order_worker
+       OrderMailer.completed_after_72_hours(self).deliver
+     else
+       OrderMailer.order_finished(self).deliver
+     end
    end
 
    def invalid_changes
