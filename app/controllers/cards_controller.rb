@@ -1,12 +1,12 @@
 class CardsController < ApplicationController
   include OpenpayHelper
   include RefererFunctions
+  access user: [:create, :destroy]
   before_action :authenticate_user!
   before_action only: [:create, :destroy] do
     init_openpay("card")
   end
   before_action :validate_max_cards, only: :create
-  access user: [:create, :destroy]
   before_action :verify_personal_information, only: :create
 
 

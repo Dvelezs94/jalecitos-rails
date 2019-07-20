@@ -2,9 +2,9 @@ class ConversationsController < ApplicationController
 
   include ConversationFunctions
   layout 'logged'
+  access user: :all
   before_action :authenticate_user!
   before_action :set_recipient, only: [:index, :create]
-  access user: :all
 
   # GET /conversations
   def index

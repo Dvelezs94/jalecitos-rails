@@ -1,13 +1,13 @@
 class BanksController < ApplicationController
   include OpenpayHelper
   include UsersHelper
+  access user: [:create, :destroy]
   before_action :authenticate_user!
   before_action :set_user, only: [:create, :destroy]
   before_action only: [:create, :destroy] do
     init_openpay("bank")
   end
   before_action :validate_max_banks, only: :create
-  access user: [:create, :destroy]
   before_action :check_user_ownership, only:[:create, :destroy]
   before_action :verify_personal_information, only: :create
 
