@@ -1,7 +1,7 @@
 class BillingProfilesController < ApplicationController
   include RefererFunctions
-  before_action :authenticate_user!
   access user: :all, admin: :all
+  before_action :authenticate_user!
   before_action :set_billing_profile, only: [:destroy]
   before_action :verify_ownership, only: [:destroy]
 

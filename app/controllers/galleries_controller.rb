@@ -1,13 +1,11 @@
 class GalleriesController < ApplicationController
   layout 'logged'
+  access user: :all
   before_action :set_item, only: [:create, :save_video]
   before_action :set_item_destroy, only: [:destroy]
   before_action :check_item_ownership, only: [:create, :destroy, :save_video]
   before_action :check_if_content, only: [:create]
   skip_before_action :verify_authenticity_token
-
-  access user: :all
-
 
   def create
     @uploaded = (params[:gig].present?)? params[:gig][:images] : params[:request][:images]#get uploaded image
