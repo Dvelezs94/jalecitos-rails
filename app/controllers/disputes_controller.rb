@@ -1,10 +1,10 @@
 class DisputesController < ApplicationController
+  access user: :all, admin: :all
   before_action :authenticate_user!
   before_action :set_dispute, only: [:show]
   before_action :check_dispute_ownership, only: :show
   before_action :check_if_can_create_dispute, only: :new
   layout 'logged'
-  access user: :all, admin: :all
 
   # GET /disputes/1
   def show

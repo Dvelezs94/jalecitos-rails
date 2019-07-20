@@ -1,10 +1,10 @@
 class ReviewsController < ApplicationController
+  access user: :all, admin: :all
   before_action :authenticate_user!
   before_action :set_review
   before_action :check_review_ownership
   before_action :check_rated
   # before_action :review_once
-  access user: :all, admin: :all
 
   def update
     #get the params
