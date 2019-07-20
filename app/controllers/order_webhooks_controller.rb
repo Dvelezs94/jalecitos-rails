@@ -1,7 +1,7 @@
 class OrderWebhooksController < ApplicationController
+  access all: :all
   http_basic_authenticate_with name: ENV.fetch("WEBHOOK_USERNAME"), password: ENV.fetch("WEBHOOK_PASSWORD")
   skip_before_action :verify_authenticity_token
-  access all: :all
 
   def handle
     @object = params

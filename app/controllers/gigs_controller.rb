@@ -4,6 +4,7 @@ class GigsController < ApplicationController
   include PackTypes
   include SetLayout
   include BannedFunctions
+  access user: { except: [:ban_gig] }, admin: [:ban_gig], all: [:show]
   before_action :set_gig, only: [:destroy, :ban_gig]
   before_action :set_gig_with_first_pack, only: :toggle_status
   before_action :set_gig_with_all_asc, only: :show
@@ -13,7 +14,6 @@ class GigsController < ApplicationController
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status, :create]
   before_action :max_gigs, only: [:new, :create]
   before_action :check_running_orders, only: :destroy
-  access user: { except: [:ban_gig] }, admin: [:ban_gig], all: [:show]
   layout :set_layout
 
   # GET /gigs/1

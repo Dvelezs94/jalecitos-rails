@@ -1,7 +1,7 @@
 class MarketingNotificationsController < ApplicationController
+  access admin: :all
   before_action :authenticate_user!
   before_action :set_marketing_notification, only: [:destroy]
-  access admin: :all
 
   # POST /likes
   def create

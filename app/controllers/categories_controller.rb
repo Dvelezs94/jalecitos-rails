@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
   access admin: :all
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # GET /categories
   def index

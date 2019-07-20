@@ -1,9 +1,9 @@
 class RaterController < ApplicationController
+  access user: :all
   skip_before_action :verify_authenticity_token
   before_action :validate_owner
   before_action :validate_klass
   before_action :validate_score
-  access user: :all
 
   def create
     if user_signed_in?

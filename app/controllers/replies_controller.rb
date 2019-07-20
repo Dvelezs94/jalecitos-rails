@@ -1,7 +1,7 @@
 class RepliesController < ApplicationController
   include RepliesHelper
-  before_action :authenticate_user!
   access user: :all, admin: :all
+  before_action :authenticate_user!
 
   # POST /replies
   def create
