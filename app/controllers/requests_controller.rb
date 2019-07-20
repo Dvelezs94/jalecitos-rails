@@ -2,12 +2,12 @@ class RequestsController < ApplicationController
   include SetLayout
   include GetRequest
   include BannedFunctions
+  access all: [:show], user: :all
   before_action :authenticate_user!, except: :show
   before_action :redirect_if_user_banned, only: [:new, :create]
   before_action :set_request, only: [:show, :destroy]
   before_action :set_req_update, only: [:edit, :update]
   before_action :set_req_create, only: [:create]
-  access all: [:show], user: :all
   before_action :check_request_ban, only: [:show]
   before_action :check_request_ownership, only:[:edit, :update, :destroy, :create]
   before_action :verify_if_published, only: [:edit, :update, :destroy]

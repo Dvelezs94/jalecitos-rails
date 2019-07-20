@@ -1,10 +1,10 @@
 class VerificationsController < ApplicationController
   layout 'logged'
+  access user: [:new, :create], admin: [:approve, :deny, :cancel]
   before_action :authenticate_user!
   before_action :check_current_verifications
   before_action :set_verification, only: [:approve, :deny]
   before_action :verify_previous_work, only: [:new, :create]
-  access user: [:new, :create], admin: [:approve, :deny, :cancel]
 
   def new
     @verification = Verification.new

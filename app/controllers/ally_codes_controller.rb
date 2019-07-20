@@ -1,6 +1,6 @@
 class AllyCodesController < ApplicationController
-  before_action :authenticate_user!
   access admin: [:create], user: [:trade]
+  before_action :authenticate_user!
   before_action :verify_already_ally, only: [:trade]
   before_action :set_ally_code, only: [:trade]
 
