@@ -3,9 +3,9 @@ class QueriesController < ApplicationController
   include SearchFunctions
   include LocationFunctions
   include GetQuery
+  access user: [:autocomplete_profession, :user_mobile_search], admin: :all, all: [:search, :autocomplete_search, :autocomplete_location]
   layout :set_layout
   before_action :set_state, only: [:search]
-  access user: [:autocomplete_profession, :user_mobile_search], admin: :all, all: [:search, :autocomplete_search, :autocomplete_location]
 
   def search
     if params[:gigs]

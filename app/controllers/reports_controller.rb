@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
-  before_action :authenticate_user!
   access user: [:create], admin: :all
+  before_action :authenticate_user!
   before_action :verify_report_count, only: :create
   before_action :set_report, only: :deny
 

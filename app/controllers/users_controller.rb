@@ -5,10 +5,10 @@ class UsersController < ApplicationController
   include UsersHelper
   respond_to :html, :json, :js
   layout :set_layout
+  access all: [:show], user: [:update_user, :configuration, :my_account, :send_new_confirmation_email]
   before_action :check_if_my_profile, only: :show
   before_action :set_user, only: [:show]
   before_action :set_user_config, only: [:configuration]
-  access all: [:show], user: [:update_user, :configuration, :my_account, :send_new_confirmation_email]
 
 
   def configuration

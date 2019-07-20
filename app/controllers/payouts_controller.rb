@@ -3,8 +3,8 @@ class PayoutsController < ApplicationController
   include OpenpayHelper
   include OrderFunctions
   include LevelHelper
-  before_action :authenticate_user!
   access user: :all
+  before_action :authenticate_user!
   before_action :set_payouts, only: :show
   before_action :validate_previous_payouts, only: :create
   before_action :min_payout_amount, only: :create

@@ -4,12 +4,12 @@ class OffersController < ApplicationController
   include OpenpayHelper
   include MoneyHelper
   include BannedFunctions
+  access all: [:show], user: :all
   before_action :authenticate_user!
   before_action :redirect_if_user_banned, only: [:new, :create]
   before_action :set_request
   before_action :allow_owner, only: :hire
   before_action :set_offer, only: [:edit, :update, :destroy, :hire]
-  access all: [:show], user: :all
   before_action :check_req_published, only: [:new, :create, :edit, :update, :destroy, :hire]
   before_action :check_offer_ownership, only:[:edit, :update, :destroy]
   before_action :redirect_if_offer_has_order, only: [:edit]

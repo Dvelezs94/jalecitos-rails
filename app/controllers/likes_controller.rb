@@ -1,8 +1,8 @@
 class LikesController < ApplicationController
+  access user: [:create, :destroy]
   before_action :authenticate_user!
   before_action :set_gig, only: [:create, :destroy]
   # before_action :check_like_ownership, only: [:destroy]
-  access user: [:create, :destroy]
 
   # POST /likes
   def create

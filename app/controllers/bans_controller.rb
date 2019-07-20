@@ -1,10 +1,10 @@
 class BansController < ApplicationController
+  access admin: :all
   before_action :authenticate_user!
   before_action :set_ban, only: [:unban]
   before_action :check_cause_present, only: :create
   before_action :no_system_ban, only: :create
   before_action :set_report, only: :create
-  access admin: :all
 
   def unban
     if @ban.banned? && @ban.baneable_type != "Request"
