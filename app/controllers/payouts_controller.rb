@@ -63,7 +63,7 @@ class PayoutsController < ApplicationController
   end
 
   def min_payout_amount
-    @orders = current_user.unpaid_orders
+    @orders = current_user.unpaid_orders(verification="payment_verification_passed")
     # calculate orders and money to give to the user.
     # this function collects the ids that fit on a desired amount (eg 5000)
     #  it returns the ids that fit
