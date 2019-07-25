@@ -104,7 +104,9 @@ class PagesController < ApplicationController
 
   def update_push_subscription
     if cookies[:FcmToken]
-      PushSubscription.create(user: current_user, auth_key: cookies[:FcmToken], device: "mobile")
+      if ! PushSubscription.find_by_auth_key(cookies[:FcmToken])
+        PushSubscription.create(user: current_user, auth_key: cookies[:FcmToken], device: "mobile")
+      end
     end
   end
 
