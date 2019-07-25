@@ -3,7 +3,7 @@ class PushSubscription < ApplicationRecord
   validates_presence_of :auth_key
   validates_uniqueness_of :auth_key
 
-  after_create :purge_old_subscriptions
+  after_save :purge_old_subscriptions
 
   private
   # Destroy other push subscriptions that dont belong to the mobile device
