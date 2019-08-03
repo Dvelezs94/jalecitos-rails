@@ -1,5 +1,5 @@
 <div class="single-gig swiper-slide">
-  <a href="<%= gig_path(city_slug(gig.city), gig) %>">
+  <a href="<%= the_gig_path(gig) %>">
     <div class="page3single-slidersd">
       <div class="singleslidepd">
         <%= image_tag( image_display_helper( default_gig_img(gig.images), gig.youtube_url ) ) %>

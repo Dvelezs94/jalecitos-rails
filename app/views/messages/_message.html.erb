@@ -17,7 +17,7 @@
         <% end %>
         <% if message.related_to.present? %>
         <% item = message.related_to %>
-        <a href="<%= message.related_to_type == "Gig"? gig_path(city_slug(item.city),item) : request_path(item) %>">
+        <a href="<%= message.related_to_type == "Gig"? the_gig_path(item) : request_path(item) %>">
         <div class="related_to_item">
           Relacionado a: <%= message.related_to.title %>
         </div>

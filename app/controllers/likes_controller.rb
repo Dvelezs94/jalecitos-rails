@@ -9,7 +9,10 @@ class LikesController < ApplicationController
     @gig.likes.where(user: current_user).first_or_create
 
     respond_to do |format|
-      format.html {redirect_to gig_path(city_slug(@gig.city),@gig.slug), notice: "Se ha guardado este Jale en tus favoritos"}
+      format.html {
+        flash[:notice] = "Se ha eliminado este Jale en tus favoritos"
+        redirect_to the_gig_path(@gig)
+      }
       format.js
     end
   end
@@ -18,7 +21,10 @@ class LikesController < ApplicationController
     @gig.likes.where(user: current_user).destroy_all
 
     respond_to do |format|
-      format.html {redirect_to gig_path(city_slug(@gig.city),@gig.slug), notice: "Se ha eliminado este Jale en tus favoritos"}
+      format.html {
+        flash[:notice] = "Se ha eliminado este Jale en tus favoritos"
+        redirect_to the_gig_path(@gig)
+      }
       format.js
     end
   end

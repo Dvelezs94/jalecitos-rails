@@ -1,7 +1,7 @@
 <div class="alert alert-danger alert-dismissible fade show text-center" role="alert" style="margin-bottom:0 !important;">
-  <% if @gig.present? && gig_path(city_slug(@gig.city),@gig) && @gig.user_id == current_user.id %>
+  <% if @gig.present? && the_gig_path(@gig) && @gig.user_id == current_user.id %>
   <p>No podrás publicar tu jale ya que tu perfil está bloqueado</p>
-  <% elsif @gig.present? && gig_path(city_slug(@gig.city),@gig) %>
+  <% elsif @gig.present? && the_gig_path(@gig) %>
   <p> No puedes contratar ya que tu cuenta está bloqueada </p>
   <% elsif @request.present? && request_path(@request) && @request.user_id != current_user.id %>
   <p> No puedes ofertar ya que tu cuenta está bloqueada </p>

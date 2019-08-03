@@ -22,7 +22,8 @@ Rails.application.routes.draw do
     end
   end
   #custom routes for city_id
-  get '/jale/:city_slug/:id' => 'gigs#show', as: "gig"
+  get '/jale/:city_slug/:id' => 'gigs#old_show', as: "old_gig"
+  get '/jale/:city_slug/:category/:id' => 'gigs#show', as: "gig"
   get '/jale/:city_slug/:id/edit' => 'gigs#edit', as: "edit_gig"
   patch '/jale/:city_slug/:id' => 'gigs#update'
   put '/jale/:city_slug/:id' => 'gigs#update'
