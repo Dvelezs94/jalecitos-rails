@@ -108,7 +108,10 @@ class PackagesController < ApplicationController
   end
 
   def check_no_ownership
-    redirect_to( gig_path(city_slug(@package.gig.city),@package.gig), notice: "No puedes contratarte a ti mismo." ) if (current_user == @package.gig.user )
+    if current_user == @package.gig.user
+      flash[:notice] = "No puedes contratarte a ti mismo"
+      redirect_to( the_gig_path(@package.gig) )
+    end
   end
 
   def check_quantity
@@ -116,7 +119,7 @@ class PackagesController < ApplicationController
       #if quantity is present and if ( package doesnt support quantity or the value is not in admitted range )
       #if quantity isnt present and package supports unit_quantity
       flash[:error] = "Solicitud de contratación inválida"
-      redirect_to( gig_path(city_slug(@package.gig.city),@package.gig))
+      redirect_to( the_gig_path(@package.gig))
     end
   end
 

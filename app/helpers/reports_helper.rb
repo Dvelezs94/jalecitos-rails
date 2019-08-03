@@ -33,7 +33,7 @@ module ReportsHelper
     if object.class == User
       user_path(object.slug)
     elsif object.class == Gig
-      gig_path(city_slug(object.city), object.slug)
+      the_gig_path(object)
     else
       request_path(object.slug)
     end
