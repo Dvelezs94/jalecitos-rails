@@ -20,10 +20,10 @@
 <div class="right-bottom-chat-write">
     <div class="bottom-chat-write">
       <%= form_for [@conversation, Message.new], remote: true do |f| %>
-      <label for="message_image">
+      <label for="message_image" style="width:45px;">
         <%= icon("fas","image", class: "fa-2x", title: "Adjuntar imagen", id: "attach-i")  %>
         <%= f.file_field :image, accept: ".jpg, .jpeg, .png", style: "display: none;" %>
-        <label id="file-name" title="borrar imagen"></label>
+        <img id="output" style="width: inherit;display:none;"></img>
       </label>
       <%= f.text_field :body, autofocus: true, size: 499, autocomplete: "off", placeholder: "Escribe un mensaje" %>
       <%= f.hidden_field :related_to_id, value: params[:model_id] %>

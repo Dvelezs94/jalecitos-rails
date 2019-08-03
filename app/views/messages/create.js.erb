@@ -1,4 +1,7 @@
 $("#message_body").val(""); //clear message field
 $("#message_related_to_id").val(''); //clear the related_to (if there is any)
-updateConvURL("related_to", "sent") //when user send the related, change url because if he reloads he cant do it again
-$('#file-name')[0].innerText = ""
+$("#message_image").val(""); //clear img field
+updateConvURL("related_to", "sent"); //when user send the related, change url because if he reloads he cant do it again
+$("#output").attr("src", "");
+$('#attach-i').show();
+$("img#output").attr("display", "none");

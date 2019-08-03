@@ -1,4 +1,4 @@
-<%= link_to conversations_path(user_id: user["user"].slug) do %>
+<%= link_to conversations_path(user_id: user["user"].id), data: {user_id: user["user"].id} do %>
 <div class="chat-box-man" id="<%= user["user"].alias %>">
   <div class="chat-single-box <%= "ef" if ! user["unread_messages"]   %>">
     <%= image_tag(avatar_display_helper(user["user"].image_url(:thumb))) %>
