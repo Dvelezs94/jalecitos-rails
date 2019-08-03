@@ -4,18 +4,20 @@ class GigsController < ApplicationController
   include PackTypes
   include SetLayout
   include BannedFunctions
-  access user: { except: [:ban_gig] }, admin: [:ban_gig], all: [:show]
+  access user: { except: [:ban_gig] }, admin: [:ban_gig], all: [:show, :old_show]
   before_action :set_gig, only: [:destroy, :ban_gig]
   before_action :set_gig_with_first_pack, only: :toggle_status
-  before_action :set_gig_with_all_asc, only: :show
-  before_action :check_published, only: :show
+  before_action :set_gig_with_all_asc, only: [:show, :old_show]
+  before_action :check_published, only: [:show, :old_show]
   before_action :set_gig_create, only: [:create]
   before_action :set_gig_update, only: [:edit, :update]
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status, :create]
   before_action :max_gigs, only: [:new, :create]
   before_action :check_running_orders, only: :destroy
   layout :set_layout
-
+  def old_show
+    redirect_to the_gig_path @gig
+  end
   # GET /gigs/1
   def show
     if params[:reviews]
@@ -45,11 +47,11 @@ class GigsController < ApplicationController
     flash_if_user_banned
     flash_if_first_package
     if flash[:error]
-      redirect_to gig_path(city_slug(@gig.city),@gig)
+      redirect_to the_gig_path(@gig)
     else
       change_status
       flash[:success] = "Estado actual del Jale: #{t("gigs.status.#{@gig.status}")}"
-      redirect_to gig_path(city_slug(@gig.city),@gig)
+      redirect_to the_gig_path(@gig)
     end
   end
 

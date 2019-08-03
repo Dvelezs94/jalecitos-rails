@@ -46,7 +46,7 @@
                 <h3>Detalles de la disputa</h3>
                 <p><strong>Numero de Orden: </strong><%= @dispute.order.uuid %></p>
                 <% if @dispute.order.purchase_type == "Package" %>
-                <p><strong>Jale: </strong><%= @dispute.order.purchase ? link_to(@dispute.order.purchase.gig.title, gig_path(city_slug(@dispute.order.purchase.gig.city),@dispute.order.purchase.gig.slug)) : "Borrado" %></p>
+                <p><strong>Jale: </strong><%= @dispute.order.purchase ? link_to(@dispute.order.purchase.gig.title, the_gig_path(@dispute.order.purchase.gig)) : "Borrado" %></p>
                 <p><strong>Paquete: </strong><%= @dispute.order.purchase ? @dispute.order.purchase.pack_type : "Borrado" %></p>
                 <% else %>
                 <p><strong>Pedido: </strong><%= link_to(@dispute.order.purchase.request.title, request_path(@dispute.order.purchase.request.slug)) %></p>
