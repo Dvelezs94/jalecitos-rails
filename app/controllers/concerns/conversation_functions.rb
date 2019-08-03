@@ -2,7 +2,7 @@ module ConversationFunctions
   private
   def set_recipient
     if params[:user_id]
-      @remote_user = User.friendly.find(params[:user_id]).id
+      @remote_user = User.find(params[:user_id]).id
       @conversation = Conversation.where(sender_id: current_user.id, recipient_id: @remote_user ).
       or( Conversation.where(sender_id: @remote_user, recipient_id: current_user.id) ).
       limit(1).first
