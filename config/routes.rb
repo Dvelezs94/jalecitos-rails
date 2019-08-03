@@ -24,10 +24,10 @@ Rails.application.routes.draw do
   #custom routes for city_id
   get '/jale/:city_slug/:id' => 'gigs#old_show', as: "old_gig"
   get '/jale/:city_slug/:category/:id' => 'gigs#show', as: "gig"
-  get '/jale/:city_slug/:id/edit' => 'gigs#edit', as: "edit_gig"
-  patch '/jale/:city_slug/:id' => 'gigs#update'
-  put '/jale/:city_slug/:id' => 'gigs#update'
-  delete '/jale/:city_slug/:id' => 'gigs#destroy'
+  get '/jale/:city_slug/:category/:id/edit' => 'gigs#edit', as: "edit_gig"
+  patch '/jale/:city_slug/:category/:id' => 'gigs#update'
+  put '/jale/:city_slug/:category/:id' => 'gigs#update'
+  delete '/jale/:city_slug/:category/:id' => 'gigs#destroy'
   #doesnt need to be declared, just for spanish friendly url for user
   get '/jales/nuevo' => 'gigs#new', as: "new_gig"
   #post "/jales" => "gigs#create", as: "gigs" #doesnt need to be declared
