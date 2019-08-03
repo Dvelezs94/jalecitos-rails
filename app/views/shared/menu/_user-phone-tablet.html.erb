@@ -5,7 +5,7 @@
       <div class="col-3">
         <div class="tablet-mobile-input">
           <div class="mobile-input-icon">
-            <% if (@gig.present? && @gig.slug.present? && current_page?( gig_path(city_slug(@gig.city),@gig))) || (@request.present? && @request.slug.present? && current_page?( request_path(@request) )) %>
+            <% if (@gig.present? && @gig.slug.present? && current_page?( the_gig_path(@gig))) || (@request.present? && @request.slug.present? && current_page?( request_path(@request) )) %>
             <i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.go(-1);"></i>
             <% else %>
             <a class="menu-open" id="menu-open" href="<%= user_mobile_search_path %>">
@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-      <% if @gig.present? && @gig.slug.present? && current_page?( gig_path(city_slug(@gig.city),@gig) ) %>
+      <% if @gig.present? && @gig.slug.present? && current_page?( the_gig_path(@gig) ) %>
       <div class="col-9 text-right">
           <%= render "shared_user/gigs/show/gig_actions", desktop: false %>
       </div>
