@@ -62,7 +62,7 @@
             <% end %>
           <%= "#{icon("fas", "check-square", title: "Verificado")}".html_safe if @gig.user.verified %>
         </div>
-        <%=link_to( "#{icon("fas", "comment-alt", title: "Mensaje")} Mensaje".html_safe, conversations_path( user_id: @gig.user.slug, model_id: @gig.id, model: "Gig"), style: "font-weight: 700;" ) if current_user != @gig.user%>
+        <%=link_to( "#{icon("fas", "comment-alt", title: "Mensaje")} Mensaje".html_safe, conversations_path( user_id: @gig.user.id, model_id: @gig.id, model: "Gig"), style: "font-weight: 700;" ) if current_user != @gig.user%>
 
       </div>
     </div>
