@@ -4,7 +4,7 @@
       <h5 class="<%= single_sale.status %>"><%= t "orders.status.#{single_sale.status}" %> <%= order_hint_employee(single_sale.status) %></h5>
       <h4># <%= single_sale.uuid %></h4>
       <% if single_sale.purchase_type == "Package"%>
-      <p><%= link_to(single_sale.purchase.gig.title, the_gig_path(single_sale.purchase.gig),single_sale.purchase.gig.slug), class: "order-title") rescue "Jale Eliminado" %></p>
+      <p><%= link_to(single_sale.purchase.gig.title, the_gig_path(single_sale.purchase.gig), class: "order-title") rescue "Jale Eliminado" %></p>
       <% else %>
       <p><%= link_to single_sale.purchase.request.title, request_path(single_sale.purchase.request.slug), class: "order-title" rescue "Orden Eliminada"%></p>
       <% end %>
