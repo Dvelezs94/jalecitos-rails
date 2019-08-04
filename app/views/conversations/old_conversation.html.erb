@@ -45,7 +45,6 @@
     <label class="custom-file-upload" for="message_image">
       <%= icon("fas","paperclip", class: "fa-2x", title: "Adjuntar imagen")  %>
       <%= f.file_field :image, accept: ".jpg, .jpeg, .png", style: "display: none;" %>
-      <label id="file-name" title="borrar imagen"></label>
     </label>
 
     <%= button_tag( :class => "btn btn-success send-message", id: "send-message") do %>
