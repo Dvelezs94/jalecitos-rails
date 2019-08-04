@@ -24,7 +24,7 @@ class MessageBroadcastWorker
       message: render_message(message, user),
       conversation_id: message.conversation_id,
       conversation_min: render_conversation(stuff),
-      opposite_slug: opposite.slug,
+      opposite_id: opposite.id,
       role: "sender"
     )
   end
@@ -34,7 +34,7 @@ class MessageBroadcastWorker
       "conversations-#{user.id}",
       message: render_message(message, user),
       conversation_id: message.conversation_id,
-      opposite_slug: opposite.slug,
+      opposite_id: opposite.id,
       conversation_min: render_conversation(stuff),
       role: "receiver"
     )

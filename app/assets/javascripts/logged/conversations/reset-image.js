@@ -1,7 +1,9 @@
 $(document).on('turbolinks:load', function() {
-  $("#file-name").on("click", function(){
+  $("#output").on("click", function(event){
+    event.preventDefault(); //the default is that when clicks it opens files to select another
     $("#message_image").val('');
-    $('#file-name')[0].innerText = "";
+    $("#output").attr("src", "");
+    $("#output").attr("display", "none");
     $('#attach-i').show();
   });
 });
