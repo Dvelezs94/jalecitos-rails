@@ -28,7 +28,7 @@
     </div>
     <% else %>
     <div class="authorlock">
-      <%=link_to( " #{icon('fas', 'comment')}Contactar ".html_safe, conversations_path( user_id: @user.slug) )%>
+      <%=link_to( " #{icon('fas', 'comment')}Contactar ".html_safe, conversations_path( user_id: @user.id) )%>
     </div>
     <div class="authorlock authorlock2">
       <%=link_to( " #{icon('fas', 'flag')}Reportar ".html_safe, "#", id: "reportuserbtntablet" )%>
