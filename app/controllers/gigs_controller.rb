@@ -178,7 +178,8 @@ class GigsController < ApplicationController
                                   :city_id,
                                   :category_id,
                                   :tag_list,
-                                  :profession
+                                  :profession,
+                                  :phone_number
                                 ).merge(:user_id => current_user.id)
 
     end

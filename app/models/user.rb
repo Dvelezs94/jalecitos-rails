@@ -49,6 +49,11 @@ class User < ApplicationRecord
   validates_presence_of :name, if: :name_changed?  #dont allow blank again if value is filled
   validate :check_running_orders, if: :user_disabled?, on: :update
 
+  #validate phone number syntax
+  validates :phone_number, :presence => {:message => 'Tienes que proporcionar un numero valido'},
+                       :numericality => true,
+                       :length => { :minimum => 10, :maximum => 10 },
+                       :allow_blank => true
   # Create User Score and openpay user
   after_validation :create_user_score
   after_validation :create_openpay_account

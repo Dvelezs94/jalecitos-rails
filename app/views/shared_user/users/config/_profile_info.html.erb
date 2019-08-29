@@ -37,10 +37,21 @@
           <%= best_in_place current_user, :name, url: update_users_path, style: "padding: 5px;", :data => {:name => "nombre"}, :place_holder => "Edítame", id: "change_user_name", inner_class: "best_input" %>
           <%= icon("fas", "pencil-alt", class: "toggable", id: "name-pencil") %>
         </div>
-        <label for="">Alias</label>
-        <div class="inp-area">
-          <%= best_in_place current_user, :alias, class: "change_user_alias", url: update_users_path, style: "padding: 5px;", :data => {:name => "alias"}, id: "change_user_alias", inner_class: "best_input" %>
-          <%= icon("fas", "pencil-alt", class: "toggable") %>
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <label for="">Alias</label>
+            <div class="inp-area">
+              <%= best_in_place current_user, :alias, class: "change_user_alias", url: update_users_path, style: "padding: 5px;", :data => {:name => "alias"}, id: "change_user_alias", inner_class: "best_input" %>
+              <%= icon("fas", "pencil-alt", class: "toggable") %>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="">Numero Celular</label>
+            <div class="inp-area">
+              <%= best_in_place current_user, :phone_number, class: "change_user_phone_number", url: update_users_path, style: "padding: 5px;", :data => {:name => "Numero celular"}, id: "change_user_phone_number", inner_class: "best_input" %>
+              <%= icon("fas", "pencil-alt", class: "toggable") %>
+            </div>
+          </div>
         </div>
         <label for="">Sobre mí</label>
         <div class="textarea-area">

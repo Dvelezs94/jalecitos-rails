@@ -117,7 +117,8 @@ class UsersController < ApplicationController
                                    :roles_word,
                                    :tag_list,
                                    :transactional_emails,
-                                   :marketing_emails
+                                   :marketing_emails,
+                                   :phone_number
                                  )
     end
 
