@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_25_005840) do
+ActiveRecord::Schema.define(version: 2019_08_29_230454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_005840) do
     t.bigint "city_id"
     t.string "youtube_url"
     t.integer "visits", default: 0
+    t.string "phone_number"
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["city_id"], name: "index_gigs_on_city_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true
@@ -214,6 +215,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_005840) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "materials", default: true
+    t.string "phone_number"
     t.index ["request_id"], name: "index_offers_on_request_id"
     t.index ["user_id"], name: "index_offers_on_user_id"
   end
@@ -515,6 +517,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_005840) do
     t.boolean "secure_transaction", default: false
     t.string "secure_transaction_job_id"
     t.string "session_token"
+    t.string "phone_number"
     t.index ["ally_code_id"], name: "index_users_on_ally_code_id"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

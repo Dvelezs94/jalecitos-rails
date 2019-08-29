@@ -70,6 +70,13 @@
 
           </div>
 
+          <div class="form_block form_section row">
+            <div class="flex-space-bet">
+              <p class="form-title">Numero celular en donde puedan contactarte (opcional)</p>
+            </div>
+            <%= form.text_field :phone_number, class: "styled", value: current_user.phone_number %>
+          </div>
+
           <!-- tags -->
           <div class="form_block form_section row">
             <div class="flex-space-bet">
