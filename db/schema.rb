@@ -248,7 +248,6 @@ ActiveRecord::Schema.define(version: 2019_07_25_005840) do
     t.float "payout_left"
     t.string "unit_type"
     t.integer "unit_count"
-    t.boolean "requested_refund"
     t.integer "payment_verification", default: 0
     t.index ["billing_profile_id"], name: "index_orders_on_billing_profile_id"
     t.index ["employer_id", "employee_id"], name: "index_orders_on_employer_id_and_employee_id"
@@ -359,6 +358,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_005840) do
     t.string "reportable_type"
     t.integer "reportable_id"
     t.integer "status", default: 0
+    t.string "cause_str"
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -512,9 +512,9 @@ ActiveRecord::Schema.define(version: 2019_07_25_005840) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.bigint "ally_code_id"
-    t.string "session_token"
     t.boolean "secure_transaction", default: false
     t.string "secure_transaction_job_id"
+    t.string "session_token"
     t.index ["ally_code_id"], name: "index_users_on_ally_code_id"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
