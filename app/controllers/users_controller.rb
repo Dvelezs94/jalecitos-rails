@@ -12,9 +12,10 @@ class UsersController < ApplicationController
 
 
   def configuration
-      @openpay_id = @user.openpay_id
-      @user_banks = get_openpay_resource("bank", @openpay_id)
-      @user_cards = get_openpay_resource("card", @openpay_id)
+      # no hire
+      # @openpay_id = @user.openpay_id
+      # @user_banks = get_openpay_resource("bank", @openpay_id)
+      # @user_cards = get_openpay_resource("card", @openpay_id)
       @roles = {:employee => "Vendedor", :employer => "Comprador"}
       @billing_profiles = current_user.billing_profiles.enabled
       @billing_profile = BillingProfile.new
