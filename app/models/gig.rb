@@ -53,10 +53,6 @@ class Gig < ApplicationRecord
   validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
   validates_length_of :youtube_url, :maximum => 250, :message => "debe contener como máximo 250 caracteres." #this message doesnt get shown, i didnt displayed it
   validate :location_validate
-  #validate phone number syntax
-  validates :phone_number, :presence => {:message => 'Tienes que proporcionar un numero valido'},
-                       :numericality => true,
-                       :length => { :minimum => 10, :maximum => 10 }
   #Gallery validations
   validates :images, length: {
   maximum: 5,

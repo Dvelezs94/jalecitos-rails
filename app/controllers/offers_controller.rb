@@ -80,8 +80,7 @@ class OffersController < ApplicationController
       offer_params = params.require(:offer).permit(:description,
                                                    :price,
                                                    :hours,
-                                                   :materials,
-                                                   :phone_number
+                                                   :materials
                                                   )
     end
 
@@ -89,8 +88,7 @@ class OffersController < ApplicationController
       offer_params = params.require(:offer).permit(:description,
                                                    :price,
                                                    :hours,
-                                                   :materials,
-                                                   :phone_number
+                                                   :materials
                                                  ).merge(:request_id => @request.id, :user_id => current_user.id)
     end
 
