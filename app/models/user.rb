@@ -229,6 +229,10 @@ class User < ApplicationRecord
      active_orders.any?
    end
 
+   def international_phone_number
+     return "52" + phone_number rescue nil
+   end
+
    private
    def set_roles
      if self.roles_word.present?

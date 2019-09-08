@@ -13,10 +13,6 @@ class Offer < ApplicationRecord
   validates :price, numericality: { greater_than_or_equal_to: 100, less_than_or_equal_to: 10000 }
   validates :hours, numericality: { only_integer: true,   greater_than_or_equal_to: 1, allow_nil: true }
   validate :cant_edit, if: :has_order, on: :update
-  #validate phone number syntax
-  validates :phone_number, :presence => {:message => 'Tienes que proporcionar un numero valido'},
-                       :numericality => true,
-                       :length => { :minimum => 10, :maximum => 10 }
 
   def description=(val)
     write_attribute(:description, no_multi_spaces(val.strip))
