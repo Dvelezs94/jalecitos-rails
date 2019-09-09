@@ -337,4 +337,7 @@ module ApplicationHelper
   def the_gig_path gig
     gig_path(city_slug(gig.city), gig.category.name.parameterize,gig.slug)
   end
+  def the_gig_url gig
+    gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug)
+  end
 end
