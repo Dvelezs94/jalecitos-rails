@@ -15,7 +15,7 @@ class Review < ApplicationRecord
   # end
 
   #Associations
-  belongs_to :order
+  belongs_to :order, optional: true #no hire, recommendations
   belongs_to :giver, foreign_key: :giver_id, class_name: "User"
   belongs_to :receiver, foreign_key: :receiver_id, class_name: "User"
   belongs_to :reviewable, :polymorphic => true, optional: true #package can be deleted
