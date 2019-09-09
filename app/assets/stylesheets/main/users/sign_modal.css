@@ -75,6 +75,11 @@
 	margin-right: 10px;
 	transform: translateY(2px);
 }
+
+.ft-20 {
+	font-size: 20px;
+}
+
 .modal-header {
 	border-bottom: none;
 	position: absolute;
