@@ -426,3 +426,7 @@ a.continue_purchase {
 .block .inner a {
   pointer-events: all;
 }
+
+.recommendation  {
+  padding: 10px 0;
+}

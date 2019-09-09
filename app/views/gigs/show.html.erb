@@ -23,6 +23,13 @@
       <div class="col-lg-4 col-md-5">
         <!-- only in computer -->
         <%= render 'shared/gigs/show/package_info', device: "computer" %>
+        <div class="recommendation">
+          <h4 ><strong>¿Recomendarías este Jale?</strong></h4>
+          <div class="row justify-content-center">
+            <button type="button" class="btn btn-primary col-lg-5 col-md-5 col-sm-5 col-5" id="recommendgigbtn">Sí</button>
+            <button type="button" class="btn btn-light col-lg-5 col-md-5 col-sm-5 col-5">No</button>
+          </div>
+        </div>
         <%= render 'shared/gigs/show/user_card_info' %>
       </div>
     </div>
@@ -30,3 +37,4 @@
   <%= gig_carousel( "Jales Relacionados", :related_gigs) %>
 </div>
 <%= render 'reports/report', object: @gig %>
+<%= render 'reviews/recommendation', object: @gig %>

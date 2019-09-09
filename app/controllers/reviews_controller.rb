@@ -15,6 +15,16 @@ class ReviewsController < ApplicationController
     head :no_content
   end
 
+  def create
+    fields = recommendation_params
+    #if comment is empty, save as nil for saving space
+    fields[:comment] = nil if fields[:comment] == ""
+    @review = Review.new(fields)
+    @success = @Review.save      
+  end
+
+
+
   private
   def set_review
     @review = Review.find(params[:id])
@@ -36,5 +46,10 @@ class ReviewsController < ApplicationController
   def review_params
     gig_params = params.require(:review).permit(:comment).merge(status: "completed")
   end
+
+  def recommendation_params
+    gig_params = params.require(:review).permit(:comment).merge(status: "completed", recommendation: true)
+  end
+
 
 end
