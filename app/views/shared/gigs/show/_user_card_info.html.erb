@@ -11,11 +11,6 @@
         <p class="hace1">Activo(a) hace <%= distance_of_time_in_words_to_now(@gig.user.current_sign_in_at) %></p>
       </div>
     </div>
-   <% if current_user != @gig.user %>
-    <div class="page3-comment">
-      <%=link_to( icon("fas", "comment", title: "Contactar"), conversations_path( user_id: @gig.user.id, model_id: @gig.id, model: "Gig") )%>
-    </div>
-  <% end %>
   </div>
   <div class="mentosdates">
     <p class="datesin">Miembro desde <%= distance_of_time_in_words_to_now(@gig.user.created_at) %></p>
