@@ -38,18 +38,26 @@
           <%= icon("fas", "pencil-alt", class: "toggable", id: "name-pencil") %>
         </div>
         <div class="row">
-          <div class="col-sm-12 col-md-6">
+          <div class="col-sm-12">
             <label for="">Alias</label>
             <div class="inp-area">
               <%= best_in_place current_user, :alias, class: "change_user_alias", url: update_users_path, style: "padding: 5px;", :data => {:name => "alias"}, id: "change_user_alias", inner_class: "best_input" %>
               <%= icon("fas", "pencil-alt", class: "toggable") %>
             </div>
           </div>
-          <div class="col-sm-12 col-md-6">
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-8">
             <label for="">Numero Celular</label>
             <div class="inp-area">
               <%= best_in_place current_user, :phone_number, class: "change_user_phone_number", url: update_users_path, style: "padding: 5px;", :data => {:name => "Numero celular"}, id: "change_user_phone_number", inner_class: "best_input" %>
               <%= icon("fas", "pencil-alt", class: "toggable") %>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <label for="">Este es mi numero de whatsapp</label>
+            <div class="inp-area">
+              <%= best_in_place current_user, :whatsapp_enabled, as: :checkbox, collection: {true: "Si", false: "No"}, class: "change_user_whatsapp_enabled", url: update_users_path, style: "padding: 5px;", :data => {:name => "Whatsapp"}, id: "change_user_whatsapp_enabled", inner_class: "best_input" %>
             </div>
           </div>
         </div>
