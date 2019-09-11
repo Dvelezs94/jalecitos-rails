@@ -118,6 +118,7 @@ class UsersController < ApplicationController
                                    :tag_list,
                                    :transactional_emails,
                                    :marketing_emails,
+                                   :whatsapp_enabled,
                                    :phone_number
                                  )
     end
