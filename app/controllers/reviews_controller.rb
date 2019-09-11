@@ -69,7 +69,6 @@ class ReviewsController < ApplicationController
     review_params[:receiver_id] = @gig_owner_id
     review_params[:giver_id] = current_user.id
     review_params[:is_recommendation] = true
-    puts review_params
     review_params
   end
 
@@ -79,7 +78,6 @@ class ReviewsController < ApplicationController
     review_params[:rating_attributes][:rateable_type] = "Review"
     review_params[:rating_attributes][:rateable_id] = @review.id
     review_params[:rating_attributes][:rater_id] = current_user.id
-    puts review_params[:rating_attributes]
     review_params[:rating_attributes]
   end
 
