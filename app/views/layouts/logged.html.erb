@@ -39,6 +39,9 @@
     <%= render 'shared/menu/main_nav_bar' %>
     <%= render "shared/transition/transition-icon" %>
     <div class="main_container">
+      <!-- Remove at some point no hire -->
+
+      <%= render 'shared_user/users/phone_available' if current_user.phone_number.nil? %>
       <%= notification_helper %>
       <div class="gap"></div>
       <%= banned_notification %>

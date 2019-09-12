@@ -54,21 +54,22 @@
               <%# render 'shared_user/gigs/forms/hints/city_hint.html.erb'%>
               <%= render "shared_user/forms/choose_payment",  n: n, pack: package[n] %>
               <div class="row hidden" display_id="by_service_<%= n %>" display_class="by_service">
-                <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="row centered justify-content-center col-lg-12 col-md-12 col-sm-12 col-12"> <!--col-lg-6 col-md-6 col-sm-12 col-12 no hire-->
                   <p class="price-text form-title">Lo que ganaré:</p>
                   <div class="row justify-content-center w-100">
-                    <%= pa.number_field :price, min: "100", max: "10000", step: ".01",
-                    class: "price-input price-input-#{n} form-control form_fields_#{n}" %>
+                    <%= pa.number_field :price, min: "0", max: "1000000", step: ".01",
+                    class: "price-input price-input-#{n} form-control form_fields_#{n}" %> <!--min: "100", max: "10000"-->
                     <span class="span-error"></span>
                   </div>
                 </div>
-                <div class="form_block row will-show col-lg-6 col-md-6 col-sm-12 col-12">
+                <%# no hire %>
+                <!-- <div class="form_block row will-show col-lg-6 col-md-6 col-sm-12 col-12">
                   <div class="flex-space-bet">
-                    <p class="price-text form-title">Precio final:  <%= icon("fas", "question-circle", class: "question_hint toggler") %></p>
+                    <p class="price-text form-title">Precio final:  <%# icon("fas", "question-circle", class: "question_hint toggler") %></p>
                   </div>
-                  <%= render 'shared_user/pack/hints/price_hint.html.erb' %>
-                  <label id="price-calc-<%= n %>" class="label-price"></label>
-                </div>
+                  <%# render 'shared_user/pack/hints/price_hint.html.erb' %>
+                  <label id="price-calc-<%# n %>" class="label-price"></label>
+                </div> -->
               </div>
               <div class="row hidden" display_id="by_units_<%= n %>" display_class="by_unit">
                 <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
@@ -82,8 +83,8 @@
                 <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
                   <p class="price-text form-title">Precio por unidad:</p>
                   <div class="row justify-content-center w-100">
-                    <%= pa.number_field :price, min: "1", max: "5000", step: "0.5", id: "unit_price_#{n}",
-                    class: "form-control form_fields_#{n} text-center unit_price" %>
+                    <%= pa.number_field :price, min: "1", max: "1000000", step: "0.5", id: "unit_price_#{n}",
+                    class: "form-control form_fields_#{n} text-center unit_price" %> <!-- max: "5000" no hire-->
                     <span class="span-error"></span>
                   </div>
                 </div>
@@ -98,14 +99,14 @@
                 <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
                   <p class="price-text form-title">Máxima cantidad a vender:</p>
                   <div class="row justify-content-center w-100">
-                    <%= pa.number_field :max_amount, min: "2", max: "10000", step: "1", id: "max_amount_#{n}",
-                    class: "form-control form_fields_#{n} max_amount text-center"  %>
+                    <%= pa.number_field :max_amount, min: "2", max: "1000000", step: "1", id: "max_amount_#{n}",
+                    class: "form-control form_fields_#{n} max_amount text-center"  %> <!-- max: "10000" no hire-->
                     <span class="span-error"></span>
                   </div>
                 </div>
               </div>
-              <%= render "shared_user/see_level_table", n: n %>
-              <%= render "shared/level_table", n: n, user: true, h: true  %>
+              <%# render "shared_user/see_level_table", n: n  no hire%>
+              <%# render "shared/level_table", n: n, user: true, h: true  no hire%>
             </div>
               <div style="margin:0 20px;display:flex;justify-content:flex-end;">
                 <%=link_to icon("fas", "trash-alt", class: "fa-2x", style: "color: red;"), "#{n}", class: "erase-all" %>
