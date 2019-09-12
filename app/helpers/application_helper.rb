@@ -17,6 +17,11 @@ module ApplicationHelper
     cookies.permanent.signed[:mb].present?
   end
 
+  def not_rated_gig(gig)
+    review = Review.find_by(reviewable: gig, giver: current_user, order_id: nil)
+    (review.present?)? false : true
+  end
+
   def prof_and_loc model  #this function is used in home and queries
     profession = model.profession.present? ? model.profession : "Sin profesión"
     if current_user #if user

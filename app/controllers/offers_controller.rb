@@ -4,7 +4,7 @@ class OffersController < ApplicationController
   include OpenpayHelper
   include MoneyHelper
   include BannedFunctions
-  access all: [:show], user: :all
+  access all: [:show], user: {except: [:hire]} #no hire user: :all
   before_action :authenticate_user!
   before_action :redirect_if_user_banned, only: [:new, :create]
   before_action :set_request

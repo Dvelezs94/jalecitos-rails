@@ -2,7 +2,7 @@
 <div class="tablet-mobile-top-ber">
   <div class="container">
     <div class="row">
-      <div class="col-3">
+      <div class="col-3" style="visibility: hidden;"> <!-- no hire -->
         <div class="tablet-mobile-input">
           <div class="mobile-input-icon">
             <% if (@gig.present? && @gig.slug.present? && current_page?( the_gig_path(@gig))) || (@request.present? && @request.slug.present? && current_page?( request_path(@request) )) %>

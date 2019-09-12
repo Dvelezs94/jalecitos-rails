@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
   include OrderFunctions
   include MoneyHelper
   layout :set_layout
-  access user: :all, admin: [:complete, :refund, :pass_payment, :deny_payment]
+  access admin: [:complete, :refund, :pass_payment, :deny_payment] #no hire user: :all
   before_action only: [:create] do
     init_openpay("charge")
   end

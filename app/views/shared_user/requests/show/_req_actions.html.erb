@@ -10,6 +10,6 @@
     <%= link_to icon("fas","pen", class: "fa-lg gig_action_icon", title: "Editar"), edit_request_path(@request) %>
     <%= link_to icon("fas","trash", class: "fa-lg gig_action_icon", title: "Eliminar"), request_path(@request), method: :delete, :data => {:confirm => 'Confirma que quieres borrar este pedido'}  %>
   <% elsif user_signed_in? && @request.user != current_user%>
-    <%= link_to icon("fa","flag", title: "Reportar"), {}, id: "reportrequestbtn" %>
+    <%= link_to icon("fa","flag", title: "Reportar"), {}, class: "reportrequestbtn" %>
   <% end %>
 </div>

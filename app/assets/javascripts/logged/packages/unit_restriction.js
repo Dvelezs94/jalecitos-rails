@@ -1,6 +1,7 @@
 $(document).on('turbolinks:load', function() {
-  $(".max_amount").keyup(adj_max_unit_price);
-  $(".unit_price").keyup(adj_max_amount);
+  //no hire
+  // $(".max_amount").keyup(adj_max_unit_price);
+  // $(".unit_price").keyup(adj_max_amount);
 });
 
 function adj_max_unit_price () {

@@ -21,7 +21,7 @@ class Package < ApplicationRecord
   validates_presence_of :unit_type, :min_amount, :max_amount, if: -> { unit_type.present? || min_amount.present? || max_amount.present? }
   validates :min_amount, numericality: { only_integer: true,   greater_than_or_equal_to: 1, allow_nil: true } #minimum 1 and allow not present
 
-  validate :max_unit_price, :price_range, :min_and_max
+  validate :price_range, :min_and_max #:max_unit_price, no hire
   before_update :check_orders
   private
   def check_orders
@@ -43,10 +43,10 @@ class Package < ApplicationRecord
   def price_range
     if unit_type.present? && min_amount.present? && max_amount.present? #unit type
       err = "El precio es demasiado bajo o no se proporcionó" if price < 1
-      err = "No puedes ganar arriba de de 5000 MXN por unidad" if price > 5000
+      #err = "No puedes ganar arriba de 5000 MXN por unidad" if price > 5000 #no hire
     elsif price.present? #service type
       err = "El precio es demasiado bajo o no se proporcionó" if price < 100
-      err = "No puedes ganar arriba de de 10000 MXN" if price > 10000
+      #err = "No puedes ganar arriba de 10000 MXN" if price > 10000 #no hire
     end
 
     if err

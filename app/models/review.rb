@@ -2,6 +2,7 @@ class Review < ApplicationRecord
   # #search
   #callbacks false make sync off so records are not added automatically
    searchkick language: "spanish",callbacks: false
+   attr_accessor :is_recommendation
   #
   # def search_data
   #   {
@@ -13,9 +14,8 @@ class Review < ApplicationRecord
   #     updated_at: updated_at
   #   }
   # end
-
   #Associations
-  belongs_to :order
+  belongs_to :order, optional: true #no hire, recommendations
   belongs_to :giver, foreign_key: :giver_id, class_name: "User"
   belongs_to :receiver, foreign_key: :receiver_id, class_name: "User"
   belongs_to :reviewable, :polymorphic => true, optional: true #package can be deleted
@@ -25,8 +25,10 @@ class Review < ApplicationRecord
 
   validates_presence_of :reviewable, on: :create
 
+  validate :just_one_recomendation, if: :is_recommendation?, on: :create
+
   # Options to rate
-  ratyrate_rateable 'Employee', 'Employer'
+  ratyrate_rateable 'Employee', 'Employer', "Recommendation"
   enum status: { pending: 0, completed: 1 }
 
   #validations
@@ -39,8 +41,10 @@ class Review < ApplicationRecord
   def resource_average
     #if the user rated the review and not pressed the cancel button
     if self.rating.present? && self.rating.stars != 0
+      if self.rating.dimension == "Recommendation"
+        RecommendationWorker.perform_async(self.id)
       # if the user that rated is the employer
-      if self.giver == self.order.employer
+      elsif self.giver == self.order.employer
         # Rate the Gig if the purchase class is package
         if self.reviewable_type == "Gig"
           GigAverageWorker.perform_async(self.id)
@@ -51,5 +55,13 @@ class Review < ApplicationRecord
         EmployerAverageWorker.perform_async(self.id)
       end
     end
+  end
+  def just_one_recomendation
+    review = Review.find_by(giver_id: giver_id, reviewable_id: reviewable_id, order_id: nil) #if order id not present, is a recommendation
+    errors.add(:base, "Ya has dado una calificación a este Jale") if review.present?
+  end
+
+  def is_recommendation?
+    is_recommendation
   end
 end

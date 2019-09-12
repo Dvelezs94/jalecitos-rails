@@ -48,7 +48,13 @@ class User < ApplicationRecord
   validates :name, format: { :with => /\A[a-zA-Z\p{L}\p{M}\s]+\z/, message: "Sólo puede contener letras y espacios" }, :allow_blank => true #allow blank because on creation it doesnt have
   validates_presence_of :name, if: :name_changed?  #dont allow blank again if value is filled
   validate :check_running_orders, if: :user_disabled?, on: :update
+  validates_presence_of :phone_number, if: :whatsapp_enabled_changed?  #dont allow blank again if value is filled
 
+  #validate phone number syntax
+  validates :phone_number, :presence => {:message => 'Tienes que proporcionar un numero valido'},
+                       :numericality => true,
+                       :length => { :minimum => 10, :maximum => 10 },
+                       :allow_blank => true
   # Create User Score and openpay user
   after_validation :create_user_score
   after_validation :create_openpay_account
@@ -222,6 +228,14 @@ class User < ApplicationRecord
    def active_orders?
      active_orders = Order.where("(employee_id=? OR employer_id=?)", self, self).where(status: ["pending", "in_progress", "disputed"])
      active_orders.any?
+   end
+
+   def international_phone_number(prefix=false)
+     if not prefix.present?
+       return "521" + phone_number rescue nil
+     else
+       return "+521" + phone_number rescue nil
+     end
    end
 
    private
