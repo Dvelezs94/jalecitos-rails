@@ -4,7 +4,7 @@ class PackagesController < ApplicationController
   include OpenpayHelper
   include MoneyHelper
   include BannedFunctions
-  access user: :all
+  access user: {except: [:hire]} # no hire, user: :all
   before_action :redirect_if_user_banned, only: [:hire]
   before_action :set_gig_and_packages, only: [ :create, :update_packages]
   before_action :check_gig_ownership, only: [ :create, :update_packages]

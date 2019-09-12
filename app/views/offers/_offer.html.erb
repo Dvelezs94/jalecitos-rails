@@ -30,9 +30,14 @@
       </div>
     <% end %>
     <% if current_user == offer.request.user && !@already_hired %>
-      <div class="Borrar-btn">
-        <%= link_to("Mensaje", conversations_path(user_id: offer.user.slug, model_id: @request.id, model: "Request"), class: "Contratar-b") %>
-        <%= link_to("Contratar", hire_request_offer_path(offer.request.slug, offer), class: "Contratar-b") %>
+      <div class="hire-pack-btn">
+        <% if offer.user.whatsapp_enabled && offer.user.phone_number.present? %>
+        <%= link_to "#{icon("fab", "whatsapp ft-20", title: "Whatsapp")}".html_safe, "https://wa.me/#{offer.user.international_phone_number}?text=#{"Hola me interesa su oferta en mi pedido *#{offer.request.name}*. #{request_url(offer.request.slug)}"}", class: "btn btn-success", id: "wapp-contact", target: "_blank" %>
+        <% end %>
+        <% if offer.user.phone_number.present? %>
+        <%= link_to "#{icon("fas", "phone", title: "Llamar")}".html_safe, "tel:#{offer.user.international_phone_number(prefix=true)}", class: "btn btn-secondary", id: "phone-contact", target: "_blank" %>
+        <% end %>
+        <%= link_to "#{icon('fas', 'comment', title: "Mensaje")}".html_safe, conversations_path( user_id: offer.user.id), class: "btn btn-primary", id: "msg-contact" %>
       </div>
     <% end %>
   </div>

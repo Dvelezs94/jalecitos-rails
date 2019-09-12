@@ -30,7 +30,8 @@ module MoneyHelper
 
   # Get toal price of order, with taxes included
   def purchase_order_total price
-    ($fee+1) * (price+$cons) * (1+$iva)
+    #($fee+1) * (price+$cons) * (1+$iva)
+    return price
   end
 
   # used for hire view

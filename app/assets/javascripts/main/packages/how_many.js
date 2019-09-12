@@ -32,5 +32,5 @@ function change_price (elem) {
   quantity = parseInt($(elem).val());
   base_price = quantity * unit_price ;
   price_label = $(elem).closest("[pack_container]").find('.packa-price');
-  price_label.html("$" + ( ((base_price+10) * 1.04) * 1.16).toFixed(2) + "<sub>MXN</sub>");
+  price_label.html("$" + base_price.toFixed(2) + "<sub>MXN</sub>"); // ((base_price+10) * 1.04) * 1.16).toFixed(2), no hire
 }

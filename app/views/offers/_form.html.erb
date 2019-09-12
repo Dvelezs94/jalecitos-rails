@@ -35,25 +35,26 @@
 
 
           <div class="form_block form_section row">
-            <div class="flex-space-bet">
-              <p class="form-title">Horas estimadas (<strong>Opcional</strong>):</p>
+            <div class="col-6">
+              <div class="flex-space-bet">
+                <p class="form-title">Horas estimadas:</p>
+              </div>
+              <%= form.number_field :hours, class: 'styled', step: 1 %>
             </div>
-            <%= form.number_field :hours, class: 'styled', step: 1 %>
-          </div>
-          <div class="form_block form_section row">
-            <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-12 col-12">
-              <p class="price-text form-title">Lo que voy a ganar:</p>
+            <div class="col-6">
+              <p class="price-text form-title">Precio:</p>
               <div class="row justify-content-center">
                 <%= form.number_field :price, min: "100", max: "10000", step: ".01",
                 class: "price-input price-input-0 styled required" %>
               </div>
             </div>
-            <div class="row will-show col-lg-6 col-md-6 col-sm-12 col-12 row">
+          </div>
+            <!-- <div class="row will-show col-lg-6 col-md-6 col-sm-12 col-12 row">
               <p class="price-text form-title">Precio final:</p>
               <label id="price-calc-0" class="label-price"></label>
-            </div>
-            <%= render "shared_user/see_level_table", n: 0 %>
-            <%= render "shared/level_table", n: 0, user: true, h: true  %>
+            </div> -->
+            <!-- no hire <%= render "shared_user/see_level_table", n: 0 %>
+            <%= render "shared/level_table", n: 0, user: true, h: true  %> -->
           </div>
 
           <div style="margin: 0 20px;">

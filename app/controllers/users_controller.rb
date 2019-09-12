@@ -12,9 +12,10 @@ class UsersController < ApplicationController
 
 
   def configuration
-      @openpay_id = @user.openpay_id
-      @user_banks = get_openpay_resource("bank", @openpay_id)
-      @user_cards = get_openpay_resource("card", @openpay_id)
+      # no hire
+      # @openpay_id = @user.openpay_id
+      # @user_banks = get_openpay_resource("bank", @openpay_id)
+      # @user_cards = get_openpay_resource("card", @openpay_id)
       @roles = {:employee => "Vendedor", :employer => "Comprador"}
       @billing_profiles = current_user.billing_profiles.enabled
       @billing_profile = BillingProfile.new
@@ -116,7 +117,9 @@ class UsersController < ApplicationController
                                    :roles_word,
                                    :tag_list,
                                    :transactional_emails,
-                                   :marketing_emails
+                                   :marketing_emails,
+                                   :whatsapp_enabled,
+                                   :phone_number
                                  )
     end
 
