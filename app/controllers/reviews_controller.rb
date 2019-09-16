@@ -35,7 +35,9 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review.destroy
+    @review.with_lock do
+      @review.destroy
+    end
   end
 
 

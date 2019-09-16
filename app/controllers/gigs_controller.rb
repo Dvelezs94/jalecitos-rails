@@ -27,7 +27,7 @@ class GigsController < ApplicationController
       render template: "shared/carousels/add_items_carousel.js.erb"
     else
       define_pack_names
-      get_my_reviews
+      get_my_reviews if current_user
       get_reviews
       get_related_gigs
       Searchkick.multi_search([@related_gigs])
