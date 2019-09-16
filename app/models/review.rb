@@ -21,7 +21,7 @@ class Review < ApplicationRecord
   belongs_to :reviewable, :polymorphic => true, optional: true #package can be deleted
   has_one :prof_rating, ->{ limit(20)}, class_name: 'Rate', as: :rateable
   has_one :gig_rating, ->{ limit(5)}, class_name: 'Rate', as: :rateable
-  has_one :rating, class_name: 'Rate', as: :rateable #limit 1 by default, this is used in reviews controller
+  has_one :rating, class_name: 'Rate', as: :rateable, dependent: :destroy #limit 1 by default, this is used in reviews controller
 
   validates_presence_of :reviewable, on: :create
 
@@ -35,7 +35,7 @@ class Review < ApplicationRecord
   validates_length_of :comment, :maximum => 2000
 
   # Run Gig average job to update score
-  after_commit :resource_average, on: :update
+  after_commit :resource_average, on: :update, if: :status_changed_to_completed?
 
   # method to average the gig and the user score
   def resource_average
@@ -63,5 +63,9 @@ class Review < ApplicationRecord
 
   def is_recommendation?
     is_recommendation
+  end
+
+  def status_changed_to_completed?
+    status_changed?(to: "completed")
   end
 end

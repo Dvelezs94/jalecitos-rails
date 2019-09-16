@@ -1,4 +1,4 @@
-<div class="servico-singleteam single-review">
+<div class="servico-singleteam single-review" review-id="<%= review.id %>">
   <div class="servico-authoristd">
     <%= link_to image_tag(avatar_display_helper(review.giver.image_url(:thumb)), class: "icon-review"), user_path(review.giver.slug) %>
   </div>
@@ -11,19 +11,30 @@
         <%= image_tag("star-on", title: review.gig_rating.stars, class: "single-star") %>
         <span class="rating-score"><%= review.gig_rating.stars.to_i %></span>
       </p>
+
+      <div class="btn-group dropleft review-more ripple">
+        <div data-toggle="dropdown" haspopup="true" expanded="false" class="w-100">
+          <%= icon("fas", "ellipsis-v") %>
+        </div>
+        <div class="dropdown-menu">
+          <%= link_to("Eliminar", review_path(review.id), method: :delete, remote: true,class: "dropdown-item", data: {confirm: "El elemento se eliminará"}) if current_user == review.giver %>
+          <%= link_to("Editar", review_path(review.id), class: "dropdown-item edit-review")  if current_user == review.giver %>
+          <%= link_to "Reportar", review_path(review.id), class: "dropdown-item report-review"  if current_user != review.giver %>
+        </div>
+      </div>
     </div>
     <p class="loyed2">
       <% if review.comment.present? %>
-      <% splitted_words = review.comment.split  %>
-        <span class='truncated-text' style='display: inline;'><%=review.comment.truncate_words(50) %></span>
-        <% if splitted_words.size > 50 %>
-          <span class='complete-text' style='display: none;'><%= splitted_words[50..-1].join(' ') %></span>
-          <div>
-            <%= link_to('Ver más', '#', onclick: 'toggleReviewText(event)') %>
-          </div>
+        <% splitted_words = review.comment.split  %>
+          <span class='truncated-text' style='display: inline;'><%=review.comment.truncate_words(50) %></span>
+          <% if splitted_words.size > 50 %>
+            <span class='complete-text' style='display: none;'><%= splitted_words[50..-1].join(' ') %></span>
+            <div>
+              <%= link_to('Ver más', '#', onclick: 'toggleReviewText(event)') %>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
-    </p>
-    <p class="loyed3"><%= distance_of_time_in_words_to_now(review.updated_at) %></p>
+      </p>
+      <p class="loyed3"><%= distance_of_time_in_words_to_now(review.updated_at) %></p>
+    </div>
   </div>
-</div>

@@ -26,9 +26,9 @@
         <% if current_user && current_user != @gig.user && not_rated_gig(@gig) %>
         <div class="recommendation">
           <h4 ><strong>¿Recomendarías este Jale?</strong></h4>
-          <div class="row justify-content-center">
-            <button type="button" class="btn btn-primary col-lg-5 col-md-5 col-sm-5 col-5 mr-1" id="recommendgigbtn">Sí</button>
-            <button type="button" class="btn btn-light col-lg-5 col-md-5 col-sm-5 col-5" id="notrecommendgigbtn">No</button>
+          <div class="row justify-content-center mar-0-auto">
+            <button type="button" class="btn btn-success col-lg-5 col-md-5 col-sm-5 col-5 mr-1" id="recommendgigbtn">Sí</button>
+            <button type="button" class="btn btn-light col-lg-5 col-md-5 col-sm-5 col-5" id="notrecommendgigbtn" , style="border:1px solid #D3D3D3">No</button>
           </div>
         </div>
         <% end %>
@@ -39,4 +39,6 @@
   <%= gig_carousel( "Jales Relacionados", :related_gigs) %>
 </div>
 <%= render 'reports/report', object: @gig %>
+<%= render 'reports/review' %>
+<%= render 'reviews/edit' %>
 <%= render 'reviews/recommendation', object: @gig %>

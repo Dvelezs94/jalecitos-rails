@@ -1,7 +1,7 @@
-$(".recommendation").fadeOut("fast", function() { $(this).remove(); } );
-$(".recommendationModal").remove();
 if (<%= @success %>){
-  show_success("Gracias por tu opinión");
+  $(".modal").css("display", "none");
+  show_success("Se ha editado tu comentario");
+  $(".paginated_reviews").find("[review-id="+ "<%= @review.id %>" + "]").remove();
   $(".paginated_reviews").prepend("<%= j render(partial: 'shared/reviews/review', collection: [@review]) %>");
   display_reviews(true);
   $('html, body').animate({

@@ -1,8 +1,8 @@
 class ReviewsController < ApplicationController
   access user: :all, admin: :all
   before_action :authenticate_user!
-  before_action :set_review, only: [:update]
-  before_action :check_review_ownership, only: [:update]
+  before_action :set_review, only: [:update, :destroy]
+  before_action :check_review_ownership, only: [:update, :destroy]
   before_action :check_rated, only: [:update]
 
   before_action :not_recommend_myself, only: [:create]
@@ -14,8 +14,8 @@ class ReviewsController < ApplicationController
     fields = review_params
     #if comment is empty, save as nil for saving space
     fields[:comment] = nil if fields[:comment] == ""
-    @review.update(fields)
-    head :no_content
+    @success = @review.update(fields)
+    # head :no_content
   end
 
   def create #create recommendation
@@ -29,9 +29,13 @@ class ReviewsController < ApplicationController
         fields = rating_params
         @rating = Rate.new(fields)
         @success = @rating.save
-        @review.delete if !@success
+        @review.delete if !@success #if no rate, call delete instead of destroy, (calling destroy would try to delete its rate)
       end
     end
+  end
+
+  def destroy
+    @review.destroy
   end
 
 
