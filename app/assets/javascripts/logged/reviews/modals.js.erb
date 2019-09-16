@@ -1,0 +1,25 @@
+$(document).on('turbolinks:load', function() {
+    $('.report-review').on('click', function () {
+      form = $("#reportRequestForm");
+      form.attr("action", $(this).attr("href"));
+      $("#review_cause").val("");
+    });
+
+    $(document).on('click','a.edit-review' , function () {
+      edit_review(this);
+    });
+});
+function edit_review(elem) {
+  form = $("#editReviewForm");
+  comment_form = form.find("#review_comment");
+  form.attr("action", $(elem).attr("href"));
+  review = $(elem).closest(".single-review");
+  first_text = review.find(".truncated-text");
+  second_text = review.find(".complete-text");
+  if (second_text.length > 0 && second_text.html() != "") {
+    comment = ( (second_text.is(":visible") )? first_text.text() : first_text.text().slice(0, first_text.text().length - 3 ) ) +" "+ second_text.text(); //removes the "..." if second text is not visible
+  } else {
+    comment = first_text.text();
+  }
+  comment_form.val(comment);
+}
