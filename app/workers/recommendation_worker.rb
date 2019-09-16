@@ -11,7 +11,7 @@ class RecommendationWorker
       @gig_owner.save
     end
     @gig = review.reviewable
-    if @gig.present? #if package exists (not deleted the gig)
+    if @gig.present?
       @gig.with_lock do
         @gig.score_average = ((@gig.score_average * @gig.score_times) + review.rating.stars) / (@gig.score_times + 1)
         @gig.score_times += 1

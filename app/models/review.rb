@@ -35,7 +35,8 @@ class Review < ApplicationRecord
   validates_length_of :comment, :maximum => 2000
 
   # Run Gig average job to update score
-  after_commit :resource_average, on: :update, if: :status_changed_to_completed?
+  before_update :resource_average, if: :status_changed_to_completed?
+  before_destroy :modify_scores
 
   # method to average the gig and the user score
   def resource_average
@@ -67,5 +68,22 @@ class Review < ApplicationRecord
 
   def status_changed_to_completed?
     status_changed?(to: "completed")
+  end
+  def modify_scores
+    # if score times -1 is equal o 0, then there is just one review, so i can simply put 0 on average
+    @gig_owner = self.reviewable.user.score
+    @gig_owner.with_lock do
+      @gig_owner.employee_score_average = (@gig_owner.employee_score_times - 1 == 0)? 0 : ((@gig_owner.employee_score_average * @gig_owner.employee_score_times) - self.rating.stars) / (@gig_owner.employee_score_times - 1)
+      @gig_owner.employee_score_times -= 1
+      @gig_owner.save
+    end
+    @gig = self.reviewable
+    if @gig.present?
+      @gig.with_lock do
+        @gig.score_average = (@gig.score_times - 1 == 0)? 0 : ((@gig.score_average * @gig.score_times) - self.rating.stars) / (@gig.score_times - 1)
+        @gig.score_times -= 1
+        @gig.save
+      end
+    end
   end
 end

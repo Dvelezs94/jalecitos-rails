@@ -17,9 +17,9 @@ function edit_review(elem) {
   first_text = review.find(".truncated-text");
   second_text = review.find(".complete-text");
   if (second_text.length > 0 && second_text.html() != "") {
-    comment = ( (second_text.is(":visible") )? first_text.html() : first_text.html().slice(0, first_text.html().length - 3 ) ) +" "+ second_text.html(); //removes the "..." if second text is not visible
+    comment = ( (second_text.is(":visible") )? first_text.text() : first_text.text().slice(0, first_text.text().length - 3 ) ) +" "+ second_text.text(); //removes the "..." if second text is not visible
   } else {
-    comment = first_text.html();
+    comment = first_text.text();
   }
   comment_form.val(comment);
 }
