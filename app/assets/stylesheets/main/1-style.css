@@ -2489,9 +2489,10 @@ p.gig-score-times {
   color: var(--gray);
 }
 .single-star {
-  margin-left: 12px;
+  margin-left: 6px;
   position: relative;
   bottom: 1px;
+  width: calc(10px + (20) * ((100vw - 320px) / (1800 - 320)));
 }
 .page3slide-stard img {
   width: 16px;
@@ -3394,4 +3395,28 @@ a.disabled-by-text {
 
 .max-w-55 {
   max-width: 55%;
+}
+.w-25 {
+  width: 25%;
+}
+
+.review-more {
+  color: #505050;
+  text-align: center;
+  margin-left: auto;
+  width: 6%;
+}
+/* Ripple effect */
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+  border-radius: 50%;
+}
+.ripple:hover {
+  background: #fff radial-gradient(circle, transparent 1%, #fff 1%) center/15000%;
+}
+.ripple:active {
+  background-color: gray;
+  background-size: 100%;
+  transition: background 0s;
 }
