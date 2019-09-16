@@ -12,6 +12,7 @@
         <span class="rating-score"><%= review.gig_rating.stars.to_i %></span>
       </p>
 
+      <% if current_user == review.giver %>
       <div class="btn-group dropleft review-more ripple">
         <div data-toggle="dropdown" haspopup="true" expanded="false" class="w-100">
           <%= icon("fas", "ellipsis-v") %>
@@ -22,6 +23,7 @@
           <%= link_to "Reportar", review_path(review.id), class: "dropdown-item report-review"  if current_user != review.giver %>
         </div>
       </div>
+      <% end %>
     </div>
     <p class="loyed2">
       <% if review.comment.present? %>

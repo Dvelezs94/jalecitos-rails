@@ -1,3 +1,4 @@
+show_notice("El Jale se ha eliminado de tus favoritos");
 item = $(".likes-<%= j @gig.slug %>");
 if( item.find(".with_number").length > 0 ) {
   item.html("<%= j render 'gigs/likes', gig: @gig, with_number: true %>")
