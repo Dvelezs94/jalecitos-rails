@@ -48,7 +48,6 @@ class User < ApplicationRecord
   validates :name, format: { :with => /\A[a-zA-Z\p{L}\p{M}\s]+\z/, message: "Sólo puede contener letras y espacios" }, :allow_blank => true #allow blank because on creation it doesnt have
   validates_presence_of :name, if: :name_changed?  #dont allow blank again if value is filled
   validate :check_running_orders, if: :user_disabled?, on: :update
-  validates_presence_of :phone_number, if: :whatsapp_enabled_changed?  #dont allow blank again if value is filled
 
   #validate phone number syntax
   validates :phone_number, :presence => {:message => 'Tienes que proporcionar un numero valido'},

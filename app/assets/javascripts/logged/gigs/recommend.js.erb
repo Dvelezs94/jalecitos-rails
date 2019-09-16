@@ -1,0 +1,44 @@
+recommend=false;
+recommend_true = "";
+recommend_false = "";
+$(document).on('turbolinks:load', function() {
+  $(document).on("click", "#recommendgigbtn", function(){
+    change_content(this.id);
+  });
+  $(document).on("click", "#notrecommendgigbtn", function(){
+    change_content(this.id);
+  });
+  $(document).on("click", "#closeRecommendation", function(){
+    keep_content();
+  });
+});
+
+function change_content(id) {
+  // title = $("#tell_us_recommendation");
+  stars = $("#recommendation_stars");
+  comment = $("#recommendation_comment");
+  if (id == "recommendgigbtn") {
+    recommend = true;
+    if (recommend_true != "") comment.val(recommend_true);
+    comment.attr("placeholder", "¿Qué es lo que recomiendas de este Jale?");
+    // title.html("¿Por qué recomendarías este Jale?");
+    stars.val(5);
+  }else{
+    recommend = false;
+    if (recommend_false != "") comment.val(recommend_false);
+    comment.attr("placeholder", "¿Cómo puede mejorar este Jale?");
+    // title.html("¿Por qué no recomendarías este Jale?");
+    stars.val(1);
+  }
+}
+
+function keep_content(){
+  comment = $("#recommendation_comment");
+  if(recommend) {
+    recommend_true = comment.val();
+    comment.val("");
+  }else{
+    recommend_false = comment.val();
+    comment.val("");
+  }
+}
