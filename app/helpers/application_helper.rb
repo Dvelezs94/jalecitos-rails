@@ -267,9 +267,9 @@ module ApplicationHelper
         html << image_tag("star-on.svg", title: rounded, class: "review-star") if decimal > 0.75
       end
       #stars that doesnt have
-      ( (5-number).to_i ).times do
-        html << image_tag("star-off.svg", title: rounded, class: "review-star")
-      end
+      # ( (5-number).to_i ).times do
+      #   html << image_tag("star-off.svg", title: rounded, class: "review-star")
+      # end
       #return it
       html.html_safe
     end

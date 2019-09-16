@@ -27,6 +27,7 @@ class GigsController < ApplicationController
       render template: "shared/carousels/add_items_carousel.js.erb"
     else
       define_pack_names
+      get_my_reviews if current_user
       get_reviews
       get_related_gigs
       Searchkick.multi_search([@related_gigs])
@@ -106,8 +107,10 @@ class GigsController < ApplicationController
 
   # DELETE /gigs/1
   def destroy
-    @gig.destroy
-    redirect_to user_path(current_user.slug), notice: 'El Jale fue destruido.'
+    @gig.with_lock do
+      @gig.destroy
+      redirect_to user_path(current_user.slug), notice: 'El Jale fue destruido.'
+    end
   end
 
   private

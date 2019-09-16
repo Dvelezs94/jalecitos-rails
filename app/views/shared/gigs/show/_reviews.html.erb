@@ -8,16 +8,17 @@
     </div>
   </div>
   <div class="servicoteam-wrap">
-    <% if @reviews.present? %>
     <div class="paginated_reviews">
-      <%= render partial: "shared/reviews/review", collection: @reviews %>
-    </div>
-      <div class="page3-viewmore">
-          <%= link_to_next_page(@reviews, "Ver más#{icon("fas", "angle-down")}".html_safe,class: "review_paginator" , param_name: :reviews,remote: true) %>
-      </div>
-    <% else %>
+    <% if @reviews.blank? && @my_reviews.blank? %>
       No hay nada para mostrar
+    <% else %>
+      <%= render partial: "shared/reviews/review", collection: @my_reviews %>
+      <%= render partial: "shared/reviews/review", collection: @reviews %>
+      <div class="page3-viewmore">
+        <%= link_to_next_page(@reviews, "Ver más#{icon("fas", "angle-down")}".html_safe,class: "review_paginator" , param_name: :reviews,remote: true) %>
+      </div>
     <% end %>
+    </div>
   </div>
 
 

@@ -99,7 +99,8 @@
 	padding: 0 10px;
 }
 
-.sign-up-form input[type="email"], .sign-up-form input[type="password"], .sign-up-form input[type="text"], .sign-up-form input[type="number"] {
+.sign-up-form input[type="email"], .sign-up-form input[type="password"], .sign-up-form input[type="text"], .sign-up-form input[type="number"],
+.sign-up-form textarea {
 	border: none;
 	text-align: center;
 	background: var(--light-gray);

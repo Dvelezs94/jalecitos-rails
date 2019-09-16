@@ -5,6 +5,19 @@
     min-width: 1200px;
   }
 
+  .review-more {
+    display: none;
+    cursor: pointer;
+    width: 3%;
+  }
+  .review-more:hover {
+    color: black;
+  }
+  .single-review:hover .review-more{
+    display: block;
+  }
+
+
   .img-show {
     max-height: 534px;
   }
@@ -1195,6 +1208,9 @@
   #main-logo {
     display: none;
   }
+  .review-more {
+    margin-right: 1vw;
+  }
 
   ::-webkit-scrollbar {
     display: none;
@@ -2172,11 +2188,17 @@
   .resp_img_show img {
     width: 40vw;
   }
+  .review-more {
+    width: 10%;
+  }
 }
 
 @media only screen and (min-width: 480px) and (max-width: 779px) {
   .resp_img_show img {
     width: 36vw;
+  }
+  .review-more {
+    width: 4%;
   }
 }
 
