@@ -107,8 +107,10 @@ class GigsController < ApplicationController
 
   # DELETE /gigs/1
   def destroy
-    @gig.destroy
-    redirect_to user_path(current_user.slug), notice: 'El Jale fue destruido.'
+    @gig.with_lock do
+      @gig.destroy
+      redirect_to user_path(current_user.slug), notice: 'El Jale fue destruido.'
+    end
   end
 
   private
