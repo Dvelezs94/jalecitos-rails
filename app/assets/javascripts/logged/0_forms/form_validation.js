@@ -34,4 +34,7 @@ $(document).on('turbolinks:load', function() {
   if($(".report_request_form").length > 0){
    $(".report_request_form").validate();
   }
+  if($(".edit_review_form").length > 0){
+   $(".edit_review_form").validate();
+  }
 });
