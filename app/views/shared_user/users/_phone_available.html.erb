@@ -1,5 +1,7 @@
-<div class="alert alert-info alert-dismissible fade show text-center" role="alert">
-  Ahora puedes agregar tu Whatsapp para que la gente te contacte! <%= link_to "Configuracion", configuration_path %>
+<div class="alert alert-info alert-dismissible fade show text-center" role="alert" style="margin-bottom:0;">
+  <%= link_to configuration_path(bestFocusAfterReload: "change_user_phone_number") do %>
+  ¡Ahora puedes agregar tu Whatsapp para que la gente te contacte! Haz click para ir a configuración.
+  <% end %>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
