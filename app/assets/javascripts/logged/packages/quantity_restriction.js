@@ -1,6 +1,7 @@
 $(document).on('turbolinks:load', function() {
-  $(".min_amount").keyup(adj_max_amt);
-  $(".max_amount").keyup(adj_min_amt);
+  //no hire
+  // $(".min_amount").keyup(adj_max_amt);
+  // $(".max_amount").keyup(adj_min_amt);
 });
 
 function adj_max_amt() {

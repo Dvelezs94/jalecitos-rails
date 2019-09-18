@@ -17,6 +17,11 @@ module ApplicationHelper
     cookies.permanent.signed[:mb].present?
   end
 
+  def not_rated_gig(gig)
+    review = Review.find_by(reviewable: gig, giver: current_user, order_id: nil)
+    (review.present?)? false : true
+  end
+
   def prof_and_loc model  #this function is used in home and queries
     profession = model.profession.present? ? model.profession : "Sin profesión"
     if current_user #if user
@@ -262,9 +267,9 @@ module ApplicationHelper
         html << image_tag("star-on.svg", title: rounded, class: "review-star") if decimal > 0.75
       end
       #stars that doesnt have
-      ( (5-number).to_i ).times do
-        html << image_tag("star-off.svg", title: rounded, class: "review-star")
-      end
+      # ( (5-number).to_i ).times do
+      #   html << image_tag("star-off.svg", title: rounded, class: "review-star")
+      # end
       #return it
       html.html_safe
     end

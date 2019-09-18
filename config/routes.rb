@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     resource :like, only: [:create, :destroy]
   end
 
-  resources :reviews, only: [:update]
+  resources :reviews, only: [:update, :create, :destroy]
   resources :ally_codes, only: [:create] do
     collection do
       post :trade

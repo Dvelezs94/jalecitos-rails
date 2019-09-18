@@ -1,0 +1,14 @@
+if (<%= @success %>){
+  $(".modal").css("display", "none");
+  show_success("Se ha editado tu comentario");
+  old_review = $(".paginated_reviews").find("[review-id="+ "<%= @review.id %>" + "]");
+  old_review.after("<%= j render(partial: 'shared/reviews/review', collection: [@review]) %>");
+  display_reviews(true);
+  $('html, body').animate({
+    scrollTop: (old_review.offset().top-200)
+  }, 1000);
+  old_review.remove();
+}
+else{
+  show_error("<%= @review.errors.full_messages.first || "Ha ocurrido un error inesperado, por favor, inténtalo más tarde" %>")
+}

@@ -77,8 +77,10 @@ class RequestsController < ApplicationController
 
   # DELETE /requests/1
   def destroy
-    @request.destroy
-    redirect_to root_path, notice: 'El pedido ha sido eliminado.'
+    @request.with_lock do
+      @request.destroy
+      redirect_to root_path, notice: 'El pedido ha sido eliminado.'
+    end
   end
 
   private

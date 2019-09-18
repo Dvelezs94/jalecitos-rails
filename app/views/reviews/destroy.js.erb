@@ -1,0 +1,2 @@
+show_success("Tu reseña se ha eliminado con éxito");
+$("[review-id="+ "<%=@review.id %>" + "]").fadeOut("fast", function() { $(this).remove(); } );

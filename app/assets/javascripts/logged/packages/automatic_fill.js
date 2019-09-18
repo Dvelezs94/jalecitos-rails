@@ -11,7 +11,7 @@ $(document).on('turbolinks:load', function() {
 function fill_max_units() {
   max_amount = $(this).closest("[display_id]").find(".max_amount");
   if ( max_amount.val() == "" ) {
-    max_amount.val( parseInt(10000/this.value)  )
+    max_amount.val( 100 ) // parseInt(10000/this.value), no hire
   }
 }
 
