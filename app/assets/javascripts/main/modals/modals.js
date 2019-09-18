@@ -19,12 +19,6 @@ function modals (modalName, modalId, buttonIdOrClass, buttonBehaviour="block", d
     if ($.getUrlVar("modal") == modalName) {
       modal.style.display = "block";
     }
-    // When the user clicks the button, open or close the modal and also closes all other modals (useful when the button behaviour is display the modal)
-    button.on("click", function() {
-      event.preventDefault();
-      modal.style.display = buttonBehaviour;
-      closeOtherModals(modalId);
-    });
 
     // When the user clicks anywhere outside of the modal, close it
     modal.onclick = function(event) {
@@ -34,6 +28,12 @@ function modals (modalName, modalId, buttonIdOrClass, buttonBehaviour="block", d
       }
     }
   }
+  // When the user clicks the button, open or close the modal and also closes all other modals (useful when the button behaviour is display the modal)
+  $(document).on("click", (buttonIsClass == false)? "#"+buttonIdOrClass : "."+buttonIdOrClass, function() {
+    event.preventDefault();
+    if(modal != null ) modal.style.display = buttonBehaviour;
+    closeOtherModals(modalId);
+  });
 }
 
 function closeOtherModals(modalId){
