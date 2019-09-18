@@ -4,7 +4,7 @@
   <head>
     <script defer src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/5.8.5/firebase-messaging.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+    <!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script> -->
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= favicon_link_tag image_path 'favicon.ico' %>
@@ -12,6 +12,7 @@
     <!-- Card Anti Fraud System -->
     <!-- <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script> <script type="text/javascript" src="https://resources.openpay.mx/lib/openpay-data.v1.min.js"></script> -->
     <%= javascript_include_tag 'guest', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'lazy_load', 'data-turbolinks-track': 'reload'%>
 
     <!-- For PWA -->
    <link rel="manifest" href="/manifest.json" />
