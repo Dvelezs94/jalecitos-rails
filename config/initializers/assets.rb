@@ -18,6 +18,8 @@ Rails.application.config.assets.precompile += %w( admin.js )
 
 Rails.application.config.assets.precompile += %w( google_turbolink.js )
 
+Rails.application.config.assets.precompile += %w( lazy_load.js )
+
 ###################css
 Rails.application.config.assets.precompile += %w( logged.scss )
 
