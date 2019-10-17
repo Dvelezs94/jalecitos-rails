@@ -37,7 +37,7 @@
         <% if offer.user.phone_number.present? %>
         <%= link_to "#{icon("fas", "phone", title: "Llamar")}".html_safe, "tel:#{offer.user.international_phone_number(prefix=true)}", class: "btn btn-secondary phone-contact", target: "_blank" %>
         <% end %>
-        <%= link_to "#{icon('fas', 'comment', title: "Mensaje")}".html_safe, conversations_path( user_id: offer.user.id), class: "btn btn-primary msg-contact" %>
+        <%= link_to "#{icon('fas', 'comment', title: "Mensaje")}".html_safe, conversations_path(user_id: offer.user.id, model_id: offer.request.id, model: "Request"), class: "btn btn-primary msg-contact" %>
       </div>
     <% end %>
   </div>

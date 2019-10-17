@@ -23,7 +23,7 @@
               <% if package.gig.user.phone_number.present? %>
               <%= link_to "#{icon("fas", "phone", title: "Llamar")}".html_safe, "tel:#{package.gig.user.international_phone_number(prefix=true)}", class: "btn btn-secondary phone-contact", target: "_blank" %>
               <% end %>
-              <%= link_to "#{icon('fas', 'comment', title: "Mensaje")}".html_safe, conversations_path( user_id: package.gig.user.id), class: "btn btn-primary msg-contact" %>
+              <%= link_to "#{icon('fas', 'comment', title: "Mensaje")}".html_safe, conversations_path(user_id: package.gig.user.id, model_id: package.gig.id, model: "Gig" ), class: "btn btn-primary msg-contact" %>
               <!-- <%= f.submit "Contratar", class: "hire-pack" %>  no hire -->
             </div>
             <% end %>
