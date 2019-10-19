@@ -35,7 +35,7 @@ class Message < ApplicationRecord
     conversation.touch
   end
   def make_links val
-    regexp = /(https?:\/\/)?\w*\.\w+(\.\w+)*(\/\w+)*(\.\w*)?/
+    regexp = /(https?:\/\/)?\w*\.\w+(\.\w+)*((?:\/|\?)[^\s]+)?/
     val.gsub(regexp) { |url|
       url_parsed = URI.parse(url)
       link_url = ( url_parsed.scheme )? url : "http://" + url
