@@ -30,18 +30,24 @@ class Message < ApplicationRecord
     #removes all html coming from user and then replaces the links for a tags (the message partial makes the html_safe)
     write_attribute(:body, make_links(CGI::escapeHTML(val)))
   end
+  def old_body
+    old_body = ActionController::Base.helpers.strip_tags(self.body)
+    old_body = CGI::unescapeHTML(old_body)
+    old_body
+  end
   private
   def update_conversation (conversation)
     conversation.touch
   end
   def make_links val
-    regexp = /(https?:\/\/)?\w*\.\w+(\.\w+)*((?:\/|\?)[^\s]*)?/
+    regexp = /(https?:\/\/)?[\w,-]*\.\w+(\.\w+)*((?:\/|\?)[^\s]*)?/
     val.gsub(regexp) { |url|
       url_parsed = URI.parse(url)
       link_url = ( url_parsed.scheme )? url : "http://" + url
       "<a href='#{URI.parse(link_url)}'target='_blank'>#{url}</a>"
     }
   end
+
 
   def polymorphic_type
     if self.related_to_type.present?
