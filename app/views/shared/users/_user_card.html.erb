@@ -12,13 +12,20 @@
       <div class="contactars">
         <p>Activo(a) hace <%= distance_of_time_in_words_to_now(@user.current_sign_in_at) rescue "nunca" %></p>
       </div>
-      <div class="inner-comment">
+      <div class="hire-pack-btn">
       <% if my_profile %>
-        <%= link_to configuration_path do %>
-        <%= " #{icon('fas', 'cog')} Configuración ".html_safe %>
+        <%= link_to configuration_path, class: "btn btn-primary" do %>
+        <%= " #{icon('fas', 'cog ')} Configuración ".html_safe %>
         <% end %>
       <% else %>
-        <%=link_to( " #{icon('fas', 'comment')}Contactar ".html_safe, conversations_path( user_id: @user.id) )%>
+        <% if @user.whatsapp_enabled && @user.phone_number.present? %>
+          <%= link_to "#{icon("fab", "whatsapp ft-20", title: "Whatsapp")}".html_safe, "https://wa.me/#{@user.international_phone_number}", class: "btn btn-success wapp-contact", target: "_blank" %>
+        <% end %>
+        <% if @user.phone_number.present? %>
+          <%= link_to "#{icon("fas", "phone", title: "Llamar")}".html_safe, "tel:#{@user.international_phone_number(prefix=true)}", class: "btn btn-secondary phone-contact", target: "_blank" %>
+        <% end %>
+          <%= link_to "#{icon('fas', 'comment', title: "Mensaje")}".html_safe, conversations_path(user_id: @user.id), class: "btn btn-primary msg-contact" %>
+
       <% end %>
       </div>
       <div class="innerdate">
@@ -28,11 +35,11 @@
         <p class="edad1">Edad: <%= (@user.age.nil?)? "Indefinida" : @user.age %></p>
         <p class="edad11"><%= (@user.bio.nil?)? "Sin descripción" : @user.bio %></p>
       </div>
-      <div class="reportar-btn">
+      <div class="hire-pack-btn">
       <% if my_profile %>
-        <%=link_to( " #{icon('fas', 'sign-out-alt')}Cerrar sesión ".html_safe, destroy_user_session_path(device: "pending"), method: :delete, id: "destroy_session")%>
+        <%=link_to( " #{icon('fas', 'sign-out-alt')} Cerrar sesión ".html_safe, destroy_user_session_path(device: "pending"), method: :delete, id: "destroy_session", class: "btn btn-secondary")%>
       <% elsif user_signed_in? %>
-        <%=link_to( " #{icon('fas', 'flag')}Reportar ".html_safe, "#", id: "reportuserbtn" )%>
+        <%=link_to( " #{icon('fas', 'flag')} Reportar ".html_safe, "#", id: "reportuserbtn", class: "btn btn-secondary" )%>
       <% end %>
       </div>
     </div>
