@@ -26,9 +26,16 @@ class Message < ApplicationRecord
   after_commit -> {update_conversation(self.conversation)}, on: :create
   mount_uploader :image, MessageUploader
 
+  def body=(val)
+    write_attribute(:body, make_links(ActionView::Base.full_sanitizer.sanitize(val)))
+  end
   private
   def update_conversation (conversation)
     conversation.touch
+  end
+  def make_links val
+    regexp = /(https?:\/\/)?\w*\.\w+(\.\w+)*(\/\w+)*(\.\w*)?/
+    val.gsub(regexp) { |url| "<a href='#{url}' target='_blank'>#{url}</a>"}
   end
 
   def polymorphic_type
