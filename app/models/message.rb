@@ -39,7 +39,7 @@ class Message < ApplicationRecord
     val.gsub(regexp) { |url|
       url_parsed = URI.parse(url)
       link_url = ( url_parsed.scheme )? url : "http://" + url
-      "<a href='#{URI.parse(link_url)}' target='_blank'>#{url}</a>"
+      "<a href='#{URI.parse(link_url)}'target='_blank'>#{url}</a>"
     }
   end
 
