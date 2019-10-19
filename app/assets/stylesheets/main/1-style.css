@@ -807,7 +807,7 @@ p.quam1 {
   width: 140px;
   text-align: center;
   padding: 10px 0;
-  border-radius: 24px;
+  border-radius: 0.25rem;
   border: none;
 }
 
