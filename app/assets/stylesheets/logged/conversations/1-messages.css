@@ -207,9 +207,9 @@
   max-width: 80%;
 }
 
-.message_content a {
+/* .message_content a {
   display: block;
-}
+} */
 
 .message_content div {
   display: inline-block;
