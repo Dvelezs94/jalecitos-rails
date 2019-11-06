@@ -26,6 +26,9 @@ build:
     - rm -f .env
     - docker pull $REPOSITORY_URL:latest || true
     - docker build --cache-from $REPOSITORY_URL:latest -t $DOCKER_IMAGE_CI .
+    - docker rmi $REPOSITORY_URL:latest || true
+    - docker tag $DOCKER_IMAGE_CI $REPOSITORY_URL:latest
+    - docker push $REPOSITORY_URL:latest
     - docker push $DOCKER_IMAGE_CI
   only:
     - master
