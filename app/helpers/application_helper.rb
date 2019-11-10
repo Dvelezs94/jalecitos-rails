@@ -323,6 +323,10 @@ module ApplicationHelper
     <link href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/splashscreens/ipadpro2_splash.png' media='(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)' rel='apple-touch-startup-image' />".html_safe
   end
 
+  def google_adsense_key
+    '<script data-ad-client="ca-pub-5195835376285892" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'.html_safe
+  end
+
   def platform_redirect_root_path
     cookies.signed[:mb] ? mobile_sign_in_path : root_path
   end
