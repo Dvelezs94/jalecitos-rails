@@ -56,6 +56,8 @@ class NotifyNewRequestWorker
       #Loop through every subscription to send the push notification
       @notify_to.each do |user_id|
         createFirebasePush(user_id, @message)
+        # Send email if transactional emails are enabled
+        RequestMailer.new_request(user_id, request).deliver if User.find(user_id).transactional_emails
       end
 
     end
