@@ -6,7 +6,7 @@
           <div class="sign-up-form">
             <%= form_with(model: Review, url: bans_path, method: :post, :html => { :class => "report_request_form", id: "reportRequestForm" }, remote: true) do |f| %>
             <%= f.select :cause, report_options, {include_blank: "Causa del reporte"}, class: "custom-select required", id: "review_cause" %>
-            <%= f.text_field :comment, placeholder: "(Opcional) Comentarios", autocomplete: "off" %>
+            <%= f.text_field :comment, placeholder: "(Opcional) Comentarios", autocomplete: "off", id: "review_comment_report" %>
             <br>
             <div class="flex-space-bet">
             <%= f.submit 'Reportar', :class => 'btn btn-success', data: {disable_with: "Bloqueando..."}%>
