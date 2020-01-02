@@ -169,3 +169,5 @@ gem 'youtube_rails', '~> 1.2', '>= 1.2.2'
 gem 'voight_kampff', '~> 1.1', '>= 1.1.3'
 # emojis
 gem 'rails_emoji_picker', '~> 0.1.5'
+#nested forms (faq of gigs)
+gem 'cocoon', '~> 1.2', '>= 1.2.14'
