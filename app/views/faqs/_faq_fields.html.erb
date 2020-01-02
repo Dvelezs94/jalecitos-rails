@@ -11,7 +11,7 @@
     <div class="card-body">
       <%= f.text_field :question, label: false,class: "styled required faq-question-input", placeholder: "¿Cuánto tiempo tardaría en hacer...?", style: "margin-bottom: 2vh;", maxlength: 200 %>
       <%= f.text_area :answer, label: false, class: "styled required", placeholder: "R: Tardaría aproximádamente...", rows: "5", maxlength: 1000%>
-      <%= link_to_remove_association "remover", f, class: 'btn btn-danger btn-xs', data: {confirm: "¿Quieres borrar esto?"} %>
+      <%= link_to_remove_association "Borrar", f, class: 'btn btn-danger btn-xs', data: {confirm: "¿Quieres borrar esto?"} %>
     </div>
   </div>
 </div>
