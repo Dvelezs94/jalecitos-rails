@@ -37,6 +37,8 @@ class Gig < ApplicationRecord
   belongs_to :city, optional: true
   #belongs_to :active_user, { where(:users => { status: "active" }) }, :class_name => "User"
   has_many :likes, dependent: :destroy
+  has_many :faqs, inverse_of: :gig, dependent: :destroy #inverse of allow to save faqs at same time of creating gig (see cocoon gem guide)
+  accepts_nested_attributes_for :faqs,allow_destroy: true, limit: 5
   belongs_to :category
   has_many :packages, ->{ order(id: :asc) }, dependent: :destroy
   # has_many :gig_first_pack, ->{ limit(1).order(id: :asc) }, class_name: 'Package' # this is useless (used in toggle icon of show ant toggle status function, but nonsense)
@@ -69,7 +71,7 @@ class Gig < ApplicationRecord
     write_attribute(:profession, no_multi_spaces(val.strip.capitalize))
   end
   def description=(val)
-    write_attribute(:description, no_multi_spaces(remove_uris(val.strip)))
+    write_attribute(:description, no_multi_spaces(val.strip))
   end
   def name=(val)
     write_attribute(:name, no_multi_spaces(remove_uris(val.strip)))
