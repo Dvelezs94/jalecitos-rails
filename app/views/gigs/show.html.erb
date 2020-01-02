@@ -20,12 +20,14 @@
 
 
         <%= render 'shared/gigs/show/reviews' %>
+        <% if @gig.faqs.any? %>
         <div class="sed-content">
           <h2>Preguntas frecuentes</h2>
           <div class="accordion" id="faq_gig" role="tablist" aria-multiselectable="true">
             <%= render partial: "faqs/faq", collection: @gig.faqs %>
           </div>
         </div>
+        <% end %>
         </div>
       </div>
       <div class="col-lg-4 col-md-5">
