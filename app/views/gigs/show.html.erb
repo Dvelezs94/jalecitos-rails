@@ -17,7 +17,15 @@
         <div class="innerpage-leftside">
         <%= render 'shared/gigs/show/gig_info' %>
         <%= render 'shared/gigs/show/package_info', device: "phone-tablet" %>
+
+
         <%= render 'shared/gigs/show/reviews' %>
+        <div class="sed-content">
+          <h2>Preguntas frecuentes</h2>
+          <div class="accordion" id="faq_gig" role="tablist" aria-multiselectable="true">
+            <%= render partial: "faqs/faq", collection: @gig.faqs %>
+          </div>
+        </div>
         </div>
       </div>
       <div class="col-lg-4 col-md-5">
