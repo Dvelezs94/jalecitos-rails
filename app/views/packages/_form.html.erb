@@ -27,7 +27,7 @@
             <div class="form-block form-group-<%= n %> row col-lg-11 centered-form">
               <strong class="form-title">Nombre del paquete</strong>
               <%= pa.text_field :name, class: "name-class name-#{n} form_fields_#{n} styled",maxlength: 100,
-               placeholder: "Fotos tamaño infantil" %>
+               placeholder: "Fotos tamaño infantil", id: "package_name_#{n}" %>
               <span class="span-error"></span>
             </div>
 
@@ -58,7 +58,7 @@
                   <p class="price-text form-title">Lo que ganaré:</p>
                   <div class="row justify-content-center w-100">
                     <%= pa.number_field :price, min: "0", max: "1000000", step: ".01",
-                    class: "price-input price-input-#{n} form-control form_fields_#{n}" %> <!--min: "100", max: "10000"-->
+                    class: "price-input price-input-#{n} form-control form_fields_#{n}", id: "price_input_#{n}" %> <!--min: "100", max: "10000"-->
                     <span class="span-error"></span>
                   </div>
                 </div>
@@ -76,7 +76,7 @@
                   <p class="price-text form-title">Tipo de unidad:</p>
                   <div class="row justify-content-center w-100">
                     <%= pa.select :unit_type, grouped_options_for_select(unit_options, selected: pack.unit_type),{},
-                     class:"form-control form_fields_#{n} text-center unit_type", style: "text-align-last:center;"%>
+                     class:"form-control form_fields_#{n} text-center unit_type", style: "text-align-last:center;" , id: "unit_select_#{n}"%>
                     <span class="span-error"></span>
                   </div>
                 </div>
