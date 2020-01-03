@@ -1515,10 +1515,6 @@ p.gig-price {
   color: var(--gray);
 }
 
-.sed-content p {
-  margin-top: -18px;
-}
-
 .doopli {
   display: none;
 }
