@@ -71,7 +71,7 @@ class Gig < ApplicationRecord
     write_attribute(:profession, no_multi_spaces(val.strip.capitalize))
   end
   def description=(val)
-    write_attribute(:description, no_multi_spaces(val.strip))
+    write_attribute(:description, no_multi_spaces(ActionController::Base.helpers.sanitize(val.strip)))
   end
   def name=(val)
     write_attribute(:name, no_multi_spaces(remove_uris(val.strip)))
