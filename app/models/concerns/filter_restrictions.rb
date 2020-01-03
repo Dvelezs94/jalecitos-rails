@@ -9,11 +9,9 @@ module FilterRestrictions
   end
 
   def remove_uris(text)
-  uri_regex = %r"((?:(?:[^ :/?#]+):)(?://(?:[^ /?#]*))(?:[^ ?#]*)(?:\?(?:[^ #]*))?(?:#(?:[^ ]*))?)"
-    text.split(uri_regex).collect do |s|
-      unless s =~ uri_regex
-        s
-      end
-    end.join
+    regexp = /(https?:\/\/)?[\w,-]*\.\w+(\.\w+)*((?:\/|\?)[^\s]*)?/ #search this regex in other def
+    text.gsub(regexp) { |url|
+      "" #removes the links
+    }
   end
 end
