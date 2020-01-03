@@ -44,7 +44,7 @@
   <div class="row padding_row">
     <div class="col-lg-12">
       <strong>Sobre Mí</strong>
-      <p><%= (@gig.user.bio)? @gig.user.bio : "Indefinido" %></p>
+      <p><%= (@gig.user.bio)? @gig.user.safe_bio : "Indefinido" %></p>
     </div>
   </div>
 </div>

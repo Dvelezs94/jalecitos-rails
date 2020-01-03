@@ -4,7 +4,7 @@
     <div class="earnlist-mewrapt">
       <div class="earnlist-me">
         <p class="limpi1"><%= package.name %></p>
-        <pre> <p class="limpi3"><%= package.description %></p> </pre>
+        <pre> <p class="limpi3"><%= package.safe_description %></p> </pre>
       </div>
           <div class="page3-btn" unit_container>
             <%= form_with(url: hire_package_path(package), method: :get, :html => { :class => "" }, local: true) do |f| %>

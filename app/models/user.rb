@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   attr_accessor :lat, :lon, :roles_word
   include ApplicationHelper
+  include LinksHelper
   #includes
   #friendly_id
   extend FriendlyId
@@ -235,6 +236,9 @@ class User < ApplicationRecord
      else
        return "+521" + phone_number rescue nil
      end
+   end
+   def safe_bio
+     make_links(CGI::escapeHTML(self.bio)).html_safe #escapes html from user and make our links
    end
 
    private
