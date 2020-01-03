@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_15_214246) do
+ActiveRecord::Schema.define(version: 2020_01_01_213528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,15 @@ ActiveRecord::Schema.define(version: 2019_09_15_214246) do
     t.datetime "updated_at", null: false
     t.bigint "gigs_id"
     t.index ["gigs_id"], name: "index_extras_on_gigs_id"
+  end
+
+  create_table "faqs", force: :cascade do |t|
+    t.string "question"
+    t.string "answer"
+    t.bigint "gig_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gig_id"], name: "index_faqs_on_gig_id"
   end
 
   create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
@@ -546,6 +555,7 @@ ActiveRecord::Schema.define(version: 2019_09_15_214246) do
   add_foreign_key "countries", "states"
   add_foreign_key "disputes", "orders"
   add_foreign_key "extras", "gigs", column: "gigs_id"
+  add_foreign_key "faqs", "gigs"
   add_foreign_key "gigs", "categories"
   add_foreign_key "gigs", "cities"
   add_foreign_key "gigs", "users"

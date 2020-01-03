@@ -87,6 +87,23 @@
 
           </div>
 
+          <div class="form_block form_section row" id="faqs_form">
+            <div class="flex-space-bet">
+              <p class="form-title">Preguntas frecuentes (Opcional)</p>
+              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
+            </div>
+            <%= render 'shared_user/gigs/forms/hints/faqs_hint.html.erb' %>
+            <div class="accordion" id="faq-accordion" role="tablist">
+            <%= form.fields_for :faqs do |faq| %>
+              <%= render "/faqs/faq_fields", f: faq %>
+            <% end %>
+            <div class="links">
+              <%= link_to_add_association 'Agregar Pregunta', form, :faqs, class: 'btn btn-success float-right', partial: "/faqs/faq_fields", id: "add_faq"  %>
+            </div>
+            </div>
+          </div>
+
+
 
         </div>
         </div>

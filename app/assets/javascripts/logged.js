@@ -39,3 +39,5 @@
 
 
 //= require js.cookie
+
+//= require cocoon

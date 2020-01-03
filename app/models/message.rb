@@ -1,4 +1,5 @@
 class Message < ApplicationRecord
+  include LinksHelper
   #search
   #callbacks false make sync off so records are not added automatically
    searchkick language: "spanish",callbacks: false
@@ -39,15 +40,6 @@ class Message < ApplicationRecord
   def update_conversation (conversation)
     conversation.touch
   end
-  def make_links val
-    regexp = /(https?:\/\/)?[\w,-]*\.\w+(\.\w+)*((?:\/|\?)[^\s]*)?/
-    val.gsub(regexp) { |url|
-      url_parsed = URI.parse(url)
-      link_url = ( url_parsed.scheme )? url : "http://" + url
-      "<a href='#{URI.parse(link_url)}'target='_blank'>#{url}</a>"
-    }
-  end
-
 
   def polymorphic_type
     if self.related_to_type.present?
