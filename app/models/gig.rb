@@ -71,7 +71,7 @@ class Gig < ApplicationRecord
     write_attribute(:profession, no_multi_spaces(val.strip.capitalize))
   end
   def description=(val)
-    write_attribute(:description, no_multi_spaces(ActionController::Base.helpers.sanitize(val.strip)))
+    write_attribute(:description, no_multi_spaces(val.strip)) #ActionController::Base.helpers.sanitize for sanitize, but i didnt used it because in view i escape all the html and then add the links and now html_safe, so the html from user doesnt work
   end
   def name=(val)
     write_attribute(:name, no_multi_spaces(remove_uris(val.strip)))
