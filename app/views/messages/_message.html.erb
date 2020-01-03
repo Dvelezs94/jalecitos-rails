@@ -9,7 +9,7 @@
 <% end %>
         <% if message.body.present? %>
           <div class="message_text">
-            <%= message.body.html_safe%>
+            <%= message.safe_body%>
           </div>
         <% end %>
         <% if message.image? %>
