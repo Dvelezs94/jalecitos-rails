@@ -1,0 +1,17 @@
+<div class="card nested-fields w-100">
+  <div class="card-header faq-collapse">
+    <h2 class="mb-0">
+      <h3 class="faq-question truncate mar-bot-0">
+      <!-- this text is filled with user input -->Pregunta frecuente
+      </h3>
+    </h2>
+  </div>
+
+  <div class="collapse data-parent="#faq-accordion">
+    <div class="card-body">
+      <%= f.text_field :question, label: false,class: "styled required faq-question-input", placeholder: "¿Cuánto tiempo tardaría en hacer...?", style: "margin-bottom: 2vh;", maxlength: 200 %>
+      <%= f.text_area :answer, label: false, class: "styled required", placeholder: "R: Tardaría aproximádamente...", rows: "5", maxlength: 1000%>
+      <%= link_to_remove_association "Borrar", f, class: 'btn btn-danger btn-xs', data: {confirm: "¿Quieres borrar esto?"} %>
+    </div>
+  </div>
+</div>

@@ -3420,3 +3420,14 @@ a.disabled-by-text {
   background-size: 100%;
   transition: background 0s;
 }
+/*accordion*/
+.accordion:after {
+  content: none !important;
+}
+.nested-fields {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
+}
+
+#add_faq{
+  margin-top: 2vh;
+}

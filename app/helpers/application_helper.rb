@@ -215,7 +215,7 @@ module ApplicationHelper
   end
 
   def meta_tags
-    if @gig.present? && current_page?( gig_path(city_slug(@gig.city),@gig) )
+    if @gig.present? && current_page?( the_gig_path(@gig) )
         "<title>#{@gig.profession} en #{seo_location(@gig.city)} para #{@gig.name}</title>
         <meta name='description' content='#{@gig.profession} en #{seo_location(@gig.city)} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos.'>
         <meta name='keywords' content='#{@gig.location},#{@gig.profession},#{@gig.tag_list.join(',')}'>
@@ -323,8 +323,22 @@ module ApplicationHelper
     <link href='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/splashscreens/ipadpro2_splash.png' media='(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)' rel='apple-touch-startup-image' />".html_safe
   end
 
-  def google_adsense_key
-    '<script data-ad-client="ca-pub-5195835376285892" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'.html_safe
+  def gig_review_google
+    "<script type='application/ld+json'>
+{
+  '@context' : 'https://schema.org/',
+  '@type': 'EmployerAggregateRating',
+  'itemReviewed': {
+    '@type': 'Organization',
+    'name' : '#{@gig.title}',
+    'sameAs' : '#{request.original_url}'
+  },
+  'ratingValue': '#{@gig.score_average}',
+  'bestRating': '5',
+  'worstRating': '1',
+  'ratingCount' : '#{@gig.score_times}'
+}
+</script>".html_safe
   end
 
   def platform_redirect_root_path

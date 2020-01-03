@@ -72,36 +72,41 @@ class GigsController < ApplicationController
 
   # POST /gigs
   def create
-    if params[:gig_id].present? #editing in creation
-      @success = @gig.update(gig_params)
-      if !@success
-        render :new
+    @gig.with_lock do
+      if params[:gig_id].present? #editing in creation
+        @gig.faqs.delete_all #in create cocoon just saves faqs, so i have to delete old ones in case they save more than 1 time
+        @success = @gig.update(gig_params)
+        if !@success
+          render :new
+        end
+      else #create
+        @success = @gig.save
+        if !@success
+          render :new
+        end
       end
-    else #create
-      @success = @gig.save
-      if !@success
-        render :new
+      respond_to do |format|
+        format.js {
+          render "update_name"
+        }
       end
-    end
-    respond_to do |format|
-      format.js {
-        render "update_name"
-       }
     end
   end
 
   # PATCH/PUT /gigs/1
   def update
-    @success = @gig.update(gig_params)
-    if @success
-      # @package = Package.find_by_gig_id(@gig)
-      respond_to do |format|
-        format.js {
-          render "update_name"
-         }
+    @gig.with_lock do
+      @success = @gig.update(gig_params)
+      if @success
+        # @package = Package.find_by_gig_id(@gig)
+        respond_to do |format|
+          format.js {
+            render "update_name"
+          }
+        end
+      else
+        render :edit
       end
-    else
-      render :edit
     end
   end
 
@@ -181,7 +186,8 @@ class GigsController < ApplicationController
                                   :city_id,
                                   :category_id,
                                   :tag_list,
-                                  :profession
+                                  :profession,
+                                  faqs_attributes: [:id, :question, :answer, :_destroy]
                                 ).merge(:user_id => current_user.id)
 
     end

@@ -1,0 +1,19 @@
+<div class="card">
+
+  <!-- Card header -->
+  <a class="collapsed" data-toggle="collapse" data-parent="#faq_gig" href="#<%= "aaaa#{faq.id}" %>" aria-expanded="false" aria-controls="<%= "aaaa#{faq.id}" %>">
+  <div class="card-header" role="tab" id="<%= "aaaa#{faq.id}bbbb" %>">
+      <h5 >
+        <%= faq.question %>
+        <i class="fas fa-angle-down rotate-icon float-right"></i>
+      </h5>
+  </div>
+</a>
+
+  <div id="<%= "aaaa#{faq.id}" %>" class="collapse" role="tabpanel" aria-labelledby="<%= "aaaa#{faq.id}bbbb" %>" data-parent="#faq_gig">
+    <div class="card-body">
+      <%= faq.answer %>
+    </div>
+  </div>
+
+</div>
