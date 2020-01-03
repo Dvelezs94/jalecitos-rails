@@ -15,9 +15,7 @@ class Message < ApplicationRecord
   belongs_to :conversation
   belongs_to :related_to, polymorphic: true, optional: true
   #Validations
-  validates :body,
-    length: {maximum: 1000},
-    on: :create
+  validates_length_of :body, :maximum => 500, :message => "debe contener como máximo 500 caracteres."
   validate :polymorphic_type, on: :create
 
   validates_presence_of :body, :unless => :image?
