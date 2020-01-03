@@ -1,4 +1,5 @@
 class Package < ApplicationRecord
+  include LinksHelper
   attr_accessor :gig_required
   #Slug
   extend FriendlyId
@@ -23,6 +24,10 @@ class Package < ApplicationRecord
 
   validate :price_range, :min_and_max #:max_unit_price, no hire
   before_update :check_orders
+
+  def safe_description
+    make_links(CGI::escapeHTML(self.description)).html_safe #escapes html from user and make our links
+  end
   private
   def check_orders
     if self.orders.where(status: [:in_progress, :pending, :disputed]).limit(1).any?
