@@ -1,4 +1,4 @@
-<% gig_description = make_links(@gig.description).html_safe %>
+<% gig_description = make_links(CGI::escapeHTML(@gig.description)).html_safe %>
 <div class="innerpage-leftsidejata">
   <div class="verificos-title">
     <h1><%= @gig.title %></h1>
