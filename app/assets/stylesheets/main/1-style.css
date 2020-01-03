@@ -3424,10 +3424,10 @@ a.disabled-by-text {
 .accordion:after {
   content: none !important;
 }
-.nested-fields,
-#faq_gig {
+.nested-fields {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
 }
+
 #add_faq{
   margin-top: 2vh;
 }

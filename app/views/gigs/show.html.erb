@@ -19,8 +19,8 @@
         <%= render 'shared/gigs/show/package_info', device: "phone-tablet" %>
 
 
-        <%= render 'shared/gigs/show/reviews' %>
         <% if @gig.faqs.any? %>
+        <hr>
         <div class="sed-content">
           <h2>Preguntas frecuentes</h2>
           <div class="accordion" id="faq_gig" role="tablist" aria-multiselectable="true">
@@ -28,6 +28,7 @@
           </div>
         </div>
         <% end %>
+        <%= render 'shared/gigs/show/reviews' %>
         </div>
       </div>
       <div class="col-lg-4 col-md-5">

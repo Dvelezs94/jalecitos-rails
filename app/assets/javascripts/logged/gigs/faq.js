@@ -11,7 +11,7 @@ $(document).on('turbolinks:load', function() {
 
   check_to_hide_or_show_add_link();
 
-  $(document).on("click", ".faq-collapse",function(){
+  $("#faq-accordion").on("click", ".faq-collapse",function(){
     $(this).closest('.nested-fields').find('.collapse').toggle('collapse');
   });
   $(document).on("input paste", ".faq-question-input",function(){
@@ -35,6 +35,9 @@ function initialize_names() {
   });
 }
 function open_the_faq(faqs_form) {
-  console.log($(faqs_form).find(".nested-fields:last-child .collapse"));
   $(faqs_form).find(".nested-fields:last .collapse").toggle("collapse");
+  $(faqs_form).find(".faq-question-input").focus();
+  $('html, body').animate({
+    scrollTop: ($(faqs_form).offset().top)
+  }, 1000);
 }
