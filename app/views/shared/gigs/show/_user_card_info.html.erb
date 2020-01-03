@@ -16,7 +16,7 @@
     <p class="datesin">Miembro desde <%= distance_of_time_in_words_to_now(@gig.user.created_at) %></p>
     <p class="edadd1">Edad: <%= (@gig.user.age.present?)? @gig.user.age : "Indefinido" %></p>
     <div class="mentoslong-content">
-      <p class="elit55"><%= (@gig.user.bio.present?)? @gig.user.bio : "Sin descripción." %></p>
+      <p class="elit55"><%= (@gig.user.bio.present?)? @gig.user.safe_bio : "Sin descripción." %></p>
     </div>
   </div>
 </div>
