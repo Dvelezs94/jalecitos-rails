@@ -38,6 +38,6 @@ function open_the_faq(faqs_form) {
   $(faqs_form).find(".nested-fields:last .collapse").toggle("collapse");
   $(faqs_form).find(".faq-question-input").focus();
   $('html, body').animate({
-    scrollTop: ($(faqs_form).offset().top)
+    scrollTop: ($(faqs_form).find(".nested-fields:last").offset().top-200)
   }, 1000);
 }

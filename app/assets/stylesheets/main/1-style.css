@@ -1519,10 +1519,6 @@ p.gig-price {
   margin-top: -18px;
 }
 
-.sedcontent-wrap a {
-  float: right;
-}
-
 .doopli {
   display: none;
 }
@@ -1576,11 +1572,6 @@ p.verified {
 
 button:focus {
 
-}
-
-.sedcontent-wrap a {
-  float: right;
-  padding-right: 6px;
 }
 
 /*innerpage3*/
@@ -1849,10 +1840,6 @@ p.loyed3 {
   margin: 0px 15px;
 }
 
-.sedcontent-wrap a {
-  float: right;
-}
-
 .doopli {
   display: none;
 }
@@ -1907,15 +1894,6 @@ p.loyed3 {
   border: none;
   background: transparent;
   transition: .4s;
-}
-
-button:focus {
-
-}
-
-.sedcontent-wrap a {
-  float: right;
-  padding-right: 6px;
 }
 
 .headerd-mainmenu ul {
@@ -3424,7 +3402,8 @@ a.disabled-by-text {
 .accordion:after {
   content: none !important;
 }
-.nested-fields {
+.nested-fields,
+#faq_gig > .card{
   border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
 }
 
