@@ -16,7 +16,7 @@ class Message < ApplicationRecord
   belongs_to :related_to, polymorphic: true, optional: true
   #Validations
   validates :body,
-    length: {maximum: 1000}, #user can put 500 chars, but in server we have to convert links to tags with text and replace < with &lt: and also > with &gt;
+    length: {maximum: 1000},
     on: :create
   validate :polymorphic_type, on: :create
 
@@ -27,10 +27,10 @@ class Message < ApplicationRecord
   after_commit -> {update_conversation(self.conversation)}, on: :create
   mount_uploader :image, MessageUploader
 
-  def body=(val)
-    #removes all html coming from user and then replaces the links for a tags (the message partial makes the html_safe)
-    write_attribute(:body, make_links(CGI::escapeHTML(val)))
+  def safe_body
+    make_links(CGI::escapeHTML(self.body)).html_safe #escapes html from user and make our links
   end
+
   def old_body
     old_body = ActionController::Base.helpers.strip_tags(self.body)
     old_body = CGI::unescapeHTML(old_body)
