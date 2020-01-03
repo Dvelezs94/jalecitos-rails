@@ -11,7 +11,7 @@
   <div id="collapseSix" class="collapse <%= "show" if params[:collapse] == "account" %>" aria-labelledby="headingSix" data-parent="#accordion">
     <div class="card-body">
       <div class="Cuenta-content">
-        <% if ! @user.verified? %>
+        <% if false && ! @user.verified? %>
         <% @cant_verify = current_user.sales.completed.length <= 10 %>
           <div class="perfil-text">
             <h4>Verificación de perfil
@@ -21,7 +21,7 @@
           <% if @cant_verify %>
           <p class="error">Debes tener más de 10 ventas para solicitar una verificación</p>
           <% end %>
-        <% else %>
+        <% elsif false %>
           <div class="verificado-btn">
             <button class="default-btn">¡Felicidades!
               <br>
@@ -43,9 +43,9 @@
             <li>
               <span></span>Tu perfil, tus jales, y tus pedidos ya no serán visibles en Jalecitos.</li>
             <li>
-              <span></span>Tus órdenes activas serán canceladas y se reembolsará el dinero.</li>
+              <!-- <span></span>Tus órdenes activas serán canceladas y se reembolsará el dinero.</li> -->
             <li>
-              <span></span>Se borrarán tus tarjetas y bancos asociados a la cuenta.</li>
+              <!-- <span></span>Se borrarán tus tarjetas y bancos asociados a la cuenta.</li> -->
             <li>
               <span></span>Tu correo ya no podrá ser utilizado de nuevo para un nuevo registo en Jalecitos.</li>
           </div>
