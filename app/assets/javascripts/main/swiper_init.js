@@ -63,8 +63,10 @@ $(document).on('turbolinks:load', function() {
     });
 
   });
-  window.swip.recent_gigs.params.autoplay.delay = 5000;
-  window.swip.recent_gigs.autoplay.start();
+  if(window.swip.recent_gigs != undefined) {
+    window.swip.recent_gigs.params.autoplay.delay = 5000;
+    window.swip.recent_gigs.autoplay.start();
+  }
 
   window.gig_show = new Swiper('.gig-show-carousel', {
     loop: true,
@@ -73,9 +75,9 @@ $(document).on('turbolinks:load', function() {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-    autoplay: {
-      delay: 3000
-    }
+    // autoplay: {
+    //   delay: 3000
+    // }
   });
   window.gig_show.on("slideChange", function() {
     stopVideos();
