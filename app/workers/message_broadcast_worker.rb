@@ -13,7 +13,7 @@ class MessageBroadcastWorker
     s_stuff = {'user' => receiver, 'unread_messages' => message.conversation.unread_messages?(sender) }
     r_stuff = {'user' => sender, 'unread_messages' => message.conversation.unread_messages?(receiver) }
     broadcast_to_sender(sender, receiver, message, s_stuff)
-    broadcast_to_receiver(receiver, sender, message, r_stuff)
+    broadcast_to_receiver(receiver, sender, message, r_stuff) if sender != receiver # if user sends message to himself dont send twice
   end
 
   private
