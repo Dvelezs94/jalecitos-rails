@@ -7,7 +7,7 @@ module GetUser
   end
   def get_gigs bool=false #used in my_account and show
     @gigs = Gig.search("*",
-       includes: [:prof_pack, :user, city: [state: :country]],
+       includes: [:user, :category, city: [state: :country]],
         where: conditions,
          order: [{ updated_at: { order: :desc, unmapped_type: :long}}],
           execute: bool )

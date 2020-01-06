@@ -31,7 +31,7 @@ module GetPages
   end
 
   def get_wizard_gigs
-    @wizard_gigs =  Gig.includes(:gigs_packages, :user, :likes, :category,city: [state: :country]).where(status: "wizard").
+    @wizard_gigs =  Gig.includes(:user, :likes, :category, city: [state: :country]).where(status: "wizard").
     page(params[:wizard_gigs]).per(15)
   end
 
@@ -42,7 +42,7 @@ module GetPages
 
   def get_popular_gigs bool=false
     @popular_gigs = Gig.search("*",
-       includes: [:gigs_packages, :user, :likes, :category, city: [state: :country]],
+       includes: [:user, :likes, :category, city: [state: :country]],
         where: conditions, boost_where: boost_where_condition,
          boost_by: {order_count: {factor: 100}},
           page: params[:popular_gigs], per_page: 15, execute: bool)
@@ -50,7 +50,7 @@ module GetPages
 
   def get_recent_gigs bool=false
     @recent_gigs = Gig.search("*",
-       includes: [:gigs_packages, :user, :likes, :category, city: [state: :country]],
+       includes: [:user, :likes, :category, city: [state: :country]],
         where: conditions,
          order: [{ created_at: { order: :desc, unmapped_type: :long}}],
           page: params[:recent_gigs], per_page: 15, execute: bool)
@@ -58,7 +58,7 @@ module GetPages
 
   def get_random_gigs
     @random_gigs   = Gig.search("*",
-      includes: [:gigs_packages, :user, :likes, :category, city: [state: :country]],
+      includes: [:user, :likes, :category, city: [state: :country]],
                           body: random_conditions,
                           page: params[:random_gigs],
                           per_page: 15,
@@ -74,7 +74,7 @@ module GetPages
 
   def get_verified_gigs bool=false
     @verified_gigs = Gig.search("*",
-       includes: [:gigs_packages, :user, :category],
+       includes: [:user, :category],
         where: conditions("verified"),
          boost_where: boost_where_condition, boost_by: {order_count: {factor: 100}},
           page: params[:verified_gigs], per_page: 15, execute: bool)
@@ -85,7 +85,7 @@ module GetPages
   end
 
   def get_liked_gigs_items
-    @liked_gigs_items = Gig.includes(:gigs_packages, :user, :likes, :category, city: [state: :country])
+    @liked_gigs_items = Gig.includes(:user, :likes, :category, city: [state: :country])
     .where(id: @liked_gigs.pluck(:gig_id), status: "published")
     .order(created_at: :desc)
   end

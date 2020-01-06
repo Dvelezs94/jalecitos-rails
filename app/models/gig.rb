@@ -46,9 +46,9 @@ class Gig < ApplicationRecord
   has_many :packages, ->{ order(id: :asc) }, dependent: :destroy
   # has_many :gig_first_pack, ->{ limit(1).order(id: :asc) }, class_name: 'Package' # this is useless (used in toggle icon of show ant toggle status function, but nonsense)
   has_many :gig_packages, ->{ limit(3).order(id: :asc) }, class_name: 'Package'
-  has_many :gigs_packages, ->{ limit(45).order(id: :asc) }, class_name: 'Package'
-  has_many :query_pack, ->{ limit(60).order(id: :asc) }, class_name: 'Package'
-  has_many :prof_pack, ->{ limit(60).order(id: :asc) }, class_name: 'Package'
+  #has_many :gigs_packages, ->{ limit(45).order(id: :asc) }, class_name: 'Package' #this was used in carousels but now i keep first package price on gig object, so i dont need grab packages when load preview of slider
+  #has_many :query_pack, ->{ limit(60).order(id: :asc) }, class_name: 'Package' #this was used on queries, but now i  dont need packages because i keep since price in gig
+  #has_many :prof_pack, ->{ limit(60).order(id: :asc) }, class_name: 'Package'  #this was used on profile, but now i  dont need packages because i keep since price in gig
   has_many :related_pack, ->{ limit(30).order(id: :asc) }, class_name: 'Package'
   #Validations
   validates_presence_of :name, :profession, :description
