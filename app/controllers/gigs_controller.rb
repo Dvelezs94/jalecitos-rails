@@ -74,6 +74,7 @@ class GigsController < ApplicationController
   # POST /gigs
   def create
     @gig.with_lock do
+      cocoon_prevent_more_than_5_faqs
       if params[:gig_id].present? #editing in creation
         @gig.faqs.delete_all #in create cocoon just saves faqs, so i have to delete old ones in case they save more than 1 time
         @success = @gig.update(gig_params)
@@ -97,6 +98,7 @@ class GigsController < ApplicationController
   # PATCH/PUT /gigs/1
   def update
     @gig.with_lock do
+      cocoon_prevent_more_than_5_faqs
       @success = @gig.update(gig_params)
       if @success
         fix_cocoon_multi_record
@@ -219,24 +221,30 @@ class GigsController < ApplicationController
       (order_count > 0) ? redirect_to(root_path, notice: "Tienes transacciones pendientes en este Jale") : true
     end
 
+    #fix cocoon new add bug
+    def cocoon_prevent_more_than_5_faqs
+      @still_in_view =[]
+      @all_except_deleted = 0
+      @will_be_created = 0
+      @faqs_hash = params.require(:gig).permit(faqs_attributes: [:id, :question, :answer, :_destroy])["faqs_attributes"]
+      @faqs_hash.each do |key, value|
+        @still_in_view << value["id"] if key.to_i < 5 && value["_destroy"] == "false" #the faqs i passed to the view initially have simple numbers, if destroy is false, then they re still there
+        @all_except_deleted+=1 if value["_destroy"] != "1"
+        @will_be_created+=1 if !value.key?(:id)
+      end
+      head(:no_content) if @will_be_created > 5 #prevent trying to hack questions
+      #the other variables @still_in_view and @all_except_deleted are just useful in update
+    end
+
     def fix_cocoon_multi_record #in worst case, user gives me 10 new records (a hacker), this code will prevent to just have at max 10 faqs
-      still_in_view =[]
-      all_except_deleted = 0
       new_records = 0
-      faqs_hash = params.require(:gig).permit(faqs_attributes: [:id, :question, :answer, :_destroy])["faqs_attributes"]
-      faqs_hash.each do |key, value|
-        still_in_view << value["id"] if key.to_i < 5 && value["_destroy"] == "false" #the faqs i passed to the view initially have simple numbers, if destroy is false, then they re still there
-        all_except_deleted+=1 if value["_destroy"] != "1"
-      end
-      need_to_erase = @gig.faqs.length - all_except_deleted
-      new_faqs = @gig.faqs.where.not(id: still_in_view).order(created_at: :asc) #i dont care about the faqs of view that are still there
+      need_to_erase = @gig.faqs.length - @all_except_deleted
+      new_faqs = @gig.faqs.where.not(id: @still_in_view).order(created_at: :asc) #i dont care about the faqs of view that are still there
       if need_to_erase > 0
-        new_faqs[0..need_to_erase-1].each do |faq|
-          faq.destroy
-        end
+          new_faqs[0..need_to_erase-1].each do |faq|
+            faq.destroy
+          end
       end
-
-
     end
     ####################################
     def prepare_packages
