@@ -8,6 +8,7 @@ class GigsController < ApplicationController
   before_action :set_gig, only: [:destroy, :ban_gig]
   before_action :set_gig_with_first_pack, only: :toggle_status
   before_action :set_gig_with_all_asc, only: [:show, :old_show]
+  before_action :remember_review, only: [:show]
   before_action :check_published, only: [:show, :old_show]
   before_action :set_gig_create, only: [:create]
   before_action :set_gig_edit, only: [:edit]
@@ -252,6 +253,14 @@ class GigsController < ApplicationController
       @new_packages =[]
       3.times do
         @new_packages << Package.new
+      end
+    end
+
+    def remember_review #if you want to shw message in other page, this code has to be executed in that page
+      if current_user && current_user == @gig.user && @gig.published?
+        cookies[:remember_review] ||= {
+          expires: 3.day #time that elapses to show message again
+        }
       end
     end
 end

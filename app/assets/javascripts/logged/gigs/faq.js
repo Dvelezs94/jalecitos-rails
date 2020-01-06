@@ -10,7 +10,6 @@ $(document).on('turbolinks:load', function() {
   });
 
   check_to_hide_or_show_add_link();
-  current_faqs();
 
   $("#faq-accordion").on("click", ".faq-collapse",function(){
     $(this).closest('.nested-fields').find('.collapse').toggle('collapse');
