@@ -3,7 +3,7 @@ module GetQuery
 
   def get_gig bool=false
     @gigs = Gig.search(filter_query,
-       includes: [:query_pack, :likes, :user, city: [state: :country]],
+       includes: [:likes, :category, :user, city: [state: :country]],
         where: where_filter, page: params[:gigs],
          boost_where: boost_where_condition, boost_by: {score: {factor: 100}},
          per_page: 20, execute: bool, operator: "or", misspellings: misspellings)

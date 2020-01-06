@@ -11,6 +11,7 @@ class PagesController < ApplicationController
       render template: "shared/carousels/add_items_carousel.js.erb"
     else
       home_get_all
+      (user_signed_in?)? render(template: 'shared_user/root/homepage') : render(template: 'shared_guest/root/homepage')
     end
     update_push_subscription if user_signed_in?
   end

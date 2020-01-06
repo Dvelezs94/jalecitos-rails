@@ -24,9 +24,17 @@ class Package < ApplicationRecord
 
   validate :price_range, :min_and_max #:max_unit_price, no hire
   before_update :check_orders
+  before_save :update_since_price_of_gig
+
+  def update_since_price_of_gig
+    self.gig.update(since: starting_price) if pack_type == "basic" #put to gig the price of first package
+  end
 
   def safe_description
     make_links(CGI::escapeHTML(self.description)).html_safe #escapes html from user and make our links
+  end
+  def starting_price #if units, need to multiply for the lowest
+    min_amount.present? ? price*min_amount : price
   end
   private
   def check_orders
@@ -34,6 +42,8 @@ class Package < ApplicationRecord
       throw :abort
     end
   end
+
+
 
   def max_unit_price
     if unit_type.present? && min_amount.present? && max_amount.present? #unit type

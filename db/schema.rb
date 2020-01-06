@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_01_213528) do
+ActiveRecord::Schema.define(version: 2020_01_06_030224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(version: 2020_01_01_213528) do
     t.bigint "city_id"
     t.string "youtube_url"
     t.integer "visits", default: 0
+    t.float "since"
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["city_id"], name: "index_gigs_on_city_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true

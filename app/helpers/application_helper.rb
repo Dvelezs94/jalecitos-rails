@@ -218,7 +218,7 @@ module ApplicationHelper
     if @gig.present? && current_page?( the_gig_path(@gig) )
         "<title>#{@gig.profession} en #{seo_location(@gig.city)} para #{@gig.name}</title>
         <meta name='description' content='#{@gig.profession} en #{seo_location(@gig.city)} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos.'>
-        <meta name='keywords' content='#{@gig.location},#{@gig.profession},#{@gig.tag_list.join(',')}'>
+        <meta name='keywords' content='#{@gig.location},#{@gig.profession},#{@gig.tags_content.join(',')}'>
         <meta name='category' content='#{@gig.category.name}'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
     elsif @request.present? && current_page?( request_path(@request) )

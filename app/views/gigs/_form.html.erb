@@ -80,7 +80,7 @@
             <%= render 'shared_user/gigs/forms/hints/tags_hint.html.erb' %>
 
             <div class="tags-input" data-name="tags-input">
-              <%= form.hidden_field :tag_list, class: "hidden_tag_list" %>
+              <%= form.hidden_field :tags_content, class: "hidden_tag_list", name: "gig[tag_list]" %>
               <textarea name="tag_list" rows="1" class="main-input tags-main-input styled font-awesome" placeholder="&#xf02c;"></textarea>
             </div>
             <label class="tag-error error"></label>
