@@ -259,7 +259,7 @@ class GigsController < ApplicationController
     def remember_review #if you want to shw message in other page, this code has to be executed in that page
       if current_user && current_user == @gig.user && @gig.published?
         cookies[:remember_review] ||= {
-          expires: 3.day #time that elapses to show message again
+          expires: (ENV.fetch("RAILS_ENV") == "production")? 3.day: 10.second #time that elapses to show message again
         }
       end
     end
