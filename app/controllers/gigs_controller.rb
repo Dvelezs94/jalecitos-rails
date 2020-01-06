@@ -172,7 +172,7 @@ class GigsController < ApplicationController
     end
 
     def set_gig_with_all_asc
-      @gig = Gig.includes(:gig_packages, :category, :faqs, :likes,:user => [:score, city: [state: :country]], city: [state: :country]).friendly.find(params[:id])
+      @gig = Gig.includes(:gig_packages, :category, :faqs, :tags,:likes,:user => [:score, city: [state: :country]], city: [state: :country]).friendly.find(params[:id])
       @gig_hits = @gig.visits
     end
 

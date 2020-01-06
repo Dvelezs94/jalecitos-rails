@@ -38,11 +38,13 @@ end
   end
 
   def current_user #eager load of user
-    if params[:controller] == "gigs" &&  params[:action] == "show"
       @current_user ||= super.tap do |user|
+        if params[:controller] == "gigs" &&  params[:action] == "show"
         ::ActiveRecord::Associations::Preloader.new.preload(user, [:score, city:[state: :country]])
+        else
+        ::ActiveRecord::Associations::Preloader.new.preload(user, [city:[state: :country]])
+        end
       end
-    end
   end
 
 
