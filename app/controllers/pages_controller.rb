@@ -96,10 +96,11 @@ class PagesController < ApplicationController
   end
 
   def phone_available
-    if current_user && current_user.phone_number.nil?
-      cookies[:phone_available] ||= {
+    if current_user && current_user.phone_number.nil? && !cookies[:phone_available]
+      cookies[:phone_available] = {
         expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 10.second  #time that elapses to show message again
       }
+      @phone_available = true
     end
   end
 

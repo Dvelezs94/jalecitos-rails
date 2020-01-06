@@ -11,7 +11,7 @@
     </button>
   </div>
   <% end %>
-  <% if current_user && current_user == @gig.user && @gig.published? && !cookies[:remember_review] %>
+  <% if @remember_review %>
   <div class="alert alert-info alert-dismissible fade show text-center" role="alert" style="margin-bottom:0 !important;">
     <div class="want_review">
       Recuerda que mientras más comentarios positivos tenga tu jale, más arriba saldrás en las búsquedas. Haz click aquí para compartir tu Jale.

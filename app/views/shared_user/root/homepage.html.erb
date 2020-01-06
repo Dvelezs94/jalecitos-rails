@@ -8,7 +8,7 @@
     </button>
   </div>
   <% end %>
-  <%= render 'shared_user/users/phone_available' if current_user.phone_number.nil? && !cookies[:phone_available] %>
+  <%= render 'shared_user/users/phone_available' if @phone_available %>
   <%= render 'categories/category_carousel' %>
 
   <%= gig_carousel( "Agregados recientemente", :recent_gigs) %>
