@@ -4,3 +4,11 @@
     updateURL(["gig_id"], ["<%= @gig.id %>"]); //if user changes name (slug) and reloads it will grab gig_id to find gig
   <% end %>
 <% end %>
+<% if params[:action] == "update" && @success %>
+$.each($(".nested-fields"), function( index, elem ) {  // if cocoon hides a removed faq, at this moment i removed it, so i have to prevent that that id tries to remove again in another request when the user goes back and submit again the form
+  if (elem.style.display== "none"){
+    $(elem).next().remove();
+    $(elem).remove();
+  }
+});
+<% end %>
