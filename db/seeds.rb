@@ -67,13 +67,14 @@ if ENV.fetch("RAILS_ENV") != "production"
 
   200.times do |x|
     3.times do |y|
-      Package.create! do |package|
+      @pack = Package.create! do |package|
         package.name = Faker::Commerce.product_name + "#{x}#{y}"
         package.description = Faker::Lorem.paragraph(30, true)
         package.price = Faker::Number.between(200, 500)
         package.gig_id = x+1
         package.pack_type = y
       end
+      @pack.gig.update(since: @pack.price) if @pack.pack_type == "basic"
     end
   end
 
