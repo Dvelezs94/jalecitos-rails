@@ -13,7 +13,9 @@
   <% end %>
   <% if current_user && current_user == @gig.user && @gig.published? && !cookies[:remember_review] %>
   <div class="alert alert-info alert-dismissible fade show text-center" role="alert" style="margin-bottom:0 !important;">
-    Recuerda que mientras más comentarios positivos tenga tu jale, más arriba saldrás en las búsquedas
+    <div class="want_review">
+      Recuerda que mientras más comentarios positivos tenga tu jale, más arriba saldrás en las búsquedas. Haz click aquí para compartir tu Jale.
+    </div>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
