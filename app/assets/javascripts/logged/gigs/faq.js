@@ -10,6 +10,7 @@ $(document).on('turbolinks:load', function() {
   });
 
   check_to_hide_or_show_add_link();
+  current_faqs();
 
   $("#faq-accordion").on("click", ".faq-collapse",function(){
     $(this).closest('.nested-fields').find('.collapse').toggle('collapse');
@@ -22,8 +23,16 @@ $(document).on('turbolinks:load', function() {
   initialize_names();
 
 });
+function current_faqs(){  //gets all ids of current dom faqs (stored in value of inputs)
+  faq_list = [];
+  $.each($("#faq-accordion > input[type=hidden]"), function( index, elem ) {
+    faq_list.push(elem.value);
+  });
+  console.log(faq_list);
+  return faq_list.join(",")
+}
 function check_to_hide_or_show_add_link() {
-  if ($('.nested-fields').length == 5) {
+  if ($('.nested-fields:visible').length == 5) {
     $('.links #add_faq').hide();
   } else {
     $('.links #add_faq').show();

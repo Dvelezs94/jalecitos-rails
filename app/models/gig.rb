@@ -41,7 +41,7 @@ class Gig < ApplicationRecord
   has_many :completed_reviews, -> (gig) { includes(:gig_rating, :giver).where(receiver_id: gig.user_id, status: "completed").order(updated_at: :desc) }, class_name: 'Review', as: :reviewable
 
   has_many :faqs, inverse_of: :gig, dependent: :destroy #inverse of allow to save faqs at same time of creating gig (see cocoon gem guide)
-  accepts_nested_attributes_for :faqs,allow_destroy: true, limit: 5
+  accepts_nested_attributes_for :faqs,allow_destroy: true, limit: 10 #worst case (deleted 5 and sending 5 new in update) so the hash would be 10 items size
   belongs_to :category
   has_many :packages, ->{ order(id: :asc) }, dependent: :destroy
   # has_many :gig_first_pack, ->{ limit(1).order(id: :asc) }, class_name: 'Package' # this is useless (used in toggle icon of show ant toggle status function, but nonsense)

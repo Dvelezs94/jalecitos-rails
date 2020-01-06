@@ -99,6 +99,7 @@ class GigsController < ApplicationController
     @gig.with_lock do
       @success = @gig.update(gig_params)
       if @success
+        fix_cocoon_multi_record
         # @package = Package.find_by_gig_id(@gig)
         respond_to do |format|
           format.js {
@@ -216,6 +217,26 @@ class GigsController < ApplicationController
         order_count += p.orders.where(status: "pending").or(p.orders.where(status: "in_progress")).or(p.orders.where(status: "disputed")).count
       end
       (order_count > 0) ? redirect_to(root_path, notice: "Tienes transacciones pendientes en este Jale") : true
+    end
+
+    def fix_cocoon_multi_record #in worst case, user gives me 10 new records (a hacker), this code will prevent to just have at max 10 faqs
+      still_in_view =[]
+      all_except_deleted = 0
+      new_records = 0
+      faqs_hash = params.require(:gig).permit(faqs_attributes: [:id, :question, :answer, :_destroy])["faqs_attributes"]
+      faqs_hash.each do |key, value|
+        still_in_view << value["id"] if key.to_i < 5 && value["_destroy"] == "false" #the faqs i passed to the view initially have simple numbers, if destroy is false, then they re still there
+        all_except_deleted+=1 if value["_destroy"] != "1"
+      end
+      need_to_erase = @gig.faqs.length - all_except_deleted
+      new_faqs = @gig.faqs.where.not(id: still_in_view).order(created_at: :asc) #i dont care about the faqs of view that are still there
+      if need_to_erase > 0
+        new_faqs[0..need_to_erase-1].each do |faq|
+          faq.destroy
+        end
+      end
+
+
     end
     ####################################
     def prepare_packages
