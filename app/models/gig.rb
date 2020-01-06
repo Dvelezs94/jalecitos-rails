@@ -37,6 +37,9 @@ class Gig < ApplicationRecord
   belongs_to :city, optional: true
   #belongs_to :active_user, { where(:users => { status: "active" }) }, :class_name => "User"
   has_many :likes, dependent: :destroy
+
+  has_many :completed_reviews, -> (gig) { includes(:gig_rating, :giver).where(receiver_id: gig.user_id, status: "completed").order(updated_at: :desc) }, class_name: 'Review', as: :reviewable
+
   has_many :faqs, inverse_of: :gig, dependent: :destroy #inverse of allow to save faqs at same time of creating gig (see cocoon gem guide)
   accepts_nested_attributes_for :faqs,allow_destroy: true, limit: 5
   belongs_to :category
