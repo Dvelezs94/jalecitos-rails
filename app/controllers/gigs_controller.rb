@@ -10,7 +10,8 @@ class GigsController < ApplicationController
   before_action :set_gig_with_all_asc, only: [:show, :old_show]
   before_action :check_published, only: [:show, :old_show]
   before_action :set_gig_create, only: [:create]
-  before_action :set_gig_update, only: [:edit, :update]
+  before_action :set_gig_edit, only: [:edit]
+  before_action :set_gig_update, only: [:update]
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status, :create]
   before_action :max_gigs, only: [:new, :create]
   before_action :check_running_orders, only: :destroy
@@ -153,11 +154,15 @@ class GigsController < ApplicationController
     end
 
     def set_gig_update
-      if params[:gig_id].present? #after edit name in update, slug changes
+      if params[:gig_id].present? #after edit name in update, slug changes (not anymore)
         @gig = Gig.find(params[:gig_id])
       else #before changing name it can be finded by original name
         @gig = Gig.friendly.find(params[:id])
       end
+    end
+
+    def set_gig_edit
+      @gig = Gig.includes(:gig_packages, :faqs, :category, :tags, city: [state: :country]).friendly.find(params[:id])
     end
 
 
@@ -167,7 +172,7 @@ class GigsController < ApplicationController
     end
 
     def set_gig_with_all_asc
-      @gig = Gig.includes(:gig_packages, :category, :user).friendly.find(params[:id])
+      @gig = Gig.includes(:gig_packages, :category, :faqs, :tags,:likes,:user => [:score, city: [state: :country]], city: [state: :country]).friendly.find(params[:id])
       @gig_hits = @gig.visits
     end
 

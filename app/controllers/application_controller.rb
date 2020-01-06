@@ -37,6 +37,17 @@ end
     end
   end
 
+  def current_user #eager load of user
+      @current_user ||= super.tap do |user|
+        if params[:controller] == "gigs" &&  params[:action] == "show"
+        ::ActiveRecord::Associations::Preloader.new.preload(user, [:score, city:[state: :country]])
+        else
+        ::ActiveRecord::Associations::Preloader.new.preload(user, [city:[state: :country]])
+        end
+      end
+  end
+
+
 
   #behave as request of "user"
   def self.renderer_with_signed_in_user(user)

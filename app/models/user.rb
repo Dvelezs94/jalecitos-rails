@@ -31,7 +31,6 @@ class User < ApplicationRecord
   acts_as_taggable
   #enum
   enum status: { active: 0, disabled: 1, banned: 2}
-
   # Create default values
   before_validation :set_defaults, on: :create
   friendly_id :alias, use: :slugged #this is after the alias is generated because if not then it will generate a number slug because alias isnt set yet
