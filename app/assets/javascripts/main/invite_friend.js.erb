@@ -19,4 +19,24 @@ $(document).on('turbolinks:load', function() {
     }
     event.preventDefault();
   });
+
+  $('.want_review').click(function (event) {
+    let url = window.location.href
+
+    if (navigator.share) {
+      navigator.share({
+          title: document.title,
+          text: "¡Me encataría que me dieras un comentario positivo en mi Jale!",
+          url: url
+      })
+    } else {
+      new Clipboard('#invite-friend', {
+        text: function() {
+          return `Me encataría que me dieras un comentario positivo en mi Jale ${url}`;
+        }
+      });
+      alert("La solicitud ha sido copiada. ¡Compartela con tus clientes para que comenten tu Jale!");
+    }
+    event.preventDefault();
+  });
 });
