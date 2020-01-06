@@ -87,6 +87,10 @@ class Gig < ApplicationRecord
     title
   end
 
+  def tags_content #useful for use eager loading (i eager load :tags and then get the names) because tag_list cand be eager loaded
+    self.tags.collect { |t| t.name }
+  end
+
   def punch(request = nil)
     if request.try(:bot?)
       true
