@@ -8,15 +8,18 @@ class GigsController < ApplicationController
   before_action :set_gig, only: [:destroy, :ban_gig]
   before_action :set_gig_with_first_pack, only: :toggle_status
   before_action :set_gig_with_all_asc, only: [:show, :old_show]
+  before_action :remember_review, only: [:show]
   before_action :check_published, only: [:show, :old_show]
+  before_action :redirect_to_show, only: [:old_show]
   before_action :set_gig_create, only: [:create]
-  before_action :set_gig_update, only: [:edit, :update]
+  before_action :set_gig_edit, only: [:edit]
+  before_action :set_gig_update, only: [:update]
   before_action :check_gig_ownership, only:[:edit, :update, :destroy, :toggle_status, :create]
   before_action :max_gigs, only: [:new, :create]
   before_action :check_running_orders, only: :destroy
   layout :set_layout
   def old_show
-    redirect_to the_gig_path @gig
+    #redirecting in redirect_to_show
   end
   # GET /gigs/1
   def show
@@ -27,7 +30,7 @@ class GigsController < ApplicationController
       render template: "shared/carousels/add_items_carousel.js.erb"
     else
       define_pack_names
-      get_my_reviews if current_user
+      get_my_reviews if current_user && @gig.user != current_user
       get_reviews
       get_related_gigs
       Searchkick.multi_search([@related_gigs])
@@ -73,6 +76,8 @@ class GigsController < ApplicationController
   # POST /gigs
   def create
     @gig.with_lock do
+      @faqs_hash = params.require(:gig).permit(faqs_attributes: [:id, :question, :answer, :_destroy])["faqs_attributes"]
+      cocoon_prevent_more_than_5_faqs if @faqs_hash.present?
       if params[:gig_id].present? #editing in creation
         @gig.faqs.delete_all #in create cocoon just saves faqs, so i have to delete old ones in case they save more than 1 time
         @success = @gig.update(gig_params)
@@ -96,8 +101,11 @@ class GigsController < ApplicationController
   # PATCH/PUT /gigs/1
   def update
     @gig.with_lock do
+      @faqs_hash = params.require(:gig).permit(faqs_attributes: [:id, :question, :answer, :_destroy])["faqs_attributes"]
+      cocoon_prevent_more_than_5_faqs if @faqs_hash.present?
       @success = @gig.update(gig_params)
       if @success
+        fix_cocoon_multi_record
         # @package = Package.find_by_gig_id(@gig)
         respond_to do |format|
           format.js {
@@ -120,6 +128,9 @@ class GigsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def redirect_to_show
+      redirect_to the_gig_path @gig
+    end
     def set_gig
       @gig = Gig.friendly.find(params[:id])
     end
@@ -153,11 +164,15 @@ class GigsController < ApplicationController
     end
 
     def set_gig_update
-      if params[:gig_id].present? #after edit name in update, slug changes
+      if params[:gig_id].present? #after edit name in update, slug changes (not anymore)
         @gig = Gig.find(params[:gig_id])
       else #before changing name it can be finded by original name
         @gig = Gig.friendly.find(params[:id])
       end
+    end
+
+    def set_gig_edit
+      @gig = Gig.includes(:gig_packages, :faqs, :category, :tags, city: [state: :country]).friendly.find(params[:id])
     end
 
 
@@ -167,7 +182,7 @@ class GigsController < ApplicationController
     end
 
     def set_gig_with_all_asc
-      @gig = Gig.includes(:gig_packages, :category, :user).friendly.find(params[:id])
+      @gig = Gig.includes(:gig_packages, :category, :faqs, :tags,:likes,:user => [:score, city: [state: :country]], city: [state: :country]).friendly.find(params[:id])
       @gig_hits = @gig.visits
     end
 
@@ -212,12 +227,47 @@ class GigsController < ApplicationController
       end
       (order_count > 0) ? redirect_to(root_path, notice: "Tienes transacciones pendientes en este Jale") : true
     end
+
+    #fix cocoon new add bug
+    def cocoon_prevent_more_than_5_faqs
+      @still_in_view =[]
+      @all_except_deleted = 0
+      @will_be_created = 0
+      @faqs_hash.each do |key, value|
+        @still_in_view << value["id"] if key.to_i < 5 && value["_destroy"] == "false" #the faqs i passed to the view initially have simple numbers, if destroy is false, then they re still there
+        @all_except_deleted+=1 if value["_destroy"] != "1"
+        @will_be_created+=1 if !value.key?(:id)
+      end
+      head(:no_content) if @will_be_created > 5 #prevent trying to hack questions
+      #the other variables @still_in_view and @all_except_deleted are just useful in update
+    end
+
+    def fix_cocoon_multi_record #in worst case, user gives me 10 new records (a hacker), this code will prevent to just have at max 10 faqs
+      new_records = 0
+      need_to_erase = @gig.faqs.length - @all_except_deleted
+      new_faqs = @gig.faqs.where.not(id: @still_in_view).order(created_at: :asc) #i dont care about the faqs of view that are still there
+      if need_to_erase > 0
+          new_faqs[0..need_to_erase-1].each do |faq|
+            faq.destroy
+          end
+      end
+    end
     ####################################
     def prepare_packages
       define_pack_names
       @new_packages =[]
       3.times do
         @new_packages << Package.new
+      end
+    end
+
+    def remember_review #if you want to shw message in other page, this code has to be executed in that page
+      @max_score_times = 5
+      if current_user && current_user == @gig.user && @gig.score_times < 5 && @gig.published? && !cookies[:remember_review]
+        cookies[:remember_review] = {
+          expires: (ENV.fetch("RAILS_ENV") == "production")? 3.day: 10.second #time that elapses to show message again
+        }
+        @remember_review = true
       end
     end
 end

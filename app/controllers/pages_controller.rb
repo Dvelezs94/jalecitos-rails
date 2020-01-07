@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   include GetPages
   access user: :all, admin: [:home], all: [:work, :home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots, :sitemap, :install]
   before_action :admin_redirect, only: :home
+  before_action :phone_available, only: :home
   before_action :pending_review, only: [:home], :if => :search_pending_review?
   layout :set_layout
   def home
@@ -11,6 +12,7 @@ class PagesController < ApplicationController
       render template: "shared/carousels/add_items_carousel.js.erb"
     else
       home_get_all
+      (user_signed_in?)? render(template: 'shared_user/root/homepage') : render(template: 'shared_guest/root/homepage')
     end
     update_push_subscription if user_signed_in?
   end
@@ -53,7 +55,7 @@ class PagesController < ApplicationController
       render template: "shared/carousels/add_items_carousel.js.erb"
     else
       wizard_get_all
-      render "home"
+      render 'shared_user/root/homepage'
     end
   end
 
@@ -90,6 +92,15 @@ class PagesController < ApplicationController
     else
       #get the pending reviews (starting from oldest)
       @p_review = Review.find_by( giver_id: current_user.id, status: "pending" )
+    end
+  end
+
+  def phone_available
+    if current_user && current_user.phone_number.nil? && !cookies[:phone_available]
+      cookies[:phone_available] = {
+        expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 10.second  #time that elapses to show message again
+      }
+      @phone_available = true
     end
   end
 
