@@ -75,7 +75,8 @@ class GigsController < ApplicationController
   # POST /gigs
   def create
     @gig.with_lock do
-      cocoon_prevent_more_than_5_faqs
+      @faqs_hash = params.require(:gig).permit(faqs_attributes: [:id, :question, :answer, :_destroy])["faqs_attributes"]
+      cocoon_prevent_more_than_5_faqs if @faqs_hash.present?
       if params[:gig_id].present? #editing in creation
         @gig.faqs.delete_all #in create cocoon just saves faqs, so i have to delete old ones in case they save more than 1 time
         @success = @gig.update(gig_params)
@@ -99,7 +100,8 @@ class GigsController < ApplicationController
   # PATCH/PUT /gigs/1
   def update
     @gig.with_lock do
-      cocoon_prevent_more_than_5_faqs
+      @faqs_hash = params.require(:gig).permit(faqs_attributes: [:id, :question, :answer, :_destroy])["faqs_attributes"]
+      cocoon_prevent_more_than_5_faqs if @faqs_hash.present?
       @success = @gig.update(gig_params)
       if @success
         fix_cocoon_multi_record
@@ -227,7 +229,6 @@ class GigsController < ApplicationController
       @still_in_view =[]
       @all_except_deleted = 0
       @will_be_created = 0
-      @faqs_hash = params.require(:gig).permit(faqs_attributes: [:id, :question, :answer, :_destroy])["faqs_attributes"]
       @faqs_hash.each do |key, value|
         @still_in_view << value["id"] if key.to_i < 5 && value["_destroy"] == "false" #the faqs i passed to the view initially have simple numbers, if destroy is false, then they re still there
         @all_except_deleted+=1 if value["_destroy"] != "1"
