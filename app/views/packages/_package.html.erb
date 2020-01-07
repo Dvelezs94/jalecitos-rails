@@ -18,7 +18,7 @@
             <div class="hire_pack_info">
               <h3 class="packa-price"><%=number_to_currency(purchase_order_total(package.price), precision: 2) %> <sub>MXN</sub></h3>
               <% if @gig.user.whatsapp_enabled && @gig.user.phone_number.present? %>
-              <%= link_to "#{icon("fab", "whatsapp ft-20", title: "Whatsapp")}".html_safe, "https://wa.me/#{@gig.user.international_phone_number}?text=#{"Hola quisiera mas informacion acerca de su jale *#{@gig.name}*. #{gig_url(city_slug(@gig.city), @gig)}"}", class: "btn btn-success wapp-contact", target: "_blank" %>
+              <%= link_to "#{icon("fab", "whatsapp ft-20", title: "Whatsapp")}".html_safe, "https://wa.me/#{@gig.user.international_phone_number}?text=#{"Hola, quisiera más información acerca de su Jale *#{@gig.name}*. #{the_gig_url(@gig)}"}", class: "btn btn-success wapp-contact", target: "_blank" %>
               <% end %>
               <% if @gig.user.phone_number.present? %>
               <%= link_to "#{icon("fas", "phone", title: "Llamar")}".html_safe, "tel:#{@gig.user.international_phone_number(prefix=true)}", class: "btn btn-secondary phone-contact", target: "_blank" %>
