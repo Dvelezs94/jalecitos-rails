@@ -361,6 +361,7 @@ module ApplicationHelper
     gig_path(city_slug(gig.city), gig.category.name.parameterize,gig.slug)
   end
   def the_gig_url gig
+    #just one code uses gig_url (gig.json.builder)
     gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug)
   end
 end

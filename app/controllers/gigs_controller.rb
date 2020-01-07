@@ -10,6 +10,7 @@ class GigsController < ApplicationController
   before_action :set_gig_with_all_asc, only: [:show, :old_show]
   before_action :remember_review, only: [:show]
   before_action :check_published, only: [:show, :old_show]
+  before_action :redirect_to_show, only: [:old_show]
   before_action :set_gig_create, only: [:create]
   before_action :set_gig_edit, only: [:edit]
   before_action :set_gig_update, only: [:update]
@@ -18,7 +19,7 @@ class GigsController < ApplicationController
   before_action :check_running_orders, only: :destroy
   layout :set_layout
   def old_show
-    redirect_to the_gig_path @gig
+    #redirecting in redirect_to_show
   end
   # GET /gigs/1
   def show
@@ -127,6 +128,9 @@ class GigsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def redirect_to_show
+      redirect_to the_gig_path @gig
+    end
     def set_gig
       @gig = Gig.friendly.find(params[:id])
     end
