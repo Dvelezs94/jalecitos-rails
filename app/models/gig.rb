@@ -37,15 +37,18 @@ class Gig < ApplicationRecord
   belongs_to :city, optional: true
   #belongs_to :active_user, { where(:users => { status: "active" }) }, :class_name => "User"
   has_many :likes, dependent: :destroy
+
+  has_many :completed_reviews, -> (gig) { includes(:gig_rating, :giver).where(receiver_id: gig.user_id, status: "completed").order(updated_at: :desc) }, class_name: 'Review', as: :reviewable
+
   has_many :faqs, inverse_of: :gig, dependent: :destroy #inverse of allow to save faqs at same time of creating gig (see cocoon gem guide)
-  accepts_nested_attributes_for :faqs,allow_destroy: true, limit: 5
+  accepts_nested_attributes_for :faqs,allow_destroy: true, limit: 10 #worst case (deleted 5 and sending 5 new in update) so the hash would be 10 items size
   belongs_to :category
   has_many :packages, ->{ order(id: :asc) }, dependent: :destroy
   # has_many :gig_first_pack, ->{ limit(1).order(id: :asc) }, class_name: 'Package' # this is useless (used in toggle icon of show ant toggle status function, but nonsense)
   has_many :gig_packages, ->{ limit(3).order(id: :asc) }, class_name: 'Package'
-  has_many :gigs_packages, ->{ limit(45).order(id: :asc) }, class_name: 'Package'
-  has_many :query_pack, ->{ limit(60).order(id: :asc) }, class_name: 'Package'
-  has_many :prof_pack, ->{ limit(60).order(id: :asc) }, class_name: 'Package'
+  #has_many :gigs_packages, ->{ limit(45).order(id: :asc) }, class_name: 'Package' #this was used in carousels but now i keep first package price on gig object, so i dont need grab packages when load preview of slider
+  #has_many :query_pack, ->{ limit(60).order(id: :asc) }, class_name: 'Package' #this was used on queries, but now i  dont need packages because i keep since price in gig
+  #has_many :prof_pack, ->{ limit(60).order(id: :asc) }, class_name: 'Package'  #this was used on profile, but now i  dont need packages because i keep since price in gig
   has_many :related_pack, ->{ limit(30).order(id: :asc) }, class_name: 'Package'
   #Validations
   validates_presence_of :name, :profession, :description
@@ -85,6 +88,10 @@ class Gig < ApplicationRecord
     title = self.name
     title[0] = title[0].upcase # make upcase first char
     title
+  end
+
+  def tags_content #useful for use eager loading (i eager load :tags and then get the names) because tag_list cand be eager loaded
+    self.tags.collect { |t| t.name }
   end
 
   def punch(request = nil)

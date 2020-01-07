@@ -218,7 +218,7 @@ module ApplicationHelper
     if @gig.present? && current_page?( the_gig_path(@gig) )
         "<title>#{@gig.profession} en #{seo_location(@gig.city)} para #{@gig.name}</title>
         <meta name='description' content='#{@gig.profession} en #{seo_location(@gig.city)} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos.'>
-        <meta name='keywords' content='#{@gig.location},#{@gig.profession},#{@gig.tag_list.join(',')}'>
+        <meta name='keywords' content='#{@gig.location},#{@gig.profession},#{@gig.tags_content.join(',')}'>
         <meta name='category' content='#{@gig.category.name}'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
     elsif @request.present? && current_page?( request_path(@request) )
@@ -240,9 +240,9 @@ module ApplicationHelper
         <meta name='category' content='Trabajo, Empleo'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
     else
-        "<title>Jalecitos | Encuentra talento freelance en México</title>
-        <meta name='description' content='Servicios Freelance en Mexico'>
-        <meta name='keywords' content='Freelancer, Freelance Mexico, Contratar expertos de confianza, contratar expertos por internet, contratar expertos México, contratar talento por internet'>
+        "<title>Jalecitos | Ofrece tus servicios por internet</title>
+        <meta name='description' content='Ofrece los servicios de tu negocio en la mejor herramienta de marketing digital en México totalmente gratis'>
+        <meta name='keywords' content='marketing digital, ofrecer servicios por internet, sección amarilla, ofrecer servicios, negocio en línea, Freelancer, Freelance Mexico, Contratar expertos de confianza, contratar expertos por internet, contratar expertos México, contratar talento por internet'>
         <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
     end
   end
@@ -361,6 +361,7 @@ module ApplicationHelper
     gig_path(city_slug(gig.city), gig.category.name.parameterize,gig.slug)
   end
   def the_gig_url gig
+    #just one code uses gig_url (gig.json.builder)
     gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug)
   end
 end

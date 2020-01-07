@@ -8,10 +8,11 @@
     </button>
   </div>
   <% end %>
+  <%= render 'shared_user/users/phone_available' if @phone_available %>
   <%= render 'categories/category_carousel' %>
 
   <%= gig_carousel( "Agregados recientemente", :recent_gigs) %>
-  
+
   <%= gig_carousel( "Jales Populares", :popular_gigs) %>
 
   <%= req_carousel("Pedidos Recientes", :recent_requests) %>

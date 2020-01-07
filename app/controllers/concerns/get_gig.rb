@@ -14,20 +14,18 @@ module GetGig
   def get_reviews
     #get the associated reviews that doesnt belong to gig owner
     if current_user
-      @reviews = Review.includes(:giver, :gig_rating).
-      where(reviewable_id: @gig.id, reviewable_type: "Gig", receiver_id: @gig.user.id, status: "completed").order(updated_at: :desc).
+      @reviews = @gig.completed_reviews.
       where.not(giver_id: current_user.id).
       page(params[:reviews]).per(5)
     else #is guest
-      @reviews = Review.includes(:giver, :gig_rating).
-      where(reviewable_id: @gig.id, reviewable_type: "Gig", receiver_id: @gig.user.id, status: "completed").order(updated_at: :desc).
+      @reviews = @gig.completed_reviews.
       page(params[:reviews]).per(5)
     end
   end
 
   def get_my_reviews
     #get the associated reviews that belongs to gig owner
-    @my_reviews = Review.includes(:giver, :gig_rating).
-    where(reviewable_id: @gig.id, reviewable_type: "Gig", giver_id: current_user.id ,receiver_id: @gig.user.id, status: "completed").order(updated_at: :desc)
+    @my_reviews = @gig.completed_reviews.
+    where( giver_id: current_user.id )
   end
 end

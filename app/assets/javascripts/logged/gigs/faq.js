@@ -22,8 +22,9 @@ $(document).on('turbolinks:load', function() {
   initialize_names();
 
 });
+
 function check_to_hide_or_show_add_link() {
-  if ($('.nested-fields').length == 5) {
+  if ($('.nested-fields:visible').length == 5) {
     $('.links #add_faq').hide();
   } else {
     $('.links #add_faq').show();

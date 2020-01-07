@@ -28,9 +28,9 @@ $(document).on('turbolinks:load', function() {
       loop: false,
       freeMode: true,
       observer: true,
-      autoplay: {
-        delay: 3500
-      },
+      // autoplay: { used for all sliders, i initialize just the first one below with autoplay.start()
+      //   delay: 1000
+      // },
       spaceBetween: 20,
       breakpointsInverse: true,
       breakpoints: {
@@ -63,6 +63,10 @@ $(document).on('turbolinks:load', function() {
     });
 
   });
+  if(window.swip.recent_gigs != undefined) {
+    window.swip.recent_gigs.params.autoplay.delay = 5000;
+    window.swip.recent_gigs.autoplay.start();
+  }
 
   window.gig_show = new Swiper('.gig-show-carousel', {
     loop: true,
@@ -71,9 +75,9 @@ $(document).on('turbolinks:load', function() {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-    autoplay: {
-      delay: 3000
-    }
+    // autoplay: {
+    //   delay: 3000
+    // }
   });
   window.gig_show.on("slideChange", function() {
     stopVideos();
