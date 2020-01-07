@@ -11,9 +11,9 @@ module GetPages
       get_liked_gigs
       get_liked_gigs_items
     else
-      get_recent_gigs
-      get_recent_requests
-      Searchkick.multi_search([@recent_gigs, @recent_requests])
+      # get_recent_gigs #home carousel isnt been triggered
+      # get_recent_requests
+      # Searchkick.multi_search([@recent_gigs, @recent_requests])
     end
   end
 

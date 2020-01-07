@@ -55,7 +55,7 @@ class PagesController < ApplicationController
       render template: "shared/carousels/add_items_carousel.js.erb"
     else
       wizard_get_all
-      render "home"
+      render 'shared_user/root/homepage'
     end
   end
 
