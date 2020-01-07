@@ -74,7 +74,7 @@ if ENV.fetch("RAILS_ENV") != "production"
         package.gig_id = x+1
         package.pack_type = y
       end
-      @pack.gig.update(since: @pack.price) if @pack.pack_type == "basic"
+      @pack.gig.update(lowest_price: @pack.price) if @pack.pack_type == "basic"
     end
   end
 
