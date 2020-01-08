@@ -105,7 +105,9 @@ class GigsController < ApplicationController
       cocoon_prevent_more_than_5_faqs if @faqs_hash.present?
       @success = @gig.update(gig_params)
       if @success
-        fix_cocoon_multi_record
+        fix_cocoon_multi_record if @faqs_hash.present?
+        puts "X"*100
+        puts request.format
         # @package = Package.find_by_gig_id(@gig)
         respond_to do |format|
           format.js {
