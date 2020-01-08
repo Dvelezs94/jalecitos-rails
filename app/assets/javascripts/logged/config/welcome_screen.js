@@ -3,7 +3,7 @@ function redirectToHome() {
 }
 //phone and desktop
 var introapp = "¡Gracias por registrarte en Jalecitos! Te daremos una breve explicación de cómo funciona la app."
-var introhome = "Éste es tu inicio, aquí verás lo más reciente en tu zona."
+var introhome = "Aquí verás los servicios que ofrecen las personas."
 var introreq = "Éstos son los Pedidos que hay, en los cuales puedes ofertar."
 var searcher = 'Este buscador sirve para encontrar Jales y Pedidos dentro de la zona que desees.'
 var moreinfo = 'Si tienes dudas, puedes consultar las guias de usuario en nuestro <a href="https://blog.jalecitos.com/blog/" target="_blank">blog</a>'
