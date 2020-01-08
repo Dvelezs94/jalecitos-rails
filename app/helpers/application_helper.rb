@@ -357,11 +357,18 @@ module ApplicationHelper
     JSON.parse(res.body)
   end
 
-  def the_gig_path gig
-    gig_path(city_slug(gig.city), gig.category.name.parameterize,gig.slug)
+  def the_gig_path gig, format = nil
+    if format == nil
+      gig_path(city_slug(gig.city), gig.category.name.parameterize,gig.slug)
+    else
+      gig_path(city_slug(gig.city), gig.category.name.parameterize,gig.slug, format: format)
+    end
   end
-  def the_gig_url gig
-    #just one code uses gig_url (gig.json.builder)
-    gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug)
+  def the_gig_url gig, format = nil
+    if format == nil
+      gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug)
+    else
+      gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug, format: format)
+    end
   end
 end
