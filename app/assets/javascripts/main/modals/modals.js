@@ -29,7 +29,7 @@ function modals (modalName, modalId, buttonIdOrClass, buttonBehaviour="block", d
     }
   }
   // When the user clicks the button, open or close the modal and also closes all other modals (useful when the button behaviour is display the modal)
-  $(document).on("click", (buttonIsClass == false)? "#"+buttonIdOrClass : "."+buttonIdOrClass, function() {
+  $(document).on("click", (buttonIsClass == false)? "#"+buttonIdOrClass : "."+buttonIdOrClass, function(event) {
     event.preventDefault();
     if(modal != null ) modal.style.display = buttonBehaviour;
     closeOtherModals(modalId);

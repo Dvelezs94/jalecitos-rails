@@ -2124,8 +2124,8 @@
     bottom: 0;
     z-index: 9;
     width: 100%;
-    background: #F4F5F7;
-    box-shadow: 0 -5px 20px 0 rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #eee;
+    background-color: #fff;
   }
 
   /*dont display menu in front of bottom content*/
@@ -2140,7 +2140,7 @@
     background: var(--green);
     color: #fff;
     border-radius: 50%;
-    box-shadow: 2px 2px 24px rgba(57,194,123,0.5);
+
   }
   .phone_links a {
     color: #9B9B9B;
