@@ -33,7 +33,7 @@
       </div>
       <div class="inner-reportarcontent">
         <p class="edad1">Edad: <%= (@user.age.nil?)? "Indefinida" : @user.age %></p>
-        <p class="edad11"><%= (@user.bio.nil?)? "Sin descripción" : @user.safe_bio %></p>
+        <p class="edad11"><pre><%= (@user.bio.nil?)? "Sin descripción" : @user.safe_bio %></pre></p>
       </div>
       <div class="hire-pack-btn">
       <% if my_profile %>
