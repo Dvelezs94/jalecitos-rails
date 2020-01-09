@@ -44,7 +44,7 @@
         <%= time_ago_in_words(@user.created_at) %></h3>
       <p class="fr">Edad:
         <%= (@user.age.nil?)? "Indefinida" : @user.age %></p>
-      <p class="tr"><%= (@user.bio.nil?)? "Sin descripción" : @user.safe_bio %></p>
+      <p class="tr"><pre><%= (@user.bio.nil?)? "Sin descripción" : @user.safe_bio %></pre></p>
     </div>
   </div>
 </div>
