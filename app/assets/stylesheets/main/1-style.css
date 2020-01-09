@@ -2990,8 +2990,7 @@ h4.req_title {
 
 /*active menu*/
 .phone_links .active {
-  color: var(--blue) !important;
-  text-shadow: 0px 0px 20px rgba(0,103,244,0.44);
+  color: var(--green) !important;
 }
 /*search styles (and profile also)*/
 .gig-query .hearted1,
