@@ -27,7 +27,7 @@
                    </div>
                    <%= f.button 'Continuar', class: "default-btn signup-continue", :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i> Entrando..." } %>
                   <p class="una"><%= link_to "Olvidé mi contraseña", new_password_path(:user) %></p>
-                   <p class="una">¿No tienes cuenta?  <%= link_to "Regístrate", {}, id: "register" %></p>
+                   <p class="una">¿No tienes cuenta?  <%= link_to "Regístrate", {}, class: "sign_up" %></p>
                  <% end %>
              </div>
          </div>

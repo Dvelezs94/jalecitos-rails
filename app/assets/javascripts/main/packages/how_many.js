@@ -16,9 +16,9 @@ $(document).on('turbolinks:load', function() { //used in gig show
     else if ( 1 <= value && value <= $(this).attr("max")) { //value is correct
       range.val(e.target.value);
     }
-    else { //less than 1 or empty
-      $(this).val(1);
-      range.val(1);
+    else { //less than min value or empty
+      $(this).val($(this).attr("min"));
+      range.val($(this).attr("min"));
     }
     change_price(this);
   });
