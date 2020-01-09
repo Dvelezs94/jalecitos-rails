@@ -1,42 +1,23 @@
 // Share API action
 $(document).on('turbolinks:load', function() {
-  $('#invite-friend').click(function (event) {
-    let url = "https://www.jalecitos.com/sign_up/"
 
-    if (navigator.share) {
-      navigator.share({
-          title: document.title,
-          text: "¡Unete a Jalecitos y oferta tus servicios en linea hoy mismo!",
-          url: url
-      })
-    } else {
-      new Clipboard('#invite-friend', {
-        text: function() {
-          return `Unete a Jalecitos y oferta tus servicios en linea hoy mismo en ${url}`;
-        }
-      });
-      alert("La invitacion ha sido copiada. ¡Compartela con tus amigos para que se unan!");
-    }
+  $('#invite-friend').click(function (event) {
+    let url = "https://www.jalecitos.com/sign_up/";
+    elem='#invite-friend';
+    desk="¡Unete a Jalecitos y oferta tus servicios en linea hoy mismo!";
+    text=`Únete a Jalecitos y oferta tus servicios en línea hoy mismo en ${url}`;
+    confirmation = "La invitación ha sido copiada. ¡Compartela con tus amigos para que se unan!";
+    share_content(elem,desk,text,confirmation, url);
     event.preventDefault();
   });
 
   $('.want_review').click(function (event) {
-    let url = window.location.href
-
-    if (navigator.share) {
-      navigator.share({
-          title: document.title,
-          text: "¡Te agradecería si me das un comentario positivo en mi Jale!",
-          url: url
-      })
-    } else {
-      new Clipboard('#invite-friend', {
-        text: function() {
-          return `Te agradecería si me das un comentario positivo en mi Jale: ${url}`;
-        }
-      });
-      alert("La solicitud ha sido copiada. ¡Compartela con tus clientes para que comenten tu Jale!");
-    }
+    let url = document.location.href;
+    elem='.want_review'
+    desk="¡Te agradecería si me das un comentario positivo en mi Jale!"
+    text=`Te agradecería si me das un comentario positivo en mi Jale: ${url}`
+    confirmation = "La solicitud ha sido copiada. ¡Compartela con tus clientes para que comenten tu Jale!"
+    share_content(elem,desk,text,confirmation, url);
     event.preventDefault();
   });
 });

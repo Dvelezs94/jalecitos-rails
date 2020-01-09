@@ -10,6 +10,7 @@
   <% end %>
   <%= render 'shared_user/users/phone_available' if @phone_available %>
   <%= render 'categories/category_carousel' %>
+  <%= render "shared/no_gigs" %>
 
   <%= gig_carousel( "Agregados recientemente", :recent_gigs) %>
 
@@ -24,7 +25,6 @@
 
   <%= gig_carousel( "Jales Gustados", :liked_gigs, 'shared_user/gigs/liked_carousel', true) %>
 
-  <%= render "shared/no_gigs" %>
 <% else %>
   <%= gig_carousel( "Jales", :wizard_gigs) %>
 

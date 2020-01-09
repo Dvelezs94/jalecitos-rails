@@ -63,9 +63,11 @@
         </div>
         <label for="">Sobre mí</label>
         <div class="textarea-area">
+          <pre>
           <%= best_in_place current_user, :bio, as: :textarea, :place_holder => "Edítame", :html_attrs => {:maxlength => 500}, url: update_users_path, class: "change_bio", inner_class: "best_input change_bio_input", :data => {:name => "biografía"}, id:
           "change_user_bio" %>
           <%= icon("fas", "pencil-alt", class: "toggable") %>
+        </pre>
         </div>
         <div class="inp-area marker-ex">
           <label for="">Ubicación</label>
