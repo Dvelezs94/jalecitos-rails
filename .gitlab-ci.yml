@@ -25,7 +25,7 @@ build:
     - $(aws ecr get-login --no-include-email --region $AWS_REGION)
     - rm -f .env
     - docker pull $REPOSITORY_URL:latest || true
-    - docker build --cache-from $REPOSITORY_URL:latest -t $DOCKER_IMAGE_CI .
+    - docker build --cache-from $REPOSITORY_URL:latest -t $DOCKER_IMAGE_CI --build-arg CI_AGENT="true" .
     - docker push $DOCKER_IMAGE_CI
   only:
     - master
