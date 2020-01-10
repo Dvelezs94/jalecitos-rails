@@ -12,3 +12,6 @@ $.each($(".nested-fields"), function( index, elem ) {  // if cocoon hides a remo
   }
 });
 <% end %>
+<% if @success #close all faq modals%>
+  $("#faq-accordion").find(".collapse").css("display", "none")
+<% end %>
