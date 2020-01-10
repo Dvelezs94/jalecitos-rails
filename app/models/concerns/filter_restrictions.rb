@@ -9,7 +9,7 @@ module FilterRestrictions
   end
 
   def remove_uris(text)
-    regexp = /(https?:\/\/)?(www\.)?(\w+\.)[A-Za-z]+((?:\/|\?)[^\s]*)?/ #search this regex in other def
+    regexp = /(https?:\/\/)?(www\.)?(\w+\.)+[A-Za-z]+((?:\/|\?)[^\s]*)?/ #search this regex in other def
     text.gsub(regexp) { |url|
       "" #removes the links
     }
