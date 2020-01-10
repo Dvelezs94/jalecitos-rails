@@ -18,11 +18,11 @@ class MessageNotificationWorker
         priority: 'high',
         data: {
             title: "#{message.user.slug}",
-            message: "#{message.old_body}"
+            message: "#{message.body}"
         },
          notification: {
             title: "#{message.user.slug}",
-            body:  "#{message.old_body}",
+            body:  "#{message.body}",
             icon: "#{avatar_display_helper(message.user.image_url(:thumb))}",
             #click_action: conversations_url(:user_id => message.user.slug),
             tag: "message-#{message.conversation_id}"
