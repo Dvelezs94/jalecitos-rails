@@ -185,7 +185,7 @@ module ApplicationHelper
       when (notification.action == "Se ha reembolsado" || notification.action == "Se te reembolsará" ) && object.class == Order
         text += "la orden <strong>#{object.uuid}</strong>"
       when notification.action == "El talento" && object.class == Order
-        text += " ya no se encuentra disponible, se te reembolsará la orden <strong>#{object.uuid}</strong>, intenta contratar a alguien más"
+        text += "ya no se encuentra disponible, se te reembolsará la orden <strong>#{object.uuid}</strong>, intenta contratar a alguien más"
       when notification.action == "Se abrió" && object.class == Ticket
         text += "el ticket <strong>#{object.title}</strong>"
       end
