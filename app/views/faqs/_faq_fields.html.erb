@@ -7,7 +7,7 @@
     </h2>
   </div>
 
-  <div class="collapse data-parent="#faq-accordion">
+  <div class="collapse" data-parent="#faq-accordion">
     <div class="card-body">
       <%= f.text_field :question, label: false,class: "styled required faq-question-input faq-field do-not-ignore", placeholder: "¿Cuánto tiempo tardaría en hacer...?", style: "margin-bottom: 2vh;", maxlength: 200 %>
       <%= f.text_area :answer, label: false, class: "styled required faq-field do-not-ignore", placeholder: "R: Tardaría aproximádamente...", rows: "5", maxlength: 1000%>

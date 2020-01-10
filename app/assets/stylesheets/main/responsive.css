@@ -27,7 +27,7 @@
   }
 
   .gig-query .gig-image, .gig-profile .gig-image {
-    max-height: 180px;
+    height: 180px;
   }
 
   .gig-query .hearted1,
@@ -138,6 +138,9 @@
   .servicoteam-wrap {
     display: block !important;
   }
+  .padingminus1{
+    min-height: 140px;
+  }
 }
 
 /* LG Device :992px. */
@@ -157,7 +160,7 @@
   }
 
   .gig-query .gig-image, .gig-profile .gig-image {
-    max-height: 140px;
+    height: 140px;
   }
   .gig-profile {
     margin: 8px 0px;
@@ -430,7 +433,7 @@
       min-height: 145px;
   }
   .gig-query .gig-image, .gig-profile .gig-image {
-    max-height: 154px;
+    height: 154px;
   }
 
   .catagorisingle-slide i {

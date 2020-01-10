@@ -29,11 +29,6 @@ class Message < ApplicationRecord
     make_links(CGI::escapeHTML(self.body)).html_safe #escapes html from user and make our links
   end
 
-  def old_body
-    old_body = ActionController::Base.helpers.strip_tags(self.body)
-    old_body = CGI::unescapeHTML(old_body)
-    old_body
-  end
   private
   def update_conversation (conversation)
     conversation.touch
