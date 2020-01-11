@@ -366,9 +366,9 @@ module ApplicationHelper
   end
   def the_gig_url gig, format = nil
     if format == nil
-      gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug)
+      gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug,:protocol => 'https')
     else
-      gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug, format: format)
+      gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug, format: format,:protocol => 'https')
     end
   end
 end
