@@ -5,6 +5,7 @@ class Gig < ApplicationRecord
   include FilterRestrictions
   include GigRequestFunctions
   include BeforeDestroyFunctions
+  include LinksHelper
   require 'voight_kampff'
   #search
   searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
@@ -82,6 +83,9 @@ class Gig < ApplicationRecord
 
   def title
     "Ofrezco #{to_downcase(self.name)}"
+  end
+  def safe_description
+    make_links(CGI::escapeHTML(self.description)).html_safe #escapes html from user and make our links
   end
 
   def min_title #used in miniatures of gigs

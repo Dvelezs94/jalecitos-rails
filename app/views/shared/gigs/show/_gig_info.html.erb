@@ -1,4 +1,4 @@
-<% gig_description = make_links(CGI::escapeHTML(@gig.description)).html_safe %>
+<% gig_safe_desc = @gig.safe_description %>
 <div class="innerpage-leftsidejata">
   <div class="verificos-title">
     <h1><%= @gig.title %></h1>
@@ -76,7 +76,7 @@
       <h2><%= @gig.title %></h2>
       <small class="visit-count gig-visits-likes"><%= "#{@gig_hits} Vistas" %> ● <%= "#{@gig.likes.length} Me gusta" %></small>
       <br>
-      <pre> <p><%= gig_description %></p> </pre>
+      <pre> <p><%= gig_safe_desc %></p> </pre>
       <br>
     </div>
 
@@ -85,13 +85,13 @@
   <!-- for768 -->
 
   <div class="califico-about nulla">
-    <pre><p><%= gig_description %></p></pre>
+    <pre><p><%= gig_safe_desc %></p></pre>
   </div>
 </div>
 
 <!-- for992 -->
 
 <div class="califico-about">
-<pre><p><%= gig_description %></p></pre>
+<pre><p><%= gig_safe_desc %></p></pre>
 <hr>
 </div>

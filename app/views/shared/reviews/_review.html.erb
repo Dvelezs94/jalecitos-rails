@@ -28,9 +28,9 @@
     <p class="loyed2">
       <% if review.comment.present? %>
         <% splitted_words = review.comment.split  %>
-          <span class='truncated-text' style='display: inline;'><%=review.comment.truncate_words(50) %></span>
+          <span class='truncated-text' style='display: inline;'><%=safes_content(review.comment.truncate_words(50)) %></span>
           <% if splitted_words.size > 50 %>
-            <span class='complete-text' style='display: none;'><%= splitted_words[50..-1].join(' ') %></span>
+            <span class='complete-text' style='display: none;'><%= safes_content(splitted_words[50..-1].join(' ')) %></span>
             <div>
               <%= link_to('Ver más', '#', onclick: 'toggleReviewText(event)') %>
             </div>
