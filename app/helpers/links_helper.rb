@@ -1,15 +1,13 @@
 module LinksHelper
   def make_links val
-    regexp = /((https?:\/\/)(\w+\.)+[A-Za-z]+|(www\.)(\w+\.)+[A-Za-z]+|(\w+\.)+(com|org|net|co|us|mx))(?:(?=(\/|\?|\s))[^\s]*|(?!x)x)/
+    regexp = /((https?:\/\/)(\w+\.)+[A-Za-z]+|(www\.)(\w+\.)+[A-Za-z]+|(\w+\.)+(com|org|net|co|us|mx)(?:(?=(\/|\?|\s))[^\s]*|(?!x)x))[^\s]*/
     #EXPLANATION OF REGEX
     #Look at the two greps | delimiting options in the regex:
     # i made 3 options to match url:
     #1: if url has https, then match url with any extension
     #2: if  url has www, same behaviour as first
-    #3: if there is some word that has a dot next to it, then just make url if it is a common extension
-    #after verifying its an url, match until space [^\s] if next char is / or ? because the url can have parameters, and even if it ends there \s, because it then returns true.
-    #if the url doesnt have http(s), or www, and it has more chars after extension and the first isnt an / or ?, it means its extension is strange, so with (?!x)x it returns false (idk why but it always does). All this is useful so google.coma doesnt take as link
-    #anyway the strange extensions pass the test when has http(s) or www.
+    #3: if there is some word that has a dot next to it, then just make url if it is a common extension, then check if next char is / or ?, or even if the word ends there and match all the word then, otherwise return false((?!x)x always returns false) becaue its a weird extension.All this is useful so google.coma doesnt take as link
+    #for all options, at the end match everything [^\s] (useful in http(s) and www because it means they have params)
 
     #this still matches https://www.com or www.www.com or www.com, but whatsapp and other sites also have this behaviour. Its nonsense trying to make code harder, in 99.9% of cases it would be wasting of time checking for that stuff
 
