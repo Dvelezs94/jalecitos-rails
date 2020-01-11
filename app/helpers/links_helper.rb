@@ -10,6 +10,7 @@ module LinksHelper
     #after verifying its an url, match until space [^\s] if next char is / or ? because the url can have parameters, and even if it ends there \s, because it then returns true.
     #if the url doesnt have http(s), or www, and it has more chars after extension and the first isnt an / or ?, it means its extension is strange, so with (?!x)x it returns false (idk why but it always does). All this is useful so google.coma doesnt take as link
     #anyway the strange extensions pass the test when has http(s) or www.
+
     #this still matches https://www.com or www.www.com or www.com, but whatsapp and other sites also have this behaviour. Its nonsense trying to make code harder, in 99.9% of cases it would be wasting of time checking for that stuff
 
     #old regex /(https?:\/\/)?(www\.)?(\w+\.)+[A-Za-z]+[^\s]*/ removed it becuse it matches with stuff like jajaj.yo, if the users dont separate words after dot, then we would have fake urls
