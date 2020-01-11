@@ -63,6 +63,10 @@ class PagesController < ApplicationController
     redirect_to "https://production.jalecitos.com.s3.amazonaws.com/sitemaps/sitemap.xml"
   end
 
+  def gig_slugs
+    #code
+  end
+
   def work
   end
 
