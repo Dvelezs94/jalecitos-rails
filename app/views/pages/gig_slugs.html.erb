@@ -1,0 +1,3 @@
+<% Gig.published.each do |gig| %>
+  <%= gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug,:protocol => 'https' )%> <br>
+<% end %>
