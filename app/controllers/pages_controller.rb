@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   include SetLayout
   include GetPages
-  access user: :all, admin: [:home], all: [:work, :home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots, :sitemap, :install]
+  access user: :all, admin: [:home], all: [:work, :home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots, :sitemap, :install, :gig_slugs]
   before_action :admin_redirect, only: :home
   before_action :phone_available, only: :home
   before_action :pending_review, only: [:home], :if => :search_pending_review?
