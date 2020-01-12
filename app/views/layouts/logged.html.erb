@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
+    <%= google_tag_manager %>
     <!-- Firebase -->
     <script defer src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/5.8.5/firebase-messaging.js"></script>
@@ -30,8 +31,6 @@
     <meta name="theme-color" content="#2B8261" />
     <title>Jalecitos</title>
     <%= ios_pwa_tags %>
-    <%= google_tag_manager %>
-
   </head>
   <body id="page-top">
     <%=hidden_field_tag :new_message, (flash.any?)? "true" : "false" %><%# useful for gritter behaviour (dont display notifications of cache) %>
