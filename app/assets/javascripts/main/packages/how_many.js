@@ -13,12 +13,12 @@ $(document).on('turbolinks:load', function() { //used in gig show
       $(this).val($(this).attr("max"));
       range.val($(this).attr("max"));
     }
-    else if ( 1 <= value && value <= $(this).attr("max")) { //value is correct
-      range.val(e.target.value);
-    }
-    else { //less than min value or empty
+    else if ( $(this).attr("min") > value ) { //less than min value
       $(this).val($(this).attr("min"));
       range.val($(this).attr("min"));
+    }
+    else {
+      range.val(e.target.value || $(this).attr("min")); //when no value, set slider to min, just for esthetic
     }
     change_price(this);
   });
@@ -32,5 +32,10 @@ function change_price (elem) {
   quantity = parseInt($(elem).val());
   base_price = quantity * unit_price ;
   price_label = $(elem).closest("[pack_container]").find('.packa-price');
-  price_label.html("$" + base_price.toFixed(2) + "<sub>MXN</sub>"); // ((base_price+10) * 1.04) * 1.16).toFixed(2), no hire
+  if (Number.isNaN(base_price)){
+    price_label.html("-");
+  }
+  else{
+    price_label.html("$" + base_price.toFixed(2) + "<sub>MXN</sub>"); // ((base_price+10) * 1.04) * 1.16).toFixed(2), no hire
+  }
 }
