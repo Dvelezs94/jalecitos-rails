@@ -12,7 +12,7 @@
     <% if @reviews.blank? && @my_reviews.blank? %>
       <% if @gig.user != current_user %>
         <% if current_user %>
-          <p onclick="move_to_element('#recommendgigbtn')">Sé el primero en dar una reseña</p>
+          <span onclick="move_to_element('#recommendgigbtn')">Sé el primero en dar una reseña</span>
         <% else %>
           Para dar una reseña debe <a href="#" class="sign_in">iniciar sesión</a>
         <% end %>

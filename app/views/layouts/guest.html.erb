@@ -28,10 +28,10 @@
     <%= ios_pwa_tags %>
     <!--Propeller Ads-->
     <meta name="propeller" content="82c24c638ce9bb9de35ae367316dc3fb">
+    <%= google_tag_manager %>
   </head>
 
   <body id="page-top">
-    <%= google_tag_manager %>
     <%=hidden_field_tag :new_message, (flash.any?)? "true" : "false" %><%# useful for gritter behaviour (dont display notifications of cache) %>
     <%= render 'shared/menu/main_nav_bar' %>
     <%= render "shared/transition/transition-icon" %>
