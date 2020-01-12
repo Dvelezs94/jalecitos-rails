@@ -30,10 +30,10 @@
     <meta name="theme-color" content="#2B8261" />
     <title>Jalecitos</title>
     <%= ios_pwa_tags %>
+    <%= google_tag_manager %>
 
   </head>
   <body id="page-top">
-    <%= google_tag_manager %>
     <%=hidden_field_tag :new_message, (flash.any?)? "true" : "false" %><%# useful for gritter behaviour (dont display notifications of cache) %>
     <%= render 'shared/menu/main_nav_bar' %>
     <%= render "shared/transition/transition-icon" %>
