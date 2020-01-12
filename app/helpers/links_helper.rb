@@ -8,6 +8,7 @@ module LinksHelper
     #3: The urls without http(s) and www will match only with the most common extensions
     #After matching urls:
     #check if next char is / or ? and keep all params
+    #otherwise [^a-zA-Z0-9] checks if char is special or some kind of \s, if it is, then do nothing (accept), if not, just accepts when is the end of string \z
     #\z is for when is located at the end of the string, it fixes bug. stuff like "google.com," passes but google.coma dont
 
     #this still matches https://www.com or www.www.com or www.com, but whatsapp and other sites also have this behaviour. Its nonsense trying to make code harder, in 99.9% of cases it would be wasting of time checking for that stuff
