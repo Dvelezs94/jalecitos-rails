@@ -8,7 +8,7 @@
     <!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script> -->
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= gig_review_google if @gig.present? && current_page?( the_gig_path(@gig) ) && @gig.score_times > 0 %>
+    <%# gig_review_google if @gig.present? && current_page?( the_gig_path(@gig) ) && @gig.score_times > 0 #lo quite porque no tiene sentido poner esto%> 
     <%= render "google/searchbox" if current_page?(root_path) %>
     <%= render "google/faq_homepage" if current_page?(root_path) %>
     <%= favicon_link_tag image_path 'favicon.ico' %>
