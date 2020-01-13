@@ -11,9 +11,8 @@ class Gig < ApplicationRecord
   searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
   def search_data
     {
-      name: no_special_chars(name).downcase,
-      #remove special chars
-      description: no_special_chars(description),
+      name: no_multi_spaces(remove_nexus(I18n.transliterate(no_special_chars(description).downcase))).strip,
+      description: no_multi_spaces(remove_nexus(I18n.transliterate(no_special_chars(description).downcase))).strip,
       tags: tag_list.join(" "),
       city_id: city_id,
       state_id: (city_id.present?)? city.state_id : nil,
