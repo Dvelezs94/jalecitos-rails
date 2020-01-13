@@ -1,10 +1,9 @@
 $(document).on('turbolinks:load', function() {
   // Check if FcmToken cookie exists, so user dont get double notifications
   var fcmcookie = getCookie("FcmToken");
+  var loggedCookie = getCookie("lg");
 
-  if (fcmcookie == null) {
-      true
-  } else {
+  if (fcmcookie != null) {
     if (firebase.messaging.isSupported()) {
       const messaging = firebase.messaging();
     }
@@ -49,15 +48,17 @@ $(document).on('turbolinks:load', function() {
   // messaging.onMessage(function(payload) {
   //   console.log('Message received. ', payload);
   // });
-  if (firebase.messaging.isSupported()) {
-    messaging.onTokenRefresh(function() {
-      messaging.getToken().then(function(refreshedToken) {
-        console.log('Token refreshed.');
-        const currentTokenKey = { auth_key: refreshedToken }
-        fetchSubscription(currentTokenKey);
-      }).catch(function(err) {
-        console.log('Unable to retrieve refreshed token ', err);
+  if (loggedCookie != null) {
+    if (firebase.messaging.isSupported()) {
+      messaging.onTokenRefresh(function() {
+        messaging.getToken().then(function(refreshedToken) {
+          console.log('Token refreshed.');
+          const currentTokenKey = { auth_key: refreshedToken }
+          fetchSubscription(currentTokenKey);
+        }).catch(function(err) {
+          console.log('Unable to retrieve refreshed token ', err);
+        });
       });
-    });
+    }
   }
 });
