@@ -6,8 +6,8 @@ module GetPages
       get_popular_gigs
       get_recent_requests
       get_recent_gigs
-      get_verified_gigs
-      Searchkick.multi_search([@popular_gigs, @recent_requests, @verified_gigs, @recent_gigs])
+      # get_verified_gigs #when adding this, add also on multi search query
+      Searchkick.multi_search([@popular_gigs, @recent_requests, @recent_gigs])
       get_liked_gigs
       get_liked_gigs_items
     else
@@ -76,7 +76,7 @@ module GetPages
     @verified_gigs = Gig.search("*",
        includes: [:user, :category],
         where: conditions("verified"),
-         boost_where: boost_where_condition, boost_by: {order_count: {factor: 100}},
+         boost_where: boost_where_condition, boost_by: {score: {factor: 100}},
           page: params[:verified_gigs], per_page: 15, execute: bool)
   end
 

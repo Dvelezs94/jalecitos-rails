@@ -21,10 +21,10 @@ class Gig < ApplicationRecord
       status: status,
       profession: profession,
       user_id: user_id,
-      verified: user.verified,
       created_at: created_at,
       updated_at: updated_at,
-      order_count: order_count,
+      #order_count: order_count,
+      #verified: user.verified,
       score: score_average * score_times
      }
   end
