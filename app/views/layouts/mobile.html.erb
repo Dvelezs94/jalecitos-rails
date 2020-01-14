@@ -2,7 +2,6 @@
 <html lang="es">
 
   <head>
-    <%= google_tag_manager %>
     <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-messaging.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
@@ -24,6 +23,7 @@
   </head>
 
   <body id="page-top">
+      <%= google_tag_manager %>
       <%= notification_helper %>
       <%= yield %>
   </body>
