@@ -1,16 +1,16 @@
 module GetQuery
   private
 
-  def get_gig bool=false
-    @gigs = Gig.search(filter_query,
+  def get_gig query, bool=false
+    @gigs = Gig.search(query,
        includes: [:likes, :category, :user, city: [state: :country]],
         where: where_filter, page: params[:gigs],
          boost_where: boost_where_condition, boost_by: {score: {factor: 100}},
          per_page: 20, execute: bool, operator: "or", misspellings: misspellings)
   end
 
-  def get_request bool=false
-    @requests = Request.search(filter_query,
+  def get_request query, bool=false
+    @requests = Request.search(query,
        includes: [:offers, city: [state: :country]],
         where: where_filter, page: params[:requests],
         boost_where: boost_where_condition,
