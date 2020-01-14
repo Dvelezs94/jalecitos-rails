@@ -78,7 +78,7 @@ class Gig < ApplicationRecord
     write_attribute(:description, no_multi_spaces(val.strip)) #ActionController::Base.helpers.sanitize for sanitize, but i didnt used it because in view i escape all the html and then add the links and now html_safe, so the html from user doesnt work
   end
   def name=(val)
-    write_attribute(:name, no_multi_spaces(remove_uris(val.strip)))
+    write_attribute(:name, no_multi_spaces(val.strip))
   end
 
   def title
@@ -86,6 +86,10 @@ class Gig < ApplicationRecord
   end
   def safe_description
     make_links(CGI::escapeHTML(self.description)).html_safe #escapes html from user and make our links
+  end
+
+  def safe_title
+    make_links(CGI::escapeHTML(title)).html_safe #escapes html from user and make our links
   end
 
   def min_title #used in miniatures of gigs
