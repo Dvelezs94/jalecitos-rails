@@ -23,6 +23,8 @@ module FilterRestrictions
     end
     return text
   end
+  
+  #also used in filter_restrictions so elastic dont query nexus
   def nexus #i dont need with uppercae because i made it downcase before, dont need with accent because i removed it before
     [
       "de", "lo", "los", "la","las", "le", "les", "a", "e", "y", "o", "u", "que", "porque", "ti",
