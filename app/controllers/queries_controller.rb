@@ -8,13 +8,14 @@ class QueriesController < ApplicationController
   before_action :set_state, only: [:search]
 
   def search
+    query = filter_query
     if params[:gigs]
-      get_gig(true)
+      get_gig(query, true)
     elsif params[:requests]
-      get_request(true)
+      get_request(query, true)
     else
-      get_gig
-      get_request
+      get_gig(query)
+      get_request(query)
       Searchkick.multi_search([@gigs, @requests])
     end
     render template: "queries/search_results"
