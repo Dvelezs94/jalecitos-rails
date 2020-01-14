@@ -36,6 +36,6 @@ function change_price (elem) {
     price_label.html("-");
   }
   else{
-    price_label.html("$" + base_price.toFixed(2) + "<sub>MXN</sub>"); // ((base_price+10) * 1.04) * 1.16).toFixed(2), no hire
+    price_label.html(base_price.toFixed(1) + "<sub>MXN</sub>"); // ((base_price+10) * 1.04) * 1.16).toFixed(2), no hire
   }
 }
