@@ -5,7 +5,7 @@ module FilterRestrictions
   end
 
   def no_special_chars text
-    text.gsub(/[[:punct:]]/, ' ') # [[:punct:]] is [`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]
+    text.gsub(/([[:punct:]]|[[:space:]])/, ' ') # [[:punct:]] is [`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/] and [[:space:]] is for \t, \n, etc
   end
 
   def remove_uris(text)
@@ -16,12 +16,10 @@ module FilterRestrictions
   end
 
   def remove_nexus text
-    nexus.each do |nex|
-      text = text.gsub(/( |\A)#{nex}(?=( |\z))/ , ' ') #i can consider just spaces because special chars have been replaced for space#\z means that the word was the last in the string
+      text = text.gsub(/( |\A)(#{nexus.join("|")})(?=( |\z))/ , ' ') #i can consider just spaces because special chars have been replaced for space#\z means that the word was the last in the string
       #[:punct:] Punctuation characters: any printable character excluding aplhanumeric or space
       #the char after nex is question because if not, when nexus one after another, one doesnt get deleted
       # text.gsub(/([[:punct:]]| )#{nex}(?=([[:punct:]]| |\z))/ , ' ') this considers the special chars, but i delete them before, so i dont need something very complicated
-    end
     return text
   end
 
