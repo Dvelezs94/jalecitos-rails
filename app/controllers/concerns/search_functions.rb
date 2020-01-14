@@ -22,7 +22,7 @@ module SearchFunctions
   def filter_query
     #if query doesnt have nothing search for all
     return "*" if ( params[:query] == "")
-    remove_nexus(no_special_chars(params[:query].downcase))
+    remove_nexus(no_special_chars(RemoveEmoji::Sanitize.call(params[:query]).downcase))
   end
 
 end
