@@ -1227,6 +1227,8 @@ p.limpi3 {
 
 h3.packa-price {
   margin-bottom: 0;
+  min-width: 40%;
+  text-align: left;
 }
 
 pre p {
