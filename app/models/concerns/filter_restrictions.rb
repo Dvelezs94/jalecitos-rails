@@ -24,7 +24,7 @@ module FilterRestrictions
   end
 
   #also used in filter_restrictions so elastic dont query nexus
-  def nexus #i dont need with uppercae because i made it downcase before, dont need with accent because i removed it before
+  def nexus #i dont need with uppercae because i made it downcase before (if i remove downcase, then i have to put i in regex), dont need with accent because i removed it before
     [
       "de", "del", "lo", "los", "la","las", "le", "les", "a", "e", "y", "o", "u", "que", "porque", "ti",
       "pero", "mas", "sin embargo", "no obstante", "al contrario", "si bien", "ni", "ya", "o bien", "es decir", "es",
