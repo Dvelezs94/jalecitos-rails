@@ -27,8 +27,6 @@ class PackagesController < ApplicationController
     @gig.with_lock do
       if @gig.gig_packages.count == 0 && params[:packages].count == 3 #just if there are no packages and packages sent to server are 3
         create_the_packages
-        fp = @gig.gig_packages[0] #fp = first package
-        @gig.published! if fp.present? && fp.name != "" && fp.description != "" && fp.price != nil && ((fp.max_amount.present?)? fp.price >= 1 : fp.price >= 100) && current_user.active?
       end
       end_form
     end
