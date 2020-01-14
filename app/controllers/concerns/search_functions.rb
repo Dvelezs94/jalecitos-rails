@@ -1,4 +1,5 @@
 module SearchFunctions
+  include FilterRestrictions
   private
 
   # def search model, includes, status
@@ -19,13 +20,9 @@ module SearchFunctions
   end
 
   def filter_query
-    query = params[:query]
     #if query doesnt have nothing search for all
-    query = "*" if ( query == "" )
-    #if query has "Ofrezco" at the beginning, cut it (^ represents at the beginning and "i" is case insensitive)
-    query = query.sub(/^ofrezco /i, '')
-    #same with requests...
-    query = query.sub(/^busco un /i, '')
+    return "*" if ( params[:query] == "")
+    remove_nexus(no_special_chars(RemoveEmoji::Sanitize.call(params[:query]).downcase))
   end
 
 end
