@@ -11,8 +11,9 @@ class Gig < ApplicationRecord
   searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
   def search_data
     {
-      name: no_multi_spaces(remove_nexus(I18n.transliterate(no_special_chars(description).downcase))).strip,
-      description: no_multi_spaces(remove_nexus(I18n.transliterate(no_special_chars(description).downcase))).strip,
+      #always first remove emojis and then special chars, otherwise there will be rare bugs with symbols inside string when sending to searchkick
+      name: no_multi_spaces(remove_nexus(I18n.transliterate(no_special_chars(RemoveEmoji::Sanitize.call(name)).downcase))).strip,
+      description: no_multi_spaces(remove_nexus(I18n.transliterate(no_special_chars(RemoveEmoji::Sanitize.call(description)).downcase))).strip,
       tags: tag_list.join(" "),
       city_id: city_id,
       state_id: (city_id.present?)? city.state_id : nil,

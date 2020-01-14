@@ -171,3 +171,5 @@ gem 'voight_kampff', '~> 1.1', '>= 1.1.3'
 gem 'rails_emoji_picker', '~> 0.1.5'
 #nested forms (faq of gigs)
 gem 'cocoon', '~> 1.2', '>= 1.2.14'
+#removes emojis, user in elasticsearch
+gem 'remove_emoji', '~> 1.0'
