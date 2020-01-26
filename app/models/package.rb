@@ -29,6 +29,7 @@ class Package < ApplicationRecord
   def update_lowest_price_of_gig_and_publish
     if pack_type == "basic" && new_record? && self.gig.user.active? #now we dont index packages, so be careful, if you want to index info of packages, when this is triggered, package 2 and 3 are not created
       self.gig.update(lowest_price: lowest_price, status: "published")
+      GigMailer.need_indexing(self.gig).deliver if ENV.fetch("RAILS_ENV") == "production"
     elsif pack_type == "basic"
       self.gig.update(lowest_price: lowest_price) if pack_type == "basic" #put to gig the price of first package
     end

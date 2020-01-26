@@ -1,4 +1,15 @@
 #!/bin/bash
+# this points to the shared folder that you have on docker-compose
+DB_SHARED_FOLDER="tmp/db/"
+BASE_NAME=`echo $0 | awk -F/ '{print $NF}'`
+
+if [ "$(uname)" == "Darwin" ]; then
+  export US_ID=1000
+  export GR_ID=1000
+else
+  export US_ID=$(id -u)
+  export GR_ID=$(id -g)
+fi
 
 function build() {
   set -e
@@ -7,24 +18,30 @@ function build() {
   read -p "Want to run the seeds after the creation? (y/n): " DBSEED
   if [ "$DBDEL" == "y" ]
   then
-    echo "Deleting DB folder..."
-    sudo rm -rf tmp/db/
+    echo "Deleting db volume"
+    docker-compose down -v
     echo "done."
+  else
+    docker-compose down
   fi
-  docker-compose down
   docker-compose up -d --build --force-recreate
   if [ "$DBCREATE" == "y" ]
   then
     sleep 10
-    bash $0 create-db
+    bash $BASE_NAME create-db
   fi
   if [  "$DBSEED" == "y" ]; then
-    bash $0 seed
+    bash $BASE_NAME seed
+    bash $BASE_NAME clear-tmp
   fi
 }
 
 function start() {
   docker-compose up -d
+}
+
+function status() {
+  docker-compose ps
 }
 
 function stop() {
@@ -36,30 +53,31 @@ function create_db() {
   docker-compose exec app rails db:migrate
 }
 
-function generate_db_diagram {
-  bash $0 run rake diagram:all
-}
-
 function path {
   echo "exporting path"
   export PATH=$PATH:$(pwd)
-  echo "You can now use jalecitos-cli as a native command"
+  echo "You can now use the CLI as a native command"
   exec $(which bash)
+}
+
+function clear-tmp {
+  $BASE_NAME run rails tmp:cache:clear
 }
 function logs() {
   docker-compose logs -f
 }
 
 function seed() {
-  bash $0 run rails db:seed
-  bash $0 reindex
+  bash $BASE_NAME run rails db:seed
+  bash $BASE_NAME reindex
 }
 
-function reindex() {
-  bash $0 run rails reindex
-}
 function expose() {
   ngrok http 80
+}
+
+function console() {
+  bash $BASE_NAME run rails c
 }
 
 case $1 in
@@ -68,6 +86,9 @@ case $1 in
   ;;
   start)
     start
+  ;;
+  status)
+    status
   ;;
   stop)
     stop
@@ -87,10 +108,7 @@ case $1 in
     logs
   ;;
   fix-perms)
-    sudo chown -R $USER:$USER app/ db/ public/ config/ lib/ test/
-  ;;
-  db_diag)
-    generate_db_diagram
+    sudo chown -R $USER:$USER app/ db/ public/ config/ lib/
   ;;
   path)
     path
@@ -98,30 +116,34 @@ case $1 in
   seed)
     seed
   ;;
-  reindex)
-    reindex
-  ;;
   expose)
     expose
   ;;
   restart-mac)
-    $0 restart && sleep 15 && $0 reindex
+    $BASE_NAME restart && sleep 15 && $BASE_NAME reindex
+  ;;
+  clear-tmp)
+    clear-tmp
+  ;;
+  console)
+    console
   ;;
   *)
     echo "
     Usage:
-    $0 path                Export cli to your shell
-    $0 build               You will need this if you want to build from scratch
-    $0 start/stop          Start the project by using docker-compose
-    $0 restart             restart
-    $0 restart-mac         restart and reindex
-    $0 logs                Tail logs
-    $0 create-db           Run db create and migrations
-    $0 run command here    Run any command inside the container
-    $0 fix-perms           Experimental - fix code permission issues
-    $0 db_diag             Export DB diagram
-    $0 seed                Seed DB
-    $0 reindex             reindex DB
-    $0 expose              expose with ngrok on port 80"
+    $BASE_NAME path                Export cli to your shell
+    $BASE_NAME build               You will need this if you want to build from scratch
+    $BASE_NAME status              check containers status
+    $BASE_NAME start/stop          Start the project by using docker-compose
+    $BASE_NAME restart             restart
+    $BASE_NAME restart-mac         restart and reindex
+    $BASE_NAME console             run rails console
+    $BASE_NAME clear-tmp           Clear tmp files like js and assets
+    $BASE_NAME logs                Tail logs
+    $BASE_NAME create-db           Run db create and migrations
+    $BASE_NAME run command here    Run any command inside the container
+    $BASE_NAME fix-perms           Experimental - fix code permission issues
+    $BASE_NAME seed                Seed DB
+    $BASE_NAME expose              expose with ngrok on port 80"
   ;;
 esac
