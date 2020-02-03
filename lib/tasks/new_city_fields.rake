@@ -1,5 +1,5 @@
 task :new_city_fields => [:environment] do
-  Gig.first(2).each do |gig|
+  Gig.all.each do |gig|
     obj=Geokit::Geocoders::GoogleGeocoder.geocode gig.location
     gig.lat = obj.lat
     gig.lng = obj.lng
@@ -9,7 +9,7 @@ task :new_city_fields => [:environment] do
   #ActiveRecord::Migration.remove_column :gigs, :city_id
   puts "Todos los jales han actualizado su ubicacion a coordenadas, ahora corriendo los pedidos"
   ##############################################################
-  Request.first(2).each do |req|
+  Request.all.each do |req|
     obj=Geokit::Geocoders::GoogleGeocoder.geocode req.location
     req.lat = obj.lat
     req.lng = obj.lng
@@ -19,7 +19,7 @@ task :new_city_fields => [:environment] do
   #ActiveRecord::Migration.remove_column :requests, :city_id
   puts "Todos los pedidos han actualizado su ubicacion a coordenadas, ahora corriendo los usuarios"
   ###############################################################
-  User.first(2).each do |user|
+  User.all.each do |user|
     obj=Geokit::Geocoders::GoogleGeocoder.geocode user.location
     user.lat = obj.lat
     user.lng = obj.lng
