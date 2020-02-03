@@ -22,7 +22,8 @@ class User < ApplicationRecord
   def search_data
     {
       tags: tag_list.join(" "),
-      city_id: city_id
+      lat: lat,
+      lng: lng
     }
   end
   #Define who can do the rating, which happens to be the user
