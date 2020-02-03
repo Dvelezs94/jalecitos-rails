@@ -8,7 +8,15 @@
     </button>
   </div>
   <% end %>
+
+
   <%= render 'shared_user/users/phone_available' if @phone_available %>
+  <form autocomplete="no">
+    <input type="text" name="address" id="gmaps-input-address" >
+  </form>
+  <div class="gmap-canvas" id="map" style="height:500px;">
+
+  </div>
   <%= render 'categories/category_carousel' %>
   <%= render "shared/no_gigs" %>
 
