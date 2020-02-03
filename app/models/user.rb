@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :lat, :lon, :roles_word
+  attr_accessor :roles_word
   include ApplicationHelper
   include LinksHelper
   #includes

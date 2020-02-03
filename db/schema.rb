@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_06_030224) do
+ActiveRecord::Schema.define(version: 2020_02_03_172222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,9 @@ ActiveRecord::Schema.define(version: 2020_01_06_030224) do
     t.string "youtube_url"
     t.integer "visits", default: 0
     t.float "lowest_price"
+    t.float "lat"
+    t.float "lng"
+    t.string "address_name"
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["city_id"], name: "index_gigs_on_city_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true
@@ -393,6 +396,9 @@ ActiveRecord::Schema.define(version: 2020_01_06_030224) do
     t.bigint "city_id"
     t.integer "offers_count", default: 0
     t.json "images"
+    t.float "lat"
+    t.float "lng"
+    t.string "address_name"
     t.index ["category_id"], name: "index_requests_on_category_id"
     t.index ["city_id"], name: "index_requests_on_city_id"
     t.index ["slug"], name: "index_requests_on_slug", unique: true
@@ -527,6 +533,9 @@ ActiveRecord::Schema.define(version: 2020_01_06_030224) do
     t.string "session_token"
     t.string "phone_number"
     t.boolean "whatsapp_enabled", default: true
+    t.float "lat"
+    t.float "lng"
+    t.string "address_name"
     t.index ["ally_code_id"], name: "index_users_on_ally_code_id"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
