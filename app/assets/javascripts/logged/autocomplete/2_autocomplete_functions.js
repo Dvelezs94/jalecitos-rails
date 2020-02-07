@@ -8,40 +8,38 @@ $(document).on('turbolinks:load', function() {
   autocom_loc_func("#config_autocomplete");
 });
 
+//this is still useful on google because it autocompletes
 function autocom_loc_func(id) {
   //remove info on click
   $(id).on("focus", function(e) {
-    var city_id = get_city_input(e.target);
     window.location_val = $(this).val();
-    window.city_val = city_id.val();
     $(this).val("");
   });
 
   //if its search autocomplete, needs some filter behaviours
-  if (id == "#search_autocomplete" || id == "#search_autocomplete_mobile") {
-    $(id).on("keydown", function(e) {
-      var city_id = get_city_input(e.target);
-      //if value of city is same...
-      if (e.keyCode == 13 && city_id.val() == window.city_val) {
-        event.preventDefault(); // prevent submitting form if user clicks enter, we will validate that
-        //and if location is empty, user wants to search in all mexico
-        if ($(this).val() == "") {
-          city_id.val("");
-          $(e.target).closest("form").submit();
-        }
-      }
-    });
-  }
+  // if (id == "#search_autocomplete" || id == "#search_autocomplete_mobile") {
+  //   $(id).on("keydown", function(e) {
+  //     var city_id = get_city_input(e.target);
+  //     //if value of city is same...
+  //     if (e.keyCode == 13 && city_id.val() == window.city_val) {
+  //       event.preventDefault(); // prevent submitting form if user clicks enter, we will validate that
+  //       //and if location is empty, user wants to search in all mexico
+  //       if ($(this).val() == "") {
+  //         city_id.val("");
+  //         $(e.target).closest("form").submit();
+  //       }
+  //     }
+  //   });
+  // }
 
-  $(id).on("keydown", function(e) {
-    var city_id = get_city_input(e.target);
-    //erase value of location if something random is typped
-    if (e.keyCode == 13 && city_id.val() == window.city_val && window.location_val != $(this).val()) {
-      alert("Debes elegir alguna de las opciones proporcionadas");
-      $(this).val("");
-    }
-
-  });
+  // $(id).on("keydown", function(e) {
+  //   var city_id = get_city_input(e.target);
+  //   //erase value of location if something random is typped
+  //   if (e.keyCode == 13 && city_id.val() == window.city_val && window.location_val != $(this).val()) {
+  //     alert("Debes elegir alguna de las opciones proporcionadas");
+  //     $(this).val("");
+  //   }
+  // });
   if (id == "#form_autocomplete") {
     $(id).blur(function(e) {
       var city_id = get_city_input(e.target);

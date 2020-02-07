@@ -5,7 +5,8 @@ module GetQuery
     @gigs = Gig.search(query,
        includes: [:likes, :category, :user, city: [state: :country]],
         where: where_filter, page: params[:gigs],
-         boost_where: boost_where_condition, boost_by: {score: {factor: 100}},
+        boost_by: {score: {factor: 100}},
+         boost_by_distance: boost_by_distance_condition,
          per_page: 20, execute: bool, operator: "or", misspellings: misspellings)
   end
 
@@ -13,7 +14,7 @@ module GetQuery
     @requests = Request.search(query,
        includes: [:offers, city: [state: :country]],
         where: where_filter, page: params[:requests],
-        boost_where: boost_where_condition,
+        boost_by_distance: boost_by_distance_condition,
          per_page: 20,
           execute: bool, operator: "or", misspellings: misspellings)
   end
@@ -25,10 +26,10 @@ module GetQuery
     {prefix_length: 3, below: 20, edit_distance: 2}
   end
 
-  def boost_where_condition
-    if @city.present?
-      {city_id: {value: @city.id, factor: 5}}
-    else #no city so i cant boost "Any place of Mexico"
+  def boost_by_distance_condition #other in home
+    if current_user.lat
+      {location: {origin: {lat: current_user.lat, lon: current_user.lng}, function: "exp"}}
+    else #user doesnt has a place of search
       {}
     end
   end

@@ -9,21 +9,19 @@ class Request < ApplicationRecord
   include BeforeDestroyFunctions
   include ApplicationHelper
   #search
-  searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
+  searchkick locations: [:location], language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
   def search_data
     {
       #always first remove emojis and then special chars, otherwise there will be rare bugs with symbols inside string when sending to searchkick
       name: no_multi_spaces(remove_nexus(I18n.transliterate(no_special_chars(RemoveEmoji::Sanitize.call(name)).downcase))).strip,
       description: no_multi_spaces(remove_nexus(I18n.transliterate(no_special_chars(RemoveEmoji::Sanitize.call(description)).downcase))).strip,
       tags: tag_list.join(" "),
-      lat: lat,
-      lng: lng,
       category_id: category_id,
       status: status,
       user_id: user_id,
       profession: profession,
       created_at: created_at
-     }
+     }.merge(location: {lat: lat, lon: lng})
   end
   #Tags
   acts_as_taggable

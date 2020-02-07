@@ -8,12 +8,8 @@ module SearchFunctions
   # end
 
   def where_filter
-    if params[:category_id].present? && @state.present?
-      {status: "published", category_id: params[:category_id], _or: [{state_id: @state.id}, {state_id: nil}]}
-    elsif params[:category_id].present?
+    if params[:category_id].present?
       {status: "published", category_id: params[:category_id]}
-    elsif @state.present?
-      {status: "published", _or: [{state_id: @state.id}, {state_id: nil}]}
     else
       {status: "published"}
     end

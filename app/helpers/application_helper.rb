@@ -8,6 +8,12 @@ module ApplicationHelper
     end
   end
 
+  def distance model
+    current_location = Geokit::LatLng.new(current_user.lat, current_user.lng)
+    destination = "#{model.lat},#{model.lng}"
+    current_location.distance_to(destination, :units => :kms).to_i.to_s(:delimited, delimiter: ' ', separator: '.')  + " kms"
+  end
+
   def city_slug city
     slug = (city.present?)? city.name : "México"
     return slug.parameterize
@@ -25,16 +31,16 @@ module ApplicationHelper
   def prof_and_loc model  #this function is used in home and queries
     profession = model.profession.present? ? model.profession : "Sin profesión"
     if current_user #if user
-      if model.city_id != nil && model.city_id == current_user.city_id #element has my location
-        profession + " (Mi ciudad)"
-      else #element hasnt my location
-        "#{profession} (#{model.location})"
+      if model.lat && current_user.address_name.present?#both model and user have location
+        profession + " (#{distance(model)})"
+      else
+        "#{profession} (#{model.address_name || "Sin dirección"})"
       end
     else # is guest
       if @city.present? && @city.id == model.city_id #query and element has my location
-        profession + " (Mi ciudad)"
+        profession
       else#element has other location (or i didnt had set one location or home)
-        "#{profession} (#{model.location})"
+        "#{profession}"
       end
     end
   end

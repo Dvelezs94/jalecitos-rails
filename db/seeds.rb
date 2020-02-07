@@ -25,7 +25,7 @@ if ENV.fetch("RAILS_ENV") != "production"
     State.create(name: state, country_id: 1)
   end
   InitMexicoPlaces.all.values.each_with_index do |cities, n|
-    cities.in_groups_of(5).first.each do |city|
+    cities.in_groups_of(5).first(20).each do |city|
       City.create(name: city, state_id: n+1)
     end
   end
@@ -36,7 +36,7 @@ if ENV.fetch("RAILS_ENV") != "production"
       user.role = "user"
       user.password = "1234aA"
       user.current_sign_in_at = Time.now()
-      user.city_id = Faker::Number.between(1, 5)
+      user.city_id = Faker::Number.between(1, 100)
       user.age = Faker::Number.between(18, 50)
       # This is so we dont have to confirm the email on seeds
       user.confirmed_at = Time.now
