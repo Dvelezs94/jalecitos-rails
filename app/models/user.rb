@@ -17,14 +17,12 @@ class User < ApplicationRecord
   # Avatar image
   mount_uploader :image, AvatarUploader
   #search
-  searchkick language: "spanish"
+  searchkick locations: [:location], language: "spanish"
   # only send these fields to elasticsearch
   def search_data
     {
       tags: tag_list.join(" "),
-      lat: lat,
-      lng: lng
-    }
+    }.merge(location: {lat: lat, lon: lng})
   end
   #Define who can do the rating, which happens to be the user
   ratyrate_rater
