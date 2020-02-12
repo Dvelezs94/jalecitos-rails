@@ -4,6 +4,9 @@ $(document).on('turbolinks:load', function() {
   initGoogleAutocomplete("search_autocomplete", "lat", "lng", "address_name", "", "1", true);
   initGoogleAutocomplete("search_autocomplete_mobile", "lat", "lng", "address_name", "", "2", true);
   initGoogleAutocomplete("config_autocomplete", "lat", "lng", "address_name", "user", "3", true);
+  initGoogleAutocomplete("form_autocomplete_gig", "lat", "lng", "address_name", "gig", "4", false);
+  initGoogleAutocomplete("form_autocomplete_req", "lat", "lng", "address_name", "request", "4", false);
+
   //initGoogleAutocomplete("gmaps-input-address", "lat2", "lng2", "address_name2", true);
 });
 
@@ -16,7 +19,6 @@ function initGoogleAutocomplete(input_id, lat_name, lng_name, address_name, mode
   var search_input = document.getElementById(input_id);
   var Gkey = "<%= ENV.fetch('GOOGLE_MAP_API') %>";
   var options = {
-    types: ['address'],
     // componentRestrictions: {country: "mx"}
   };
   //generate ids
@@ -32,10 +34,10 @@ function initGoogleAutocomplete(input_id, lat_name, lng_name, address_name, mode
   //create hidden fields where coordinates are stored
   if($("#"+lat_id).length == 0){ //just do it once (fix turbolinks problem)
     if(model != ""){
-      $(search_input).after("<input type='hidden' name="+model+"["+ lat_name+"] id="+lat_id+" value="+ (search_input.getAttribute('lat')|| "") +">"+"<input type='hidden' name="+model+"["+lng_name+"] id="+lng_id+" value="+ (search_input.getAttribute('lng') || "") +">"+"<input type='hidden' name="+model+"["+address_name+"] id="+address_id+">");
+      $(search_input).after("<input type='hidden' name="+model+"["+ lat_name+"] id="+lat_id+" value="+ (search_input.getAttribute('lat')|| "") +">"+"<input type='hidden' name="+model+"["+lng_name+"] id="+lng_id+" value="+ (search_input.getAttribute('lng') || "") +">"+"<input type='hidden' name="+model+"["+address_name+"] id="+address_id+" value ='"+(search_input.getAttribute('address_name')||"")+"'>");
     }
     else{
-      $(search_input).after("<input type='hidden' name="+ lat_name+" id="+lat_id+" value="+ (search_input.getAttribute('lat')|| "") +">"+"<input type='hidden' name="+lng_name+" id="+lng_id+" value="+ (search_input.getAttribute('lng')||"") +">"+"<input type='hidden' name="+address_name+" id="+address_id+">");
+      $(search_input).after("<input type='hidden' name="+ lat_name+" id="+lat_id+" value="+ (search_input.getAttribute('lat')|| "") +">"+"<input type='hidden' name="+lng_name+" id="+lng_id+" value="+ (search_input.getAttribute('lng')||"") +">"+"<input type='hidden' name="+address_name+" id="+address_id+" value ='"+(search_input.getAttribute('address_name')||"")+"'>");
     }
   }
   window.id_sufix++; //prevents same ids on different autocomplete inputs

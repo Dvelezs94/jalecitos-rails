@@ -47,7 +47,7 @@ class RequestsController < ApplicationController
         render :new
       end
     else #create
-      @success = @request.save
+      @success = @request.save!
       if !@success
         render :new
       end
@@ -93,7 +93,9 @@ class RequestsController < ApplicationController
     def request_params
       request_params = params.require(:request).permit(:name,
                                   :description,
-                                  :city_id,
+                                  :address_name,
+                                  :lat,
+                                  :lng,
                                   :category_id,
                                   :budget,
                                   :tag_list,

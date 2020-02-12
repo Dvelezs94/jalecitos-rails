@@ -8,8 +8,8 @@ module ApplicationHelper
     end
   end
 
-  def distance model
-    current_location = Geokit::LatLng.new(current_user.lat, current_user.lng)
+  def distance model, lat, lng
+    current_location = Geokit::LatLng.new(lat, lng)
     destination = "#{model.lat},#{model.lng}"
     current_location.distance_to(destination, :units => :kms).to_i.to_s(:delimited, delimiter: ' ', separator: '.')  + " kms"
   end
@@ -32,15 +32,15 @@ module ApplicationHelper
     profession = model.profession.present? ? model.profession : "Sin profesión"
     if current_user #if user
       if model.lat && current_user.address_name.present?#both model and user have location
-        profession + " (#{distance(model)})"
+        profession + " (#{distance(model, current_user.lat, current_user.lng)})"
       else
         "#{profession} (#{model.address_name || "Sin dirección"})"
       end
     else # is guest
-      if @city.present? && @city.id == model.city_id #query and element has my location
-        profession
+      if model.lat && params[:lat].present? #guest accepted location
+        profession + " (#{distance(model, params[:lat].to_f, params[:lon].to_f)})"
       else#element has other location (or i didnt had set one location or home)
-        "#{profession}"
+        "#{profession} (#{model.address_name || "Sin dirección"})"
       end
     end
   end

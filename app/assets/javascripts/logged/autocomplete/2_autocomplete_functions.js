@@ -4,7 +4,8 @@ $(document).on('turbolinks:load', function() {
   autocom_loc_func("#mobile_menu_autocomplete");
   autocom_loc_func("#search_autocomplete");
   autocom_loc_func("#search_autocomplete_mobile");
-  autocom_loc_func("#form_autocomplete");
+  autocom_loc_func("#form_autocomplete_gig");
+  autocom_loc_func("#form_autocomplete_req");
   autocom_loc_func("#config_autocomplete");
 });
 
@@ -40,25 +41,12 @@ function autocom_loc_func(id) {
   //     $(this).val("");
   //   }
   // });
-  if (id == "#form_autocomplete") {
+  if (id == "#form_autocomplete_gig" || id == "#form_autocomplete_req") {
     $(id).blur(function(e) {
-      var city_id = get_city_input(e.target);
-      //if id is same...
-      if (city_id.val() == window.city_val) {
-        //and value isnt empty, retype location
-        if ($(this).val() != "") {
+        //if no option selected, retype location
+        if ($(this).val() != window.location_val) {
           $(this).val(window.location_val);
-        }
        }
     });
-  } else {
-    //retype the location if nothing is set
-    $(id).blur(function(e) {
-      $(this).val(window.location_val);
-    });
-  }
-}
-
-function get_city_input(loc_input) {
-  return $(loc_input).closest("form").find(".city");
+   }
 }

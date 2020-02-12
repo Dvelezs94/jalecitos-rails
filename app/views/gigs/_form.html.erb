@@ -58,15 +58,17 @@
           <!-- 2 end -->
           <div class="form_block form_section row">
             <div class="flex-space-bet">
-              <p class="form-title">¿En qué ciudad de México ofertas este jale?
+              <p class="form-title">¿Dónde ofertas el servicio?
               </p>
               <%= icon("fas", "question-circle", class: "question_hint toggler") %>
             </div>
             <%= render 'shared_user/gigs/forms/hints/city_hint.html.erb' %>
-            <%= render "shared_user/forms/choose_city"%>
-            <%= form.text_field :location, class: 'required font-awesome styled form_autocomplete', id: "form_autocomplete", size: 50, placeholder: '&#xf3c5; Busca tu ciudad...'.html_safe, value: (gig.location(true) != nil)? gig.location : current_user.location(true) %>
-            <%= form.hidden_field :city_id, class: "city", id: "form_autocomplete_id",
-             value: (gig.city_id != nil)? gig.city_id : current_user.city_id %>
+            <%= form.text_field :location, class: 'required font-awesome styled form_autocomplete', id: "form_autocomplete_gig",
+             size: 50, placeholder: '&#xf3c5; Busca una dirección...'.html_safe,
+              value: gig.location(true) || current_user.location(true),
+              lat: (gig.lat || current_user.lat),
+               lng: (gig.lng|| current_user.lng),
+               address_name: (gig.address_name|| current_user.address_name)  %>
 
           </div>
 
