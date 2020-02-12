@@ -27,9 +27,11 @@ module GetQuery
   end
 
   def boost_by_distance_condition #other in home
-    if current_user.lat
+    if current_user && current_user.lat
       {location: {origin: {lat: current_user.lat, lon: current_user.lng}, function: "exp"}}
-    else #user doesnt has a place of search
+    elsif !current_user && params[:lat].present? #is guest with location
+      {location: {origin: {lat: params[:lat], lon: params[:lon]}, function: "exp"}}
+    else #user or guest doesnt has place of search
       {}
     end
   end

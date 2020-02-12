@@ -50,7 +50,7 @@ class Gig < ApplicationRecord
   #has_many :prof_pack, ->{ limit(60).order(id: :asc) }, class_name: 'Package'  #this was used on profile, but now i  dont need packages because i keep since price in gig
   has_many :related_pack, ->{ limit(30).order(id: :asc) }, class_name: 'Package'
   #Validations
-  validates_presence_of :name, :profession, :description
+  validates_presence_of :name, :profession, :description, :lat, :lng, :address_name
   validate :maximum_amount_of_tags, :no_spaces_in_tag, :tag_length
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
   validates_length_of :description, :maximum => 1000, :message => "debe contener como máximo 1000 caracteres."
