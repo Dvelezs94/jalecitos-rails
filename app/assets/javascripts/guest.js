@@ -27,3 +27,5 @@
 //= require js.cookie
 
 //= require serviceworker-companion
+
+//require ./dashforge
