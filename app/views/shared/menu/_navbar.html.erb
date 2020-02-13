@@ -1,5 +1,7 @@
+<% categories = Category.all %>
+<% group_size = (categories.length%3 != 0)? (categories.length/3+1).to_i : (categories.length/3).to_i %>
 <header class="navbar navbar-header navbar-header-fixed">
-  <a href="" id="mainMenuOpen" class="burger-menu">aaa<i data-feather="menu"></i></a>
+  <a href="" id="mainMenuOpen" class="burger-menu"><i data-feather="menu"></i></a>
   <a href="" id="chatContentClose" class="burger-menu d-none"><i data-feather="arrow-left"></i></a>
   <div class="navbar-brand">
     <a href="base/template/index.html" class="df-logo">Jale<span>citos</span></a>
@@ -29,40 +31,22 @@
         </ul>
       </li>
       <li class="nav-item with-sub">
-        <a href="" class="nav-link"><i data-feather="layers"></i> Categorias</a>
+        <a href="" class="nav-link"><i data-feather="layers"></i> Categorías</a>
         <div class="navbar-menu-sub">
           <div class="d-lg-flex">
-            <ul>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Alimentos</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Arte y Diseño</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Asistencia Técnica</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Belleza</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Comunicación</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Deportes y Recreación</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Educación</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Entretenimiento</a></li>
-            </ul>
-            <ul>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Eventos</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Hogar</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Legal</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Limpieza</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Mantenimiento</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Mascotas</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Manualidades</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Multimedia</a></li>
-            </ul>
-            <ul>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Negocios</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Reparación</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Salud</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Seguridad</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Servicios Profesionales</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Tecnología</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Transporte</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Vehículos</a></li>
-              <li class="nav-sub-item"><a href="/" class="nav-sub-link">Otro</a></li>
-            </ul>
+              <% 3.times do |n| %>
+                <ul>
+                  <% categories.in_groups_of(group_size)[n].each do |cat| %>
+                    <% if cat.present? %>
+                    <li class="nav-sub-item">
+                      <%= link_to search_path(query: "", category_id: cat.id, lat: "#{current_user.lat}", lon: "#{current_user.lng}", device: "#{"mobile" if cookies.signed[:mb]}"), class: "nav-sub-link" do %>
+                        <%= cat.name %>
+                      <% end %>
+                    </li>
+                    <% end %>
+                  <% end %>
+                  </ul>
+              <% end %>
           </div>
         </div><!-- nav-sub -->
       </li>

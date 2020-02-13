@@ -28,4 +28,4 @@
 
 //= require serviceworker-companion
 
-//require ./dashforge
+//= require_tree ./dashforge

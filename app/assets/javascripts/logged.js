@@ -40,4 +40,4 @@
 
 //= require cocoon
 
-//require ./dashforge
+//= require_tree ./dashforge
