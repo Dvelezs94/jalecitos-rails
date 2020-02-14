@@ -39,7 +39,10 @@
     <%=hidden_field_tag :new_message, (flash.any?)? "true" : "false" %><%# useful for gritter behaviour (dont display notifications of cache) %>
     <%= render 'shared/menu/main_nav_bar' %>
     <%= render "shared/transition/transition-icon" %>
-    <div class="main_container">
+    <%= render 'shared_user/users/confirm_email' if current_user.confirmed_at.nil? %>
+    <%= render 'shared_user/users/phone_available' if @phone_available %>
+    <div class="content content-fixed">
+      <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
       <!-- Remove at some point no hire -->
 
       <%= notification_helper %>
@@ -49,9 +52,7 @@
       <% if @p_review.present? %>
         <%= render partial: 'reviews/review', collection: [@p_review]%>
       <% end %>
-    </div>
-    <div class="plusarea">
-      <a href="#" id="newelementbtndesktop"><i class="fa fa-plus"></i></a>
+      </div>
     </div>
     <%= render 'shared_user/new_element_modal' %>
     <%= render 'shared_user/menu/phone_bottom_menu' %>

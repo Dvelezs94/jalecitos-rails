@@ -3000,7 +3000,7 @@ h4.req_title {
   position: absolute;
 }
 /*mobile search styles*/
-.mobile_menu_autocomplete {
+/* .mobile_menu_autocomplete {
   color: #fff;
   font-size: 14px;
   white-space: nowrap;
@@ -3025,7 +3025,7 @@ h4.req_title {
 
 .mobile_menu_autocomplete.tt-hint {
   color: #39C27B !important;
-}
+} */
 
 .element-size {
   width: 80%;
