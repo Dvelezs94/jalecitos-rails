@@ -41,7 +41,7 @@ function autocom_loc_func(id) {
   //     $(this).val("");
   //   }
   // });
-  if (id == "#form_autocomplete_gig" || id == "#form_autocomplete_req") {
+  if (id == "#form_autocomplete_gig" || id == "#form_autocomplete_req" || id == "#mobile_menu_autocomplete") {
     $(id).blur(function(e) {
         //if no option selected, retype location
         if ($(this).val() != window.location_val) {

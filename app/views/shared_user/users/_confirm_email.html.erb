@@ -1,0 +1,7 @@
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  Tienes <strong><%= ((current_user.created_at+15.days - Time.now )/1.day).to_i %> días </strong> para confirmar tu correo. <br>
+  <%= link_to "No recibí mi correo de confirmación.", send_new_confirmation_email_users_path %>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

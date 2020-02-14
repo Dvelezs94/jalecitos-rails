@@ -284,8 +284,8 @@ module ApplicationHelper
   def one_star_disp_help gig
     html = ""
      if gig.score_times > 0
-       html += "#{image_tag("star-on.svg", title: gig.score_average, class: "review-star")}"
-       html += "<p class='gig-score-average'> #{gig.score_average}  <span class='gig-score-times'>(#{gig.score_times})</span> </p>"
+       html += '<i data-feather="star" class="feather-12 tx-warning filled tx-warning filled"></i>'
+       html += "<span class='tx-warning'> #{gig.score_average} <small class='tx-gray-600'>(#{gig.score_times} valoraciones)</small></span>"
     else
       html += "<h6 class='na'>N/A</h6>"
     end

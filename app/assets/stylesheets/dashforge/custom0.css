@@ -8,8 +8,28 @@
 }
 
 .gig-card-top {
-  height: 25vh;
   object-fit: cover;
+  height: 250px
+} @media (max-width: 992px) {
+    .gig-card-top {
+      height: 200px;
+    }
+  }
+  @media (max-width: 768px) {
+    .gig-card-top {
+      height: 180px;
+    }
+  }
+  @media (max-width: 576px) {
+    .gig-card-top {
+      height: 200px;
+    }
+  }
+
+.gig-card-horizontal {
+  object-fit: cover;
+  height: 150px;
+  width: 30%;
 }
 
 .no-overflow {
@@ -105,4 +125,31 @@
 .new_gig_image_well {
  position:relative;
  display: block;
+}
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.screen-size-wrapper {
+  position: fixed;
+  top: 70px;
+  bottom: 0;
+  left: 25px;
+  right: 25px;
+}
+#searchList {
+  max-height: 91vh;
+}
+
+@media (max-width: 576px) {
+  ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+  }
+  .screen-size-wrapper {
+    left: 10px;
+    right: 10px;
+  }
 }

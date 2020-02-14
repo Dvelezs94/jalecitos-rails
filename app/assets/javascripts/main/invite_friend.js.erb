@@ -20,4 +20,13 @@ $(document).on('turbolinks:load', function() {
     share_content(elem,desk,text,confirmation, url);
     event.preventDefault();
   });
+  $('.share_gig_url').click(function (event) {
+    let url = this.href;
+    elem='.share_gig_url'
+    desk=""
+    text=`${url}`
+    confirmation = "La url ha sido copiada. ¡Compartela con las personas!"
+    share_content(elem,desk,text,confirmation, url);
+    event.preventDefault();
+  });
 });
