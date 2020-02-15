@@ -1,17 +1,18 @@
-<% if current_user && with_number == false %>
+<% if current_user %>
+<%= puts "Z"*10 %>
   <% if gig.likes.select{|l| l.user_id == current_user.id}.present? %>
-    <%= link_to "#{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'like')}".html_safe, gig_like_path(gig.slug), method: :delete, class: 'like', remote: true %>
+    <%= link_to gig_like_path(gig.id), class: "link-05 #{"with_number" if with_number == true}", method: :delete, remote: true, gig_id: "#{gig.id}"  do %>
+      <%= (with_number == false)? "<i data-feather='heart' class='feather-12 tx-warning filled tx-danger filled'></i>".html_safe : gig.likes.length %> Me gusta
+    <% end %>
   <% else %>
-    <%= link_to "#{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'unlike')}".html_safe, gig_like_path(gig.slug), method: :post, class: 'unlike', remote: true %>
-  <% end %>
-<% elsif current_user %>
-  <% if gig.likes.select{|l| l.user_id == current_user.id}.present? %>
-    <%= link_to "#{gig.likes.length}  #{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'like with_number')}".html_safe, gig_like_path(gig.slug), method: :delete, class: 'like', remote: true %>
-  <% else %>
-    <%= link_to "#{gig.likes.length if gig.likes.length > 0}  #{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'unlike with_number')}".html_safe, gig_like_path(gig.slug), method: :post, class: 'unlike', remote: true %>
+  <%= puts "m"*10 %>
+    <%= link_to gig_like_path(gig.id), class: "#{"with_number" if with_number == true}", method: :post, remote: true, gig_id: "#{gig.id}"  do %>
+       <%= gig.likes.length if with_number == true %> Me gusta
+    <% end %>
   <% end %>
 <% else %>
-  <% if gig.likes.length > 0 %>
-  <%= link_to "#{gig.likes.length}#{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'unlike')}".html_safe, "#", method: :post, class: 'unlike disabled-by-text', remote: true %>
+<%= puts "h"*10 %>
+  <%= link_to gig_like_path(gig.id), class: "#{"with_number" if with_number == true}", method: :post, remote: true, gig_id: "#{gig.id}"  do %>
+    <%= gig.likes.length %> Me gusta
   <% end %>
 <% end %>
