@@ -12,7 +12,7 @@ class PagesController < ApplicationController
       render template: "shared/carousels/add_items_carousel.js.erb"
     else
       @last_gigs_near_by = Gig.search("*",
-         includes: [:user],
+         includes: [:user, :likes],
           where: (current_user.lat.present?)?{status: "published", location: {near: {lat: current_user.lat, lon: current_user.lng}, within: "7mi"}}:{status: "published"}, #7mi = 11km
           limit: 16, order: [{ created_at: { order: :desc, unmapped_type: :long}}]) if user_signed_in?
       #home_get_all
