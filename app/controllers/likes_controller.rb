@@ -2,6 +2,7 @@ class LikesController < ApplicationController
   access user: [:create, :destroy]
   before_action :authenticate_user!
   before_action :set_gig, only: [:create, :destroy]
+  before_action :not_my_gig, only: [:create, :destroy]
   # before_action :check_like_ownership, only: [:destroy]
 
   # POST /likes
@@ -33,5 +34,9 @@ class LikesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_gig
       @gig = Gig.find(params[:gig_id])
+    end
+
+    def not_my_gig
+      head(:no_content) if current_user.id == @gig.user_id
     end
 end
