@@ -1,18 +1,15 @@
 <% if current_user %>
-<%= puts "Z"*10 %>
-  <% if gig.likes.select{|l| l.user_id == current_user.id}.present? %>
-    <%= link_to gig_like_path(gig.id), class: "link-05 #{"with_number" if with_number == true}", method: :delete, remote: true, gig_id: "#{gig.id}"  do %>
-      <%= (with_number == false)? "<i data-feather='heart' class='feather-12 tx-warning filled tx-danger filled'></i>".html_safe : gig.likes.length %> Me gusta
+  <% if gig.likes.select{|l| l.user_id == current_user.id}.present? %>  <%#user liked the gig %>
+    <%= link_to gig_like_path(gig.id, with_number: with_number), class: "link-05", method: :delete, remote: true, gig_id: "#{gig.id}"  do %>
+      <%= (with_number)? gig.likes.length : "<i data-feather='heart' class='feather-12 tx-warning filled tx-danger filled'></i>".html_safe %> Me gusta
     <% end %>
-  <% else %>
-  <%= puts "m"*10 %>
-    <%= link_to gig_like_path(gig.id), class: "#{"with_number" if with_number == true}", method: :post, remote: true, gig_id: "#{gig.id}"  do %>
-       <%= gig.likes.length if with_number == true %> Me gusta
+  <% else %> <%#user doesnt liked yet the gig %>
+    <%= link_to gig_like_path(gig.id, with_number: with_number), method: :post, remote: true, gig_id: "#{gig.id}"  do %>
+       <%= gig.likes.length if with_number %> Me gusta
     <% end %>
   <% end %>
-<% else %>
-<%= puts "h"*10 %>
-  <%= link_to gig_like_path(gig.id), class: "#{"with_number" if with_number == true}", method: :post, remote: true, gig_id: "#{gig.id}"  do %>
-    <%= gig.likes.length %> Me gusta
+<% else %> <%#is a guest%>
+  <%= link_to gig_like_path(gig.id, with_number: with_number), method: :post, remote: true, gig_id: "#{gig.id}"  do %>
+    <%= gig.likes.length if with_number %> Me gusta
   <% end %>
 <% end %>

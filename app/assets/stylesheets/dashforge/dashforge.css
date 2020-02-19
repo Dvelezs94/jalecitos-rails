@@ -11719,7 +11719,6 @@ textarea.parsley-success:focus {
 
 .bootstrap-tagsinput {
   display: block;
-  padding: 5px;
   box-shadow: none;
   border-color: #c0ccda;
   border-radius: 0.25rem; }
@@ -11728,6 +11727,7 @@ textarea.parsley-success:focus {
     align-items: center;
     background-color: #0168fa;
     color: #fff;
+    margin: 2px;
     padding: 2px 7px;
     border-radius: 1px; }
     .bootstrap-tagsinput .tag [data-role="remove"] {

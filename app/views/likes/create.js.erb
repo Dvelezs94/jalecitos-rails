@@ -1,9 +1,4 @@
 item = $("a[gig_id=<%= j @gig.id.to_s %>]");
-if( item.hasClass("with_number") ) {
-  item.replaceWith("<%= j render 'gigs/likes', gig: @gig, with_number: true %>")
-}
-else {
-  item.replaceWith("<%= j render 'gigs/likes', gig: @gig, with_number: false %>")
-}
+item.replaceWith("<%= j render 'gigs/likes', gig: @gig, with_number: ActiveModel::Type::Boolean.new.cast(params[:with_number]) %>");
 show_success("El Jale se ha agregado a tus favoritos");
 feather.replace();
