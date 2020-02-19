@@ -1,9 +1,3 @@
 item = $("a[gig_id=<%= j @gig.id.to_s %>]");
-console.log(item)
-if( item.hasClass("with_number")  ) {
-  item.replaceWith("<%= j render 'gigs/likes', gig: @gig, with_number: true %>")
-}
-else {
-  item.replaceWith("<%= j render 'gigs/likes', gig: @gig, with_number: false %>")
-}
+item.replaceWith("<%= j render 'gigs/likes', gig: @gig, with_number: ActiveModel::Type::Boolean.new.cast(params[:with_number]) %>");
 show_notice("El Jale se ha eliminado de tus favoritos");

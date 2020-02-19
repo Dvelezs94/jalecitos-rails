@@ -153,3 +153,7 @@
     right: 10px;
   }
 }
+
+#mapPopOver {
+  display: none;
+}
