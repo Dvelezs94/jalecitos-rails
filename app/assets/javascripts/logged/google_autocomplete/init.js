@@ -6,9 +6,19 @@ $(document).on('turbolinks:load', function() {
   initGoogleAutocomplete("config_autocomplete", "lat", "lng", "address_name", "user", "3", true);
   initGoogleAutocomplete("form_autocomplete_gig", "lat", "lng", "address_name", "gig", "4", false);
   initGoogleAutocomplete("form_autocomplete_req", "lat", "lng", "address_name", "request", "4", false);
+  initGoogleMap("searchmap");
 
   //initGoogleAutocomplete("gmaps-input-address", "lat2", "lng2", "address_name2", true);
 });
+
+function initGoogleMap(id){
+  waitForElement("#"+id, function() {
+    var map = new google.maps.Map(document.getElementById(id), {
+      center: {lat: 19.432608, lng: -99.133209},
+      zoom: 2
+    });
+  });
+}
 
 
 //the three hidden input are created by the function, you just have to specify their new ids

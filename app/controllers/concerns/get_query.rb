@@ -3,11 +3,11 @@ module GetQuery
 
   def get_gig query, bool=false
     @gigs = Gig.search(query,
-       includes: [:likes, :category, :user, city: [state: :country]],
+       includes: [:likes, :category, :user],
         where: where_filter, page: params[:gigs],
         boost_by: {score: {factor: 100}},
          boost_by_distance: boost_by_distance_condition,
-         per_page: 20, execute: bool, operator: "or", misspellings: misspellings)
+         per_page: 5, execute: bool, operator: "or", misspellings: misspellings)
   end
 
   def get_request query, bool=false

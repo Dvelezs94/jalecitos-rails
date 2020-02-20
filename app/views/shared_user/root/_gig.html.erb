@@ -9,7 +9,7 @@
           </div>
           <div class="media-body mg-l-10">
             <h6 class="mg-b-0"><%= gig.user.alias %></h6>
-            <small class="d-block tx-gray-600">Hace 5 minutos</small>
+            <small class="d-block tx-gray-600">Activo hace <%= distance_of_time_in_words_to_now(gig.user.current_sign_in_at) %></small>
           </div><!-- media-body -->
         </span>
         <p class="card-title mg-t-10 tx-16"><%= gig.min_title %></p>
