@@ -26,13 +26,13 @@ module PagesHelper
 
   def query_home_or_profile_helper gig
     if params[:query]
-      number_to_currency(purchase_order_total(gig.lowest_price), precision: 2)
+      number_to_currency(purchase_order_total(gig.lowest_price), precision: 0)
     elsif params[:controller]=="pages" && gig.lowest_price.present?
       number_to_currency(purchase_order_total(gig.lowest_price), precision: 0)
     elsif params[:controller]=="users" && gig.lowest_price.present?
-      number_to_currency(purchase_order_total(gig.lowest_price), precision: 2)
+      number_to_currency(purchase_order_total(gig.lowest_price), precision: 0)
     elsif params[:controller]=="gigs" && params[:action]=="show" && gig.lowest_price.present?
-      number_to_currency(purchase_order_total(gig.lowest_price), precision: 2)
+      number_to_currency(purchase_order_total(gig.lowest_price), precision: 0)
     else
       "Indefinido"
     end

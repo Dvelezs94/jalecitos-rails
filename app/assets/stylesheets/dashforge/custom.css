@@ -140,7 +140,8 @@
   right: 25px;
 }
 #searchList {
-  max-height: 91vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 @media (max-width: 576px) {

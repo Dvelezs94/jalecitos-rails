@@ -1,58 +1,69 @@
-<% if ! current_user %>
-<div class="container">
-  <div class="mail-form">
-    <%= form_with url: search_path, method: :get, class: "search-form-guest" ,local: true do |f|%>
-    <%= f.text_field :query, value: params[:query], placeholder: "¿Qué necesitas contratar?", onclick: "getLocation();", required: true%>
-    <%= f.hidden_field :lat, value: params[:lat] %>
-    <%= f.hidden_field :lon, value: params[:lon] %>
-    <%= icon "fas", "search", style: "cursor:pointer;z-index:3;", onclick: "$('.submit-query').click();" %>
-    <%= icon "fas", "arrow-right", style: "cursor:pointer;z-index:3;", onclick: "$('.submit-query').click();" %>
-    <%= f.submit "Continuar", class: "submit-query",style: "visibility:hidden; position: absolute;" %>
-    <% end %>
-  </div>
-</div>
-<% end %>
-<div class="transacciones-secsion search_results">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="transacciones-text">
-          <h1>Resultados de Búsqueda</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="Transacciones-tab-secsion">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12">
-        <div class="Transacciones-tab-area">
-          <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-              <a class="nav-item nav-link active" id="nav-gigs-tab" data-toggle="tab" href="#query-gigs" role="tab" aria-controls="nav-gigs" aria-selected="true">Jales (<%= @gigs.total_count %>)</a>
-              <a class="nav-item nav-link" id="nav-requests-tab" data-toggle="tab" href="#query-requests" role="tab" aria-controls="nav-requests" aria-selected="false">Pedidos (<%= @requests.total_count %>)</a>
-            </div>
-          </nav>
-          <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active paginator-container" id="query-gigs" role="tabpanel" aria-labelledby="nav-gigs-tab">
-              <div class="transacciones-tab-content paginated-gigs row">
-                <%= render partial: 'shared/queries/gig', collection: @gigs %>
-                <%= render "shared/no_gigs" if @gigs.total_count == 0 %>
-              </div>
-              <%= paginate @gigs, param_name: :gigs %>
-            </div>
-            <div class="tab-pane fade paginator-container" id="query-requests" role="tabpanel" aria-labelledby="nav-requests-tab">
-              <div class="transacciones-tab-content paginated-requests row">
-                <%= render partial: 'shared/queries/request', collection: @requests %>
-                <%= "<div class='container'>No hay nada para mostrar</div>".html_safe if @requests.total_count == 0 %>
-              </div>
-              <%= paginate @requests, param_name: :requests %>
-            </div>
+<div class="screen-size-wrapper">
+  <div class="row h-100">
+    <div class="col-12 pd-0 collapse" id="filterBar">
+      <form action="">
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <select class="custom-select">
+              <option selected="selected">Publicación</option>
+              <option value="1">Pedido</option>
+            </select>
           </div>
+          <div class="form-group col-md-2">
+            <input class="form-control" placeholder="Ubicación">
+          </div>
+          <div class="form-group col-md-2">
+            <select class="custom-select">
+              <option selected="selected">Categoria</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <div class="form-group col-xs-6 col-md-2">
+            <input type="number" class="form-control" placeholder="Precio Máximo">
+          </div>
+          <div class="form-group col-xs-6 col-md-2">
+            <input type="number" class="form-control" placeholder="Precio Mínimo">
+          </div>
+          <div class="form-group col-md-2">
+            <select class="custom-select">
+              <option selected="selected">Ordenar</option>
+              <option value="1">Relevancia</option>
+              <option value="2">Precio</option>
+              <option value="3">Distancia</option>
+            </select>
+          </div>
+          <!-- <div class="form-group col-md-2"> <input type="password" class="form-control" placeholder="Password"> </div> -->
         </div>
+      </form>
+    </div>
+
+
+    <div class="col-sm-12 col-md-8 col-lg-6 pd-md-l-0 h-100">
+
+        <div class="col-12 d-flex align-items-center justify-content-between pd-0">
+          <h4 class="mg-b-0 tx-spacing--1">
+            <strong><%= @gigs.total_count %></strong>
+            resultados en
+            "<strong><%= params[:query]|| " " %></strong>"
+          </h4>
+          <div class="btn-group mg-l-5" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-dark" data-toggle="collapse" href="#filterBar">
+              <i data-feather="filter" class="d-inline"></i>
+              Filtros</button>
+              <button type="button" class="btn btn-secondary d-xs-inline d-md-none" id="searchListToggle">
+                <i data-feather="map-pin"></i>
+                Mapa</button>
+              </div>
+            </div>
+      <div id="searchList" class="paginated-gigs ht-90p overflow-y-auto">
+        <%= render partial: 'shared/queries/gig', collection: @gigs %>
+        <%= paginate @gigs, param_name: :gigs %>
       </div>
     </div>
+    <% if @gigs.any? %>
+    <div class="col-sm-none col-md-4 col-lg-6" id="searchmap"></div>
+    <% end %>
   </div>
 </div>
