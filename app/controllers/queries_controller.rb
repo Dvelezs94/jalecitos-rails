@@ -8,7 +8,7 @@ class QueriesController < ApplicationController
 
   def search
     query = filter_query
-    if params[:requests]
+    if params[:model_name] == "requests"
       get_request(query, true)
     else
       get_gig(query, true)

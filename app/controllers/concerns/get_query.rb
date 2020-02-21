@@ -5,9 +5,9 @@ module GetQuery
     @gigs = Gig.search(query,
        includes: [:likes, :category, :user],
         where: where_filter, page: params[:gigs],
-        boost_by: {score: {factor: 100}},
+        boost_by: boost_by_score,
          boost_by_distance: boost_by_distance_condition,
-         per_page: 5, execute: bool, operator: "or", misspellings: misspellings)
+         per_page: 5, execute: bool, operator: "or", misspellings: misspellings, order: order_by)
   end
 
   def get_request query, bool=false
@@ -27,17 +27,42 @@ module GetQuery
   end
 
   def boost_by_distance_condition #other in home
-    if current_user && current_user.lat
-      {location: {origin: {lat: current_user.lat, lon: current_user.lng}, function: "exp"}}
-    elsif !current_user && params[:lat].present? #is guest with location
-      {location: {origin: {lat: params[:lat], lon: params[:lon]}, function: "exp"}}
-    else #user or guest doesnt has place of search
-      {}
+    dist={}
+    if params[:lat].present? #guest or user with location
+      dist = dist.merge({location: {origin: {lat: params[:lat], lon: params[:lng]}, function: "exp"}})
+    elsif current_user && current_user.lat # first search when filter isnt there
+      dist = dist.merge({location: {origin: {lat: current_user.lat, lon: current_user.lng}, function: "exp"}})
     end
+    return dist
   end
 
   def by_score
     [{ score: { order: :desc, unmapped_type: :long}}]
   end
 
+  def where_filter
+    cond = {status: "published"}
+    cond = cond.merge({category_id: params[:category_id]}) if params[:category_id].present?
+    cond = cond.merge({price: price_range})
+    return cond
+  end
+
+  def price_range
+    range = {}
+    range = range.merge({gte: params[:min_price]}) if params[:min_price].present?
+    range = range.merge({lte: params[:max_price]}) if params[:max_price].present?
+    return range
+  end
+
+  def boost_by_score
+    boost ={}
+    boost = boost.merge({score: {factor: 100}}) if params[:order_by] == "score"
+  end
+
+  def order_by
+    o = {}
+    o = o.merge({score: :desc}) if params[:order_by] == "score"
+    o = o.merge({price: :adc}) if params[:order_by] == "price"
+    o = o.merge({created_at: :desc}) if params[:order_by] == "recent"
+  end
 end
