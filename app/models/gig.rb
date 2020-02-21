@@ -21,8 +21,7 @@ class Gig < ApplicationRecord
       user_id: user_id,
       created_at: created_at,
       updated_at: updated_at,
-      #order_count: order_count,
-      #verified: user.verified,
+      price: lowest_price,
       score: score_average * score_times
     }.merge(location: {lat: lat, lon: lng})
   end

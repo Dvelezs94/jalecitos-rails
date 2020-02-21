@@ -16,16 +16,16 @@
     <ul class="nav navbar-menu justify-content-center">
       <li class="nav-label pd-l-20 pd-lg-l-25 d-lg-none">Menu</li>
       <li class="nav-item with-sub active">
-        <a href="" class="nav-link"><i data-feather="briefcase"></i> Jales</a>
+        <a href="" class="nav-link"><i data-feather="briefcase"></i> Servicios</a>
         <ul class="navbar-menu-sub">
           <li class="nav-sub-item">
             <%= link_to new_gig_path, class: "nav-sub-link" do  %>
-              <i data-feather="bar-chart-2"></i>Nuevo Jale
+              <i data-feather="bar-chart-2"></i>Nuevo Servicio
             <% end %>
           </li>
           <li class="nav-sub-item">
             <%= link_to my_account_users_path, class: "nav-sub-link" do  %>
-              <i data-feather="users"></i>Mis Jales
+              <i data-feather="users"></i>Mis Servicios
             <% end %>
           </li>
         </ul>
@@ -66,11 +66,11 @@
         </div><!-- nav-sub -->
       </li>
       <li class="nav-item"><a href="" class="link-04 nav-link" id="invite-friend"><i data-feather="share-2"></i>Invitar</a></li>
-      <hr class=".d-none .d-sm-block .d-md-none mg-r-5 mg-l-5">
+      <hr class="d-lg-none mg-r-5 mg-l-5">
       <div class="location-header">
         <li class="nav-item">
          <%= form_with model: User, url: update_users_path, method: :put , local: true do |f|%>
-            <%= f.text_field :location, class: 'form-control rounded', id: "mobile_menu_autocomplete", placeholder: "Ubicación",
+            <%= f.text_field :location, class: 'form-control rounded', id: "menu_autocomplete", placeholder: "Ubicación",
             value: (current_user.location(true).present?)? current_user.location : "",
             lat: (params[:location].present?)? params[:lat] : current_user.lat || nil,
             lng: (params[:location].present?)? params[:lng] : current_user.lng || nil %>

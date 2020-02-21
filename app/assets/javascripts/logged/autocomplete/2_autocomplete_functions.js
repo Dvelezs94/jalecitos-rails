@@ -3,7 +3,6 @@ $(document).on('turbolinks:load', function() {
   //location autocompletes needs this events to better ui experience
   autocom_loc_func("#mobile_menu_autocomplete");
   autocom_loc_func("#search_autocomplete");
-  autocom_loc_func("#search_autocomplete_mobile");
   autocom_loc_func("#form_autocomplete_gig");
   autocom_loc_func("#form_autocomplete_req");
   autocom_loc_func("#config_autocomplete");
@@ -41,7 +40,7 @@ function autocom_loc_func(id) {
   //     $(this).val("");
   //   }
   // });
-  if (id == "#form_autocomplete_gig" || id == "#form_autocomplete_req" || id == "#mobile_menu_autocomplete") {
+  if (id == "#form_autocomplete_gig" || id == "#form_autocomplete_req" || id == "#menu_autocomplete" || id == "#search_autocomplete") {
     $(id).blur(function(e) {
         //if no option selected, retype location
         if ($(this).val() != window.location_val) {
