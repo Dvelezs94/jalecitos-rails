@@ -15,8 +15,8 @@ module GetQuery
        includes: [:offers, city: [state: :country]],
         where: where_filter, page: params[:requests],
         boost_by_distance: boost_by_distance_condition,
-         per_page: 20,
-          execute: bool, operator: "or", misspellings: misspellings)
+         per_page: 8,
+          execute: bool, operator: "or", misspellings: misspellings, order: order_by)
   end
 
   def misspellings
@@ -62,7 +62,7 @@ module GetQuery
   def order_by
     o = {}
     o = o.merge({score: :desc}) if params[:order_by] == "score"
-    o = o.merge({price: :adc}) if params[:order_by] == "price"
+    o = o.merge({price: :asc}) if params[:order_by] == "price"
     o = o.merge({created_at: :desc}) if params[:order_by] == "recent"
   end
 end

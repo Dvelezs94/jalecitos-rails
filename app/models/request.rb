@@ -19,7 +19,7 @@ class Request < ApplicationRecord
       category_id: category_id,
       status: status,
       user_id: user_id,
-      price: budget[/\d+/], #finds first number
+      price: budget[/\d+/].to_i, #finds first number
       profession: profession,
       created_at: created_at
      }.merge(location: {lat: lat, lon: lng})

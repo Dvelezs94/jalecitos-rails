@@ -1,7 +1,7 @@
 //this has number 2 respect the initializers of location autocompletes because otherwise blur doesnt work, maybe event declaration orders matters...
 $(document).on('turbolinks:load', function() {
   //location autocompletes needs this events to better ui experience
-  autocom_loc_func("#mobile_menu_autocomplete");
+  autocom_loc_func("#menu_autocomplete");
   autocom_loc_func("#search_autocomplete");
   autocom_loc_func("#form_autocomplete_gig");
   autocom_loc_func("#form_autocomplete_req");

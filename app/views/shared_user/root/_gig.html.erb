@@ -24,7 +24,7 @@
     <div class="card-footer d-flex justify-content-between align-items-center">
       <%= render("gigs/likes", gig: gig, with_number: false) if current_user != gig.user %>
       <a href="">Mapa</a>
-      <%= link_to the_gig_path(gig), class: "share_gig_url" do %>
+      <%= link_to the_gig_path(gig), class: "share_item_url" do %>
         Compartir
       <% end %>
     </div>
