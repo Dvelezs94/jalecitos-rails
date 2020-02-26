@@ -56,7 +56,8 @@ module GetQuery
 
   def boost_by_score
     boost ={}
-    boost = boost.merge({score: {factor: 100}}) if params[:order_by] == "score"
+    boost = boost.merge({score: {factor: 100}}) #useful when no order selected
+    return boost
   end
 
   def order_by
@@ -64,5 +65,6 @@ module GetQuery
     o = o.merge({score: :desc}) if params[:order_by] == "score"
     o = o.merge({price: :asc}) if params[:order_by] == "price"
     o = o.merge({created_at: :desc}) if params[:order_by] == "recent"
+    return o
   end
 end
