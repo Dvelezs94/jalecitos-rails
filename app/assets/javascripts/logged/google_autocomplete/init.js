@@ -21,6 +21,8 @@ function searchToggle(){
   the_screen = $('[screen-wrapper="true"]')
   the_screen.toggleClass("screen-size-wrapper");
   the_screen.toggleClass("screen-size-wrapper-map");
+  $("#filterBar").toggleClass("ht-1");
+  $("#filterBar").toggleClass("pd-t-10");
 }
 
 function initGoogleMap(id){
