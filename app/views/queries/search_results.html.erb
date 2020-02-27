@@ -1,9 +1,9 @@
-<div class="screen-size-wrapper">
+<div class="screen-size-wrapper" screen-wrapper="true">
   <div class="row h-100">
-    <div class="col-12 pd-0 <%= "collapse" if !params.has_key?(:category_id) %><%# if category is defined, then filter was used, so i display it by default %>" id="filterBar">
+    <div class="col-12 pd-0 collapse <%= "show" if params.has_key?(:category_id) %><%# if category is defined, then filter was used, so i display it by default %>" id="filterBar">
       <%= form_with url: search_path(filter: "active"), method: :get ,:html => {class: ""}, id: "search-form" , local: true do |f|%>
       <%= f.hidden_field(:query, value: params[:query]) %>
-      <div class="form-row">
+      <div class="d-flex flex-wrap">
         <div class="form-group col-md-2">
           <%= f.select(:model_name, options_for_select([ ["Servicios", "gigs"], ["Pedidos", "requests"]], selected: params[:model_name]),{}, {class: 'custom-select'}) %>
         </div>
@@ -30,8 +30,7 @@
         </div>
       <% end %>
     </div>
-
-    <div class="col-sm-12 col-md-8 col-lg-6 pd-md-l-0 h-100">
+    <div class="col-sm-12 col-md-8 col-lg-6 pd-md-l-0 h-100" id="filter_and_results">
 
       <div class="col-12 d-flex align-items-center justify-content-between pd-0">
         <h4 class="mg-b-0 tx-spacing--1">
@@ -42,12 +41,12 @@
           <button type="button" class="btn btn-dark" data-toggle="collapse" href="#filterBar">
             <i data-feather="filter" class="d-inline"></i>
             Filtros</button>
-          <button type="button" class="btn btn-secondary d-xs-inline d-md-none" id="searchListToggle">
+          <button type="button" class="btn btn-secondary d-xs-inline d-md-none" onclick="searchToggle()" >
             <i data-feather="map-pin"></i>
             Mapa</button>
         </div>
       </div>
-      <div id="searchList" class="ht-85p overflow-y-auto flex-wrap d-flex">
+      <div id="searchList" class="ht-90p flex-wrap d-flex">
         <% if params[:model_name] == "requests" %>
           <%= render partial: 'shared/queries/request', collection: @requests %>
           <%= paginate @requests, param_name: :requests %>
@@ -58,5 +57,21 @@
       </div>
     </div>
       <div class="col-sm-none col-md-4 col-lg-6" id="searchmap"></div>
+      <!-- map buttons -->
+      <div class="d-none">
+        <button id="google_control_close" class="btn btn-secondary d-block d-lg-none tx-14 mg-10 pd-x-10" onclick="searchToggle()">
+          <i data-feather="list" class="d-inline"></i> Lista
+        </button>
+        <button id="google_control_search" class="btn btn-secondary tx-14 mg-10 pd-x-10" onclick="">
+          <i data-feather="map-pin" class="d-inline"></i> Buscar aquí
+        </button>
+        <button id="google_control_filter" class="btn btn-secondary d-block d-lg-none tx-14 mg-10 pd-x-10" onclick=$("[href='#filterBar']").click()>
+          <i data-feather="filter" class="d-inline"></i> Filtro
+        </button>
+        <div class="fdgd">
+
+        </div>
+      </div>
+      <!-- map buttons -->
   </div>
 </div>

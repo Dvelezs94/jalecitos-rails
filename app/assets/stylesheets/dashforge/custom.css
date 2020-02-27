@@ -19,6 +19,7 @@
     .gig-card-top {
       height: 180px;
     }
+
   }
   @media (max-width: 576px) {
     .gig-card-top {
@@ -139,10 +140,18 @@
   left: 25px;
   right: 25px;
 }
+.screen-size-wrapper-map {
+  position: fixed;
+  top: 55px !important;
+  bottom: 0;
+  left: 10px !important;
+  right: 10px !important;
+}
 #searchList {
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
 
 @media (max-width: 576px) {
   ::-webkit-scrollbar {
