@@ -6,16 +6,43 @@ $(document).on('turbolinks:load', function() {
   initGoogleAutocomplete("form_autocomplete_gig", "lat", "lng", "address_name", "gig", "3", false);
   initGoogleAutocomplete("form_autocomplete_req", "lat", "lng", "address_name", "request", "4", false);
   initGoogleMap("searchmap");
-
   //initGoogleAutocomplete("gmaps-input-address", "lat2", "lng2", "address_name2", true);
+  $(window).resize(function(){
+    if ($("#filter_and_results").hasClass("d-none") && window.innerWidth > 767){
+      searchToggle();
+    }
+  });
 });
+
+function searchToggle(){
+  container = $("#filter_and_results")
+  container.toggleClass("d-none");
+  //useful for displaying map of query without margins
+  the_screen = $('[screen-wrapper="true"]')
+  the_screen.toggleClass("screen-size-wrapper");
+  the_screen.toggleClass("screen-size-wrapper-map");
+}
 
 function initGoogleMap(id){
   waitForElement("#"+id, function() {
     var map = new google.maps.Map(document.getElementById(id), {
       center: {lat: 19.432608, lng: -99.133209},
-      zoom: 2
+      zoom: 2,
+      fullscreenControl: false,
+      zoomControl: true,
+      mapTypeControl: false,
+      scaleControl: true,
+      streetViewControl: false,
+      rotateControl: true
     });
+
+    control_close = $("#google_control_close")[0];
+    control_search = $("#google_control_search")[0];
+    control_filter = $("#google_control_filter")[0];
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(control_close);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(control_search);
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(control_filter);
+
   });
 }
 
@@ -54,7 +81,7 @@ function initGoogleAutocomplete(input_id, lat_name, lng_name, address_name, mode
   if(map_id != ""){
     var map = new google.maps.Map(document.getElementById(map_id), {
       center: {lat: 19.432608, lng: -99.133209},
-      zoom: 2
+      zoom: 2,
     });
     //change map when autocomplete changes
     search_autocomplete.addListener('place_changed', function(){
