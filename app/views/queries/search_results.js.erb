@@ -8,5 +8,6 @@ paginator_container.find('.pag-and-load').remove();
 <% if collection.next_page %>
   paginator_container.append("<%= j paginate(collection, param_name: name+'s') %>");
 <% end %>
-
+load_pending_map_elements(window.searchmap);
+feather.replace();
 <% sleep 1 %>

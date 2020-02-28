@@ -1,4 +1,4 @@
-<div class="card mg-t-10">
+<div class="card mg-t-10" loaded_in_map="false" lat="<%= gig.lat %>" lng="<%= gig.lng %>" title="<%= gig.min_title %>">
   <div class="card-horizontal mg-5">
     <%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), class: "card-img gig-card-horizontal") %>
     <div class="card-body pd-b-5-f">
@@ -19,7 +19,7 @@
         </div>
         <small>Desde <strong><%= query_home_or_profile_helper(gig) %></strong></small>
       </div>
-      <div class="d-flex justify-content-between align-items-center mg-t-10">
+      <div class="d-flex justify-content-between align-items-center mg-t-10 gig_buttons">
         <%= render("gigs/likes", gig: gig, with_number: false) if current_user != gig.user %>
         <%= link_to the_gig_path(gig), class: "share_item_url" do %>
           Compartir

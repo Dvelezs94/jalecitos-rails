@@ -13,8 +13,6 @@ class QueriesController < ApplicationController
     else
       get_gig(query, true)
     end
-    puts "X"*100
-    puts Geokit::Geocoders::MultiGeocoder.geocode(request.ip)
     render template: "queries/search_results"
   end
 

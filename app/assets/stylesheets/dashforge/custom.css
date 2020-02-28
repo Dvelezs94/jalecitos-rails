@@ -171,3 +171,30 @@
 .pac-container.pac-logo {
   z-index: 9999;
 }
+/*windowinfo of google maps*/
+.gm-style-iw-d,
+.gm-style-iw.gm-style-iw-c {
+  min-width: 200px !important;
+}
+.gm-style-iw-d {
+  overflow-y: scroll !important;
+}
+.gm-style-iw.gm-style-iw-c {
+  padding: 10px !important;
+}
+.gm-style-iw-d .media,
+.gm-style-iw-d img,
+.gm-style-iw-d .share_item_url,
+.gm-style-iw-d .gig_buttons a[gig_id]{
+  display: none;
+}
+.gm-style-iw-d .card-body {
+  padding: 5px !important;
+}
+.gm-style-iw-d .gig_buttons {
+  float: right !important;
+}
+
+.gm-style-iw-d .card-title {
+  font-size: 14px !important;
+}
