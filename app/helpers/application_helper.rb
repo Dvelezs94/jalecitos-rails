@@ -284,10 +284,11 @@ module ApplicationHelper
   def one_star_disp_help gig
     html = ""
      if gig.score_times > 0
-       html += '<i data-feather="star" class="feather-12 tx-warning filled tx-warning filled"></i>'
-       html += "<span class='tx-warning'> #{gig.score_average} <small class='tx-gray-600'>(#{gig.score_times} valoraciones)</small></span>"
+       html += '<i data-feather="star" class="feather-12 tx-warning filled"></i>'
+       html += "<span class='tx-warning'> #{gig.score_average} <small class='tx-gray-600'>(#{gig.score_times})</small></span>"
     else
-      html += "<h6 class='na'>N/A</h6>"
+      html += '<i data-feather="star" class="feather-12 tx-gray-600 filled"></i>'
+      html += "<span> <small class='tx-gray-600'>(0)</small></span>"
     end
     html.html_safe
   end
