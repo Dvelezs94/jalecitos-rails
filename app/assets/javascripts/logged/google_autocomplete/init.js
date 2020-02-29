@@ -53,6 +53,13 @@ function initGoogleMap(id) {
 
 function load_pending_map_elements(map) {
   $("[loaded_in_map='false']").each(function(index, elem) {
+    //check other elements in same lat and lng
+    var samePlaceMarkers = "";
+    // var changedInfoWindow = false;
+    $("[loaded_in_map][lat='"+elem.getAttribute("lat")+"'][lng='"+elem.getAttribute("lng")+"']").each(function(index, elem) {
+      samePlaceMarkers += elem.outerHTML
+      // if( elem == window.activeElem ) changedInfoWindow = true;
+    });
     //create marker
     var myLatlng = new google.maps.LatLng(elem.getAttribute("lat"), elem.getAttribute("lng"));
     var marker = new google.maps.Marker({
@@ -65,11 +72,17 @@ function load_pending_map_elements(map) {
     //infowindow of each marker
 
     var infowindow = new google.maps.InfoWindow({
-      content: elem.outerHTML
+      content: samePlaceMarkers
     });
     marker.addListener('click', function() {
+      window.activeElem = elem;
+      window.activeInfowindow = infowindow;
       infowindow.open(window.searchmap, marker);
     });
+    // if( changedInfoWindow ){
+    //   console.log(1);
+    //   window.activeInfowindow.setContent(samePlaceMarkers);
+    // }
     });
 }
 
