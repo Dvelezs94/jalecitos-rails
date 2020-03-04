@@ -52,39 +52,37 @@ function initGoogleMap(id) {
 }
 
 function load_pending_map_elements(map) {
-  $("[loaded_in_map='false']").each(function(index, elem) {
+  $("#searchList [loaded_in_map='false']").each(function(index, elem) {
+    var infoTexts = "";
+    var changedInfoWindow = false;
     //check other elements in same lat and lng
-    var samePlaceMarkers = "";
-    // var changedInfoWindow = false;
-    $("[loaded_in_map][lat='"+elem.getAttribute("lat")+"'][lng='"+elem.getAttribute("lng")+"']").each(function(index, elem) {
-      samePlaceMarkers += elem.outerHTML
-      // if( elem == window.activeElem ) changedInfoWindow = true;
+    $("#searchList [loaded_in_map][lat='" + elem.getAttribute("lat") + "'][lng='" + elem.getAttribute("lng") + "']").each(function(index, elem2) {
+      infoTexts += elem2.outerHTML
+      elem2.setAttribute("loaded_in_map", "true");
+      if (elem2 == window.activeElem) changedInfoWindow = true;
     });
     //create marker
     var myLatlng = new google.maps.LatLng(elem.getAttribute("lat"), elem.getAttribute("lng"));
     var marker = new google.maps.Marker({
       position: myLatlng,
-      title: elem.getAttribute("title")
+      title: elem.getAttribute("title"),
+      map: map
     });
-    //set marker in map
-    marker.setMap(map);
-    elem.setAttribute("loaded_in_map", "true");
     //infowindow of each marker
 
     var infowindow = new google.maps.InfoWindow({
-      content: samePlaceMarkers
+      content: infoTexts
     });
     marker.addListener('click', function() {
       window.activeElem = elem;
       window.activeInfowindow = infowindow;
       infowindow.open(window.searchmap, marker);
     });
-    // if( changedInfoWindow ){
-    //   console.log(1);
-    //   window.activeInfowindow.setContent(samePlaceMarkers);
-    // }
-    });
+    if (changedInfoWindow)
+      window.activeInfowindow.setContent(infoTexts);
+  });
 }
+
 
 //the three hidden input are created by the function, you just have to specify their new ids
 function initGoogleAutocomplete(input_id, lat_name, lng_name, address_name, model, id_sufix, send_on_select = false, map_id = "") {
