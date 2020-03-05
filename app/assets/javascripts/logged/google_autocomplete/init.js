@@ -29,7 +29,7 @@ function initGoogleMap(id) {
   waitForElement("#" + id, function() {
     window.searchmap = new google.maps.Map(document.getElementById(id), {
       center: {
-        lat: parseFloat($("#search_autocomplete").attr("lat"))|| 19.432608,
+        lat: parseFloat($("#search_autocomplete").attr("lat")) || 19.432608,
         lng: parseFloat($("#search_autocomplete").attr("lng")) || -99.133209
       },
       zoom: 15,
@@ -48,6 +48,21 @@ function initGoogleMap(id) {
     window.searchmap.controls[google.maps.ControlPosition.TOP_CENTER].push(control_search);
     window.searchmap.controls[google.maps.ControlPosition.TOP_RIGHT].push(control_filter);
     load_pending_map_elements(window.searchmap);
+    //get current center coordinates when moved
+    google.maps.event.addListener(window.searchmap, "center_changed", function() {
+      var center = this.getCenter();
+      var latitude = center.lat();
+      var longitude = center.lng();
+      console.log("current latitude is: " + latitude);
+      console.log("current longitude is: " + longitude);
+      console.log("current zoom is : " +this.getZoom());
+      if (this.getZoom() >= 12) {
+        $("#google_control_search").removeAttr("disabled");
+      }
+      else {
+        $("#google_control_search").attr("disabled", "true")
+      }
+    });
   });
 }
 
@@ -64,7 +79,7 @@ function load_pending_map_elements(map) {
     });
     //create marker
     var myLatlng = new google.maps.LatLng(elem.getAttribute("lat"), elem.getAttribute("lng"));
-    var title = (sameLoc.length > 1)? elem.getAttribute("title") + " y "+(sameLoc.length-1)+" más" : elem.getAttribute("title");
+    var title = (sameLoc.length > 1) ? elem.getAttribute("title") + " y " + (sameLoc.length - 1) + " más" : elem.getAttribute("title");
     var marker = new google.maps.Marker({
       position: myLatlng,
       title: title,
