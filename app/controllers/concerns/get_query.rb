@@ -7,7 +7,7 @@ module GetQuery
         where: where_filter, page: params[:gigs],
         boost_by: boost_by_score,
          boost_by_distance: boost_by_distance_condition,
-         per_page: 20, execute: bool, operator: "or", misspellings: misspellings, order: order_by)
+         per_page: 5, execute: bool, operator: "or", misspellings: misspellings, order: order_by)
   end
 
   def get_request query, bool=false
@@ -15,7 +15,7 @@ module GetQuery
        includes: [:offers, city: [state: :country]],
         where: where_filter, page: params[:requests],
         boost_by_distance: boost_by_distance_condition,
-         per_page: 8,
+         per_page: 5,
           execute: bool, operator: "or", misspellings: misspellings, order: order_by)
   end
 

@@ -29,10 +29,10 @@ function initGoogleMap(id) {
   waitForElement("#" + id, function() {
     window.searchmap = new google.maps.Map(document.getElementById(id), {
       center: {
-        lat: 19.432608,
-        lng: -99.133209
+        lat: parseFloat($("#search_autocomplete").attr("lat"))|| 19.432608,
+        lng: parseFloat($("#search_autocomplete").attr("lng")) || -99.133209
       },
-      zoom: 2,
+      zoom: 15,
       fullscreenControl: false,
       zoomControl: true,
       mapTypeControl: false,
@@ -56,16 +56,18 @@ function load_pending_map_elements(map) {
     var infoTexts = "";
     var changedInfoWindow = false;
     //check other elements in same lat and lng
-    $("#searchList [loaded_in_map][lat='" + elem.getAttribute("lat") + "'][lng='" + elem.getAttribute("lng") + "']").each(function(index, elem2) {
-      infoTexts += elem2.outerHTML
+    var sameLoc = $("#searchList [loaded_in_map][lat='" + elem.getAttribute("lat") + "'][lng='" + elem.getAttribute("lng") + "']");
+    sameLoc.each(function(index, elem2) {
+      infoTexts += elem2.outerHTML;
       elem2.setAttribute("loaded_in_map", "true");
       if (elem2 == window.activeElem) changedInfoWindow = true;
     });
     //create marker
     var myLatlng = new google.maps.LatLng(elem.getAttribute("lat"), elem.getAttribute("lng"));
+    var title = (sameLoc.length > 1)? elem.getAttribute("title") + " y "+(sameLoc.length-1)+" más" : elem.getAttribute("title");
     var marker = new google.maps.Marker({
       position: myLatlng,
-      title: elem.getAttribute("title"),
+      title: title,
       map: map
     });
     //infowindow of each marker

@@ -198,3 +198,7 @@
 .gm-style-iw-d .card-title {
   font-size: 14px !important;
 }
+
+.gm-style-iw-d .col-lg-6 {
+  max-width: 100% !important;
+}
