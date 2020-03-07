@@ -13,7 +13,7 @@ $(document).on('turbolinks:load', function() {
     }
   });
 });
-
+window.markers = [];
 function searchToggle() {
   container = $("#filter_and_results")
   container.toggleClass("d-none");
@@ -66,7 +66,8 @@ function initGoogleMap(id) {
   });
 }
 
-function load_pending_map_elements(map) {
+function load_pending_map_elements(map, deleteOldMarkers=true) {
+  if (deleteOldMarkers) DeleteMarkers();
   $("#searchList [loaded_in_map='false']").each(function(index, elem) {
     var infoTexts = "";
     var changedInfoWindow = false;
@@ -95,10 +96,19 @@ function load_pending_map_elements(map) {
       window.activeInfowindow = infowindow;
       infowindow.open(window.searchmap, marker);
     });
+    window.markers.push(marker);
     if (changedInfoWindow)
       window.activeInfowindow.setContent(infoTexts);
   });
 }
+
+function DeleteMarkers() {
+     //Loop through all the markers and remove
+     for (var i = 0; i < window.markers.length; i++) {
+         window.markers[i].setMap(null);
+     }
+     window.markers = [];
+ };
 
 
 //the three hidden input are created by the function, you just have to specify their new ids
@@ -147,7 +157,7 @@ function initGoogleAutocomplete(input_id, lat_name, lng_name, address_name, mode
     //extra events
     if (send_on_select) {
       search_autocomplete.addListener('place_changed', function() {
-        $(search_input).closest("form").submit();
+        $(search_input).closest("form").find("input[type='submit']").click();
       });
       //erase value lat and lng if nothing was selected before send form
       $(search_input).on("keydown", function(e) {

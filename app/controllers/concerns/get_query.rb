@@ -15,7 +15,7 @@ module GetQuery
        includes: [:offers, city: [state: :country]],
         where: where_filter, page: params[:requests],
         boost_by_distance: boost_by_distance_condition,
-         per_page: 5,
+         per_page: 10,
           execute: bool, operator: "or", misspellings: misspellings, order: order_by)
   end
 

@@ -1,7 +1,7 @@
 <div class="screen-size-wrapper" screen-wrapper="true">
   <div class="row h-100">
     <div class="col-12 pd-0 collapse <%= "show" if params.has_key?(:category_id) %><%# if category is defined, then filter was used, so i display it by default %>" id="filterBar">
-      <%= form_with url: search_path(filter: "active"), method: :get ,:html => {class: ""}, id: "search-form" , local: true do |f|%>
+      <%= form_with url: search_path(filter: "active"), method: :get ,:html => {class: ""}, id: "search-form" , remote: true do |f|%>
       <%= f.hidden_field(:query, value: params[:query], id: "query-filter") %>
       <div class="d-flex flex-wrap">
         <div class="form-group col-md-2">
@@ -28,14 +28,15 @@
             selected: params[:order_by]),{include_blank: "Ordenar"}, {class: 'custom-select'}) %>
           </div>
         </div>
+        <%= f.submit "Enviar", id: "search-form-submit", class: "d-none" %>
       <% end %>
     </div>
     <div class="col-sm-12 col-md-8 col-lg-6 pd-md-l-0 h-100" id="filter_and_results">
 
       <div class="col-12 d-flex align-items-center justify-content-between pd-0">
-        <h4 class="mg-b-0 tx-spacing--1">
+        <h4 class="mg-b-0 tx-spacing--1" id="results-text">
           <strong><%=(params[:model_name] == "requests")? @requests.total_count : @gigs.total_count %></strong>
-          resultados en "<strong><%= params[:query]|| " " %></strong>"
+          resultados en '<strong><%= params[:query]%></strong>'
         </h4>
         <div class="btn-group mg-l-5" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-dark" data-toggle="collapse" href="#filterBar">
@@ -46,7 +47,22 @@
             Mapa</button>
         </div>
       </div>
-      <div id="searchList" class="ht-90p flex-wrap d-flex">
+      <div id="loading-results" class="pd-t-20 d-none">
+
+          <div class="placeholder-paragraph">
+            <div class="line"></div>
+            <div class="line"></div>
+            <br>
+            <div class="line"></div>
+            <div class="line"></div>
+            <br>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+
+
+      </div>
+      <div id="searchList" class="ht-90p flex-column  d-flex">
         <% if params[:model_name] == "requests" %>
           <%= render partial: 'shared/queries/request', collection: @requests %>
           <%= paginate @requests, param_name: :requests %>
