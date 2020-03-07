@@ -1,13 +1,26 @@
-<% name = (params[:gigs].present?)? "gig" : "request" %>
+<% isPagination = params[:gigs].present? || params[:requests].present? %>
+<% name = (params[:gigs].present? || params[:model_name] == "gigs")? "gig" : "request"  #pagination uses the params[:gigs] or params[:requests], and the filter dont, thats how i know if filter or pagination is used%>
 <% collection = instance_variable_get("@"+name+"s") %>
-
 paginator_container = $("#searchList");
-$("#searchList").append('<%= j render(partial: "shared/queries/#{name}", collection: collection) %>');
-paginator_container.find('.pag-and-load').remove();
+<% if isPagination #append if pagination, delete all if new filtering %>
+  paginator_container.append('<%= j render(partial: "shared/queries/#{name}", collection: collection) %>');
+  load_pending_map_elements(window.searchmap, false);
+<% else %>
+  <% infoText = "<strong> #{collection.total_count} </strong> resultados en '<strong>#{params[:query]}</strong>'".html_safe %>
+  $("#results-text").html("<%= infoText %>");
+  paginator_container.scrollTop(0);
+  paginator_container.html('<%= j render(partial: "shared/queries/#{name}", collection: collection) %>');
+  window.searchmap.setCenter(new google.maps.LatLng(<%= params[:lat] %>, <%= params[:lng] %>));
+  load_pending_map_elements(window.searchmap, true);
+  $("#loading-results").addClass("d-none");
+  $("#searchList").removeClass("invisible");
+  changeurl("<%= request.fullpath %>", "");
+<% end %>
 
+// this both pagination and filtering uses (removes paginator and adds the new one, then load the map)
+paginator_container.find('.pag-and-load').remove();
 <% if collection.next_page %>
   paginator_container.append("<%= j paginate(collection, param_name: name+'s') %>");
 <% end %>
-load_pending_map_elements(window.searchmap);
 feather.replace();
 <% sleep 1 %>
