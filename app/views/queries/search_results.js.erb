@@ -11,6 +11,7 @@ paginator_container = $("#searchList");
   paginator_container.scrollTop(0);
   paginator_container.html('<%= j render(partial: "shared/queries/#{name}", collection: collection) %>');
   window.searchmap.setCenter(new google.maps.LatLng(<%= params[:lat] %>, <%= params[:lng] %>));
+  window.searchmap.setZoom(14);
   load_pending_map_elements(window.searchmap, true);
   $("#loading-results").addClass("d-none");
   $("#searchList").removeClass("invisible");
