@@ -86,6 +86,21 @@ function searchHere(){
   search_button.find("span").toggleClass("d-none");
 }
 
+function goToElement(element){
+  var lat = parseFloat(element.getAttribute("lat"));
+  var lng = parseFloat(element.getAttribute("lng"));
+  $.each( window.markers, function( index, marker ){
+    markerLat = parseFloat(marker.position.lat());
+    markerLng = parseFloat(marker.position.lng())
+    if (markerLat == lat && markerLng == lng){
+      if (window.activeInfowindow) window.activeInfowindow.close();
+      window.searchmap.setZoom(15);
+      google.maps.event.trigger(marker, 'click');
+      window.searchmap.setCenter(new google.maps.LatLng(lat, lng));
+    }
+  });
+}
+
 function load_pending_map_elements(map, deleteOldMarkers=true) {
   if (deleteOldMarkers) DeleteMarkers();
   $("#searchList [loaded_in_map='false']").each(function(index, elem) {
