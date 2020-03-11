@@ -1,4 +1,4 @@
-<div class="card mg-t-10 gig-card" loaded_in_map="false" lat="<%= gig.lat %>" lng="<%= gig.lng %>" title="<%= gig.min_title %>">
+<div class="card mg-t-10 gig-card" loaded_in_map="false" lat="<%= gig.lat %>" lng="<%= gig.lng %>" title="<%= gig.min_title %>" onclick="goToElement(this)">
   <div class="card-horizontal mg-5">
     <%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), class: "card-img gig-card-horizontal") %>
     <div class="card-body pd-b-5-f">
