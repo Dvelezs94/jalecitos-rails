@@ -1,6 +1,6 @@
-<div class="mg-t-10 req-card" loaded_in_map="false" lat="<%= request.lat %>" lng="<%= request.lng %>" title="<%= request.title %>"  onclick="goToElement(this)">
+<div class="mg-t-10 req-card" loaded_in_map="false" lat="<%= request.lat %>" lng="<%= request.lng %>" title="<%= request.title %>">
   <div class="card">
-    <div class="card-body pd-b-5-f pd-t-10-f">
+    <div class="card-body pd-b-5-f pd-t-10-f" onclick="goToElement($(this).closest('[loaded_in_map]')[0])">
       <small class="tx-gray-600">Publicado hace <%= distance_of_time_in_words_to_now(request.created_at) %></small>
       <p class="card-title tx-16"><%= request.title %></p>
       <div class="d-flex justify-content-between align-items-center">

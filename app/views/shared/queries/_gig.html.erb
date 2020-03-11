@@ -1,8 +1,8 @@
-<div class="card mg-t-10 gig-card" loaded_in_map="false" lat="<%= gig.lat %>" lng="<%= gig.lng %>" title="<%= gig.min_title %>" onclick="goToElement(this)">
+<div class="card mg-t-10 gig-card" loaded_in_map="false" lat="<%= gig.lat %>" lng="<%= gig.lng %>" title="<%= gig.min_title %>">
   <div class="card-horizontal mg-5">
     <%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), class: "card-img gig-card-horizontal") %>
     <div class="card-body pd-b-5-f">
-      <span class="media">
+      <span class="media" onclick="goToElement($(this).closest('[loaded_in_map]')[0])">
         <div class="avatar avatar-sm">
           <%= image_tag(avatar_display_helper(gig.user.image_url(:thumb)), class: "rounded-circle") %>
         </div>
@@ -12,8 +12,8 @@
         </div><!-- media-body -->
       </span>
 
-      <p class="card-title mg-t-10 mg-b-5 tx-16"><%= gig.min_title %></p>
-      <div class="d-flex justify-content-between align-items-center b-0">
+      <p class="card-title mg-t-10 mg-b-5 tx-16" onclick="goToElement($(this).closest('[loaded_in_map]')[0])"><%= gig.min_title %></p>
+      <div class="d-flex justify-content-between align-items-center b-0" onclick="goToElement($(this).closest('[loaded_in_map]')[0])">
         <div>
           <%= one_star_disp_help gig %>
         </div>
