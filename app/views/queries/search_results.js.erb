@@ -7,6 +7,7 @@ paginator_container = $("#searchList");
   feather.replace(); //always before loading map elements
   load_pending_map_elements(window.searchmap, false);
 <% else %>
+  var search_button = $("#google_control_search");
   <% infoText = "<strong> #{collection.total_count} </strong> resultados en '<strong>#{params[:query]}</strong>'".html_safe %>
   $("#results-text").html("<%= infoText %>");
   paginator_container.scrollTop(0);
@@ -15,6 +16,8 @@ paginator_container = $("#searchList");
   if (window.searchmap.getZoom() > 14) window.searchmap.setZoom(14);
   feather.replace(); //always before loading map elements
   load_pending_map_elements(window.searchmap, true);
+  search_button.removeAttr("disabled");
+  search_button.find("span").toggleClass("d-none");
   $("#loading-results").addClass("d-none");
   $("#searchList").removeClass("invisible");
   changeurl("<%= request.fullpath %>", "");

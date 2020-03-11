@@ -21,7 +21,7 @@ function searchToggle() {
   the_screen = $('[screen-wrapper="true"]')
   the_screen.toggleClass("screen-size-wrapper");
   the_screen.toggleClass("screen-size-wrapper-map");
-  $("#filterBar").toggleClass("ht-1");
+  $("#filterBar").toggleClass("ht-100");
   $("#filterBar").toggleClass("pd-t-10");
 }
 
@@ -63,7 +63,6 @@ function initGoogleMap(id) {
 
 function searchHere(){
   var geocoder = new google.maps.Geocoder;
-  var search_button = $("#google_control_search");
   var latlng = {lat: window.searchmap.center.lat(), lng: window.searchmap.center.lng()};
   geocoder.geocode({'location': latlng}, function(results, status) {
   if (status === 'OK') {
@@ -72,8 +71,6 @@ function searchHere(){
       form.find("#search_autocomplete").val(results[0].formatted_address);
       form.find("[name='lat']").val(results[0].geometry.location.lat());
       form.find("[name='lng']").val(results[0].geometry.location.lng());
-      search_button.attr("disabled", "true");
-      search_button.find("span").toggleClass("d-none");
       $("#search-form-submit").click();
     } else {
       // nothing
@@ -82,8 +79,6 @@ function searchHere(){
     console.log('Geocoder failed due to: ' + status);
   }
 });
-  search_button.removeAttr("disabled");
-  search_button.find("span").toggleClass("d-none");
 }
 
 function goToElement(element){
