@@ -97,6 +97,7 @@ function goToElement(element){
       window.searchmap.setZoom(15);
       google.maps.event.trigger(marker, 'click');
       window.searchmap.setCenter(new google.maps.LatLng(lat, lng));
+      return false;
     }
   });
 }
