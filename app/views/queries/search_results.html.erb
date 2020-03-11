@@ -78,8 +78,14 @@
         <button id="google_control_close" class="btn btn-secondary d-block d-md-none tx-14 mg-10 pd-x-10" onclick="searchToggle()">
           <i data-feather="list" class="d-inline"></i> Lista
         </button>
-        <button id="google_control_search" class="btn btn-secondary tx-14 mg-10 pd-x-10" onclick="">
-          <i data-feather="map-pin" class="d-inline"></i> Buscar aquí
+        <button id="google_control_search" class="btn btn-secondary tx-14 mg-10 pd-x-10" onclick="searchHere()">
+          <i data-feather="map-pin" class="d-inline"></i>
+          <span>
+             Buscar aquí
+          </span>
+          <span class="d-none">
+            Cargando...
+          </span>
         </button>
         <button id="google_control_filter" class="btn btn-secondary d-block d-md-none tx-14 mg-10 pd-x-10" onclick=$("[href='#filterBar']").click()>
           <i data-feather="filter" class="d-inline"></i> Filtro

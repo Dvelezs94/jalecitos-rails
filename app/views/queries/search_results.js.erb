@@ -4,6 +4,7 @@
 paginator_container = $("#searchList");
 <% if isPagination #append if pagination, delete all if new filtering %>
   paginator_container.append('<%= j render(partial: "shared/queries/#{name}", collection: collection) %>');
+  feather.replace(); //always before loading map elements
   load_pending_map_elements(window.searchmap, false);
 <% else %>
   <% infoText = "<strong> #{collection.total_count} </strong> resultados en '<strong>#{params[:query]}</strong>'".html_safe %>
@@ -11,7 +12,8 @@ paginator_container = $("#searchList");
   paginator_container.scrollTop(0);
   paginator_container.html('<%= j render(partial: "shared/queries/#{name}", collection: collection) %>');
   window.searchmap.setCenter(new google.maps.LatLng(<%= params[:lat] %>, <%= params[:lng] %>));
-  window.searchmap.setZoom(14);
+  if (window.searchmap.getZoom() > 14) window.searchmap.setZoom(14);
+  feather.replace(); //always before loading map elements
   load_pending_map_elements(window.searchmap, true);
   $("#loading-results").addClass("d-none");
   $("#searchList").removeClass("invisible");
@@ -23,5 +25,4 @@ paginator_container.find('.pag-and-load').remove();
 <% if collection.next_page %>
   paginator_container.append("<%= j paginate(collection, param_name: name+'s') %>");
 <% end %>
-feather.replace();
 <% sleep 1 %>
