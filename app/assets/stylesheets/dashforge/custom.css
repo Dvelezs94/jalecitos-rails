@@ -188,8 +188,15 @@
 .gm-style-iw-d .gig_buttons a[gig_id]{
   display: none;
 }
-.gm-style-iw-d .card-body {
-  padding: 5px !important;
+.gm-style-iw-d .req-card .card-body,
+.gm-style-iw-d .card-footer {
+  padding: 10px !important;
+}
+.gm-style-iw-d .gig-card .card-body {
+  padding: 3px !important;
+}
+.gm-style-iw-d .card-footer a {
+  margin-left: auto;
 }
 .gm-style-iw-d .gig_buttons {
   float: right !important;

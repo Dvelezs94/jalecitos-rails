@@ -50,20 +50,40 @@ function initGoogleMap(id) {
     load_pending_map_elements(window.searchmap);
     //get current center coordinates when moved
     google.maps.event.addListener(window.searchmap, "center_changed", function() {
-      var center = this.getCenter();
-      var latitude = center.lat();
-      var longitude = center.lng();
-      console.log("current latitude is: " + latitude);
-      console.log("current longitude is: " + longitude);
-      console.log("current zoom is : " +this.getZoom());
-      if (this.getZoom() >= 12) {
+      window.currentzoom = this.getZoom();
+      if (window.currentzoom >= 12) {
         $("#google_control_search").removeAttr("disabled");
       }
       else {
-        $("#google_control_search").attr("disabled", "true")
+        $("#google_control_search").attr("disabled", "true");
       }
     });
   });
+}
+
+function searchHere(){
+  var geocoder = new google.maps.Geocoder;
+  var search_button = $("#google_control_search");
+  var latlng = {lat: window.searchmap.center.lat(), lng: window.searchmap.center.lng()};
+  geocoder.geocode({'location': latlng}, function(results, status) {
+  if (status === 'OK') {
+    if (results[0]) {
+      form = $("#search-form");
+      form.find("#search_autocomplete").val(results[0].formatted_address);
+      form.find("[name='lat']").val(results[0].geometry.location.lat());
+      form.find("[name='lng']").val(results[0].geometry.location.lng());
+      search_button.attr("disabled", "true");
+      search_button.find("span").toggleClass("d-none");
+      $("#search-form-submit").click();
+    } else {
+      // nothing
+    }
+  } else {
+    console.log('Geocoder failed due to: ' + status);
+  }
+});
+  search_button.removeAttr("disabled");
+  search_button.find("span").toggleClass("d-none");
 }
 
 function load_pending_map_elements(map, deleteOldMarkers=true) {
@@ -94,6 +114,7 @@ function load_pending_map_elements(map, deleteOldMarkers=true) {
     marker.addListener('click', function() {
       window.activeElem = elem;
       window.activeInfowindow = infowindow;
+      feather.replace();
       infowindow.open(window.searchmap, marker);
     });
     window.markers.push(marker);
