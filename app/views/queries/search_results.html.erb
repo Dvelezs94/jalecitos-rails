@@ -1,6 +1,6 @@
 <div class="screen-size-wrapper" screen-wrapper="true">
   <div class="row h-100">
-    <div class="col-12 pd-0 collapse <%= "show" if params.has_key?(:category_id) %><%# if category is defined, then filter was used, so i display it by default %>" id="filterBar">
+    <div class="col-12 pd-0 collapse" id="filterBar">
       <%= form_with url: search_path(filter: "active"), method: :get ,:html => {class: ""}, id: "search-form" , remote: true do |f|%>
       <%= f.hidden_field(:query, value: params[:query], id: "query-filter") %>
       <div class="d-flex flex-wrap">
@@ -25,7 +25,7 @@
           </div>
           <div class="form-group col-md-2">
             <%= f.select(:order_by, options_for_select( (params[:model_name]!="requests")? [["Reciente", "recent"], ["Precio", "price"], ["Valoraciones", "score"]] : [["Reciente", "recent"], ["Precio", "price"]],
-            selected: params[:order_by]),{include_blank: "Ordenar"}, {class: 'custom-select'}) %>
+            selected: params[:order_by]),{include_blank: "Sin orden"}, {class: 'custom-select'}) %>
           </div>
         </div>
         <%= f.submit "Enviar", id: "search-form-submit", class: "d-none" %>
