@@ -7,5 +7,8 @@ $(document).on('turbolinks:load', function() {
     $("#searchList").addClass("invisible");
     $("#loading-results").removeClass("d-none");
     $("#results-text").html("Cargando...");
+    var search_button = $("#google_control_search")
+    search_button.attr("disabled", "true");
+    search_button.find("span").toggleClass("d-none");
   });
 });
