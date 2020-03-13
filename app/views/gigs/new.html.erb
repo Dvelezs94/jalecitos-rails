@@ -1,18 +1,23 @@
-<div class="separation">
+<div class="row">
 
-</div>
-<div id="section_parent_gig">
-  <h3>Jale</h3>
-  <section>
-    <%= render 'form', gig: @gig %>
-  </section>
-  <h3>Galería</h3>
-  <section>
-    <%= render 'galleries/form', item: @gig %>
-  </section>
+  <!-- Gig preview -->
+  <%= render "preview", gig: @gig %>
+  <!-- End gig preview -->
+<div class="col-lg-6 col-md-12 col-sm-12 order-xs-1 order-lg-2 mg-b-10">
+  <div id="section_parent_gig">
+    <h3>Información General</h3>
+    <section>
+      <%= render 'form', gig: @gig %>
+    </section>
+    <h3>FAQ & Multimedia</h3>
+    <section>
+      <%= render 'galleries/form', item: @gig %>
+    </section>
 
-  <h3>Paquetes</h3>
-  <section>
+    <h3>Paquetes</h3>
+    <section>
       <%= render 'packages/form', package: @new_packages %>
-  </section>
+    </section>
+  </div>
+</div>
 </div>

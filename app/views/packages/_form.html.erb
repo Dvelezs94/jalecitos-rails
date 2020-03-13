@@ -1,3 +1,129 @@
+<ul class="nav nav-line nav-justified" id="packages" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="basic-tab" data-toggle="tab" href="#basic" role="tab" aria-controls="basic" aria-selected="true">Basico
+      <span class="tx-danger">*</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="standard-tab" data-toggle="tab" href="#standard" role="tab" aria-controls="standard" aria-selected="false">Standard</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="premium-tab" data-toggle="tab" href="#premium" role="tab" aria-controls="premium" aria-selected="false">Premium</a>
+  </li>
+</ul>
+<div class="tab-content bd bd-gray-300 bd-t-0 pd-20 rounded-bottom" id="packagesContent">
+  <div class="tab-pane fade show active" id="basic" role="tabpanel" aria-labelledby="basic-tab">
+    <div class="form-group">
+      <label class="d-block">Nombre del paquete
+        <span class="tx-danger">*</span></label>
+      <input type="text" class="form-control" placeholder="fotos tamaño infantil">
+    </div>
+    <div class="form-group">
+      <label class="d-block">Describe este paquete
+        <span class="tx-danger">*</span></label>
+      <textarea
+        class="form-control"
+        placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita necessitatibus beatae, dolorem sunt, dignissimos nesciunt est tenetur assumenda illo error distinctio impedit doloribus possimus numquam eveniet corrupti quod temporibus magnam."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="d-block">Método de cobro
+        <span class="tx-danger">*</span></label>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="radio1" name="customRadio" class="custom-control-input" checked="checked">
+        <label class="custom-control-label" for="radio1">Por Servicio</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="radio2" name="customRadio" class="custom-control-input">
+        <label class="custom-control-label" for="radio2">Por Unidades</label>
+      </div>
+
+      <label class="d-block mg-t-10">Lo que Ganaré
+        <span class="tx-danger">*</span></label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input type="text" class="form-control">
+        <div class="input-group-append">
+          <span class="input-group-text">.00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="standard" role="tabpanel" aria-labelledby="standard-tab">
+    <div class="form-group">
+      <label class="d-block">Nombre del paquete</label>
+      <input type="text" class="form-control" placeholder="fotos tamaño infantil">
+    </div>
+    <div class="form-group">
+      <label class="d-block">Describe este paquete</label>
+      <textarea
+        class="form-control"
+        placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita necessitatibus beatae, dolorem sunt, dignissimos nesciunt est tenetur assumenda illo error distinctio impedit doloribus possimus numquam eveniet corrupti quod temporibus magnam."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="d-block">Método de cobro</label>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="radio1" name="customRadio" class="custom-control-input" checked="checked">
+        <label class="custom-control-label" for="radio1">Por Servicio</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="radio2" name="customRadio" class="custom-control-input">
+        <label class="custom-control-label" for="radio2">Por Unidades</label>
+      </div>
+
+      <label class="d-block mg-t-10">Lo que Ganaré</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input type="text" class="form-control">
+        <div class="input-group-append">
+          <span class="input-group-text">.00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="premium" role="tabpanel" aria-labelledby="premium-tab">
+    <div class="form-group">
+      <label class="d-block">Nombre del paquete</label>
+      <input type="text" class="form-control" placeholder="fotos tamaño infantil">
+    </div>
+    <div class="form-group">
+      <label class="d-block">Describe este paquete</label>
+      <textarea
+        class="form-control"
+        placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita necessitatibus beatae, dolorem sunt, dignissimos nesciunt est tenetur assumenda illo error distinctio impedit doloribus possimus numquam eveniet corrupti quod temporibus magnam."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="d-block">Método de cobro</label>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="radio1" name="customRadio" class="custom-control-input" checked="checked">
+        <label class="custom-control-label" for="radio1">Por Servicio</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="radio2" name="customRadio" class="custom-control-input">
+        <label class="custom-control-label" for="radio2">Por Unidades</label>
+      </div>
+
+      <label class="d-block mg-t-10">Lo que Ganaré</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input type="text" class="form-control">
+        <div class="input-group-append">
+          <span class="input-group-text">.00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <%# OLD PARTIAL ------------------------------------ %>
+
 <%= form_with(model: package, url: package_form_url_helper, method: form_method_helper, local: true, :html => { :id => "packages_form", class: "pack_form" }) do |form|%>
 <% has_all_pack = params[:action] == 'edit' && (@gig.gig_packages.any? && @gig.gig_packages[2].name != '') %>
 <div class="container-fluid section centered-form packages-builder">
