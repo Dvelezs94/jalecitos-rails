@@ -39,7 +39,7 @@ class Request < ApplicationRecord
   belongs_to :employee, class_name: "User", optional: true
   #Validations
   validates_presence_of :name, :description, :budget, :category_id, :lat, :lng
-  validate  :tag_length, :no_spaces_in_tag, :maximum_amount_of_tags
+  validate  :tag_length, :maximum_amount_of_tags
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
   validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
   validates_length_of :description, :maximum => 1000, :message => "debe contener como máximo 1000 caracteres."

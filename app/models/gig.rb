@@ -50,7 +50,7 @@ class Gig < ApplicationRecord
   has_many :related_pack, ->{ limit(30).order(id: :asc) }, class_name: 'Package'
   #Validations
   validates_presence_of :name, :profession, :description, :lat, :lng, :address_name
-  validate :maximum_amount_of_tags, :no_spaces_in_tag, :tag_length
+  validate :maximum_amount_of_tags, :tag_length
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
   validates_length_of :description, :maximum => 1000, :message => "debe contener como máximo 1000 caracteres."
   validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."

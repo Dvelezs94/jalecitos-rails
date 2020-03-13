@@ -9,6 +9,7 @@ $(document).on('turbolinks:load', function() {
       headerTag: "h3",
       bodyTag: "section",
       transitionEffect: "slideLeft",
+      titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
       labels: {
         previous: "Anterior",
         next: "Siguiente",

@@ -39,7 +39,7 @@ class User < ApplicationRecord
   validates :available, :inclusion=> { :in => ["Tiempo completo", "Medio tiempo", "Esporádico", "Fin de semana"]}, allow_blank: true
   validates_length_of :name, maximum: 100
   validates_length_of :alias, maximum: 30
-  validate :maximum_amount_of_tags, :no_spaces_in_tag, :tag_length
+  validate :maximum_amount_of_tags, :tag_length
   # validate :location_syntax
   validates_length_of :bio, maximum: 500
   validates_presence_of :alias, :slug

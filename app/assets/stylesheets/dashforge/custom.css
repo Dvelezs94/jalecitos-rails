@@ -10,9 +10,19 @@
 .gig-card-top {
   object-fit: cover;
   height: 250px
-} @media (max-width: 992px) {
+}
+@media (max-width: 1200px) {
+
+    .wizard > .steps .disabled .title {
+      display: none;
+    }
+  }
+@media (max-width: 992px) {
     .gig-card-top {
       height: 200px;
+    }
+    .wizard > .steps > ul li + li::before {
+      display: none;
     }
   }
   @media (max-width: 768px) {
@@ -208,4 +218,19 @@
 
 .gm-style-iw-d .col-lg-6 {
   max-width: 100% !important;
+}
+.wizard > .steps > ul li + li::before {
+  content: '\2192';
+}
+/*count in forms css*/
+.count{
+  float: right;
+  font-size: 0.8rem;
+}
+/*error forms css*/
+span.error,
+div.error,
+.span-error,
+label.error{
+  color: red;
 }
