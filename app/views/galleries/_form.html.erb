@@ -1,29 +1,31 @@
-<h6 class="mg-b-0">Preguntas Frecuentes</h6>
-<%= form_with(model: item,url: gig_form_url_helper, method: form_method_helper) do |form| %>
+<% if item.class == Gig %>
+  <h6 class="mg-b-0">Preguntas Frecuentes</h6>
+  <%= form_with(model: item,url: gig_form_url_helper, method: form_method_helper) do |form| %>
 
-    <%= form.fields_for :faqs do |faq| %>
-    <%= render "/faqs/faq_fields", f: faq %>
-  <% end %>
-  <div class="links tx-right">
-    <%= link_to_add_association 'Agregar Pregunta', form, :faqs, class: 'btn btn-success', partial: "/faqs/faq_fields", id: "add_faq" %>
-  </div>
-
+  <%= form.fields_for :faqs do |faq| %>
+  <%= render "/faqs/faq_fields", f: faq %>
 <% end %>
+<div class="links tx-right">
+  <%= link_to_add_association 'Agregar Pregunta', form, :faqs, class: 'btn btn-success', partial: "/faqs/faq_fields", id: "add_faq" %>
+</div>
+
 <!-- Question master sample -->
 <!-- End question master -->
 
 <hr>
 <h6>Multimedia</h6>
 <div class="form-group">
-<div>
-<label class="d-block">Video Youtube</label>
-<input type="text" class="form-control" placeholder="https://www.youtube.com/watch?v=jNQXAC9IVRw, https://youtu.be/jNQXAC9IVRw">
+  <div>
+    <label class="d-block">Video Youtube</label>
+    <%= form.text_field :youtube_url, class: "form-control", maxlength: 100, placeholder: "https://www.youtube.com/watch?v=jNQXAC9IVRw, https://youtu.be/jNQXAC9IVRw" %>
+  </div>
 </div>
-</div>
+<% end %>
 
+<% end %>
 <div class="form-group">
 <div>
-<label class="d-block">Imagenes o GIFs</label>
+<label class="d-block">Imágenes o GIFs</label>
 <div class="row">
   <div class="col-6 pd-x-0">
     <div class="new_gig_image_item">
