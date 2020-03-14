@@ -200,6 +200,7 @@ class GigsController < ApplicationController
                                   :description,
                                   :address_name,
                                   :lat,
+                                  :youtube_url,
                                   :lng,
                                   :category_id,
                                   :tag_list,
