@@ -1,7 +1,10 @@
 version: '3'
 services:
   db:
-    image: postgres
+    image: postgres:12
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dbpass
     volumes:
       - postgres-volume:/var/lib/postgresql/data
 
@@ -11,6 +14,7 @@ services:
       args:
         US_ID: $US_ID
         GR_ID: $GR_ID
+    image: jalecitos-rails_app:latest
     command: bash -c "rm -f tmp/pids/server.pid && bundle install && bundle exec rails s -p 3000 -b '0.0.0.0'"
 #    command: tail -f /var/log/dpkg.log
     volumes:
@@ -46,10 +50,9 @@ services:
 
   elasticsearch:
     image: elasticsearch:6.4.2
-    ports:
-      - 9200:9200
     environment:
       - discovery.type=single-node
 
 volumes:
   postgres-volume:
+  elasticsearch-volume:
