@@ -46,29 +46,68 @@
     </div>
 
     <div class="form-group">
-      <label class="d-block">Método de cobro
-        <span class="tx-danger">*</span></label>
-      <div class="custom-control custom-radio">
-        <input type="radio" id="radio1" name="customRadio" class="custom-control-input" checked="checked">
-        <label class="custom-control-label" for="radio1">Por Servicio</label>
+      <label class="d-block">Método de cobro<span class="tx-danger">*</span></label>
+      <%= render "shared_user/forms/choose_payment",  n: n, pack: package[n] %>
+      <div class="row d-none" display_id="by_service_<%= n %>" display_class="by_service">
+        <div class="row centered justify-content-center col-lg-12 col-md-12 col-sm-12 col-12"> <!--col-lg-6 col-md-6 col-sm-12 col-12 no hire-->
+          <label class="d-block mg-t-10">Lo que ganaré
+            <span class="tx-danger">*</span></label>
+          <div class="row justify-content-center w-100">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <%= pa.number_field :price, min: "0", max: "1000000", step: "1",
+              class: "price-input price-input-#{n} form-control form_fields_#{n}", id: "price_input_#{n}" %> <!--min: "100", max: "10000"-->
+              <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+              </div>
+              <span class="span-error w-100"></span> <%# w-100 fixes space when error appears %>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="custom-control custom-radio">
-        <input type="radio" id="radio2" name="customRadio" class="custom-control-input">
-        <label class="custom-control-label" for="radio2">Por Unidades</label>
+      <div class="row d-none" display_id="by_units_<%= n %>" display_class="by_unit">
+        <div class="row justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
+          <label class="d-block mg-t-10">Tipo de unidad
+            <span class="tx-danger">*</span></label>
+          <div class="row justify-content-center w-100">
+            <%= pa.select :unit_type, grouped_options_for_select(unit_options, selected: pack.unit_type),{},
+             class:"form-control form_fields_#{n} text-center unit_type", style: "text-align-last:center;" , id: "unit_select_#{n}"%>
+            <span class="span-error"></span>
+          </div>
+        </div>
+        <div class="row justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
+          <label class="d-block mg-t-10">Precio por unidad
+            <span class="tx-danger">*</span></label>
+          <div class="row justify-content-center w-100">
+            <%= pa.number_field :price, min: "1", max: "1000000", step: "0.5", id: "unit_price_#{n}",
+            class: "form-control form_fields_#{n} text-center unit_price" %> <!-- max: "5000" no hire-->
+            <span class="span-error"></span>
+          </div>
+        </div>
+        <div class="row justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
+          <label class="d-block mg-t-10">Mínima cantidad a vender
+            <span class="tx-danger">*</span></label>
+          <div class="row justify-content-center w-100">
+            <%= pa.number_field :min_amount, min: "1", max: "99999", step: "1", id: "min_amount_#{n}",
+            class: "form-control form_fields_#{n} min_amount text-center"  %>
+            <span class="span-error"></span>
+          </div>
+        </div>
+        <div class="row justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
+          <label class="d-block mg-t-10">Máxima cantidad a vender
+            <span class="tx-danger">*</span></label>
+          <div class="row justify-content-center w-100">
+            <%= pa.number_field :max_amount, min: "2", max: "1000000", step: "1", id: "max_amount_#{n}",
+            class: "form-control form_fields_#{n} max_amount text-center"  %> <!-- max: "10000" no hire-->
+            <span class="span-error"></span>
+          </div>
+        </div>
       </div>
 
-      <label class="d-block mg-t-10">Lo que Ganaré
-        <span class="tx-danger">*</span></label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">$</span>
-        </div>
-        <input type="text" class="form-control">
-        <div class="input-group-append">
-          <span class="input-group-text">.00</span>
-        </div>
-      </div>
-      <div class="d-flex justify-content-end mg-sm-t-10">
+      <div class="d-flex justify-content-end mg-t-10">
         <%=link_to "#{n}", class: "erase-all" do %>
         <button type="button" class="btn btn-danger btn-icon">
           <i data-feather="trash"></i>

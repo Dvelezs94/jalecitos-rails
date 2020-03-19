@@ -1,3 +1,4 @@
+
 .location-header {
   margin: 0 10px;
 }
@@ -125,7 +126,9 @@
     display: none;
   }
 }
-
+.mar-0-auto {
+  margin: 0 auto;
+}
 
 .new_gig_image_item {
  display: inline-block;
