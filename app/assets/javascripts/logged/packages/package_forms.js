@@ -1,5 +1,5 @@
 function generate_error(formNumber,index, input) {
-  var err_span = $(input).next();
+  var err_span = $(input).nextAll('span:first');
   err_span.html("Por favor, llene este campo");
   $(input).addClass("error");
   $("#pack-names a")[formNumber].click();//open the form with the error

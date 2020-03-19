@@ -40,10 +40,7 @@ function displayTab() {
   displayTrash();
 }
 function displayTrash() {
-  console.log($("#pack-names a[role='tab']").length);
-  console.log($("#pack-names a[role='tab']:hidden").length)
   var displayed_navs = $("#pack-names a[role='tab']").length - $("#pack-names a[role='tab']").closest("li.d-none").length - 1;
-  console.log(displayed_navs);
   trashes = $(".erase-all");
   $.each(trashes, function( index, trash ) {
     if (index == displayed_navs) {
