@@ -8521,8 +8521,7 @@ textarea.form-control {
     display: inline-block;
     margin-right: 10px; }
     .ui-accordion-header .ui-accordion-header-icon::before {
-      content: '\f273';
-      font-family: 'Ionicons';
+      content: '+';
       font-size: 14px;
       display: inline-block; }
   .ui-accordion-header.ui-state-active {
@@ -8530,7 +8529,7 @@ textarea.form-control {
     border-bottom-width: 0;
     color: #0168fa; }
     .ui-accordion-header.ui-state-active .ui-accordion-header-icon::before {
-      content: '\f368'; }
+      content: '-'; }
 
 .ui-accordion-content {
   border: 1px solid rgba(72, 94, 144, 0.16);

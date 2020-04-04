@@ -93,9 +93,9 @@
   height:600px;
   width:100%;
   object-fit: contain; }
-.gig-show-picture.preview {
+.gig-show-picture {
   height: 500px; }
-.carousel-item.gig.preview img {
+.carousel-item.gig img {
   height:500px;
   width:100%;
   object-fit: contain; }
@@ -236,4 +236,16 @@ div.error,
 .span-error,
 label.error{
   color: red;
+}
+/* deactivates links when uploading image */
+.isDisabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.isDisabled > a {
+  color: currentColor;
+  display: inline-block;  /* For IE11/ MS Edge bug */
+  pointer-events: none;
+  text-decoration: none;
 }

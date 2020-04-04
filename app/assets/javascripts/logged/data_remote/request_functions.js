@@ -7,10 +7,10 @@ function ajaxSent(){
   //show loading
   if($("div.loading").length > 1){
     //when there is more than one loading gif, loading zones are used to find the closest one
-    $(window.target).closest("div.loading-zone").find("div.loading").show();
+    $(window.target).closest("div.loading-zone").find("div.loading").removeClass("d-none");
   }
   else{
-    $("div.loading").show();
+    $("div.loading").removeClass("d-none");
   }
 }
 function ajaxRecieved(){
@@ -25,10 +25,10 @@ function ajaxRecieved(){
   if(window.sentRequests == 0){
     if($("div.loading").length > 1){
       //when there is more than one loading gif, loading zones are used to find the closest one
-      $(window.target).closest("div.loading-zone").find("div.loading").hide();
+      $(window.target).closest("div.loading-zone").find("div.loading").addClass("d-none");
     }
     else{
-      $("div.loading").hide();
+      $("div.loading").addClass("d-none");
     }
   }
 }

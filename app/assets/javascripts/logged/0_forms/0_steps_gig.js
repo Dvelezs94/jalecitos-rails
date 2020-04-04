@@ -37,6 +37,7 @@ $(document).on('turbolinks:load', function() {
         form = form_cont.find("#section_parent_gig-p-" + currentIndex + " form").first();
         if (form.valid()) {
           syncAjaxGig(form);
+          if (currentIndex == 0) update_faq_accordion(); //in case of creation, erases preview faqs when gig form is submitted. better ux
           return true;
         } else {
           return false;

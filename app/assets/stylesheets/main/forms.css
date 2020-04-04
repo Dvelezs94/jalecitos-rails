@@ -13,10 +13,6 @@
   text-align: center;
 }
 
-.current_images {
-  justify-content: center;
-}
-
 #gig_images_hint {
   top: -20%;
 }
@@ -491,7 +487,7 @@ span.error,
 div.error,
 .span-error{
   color: red;
-}          
+}
 
 /* pack form */
 .pack-names #nav-tab {

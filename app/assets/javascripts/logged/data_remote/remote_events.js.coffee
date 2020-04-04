@@ -19,7 +19,7 @@ $ ->
     #recieved 1 response
     ajaxRecieved()
     #delete image element if galleries
-    if $(".current_images").length > 0
+    if $("#current_images").length > 0
       $(event.currentTarget).closest("div.current_img").fadeOut 500, -> @remove()
     #delete card element if configuration
     if $("#cardForm").length > 0
