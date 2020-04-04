@@ -69,11 +69,7 @@ Rails.application.routes.draw do
    devise_scope :user do
      post 'user/disable', :to => 'users/registrations#disable'
    end
-   resources :galleries, only: [:create, :destroy] do
-     collection do
-       post :save_video
-     end
-   end
+   resources :galleries, only: [:create, :destroy] 
    resources :packages, except: [:destroy,:show,:index, :new, :edit, :update] do
      collection do
        patch 'update_packages', to: 'packages#update_packages', as: 'update'

@@ -1,6 +1,6 @@
 <% if item.class == Gig %>
   <h6 class="mg-b-0">Preguntas Frecuentes</h6>
-  <%= form_with(model: item,url: gig_form_url_helper, method: form_method_helper) do |form| %>
+  <%= form_with(model: item,url: gig_form_url_helper, method: form_method_helper, id: "faqs_form") do |form| %>
 
   <%= form.fields_for :faqs do |faq| %>
   <%= render "/faqs/faq_fields", f: faq %>
@@ -23,132 +23,27 @@
 <% end %>
 
 <% end %>
+<%= form_with(model: item, url: galleries_path, method: :post, :html => { :id => "new_image" }, local: false) do |form| %>
 <div class="form-group">
 <div>
 <label class="d-block">Imágenes o GIFs</label>
-<div class="row">
-  <div class="col-6 pd-x-0">
-    <div class="new_gig_image_item">
-      <div class="new_gig_image_well">
-        <img src="https://source.unsplash.com/random?sig=10" class="img-thumbnail">
-        <figcaption class="pos-absolute b-0 l-0 wd-100p pd-20 d-flex justify-content-center">
-          <div class="btn-group">
-            <a href="" class="btn btn-dark btn-icon">
-              <i data-feather="trash-2"></i>
-            </a>
-          </div>
-        </figcaption>
-      </div>
-    </div>
-  </div>
-  <div class="col-6 pd-x-0">
-    <div class="new_gig_image_item">
-      <div class="new_gig_image_well">
-        <img src="https://source.unsplash.com/random?sig=11" class="img-thumbnail">
-        <figcaption class="pos-absolute b-0 l-0 wd-100p pd-20 d-flex justify-content-center">
-          <div class="btn-group">
-            <a href="" class="btn btn-dark btn-icon">
-              <i data-feather="trash-2"></i>
-            </a>
-          </div>
-        </figcaption>
-      </div>
-    </div>
-  </div>
-  <div class="col-6 pd-x-0">
-    <div class="new_gig_image_item">
-      <div class="new_gig_image_well">
-        <img src="https://source.unsplash.com/random?sig=12" class="img-thumbnail">
-        <figcaption class="pos-absolute b-0 l-0 wd-100p pd-20 d-flex justify-content-center">
-          <div class="btn-group">
-            <a href="" class="btn btn-dark btn-icon">
-              <i data-feather="trash-2"></i>
-            </a>
-          </div>
-        </figcaption>
-      </div>
-    </div>
-  </div>
-  <div class="col-6 pd-x-0">
-    <div class="new_gig_image_item">
-      <div class="new_gig_image_well">
-        <img src="https://source.unsplash.com/random?sig=13" class="img-thumbnail">
-        <figcaption class="pos-absolute b-0 l-0 wd-100p pd-20 d-flex justify-content-center">
-          <div class="btn-group">
-            <a href="" class="btn btn-dark btn-icon">
-              <i data-feather="trash-2"></i>
-            </a>
-          </div>
-        </figcaption>
-      </div>
-    </div>
-  </div>
+<div class="row" id="current_images">
+  <%= render partial: "galleries/image", collection: item.images %>
 </div>
 </div>
 </div>
 <div class="col-12 tx-right pd-r-0">
-<button class="btn btn-success">
-<i data-feather="plus"></i>
-Agregar Imagen</button>
+<label for="file-input" class="btn btn-success">
+  <i data-feather="plus"></i>
+  Agregar Imagen
+</label>
 </div>
 
-<%# OLD PARTIAL ------------------------------------ %>
-
-<div class="container-fluid section ">
-<!-- post request form -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-7 col-md-12 centered-form">
-      <h3 style="text-align: center;">Agrega tu galería de imágenes<%= (item.class == Gig) ? " y vídeo" : ""%></h3>
-      <div class="form_box post_form_col">
-        <% if item.class == Gig %>
-          <%= form_with(model: item, url: save_video_galleries_path, method: :post, :html => { :id => "new_video" }, local: false) do |form| %>
-          <div class="form_block form_section row">
-            <div class="flex-space-bet">
-              <p class="form-title">Video de Youtube (<strong>Opcional</strong>)</p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-            <%= render 'shared_user/gigs/forms/hints/videos_hint.html.erb' %>
-            <%= form.text_field :youtube_url, class: "styled", maxlength: 100, placeholder: "Ej: https://www.youtube.com/watch?v=fTjhQc6Yiy0" %>
-          </div>
-        <% end %>
-      <% end %>
-
-      <%= form_with(model: item, url: galleries_path, method: :post, :html => { :id => "new_image" }, local: false) do |form| %>
-      <div class="form_block form_section row">
-        <div class="flex-space-bet">
-          <p class="form-title">Imágenes<%= (item.class == Gig) ? " y gifs " : " "%>a subir (<strong>Opcional</strong>)
-          </p>
-          <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-        </div>
-        <%= render "shared_user/#{item.class.to_s.downcase}s/forms/hints/images_hint.html.erb" %>
-        <div class="current_images" style="display:flex;width:100%;flex-wrap:wrap;">
-          <%= render partial: "galleries/image", collection: item.images %>
-        </div>
-
-        <div style="width:100%;text-align:center;">
-          <label for="file-input" class="custom-file-upload" style="margin: 20px auto;height:30px;">
-            Subir imágenes
-          </label>
-        </div>
-        <% allowed_ext = (item.class == Gig)? ".png, .jpg, .jpeg, .gif" : ".png, .jpg, .jpeg" %>
-          <%= form.file_field :images, multiple: true, id: "file-input", accept: allowed_ext, style: "display:none;" %>
-        </div>
-        <div class="loading row justify-content-center" style="text-align: center; display: none;">
-          <div class="bounce1"></div>
-          <div class="bounce2"></div>
-          <div class="bounce3"></div>
-        </div>
-
-      </div>
-      <!-- form box -->
-      <!-- -->
-    </div>
-    <!-- -->
-  </div>
-  <!-- col lg 7 -->
+<% allowed_ext = (item.class == Gig)? ".png, .jpg, .jpeg, .gif" : ".png, .jpg, .jpeg" %>
+<%= form.file_field :images, multiple: true, id: "file-input", accept: allowed_ext, class: "d-none" %>
+<div class="row justify-content-center">
+<div class="spinner-grow loading mg-t-10 d-none" role="status">
+  <span class="sr-only">Loading...</span>
 </div>
 </div>
-<!-- container fluid -->
-
 <% end %>

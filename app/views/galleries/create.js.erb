@@ -2,11 +2,11 @@
 ajaxRecieved();
 //if is the last, hide loading
 if (window.sentRequests == 0){
-  $(".loading").hide();
+  $(".loading").addClass("d-none");
 }
 //do the render
 <% if @success %> //loads an image
-  $(".current_images").append("<%= j render partial: 'galleries/image', collection: [@item.images.last] %>");
+  $("#current_images").append("<%= j render partial: 'galleries/image', collection: [@item.images.last] %>");
 <% elsif @next %> //clicks next form
   //so dont do nothing
 <% elsif @req_end %> //request end
@@ -19,3 +19,5 @@ if (window.sentRequests == 0){
 <% else %>
   alert("<%= j @item.errors[:images][0].html_safe %>");
 <% end %>
+append_to_carousel("<%= @item.images.last %>")
+feather.replace();
