@@ -249,3 +249,9 @@ label.error{
   pointer-events: none;
   text-decoration: none;
 }
+
+/* good place for error in price (not error for not filling) */
+#packages_form .input-group label.error {
+  position: absolute;
+  top: 100%;
+}
