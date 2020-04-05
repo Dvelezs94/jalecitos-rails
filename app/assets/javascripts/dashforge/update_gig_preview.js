@@ -5,8 +5,12 @@ $(document).on('turbolinks:load', function() {
     $("#faqs_form").on("keyup change", ":input", function() {
       update_faq_accordion();
     });
+    $('#faqs_form').on('cocoon:after-remove', function(e, insertedItem, originalEvent) {
+    update_faq_accordion();
+  });
 });
 
+//faq accordion functions
 function update_faq_accordion() {
   //update accordion
   accordion = $("#preview-accordion");
@@ -21,6 +25,8 @@ function update_faq_accordion() {
   accordion.accordion('destroy').accordion();
 }
 
+
+// carousel functions
 function append_to_carousel(image_url) {
   carousel = $("#gig-preview-carousel");
   carousel.find(".carousel-inner").append("<div class='carousel-item gig'><img src="+ image_url +" alt='...'></div>");
@@ -35,9 +41,9 @@ function append_to_carousel(image_url) {
 }
 function delete_from_carousel(image_url) {
   carousel = $("#gig-preview-carousel");
-  element = carousel.find("img[src='"+ image_url +"']").closest("div")
+  element = carousel.find("img[src='"+ image_url +"']").closest("div");
   if (element.hasClass("active")) { // if the active image is deleted, then i need to display another
-    carousel.find(".carousel-inner > div:first-child").addClass("active");
+    carousel.find(".carousel-inner > div:not(.active):first").addClass("active");
   }
   element.remove();
 }
