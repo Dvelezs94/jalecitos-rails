@@ -1,36 +1,56 @@
 <% if @show_packages == true  && package.name != "" && package.description != "" && package.price != nil%>
-<% unit_pack = (package.unit_type != nil && package.max_amount != nil && package.min_amount != nil) ? true: false %>
-  <div class="tab-pane fade  <%= "active show" if package.pack_type == "basic" %>" id="<%= "#{package.pack_type}#{device}"%>" role="tabpanel" aria-labelledby="<%= package.pack_type %>-tab" pack_container pack_price="<%= package.price %>">
-    <div class="earnlist-mewrapt">
-      <div class="earnlist-me">
-        <p class="limpi1"><%= package.name %></p>
-        <pre> <p class="limpi3"><%= package.safe_description %></p> </pre>
-      </div>
-          <div class="page3-btn" unit_container>
-            <%= form_with(url: hire_package_path(package), method: :get, :html => { :class => "" }, local: true) do |f| %>
-            <% if unit_pack%>
-            <input type="range" class="range-pack unit_range" value="<%= package.min_amount %>" min="<%= package.min_amount %>" max="<%= package.max_amount %>">
-            <div class="div-space-left">
-              <input type="number" name="quantity" class="unit_quantity form-control" value="<%= package.min_amount %>" min="<%= package.min_amount %>" max="<%= package.max_amount %>">
-              <h3 class="mar-bot-0"><span class="badge unit_text"><%= t("packages.unit_type.plural.#{package.unit_type}") %></span></h3>
-            </div>
-            <% end %>
-            <div class="hire_pack_info">
-              <h3 class="packa-price"><%=number_to_currency(purchase_order_total(package.price), precision: 2) %> <sub>MXN</sub></h3>
-              <% if @gig.user.whatsapp_enabled && @gig.user.phone_number.present? %>
-              <%= link_to "#{icon("fab", "whatsapp ft-20", title: "Whatsapp")}".html_safe, "https://wa.me/#{@gig.user.international_phone_number}?text=#{"Hola, quisiera más información acerca de su Jale *#{@gig.name}*. #{the_gig_url(@gig)}"}", class: "btn btn-success wapp-contact", target: "_blank" %>
-              <% end %>
-              <% if @gig.user.phone_number.present? %>
-              <%= link_to "#{icon("fas", "phone", title: "Llamar")}".html_safe, "tel:#{@gig.user.international_phone_number(prefix=true)}", class: "btn btn-secondary phone-contact", target: "_blank" %>
-              <% end %>
-              <%= link_to "#{icon('fas', 'comment', title: "Mensaje")}".html_safe, conversations_path(user_id: @gig.user.id, model_id: @gig.id, model: "Gig" ), class: "btn btn-primary msg-contact" %>
-              <!-- <%= f.submit "Contratar", class: "hire-pack" %>  no hire -->
-            </div>
-            <% end %>
-          </div>
 
-    </div>
+<% unit_pack = (package.unit_type != nil && package.max_amount != nil && package.min_amount != nil) ? true: false %>
+
+
+<div class="tab-pane fade <%= "active show" if package.pack_type == "basic" %>" id="<%= "#{package.pack_type}"%>" role="tabpanel" aria-labelledby="<%= package.pack_type %>-tab" pack_container pack_price="<%= package.price %>">
+  <h6><%= package.name %></h6>
+  <p><%= package.safe_description %></p>
+  <div class="d-flex justify-content-between align-items-center">
+    <h6 class="mg-b-0-f"><%=number_to_currency(purchase_order_total(package.price), precision: 2) %>  MXN</h6>
+    <span>
+      <div class="dropdown">
+        <button class="btn btn-xs btn-primary dropdown-toggle" type="button" id="basicoDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Contactar
+        </button>
+        <div class="dropdown-menu" aria-labelledby="basicoDropdown">
+          <%= link_to "https://wa.me/#{@gig.user.international_phone_number}?text=#{"Hola, quisiera más información acerca de su Jale *#{@gig.name}*. #{the_gig_url(@gig)}"}",
+           class: "dropdown-item wapp-contact", target: "_blank" do %>
+           Whatsapp
+          <% end %>
+
+          <%= link_to "tel:#{@gig.user.international_phone_number(prefix=true)}", class: "dropdown-item phone-contact", target: "_blank" do %>
+            Llamar
+          <% end %>
+
+          <%= link_to conversations_path(user_id: @gig.user.id, model_id: @gig.id, model: "Gig" ), class: "dropdown-item msg-contact" do %>
+            Mensaje
+          <% end %>
+
+          <%= link_to "mailto:"+@gig.user.email, class: "dropdown-item email-contact", target: "_blank" do %>
+            Mail
+          <% end %>
+
+          <!-- <a class="dropdown-item" data-toggle="collapse" href="#collapseBasic" role="button" aria-expanded="false" aria-controls="collapseBasic">Email</a> -->
+        </div>
+      </div>
+    </span>
   </div>
+  <!-- <div class="collapse mg-t-5" id="collapseBasic">
+    <div class="d-flex align-items-center justify-content-center">
+      <form class="wd-300 rounded pd-5 bg-white">
+        <div class="form-group">
+          <textarea class="form-control" rows="2" placeholder="Escribe tu Mensaje"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Enviar Email</button>
+      </form>
+    </div>
+  </div> -->
+</div>
+
+
+
+
 <% else %>
   <% @show_packages = false %>
 <% end  %>

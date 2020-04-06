@@ -1,4 +1,19 @@
-<% if current_user %>
+<% gig_show = false if gig_show.nil? %>
+
+<% if gig_show && current_user %>
+  <% if gig.likes.select{|l| l.user_id == current_user.id}.present? %>  <%#user liked the gig %>
+    <%= link_to gig_like_path(gig.id, with_number: with_number, gig_show: true), class: "dropdown-item", method: :delete, remote: true, gig_id: "#{gig.id}"  do %>
+      <%= (with_number)? gig.likes.length : "<i data-feather='heart' class='tx-danger filled'></i>".html_safe %> Me gusta
+    <% end %>
+  <% else %> <%#user doesnt liked yet the gig %>
+    <%= link_to gig_like_path(gig.id, with_number: with_number, gig_show: true), class: "dropdown-item", method: :post, remote: true, gig_id: "#{gig.id}"  do %>
+      <%= (with_number)? gig.likes.length : "<i data-feather='heart'></i>".html_safe %> Me gusta
+    <%end %>
+  <% end %>
+
+<%# homepage %>
+
+<% elsif current_user %>
   <% if gig.likes.select{|l| l.user_id == current_user.id}.present? %>  <%#user liked the gig %>
     <%= link_to gig_like_path(gig.id, with_number: with_number), class: "link-05", method: :delete, remote: true, gig_id: "#{gig.id}"  do %>
       <%= (with_number)? gig.likes.length : "<i data-feather='heart' class='feather-12 tx-warning filled tx-danger filled'></i>".html_safe %> Me gusta
