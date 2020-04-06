@@ -25,7 +25,7 @@
     <div class="row">
       <div class="col-lg-8 col-md-7 small-padding">
         <div class="innerpage-leftside">
-        <%= render 'shared/gigs/show/gig_info' %>
+        <%# render 'shared/gigs/show/gig_info' %>
         <%= render 'shared/gigs/show/package_info', device: "phone-tablet" %>
 
         <% if @gig.faqs.any? %>
@@ -61,3 +61,19 @@
 <%= render 'reports/review' %>
 <%= render 'reviews/edit' %>
 <%= render 'reviews/recommendation', object: @gig %>
+
+
+
+
+
+
+<div class="row">
+  <div class="col-lg-9">
+    <%= render 'shared/gigs/show/gig_info2' %>
+</div><!-- col -->
+<div class="col-lg-3 mg-t-40 mg-lg-t-0">
+  <% @show_packages = true %>
+  <%= render 'shared/gigs/show/packages_info' %>
+  <%= render 'shared/gigs/show/user_about2' %>
+  </div>
+</div>

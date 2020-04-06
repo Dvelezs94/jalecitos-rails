@@ -10,13 +10,38 @@
                <div class="divi-new js-form-join-section" data-section="1"></div>
                <%= form_with model: Report, url: report_url(object), class: "reportForm", remote: true do |f| %>
                  <%= f.select :cause, report_options, {include_blank: "Causa del reporte"}, class: "custom-select required" %>
-                 <%= f.text_field :comment, placeholder: "(Opcional) Comentarios", autocomplete: "off" %>
+                 <%= f.text_area :comment, placeholder: "(Opcional) Comentarios", autocomplete: "off" %>
                  <br>
                  <%= f.submit 'Continuar', :class => 'btn continue-button w-100', data: {disable_with: "Reportando..." } %>
                <% end %>
              </div>
          </div>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <%= form_with model: Report, url: report_url(object), class: "reportForm", remote: true do |f| %>
+        <div class="modal-body">
+          <h4>Reportar <%= reportable_type(object) %></h4>
+          <div class="form-group">
+            <%= f.select :cause, report_options, {include_blank: "Causa del reporte"}, class: "custom-select required" %>
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2" class="d-block">Comentarios</label>
+            <%= f.text_area :comment, placeholder: "Nos interesa saber más... Por favor menciona a detalle qué normas rompe esta publicación",
+             autocomplete: "off", class: "form-control", rows: "2"%>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="cancel" data-dismiss="modal">Cerrar</button>
+          <%= f.submit 'Enviar Reporte', :class => 'btn btn-primary', data: {disable_with: "Reportando..." } %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
