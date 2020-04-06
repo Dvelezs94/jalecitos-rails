@@ -3,11 +3,18 @@
 <% unit_pack = (package.unit_type != nil && package.max_amount != nil && package.min_amount != nil) ? true: false %>
 
 
-<div class="tab-pane fade <%= "active show" if package.pack_type == "basic" %>" id="<%= "#{package.pack_type}"%>" role="tabpanel" aria-labelledby="<%= package.pack_type %>-tab" pack_container pack_price="<%= package.price %>">
+<div class="tab-pane fade <%= "active show" if package.pack_type == "basic" %>" id="<%=package.pack_type.to_s%>" role="tabpanel" aria-labelledby="<%= package.pack_type %>-tab" pack_container pack_price="<%= package.price %>">
   <h6><%= package.name %></h6>
   <p><%= package.safe_description %></p>
+  <% if unit_pack%>
+  <input type="range" class="unit_range" value="<%= package.min_amount %>" min="<%= package.min_amount %>" max="<%= package.max_amount %>">
+  <div class="div-space-left">
+    <input type="number" name="quantity" class="form-control" value="<%= package.min_amount %>" min="<%= package.min_amount %>" max="<%= package.max_amount %>" autocomplete="off">
+    <h3 class="mar-bot-0"><span class="badge unit_text"><%= t("packages.unit_type.plural.#{package.unit_type}") %></span></h3>
+  </div>
+  <% end %>
   <div class="d-flex justify-content-between align-items-center">
-    <h6 class="mg-b-0-f"><%=number_to_currency(purchase_order_total(package.price), precision: 2) %>  MXN</h6>
+    <h6 class="mg-b-0-f" packa_price_label ><%=number_to_currency(purchase_order_total(package.price), precision: 2) %>  MXN</h6>
     <span>
       <div class="dropdown">
         <button class="btn btn-xs btn-primary dropdown-toggle" type="button" id="basicoDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
