@@ -26,7 +26,7 @@
     </div><!-- card -->
   </div>
   <!-- end user profile -->
-  <div class="col-md-12 pd-l-0 pd-r-0 mg-t-15">
+  <div class="col-md-12 pd-l-0 pd-r-0 mg-t-15 animated bounce">
     <div class="card">
       <div class="card-body tx-13">
         <div>
@@ -35,11 +35,11 @@
             <%= f.hidden_field :reviewable_id, value: @gig.id %>
             <%= f.fields_for :rating_attributes do |r| %>
               <div class="form-group rating-input">
-                <label for="star1" title="Very Poor!"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 1, :id => "star1" %>
-                <label for="star2" title="Poor!"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 2, :id => "star2" %>
-                <label for="star3" title="Average!"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 3, :id => "star3" %>
-                <label for="star4" title="Good!"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 4, :id => "star4" %>
-                <label for="star5" title="Excellent!"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 5, :id => "star5", checked: "checked" %>
+                <label for="star1" title="Muy malo"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 1, :id => "star1" %>
+                <label for="star2" title="Malo"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 2, :id => "star2" %>
+                <label for="star3" title="Decente"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 3, :id => "star3" %>
+                <label for="star4" title="Bueno"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 4, :id => "star4" %>
+                <label for="star5" title="Excelente"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 5, :id => "star5", checked: "checked" %>
               </div>
             <% end %>
             <div class="form-group">
