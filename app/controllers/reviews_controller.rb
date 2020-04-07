@@ -6,7 +6,6 @@ class ReviewsController < ApplicationController
   before_action :check_rated, only: [:update]
 
   before_action :not_recommend_myself, only: [:create]
-  before_action :just_one_or_five_stars, only: [:create]
   # before_action :review_once
 
   def update
@@ -24,7 +23,7 @@ class ReviewsController < ApplicationController
     fields[:comment] = nil if fields[:comment] == ""
     current_user.with_lock do
       @review = Review.new(fields)
-      @success = @review.save
+      @success = @review.save!
       if @success
         fields = rating_params
         @rating = Rate.new(fields)
@@ -81,17 +80,12 @@ class ReviewsController < ApplicationController
 
   def rating_params
     review_params = params.require(:review).permit(rating_attributes: [:stars] )
+    review_params[:rating_attributes][:stars] = review_params[:rating_attributes][:stars].to_i.to_s  #get sure that its an integer
     review_params[:rating_attributes][:dimension] = "Recommendation"
     review_params[:rating_attributes][:rateable_type] = "Review"
     review_params[:rating_attributes][:rateable_id] = @review.id
     review_params[:rating_attributes][:rater_id] = current_user.id
     review_params[:rating_attributes]
   end
-
-  def just_one_or_five_stars
-    stars = params[:review][:rating_attributes][:stars]
-    head(:no_content) if stars != "5" && stars != "1"
-  end
-
 
 end

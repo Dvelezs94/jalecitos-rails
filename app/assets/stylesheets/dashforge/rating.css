@@ -1,0 +1,48 @@
+/*correct space for stars input */
+.rating-input {
+  display: flex;
+  justify-content: center;
+}
+
+/* It map buttons to Numbers */
+.rating-input > label {
+
+margin-bottom: 0 !important;
+
+padding:0 .1em;
+
+white-space:nowrap;
+
+cursor:pointer;
+
+line-height:1.2;
+
+ }
+
+
+ /* It shadows the star button to golden colour when you move the curser on star buttons */
+ /* The stars coloured to the color: #f70*/
+ .rating-input > input:checked ~ label svg {
+
+   fill: none;
+
+ }
+ .rating-input:hover label svg {
+   fill: currentColor !important;
+ }
+
+ .rating-input > label:hover ~ label svg  {
+
+   fill: none !important;
+
+ }
+
+
+
+/* The input is radio button on click to buttton will move cursor to different position will remain stay on the same position */
+
+.rating-input:not(:checked) > input {
+
+display: none;
+
+}

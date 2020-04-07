@@ -3,20 +3,23 @@
     <div class="card card-profile">
       <div class="card-body tx-13">
         <div>
-          <div class="avatar avatar-lg"><img src="https://source.unsplash.com/random?sig=6" class="rounded-circle" alt=""></div>
-          <h5 class="mg-b-5-f">Juan Perez</h5>
-          <p class="mg-b-5">Saltillo, Coahuila de Zaragoza, MX</p>
-          <p class="mg-b-5 tx-gray-600">Activo hace 5 horas</p>
+          <div class="avatar avatar-lg"><%= image_tag(avatar_display_helper(@gig.user.image_url(:thumb)), class: "rounded-circle") %></div>
+          <h5 class="mg-b-5-f"><%= @gig.user.alias %></h5>
+          <p class="mg-b-5"><%= @gig.user.location %></p>
+          <p class="mg-b-5 tx-gray-600">Activo hace <%= distance_of_time_in_words_to_now(@gig.user.current_sign_in_at)%></p>
 
           <div>
-            <i data-feather="star" class="feather-18 tx-warning filled tx-warning filled"></i>
-            <span class="tx-warning">5 <small class="tx-gray-600">(20 valoraciones)</small></span>
+            <% if score_average_times( @gig.user.score) == 0 %>
+            <small class="tx-gray-600">Sin valoraciones</small>
+            <% else %>
+              <i data-feather="star" class="feather-18 tx-warning filled"></i>
+              <span class="tx-warning"><%= score_average(@gig.user.score) %> <small class="tx-gray-600">(<%= score_average_times( @gig.user.score) %> valoraciones)</small></span>
+            <% end %>
           </div>
           <div class="divider-text w-100">Bio</div>
-          <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut, perspiciatis culpa harum, autem assumenda blanditiis. Quos, in, dolore dolor tempore tempora voluptatem excepturi ut et neque
-            debitisconsectetur perspiciatis.</p>
+          <p class="text-center"><%= (@gig.user.bio)? @gig.user.safe_bio : "Sin descripción" %></p>
           <div class="col d-flex align-items-center justify-content-between">
-            <button class="btn btn-block btn-white">Perfil</button>
+            <%= link_to "Perfil", user_path(@gig.user.slug), class: "btn btn-block btn-white" %>
           </div>
         </div>
       </div>
@@ -28,17 +31,25 @@
       <div class="card-body tx-13">
         <div>
           <h5 class="mg-b-5-f tx-center">Reseña de este anuncio</h5>
-          <form action="">
+          <%= form_with(model: Review, url: reviews_path, method: :post, :html => { class: "review_form" }) do |f| %>
+            <%= f.hidden_field :reviewable_id, value: @gig.id %>
+            <%= f.fields_for :rating_attributes do |r| %>
+              <div class="form-group rating-input">
+                <label for="star1" title="Very Poor!"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 1, :id => "star1" %>
+                <label for="star2" title="Poor!"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 2, :id => "star2" %>
+                <label for="star3" title="Average!"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 3, :id => "star3" %>
+                <label for="star4" title="Good!"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 4, :id => "star4" %>
+                <label for="star5" title="Excellent!"><i data-feather="star" class="feather-18 tx-warning filled"></i></label><%=r.radio_button :stars, 5, :id => "star5", checked: "checked" %>
+              </div>
+            <% end %>
             <div class="form-group">
-              <p class="tx-center"><i data-feather="star" class="feather-16 tx-warning filled tx-warning filled"></i><i data-feather="star" class="feather-16 tx-warning filled tx-warning filled"></i><i data-feather="star" class="feather-16 tx-warning filled tx-warning filled"></i><i data-feather="star" class="feather-16 tx-warning filled tx-warning filled"></i><i data-feather="star" class="feather-16 tx-warning filled tx-warning filled"></i></p>
-            </div>
-            <div class="form-group">
-              <textarea name="name" rows="2" class="form-control" placeholder="¿Qué tal te ha parecido el servicio de Juan Perez?"></textarea>
+              <%= f.text_area :comment, placeholder: "¿Qué tal te ha parecido el servicio de #{@gig.user.alias}?", id: "recommendation_comment",
+               class: "form-control" , rows: 2, maxlength: 2000 %>
             </div>
             <div class="form-group mg-b-0">
-              <button class="btn btn-block btn-success">Enviar reseña</button>
+              <%= f.submit 'Enviar reseña', :class => 'btn btn-block btn-success', data: {disable_with: "Enviando..."} %>
             </div>
-          </form>
+          <% end %>
         </div>
       </div>
     </div><!-- card -->
