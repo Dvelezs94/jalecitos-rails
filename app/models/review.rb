@@ -59,7 +59,7 @@ class Review < ApplicationRecord
   end
   def just_one_recomendation
     review = Review.find_by(giver_id: giver_id, reviewable_id: reviewable_id, order_id: nil) #if order id not present, is a recommendation
-    errors.add(:base, "Ya has dado una calificación a este Jale") if review.present?
+    # errors.add(:base, "Ya has dado una calificación a este Jale") if review.present?
   end
 
   def is_recommendation?
