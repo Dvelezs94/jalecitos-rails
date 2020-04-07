@@ -26,11 +26,12 @@
     </div><!-- card -->
   </div>
   <!-- end user profile -->
-  <div class="col-md-12 pd-l-0 pd-r-0 mg-t-15 animated bounce">
+  <% if current_user != @gig.user %>
+  <div class="col-md-12 pd-l-0 pd-r-0 mg-t-15">
     <div class="card">
       <div class="card-body tx-13">
-        <div>
-          <h5 class="mg-b-5-f tx-center">Reseña de este anuncio</h5>
+        <div id="new_review_content">
+            <h5 class="mg-b-5-f tx-center">Califica este anuncio</h5>
           <%= form_with(model: Review, url: reviews_path, method: :post, :html => { class: "review_form" }) do |f| %>
             <%= f.hidden_field :reviewable_id, value: @gig.id %>
             <%= f.fields_for :rating_attributes do |r| %>
@@ -54,3 +55,4 @@
       </div>
     </div><!-- card -->
   </div>
+  <% end %>

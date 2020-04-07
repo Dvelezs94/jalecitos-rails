@@ -285,7 +285,7 @@ module ApplicationHelper
     html = ""
      if gig.score_times > 0
        html += '<i data-feather="star" class="feather-12 tx-warning filled"></i>'
-       html += "<span class='tx-warning'> #{gig.score_average} <small class='tx-gray-600'>(#{gig.score_times})</small></span>"
+       html += "<span class='tx-warning'> #{gig.score_average.round(1)} <small class='tx-gray-600'>(#{gig.score_times})</small></span>"
     else
       html += '<i data-feather="star" class="feather-12 tx-gray-600 filled"></i>'
       html += "<span> <small class='tx-gray-600'>(0)</small></span>"
@@ -295,16 +295,17 @@ module ApplicationHelper
 
   def score_average us, return_number=true
     if us.employee_score_times == 0.0 && us.employer_score_times == 0.0 && return_number == true
-      0.0
+      return 0.0
     elsif us.employee_score_times == 0.0 && us.employer_score_times == 0.0 && return_number != true
-      "N/A"
+      return "N/A"
     elsif us.employer_score_times == 0.0
-      us.employee_score_average
+      sa = us.employee_score_average
     elsif us.employee_score_times == 0.0
-      us.employer_score_average
+      sa = us.employer_score_average
     else
-      score_average = ( ( us.employee_score_average* us.employee_score_times)+( us.employer_score_average* us.employer_score_times) ) / (us.employer_score_times + us.employee_score_times )
+      sa = ( ( us.employee_score_average* us.employee_score_times)+( us.employer_score_average* us.employer_score_times) ) / (us.employer_score_times + us.employee_score_times )
     end
+    return sa.round(1)
   end
 
   def score_average_times us
