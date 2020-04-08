@@ -10,7 +10,7 @@ class ReviewsController < ApplicationController
 
   def update
     #get the params
-    @review.reviewable.with_lock do #lock gig because maybe im going to change stars
+    @review.with_lock do #lock review if many changes are applied
       fields = review_params
       #if comment is empty, save as nil for saving space
       fields[:comment] = nil if fields[:comment] == ""
