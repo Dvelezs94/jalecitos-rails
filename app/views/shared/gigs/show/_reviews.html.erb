@@ -22,6 +22,7 @@
         <a href="#"class="want_review">Comparte tu Jale para conseguir reseñas haciendo click aquí</a>
       <% end %>
     <% else %>
+
       <%= render partial: "shared/reviews/review", collection: @my_reviews %>
       <%= render partial: "shared/reviews/review", collection: @reviews %>
       <div class="page3-viewmore">

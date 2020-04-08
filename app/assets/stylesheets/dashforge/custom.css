@@ -278,3 +278,13 @@ label.error{
 .irs--flat .irs-single:before {
   border-top-color: #0168fa !important;
 }
+/*review options in big devices shows only on hover review*/
+@media (min-width: 1200px) {
+
+  [review-options] {
+    display: none;
+  }
+  [review-id]:hover [review-options]{
+    display: block;
+  }
+}

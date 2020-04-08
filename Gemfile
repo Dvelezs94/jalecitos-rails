@@ -173,3 +173,5 @@ gem 'rails_emoji_picker', '~> 0.1.5'
 gem 'cocoon', '~> 1.2', '>= 1.2.14'
 #removes emojis, user in elasticsearch
 gem 'remove_emoji', '~> 1.0'
+#styling of data confirm links
+gem 'data-confirm-modal', '~> 1.6', '>= 1.6.3'
