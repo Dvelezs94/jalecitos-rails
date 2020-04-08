@@ -10,10 +10,14 @@ class ReviewsController < ApplicationController
 
   def update
     #get the params
-    fields = review_params
-    #if comment is empty, save as nil for saving space
-    fields[:comment] = nil if fields[:comment] == ""
-    @success = @review.update(fields)
+    @review.reviewable.with_lock do #lock gig because maybe im going to change stars
+      fields = review_params
+      #if comment is empty, save as nil for saving space
+      fields[:comment] = nil if fields[:comment] == ""
+      @success = @review.update(fields)
+      #this updates stars
+      @success = @review.rating.update( get_stars ) if @success
+    end
     # head :no_content
   end
 
@@ -76,6 +80,12 @@ class ReviewsController < ApplicationController
     review_params[:giver_id] = current_user.id
     review_params[:is_recommendation] = true
     review_params
+  end
+
+  def get_stars
+    review_params = params.require(:review).require(:rating_attributes).permit(:stars)
+    review_params[:stars] = review_params[:stars].to_i.to_s
+    return review_params
   end
 
   def rating_params

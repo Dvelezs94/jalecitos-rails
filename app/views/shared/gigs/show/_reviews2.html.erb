@@ -2,7 +2,7 @@
   <% if @gig.score_times == 0 %>
     Sin reseñas
   <% else %>
-  Calificaciones <i data-feather="star" class="feather-12 tx-warning filled tx-warning filled"></i>
+  Calificaciones <i data-feather="star" class="feather-12 tx-warning filled"></i>
   <span class="tx-warning"><%= @gig.score_average.round(1) %> <small class="tx-gray-600 tx-10">(<%= @gig.score_times %>) | </small></span>
   <a class="mg-l-5" data-toggle="collapse" href="#paginated_reviews" aria-expanded="false" aria-controls="paginated_reviews">Ver reseñas</a>
   <% end %>
@@ -11,7 +11,8 @@
 <div class="collapse mg-t-5 tx-center" id="paginated_reviews">
 
 
-
+  <%= puts "X"*100 %>
+  <%= puts @reviews.length %>
   <%= render partial: "shared/reviews/review", collection: @my_reviews %>
   <%= render partial: "shared/reviews/review", collection: @reviews %>
 

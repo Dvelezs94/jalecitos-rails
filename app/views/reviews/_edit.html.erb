@@ -1,22 +1,22 @@
-<div class="modal" id="editReviewModal">
+<div class="modal fade" id="editreviewModal" tabindex="-1" role="dialog" aria-labelledby="editreviewModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-body">
-        <div class="sign-up">
-          <div class="sign-up-form">
-            <%= form_with(model: Review, url: "", method: :put, :html => { :class => "edit_review_form", id: "editReviewForm" }, remote: true) do |f| %>
-            <%= f.text_area :comment, placeholder: "(Opcional) Comentarios", autocomplete: "off", :rows => 5, maxlength:2000 %>
-            <br>
-            <div class="flex-space-bet">
-            <%= f.submit 'Actualizar', :class => 'btn btn-success', data: {disable_with: "Editando..."}%>
-            <%= link_to root_path, class: "closeModals" do %>
-            <%= button_tag "Cancelar", class: "btn btn-light", style: "border:1px solid #D3D3D3" %>
+      <%= form_with(model: Review, url: "", method: :put, :html => { id: "editReviewForm" }, remote: true) do |f| %>
+        <div class="modal-body">
+          <h4>Edita tu reseña</h4>
+            <%= f.fields_for :rating_attributes do |r| %>
+            <%= render partial: "shared/rating_input", locals: {f: r, id_for_label: 1} %>
             <% end %>
-            </div>
-          <% end %>
+          <div class="form-group">
+            <label for="review-comment-edit" class="d-block">Comentarios</label>
+            <%= f.text_area :comment, placeholder: "(Opcional) Comentarios", autocomplete: "off", :rows => 5, maxlength:2000, class: "form-control", id: "review-comment-edit" %>
+          </div>
         </div>
-      </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="cancel" data-dismiss="modal">Cancelar</button>
+          <%= f.submit 'Actualizar', :class => 'btn btn-primary', data: {disable_with: "Editando..." } %>
+        </div>
+      <% end %>
     </div>
   </div>
-</div>
 </div>

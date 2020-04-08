@@ -41,3 +41,5 @@
 //= require cocoon
 
 //= require_tree ./dashforge
+
+//= require data-confirm-modal
