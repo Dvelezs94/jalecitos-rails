@@ -9,13 +9,28 @@
     <button type="button" class="btn btn-xs btn-outline-success mg-md-l-5" data-toggle="modal" data-target="#mapModal"><i data-feather="map"></i> Ver en Mapa</button>
   </div>
   <span>
-    <%= link_to "Compartir", {}, class: "share_item_url btn btn-xs btn-outline-primary" %>
+    <%= link_to "Compartir", {}, class: "share_item_url btn btn-xs btn-outline-primary" if @gig.published? %>
+    <%= link_to "Editar", edit_gig_path(city_slug(@gig.city),@gig.category.name.parameterize, @gig), class: "btn btn-xs btn-outline-primary" if !@gig.published? %> <%# if not published (and i can access to view, it means is my gig) %>
     <a href="" class="link-01" id="moreMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="more-vertical"></i></a>
     <div class="dropdown-menu" aria-labelledby="moreMenuButton">
-        <%= render("gigs/likes", gig: @gig, with_number: false, gig_show: true) if current_user %>
+      <% if user_signed_in? && (@gig.user == current_user) %>
+      <% unless @gig.banned? || @gig.gig_packages[0].nil? %>
+        <%= link_to toggle_status_gig_path(@gig), class: "dropdown-item"  do %>
+          <%= status_text_helper(@gig) %>
+        <% end %>
+      <% end %>
+        <%= link_to edit_gig_path(city_slug(@gig.city),@gig.category.name.parameterize, @gig), class: "dropdown-item" do %>
+        <i data-feather='edit-2'></i> Editar
+        <% end %>
+        <%= link_to gig_path(city_slug(@gig.city),@gig), method: :delete, data: { confirm: 'Se eliminará permanentemente' }, class: "dropdown-item" do %>
+        <i data-feather='trash'></i> Eliminar
+        <% end %>
+      <% elsif user_signed_in?%>
+        <%= render("gigs/likes", gig: @gig, with_number: false, gig_show: true)  %>
         <%= link_to "#", class: "dropdown-item", data: {toggle: "modal", target: "#reportModal"} do %>
           <i data-feather="flag"></i> Reportar
         <% end %>
+      <% end %>
     </div>
   </span>
 </div>
