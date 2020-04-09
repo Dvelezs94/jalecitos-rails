@@ -7,9 +7,11 @@
         <h4 class="mg-b-0 tx-spacing--1">Lo último para ti</h4>
       </div>
       <div>
-        <a href="/" class="link-03">Ver más
-          <i data-feather="chevron-right"></i>
-        </a>
+        <% if @last_gigs_near_by.total_count > @show_x_last_gigs_near_by %>
+          <%= link_to search_path(query: "", lat: (@userinfo.present?)? @userinfo.lat : current_user.lat, lng: (@userinfo.present?)? @userinfo.lng : current_user.lng, order_by: "recent"), class: "link-03" do  %>
+          Ver más <i data-feather="chevron-right"></i>
+          <% end %>
+        <%end %>
       </div>
     </div>
     <%= render partial: "shared_user/root/gig", collection: @last_gigs_near_by, as: "gig" %>
