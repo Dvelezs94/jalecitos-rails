@@ -19,13 +19,6 @@ module GetQuery
           execute: bool, operator: "or", misspellings: misspellings, order: order_by)
   end
 
-  def misspellings
-    #prefix_length : words of n letters or less doesnt have misspellings
-    #below : if the results are lower than 20, misspellings are activated (default is 1 edit_distance, but with this word have to match exactly)
-    #edit_distance : intertions, deletions of sustitutions to match words
-    {prefix_length: 3, below: 20, edit_distance: 2}
-  end
-
   def boost_by_distance_condition #other in home
     dist={}
     if params[:lat].present? #guest or user with location
