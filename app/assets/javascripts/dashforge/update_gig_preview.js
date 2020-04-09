@@ -15,7 +15,8 @@ function update_faq_accordion() {
   //update accordion
   accordion = $("#preview-accordion");
   accordion.html("");
-  $.each($(".nested-fields"), function( index, elem ) {
+  //with not display none (on edit, when removes something, cocoon hides it, i think maybe is for knowing which stuff delete)
+  $.each($(".nested-fields:not([style*='display: none'])"), function( index, elem ) {
     question = $(elem).find("input:last").val();
     answer = $(elem).find("textarea").val();
     if (question != "") {

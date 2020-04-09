@@ -1,20 +1,26 @@
+<% edit = controller.action_name == "edit" %>
 <div class="col-lg-6 col-md-12 order-xs-2 order-sm-2 order-lg-1">
   <div class="alert alert-warning" role="alert">Vista Previa de la publicación</div>
-  <h1 preview="gig[name]">Realizarte una sesión de fotografías</span></h1>
-  <p class="tx-gray-500"><%= rand(100..1000) %> Me gusta</p>
+  <h1 preview="gig[name]"><%= gig.name || "Realizarte una sesión de fotografías" %></span></h1>
+  <p class="tx-gray-500"><%= (edit)? gig.likes.length : rand(100..1000) %> Me gusta</p>
 
 
   <div class="row row-xs mg-sm-t-10 mg-b-10 mg-t-15">
     <div class="col-12">
       <div id="gig-preview-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
         <div class="carousel-inner gig-show-picture bg-black-8">
-          <div class="carousel-item gig preview active">
-            <img src="https://source.unsplash.com/random?sig=4" alt="...">
-          </div>
-          <div class="carousel-item gig preview">
-            <img src="https://source.unsplash.com/random?sig=5" alt="...">
-          </div>
-          <!-- more items goes here -->
+          <% if gig.images.length > 0 %>
+            <% gig.images.each_with_index do |image, index| %>
+              <div class="carousel-item gig <%= "active" if index == 0 %>">
+                <%= image_tag( image.url, data: {lity: true}) %>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="carousel-item gig preview active">
+              <img src="https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/app_images/gig-no-image-2.png" alt="...">
+            </div>
+          <% end %>
+
         </div>
         <a class="carousel-control-prev" href="#gig-preview-carousel" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true">
@@ -32,10 +38,13 @@
     </div>
   </div>
   <p preview="gig[description]">
-    Fotógrafo profesional con 5 años de experiencia. Ofrezco servicios de fotografía de calidad para eventos. Manejo paquetes de sesiones individuales o de pareja, 1 hora de fotografías con 15 fotos editadas.
+    <%= gig.description || "Fotógrafo profesional con 5 años de experiencia. Ofrezco servicios de fotografía de calidad para eventos. Manejo paquetes de sesiones individuales o de pareja, 1 hora de fotografías con 15 fotos editadas." %>
   </p>
 
   <div class="accordion" id="preview-accordion">
+    <% if edit %>
+      <%= render partial: "faqs/faq", collection: gig.faqs %>
+    <% else %>
     <h6>¿Qué sucede si no me agrada el estilo de las fotos?</h6>
     <div>
       <p>Tengo una política de devolución del 100% en caso de que mi estilo no vaya de acuerdo al suyo.
@@ -46,5 +55,6 @@
       <p>Generalmente suelo entregar el material en un lapso de 2-3 semanas.
       </p>
     </div>
+    <% end %>
   </div>
 </div>

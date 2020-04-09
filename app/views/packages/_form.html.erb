@@ -11,8 +11,8 @@
   <li class="nav-item <%= "d-none" if params[:action] == 'new' || @gig.gig_packages.none? || @gig.gig_packages[2].name == "" %>">
     <a class="nav-link" id="pack-tab-2" data-toggle="tab" href="#package-2" role="tab" aria-selected="false" aria-controls="premium">Premium</a>
   </li>
-  <li class="nav-item">
-    <a href="#" class="nav-link pack-tab-displayer <%= "d-none" if has_all_pack %>" style="color:green;" id="new-package-1" >Nuevo</a>
+  <li class="nav-item <%= "d-none" if has_all_pack %>">
+    <a href="#" class="nav-link pack-tab-displayer" style="color:green;" id="new-package-1" >Nuevo</a>
   </li>
 </ul>
 <div class="tab-content bd bd-gray-300 bd-t-0 pd-20 rounded-bottom" id="packagesContent">

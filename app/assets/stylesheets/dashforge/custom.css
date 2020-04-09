@@ -305,3 +305,9 @@ label.error{
 .vh-50 {
   height: 50vh;
 }
+/*gig title of jquery steps*/
+@media (min-width: 992px) and (max-width: 1200px) {
+  #section_parent_gig > .steps .done a .title, #section_parent_gig > .steps .done a:hover .title, #section_parent_gig > .steps .done a:active .title {
+    display: none;
+  }
+  }
