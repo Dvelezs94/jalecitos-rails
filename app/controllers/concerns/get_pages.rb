@@ -40,6 +40,16 @@ module GetPages
     page(params[:wizard_requests]).per(15)
   end
 
+  def get_last_gigs_near_by
+    @show_x_last_gigs_near_by = 16
+    @last_gigs_near_by = Gig.search("*",
+       includes: [:user, :likes],
+        where: where_filter,
+          boost_by: boost_by_score,
+            boost_by_distance: boost_by_distance_condition,
+              limit: @show_x_last_gigs_near_by, order: { created_at: :desc})
+  end
+
   def get_popular_gigs bool=false
     @popular_gigs = Gig.search("*",
        includes: [:user, :likes, :category, city: [state: :country]],

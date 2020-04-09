@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   include SetLayout
   include GetPages
+  include SearchFunctions
   access user: :all, admin: [:home], all: [:work, :home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots, :sitemap, :install, :gig_slugs]
   before_action :admin_redirect, only: :home
   before_action :phone_available, only: :home
@@ -11,10 +12,7 @@ class PagesController < ApplicationController
       home_paginate
       render template: "shared/carousels/add_items_carousel.js.erb"
     else
-      @last_gigs_near_by = Gig.search("*",
-         includes: [:user, :likes],
-          where: (current_user.lat.present?)?{status: "published", location: {near: {lat: current_user.lat, lon: current_user.lng}, within: "7mi"}}:{status: "published"}, #7mi = 11km
-          limit: 16, order: [{ created_at: { order: :desc, unmapped_type: :long}}]) if user_signed_in?
+      get_last_gigs_near_by if user_signed_in?
       #home_get_all
       (user_signed_in?)? render(template: 'shared_user/root/homepage') : render(template: 'shared_guest/root/homepage')
     end
