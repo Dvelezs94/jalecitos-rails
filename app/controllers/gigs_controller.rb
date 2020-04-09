@@ -1,6 +1,7 @@
 class GigsController < ApplicationController
   include GigStatus
   include GetGig
+  include SearchFunctions
   include PackTypes
   include SetLayout
   include BannedFunctions

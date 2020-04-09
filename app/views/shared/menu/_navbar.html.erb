@@ -54,7 +54,7 @@
                   <% categories.in_groups_of(group_size)[n].each do |cat| %>
                     <% if cat.present? %>
                     <li class="nav-sub-item">
-                      <%= link_to search_path(query: "", category_id: cat.id, lat: "#{current_user.lat}", lon: "#{current_user.lng}", device: "#{"mobile" if cookies.signed[:mb]}"), class: "nav-sub-link" do %>
+                      <%= link_to search_path(query: "", category_id: cat.id, lat: current_user.lat, lng: current_user.lng), class: "nav-sub-link" do %>
                         <%= cat.name %>
                       <% end %>
                     </li>
@@ -207,7 +207,7 @@
     </div><!-- dropdown -->
   </div><!-- navbar-right -->
   <div class="navbar-search">
-    <%= form_with url: search_path, method: :get ,:html => {class: ""}, local: true do |f|%>
+    <%= form_with url: search_path, method: :get ,:html => {id: "simple-query"}, local: true do |f|%>
     <div class="navbar-search-header">
       <%= f.search_field :query, value: params[:query], class:"form-control", placeholder: "Escribe y presiona Enter para buscar", autocomplete: "off" %><%# la clase ahead query pondria el autocomplete  %>
       <button class="btn"><i data-feather="search"></i></button>

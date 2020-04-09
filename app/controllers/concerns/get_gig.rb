@@ -1,14 +1,13 @@
 module GetGig
   private
   def get_related_gigs bool=false
+    @show_x_related_gigs = 4 #user in view to display "see more" if the is more
     @related_gigs = Gig.search("*",
-       includes: [:user, :related_pack,
-          :likes, city: [state: :country]],
-           where: { category_id: @gig.category_id, status: "published",
-            _id: { not: @gig.id },
-            _or: [{city_id: @gig.city_id}, {city_id: nil}]
-           },
-            page: params[:related_gigs], per_page: 10, execute: bool)
+       includes: [:likes, :category, :user],
+        where: {status: "published", category_id: @gig.category_id},
+        boost_by: {score: {factor: 100}},
+         boost_by_distance: {location: {origin: {lat: @gig.lat, lon: @gig.lng}, function: "exp", factor: 50}},
+         limit: @show_x_related_gigs, execute: bool, operator: "or", misspellings: misspellings, order: {})
   end
 
   def get_reviews

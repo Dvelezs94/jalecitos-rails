@@ -36,7 +36,7 @@
       <div class="col-12 d-flex align-items-center justify-content-between pd-0">
         <h4 class="mg-b-0 tx-spacing--1" id="results-text">
           <strong><%=(params[:model_name] == "requests")? @requests.total_count : @gigs.total_count %></strong>
-          resultados en '<strong><%= params[:query]%></strong>'
+          resultados <%= "en <strong>#{params[:query]}</strong>".html_safe if params[:query].present? %>
         </h4>
         <div class="btn-group mg-l-5" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-dark" data-toggle="collapse" href="#filterBar">

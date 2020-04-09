@@ -14,6 +14,9 @@
   <%= render "shared/gigs/show/rate_gig" if current_user != @gig.user && @my_reviews.empty? %>
   </div>
 </div>
+<div class="row row-xs">
+  <%= render 'shared/gigs/show/suggestions' if @related_gigs.any? && @gig.published?%>
+</div>
 <%= render 'reports/report', object: @gig %>
 <%= render 'reviews/edit' %>
 <%# render 'reports/review' %>

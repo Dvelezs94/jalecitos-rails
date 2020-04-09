@@ -1,0 +1,13 @@
+<div class="col-12 d-flex align-items-center justify-content-between mg-b-10 mg-t-20">
+  <div>
+    <h4 class="mg-b-0 tx-spacing--1">Sugerencias</h4>
+  </div>
+  <div>
+    <% if @related_gigs.total_count > @show_x_related_gigs %>
+      <%= link_to search_path(query: "", category_id: @gig.category_id, lat: @gig.lat, lng: @gig.lng), class: "link-03" do  %>
+      Ver más <i data-feather="chevron-right"></i>
+      <% end %>
+    <%end %>
+  </div>
+</div>
+<%= render partial: "shared_user/root/gig", collection: @related_gigs, as: "gig" %>
