@@ -49,7 +49,7 @@
 
         <% end %>
         <!-- Slides -->
-        <% if @gig.images.count > 0 %>
+        <% if @gig.images.length > 0 %>
           <% @gig.images.each_with_index do |image, index| %>
             <div class="carousel-item gig <%= "active" if @gig.youtube_url.blank? && index == 0 %>">
               <%= image_tag( image.url, data: {lity: true}) %>
