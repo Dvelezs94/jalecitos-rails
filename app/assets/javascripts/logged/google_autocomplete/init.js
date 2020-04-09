@@ -12,6 +12,9 @@ $(document).on('turbolinks:load', function() {
       searchToggle();
     }
   });
+  $("[data-target='#showmapModal']").on("click", function(){
+    initElementMap(this);
+  });
 });
 window.markers = [];
 function searchToggle() {
@@ -23,6 +26,55 @@ function searchToggle() {
   the_screen.toggleClass("screen-size-wrapper-map");
   $("#filterBar").toggleClass("ht-100");
   $("#filterBar").toggleClass("pd-t-10");
+}
+
+function initElementMap(link) {
+  //init the map if not defined
+  if(typeof window.elementmap === 'undefined') {
+    window.elementmap = new google.maps.Map(document.getElementById("elementMap"), {
+      center: {
+        lat:  19.432608,
+        lng:  -99.133209
+      },
+      zoom: 15,
+      fullscreenControl: false,
+      zoomControl: true,
+      mapTypeControl: false,
+      scaleControl: true,
+      streetViewControl: false,
+      rotateControl: true
+    });
+  }
+  if(typeof window.elementMarker !== 'undefined') window.elementMarker.setMap(null); //delete old marker from map
+  already_on_page = $(link).attr("already-on-page");
+  if (already_on_page == "true") { //dpnt display view more button when click see map of gig show because im already there
+    $("#see_more_element").addClass("d-none");
+    elem = $(link)[0]
+  }else {
+    $("#see_more_element").removeClass("d-none");
+    $("#see_more_element").attr("href", link.href); //put the url of element in button
+    elem = $(link).closest("[single-element]")[0]
+  }
+  //make marker and infowindow
+  var myLatlng = new google.maps.LatLng(elem.getAttribute("lat"), elem.getAttribute("lng"));
+  var title = elem.getAttribute("title");
+  window.elementMarker = new google.maps.Marker({
+    position: myLatlng,
+    title: title,
+    map: window.elementmap
+  });
+  if (already_on_page != "true") { //dont put infomap if already on page
+    var infowindow = new google.maps.InfoWindow({
+      content: elem.outerHTML
+    });
+    window.elementMarker.addListener('click', function() {
+      feather.replace();
+      infowindow.open(window.elementmap, window.elementMarker);
+    });
+  }
+  //point to marker in map
+  window.elementmap.setZoom(15)
+  window.elementmap.setCenter(myLatlng);
 }
 
 function initGoogleMap(id) {

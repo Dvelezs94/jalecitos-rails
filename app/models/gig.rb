@@ -79,7 +79,7 @@ class Gig < ApplicationRecord
   end
 
   def title
-    "Ofrezco #{to_downcase(self.name)}"
+    "#{to_upcase(self.name)}"
   end
   def safe_description
     make_links(CGI::escapeHTML(self.description)).html_safe #escapes html from user and make our links
