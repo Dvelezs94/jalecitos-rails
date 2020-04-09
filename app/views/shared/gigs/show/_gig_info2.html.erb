@@ -6,7 +6,9 @@
 <div class="d-flex justify-content-between align-items-center">
   <div>
     <span class="d-mobile-none d-md-inline">A unos <b><%= distance(@gig, current_user.lat, current_user.lng) %></b> de ti</span>
-    <button type="button" class="btn btn-xs btn-outline-success mg-md-l-5" data-toggle="modal" data-target="#mapModal"><i data-feather="map"></i> Ver en Mapa</button>
+    <button type="button" class="btn btn-xs btn-outline-success mg-md-l-5" data-toggle="modal" data-target="#showmapModal" already-on-page="true" lat="<%= @gig.lat %>" lng="<%= @gig.lng %>" title="<%= @gig.title %>">
+      <i data-feather="map"></i> Ver en Mapa
+    </button>
   </div>
   <span>
     <%= link_to "Compartir", {}, class: "share_item_url btn btn-xs btn-outline-primary" if @gig.published? %>

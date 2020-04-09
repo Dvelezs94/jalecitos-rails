@@ -184,7 +184,7 @@
 .pac-container.pac-logo {
   z-index: 9999;
 }
-/*windowinfo of google maps*/
+/*windowinfo of google maps in search*/
 .gm-style-iw-d,
 .gm-style-iw.gm-style-iw-c {
   min-width: 200px !important;
@@ -222,6 +222,19 @@
 .gm-style-iw-d .col-lg-6 {
   max-width: 100% !important;
 }
+/*windowinfo of google maps in single elements display map*/
+.gm-style-iw-d [single-element] {
+  max-width: 100%;
+}
+.gm-style-iw-d [single-element] .card-footer {
+  display: none !important;
+}
+.gm-style-iw-d [single-element] .card-body {
+  padding-top: 5px;
+}
+
+/*end*/
+
 .wizard > .steps > ul li + li::before {
   content: '\2192';
 }
@@ -287,4 +300,8 @@ label.error{
   [review-id]:hover [review-options]{
     display: block;
   }
+}
+
+.vh-50 {
+  height: 50vh;
 }
