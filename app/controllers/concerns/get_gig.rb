@@ -4,7 +4,7 @@ module GetGig
     @show_x_related_gigs = 4 #user in view to display "see more" if the is more
     @related_gigs = Gig.search("*",
        includes: [:likes, :category, :user],
-        where: {status: "published", category_id: @gig.category_id},
+        where: {status: "published", category_id: @gig.category_id, id: {not: @gig.id}},
         boost_by: {score: {factor: 100}},
          boost_by_distance: {location: {origin: {lat: @gig.lat, lon: @gig.lng}, function: "exp", factor: 50}},
          limit: @show_x_related_gigs, execute: bool, operator: "or", misspellings: misspellings, order: {})

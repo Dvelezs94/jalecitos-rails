@@ -2,9 +2,10 @@
 .rating-input {
   display: flex;
   justify-content: center;
+  flex-direction: row-reverse;
 }
 
-/* It map buttons to Numbers */
+/* position of labels*/
 .rating-input > label {
 
 margin-bottom: 0 !important;
@@ -20,21 +21,17 @@ line-height:1.2;
  }
 
 
- /* It shadows the star button to golden colour when you move the curser on star buttons */
- /* The stars coloured to the color: #f70*/
- .rating-input > input:checked ~ label svg {
-
-   fill: none;
-
- }
- .rating-input:hover label svg {
+/*when hover, color the star hovered and all preceeding stars*/
+ .rating-input > label:hover svg  {
    fill: currentColor !important;
  }
-
  .rating-input > label:hover ~ label svg  {
+   fill: currentColor !important;
+ }
+ /*when something is checked, fill all the preceeding stars*/
+ .rating-input > input:checked ~ label svg {
 
-   fill: none !important;
-
+   fill: currentColor;
  }
 
 
@@ -45,4 +42,14 @@ line-height:1.2;
 
 display: none;
 
+}
+
+/* display error */
+.rating-input {
+  flex-wrap: wrap-reverse;
+}
+
+.rating-input .error {
+  width: 100%;
+  text-align: center;
 }

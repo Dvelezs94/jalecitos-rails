@@ -3,7 +3,7 @@ $(document).on "turbolinks:load", ->
   if $('.pagination').length && ! $('#contacts-list').length
     $("#searchList").scroll ->
       url = $('a.next-page:visible').attr('href')
-      if url && $("#searchList").scrollTop() > $("#searchList")[0].scrollHeight - 600
+      if url && $("#searchList").scrollTop() > $("#searchList")[0].scrollHeight - screen.height
         $('.pagination:visible').text("")
         $(".loading").show()
         $.getScript url
