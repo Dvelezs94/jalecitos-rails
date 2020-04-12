@@ -25,9 +25,10 @@
            class: "dropdown-item wapp-contact", target: "_blank" do %>
            Whatsapp
           <% end %>
-
-          <%= link_to "tel:#{@gig.user.international_phone_number(prefix=true)}", class: "dropdown-item phone-contact", target: "_blank" do %>
-            Llamar
+          <% if @gig.user.phone_number.present? %>
+            <%= link_to "tel:#{@gig.user.international_phone_number(prefix=true)}", class: "dropdown-item phone-contact", target: "_blank" do %>
+              Llamar
+            <% end %>
           <% end %>
 
           <%= link_to conversations_path(user_id: @gig.user.id, model_id: @gig.id, model: "Gig" ), class: "dropdown-item msg-contact" do %>

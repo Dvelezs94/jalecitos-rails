@@ -35,7 +35,6 @@ class User < ApplicationRecord
   friendly_id :alias, use: :slugged #this is after the alias is generated because if not then it will generate a number slug because alias isnt set yet
   # Validates uniqueness of id
   validates :email, :alias,  uniqueness: true
-  validates_numericality_of :age, greater_than_or_equal_to: 0, less_than: 101, allow_blank: true
   validates :available, :inclusion=> { :in => ["Tiempo completo", "Medio tiempo", "Esporádico", "Fin de semana"]}, allow_blank: true
   validates_length_of :name, maximum: 100
   validates_length_of :alias, maximum: 30
@@ -50,8 +49,7 @@ class User < ApplicationRecord
 
   #validate phone number syntax
   validates :phone_number, :presence => {:message => 'Tienes que proporcionar un numero valido'},
-                       :numericality => true,
-                       :length => { :minimum => 10, :maximum => 10 },
+                       :length => { :minimum => 10, :maximum => 18 },
                        :allow_blank => true
   # Create User Score and openpay user
   after_validation :create_user_score

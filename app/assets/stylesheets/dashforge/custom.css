@@ -311,3 +311,18 @@ label.error{
     display: none;
   }
   }
+/*config menu on mobile*/
+@media (max-width: 768px) {
+  #settings {
+    flex-direction: row !important;
+    border-right: none !important;
+    justify-content: space-between;
+  }
+  #settings .nav-item {
+    margin-top: 0 !important;
+    margin-bottom: 10px;
+  }
+  #settings .nav-link.active::after {
+    display: none;
+  }
+}
