@@ -1,6 +1,6 @@
 <div class="container ht-100p">
   <div class="row justify-content-center">
-    <ul class="nav nav-line flex-column md-block" id="settings" role="tablist">
+    <ul class="nav nav-line flex-column" id="settings" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Editar Perfil</a>
       </li>
@@ -15,6 +15,7 @@
         <a class="nav-link" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false">Cuenta</a>
       </li>
     </ul>
+
     <div class="tab-content bd bd-gray-300 pd-20 wd-md-80p wd-lg-60p" id="settingsContent">
 
       <%= render 'users/edit_profile' %>

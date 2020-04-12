@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function() {
   // if(window.innerWidth < 992)
   initGoogleAutocomplete("menu_autocomplete", "lat", "lng", "address_name", "user", "0", true);
   initGoogleAutocomplete("search_autocomplete", "lat", "lng", "address_name", "", "1", true);
-  initGoogleAutocomplete("config_autocomplete", "lat", "lng", "address_name", "user", "2", true);
+  initGoogleAutocomplete("config_autocomplete", "lat", "lng", "address_name", "user", "2", false);
   initGoogleAutocomplete("form_autocomplete_gig", "lat", "lng", "address_name", "gig", "3", false);
   initGoogleAutocomplete("form_autocomplete_req", "lat", "lng", "address_name", "request", "4", false);
   initGoogleMap("searchmap");

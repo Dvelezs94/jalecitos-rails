@@ -49,28 +49,14 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   #aqui la parte del usuario de la url no importa, ya que aqui adentro se usa current_user, esto para darle seguridad a los usuarios de solo editar su perfil
   def update_user
-    if params[:user]["name"].present?
-      update_openpay_name(params[:user]["name"])
-    end
-    @success = current_user.update(user_params)
+    @success = current_user.update!(user_params)
     respond_to do |format|
-      # if params[:user]["alias"]
-      #   # flash[:success] = 'Tu alias ha sido actualizado.'
-      #   format.json  { render :json => { :redirect => configuration_path } }
-      #labels and image of user
         format.js {
-          if params[:user][:image].present?
-            @message = "Tu imagen de perfil se ha actualizado."
-          else
-            @message = "Tus etiquetas se han actualizado."
-            puts @message
-          end
+
          }
-        #best_in_place
-        format.json { respond_with_bip(current_user) }
         #changing location of config and mobile use this, and image of user
         format.html {
-          flash[:success] = "Tu ubicación se ha actualizado."
+          flash[:success] = "Tu información se ha actualizado."
           redirect_to request.referrer
          }
     end
@@ -112,16 +98,17 @@ class UsersController < ApplicationController
                                    :image,
                                    :bio,
                                    :age,
-                                   :available,
                                    :lat,
                                    :lng,
                                    :address_name,
-                                   :roles_word,
+                                   # :roles_word,
                                    :tag_list,
                                    :transactional_emails,
-                                   :marketing_emails,
+                                   # :marketing_emails,
                                    :whatsapp_enabled,
-                                   :phone_number
+                                   :phone_number,
+                                   :birth,
+                                   :website
                                  )
     end
 

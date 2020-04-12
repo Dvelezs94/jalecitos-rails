@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_065736) do
+ActiveRecord::Schema.define(version: 2020_04_12_000421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -517,7 +517,6 @@ ActiveRecord::Schema.define(version: 2020_04_09_065736) do
     t.datetime "confirmation_sent_at"
     t.string "openpay_id"
     t.integer "status", default: 0
-    t.integer "age"
     t.string "available"
     t.boolean "transactional_emails", default: true
     t.boolean "marketing_emails", default: true
@@ -536,6 +535,8 @@ ActiveRecord::Schema.define(version: 2020_04_09_065736) do
     t.float "lat"
     t.float "lng"
     t.string "address_name"
+    t.date "birth"
+    t.string "website"
     t.index ["ally_code_id"], name: "index_users_on_ally_code_id"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
