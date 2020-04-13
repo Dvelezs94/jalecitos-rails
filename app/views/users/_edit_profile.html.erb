@@ -1,4 +1,4 @@
-<div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+<div class="tab-pane fade <%= "show active" if params[:collapse].nil? %>" id="profile" role="tabpanel" aria-labelledby="profile-tab">
   <%= form_with(model: @user, local: true, url: update_users_path, method: :put) do |form| %>
     <div class="form-group row">
       <div class="col-sm-2 d-flex justify-content-end">
@@ -51,7 +51,7 @@
       <label for="userphone" class="col-sm-2 col-form-label tx-right">Teléfono</label>
       <div class="col-sm-10">
         <div class="input-group">
-          <select id="select-country" class="custom-select col-2 col-xs-3"></select>
+          <select id="select-country" class="custom-select col-2 col-sm-3 col-xs-3"></select>
           <%= form.text_field :phone_number, class: "form-control", placeholder: "+52 555 555 5555", id: "userphone", autocomplete: "off" %>
         </div>
       </div>

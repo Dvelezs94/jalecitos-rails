@@ -51,12 +51,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
    if resource_updated
      flash[:success] = "La cuenta ha sido actualizada."
      bypass_sign_in resource, scope: resource_name
-     redirect_to configuration_path
+     redirect_to configuration_path(n)
    else
      clean_up_passwords resource
      set_minimum_password_length
      flash[:error] = "No se pudieron actualizar tus datos, intenta de nuevo."
-     redirect_to configuration_path
+     redirect_to configuration_path(collapse: "security")
    end
   end
 
@@ -66,13 +66,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def disable
-    if current_user.provider.present? #confirmation was in the view
-      disable_account()
-    elsif current_user.valid_password?(params[:password])
-      disable_account() #no provider, but user entered his passord
+    #cant disable banned accounts
+    if current_user.active?
+      @success = current_user.update(status: "disabled")
+      if @success
+        current_user.invalidate_all_sessions!
+        sign_out(current_user)
+        flash[:success] = "Tu cuenta ha sido desactivada."
+        redirect_to root_path
+      else
+        flash[:notice] = current_user.errors.full_messages.first
+        redirect_to configuration_path(collapse: "account")
+      end
+    elsif current_user.banned?
+      flash[:notice] = "No se pudo desactivar la cuenta ya que está bloqueada."
+      redirect_to configuration_path(collapse: "account")
     else
-      flash[:notice] = "La contraseña no es válida"
-      redirect_to configuration_path
+      flash[:notice] = "No se pudo desactivar esta cuenta."
+      redirect_to configuration_path(collapse: "account")
     end
   end
 
@@ -107,10 +118,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     cookies.permanent.signed[:mb].present? ? mobile_sign_up_path : root_path
   end
 
-  def after_destroy_account_path
-    cookies.permanent.signed[:mb].present? ? mobile_sign_in_path : root_path
-  end
-
   private
   def check_captcha
     unless verify_recaptcha
@@ -118,27 +125,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.validate # Look for any other validation errors besides Recaptcha
       flash[:error] = "Por favor, confirma que no eres un robot en tu registro."
       redirect_to after_inactive_sign_up_path_for(resource)
-    end
-  end
-  def disable_account
-    #cant disable banned accounts
-    if current_user.active?
-      @success = current_user.update(status: "disabled")
-      if @success
-        current_user.invalidate_all_sessions!
-        sign_out(current_user)
-        flash[:success] = "Tu cuenta ha sido desactivada."
-        redirect_to after_destroy_account_path()
-      else
-        flash[:notice] = current_user.errors.full_messages.first
-        redirect_to configuration_path
-      end
-    elsif current_user.banned?
-      flash[:notice] = "No se pudo desactivar la cuenta ya que está bloqueada."
-      redirect_to configuration_path
-    else
-      flash[:notice] = "No se pudo desactivar esta cuenta."
-      redirect_to configuration_path
     end
   end
 end
