@@ -1,11 +1,16 @@
-<div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="account-tab">
-<h4>Eliminar cuenta</h4>
-<h5>¿Qué pasa cuando elimino mi cuenta?</h5>
-<div class=" pd-l-20">
-  <li><span></span>Tu perfil, tus jales, y tus pedidos ya no serán visibles en Jalecitos.</li>
-  <li></span>Tu correo ya no podrá ser utilizado de nuevo para un nuevo registo en Jalecitos.</li>
+<div class="tab-pane fade <%= "show active" if params[:collapse] == "account" %>" id="account" role="tabpanel" aria-labelledby="account-tab">
+  <%= form_with url: user_disable_path, method: :post, local: true do |f| %>
+  <h4>Eliminar cuenta</h4>
+  <h5>¿Qué pasa cuando elimino mi cuenta?</h5>
+  <div class=" pd-l-20">
+    <li>
+      <span></span>Tu perfil, tus anuncios, y tus pedidos ya no serán visibles en la plataforma.</li>
+    <li></span>Tu correo ya no podrá ser utilizado de nuevo para un nuevo registro.</li>
 </div>
-<div class="tx-right pd-t-20">
-<button class="btn btn-danger">Cancelar mi cuenta</button>
-</div>
+
+  <div class="tx-right pd-t-20">
+    <%= f.submit "Cancelar cuenta", class: "btn btn-danger",:data => {:confirm => '¿Estás seguro de cancelar tu cuenta?', verify: 'wand', verify_text: 'Escribe "wand" para proceder'} %>
+  </div>
+
+<% end %>
 </div>

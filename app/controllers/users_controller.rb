@@ -57,7 +57,7 @@ class UsersController < ApplicationController
         #changing location of config and mobile use this, and image of user
         format.html {
           flash[:success] = "Tu información se ha actualizado."
-          redirect_to request.referrer
+          redirect_to request.referrer #menu stuff maybe needs reload if user updated location
          }
     end
 
