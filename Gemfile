@@ -77,7 +77,7 @@ gem 'omniauth-facebook', '~> 5.0'
 # Google omniauth
 gem 'omniauth-google-oauth2', '~> 0.6.1'
 #Notifications
-gem 'gritter', '~> 1.2'
+gem 'toastr-rails', '~> 1.0', '>= 1.0.3'
 #Store images
 gem 'carrierwave', '~> 1.2', '>= 1.2.3'
 gem 'carrierwave-aws', '~> 1.3'

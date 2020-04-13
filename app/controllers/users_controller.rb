@@ -93,7 +93,7 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name,
+      user_params = params.require(:user).permit(:name,
                                    :alias,
                                    :image,
                                    :bio,
@@ -110,6 +110,8 @@ class UsersController < ApplicationController
                                    :birth,
                                    :website
                                  )
+      user_params[:phone_number] = "" if user_params[:phone_number].split(" ").length < 2 #this tells me that maybe the string just has the code that is put in the frontend input
+      return user_params
     end
 
     def check_if_my_profile

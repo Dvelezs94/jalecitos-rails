@@ -8,8 +8,6 @@
 
 //= require bootstrap
 
-//= require gritter
-
 //= require jquery.validate
 
 
