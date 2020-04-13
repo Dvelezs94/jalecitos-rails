@@ -7,11 +7,7 @@
 
 //= require popper
 
-
 //= require bootstrap
-
-//= require gritter
-
 //= require jquery.steps
 
 //= require jquery.easing
@@ -40,6 +36,6 @@
 
 //= require cocoon
 
+//= require_tree ./toastr
 //= require_tree ./dashforge
-
 //= require data-confirm-modal

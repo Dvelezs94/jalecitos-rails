@@ -49,7 +49,7 @@ class User < ApplicationRecord
 
   #validate phone number syntax
   validates :phone_number, :presence => {:message => 'Tienes que proporcionar un numero valido'},
-                       :length => { :minimum => 10, :maximum => 18 },
+                       :length => { :minimum => 10, :maximum => 25 }, #idk the min and max length, just in case someone wants to enter a big string
                        :allow_blank => true
   # Create User Score and openpay user
   after_validation :create_user_score

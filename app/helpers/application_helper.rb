@@ -89,15 +89,22 @@ module ApplicationHelper
           flash_type = :warning
         when flash[:success]
           flash_type = :success
-        when flash[:progress]
-          flash_type = :progress
       end
       notification_generator_helper msg, flash_type
     end
   end
 
   def notification_generator_helper msg, flash_type
-     js add_gritter(msg, :image => flash_type, :title=>"Jalecitos", :sticky => false, :time => 5000 )
+    if flash_type == :error
+      type = "error"
+    elsif flash_type == :success
+      type = "success"
+    elsif flash_type == :notice
+      type = "info"
+    else
+      type = "warning"
+    end
+    ("<script>toastr." + type + "('"+ msg + "', {timeOut: 3000})</script>").html_safe
   end
 
   def image_display_helper image, yt_url #used in min versions

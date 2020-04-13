@@ -20,19 +20,19 @@
     <div class="form-group row">
       <label for="user_name" class="col-sm-2 col-form-label tx-right">Nombre</label>
       <div class="col-sm-10">
-        <%= form.text_field :name, class: "form-control", placeholder: "Mario Pérez" %>
+        <%= form.text_field :name, class: "form-control", placeholder: "Mario Pérez", autocomplete: "off" %>
       </div>
     </div>
     <div class="form-group row">
       <label for="user_alias" class="col-sm-2 col-form-label tx-right">Alias (@)</label>
       <div class="col-sm-10">
-        <%= form.text_field :alias, class: "form-control", placeholder: "mario99" %>
+        <%= form.text_field :alias, class: "form-control", placeholder: "mario99", autocomplete: "off" %>
       </div>
     </div>
     <div class="form-group row">
       <label for="user_website" class="col-sm-2 col-form-label tx-right">Sitio Web</label>
       <div class="col-sm-10">
-        <%= form.text_field :website, class: "form-control", placeholder: "https://ejemplo.com" %>
+        <%= form.text_field :website, class: "form-control", placeholder: "https://ejemplo.com", autocomplete: "off" %>
       </div>
     </div>
     <div class="form-group row">
@@ -51,8 +51,8 @@
       <label for="userphone" class="col-sm-2 col-form-label tx-right">Teléfono</label>
       <div class="col-sm-10">
         <div class="input-group">
-          <select id="select-country"></select>
-          <%= form.text_field :phone_number, class: "form-control", placeholder: "+52 555 555 5555", id: "userphone" %>
+          <select id="select-country" class="custom-select col-2 col-xs-3"></select>
+          <%= form.text_field :phone_number, class: "form-control", placeholder: "+52 555 555 5555", id: "userphone", autocomplete: "off" %>
         </div>
       </div>
     </div>
@@ -69,7 +69,7 @@
       <label for="userbirth" class="col-sm-2 col-form-label tx-right">Fecha de nacimiento</label>
       <div class="col-sm-10">
         <div class="input-group">
-          <%= form.text_field :birth, class: "form-control", placeholder: "yyyy/mm/dd", id: "userbirth" %>
+          <%= form.text_field :birth, class: "form-control", placeholder: "yyyy/mm/dd", id: "userbirth", autocomplete: "off" %>
         </div>
       </div>
     </div>
@@ -77,7 +77,12 @@
       <label for="config_autocomplete" class="col-sm-2 col-form-label tx-right">Tu ubicación</label>
       <div class="col-sm-10">
         <div class="input-group">
-          <%= form.text_field :location, class: 'form-control', id: "config_autocomplete", value: current_user.location(true) %>
+          <%= form.text_field :location, class: 'form-control', id: "config_autocomplete",
+          value: current_user.location(true),
+          lat: (current_user.lat),
+           lng: (current_user.lng),
+           address_name: (current_user.address_name)
+           %>
         </div>
       </div>
     </div>
