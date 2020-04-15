@@ -69,12 +69,12 @@
       <hr class="d-lg-none mg-r-5 mg-l-5">
       <div class="location-header">
         <li class="nav-item">
-         <%= form_with model: User, url: update_users_path, method: :put , local: true do |f|%>
+         <%= form_with model: User, url: update_users_path, method: :put , remote: true do |f|%>
             <%= f.text_field :location, class: 'form-control rounded', id: "menu_autocomplete", placeholder: "Ubicación",
             value: (current_user.location(true).present?)? current_user.location : "",
             lat: (params[:location].present?)? params[:lat] : current_user.lat || nil,
             lng: (params[:location].present?)? params[:lng] : current_user.lng || nil %>
-            <%# without submit button so the form cant be submitted if one option is not selected %>
+            <%= f.submit("Enviar", class: "d-none") %>
           <% end %>
         </li>
       </div>
