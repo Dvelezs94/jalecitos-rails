@@ -1,7 +1,9 @@
 <div class="profile-sidebar pd-lg-r-25">
   <div class="row">
     <div class="col-sm-3 col-md-2 col-lg">
-      <div class="avatar avatar-xxl avatar-online"><img src="https://via.placeholder.com/500" class="rounded-circle" alt=""></div>
+      <div class="avatar avatar-xxl avatar-online">
+        <%= image_tag(avatar_display_helper(@user.image_url()), class: "rounded-circle", data: {lity: true}, lazy: true) %>
+        </div>
     </div><!-- col -->
     <div class="col-sm-8 col-md-7 col-lg mg-t-20 mg-sm-t-0 mg-lg-t-25">
       <h5 class="mg-b-2 tx-spacing--1"><%= @user.name %></h5>
@@ -44,9 +46,9 @@
     <div class="col-sm-6 col-md-5 col-lg mg-t-40">
       <label class="tx-sans tx-10 tx-semibold tx-uppercase tx-color-01 tx-spacing-1 mg-b-15">Social</label>
       <ul class="list-unstyled profile-info-list">
-        <li><%= link_to("<i data-feather='globe'></i>#{@user.website}".html_safe, @user.website, target: "_blank") if @user.website.present? %></li>
-        <li><%= link_to("<i data-feather='facebook'></i>#{@user.get_hashtag('fb')}".html_safe, @user.facebook, target: "_blank") if @user.facebook.present? %></li>
-        <li><%= link_to("<i data-feather='instagram'></i>#{@user.get_hashtag('ig')}".html_safe, @user.instagram, target: "_blank") if @user.instagram.present? %></li>
+        <% if @user.website.present?  %><li><%= link_to("<i data-feather='globe'></i>#{@user.website}".html_safe, @user.website, target: "_blank")%></li> <% end %>
+        <% if @user.facebook.present? %><li><%= link_to("<i data-feather='facebook'></i>#{@user.get_hashtag('fb')}".html_safe, @user.facebook, target: "_blank") %></li> <% end %>
+        <% if @user.instagram.present? %><li><%= link_to("<i data-feather='instagram'></i>#{@user.get_hashtag('ig')}".html_safe, @user.instagram, target: "_blank") %></li> <% end %>
       </ul>
     </div><!-- col -->
     <% end %>
