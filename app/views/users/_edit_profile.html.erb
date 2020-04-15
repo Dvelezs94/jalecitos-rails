@@ -1,5 +1,5 @@
 <div class="tab-pane fade <%= "show active" if params[:collapse].nil? %>" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-  <%= form_with(model: @user, local: true, url: update_users_path, method: :put) do |form| %>
+  <%= form_with(model: @user, remote: true, url: update_users_path, method: :put) do |form| %>
     <div class="form-group row">
       <div class="col-sm-2 d-flex justify-content-end">
         <div class="avatar avatar-lg"><%= image_tag(avatar_display_helper(@user.image_url()), class: "rounded-circle", id: "userImage")%></div>

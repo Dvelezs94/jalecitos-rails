@@ -1,5 +1,2 @@
-<% if @success  %>
-  <%= add_gritter(@message, :image => :success, :title => "Éxito", :time => 1000)%>
-<% else %>
-  <%= add_gritter("Inténtalo de nuevo más tarde.", :image => :error, :title => "Error")%>
-<% end %>
+//errors
+  toastr.error("<%= current_user.errors.full_messages.first %>")
