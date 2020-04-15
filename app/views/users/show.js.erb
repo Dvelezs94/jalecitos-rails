@@ -9,7 +9,7 @@ paginator_container.html("");
 <% if collection.next_page %>
   paginator_container.append("<%= j paginate(collection, param_name: name+'s') %>");
 <% else %>
-paginator_container.closest("div").remove();  
+paginator_container.closest("div").remove();
 <% end %>
-
+feather.replace();
 <% sleep 1 %>
