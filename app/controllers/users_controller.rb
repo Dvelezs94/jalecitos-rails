@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     elsif params[:requests]
       get_requests
     elsif params[:gigs]
-      get_gigs 
+      get_gigs
     else
       get_reviews
       get_gigs
@@ -115,7 +115,7 @@ class UsersController < ApplicationController
                                    :facebook,
                                    :instagram
                                  )
-      user_params[:phone_number] = "" if user_params[:phone_number].split(" ").length < 2 #this tells me that maybe the string just has the code that is put in the frontend input
+      user_params[:phone_number] = "" if user_params[:phone_number].present? && user_params[:phone_number].split(" ").length < 2 #this tells me that maybe the string just has the code that is put in the frontend input
       return user_params
     end
 

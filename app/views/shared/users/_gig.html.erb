@@ -1,12 +1,14 @@
-<a href="<%= the_gig_path(gig) %>" class="media mg-b-40 col-xl-6">
-  <div class="wd-45 ht-45 rounded d-flex align-items-center justify-content-center">
-    <%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), class: "img-fit-cover rounded") %>
-  </div>
-  <div class="media-body pd-l-25">
-    <h6 class="tx-color-01 mg-b-5"><%= gig.name %></h6>
-    <p class="tx-12 mg-b-10 tx-black"><%= gig.description.truncate(100) %>...</p>
-    <div>
-      <%= one_star_disp_help(gig) %>
+<a href="<%= the_gig_path(gig) %>" class="mg-b-40 col-xl-6">
+  <div class="media">    
+    <div class="wd-45 ht-45 rounded d-flex align-items-center justify-content-center">
+      <%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), class: "img-fit-cover rounded") %>
+    </div>
+    <div class="media-body pd-l-25">
+      <h6 class="tx-color-01 mg-b-5"><%= gig.name %></h6>
+      <p class="tx-12 mg-b-10 tx-black"><%= gig.description.truncate(100) %>...</p>
+      <div>
+        <%= one_star_disp_help(gig) %>
+      </div>
     </div>
   </div>
 </a>
