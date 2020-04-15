@@ -326,3 +326,7 @@ label.error{
     display: none;
   }
 }
+
+pre[preview] {
+  font-size: 100%;
+}

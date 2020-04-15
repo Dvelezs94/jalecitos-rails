@@ -15,7 +15,11 @@ include RequestsHelper
       user.lat = loc.lat || 21.8852562
       user.lng = loc.lng || -102.2915677
       user.address_name = (loc.full_address.present?)? loc.full_address : "Aguascalientes, Ags., México"
-      user.age = Faker::Number.between(18, 50)
+      user.birth = rand(50.years).seconds.ago
+      user.website = Faker::Internet.url
+      user.facebook = Faker::Internet.url("facebook.com")
+      user.instagram = Faker::Internet.url("instagram.com")
+
       # This is so we dont have to confirm the email on seeds
       user.confirmed_at = Time.now
       1.times do |y|
