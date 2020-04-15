@@ -7,7 +7,7 @@
       <h2><%= @user.alias %></h2>
       <p><%= @user.location %></p>
       <div class="innersocial-list">
-        <%= star_display_helper( score_average(@user.score) ) %>
+        <%= star_display_helper( @user.score_average) %>
       </div>
       <div class="contactars">
         <p>Activo(a) hace <%= distance_of_time_in_words_to_now(@user.current_sign_in_at) rescue "nunca" %></p>
@@ -32,7 +32,7 @@
         <p>Miembro desde hace <br> <%= time_ago_in_words(@user.created_at) %></p>
       </div>
       <div class="inner-reportarcontent">
-        <p class="edad1">Edad: <%= (@user.age.nil?)? "Indefinida" : @user.age %></p>
+        <p class="edad1">Edad: <%= (@user.birth.nil?)? "Indefinida" : @user.birth %></p>
         <p class="edad11"><pre><%= (@user.bio.nil?)? "Sin descripción" : @user.safe_bio %></pre></p>
       </div>
       <div class="hire-pack-btn">

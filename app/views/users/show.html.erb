@@ -1,3 +1,11 @@
+<div class="media d-block d-lg-flex">
+  <%= render 'shared/users/profile_sidebar' %>
+  <div class="media-body mg-t-40 mg-lg-t-0 pd-lg-x-10">
+    <%= render 'shared/users/services_card.html.erb' %>
+  </div>
+  <%= render 'shared/users/reviews.html.erb' %>
+</div>
+
 <div class="catagorislide-area innerpage-onearea">
   <div class="container">
     <%= render 'shared/users/user_card_tablet' %>
@@ -9,6 +17,6 @@
     </div>
   </div>
 </div>
-<%= render 'reports/report', object: @user %>
 
 <%# render 'form', user: @user %>
+<%= render 'reports/report', object: @user %>

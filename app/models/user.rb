@@ -47,6 +47,8 @@ class User < ApplicationRecord
   validates_presence_of :name, if: :name_changed?  #dont allow blank again if value is filled
   validate :check_running_orders, if: :user_disabled?, on: :update
 
+  validate :websites
+
   #validate phone number syntax
   validates :phone_number, :presence => {:message => 'Tienes que proporcionar un numero valido'},
                        :length => { :minimum => 10, :maximum => 25 }, #idk the min and max length, just in case someone wants to enter a big string
@@ -124,6 +126,40 @@ class User < ApplicationRecord
 
   def verify_gigs
       self.gigs.each { |gig| gig.touch }
+  end
+
+  def age
+    now = Time.now.utc.to_date
+    now.year - self.birth.year - ((now.month > self.birth.month || (now.month == self.birth.month && now.day >= self.birth.day)) ? 0 : 1)
+  end
+
+  def score_average return_number=true
+    us = self.score
+    if us.employee_score_times == 0.0 && us.employer_score_times == 0.0
+      return (return_number)? 0.0 : "N/A"
+    elsif us.employer_score_times == 0.0
+      sa = us.employee_score_average
+    elsif us.employee_score_times == 0.0
+      sa = us.employer_score_average
+    else
+      sa = ( ( us.employee_score_average* us.employee_score_times)+( us.employer_score_average* us.employer_score_times) ) / (us.employer_score_times + us.employee_score_times )
+    end
+    return sa.round(1)
+  end
+
+  def get_hashtag string
+    url = (string == "fb")? self.facebook : self.instagram
+    #this removes all before .com/ and itself, then removes after any / or ?
+    return "@" + url.gsub(/.*com\//, '').gsub(/\/.*/, '').gsub(/\?.*/, '')
+  end
+
+  def score_average_times
+    us = self.score
+    if us.employee_score_times == 0.0 && us.employer_score_times == 0.0
+      return 0
+    else
+      us.employer_score_times + us.employee_score_times
+    end
   end
 
   def level_enabled?
@@ -348,5 +384,21 @@ class User < ApplicationRecord
 
    def check_running_orders
      errors.add(:base, "No puedes cancelar tu cuenta ya que tienes órdenes activas") if self.active_orders?
+   end
+
+   def websites
+     if self.website.present?
+       errors.add(:base, "El sitio no es una url") if ! url_regex.match?(self.website)
+     end
+     if self.facebook.present?
+       errors.add(:base, "La página de facebook no es una url válida") if ! url_regex.match?(self.facebook)
+       errors.add(:base, "El perfil de facebook debe apuntar a facebook.com") if get_host_without_www(self.facebook) != "facebook.com" && get_host_without_www(self.facebook) != "fb.com"
+
+     end
+     if self.instagram.present?
+       errors.add(:base, "La página de instagram no es una url válida") if ! url_regex.match?(self.instagram)
+       errors.add(:base, "El perfil de instagram debe apuntar a instagram.com") if get_host_without_www(self.instagram) != "instagram.com"
+     end
+
    end
 end

@@ -300,29 +300,6 @@ module ApplicationHelper
     html.html_safe
   end
 
-  def score_average us, return_number=true
-    if us.employee_score_times == 0.0 && us.employer_score_times == 0.0 && return_number == true
-      return 0.0
-    elsif us.employee_score_times == 0.0 && us.employer_score_times == 0.0 && return_number != true
-      return "N/A"
-    elsif us.employer_score_times == 0.0
-      sa = us.employee_score_average
-    elsif us.employee_score_times == 0.0
-      sa = us.employer_score_average
-    else
-      sa = ( ( us.employee_score_average* us.employee_score_times)+( us.employer_score_average* us.employer_score_times) ) / (us.employer_score_times + us.employee_score_times )
-    end
-    return sa.round(1)
-  end
-
-  def score_average_times us
-    if us.employee_score_times == 0.0 && us.employer_score_times == 0.0
-      return 0;
-    else
-      us.employer_score_times + us.employee_score_times
-    end
-  end
-
   def ios_pwa_tags
     "<meta name='apple-mobile-web-app-capable' content='yes'>
     <meta name='apple-mobile-web-app-status-bar-style' content='default'>

@@ -537,6 +537,8 @@ ActiveRecord::Schema.define(version: 2020_04_12_000421) do
     t.string "address_name"
     t.date "birth"
     t.string "website"
+    t.string "facebook"
+    t.string "instagram"
     t.index ["ally_code_id"], name: "index_users_on_ally_code_id"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

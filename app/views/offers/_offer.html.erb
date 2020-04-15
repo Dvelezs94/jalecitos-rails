@@ -5,7 +5,7 @@
       <h5><%= link_to(offer.user.alias, user_path(offer.user.slug)) %></h5>
       <span>
         <i class="fa fa-star"></i>
-        <%= score_average(offer.user.score, false) %></span>
+        <%= offer.user.score_average(false) %></span>
 
     </div>
     <div class="fernanda-user-box-text">

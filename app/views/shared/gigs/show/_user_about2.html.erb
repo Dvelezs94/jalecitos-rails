@@ -9,11 +9,11 @@
           <p class="mg-b-5 tx-gray-600">Activo hace <%= distance_of_time_in_words_to_now(@gig.user.current_sign_in_at)%></p>
 
           <div>
-            <% if score_average_times( @gig.user.score) == 0 %>
+            <% if @gig.user.score_average_times == 0 %>
             <small class="tx-gray-600">Sin valoraciones</small>
             <% else %>
               <i data-feather="star" class="feather-18 tx-warning filled"></i>
-              <span class="tx-warning"><%= score_average(@gig.user.score) %> <small class="tx-gray-600">(<%= score_average_times( @gig.user.score) %> valoraciones)</small></span>
+              <span class="tx-warning"><%= @gig.user.score_average %> <small class="tx-gray-600">(<%= @gig.user.score_average_times %> valoraciones)</small></span>
             <% end %>
           </div>
           <div class="divider-text w-100">Bio</div>

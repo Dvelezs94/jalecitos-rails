@@ -49,14 +49,18 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   #aqui la parte del usuario de la url no importa, ya que aqui adentro se usa current_user, esto para darle seguridad a los usuarios de solo editar su perfil
   def update_user
-    @success = current_user.update!(user_params)
+    @success = current_user.update(user_params)
     respond_to do |format|
         format.js {
 
          }
         #changing location of config and mobile use this, and image of user
         format.html {
-          flash[:success] = "Tu información se ha actualizado."
+          if @succes
+            flash[:success] = "Tu información se ha actualizado."
+          else
+            flash[:error] = current_user.errors.full_messages.first
+          end
           redirect_to request.referrer #menu stuff maybe needs reload if user updated location
          }
     end
@@ -108,7 +112,9 @@ class UsersController < ApplicationController
                                    :whatsapp_enabled,
                                    :phone_number,
                                    :birth,
-                                   :website
+                                   :website,
+                                   :facebook,
+                                   :instagram
                                  )
       user_params[:phone_number] = "" if user_params[:phone_number].split(" ").length < 2 #this tells me that maybe the string just has the code that is put in the frontend input
       return user_params
