@@ -19,10 +19,10 @@
         <% end %>
       <% else %>
         <% if @user.whatsapp_enabled && @user.phone_number.present? %>
-          <%= link_to "#{icon("fab", "whatsapp ft-20", title: "Whatsapp")}".html_safe, "https://wa.me/#{@user.international_phone_number}", class: "btn btn-success wapp-contact", target: "_blank" %>
+          <%= link_to "#{icon("fab", "whatsapp ft-20", title: "Whatsapp")}".html_safe, "https://wa.me/#{@user.phone_number}", class: "btn btn-success wapp-contact", target: "_blank" %>
         <% end %>
         <% if @user.phone_number.present? %>
-          <%= link_to "#{icon("fas", "phone", title: "Llamar")}".html_safe, "tel:#{@user.international_phone_number(prefix=true)}", class: "btn btn-secondary phone-contact", target: "_blank" %>
+          <%= link_to "#{icon("fas", "phone", title: "Llamar")}".html_safe, "tel:#{@user.phone_number}", class: "btn btn-secondary phone-contact", target: "_blank" %>
         <% end %>
           <%= link_to "#{icon('fas', 'comment', title: "Mensaje")}".html_safe, conversations_path(user_id: @user.id), class: "btn btn-primary msg-contact" %>
 

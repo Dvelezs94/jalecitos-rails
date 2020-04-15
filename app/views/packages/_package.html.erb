@@ -21,12 +21,12 @@
           Contactar
         </button>
         <div class="dropdown-menu" aria-labelledby="basicoDropdown">
-          <%= link_to "https://wa.me/#{@gig.user.international_phone_number}?text=#{"Hola, quisiera más información acerca de su Jale *#{@gig.name}*. #{the_gig_url(@gig)}"}",
+          <%= link_to "https://wa.me/#{@gig.user.phone_number}?text=#{"Hola, quisiera más información acerca de su Jale *#{@gig.name}*. #{the_gig_url(@gig)}"}",
            class: "dropdown-item wapp-contact", target: "_blank" do %>
            Whatsapp
           <% end %>
           <% if @gig.user.phone_number.present? %>
-            <%= link_to "tel:#{@gig.user.international_phone_number(prefix=true)}", class: "dropdown-item phone-contact", target: "_blank" do %>
+            <%= link_to "tel:#{@gig.user.phone_number}", class: "dropdown-item phone-contact", target: "_blank" do %>
               Llamar
             <% end %>
           <% end %>

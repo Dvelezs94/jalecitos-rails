@@ -63,8 +63,11 @@ class User < ApplicationRecord
   # update verified gigs when account is verified
   before_update :verify_gigs, :if => :verified_changed?
   before_update :set_roles
+  before_update :remove_domains
   #when user is banned, unbanned or disabled...
   after_validation :enable_disable_stuff, :if => :status_changed? #this is after updates so dont refund nothing and reverse everything is some validation fails, it would be a big trouble because refund will send to openpay the request and if validation fails then the status of the order will reset to in progress, for example, and refund was requested... trouble
+
+
 
   # Associations
   # User Score
@@ -148,9 +151,16 @@ class User < ApplicationRecord
   end
 
   def get_hashtag string
-    url = (string == "fb")? self.facebook : self.instagram
+    name = (string == "fb")? self.facebook : self.instagram
     #this removes all before .com/ and itself, then removes after any / or ?
-    return "@" + url.gsub(/.*com\//, '').gsub(/\/.*/, '').gsub(/\?.*/, '')
+    return "@" + name
+  end
+
+  def facebook_url
+    (self.facebook.present?)? "https://facebook.com/"+ self.facebook : nil
+  end
+  def instagram_url
+    (self.instagram.present?)? "https://instagram.com/"+ self.instagram : nil
   end
 
   def score_average_times
@@ -260,14 +270,6 @@ class User < ApplicationRecord
    def active_orders?
      active_orders = Order.where("(employee_id=? OR employer_id=?)", self, self).where(status: ["pending", "in_progress", "disputed"])
      active_orders.any?
-   end
-
-   def international_phone_number(prefix=false)
-     if not prefix.present?
-       return "521" + phone_number rescue nil
-     else
-       return "+521" + phone_number rescue nil
-     end
    end
    def safe_bio
      make_links(CGI::escapeHTML(self.bio)).html_safe #escapes html from user and make our links
@@ -390,15 +392,19 @@ class User < ApplicationRecord
      if self.website.present?
        errors.add(:base, "El sitio no es una url") if ! url_regex.match?(self.website)
      end
-     if self.facebook.present?
+     if self.facebook_changed?
+       puts "X"*500
+       puts self.facebook
        errors.add(:base, "La página de facebook no es una url válida") if ! url_regex.match?(self.facebook)
        errors.add(:base, "El perfil de facebook debe apuntar a facebook.com") if get_host_without_www(self.facebook) != "facebook.com" && get_host_without_www(self.facebook) != "fb.com"
-
      end
-     if self.instagram.present?
+     if self.instagram_changed?
        errors.add(:base, "La página de instagram no es una url válida") if ! url_regex.match?(self.instagram)
        errors.add(:base, "El perfil de instagram debe apuntar a instagram.com") if get_host_without_www(self.instagram) != "instagram.com"
      end
-
+   end
+   def remove_domains #this removes domains and other innecesary stuff like params
+     self.facebook = self.facebook.gsub(/.*com\//, '').gsub(/\/.*/, '').gsub(/\?.*/, '')
+     self.instagram = self.instagram.gsub(/.*com\//, '').gsub(/\/.*/, '').gsub(/\?.*/, '')
    end
 end

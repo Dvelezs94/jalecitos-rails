@@ -47,17 +47,18 @@
       <label class="tx-sans tx-10 tx-semibold tx-uppercase tx-color-01 tx-spacing-1 mg-b-15">Social</label>
       <ul class="list-unstyled profile-info-list">
         <% if @user.website.present?  %><li><%= link_to("<i data-feather='globe'></i>#{@user.website}".html_safe, @user.website, target: "_blank")%></li> <% end %>
-        <% if @user.facebook.present? %><li><%= link_to("<i data-feather='facebook'></i>#{@user.get_hashtag('fb')}".html_safe, @user.facebook, target: "_blank") %></li> <% end %>
-        <% if @user.instagram.present? %><li><%= link_to("<i data-feather='instagram'></i>#{@user.get_hashtag('ig')}".html_safe, @user.instagram, target: "_blank") %></li> <% end %>
+        <% if @user.facebook.present? %><li><%= link_to("<i data-feather='facebook'></i>#{@user.get_hashtag('fb')}".html_safe, @user.facebook_url, target: "_blank") %></li> <% end %>
+        <% if @user.instagram.present? %><li><%= link_to("<i data-feather='instagram'></i>#{@user.get_hashtag('ig')}".html_safe, @user.instagram_url, target: "_blank") %></li> <% end %>
       </ul>
     </div><!-- col -->
     <% end %>
     <div class="col-sm-6 col-md-5 col-lg mg-t-40">
       <label class="tx-sans tx-10 tx-semibold tx-uppercase tx-color-01 tx-spacing-1 mg-b-15">Información de contacto</label>
       <ul class="list-unstyled profile-info-list">
-        <li><i data-feather="briefcase"></i> <span class="tx-color-03">Monterrey, NL. MX.</span></li>
-        <li><i data-feather="smartphone"></i> <a href="">(+1) 8442862662</a></li>
-        <li><i data-feather="mail"></i> <a href="">diego@mybilbo.com</a></li>
+        <!-- <li><i data-feather="briefcase"></i> <span class="tx-color-03">Monterrey, NL. MX.</span></li> -->
+        <% if @user.phone_number.present?  %>  <li><%= link_to "<i data-feather='smartphone'></i> #{@user.phone_number}".html_safe, "tel:#{@user.phone_number}", target: "_blank" %></li> <% end %>
+        <li><%= link_to "<i data-feather='mail'></i> #{@user.email}".html_safe, "mailto:"+@user.email, target: "_blank" %></li>
+
       </ul>
     </div><!-- col -->
   </div><!-- row -->
