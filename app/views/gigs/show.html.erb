@@ -1,4 +1,3 @@
-
 <%= render 'shared/gigs/show/details_hints' if current_user && current_user.active? && (@gig.gig_packages.none? || @gig.draft?)%>
 <%= render 'shared/gigs/show/remember_review' if @remember_review %>
 

@@ -24,10 +24,11 @@ class UsersController < ApplicationController
   def show
     if params[:reviews]
       get_reviews
+    elsif params[:gigs]
+      get_gigs
     else
       get_reviews
       get_gigs
-      Searchkick.multi_search([@gigs])
     end
   end
 
@@ -36,12 +37,13 @@ class UsersController < ApplicationController
     if params[:reviews]
       get_reviews
     elsif params[:requests]
-      get_requests(true)
+      get_requests
+    elsif params[:gigs]
+      get_gigs 
     else
       get_reviews
       get_gigs
       get_requests
-      Searchkick.multi_search([@gigs, @requests])
     end
     render "show"
   end
