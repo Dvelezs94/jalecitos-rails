@@ -3,22 +3,14 @@ module GetUser
   def get_reviews #used in my_account and show
     @reviews = Review.includes(:giver, :reviewable,:prof_rating).
     where(receiver_id: @user.id, status: "completed").order(updated_at: :desc).
-    page(params[:reviews]) .per(20)
+    page(params[:reviews]).per(5)
   end
-  def get_gigs bool=false #used in my_account and show
-    @gigs = Gig.search("*",
-       includes: [:user, :category, city: [state: :country]],
-        where: conditions,
-         order: [{ updated_at: { order: :desc, unmapped_type: :long}}],
-          execute: bool )
+  def get_gigs
+    @gigs = Gig.where(conditions).order(score_average: :desc).page(params[:gigs]).per(1)
   end
 
-  def get_requests bool=false
-    @requests = Request.search("*",
-       includes: [city: [state: :country]],
-        where: {user_id: @user.id},
-         order: [{ created_at: { order: :desc, unmapped_type: :long}}],
-          execute: bool, page: params[:requests], per_page: 20 )
+  def get_requests
+    @requests = Request.where( user_id: @user.id ).order(created_at: :desc).page(params[:requests]).per(4)
   end
 
   def conditions
