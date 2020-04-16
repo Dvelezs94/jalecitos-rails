@@ -36,10 +36,13 @@
     </div>
   </div>
   <div class="divider-text w-100"><%= "sin " if @request.offers_count == 0 %>postulaciones</div>
+  <div class="row row-xs" paginated-other_offers>
+
   <%= render( @my_offer ) if @my_offer.present? %>
   <%= render( @other_offers ) if @other_offers.present? %>
   <%= paginate @other_offers if @other_offers.present? %>
 
+  </div>
 </div>
 
 <%= render "reports/report", object: @request%>

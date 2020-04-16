@@ -9,6 +9,16 @@ $(document).on "turbolinks:load", ->
         $.getScript url
 
     $(window).scroll()
+
+    $(window).scroll ->
+      url = $('a.next-page:visible').attr('href')
+      if url && $(window).scrollTop() > $(document).height() - $(window).height() - 300
+        $('.pagination:visible').text("")
+        $(".loading").show()
+        $.getScript url
+
+        $(window).scroll()
+
   #special pagination in messages
   else
     $("#contacts-list").scroll ->
