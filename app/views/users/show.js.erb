@@ -7,9 +7,11 @@ elements_list.append('<%= j render(partial: "shared/users/#{name}", collection: 
 paginator_container.html("");
 
 <% if collection.next_page %>
-  paginator_container.append("<%= j paginate(collection, param_name: name+'s') %>");
+  paginator_container.append("<%= j link_to_next_page(collection, 'Mostrar más <i data-feather="chevron-down" class="mg-l-2 mg-r-0 mg-t-2"></i>'.html_safe,
+   param_name: name+'s', remote: true, data: {disable_with: 'Cargando...'}, class: 'nav-link') %>");
+
 <% else %>
-paginator_container.closest("div").remove();
+paginator_container.remove();
 <% end %>
 feather.replace();
 <% sleep 1 %>

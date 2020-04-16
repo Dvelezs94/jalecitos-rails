@@ -1,12 +1,12 @@
 <% if @success %>
   <% if params[:action] == "update_packages" && ! @gig.published? %>
-    <% flash[:notice] = 'Tu Jale se ha actualizado exitosamente y está listo para que lo publiques' %>
+    <% flash[:notice] = 'Tu Anuncio se ha actualizado exitosamente y está listo para que lo publiques' %>
   <% elsif params[:action] == "update_packages" %>
-    <% flash[:notice] = 'Tu Jale se ha actualizado exitosamente' %>
+    <% flash[:notice] = 'Tu Anuncio se ha actualizado exitosamente' %>
   <% elsif params[:action] == "create" && current_user.banned? %>
-    <% flash[:notice] = 'Tu Jale se ha guardado pero no será publicado ya que tu cuenta está bloqueada' %>
+    <% flash[:notice] = 'Tu Anuncio se ha guardado pero no será publicado ya que tu cuenta está bloqueada' %>
   <% else %>
-    <% flash[:notice] = 'Tu Jale se ha publicado exitosamente' %>
+    <% flash[:notice] = 'Tu Anuncio se ha publicado exitosamente' %>
   <% end %>
   window.location = "<%= the_gig_path(@gig) %>"
 <% elsif @active_orders %> //used in update

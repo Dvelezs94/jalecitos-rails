@@ -2,6 +2,7 @@
   <%= render 'shared/users/profile_sidebar' %>
   <div class="media-body mg-t-40 mg-lg-t-0 pd-lg-x-10">
     <%= render 'shared/users/services_card.html.erb' %>
+    <%= render 'shared/users/requests_card' if @user == current_user %>
   </div>
   <%= render 'shared/users/reviews.html.erb' %>
 </div>

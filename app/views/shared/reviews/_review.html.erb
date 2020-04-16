@@ -1,4 +1,4 @@
-<div class="media w-100 mb-1" review-id="<%= review.id %>">
+<div class="media w-100 " review-id="<%= review.id %>" display-hidden-menu>
   <div class="avatar mg-r-20"><%= image_tag(avatar_display_helper(review.giver.image_url(:thumb)), class: "rounded-circle") %> </div>
   <div class="media-body">
     <div class="d-flex align-items-center ht-20">
@@ -9,7 +9,7 @@
         <span class="text-muted"> <%= distance_of_time_in_words_to_now(review.created_at) %> </span>
       </small>
       <% if current_user == review.giver %>
-      <span class="ml-auto" review-options>
+      <span class="ml-auto" menu-hidden>
         <a href="" class="link-01" id="moreMenuButton-<%= review.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="more-vertical" class="feather-16"></i></a>
         <div class="dropdown-menu" aria-labelledby="moreMenuButton-<%= review.id %>">
           <%= link_to("Eliminar", review_path(review.id), method: :delete, remote: true,class: "dropdown-item", data: {confirm: "El elemento se eliminará"}) if current_user == review.giver %>

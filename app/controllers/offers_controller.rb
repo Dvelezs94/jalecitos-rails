@@ -41,7 +41,7 @@ class OffersController < ApplicationController
     if @offer.save
       create_notification(@offer.user, @offer.request.user, "ofertó", @offer.request)
       OfferMailer.new_offer(@offer).deliver if @offer.request.user.transactional_emails
-      redirect_to request_path(params[:request_id]), notice: 'La oferta ha sido creada con éxito.'
+      redirect_to request_path(params[:request_id]), success: 'La oferta ha sido creada con éxito.'
     else
       render :new
     end
@@ -60,7 +60,7 @@ class OffersController < ApplicationController
   def destroy
     begin
     @offer.destroy
-    redirect_to request_path(params[:request_id]), notice: 'Oferta destruida.'
+    redirect_to request_path(params[:request_id]), notice: 'Oferta eliminada.'
     rescue => e
       redirect_to request_path(params[:request_id]), notice: e
     end

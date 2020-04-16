@@ -294,10 +294,10 @@ label.error{
 /*review options in big devices shows only on hover review*/
 @media (min-width: 1200px) {
 
-  [review-options] {
+  [menu-hidden] {
     display: none;
   }
-  [review-id]:hover [review-options]{
+  [display-hidden-menu]:hover [menu-hidden]{
     display: block;
   }
 }
@@ -329,4 +329,28 @@ label.error{
 
 pre[preview] {
   font-size: 100%;
+}
+
+/*truncate text*/
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.multi-line-truncate-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
+}
+.multi-line-truncate-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
 }

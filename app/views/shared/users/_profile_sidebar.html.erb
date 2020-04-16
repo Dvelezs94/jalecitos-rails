@@ -58,6 +58,9 @@
         <!-- <li><i data-feather="briefcase"></i> <span class="tx-color-03">Monterrey, NL. MX.</span></li> -->
         <% if @user.phone_number.present?  %>  <li><%= link_to "<i data-feather='smartphone'></i> #{@user.phone_number}".html_safe, "tel:#{@user.phone_number}", target: "_blank" %></li> <% end %>
         <li><%= link_to "<i data-feather='mail'></i> #{@user.email}".html_safe, "mailto:"+@user.email, target: "_blank" %></li>
+        <li><%= link_to conversations_path(user_id: @user.id ) do %>
+          <i data-feather='send'></i> <%= @user.alias %>
+        <% end %></li>
 
       </ul>
     </div><!-- col -->
