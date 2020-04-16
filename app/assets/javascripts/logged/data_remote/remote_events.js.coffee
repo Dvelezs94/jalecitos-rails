@@ -25,16 +25,6 @@ $ ->
     if $("#cardForm").length > 0
       $(event.currentTarget).closest("li.card_or_bank_object").fadeOut 500, -> @remove()
 
-  # $('.change_user_alias').bind("ajax:success", (data) ->
-  #    console.log(this)
-  #    )
-
-  $(document).on "ajax:success", ".best_in_place", (event, data, status, xhr) ->
-    $.gritter.add({ image: '/assets/success.png', title: 'Éxito', text: 'Tu ' + $(this).data('name') + " se ha actualizado" });
-
-  $(document).on "ajax:error", ".best_in_place", (event, data, status, xhr) ->
-    errors = JSON.parse(data.responseText)
-    $.gritter.add({ image: '/assets/error.png', title: 'Error', text: errors[0] });
 
 
 

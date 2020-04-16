@@ -6,6 +6,7 @@ $(document).on('turbolinks:load', function() {
   initGoogleAutocomplete("form_autocomplete_gig", "lat", "lng", "address_name", "gig", "3", false);
   initGoogleAutocomplete("form_autocomplete_req", "lat", "lng", "address_name", "request", "4", false);
   initGoogleMap("searchmap");
+  initreqMap();
   //initGoogleAutocomplete("gmaps-input-address", "lat2", "lng2", "address_name2", true);
   $(window).resize(function() {
     if ($("#filter_and_results").hasClass("d-none") && window.innerWidth > 767) {
@@ -28,6 +29,37 @@ function searchToggle() {
   $("#filterBar").toggleClass("pd-t-10");
 }
 
+
+function initreqMap() {
+  waitForElement("#reqMap", function() {
+    window.reqmap = new google.maps.Map(document.getElementById("reqMap"), {
+      center: {
+        lat:  19.432608,
+        lng:  -99.133209
+      },
+      zoom: 15,
+      fullscreenControl: false,
+      zoomControl: false,
+      mapTypeControl: false,
+      scaleControl: true,
+      streetViewControl: false,
+      rotateControl: true
+    });
+    elem = $("#reqMap")[0];
+    //make marker and infowindow
+    var myLatlng = new google.maps.LatLng(elem.getAttribute("lat"), elem.getAttribute("lng"));
+    var title = elem.getAttribute("title");
+    window.reqMarker = new google.maps.Marker({
+      position: myLatlng,
+      title: title,
+      map: window.reqmap
+    });
+    //point to marker in map
+    window.reqmap.setZoom(15)
+    window.reqmap.setCenter(myLatlng);
+  });
+}
+
 function initElementMap(link) {
   //init the map if not defined
   if(typeof window.elementmap === 'undefined') {
@@ -36,7 +68,7 @@ function initElementMap(link) {
         lat:  19.432608,
         lng:  -99.133209
       },
-      zoom: 15,
+      zoom: 10,
       fullscreenControl: false,
       zoomControl: true,
       mapTypeControl: false,

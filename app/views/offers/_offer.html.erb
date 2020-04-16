@@ -1,44 +1,60 @@
 <% if offer.user.active? %>
-  <div class="fernanda-single-box <%= offer.user == offer.request.employee ? 'chosen-offer' : nil %>">
-    <div class="offer_image_name">
-      <%= image_tag(offer.user.image_url) %>
-      <h5><%= link_to(offer.user.alias, user_path(offer.user.slug)) %></h5>
-      <span>
-        <i class="fa fa-star"></i>
-        <%= offer.user.score_average(false) %></span>
-
+<div class="media w-100" display-hidden-menu>
+  <div class="avatar mg-r-20"><%= image_tag(offer.user.image_url, class: "rounded-circle") %></div>
+  <div class="media-body">
+    <div class="d-flex justify-content-between align-items-center ht-20">
+          <small class="tx-inverse">
+            <strong> <%= offer.user.alias %> <span><i data-feather="star" class="feather-12 tx-warning filled tx-warning filled"></i>
+              <span class="tx-warning tx-13" stars> <%= offer.user.score_average(false) %> </span></span>
+            </strong>
+            <span class="text-muted"> <%= distance_of_time_in_words_to_now(offer.created_at) %> </span>
+          </small>
+          <% if current_user == offer.user && !@already_hired%>
+          <span class="ml-auto" menu-hidden >
+            <a href="" class="link-01" id="moreMenuButton-<%= offer.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="more-vertical" class="feather-16"></i></a>
+            <div class="dropdown-menu" aria-labelledby="moreMenuButton-<%= offer.id %>">
+              <%= link_to("Eliminar", request_offer_path(offer.request, offer), method: :delete,class: "dropdown-item", data: {confirm: "El elemento se eliminará"}) %>
+              <%= link_to "Editar", edit_request_offer_path(offer.request, offer), class: "dropdown-item", data: {toggle: "modal", target: "#offerModal"}  %>
+            </div>
+          </span>
+          <% end %>
     </div>
-    <div class="fernanda-user-box-text">
-      <p>Horas estimadas:
-          <%= offer.hours if offer.hours.present? %>
-          <strong><%= number_to_currency(purchase_order_total(offer.price), precision: 2) %>
-            MXN</strong>
-        </p>
+    <p class="tx-left"><%= offer.description %></p>
+    <div class="d-flex text-muted justify-content-between">
+      <span class="d-flex">
+        <p><%= number_to_currency(purchase_order_total(offer.price), precision: 2) %> MXN (<strong><%=(offer.materials) ? "con " : " sin " %>material</strong>)&nbsp;
+    <%= " 🞄 " + offer.hours.to_s+ " horas"  if offer.hours.present? %></p>
+      </span>
+      <% if current_user == @request.user%>
+      <div class="dropdown" menu-hidden >
+        <button class="btn btn-xs btn-light dropdown-toggle" type="button" id="basicoDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i data-feather="message-circle"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="basicoDropdown">
+          <%= link_to "https://wa.me/#{offer.user.phone_number}?text=#{"Hola, quisiera más información acerca de su oferta  en *#{@request.name}*."}",
+           class: "dropdown-item wapp-contact", target: "_blank" do %>
+           Whatsapp
+          <% end %>
+          <% if offer.user.phone_number.present? %>
+            <%= link_to "tel:#{offer.user.phone_number}", class: "dropdown-item phone-contact", target: "_blank" do %>
+              Llamar
+            <% end %>
+          <% end %>
+
+          <%= link_to conversations_path(user_id: offer.user.id, model_id: @request.id, model: "Request" ), class: "dropdown-item msg-contact" do %>
+            Mensaje
+          <% end %>
+
+          <%= link_to "mailto:"+offer.user.email, class: "dropdown-item email-contact", target: "_blank" do %>
+            Mail
+          <% end %>
+
+          <!-- <a class="dropdown-item" data-toggle="collapse" href="#collapseBasic" role="button" aria-expanded="false" aria-controls="collapseBasic">Email</a> -->
+        </div>
+      </div>
+      <% end %>
     </div>
-    <% if current_user == offer.user || current_user == offer.request.user %>
-      <div class="ipsum-text">
-
-      <pre><strong>El precio establecido<%= (offer.materials) ? " " : " NO " %>cubre material a utilizar.</strong></pre>
-
-      <pre><p><%=offer.description %></p></pre>
-      </div>
-    <% end %>
-    <% if current_user == offer.user && !@already_hired%>
-      <div class="Borrar-btn">
-        <%= link_to 'Editar', edit_request_offer_path(offer.request, offer), class: "Editar-b" %>
-        <%= link_to "Borrar", request_offer_path(offer.request, offer), method: :delete, data: { confirm: '¿Estás seguro de querer borrar esta oferta?' }, class: "Borrar-b" %>
-      </div>
-    <% end %>
-    <% if current_user == offer.request.user && !@already_hired %>
-      <div class="hire-pack-btn">
-        <% if offer.user.whatsapp_enabled && offer.user.phone_number.present? %>
-        <%= link_to "#{icon("fab", "whatsapp ft-20", title: "Whatsapp")}".html_safe, "https://wa.me/#{offer.user.phone_number}?text=#{"Hola me interesa su oferta en mi pedido *#{offer.request.name}*. #{request_url(offer.request.slug)}"}", class: "btn btn-success wapp-contact", target: "_blank" %>
-        <% end %>
-        <% if offer.user.phone_number.present? %>
-        <%= link_to "#{icon("fas", "phone", title: "Llamar")}".html_safe, "tel:#{offer.user.phone_number}", class: "btn btn-secondary phone-contact", target: "_blank" %>
-        <% end %>
-        <%= link_to "#{icon('fas', 'comment', title: "Mensaje")}".html_safe, conversations_path(user_id: offer.user.id, model_id: offer.request.id, model: "Request"), class: "btn btn-primary msg-contact" %>
-      </div>
-    <% end %>
   </div>
+</div>
+
 <% end %>
