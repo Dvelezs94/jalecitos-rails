@@ -21,11 +21,11 @@
 //= require best_in_place
 
 //= require jquery-fileupload/basic
-//= require_tree ./dashforge
 
 //= require_tree ./main
 
 //= require_tree ./logged
+//= require_tree ./dashforge
 
 //= require serviceworker-companion
 
