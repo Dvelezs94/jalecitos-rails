@@ -354,3 +354,13 @@ pre[preview] {
   -webkit-box-orient: vertical;
   /* autoprefixer: on */
 }
+
+.bootstrap-tagsinput .tag {
+  color: #1b2e4b;
+  background-color: white;
+  border: 1px solid #c0ccda;
+  border-radius: 0.25rem;
+}
+.bootstrap-tagsinput .tag [data-role="remove"] {
+  margin-bottom: 2px;
+}
