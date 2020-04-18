@@ -19,7 +19,7 @@ class Review < ApplicationRecord
   belongs_to :giver, foreign_key: :giver_id, class_name: "User"
   belongs_to :receiver, foreign_key: :receiver_id, class_name: "User"
   belongs_to :reviewable, :polymorphic => true, optional: true #package can be deleted
-  has_one :prof_rating, ->{ limit(20)}, class_name: 'Rate', as: :rateable
+  has_one :prof_rating, ->{ limit(10)}, class_name: 'Rate', as: :rateable
   has_one :gig_rating, ->{ limit(5)}, class_name: 'Rate', as: :rateable
   has_one :rating, class_name: 'Rate', as: :rateable, dependent: :destroy #limit 1 by default, this is used in reviews controller
 

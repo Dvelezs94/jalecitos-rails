@@ -3,14 +3,14 @@
     <h6 class="tx-uppercase tx-semibold mg-b-0">Pedidos</h6>
   </div><!-- card-header -->
   <div class="card-body pd-25">
-    <div class="row" paginated-gigs>
+    <div class="row" paginated-requests>
       <%= render partial: "shared/users/request", collection: @requests, as: "request" %>
     </div><!-- row -->
   </div><!-- card-body -->
   <% if @requests.total_count > @requests.length %>
     <nav class="nav nav-with-icon tx-13 card-footer bg-transparent pd-y-15 pd-x-20" paginator-container>
       <%= link_to_next_page(@requests, "Mostrar más <i data-feather='chevron-down' class='mg-l-2 mg-r-0 mg-t-2'></i>".html_safe,
-       param_name: :gigs, remote: true, data: {disable_with: "Cargando..."}, class: "nav-link") %>
+       param_name: :requests, remote: true, data: {disable_with: "Cargando..."}, class: "link-03 d-inline-flex align-items-center") %>
     </nav>
   <% end %>
 </div><!-- card -->
