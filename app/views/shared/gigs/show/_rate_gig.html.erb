@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body tx-13">
       <div id="new_review_content">
-          <h5 class="mg-b-5-f tx-center">Califica este anuncio</h5>
+          <h5 class="mg-b-5-f tx-center">Califica este servicio</h5>
         <%= form_with(model: Review, url: reviews_path, method: :post, :html => { class: "review_form" }) do |f| %>
           <%= f.hidden_field :reviewable_id, value: @gig.id %>
           <%= f.fields_for :rating_attributes do |r| %>

@@ -1,8 +1,7 @@
-<div class="alert alert-info alert-dismissible fade show text-center" role="alert">
-  <div class="want_review">
-    Recuerda que tu Anuncio tendrá prioridad en las búsquedas mientras más comentarios positivos tenga. Haz click aquí para invitar a que lo califiquen.
-  </div>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+<a class="want_review d-none">dasdasdadddasdasdasdasdasdsadsdsa</a> <!-- need to add this so clipboard works-->
+<script>
+  toast_review = toastr.info("Recuerda que tu servicio tendrá prioridad en las búsquedas mientras más comentarios positivos tenga. Haz click aquí para invitar a que lo califiquen.", "",{timeOut: 10000, positionClass: "toast-bottom-full-width"});
+  $(toast_review).click(function () {
+    $(".want_review")[0].click();
+  });
+</script>

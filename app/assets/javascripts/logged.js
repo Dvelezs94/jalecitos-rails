@@ -21,6 +21,7 @@
 //= require best_in_place
 
 //= require jquery-fileupload/basic
+//= require_tree ./dashforge
 
 //= require_tree ./main
 
@@ -35,7 +36,5 @@
 //= require js.cookie
 
 //= require cocoon
-
 //= require_tree ./toastr
-//= require_tree ./dashforge
 //= require data-confirm-modal

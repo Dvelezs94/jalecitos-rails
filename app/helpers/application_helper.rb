@@ -104,7 +104,7 @@ module ApplicationHelper
     else
       type = "warning"
     end
-    ("<script>toastr." + type + "('"+ msg + "', {timeOut: 3000})</script>").html_safe
+    ("<script>toastr." + type + "('"+ msg + "')</script>").html_safe
   end
 
   def image_display_helper image, yt_url #used in min versions

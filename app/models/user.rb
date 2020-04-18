@@ -393,7 +393,6 @@ class User < ApplicationRecord
        errors.add(:base, "El sitio no es una url") if ! url_regex.match?(self.website)
      end
      if self.facebook_changed?
-       puts "X"*500
        puts self.facebook
        errors.add(:base, "La página de facebook no es una url válida") if ! url_regex.match?(self.facebook)
        errors.add(:base, "El perfil de facebook debe apuntar a facebook.com") if get_host_without_www(self.facebook) != "facebook.com" && get_host_without_www(self.facebook) != "fb.com"

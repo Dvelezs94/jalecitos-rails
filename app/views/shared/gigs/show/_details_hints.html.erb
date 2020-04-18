@@ -1,12 +1,15 @@
-<div class="alert alert-primary alert-dismissible fade show text-center" role="alert">
-
-  <% if @gig.gig_packages.none? %>
-    <%= link_to("Agrega paquetes al Anuncio para publicarlo.", edit_gig_path(city_slug(@gig.city),@gig.category.name.parameterize,@gig))%>
-  <% else %>
-    <%= link_to("¡Tu Anuncio está listo para publicarse! Haz click aquí para hacerlo.", toggle_status_gig_path(@gig), class: "alert-link") %>
-  <% end %>
-
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+<% if @gig.gig_packages.none? %>
+  <script>
+    toast_phone = toastr.info("Agrega paquetes al servicio para publicarlo.", "",{timeOut: 10000, positionClass: "toast-bottom-full-width"})
+    $(toast_phone).click(function () {
+      window.location = "<%= edit_gig_path(city_slug(@gig.city),@gig.category.name.parameterize,@gig) %>"
+    });
+  </script>
+<% else %>
+  <script>
+    toast_phone = toastr.info("¡Tu servicio está listo para publicarse! Haz click aquí para hacerlo.", "",{timeOut: 10000, positionClass: "toast-bottom-full-width"})
+    $(toast_phone).click(function () {
+      window.location = "<%= toggle_status_gig_path(@gig) %>"
+    });
+  </script>
+<% end %>
