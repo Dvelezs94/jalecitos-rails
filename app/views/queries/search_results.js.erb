@@ -22,7 +22,7 @@ paginator_container = $("#searchList");
   search_button.find("span").toggleClass("d-none");
   $("#loading-results").addClass("d-none");
   $("#searchList").removeClass("invisible");
-  // changeurl("<%= request.fullpath %>", ""); this breaks the button to return to old page
+  updateURL(<%= raw(params.keys) %>,<%= raw(params.values) %>)
 <% end %>
 
 // this both pagination and filtering uses (removes paginator and adds the new one, then load the map)
