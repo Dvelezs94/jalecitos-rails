@@ -3,10 +3,10 @@ module GetUser
   def get_reviews #used in my_account and show
     @reviews = Review.includes(:giver, :reviewable,:prof_rating).
     where(receiver_id: @user.id, status: "completed").order(updated_at: :desc).
-    page(params[:reviews]).per(5)
+    page(params[:reviews]).per(10)
   end
   def get_gigs
-    @gigs = Gig.where(conditions).order(score_average: :desc).page(params[:gigs]).per(1)
+    @gigs = Gig.where(conditions).order(score_average: :desc).page(params[:gigs]).per(4)
   end
 
   def get_requests

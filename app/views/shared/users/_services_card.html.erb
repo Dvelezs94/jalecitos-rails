@@ -10,7 +10,7 @@
   <% if @gigs.total_count > @gigs.length %>
     <nav class="nav nav-with-icon tx-13 card-footer bg-transparent pd-y-15 pd-x-20" paginator-container>
       <%= link_to_next_page(@gigs, "Mostrar más <i data-feather='chevron-down' class='mg-l-2 mg-r-0 mg-t-2'></i>".html_safe,
-       param_name: :gigs, remote: true, data: {disable_with: "Cargando..."}, class: "nav-link") %>
+       param_name: :gigs, remote: true, data: {disable_with: "Cargando..."}, class: "link-03 d-inline-flex align-items-center") %>
     </nav>
   <% end %>
 </div><!-- card -->

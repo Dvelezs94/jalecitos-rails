@@ -7,8 +7,8 @@ elements_list.append('<%= j render(partial: "shared/users/#{name}", collection: 
 paginator_container.html("");
 
 <% if collection.next_page %>
-  paginator_container.append("<%= j link_to_next_page(collection, 'Mostrar más <i data-feather="chevron-down" class="mg-l-2 mg-r-0 mg-t-2"></i>'.html_safe,
-   param_name: name+'s', remote: true, data: {disable_with: 'Cargando...'}, class: 'nav-link') %>");
+  paginator_container.append("<%= j link_to_next_page(collection, 'Mostrar más <i data-feather="chevron-down" class="mg-l-2 mg-r-0 mg-t-2 feather-12"></i>'.html_safe,
+   param_name: name+'s', remote: true, data: {disable_with: 'Cargando...'}, class: 'link-03 d-inline-flex align-items-center') %>");
 
 <% else %>
 paginator_container.remove();
