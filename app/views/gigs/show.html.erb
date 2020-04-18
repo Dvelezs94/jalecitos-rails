@@ -1,6 +1,6 @@
-<%= render 'shared/gigs/show/details_hints' if current_user && current_user.active? && (@gig.gig_packages.none? || @gig.draft?)%>
-<%= render 'shared/gigs/show/remember_review' if @remember_review %>
-
+<%= render 'shared/gigs/show/details_hints' if current_user && current_user.active? && (@gig.gig_packages.none? || @gig.draft?) && request.original_url != request.referrer %>
+<%= render 'shared/gigs/show/remember_review' if @remember_review && request.original_url != request.referrer  %>
+<%# if request.original_url != request.referrer means that user comes from other page, if that were same, then he updated gig status, then i dont need to display messages  %>
 <div class="row">
   <div class="col-lg-9">
     <%= render 'shared/gigs/show/gig_info2' %>

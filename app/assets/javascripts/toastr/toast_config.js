@@ -1,5 +1,5 @@
 /*make new customization in https://codeseven.github.io/toastr/demo.html*/
-
+/*this is the global default configuration of notifications*/
 toastr.options = {
   "closeButton": false,
   "debug": false,

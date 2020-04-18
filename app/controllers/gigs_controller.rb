@@ -19,6 +19,7 @@ class GigsController < ApplicationController
   before_action :max_gigs, only: [:new, :create]
   before_action :check_running_orders, only: :destroy
   layout :set_layout
+
   def old_show
     #redirecting in redirect_to_show
   end
@@ -26,9 +27,6 @@ class GigsController < ApplicationController
   def show
     if params[:reviews]
       get_reviews
-    elsif params[:related_gigs]
-      get_related_gigs(true)
-      render template: "shared/carousels/add_items_carousel.js.erb"
     else
       define_pack_names
       get_my_reviews if current_user && @gig.user != current_user
@@ -37,9 +35,7 @@ class GigsController < ApplicationController
       Searchkick.multi_search([@related_gigs])
     end
     # increment gig visit
-    if current_user != @gig.user
-      punch_gig
-    end
+    punch_gig if current_user != @gig.user
   end
 
   def ban_gig
