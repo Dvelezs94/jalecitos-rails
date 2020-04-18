@@ -14,12 +14,6 @@ function updateURL(name, value, focusAfterReload="") { //removes all other query
       window.history.pushState({path:newurl},'',newurl);
   }
 }
-
-function changeurl(url, title) {
-    var new_url = url;
-    window.history.pushState('data', 'Title', new_url.replace(/&amp;/g, '&'));
-    if (title != "") document.title = title;
-}
 function updateFormURL(name, value) {
   var strings = "";
   //prepare all the query strings
