@@ -41,7 +41,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # if the user already exists, just log in
     elsif @user.persisted?
       if check_if_banned(@user)
-        redirect_to cookies.permanent.signed[:mb].present? ? mobile_sign_in_path : root_path
+        redirect_to root_path
       else
         log_in_and_remember(@user)
         #  the z is just to fix the fb issue that is appending #_=_ to the last url param

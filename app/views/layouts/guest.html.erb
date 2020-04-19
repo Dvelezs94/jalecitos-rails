@@ -8,9 +8,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%# gig_review_google if @gig.present? && current_page?( the_gig_path(@gig) ) && @gig.score_times > 0 #lo quite porque no tiene sentido poner esto%>
-    <%= render "google/searchbox" if current_page?(root_path) %>
-    <%= render "google/faq_homepage" if current_page?(root_path) %>
+    <%# render "google/searchbox" if current_page?(root_path) %>
+    <%# render "google/faq_homepage" if current_page?(root_path) %>
     <%= favicon_link_tag image_path 'favicon.ico' %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.26.0/feather.min.js"></script>
     <%= stylesheet_link_tag 'guest', media: 'all', 'data-turbolinks-track': 'reload' %>
     <!-- Card Anti Fraud System -->
     <!-- <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script> <script type="text/javascript" src="https://resources.openpay.mx/lib/openpay-data.v1.min.js"></script> -->
@@ -32,18 +33,9 @@
 
   <body>
     <%= google_tag_manager %>
-    <%=hidden_field_tag :new_message, (flash.any?)? "true" : "false" %><%# useful for gritter behaviour (dont display notifications of cache) %>
-    <%= render 'shared/menu/main_nav_bar' %>
-    <%= render "shared/transition/transition-icon" %>
-    <div class="main_container">
+    <div class="content content-fixed content-auth">
       <%= notification_helper %>
-      <% if  ! (current_page?(root_path) || current_page?(new_user_session_path)) || params[:query] %>
-        <div class="gap"></div>
-      <% end  %>
       <%= yield %>
-      <%= render 'shared_guest/log/sessions'%>
     </div>
-    <%= render 'shared_guest/footer' %>
-    <%= render 'pages/contact' %>
   </body>
 </html>

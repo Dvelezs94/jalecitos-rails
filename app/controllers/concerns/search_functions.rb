@@ -31,7 +31,7 @@ module SearchFunctions
     else # get location by ip
       begin
         @userinfo = Geokit::Geocoders::MultiGeocoder.geocode(request.ip)
-        dist = dist.merge(location: { origin: { lat: @userinfo.lat, lon: @userinfo.lng }, function: 'exp', factor: 50 })
+        dist = dist.merge(location: { origin: { lat: @userinfo.lat, lon: @userinfo.lng }, function: 'exp', factor: 50 }) if @userinfo.lat && @userinfo.lng
       rescue
         # do nothing, maybe i can put a default location
       end

@@ -34,9 +34,5 @@ class QueriesController < ApplicationController
       misspellings: {below: 2}
     }).map(&:name)
   end
-
-  def user_mobile_search
-
-  end
   private
 end

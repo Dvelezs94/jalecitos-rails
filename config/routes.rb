@@ -69,7 +69,7 @@ Rails.application.routes.draw do
    devise_scope :user do
      post 'user/disable', :to => 'users/registrations#disable'
    end
-   resources :galleries, only: [:create, :destroy] 
+   resources :galleries, only: [:create, :destroy]
    resources :packages, except: [:destroy,:show,:index, :new, :edit, :update] do
      collection do
        patch 'update_packages', to: 'packages#update_packages', as: 'update'
@@ -145,8 +145,6 @@ Rails.application.routes.draw do
     end
   end
   put "deny_report/:id", to: "reports#deny", as: "deny_report"
-  get 'mobile_sign_in', to: 'mobiles#log_in'
-  get 'mobile_sign_up', to: 'mobiles#register'
   get 'configuration', to: 'users#configuration'
   get 'wizard', to: 'pages#wizard'
   get 'finance', to: 'pages#finance'
@@ -159,11 +157,9 @@ Rails.application.routes.draw do
   # get 'guest_search', to: 'queries#guest_search'
   # get 'guest_autocomplete_search', to: 'queries#guest_autocomplete_search'
 
-  # get 'user_mobile_search', to: 'queries#user_mobile_search'
   # get 'user_autocomplete_search', to: 'queries#user_autocomplete_search'
   # get 'user_search', to: 'queries#user_search'
 
-  get 'user_mobile_search', to: 'queries#user_mobile_search'
   get 'buscar', to: 'queries#search', as: "search"
   get '/guest_search', to: redirect { |path_params, req| "/buscar?#{req.params.to_query}" }
   get 'autocomplete_search', to: 'queries#autocomplete_search'
