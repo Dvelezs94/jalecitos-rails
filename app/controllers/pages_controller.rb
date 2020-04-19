@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   include SearchFunctions
   access user: :all, admin: [:home], all: [:work, :home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots, :sitemap, :install, :gig_slugs]
   before_action :admin_redirect, only: :home
+  before_action :verify_email, only: :home
   before_action :phone_available, only: :home
   before_action :pending_review, only: [:home], :if => :search_pending_review?
   before_action :go_to_sign_in, only: :home
@@ -103,11 +104,20 @@ class PagesController < ApplicationController
   end
 
   def phone_available
-    if current_user && current_user.phone_number.blank? && !cookies[:phone_available]
+    if current_user && current_user.phone_number.blank? && !cookies[:phone_available] && !@verify_email #i dont want to display both at same time, its more important the mail
       cookies[:phone_available] = {
         expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 10.second  #time that elapses to show message again
       }
       @phone_available = true
+    end
+  end
+
+  def verify_email
+    if current_user && current_user.confirmed_at.nil? && !cookies[:verify_email]
+      cookies[:verify_email] = {
+        expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 10.second  #time that elapses to show message again
+      }
+      @verify_email = true
     end
   end
   def go_to_sign_in
