@@ -403,7 +403,7 @@ class User < ApplicationRecord
      end
    end
    def remove_domains #this removes domains and other innecesary stuff like params
-     self.facebook = self.facebook.gsub(/.*com\//, '').gsub(/\/.*/, '').gsub(/\?.*/, '')
-     self.instagram = self.instagram.gsub(/.*com\//, '').gsub(/\/.*/, '').gsub(/\?.*/, '')
+     self.facebook = self.facebook.gsub(/.*com\//, '').gsub(/\/.*/, '').gsub(/\?.*/, '') if facebook_changed?
+     self.instagram = self.instagram.gsub(/.*com\//, '').gsub(/\/.*/, '').gsub(/\?.*/, '') if instagram_changed?
    end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  layout "mobile"
+  layout "guest"
   prepend_before_action :check_captcha, only: [:create]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    build_resource(sign_up_params.merge(lat: params[:sign_up_lat], lon: params[:sign_up_lon]))
+    build_resource(sign_up_params.merge(lat: params[:sign_up_lat], lng: params[:sign_up_lon]))
     resource.save
     yield resource if block_given?
     if resource.persisted?
@@ -115,7 +115,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
-    cookies.permanent.signed[:mb].present? ? mobile_sign_up_path : root_path
+    root_path
   end
 
   private

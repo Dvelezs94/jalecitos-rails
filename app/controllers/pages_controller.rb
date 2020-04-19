@@ -6,6 +6,7 @@ class PagesController < ApplicationController
   before_action :admin_redirect, only: :home
   before_action :phone_available, only: :home
   before_action :pending_review, only: [:home], :if => :search_pending_review?
+  before_action :go_to_sign_in, only: :home
   layout :set_layout
   def home
     if params[:current] #if some pagination is present...
@@ -109,7 +110,9 @@ class PagesController < ApplicationController
       @phone_available = true
     end
   end
-
+  def go_to_sign_in
+    redirect_to new_user_session_path if ! user_signed_in?
+  end
 
   def search_pending_review?
     #format html helps to not query pending reviews when pagination triggers

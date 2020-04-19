@@ -45,7 +45,7 @@
   Entrar con Google
 <% end %>
 <div class="tx-13 mg-t-20 tx-center">¿Ya tienes una cuenta?
-  <%= link_to "Inicia sesión", params[:controller]== "mobiles"? mobile_sign_in_path : new_user_session_path %>
+  <%= link_to "Inicia sesión", new_user_session_path %>
 </div>
 <div class="tx-13 mg-t-20 tx-center">
   ¿No recibiste las<%= link_to " instrucciones de confirmación de cuenta", new_confirmation_path(resource_name) %>?

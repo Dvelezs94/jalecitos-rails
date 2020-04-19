@@ -342,7 +342,7 @@ module ApplicationHelper
   end
 
   def platform_redirect_root_path
-    cookies.signed[:mb] ? mobile_sign_in_path : root_path
+    root_path
   end
 
   def get_invoice uuid
