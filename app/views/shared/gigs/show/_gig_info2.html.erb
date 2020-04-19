@@ -76,7 +76,7 @@
 
 </div>
 <small class="tx-gray-600"><%= @gig.location %></small>
-<p><%= gig_safe_desc %></p>
+<p class="pre-wrap"><%= gig_safe_desc %></p>
 
 <div class="accordion" id="gig-show-accordion">
   <%= render partial: "faqs/faq", collection: @gig.faqs %>

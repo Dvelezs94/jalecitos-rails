@@ -364,3 +364,6 @@ pre[preview] {
 .bootstrap-tagsinput .tag [data-role="remove"] {
   margin-bottom: 2px;
 }
+.pre-wrap {
+  white-space: pre-wrap !important;
+}
