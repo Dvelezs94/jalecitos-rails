@@ -25,51 +25,6 @@
 }
 
 
-.facebook-login {
-	background: #3a5998;
-	display: inline-block;
-	color: #fff;
-	font-family: 'Nunito', sans-serif;
-  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
-  font-weight: 700;
-	width: 100%;
-	border-radius: 4px;
-	border: none;
-}
-
-.facebook-login button {
-	background: none;
-	border: none;
-	color: white;
-	font-weight: 700;
-	padding: 10px;
-	height: 100%;
-	width: 100%;
-}
-
-.google-login {
-	background: #db4437;
-	display: inline-block;
-	color: #fff;
-	font-family: 'Nunito', sans-serif;
-  font-size: calc(14px + (17 - 14) * ((100vw - 320px) / (1800 - 320)));
-  font-weight: 700;
-	width: 100%;
-	border-radius: 4px;
-	border: none;
-	margin-bottom: 10px;
-}
-
-.google-login button {
-	background: none;
-	border: none;
-	color: white;
-	font-weight: 700;
-	padding: 10px;
-	height: 100%;
-	width: 100%;
-}
-
 .nueva a sapn i.fa {
 	font-size: 20px;
 	margin-right: 10px;

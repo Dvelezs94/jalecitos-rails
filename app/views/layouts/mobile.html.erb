@@ -22,9 +22,13 @@
     <%= meta_tags %>
   </head>
 
-  <body id="page-top">
+  <body>
+    <div class="content content-fixed content-auth">
+
       <%= google_tag_manager %>
       <%= notification_helper %>
       <%= yield %>
+
+      </div>
   </body>
 </html>

@@ -1,9 +1,11 @@
 $(document).on('turbolinks:load', function() {
   if (focusAfterReload = $.getUrlVar("focusAfterReload")) {
+    moveTo($("#"+focusAfterReload));
       $("#"+focusAfterReload).focus();
   }
   if (bestFocusAfterReload = $.getUrlVar("bestFocusAfterReload")) {
     waitForElement("#"+bestFocusAfterReload, function() {
+      moveTo($("#"+focusAfterReload));
       focus_best_span(bestFocusAfterReload);
     });
   }
