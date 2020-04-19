@@ -5,6 +5,7 @@
   <div class="card-body pd-25">
     <div class="row" paginated-gigs>
       <%= render partial: "shared/users/gig", collection: @gigs, as: "gig" %>
+    <%= "Nada para mostrar" if @gigs.empty? %>
     </div><!-- row -->
   </div><!-- card-body -->
   <% if @gigs.total_count > @gigs.length %>

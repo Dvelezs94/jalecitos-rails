@@ -1,7 +1,3 @@
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  Tienes <strong><%= ((current_user.created_at+15.days - Time.now )/1.day).to_i %> días </strong> para confirmar tu correo. <br>
-  <%= link_to "No recibí mi correo de confirmación.", send_new_confirmation_email_users_path %>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+<script>toast_phone = toastr.warning("Tienes <%= ((current_user.created_at+15.days - Time.now )/1.day).to_i.to_s %> días para confirmar tu correo. Da click aquí si no recibiste tu correo de confirmación", "", {"positionClass": "toast-bottom-full-width", timeOut: 10000})
+  $(toast_phone).click(function(){ window.location = "<%= send_new_confirmation_email_users_path %>" });
+</script>

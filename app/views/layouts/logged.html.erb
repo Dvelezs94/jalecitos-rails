@@ -38,7 +38,7 @@
     <%= google_tag_manager %>
     <%=hidden_field_tag :new_message, (flash.any?)? "true" : "false" %><%# useful for gritter behaviour (dont display notifications of cache) %>
     <%= render 'shared/menu/main_nav_bar' %>
-    <%= render 'shared_user/users/confirm_email' if current_user.confirmed_at.nil? && controller.action_name != "wizard" %>
+    <%= render 'shared_user/users/confirm_email' if @verify_email && controller.action_name != "wizard" %>
     <div class="content content-fixed">
       <%= render 'shared_user/users/phone_available' if @phone_available %>
       <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
