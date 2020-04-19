@@ -367,3 +367,7 @@ pre[preview] {
 .pre-wrap {
   white-space: pre-wrap !important;
 }
+/*this fixes css of tags input*/
+.bootstrap-tagsinput .tag [data-role="remove"]::after {
+  content: 'x';
+}
