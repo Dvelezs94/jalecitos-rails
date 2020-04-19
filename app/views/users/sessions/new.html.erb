@@ -14,14 +14,14 @@
       <%= form_for(:user, :html => { :class => "sign_in_form" }, :url => session_path(:user)) do |f| %>
       <div class="form-group">
         <label>Email</label>
-        <%= f.email_field :email, placeholder: "ejemplo@gmail.com", class: "form-control required", value: "", autofocus: true, autocomplete: "username",onfocus: "getLocation();" %>
+        <%= f.email_field :email, placeholder: "ejemplo@gmail.com", class: "form-control required", value: "", autofocus: true, autocomplete: "username",onfocus: "getLocation();", tabindex: 1 %>
       </div>
       <div class="form-group">
         <div class="d-flex justify-content-between mg-b-5">
           <label class="mg-b-0-f">Contraseña</label>
           <%= link_to "¿Olvidaste tu contraseña?", new_password_path(:user), class:"tx-13" %>
         </div>
-        <%= f.password_field :password, placeholder: "Escribe tu contraseña" , class: "form-control required", autocomplete: "current-password" %>
+        <%= f.password_field :password, placeholder: "Escribe tu contraseña" , class: "form-control required", autocomplete: "current-password", tabindex: 2 %>
       </div>
       <div class="form-group custom-control custom-checkbox">
         <% if (controller.controller_name == "sessions" && cookies.permanent.signed[:mb].present? ||controller.controller_name == "mobiles" ) %>
