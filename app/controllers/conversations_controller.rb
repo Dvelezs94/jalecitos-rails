@@ -28,11 +28,20 @@ class ConversationsController < ApplicationController
       get_conversations
       filter_conversations
     else
-      get_conversations
-      get_opposite_user( @conversations )
-      if params[:user_id] && params[:user_id] != current_user.slug
-        get_messages
-        mark_as_read
+      respond_to do |format|
+        format.html {
+          get_conversations
+          get_opposite_user( @conversations )
+          if params[:user_id] && params[:user_id] != current_user.slug
+            get_messages
+            mark_as_read
+          end
+        }
+        format.js { #user clicked in a conv_min so i am going to display the conversation
+          get_messages
+          mark_as_read
+        }
+
       end
     end
   end

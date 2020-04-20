@@ -1,6 +1,6 @@
 function scrollBottomMessages() {
-  if ($(".message_view_box").length > 0) {
-    $(".message_view_box").scrollTop($(".message_view_box")[0].scrollHeight);
+  if ($("[content-scrolleable]").length > 0) {
+    $("[content-scrolleable]").scrollTop($("[messages-list]")[0].scrollHeight);
   }
 }
 

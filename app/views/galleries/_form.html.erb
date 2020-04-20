@@ -42,7 +42,7 @@
 <% allowed_ext = (item.class == Gig)? ".png, .jpg, .jpeg, .gif" : ".png, .jpg, .jpeg" %>
 <%= form.file_field :images, multiple: true, id: "file-input", accept: allowed_ext, class: "d-none" %>
 <div class="row justify-content-center">
-<div class="spinner-grow loading mg-t-10 d-none" role="status">
+<div class="spinner-grow loading mg-t-10 d-none" role="status" change_in_ajax>
   <span class="sr-only">Loading...</span>
 </div>
 </div>

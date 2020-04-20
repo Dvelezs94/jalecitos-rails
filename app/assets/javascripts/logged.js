@@ -24,8 +24,8 @@
 
 //= require_tree ./main
 
-//= require_tree ./logged
 //= require_tree ./dashforge
+//= require_tree ./logged
 
 //= require serviceworker-companion
 
