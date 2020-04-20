@@ -1,0 +1,12 @@
+<%= link_to conversations_path(user_id: user["user"].id), data: {user_id: user["user"].id} do %>
+<div class="chat-box-man" id="<%= user["user"].alias %>">
+  <div class="chat-single-box <%= "ef" if ! user["unread_messages"]   %>">
+    <%= image_tag(avatar_display_helper(user["user"].image_url(:thumb))) %>
+    <div class="single-box-text">
+      <h4 class="truncate"><%= "#{user["user"].alias}" %></h4>
+      <p>Activo hace
+        <%= user["user"].current_sign_in_at != nil ? distance_of_time_in_words_to_now(user["user"].current_sign_in_at) : "nunca" %></p>
+    </div>
+  </div>
+</div>
+<% end %>

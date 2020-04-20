@@ -21,7 +21,7 @@ class Conversations
 
   readConversation: () =>
     $.ajax(
-      url: "/conversations/" + $("#conversation_div").data("conversation-id") + "/read_conversation"
+      url: "/conversations/" + $("[conversation-id]").data("conversation-id") + "/read_conversation"
       data: { authenticity_token: $('[name="csrf-token"]')[0].content }
       dataType: "JSON"
       method: "POST"

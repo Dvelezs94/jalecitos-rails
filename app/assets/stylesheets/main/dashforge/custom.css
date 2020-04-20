@@ -371,3 +371,9 @@ pre[preview] {
 .bootstrap-tagsinput .tag [data-role="remove"]::after {
   content: 'x';
 }
+.mw-130px {
+  max-width: 130px;
+}
+.mw-45px {
+  max-width: 45px;
+}

@@ -7,7 +7,7 @@ function message_view_height () {
   conversation_input = $('.bottom-chat-write:visible').outerHeight(true) || 0;
   desktop_top_menu = $('.header-to-area:visible').outerHeight(true) || 0;
   messages_height = screen_height - extra_padding - conversation_input - upper_conversation_menu - mobile_nav - mobile_top_menu - desktop_top_menu;
-  $('.message_view_box').height(messages_height);
+  $('[messages-list]').height(messages_height);
 }
 
 $(document).on('turbolinks:load', function() {
