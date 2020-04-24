@@ -9,6 +9,7 @@
   <% if @messages.next_page %>
     $("[messages-list]").prepend('<%= j paginate(@messages) %>');
   <% end %>
+  stylize_messages();
   <% sleep 1 %>
 <% elsif params[:conversation] || params[:word] == "" %>
     <% if params[:word] == "" %>
@@ -41,4 +42,5 @@
     <%= puts params.class %>
     $("[content-scrolleable]").scrollTop($("[messages-list]")[0].scrollHeight);
     messages_scroll(); // add scroll pagination event
+    stylize_messages();
 <% end %>

@@ -1,16 +1,20 @@
-<div class="chat-group-divider mg-t-20" day><%= message.created_at.strftime("%b %e, %Y") %>
+<% m_diff = 10 %><%#difference of minutes when i want to display again an user image between his messages%>
+<% if @prev_created_at.nil? || @prev_created_at.to_date != message.created_at.to_date %>
+<div class="chat-group-divider"><%= message.created_at.strftime("%b %e, %Y") %>
 </div>
+<% end %>
+<% minute_difference = (@prev_created_at.present?)? (message.created_at  - @prev_created_at)/1.minute : message.created_at %>
 
-<div class="media" message>
-  <div class="avatar avatar-sm avatar-online" avatar="<%= message.user.id %>" date="<%= message.created_at %>">
+<div class="media">
+  <div class="avatar avatar-sm avatar-online <%= "invisible"if minute_difference <= m_diff %>">
     <%= image_tag(avatar_display_helper(message.user.image_url(:thumb)), class: "rounded-circle avatar-initial") %>
   </div>
   <div class="media-body" title="<%= distance_of_time_in_words_to_now(message.created_at)%>" >
-
-    <h6 msg-info="<%= message.user.id %>"><%= message.user.alias %>
+    <% if minute_difference > m_diff %>
+    <h6><%= message.user.alias %>
       <small><%= distance_of_time_in_words_to_now(message.created_at) %></small>
     </h6>
-
+    <% end %>
     <p><%= message.safe_body%></p>
 
     <% if message.image? %>
@@ -27,4 +31,6 @@
       <% end %>
 
     </div>
+    <!-- media-body -->
   </div>
+<% @prev_created_at = message.created_at %><%# this messagw now is the previous in new loop%>
