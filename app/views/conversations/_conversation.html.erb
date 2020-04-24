@@ -8,7 +8,7 @@
   <!-- chat-content-header -->
 
   <div class="chat-content-body" content-scrolleable>
-    <div class="chat-group" messages-list>
+    <div class="chat-group" messages-list="<%= opposite_user.id %>">
       <%= paginate @messages %>
       <%= render 'conversations/conversation_content', messages: @messages.sort %>
 
