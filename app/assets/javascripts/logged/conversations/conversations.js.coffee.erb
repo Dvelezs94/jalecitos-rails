@@ -17,7 +17,7 @@ class Conversations
   renderBoolean: (data) =>
     # put the red dot if there are unread conversations
     if data.unread == true
-      $(".mess-icon").addClass("unread");
+      $("[new-message]").removeClass("d-none");
 
   readConversation: () =>
     $.ajax(

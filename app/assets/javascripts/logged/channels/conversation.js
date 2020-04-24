@@ -7,6 +7,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
     window.conv = conversation
     //if i am filtering, i cant append new conversations to filter results...
     if ($("[filter-conversation]").val() == "") {
+      opposite_user_id = conv_min.attr("data-user-id"); //get id before it gets deleted... im going to use it removing red dot
 
       // if the conversation is visible, remove it and prepend the updated conversation to the start, this wont affect pagination
       if (conv_min.length > 0) {
@@ -22,9 +23,11 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
       else {
         $("[contacts-list]").prepend(data['conversation_min']);
       }
+      //remove the red dot if the conversation is opened
+      if (opposite_user_id == $("[messages-list]").attr("messages-list")) $("[contacts-list] > a:first-child").find("span").remove();
     }
     if (data['role'] == "receiver" && conversation.length == 0){ // if i am the receiver and not in the conversation, add the dot
-      $(".mess-icon").addClass("unread");
+      $("[new-message]").removeClass("d-none");
     }
     else {
       var messages_list = conversation.find('[messages-list]');
