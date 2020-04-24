@@ -4,7 +4,6 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
   received: function(data) {
     var conv_min = $("a[data-user-id="+data['opposite_id']+"]");
     var conversation = $("[data-conversation-id='" + data['conversation_id'] + "']");
-    console.log(conversation)
     window.conv = conversation
     //if i am filtering, i cant append new conversations to filter results...
     if ($("[filter-conversation]").val() == "") {
@@ -30,6 +29,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
     else {
       var messages_list = conversation.find('[messages-list]');
       messages_list.append(data['message']);
+      stylize_messages();
       var height = messages_list[0].scrollHeight;
       $('[content-scrolleable]').scrollTop(height);
       //mark as read if the receiver of message is watching conversation at the time the message arrives

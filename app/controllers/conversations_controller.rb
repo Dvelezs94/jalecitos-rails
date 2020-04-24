@@ -97,7 +97,7 @@ class ConversationsController < ApplicationController
   end
 
   def get_messages
-    @messages = Message.where(conversation_id: @conversation.id).order(id: :desc).page(params[:page]).per(25)
+    @messages = Message.where(conversation_id: @conversation.id).order(id: :desc).page(params[:page]).per(50)
   end
 
 end
