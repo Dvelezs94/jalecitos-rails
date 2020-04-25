@@ -66,15 +66,9 @@ class ConversationsController < ApplicationController
   end
 
   def check_unread
-    @conversations = Conversation.includes(:messages).
-    mine(current_user)
-    @unread = false
-    @conversations.each do |c|
-      if c.unread_messages?(current_user)
-        @unread = true
-        break
-      end
-    end
+    @conversations = Conversation.mine(current_user)
+    @messages = Message.where(conversation_id: @conversations.pluck(:id)).where.not(user: current_user).order(created_at: :desc).limit(5) #get last 5 messages, i dont care if they were read
+    @unread = @messages.select{|msg| msg.read_at == nil }.present? #some of the last 5 messages needs to be read, NOTE: i am just checking last messages, now i dont care if a very old message is unread 
   end
 
   def read_conversation

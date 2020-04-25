@@ -16,7 +16,8 @@ class Conversations
 
   renderBoolean: (data) =>
     # put the red dot if there are unread conversations
-    if data.unread == true
+    $("[new-messages]").after(data.messages)
+    if data.unread
       $("[new-message]").removeClass("d-none");
 
   readConversation: () =>
