@@ -15,9 +15,10 @@ class Conversations
     )
 
   renderBoolean: (data) =>
-    console.log(data)
-    # put the red dot if there are unread conversations
     $("[new-messages]").after(data.messages)
+    if data.messages.trim().length > 0
+      $("[no-messages]").addClass("d-none"); #hide no messages text if message exist
+    # put the red dot if there are unread conversations
     if data.unread
       $("[new-message]").removeClass("d-none");
 
