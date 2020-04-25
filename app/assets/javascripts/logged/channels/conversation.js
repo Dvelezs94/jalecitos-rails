@@ -26,8 +26,10 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
       //remove the red dot if the conversation is opened
       if (opposite_user_id == $("[messages-list]").attr("messages-list")) $("[contacts-list] > a:first-child").find("span").remove();
     }
-    if (data['role'] == "receiver" && conversation.length == 0){ // if i am the receiver and not in the conversation, add the dot
-      $("[new-message]").removeClass("d-none");
+    if (data['role'] == "receiver"){ // if i am the receiver
+      $("[new-messages]").after(data['message_min']); //add message to message menu view
+      if ( $("[data-message-min]").length > 5 ) $("[data-message-min]:last").remove()//just 5 messages on menu view
+      if (conversation.length == 0) $("[new-message]").removeClass("d-none"); //not in the conversation? add the dot
     }
     else {
       var messages_list = conversation.find('[messages-list]');

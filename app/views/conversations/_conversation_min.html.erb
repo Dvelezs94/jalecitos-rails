@@ -5,7 +5,7 @@
     <h6 class="mg-b-0"><%= "#{user["user"].alias}" %></h6>
     <small class="d-block tx-color-04"><%= user["user"].current_sign_in_at != nil ? distance_of_time_in_words_to_now(user["user"].current_sign_in_at) : "nunca" %></small>
   </div><!-- media-body -->
-  <% if user["unread_messages"] %>
+  <% if user["unread_messages"] && params[:user_id] != user["user"].id %> <%# if same id as url, im going to read it so i dont need dot %>
     <span class="badge badge-danger ht-10"> </span> <%#space here in html is needed %>
   <% end %>
 <% end %>
