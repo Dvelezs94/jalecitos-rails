@@ -4,6 +4,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
   received: function(data) {
     var conv_min = $("a[data-user-id="+data['opposite_id']+"]");
     var conversation = $("[data-conversation-id='" + data['conversation_id'] + "']");
+    console.log(data['message'])
     window.conv = conversation
     //if i am filtering, i cant append new conversations to filter results...
     if ($("[filter-conversation]").val() == "") {
@@ -28,17 +29,18 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
     }
     if (data['role'] == "receiver"){ // if i am the receiver
       $("[new-messages]").after(data['message_min']); //add message to message menu view
-      if ( $("[data-message-min]").length > 5 ) $("[data-message-min]:last").remove()//just 5 messages on menu view
-      if (conversation.length == 0) $("[new-message]").removeClass("d-none"); //not in the conversation? add the dot
+      if ( $("[data-message-min]").length > 5 ) $("[data-message-min]:last").remove();//just 5 messages on menu view
+      if (conversation.length == 0){
+        $("[new-message]").removeClass("d-none"); //not in the conversation? add the dot
+      }else{
+        window.conversations.readConversation(data['conversation_id']); //mark as read if the receiver of message is watching conversation at the time the message arrives
+      }
     }
-    else {
-      var messages_list = conversation.find('[messages-list]');
-      messages_list.append(data['message']);
-      stylize_messages();
-      var height = messages_list[0].scrollHeight;
-      $('[content-scrolleable]').scrollTop(height);
-      //mark as read if the receiver of message is watching conversation at the time the message arrives
-      window.conversations.readConversation(data['conversation_id']);
-    }
+    var messages_list = conversation.find('[messages-list]');
+    messages_list.append(data['message']);
+    stylize_messages();
+    var height = messages_list[0].scrollHeight;
+    $('[content-scrolleable]').scrollTop(height);
+
   }
 });

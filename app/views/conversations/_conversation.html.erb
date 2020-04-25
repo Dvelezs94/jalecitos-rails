@@ -10,8 +10,9 @@
   <div class="chat-content-body" content-scrolleable>
     <div class="chat-group" messages-list="<%= opposite_user.id %>">
       <%= paginate @messages %>
-      <%= render 'conversations/conversation_content', messages: @messages.sort %>
-
+      <% @messages.sort.each do |message| %> <%#made this way so message_broadcast_worker is faster %>
+        <%= render message, user: message.user %>
+      <% end %>
     </div>
   </div>
   <!-- chat-content-body -->
