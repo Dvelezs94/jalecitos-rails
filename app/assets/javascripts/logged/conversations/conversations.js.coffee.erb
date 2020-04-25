@@ -15,6 +15,7 @@ class Conversations
     )
 
   renderBoolean: (data) =>
+    console.log(data)
     # put the red dot if there are unread conversations
     $("[new-messages]").after(data.messages)
     if data.unread

@@ -33,7 +33,7 @@ class MessageBroadcastWorker
     ActionCable.server.broadcast(
       "conversations-#{user.id}",
       message: render_message(message, opposite),
-      message_min: render_message_min(message),
+      message_min: render_message_min(message, opposite),
       conversation_id: message.conversation_id,
       opposite_id: opposite.id,
       conversation_min: render_conversation(stuff),
@@ -47,10 +47,10 @@ class MessageBroadcastWorker
       locals: { message: message, user: user }
     )
   end
-  def render_message_min(message)
+  def render_message_min(message, user )
     ApplicationController.render(
       partial: 'messages/message_min',
-      locals: { message: message }
+      locals: { message: message, user: user }
     )
   end
 
