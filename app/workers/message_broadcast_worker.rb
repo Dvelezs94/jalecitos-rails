@@ -21,7 +21,7 @@ class MessageBroadcastWorker
   def broadcast_to_sender(user, opposite, message, stuff)
     ActionCable.server.broadcast(
       "conversations-#{user.id}",
-      message: render_message(message),
+      message: render_message(message,user),
       conversation_id: message.conversation_id,
       conversation_min: render_conversation(stuff),
       opposite_id: opposite.id,
@@ -32,7 +32,7 @@ class MessageBroadcastWorker
   def broadcast_to_receiver(user, opposite, message, stuff)
     ActionCable.server.broadcast(
       "conversations-#{user.id}",
-      message: render_message(message),
+      message: render_message(message, opposite),
       message_min: render_message_min(message),
       conversation_id: message.conversation_id,
       opposite_id: opposite.id,
@@ -41,10 +41,10 @@ class MessageBroadcastWorker
     )
   end
 
-  def render_message(message)
+  def render_message(message, user)
     ApplicationController.render(
       partial: 'messages/message',
-      locals: { message: message }
+      locals: { message: message, user: user }
     )
   end
   def render_message_min(message)
