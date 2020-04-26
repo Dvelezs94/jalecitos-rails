@@ -15,7 +15,8 @@ class Conversations
     )
 
   renderBoolean: (data) =>
-    $("[new-messages]").after(data.messages)
+    $("[new-messages]").after(data.messages);
+    feather.replace();
     if data.messages.trim().length > 0
       $("[no-messages]").addClass("d-none"); #hide no messages text if message exist
     # put the red dot if there are unread conversations
