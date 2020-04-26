@@ -28,6 +28,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
     }
     if (data['role'] == "receiver"){ // if i am the receiver
       $("[new-messages]").after(data['message_min']); //add message to message menu view
+      feather.replace();
       if ( $("[data-message-min]").length > 5 ) $("[data-message-min]:last").remove();//just 5 messages on menu view
       if (conversation.length == 0){
         $("[new-message]").removeClass("d-none"); //not in the conversation? add the dot
@@ -36,7 +37,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
       }
     }
     //append message to conversation stuff
-    if (conversation.length > 0){      
+    if (conversation.length > 0){
       var messages_list = conversation.find('[messages-list]');
       messages_list.append(data['message']);
       stylize_messages();

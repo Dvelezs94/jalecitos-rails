@@ -6,7 +6,7 @@
       <strong><%= user.alias %></strong>
       <p><%= message.safe_body.truncate(50)%></p>
       <% if message.image? %>
-        <p>Imagen</p>
+        <p class="font-weight-bold"> Imagen <i data-feather="camera" class="feather-12 mg-b-1"></i>  </p>
       <% end %>
       <span><%= distance_of_time_in_words_to_now(message.created_at) %></span>
     </div><!-- media-body -->
