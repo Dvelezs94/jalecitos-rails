@@ -380,8 +380,11 @@ pre[preview] {
 .zi-10000 {
   z-index: 10000;
 }
-@media (max-width: 992px){  
+@media (max-width: 992px){
   .t-mobile-20 {
     top: 20px;
   }
+}
+.w-0 {
+  width: 0;
 }
