@@ -1,24 +1,17 @@
 $(document).on "turbolinks:load", ->
   #pagination in most pages
   if $('.pagination').length && ! $('[contacts-list]').length
-    $("#searchList").scroll ->
-      $("img").lazyload() #fixes bug of lazyload (bug makes lazyload dont detect scroll and doesnt load images)
-      url = $('a.next-page:visible').attr('href')
-      if url && $("#searchList").scrollTop() > $("#searchList")[0].scrollHeight - screen.height
-        $('.pagination:visible').text("")
-        $(".loading").show()
-        $.getScript url
 
-    $(window).scroll()
+
 
     $(window).scroll ->
+      console.log(1)
       url = $('a.next-page:visible').attr('href')
       if url && $(window).scrollTop() > $(document).height() - $(window).height() - 300
         $('.pagination:visible').text("")
         $(".loading").show()
         $.getScript url
 
-        $(window).scroll()
 
   #special pagination in messages
   else
@@ -37,4 +30,12 @@ $(document).on "turbolinks:load", ->
    if url && $(this).scrollTop() < 100
      $(this).find('.pagination:visible').text("")
      $(this).find(".loading").show()
+     $.getScript url
+
+@searchList_scroll = ->
+   $("img").lazyload() #fixes bug of lazyload (bug makes lazyload dont detect scroll and doesnt load images)
+   url = $('a.next-page:visible').attr('href')
+   if url && $("#searchList").scrollTop() > $("#searchList")[0].scrollHeight - screen.height
+     $('.pagination:visible').text("")
+     $(".loading").show()
      $.getScript url

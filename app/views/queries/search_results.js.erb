@@ -8,9 +8,7 @@ paginator_container = $("#searchList");
   load_pending_map_elements(window.searchmap, false);
 <% else %>
   var search_button = $("#google_control_search");
-  <% infoText = "<strong> #{collection.total_count} </strong> resultados" %>
-  <% infoText2 =  (params[:query].present?)? " en '<strong>#{params[:query]}</strong>'" : "" %>
-  <% infoText = ( infoText + infoText2).html_safe %>
+  <% infoText = "<strong> #{collection.total_count} </strong> resultados".html_safe %>
   $("#results-text").html("<%= infoText %>");
   paginator_container.scrollTop(0);
   paginator_container.html('<%= j render(partial: "shared/queries/#{name}", collection: collection) %>');

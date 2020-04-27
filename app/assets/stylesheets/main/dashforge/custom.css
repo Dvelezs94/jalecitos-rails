@@ -161,6 +161,8 @@
   right: 10px !important;
 }
 #searchList {
+  top:40px;
+  bottom: 5px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
