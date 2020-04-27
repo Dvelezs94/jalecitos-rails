@@ -33,7 +33,8 @@ class PagesController < ApplicationController
   end
 
   def liked
-    @liked_gigs = Gig.find(current_user.likes.pluck(:gig_id))
+    @likes = current_user.likes.page(params[:page]).per(20)
+    @liked_gigs = Gig.find(@likes.pluck(:gig_id))
   end
 
   def terms_and_conditions
