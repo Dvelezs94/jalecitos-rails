@@ -2,6 +2,7 @@ $(document).on "turbolinks:load", ->
   #pagination in most pages
   if $('.pagination').length && ! $('[contacts-list]').length
     $("#searchList").scroll ->
+      $("img").lazyload() #fixes bug of lazyload (bug makes lazyload dont detect scroll and doesnt load images)
       url = $('a.next-page:visible').attr('href')
       if url && $("#searchList").scrollTop() > $("#searchList")[0].scrollHeight - screen.height
         $('.pagination:visible').text("")

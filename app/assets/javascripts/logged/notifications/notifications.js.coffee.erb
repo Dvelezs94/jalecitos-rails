@@ -46,6 +46,6 @@ class Notifications
     $("[notifications]").after(items)
     if unread_count > 0 # put the red dot if there are unread notifications
       $("[read-notifications] span").removeClass("d-none");
-      $("[read-notifications] span").html(unread_count);
+      #$("[read-notifications] span").html(unread_count);
     if items.length == 0
       $("[notifications]").after('<div  class="container" >No hay nada para mostrar</div>');
