@@ -4192,7 +4192,9 @@ a.close.disabled {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
 
 .toast-body {
-  padding: 0.75rem; }
+  padding: 0.75rem;
+  background: white;
+ }
 
 
 
