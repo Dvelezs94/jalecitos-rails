@@ -4,7 +4,7 @@
     <div class="card-body pd-b-5-f">
       <span class="media" onclick="goToElement($(this).closest('[loaded_in_map]')[0])">
         <div class="avatar avatar-sm">
-          <%= image_tag(avatar_display_helper(gig.user.image_url(:thumb)), class: "rounded-circle") %>
+          <%= image_tag(avatar_display_helper(gig.user.image_url(:thumb)), class: "rounded-circle", lazy: true) %>
         </div>
         <div class="media-body mg-l-10">
           <h6 class="mg-b-0"><%= gig.user.alias %></h6>

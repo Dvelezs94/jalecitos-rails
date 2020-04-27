@@ -18,6 +18,7 @@ $ ->
     window.target = event.currentTarget
     #recieved 1 response
     ajaxRecieved()
+    $("img").lazyload();
     #delete image element if galleries
     if $("#current_images").length > 0
       $(event.currentTarget).closest("div.current_img").fadeOut 500, -> @remove()
@@ -43,3 +44,6 @@ $ ->
     else if window.card_after_rename
       $("#cardModal").show()
       $("#card_number").focus()
+
+  $("body").on "ajax:success","a", (event) ->
+    console.log(1);

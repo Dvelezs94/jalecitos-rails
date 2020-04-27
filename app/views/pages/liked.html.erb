@@ -1,1 +1,6 @@
-<%= render 'shared_user/root/gig_liked_list' %>
+<div class="row row-xs" paginated-gigs>
+
+  <%= render partial: "shared_user/root/gig", collection: @liked_gigs, as: "gig" %>
+  <%= paginate @likes %>
+
+</div>
