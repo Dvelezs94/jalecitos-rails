@@ -127,6 +127,10 @@ class User < ApplicationRecord
     Order.where(employee: self, status: "completed", paid_at: nil, payment_verification: verification)
   end
 
+  def noa #name or alias
+    (self.name.present?)? self.name : self.alias
+  end
+
   def verify_gigs
       self.gigs.each { |gig| gig.touch }
   end

@@ -377,3 +377,6 @@ pre[preview] {
 .mw-45px {
   max-width: 45px;
 }
+.zi-10000 {
+  z-index: 10000;
+}

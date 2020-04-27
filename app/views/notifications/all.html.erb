@@ -1,12 +1,13 @@
-  <% if @notifications.count > 0 %>
-      <div class="paginated-elements notifarea">
-        <%= render @notifications %>
+<div class="media d-block d-lg-flex">
+  <div class="media-body">
+    <div class="timeline-group tx-13" paginated-notif>
+      <%= render @notifications %>
+      <% if @notifications.empty? %>
+      <div class="container text-center">
+        Nada para mostrar
       </div>
-    <div class="pagination-links">
+      <% end %>
       <%= paginate @notifications %>
     </div>
-  <% else %>
-  <div class="container" style="margin-top:2vh;text-align: center;">
-    No hay nada para mostrar
   </div>
-  <% end %>
+</div>
