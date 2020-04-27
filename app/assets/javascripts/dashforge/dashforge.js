@@ -6,7 +6,7 @@ $(document).on('turbolinks:load', function() {
 
   // Initialize PerfectScrollbar of navbar menu for mobile only
   if(window.matchMedia('(max-width: 991px)').matches) {
-    const psNavbar = new PerfectScrollbar('#navbarMenu', {
+    window.psNavbar = new PerfectScrollbar('#navbarMenu', {
       suppressScrollX: true
     });
   }
@@ -36,7 +36,7 @@ $(document).on('turbolinks:load', function() {
     $(this).parent().siblings().removeClass('show');
 
     if(window.matchMedia('(max-width: 991px)').matches) {
-      psNavbar.update();
+      window.psNavbar.update();
     }
   })
 
