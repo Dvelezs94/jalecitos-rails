@@ -1,6 +1,6 @@
 <div class="card mg-t-10 gig-card" loaded_in_map="false" lat="<%= gig.lat %>" lng="<%= gig.lng %>" title="<%= gig.min_title %>">
   <div class="card-horizontal mg-5">
-    <%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), class: "card-img gig-card-horizontal") %>
+    <%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), class: "card-img gig-card-horizontal", lazy: true) %>
     <div class="card-body pd-b-5-f">
       <span class="media" onclick="goToElement($(this).closest('[loaded_in_map]')[0])">
         <div class="avatar avatar-sm">

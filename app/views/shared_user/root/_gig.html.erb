@@ -1,7 +1,7 @@
 <div class="col-sm-6 col-md-4 col-lg-3 mg-t-10" single-element lat="<%= gig.lat %>"  lng="<%= gig.lng %>" title="<%= gig.title %>">
   <div class="card">
     <%= link_to the_gig_path(gig), class: "link-01-a" do %>
-    <%= image_tag( image_display_helper( default_gig_img(gig.images), gig.youtube_url ), class: "card-img-top gig-card-top" ) %>
+    <%= image_tag( image_display_helper( default_gig_img(gig.images), gig.youtube_url ), class: "card-img-top gig-card-top", lazy: true ) %>
       <div class="card-body pd-b-5-f">
         <span class="media">
           <div class="avatar avatar-sm avatar-online">

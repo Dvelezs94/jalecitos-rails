@@ -44,6 +44,3 @@ $ ->
     else if window.card_after_rename
       $("#cardModal").show()
       $("#card_number").focus()
-
-  $("body").on "ajax:success","a", (event) ->
-    console.log(1);
