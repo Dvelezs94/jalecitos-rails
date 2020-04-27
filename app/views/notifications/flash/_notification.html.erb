@@ -1,4 +1,4 @@
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="50000">
 <div class="toast-header">
   <h6 class="tx-inverse tx-14 mg-b-0 mg-r-auto">Notificación</h6>
   <small>Ahora<%# distance_of_time_in_words_to_now(notification.created_at) %></small>
@@ -6,9 +6,9 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
+<a href="<%=url_generator_helper(notification, notification.notifiable) %>" class="tx-black">
 <div class="toast-body">
-  <a href="<%=url_generator_helper(notification, notification.notifiable) %>" class="tx-black">
     <%= build_notification_text(notification, notification.notifiable) %>
-  </a>
 </div>
+</a>
 </div>
