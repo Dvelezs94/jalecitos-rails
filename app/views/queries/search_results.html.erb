@@ -36,7 +36,7 @@
       <div class="col-12 d-flex align-items-center justify-content-between pd-0">
         <h4 class="mg-b-0 tx-spacing--1" id="results-text">
           <strong><%=(params[:model_name] == "requests")? @requests.total_count : @gigs.total_count %></strong>
-          resultados <%= "en <strong>#{params[:query]}</strong>".html_safe if params[:query].present? %>
+          resultados
         </h4>
         <div class="btn-group mg-l-5" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-dark" data-toggle="collapse" href="#filterBar">
@@ -62,7 +62,7 @@
 
 
       </div>
-      <div id="searchList" class="ht-90p flex-column  d-flex">
+      <div id="searchList" class="pos-absolute flex-column  d-flex" onscroll="searchList_scroll();">
         <% if params[:model_name] == "requests" %>
           <%= render partial: 'shared/queries/request', collection: @requests %>
           <%= paginate @requests, param_name: :requests %>
