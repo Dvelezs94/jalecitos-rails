@@ -10,7 +10,7 @@
   <% @show_packages = true %>
   <%= render 'shared/gigs/show/packages_info' %>
   <%= render 'shared/gigs/show/user_about2' %>
-  <%= render "shared/gigs/show/rate_gig" if current_user != @gig.user && @my_reviews.empty? %>
+  <%= render "shared/gigs/show/rate_gig" if current_user && current_user != @gig.user && @my_reviews.blank? %>
   </div>
 </div>
 <div class="row row-xs">

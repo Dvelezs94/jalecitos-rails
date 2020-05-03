@@ -25,7 +25,3 @@
 //= require js.cookie
 
 //= require serviceworker-companion
-
-
-
-//= require_tree ./toastr

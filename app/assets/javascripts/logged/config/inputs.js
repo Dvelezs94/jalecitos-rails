@@ -34,9 +34,7 @@ var code={ BD:"880",BE:"32",BF:"226",BG:"359",BA:"387",BB:"1",WF:"681",BL:"590",
   selectCountry.html(html);
 
   selectCountry.on('change', function() {
-    window.cleavePhone.setPhoneRegionCode(this.value);
-    window.cleavePhone.properties.prefix = this.value;
-    window.cleavePhone.setRawValue(this.value);
+    modifyCleave(this.value);
     $('#userphone').focus();
   });
   //init with mx or the selected value
@@ -47,9 +45,16 @@ var code={ BD:"880",BE:"32",BF:"226",BG:"359",BA:"387",BB:"1",WF:"681",BL:"590",
   }else {
     selectCountry.val('+52');
   }
-  //change it but dont focus it
-  selectCountry.change();
-  $('#userphone').blur();
+  modifyCleave(selectCountry.val());
+
   //put the value in the input again after init the select
   if (current_val != "") $("#userphone").val(current_val);
+}
+
+
+
+function modifyCleave(value) {
+  window.cleavePhone.setPhoneRegionCode(value);
+  window.cleavePhone.properties.prefix = value;
+  window.cleavePhone.setRawValue(value);
 }

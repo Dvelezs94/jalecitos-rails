@@ -5,7 +5,7 @@
 <p class="tx-gray-500"><%= "#{@gig_hits} Vistas" %> ● <%= "#{@gig.likes.length} Me gusta" %></p>
 <div class="d-flex justify-content-between align-items-center">
   <div>
-    <span class="d-mobile-none d-md-inline">A unos <b><%= distance(@gig, current_user.lat, current_user.lng) %></b> de ti</span>
+    <span class="d-mobile-none d-md-inline">A unos <b><%= distance(@gig, @mylat, @mylng) %></b> de ti</span>
     <button type="button" class="btn btn-xs btn-outline-success mg-md-l-5" data-toggle="modal" data-target="#showmapModal" already-on-page="true" lat="<%= @gig.lat %>" lng="<%= @gig.lng %>" title="<%= @gig.title %>">
       <i data-feather="map"></i> Ver en Mapa
     </button>

@@ -23,7 +23,6 @@ App.notifications = App.cable.subscriptions.create("NotificationsChannel", {
     if(data.reviewItem && $("#reviewModal").length == 0){
       $("body").prepend(data.reviewItem); // gets the modal
       modals('rev-modal', 'reviewModal', "closeReview", "none", true ); //shows the modal
-      activate_ratyrate(); //activates stars
       review_validation(); //activates the validation of the form
     }
     //put the red dot

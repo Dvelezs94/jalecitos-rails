@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function() {
   stylize_messages();
+  $("[content-scrolleable]").scrollTop($("[messages-list]")[0].scrollHeight); //scroll to bottom
 });
 
 function stylize_messages() {

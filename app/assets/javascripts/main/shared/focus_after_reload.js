@@ -1,14 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  if (focusAfterReload = $.getUrlVar("focusAfterReload")) {
-    moveTo($("#"+focusAfterReload));
-      $("#"+focusAfterReload).focus();
-  }
-  if (bestFocusAfterReload = $.getUrlVar("bestFocusAfterReload")) {
-    waitForElement("#"+bestFocusAfterReload, function() {
-      moveTo($("#"+focusAfterReload));
-      focus_best_span(bestFocusAfterReload);
-    });
-  }
+  focus_after_reload();
 });
 function focus_best_span(span_id) {
   $(".modal").hide(); //close all modals if necessary
@@ -19,4 +10,16 @@ function focus_best_span(span_id) {
   $('html, body').animate({ //animate through screen
     scrollTop: ($("#"+span_id).offset().top-200)
   }, 1000);
+}
+function focus_after_reload() {
+  if (focusAfterReload = $.getUrlVar("focusAfterReload")) {
+    moveTo($("#"+focusAfterReload));
+      $("#"+focusAfterReload).focus();
+  }
+  if (bestFocusAfterReload = $.getUrlVar("bestFocusAfterReload")) {
+    waitForElement("#"+bestFocusAfterReload, function() {
+      moveTo($("#"+focusAfterReload));
+      focus_best_span(bestFocusAfterReload);
+    });
+  }
 }
