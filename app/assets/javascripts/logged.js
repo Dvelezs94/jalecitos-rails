@@ -24,7 +24,6 @@
 
 //= require_tree ./main
 
-//= require_tree ./dashforge
 //= require_tree ./logged
 
 //= require serviceworker-companion
@@ -36,5 +35,4 @@
 //= require js.cookie
 
 //= require cocoon
-//= require_tree ./toastr
 //= require data-confirm-modal
