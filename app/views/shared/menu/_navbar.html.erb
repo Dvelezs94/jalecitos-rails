@@ -51,6 +51,22 @@
           </li>
         </ul>
       </li>
+      <% else %>
+      <li class="nav-item with-sub active">
+        <a href="" class="nav-link"><i data-feather="briefcase"></i> Cuenta</a>
+        <ul class="navbar-menu-sub">
+          <li class="nav-sub-item">
+            <%= link_to new_user_session_path, class: "nav-sub-link" do  %>
+              <i data-feather="user-check"></i>Iniciar Sesión
+            <% end %>
+          </li>
+          <li class="nav-sub-item">
+            <%= link_to new_user_registration_path, class: "nav-sub-link" do  %>
+              <i data-feather="user-plus"></i>Registrarme
+            <% end %>
+          </li>
+        </ul>
+      </li>
       <% end %>
       <li class="nav-item with-sub">
         <a href="" class="nav-link"><i data-feather="layers"></i> Categorías</a>
