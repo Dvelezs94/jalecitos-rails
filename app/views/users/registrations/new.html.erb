@@ -21,8 +21,9 @@
           <label class="mg-b-0-f">Confirma tu contraseña</label>
         </div>
         <%= f.password_field :password_confirmation, placeholder: "Confirmar contraseña", class: "form-control required", autocomplete: "new-password" %>
-        <%= hidden_field_tag :sign_up_lat, value = '' %>
-        <%= hidden_field_tag :sign_up_lon, value = '' %>
+        <%= hidden_field_tag :sign_up_lat, value = @mylat %>
+        <%= hidden_field_tag :sign_up_lon, value = @mylng %>
+        <%= hidden_field_tag :sign_up_address_name, value = @myaddress %>
       </div>
       <div class="form-group d-flex justify-content-center">
         <%= recaptcha_tags %>

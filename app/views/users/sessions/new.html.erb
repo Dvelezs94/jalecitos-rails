@@ -14,7 +14,7 @@
         <%= form_for(:user, :html => { :class => "sign_in_form" }, :url => session_path(:user)) do |f| %>
         <div class="form-group">
           <label>Email</label>
-          <%= f.email_field :email, placeholder: "ejemplo@gmail.com", class: "form-control required", value: "", autofocus: true, autocomplete: "username",onfocus: "getLocation();", tabindex: 1 %>
+          <%= f.email_field :email, placeholder: "ejemplo@gmail.com", class: "form-control required", value: "", autofocus: true, autocomplete: "username", tabindex: 1 %>
         </div>
         <div class="form-group">
           <div class="d-flex justify-content-between mg-b-5">

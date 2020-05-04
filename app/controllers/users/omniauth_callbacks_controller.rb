@@ -23,7 +23,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_by_email(@auth.info.email)
     if ! @user
       if @auth.info.email.present?
-        @new_user = User.new(provider: @auth.provider, email: @auth.info.email, password: Devise.friendly_token[0,20], name: @auth.info.name, image: @auth.info.image, lat: request.env["omniauth.params"]["lat"], lon: request.env["omniauth.params"]["lon"])
+        @new_user = User.new(provider: @auth.provider, email: @auth.info.email, password: Devise.friendly_token[0,20], name: @auth.info.name, image: @auth.info.image, lat: @mylat, lng: @mylng)
         @new_user.skip_confirmation!
         success = @new_user.save
         if success
