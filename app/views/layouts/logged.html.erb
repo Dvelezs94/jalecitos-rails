@@ -34,7 +34,7 @@
     <title>Jalecitos</title>
     <%= ios_pwa_tags %>
   </head>
-  <body class="app-chat"> <%# app chat class is necessary for chat in mobile%>
+  <body class="app-chat" > <%# app chat class is necessary for chat in mobile%>
 
     <%= google_tag_manager %>
     <%=hidden_field_tag :new_message, (flash.any?)? "true" : "false" %><%# useful for gritter behaviour (dont display notifications of cache) %>

@@ -16,7 +16,6 @@
 
 //= require jquery.nicescroll.js
 
-//= require introjs
 
 //= require best_in_place
 
@@ -25,6 +24,7 @@
 //= require_tree ./main
 
 //= require_tree ./logged
+//= require introjs
 
 //= require serviceworker-companion
 

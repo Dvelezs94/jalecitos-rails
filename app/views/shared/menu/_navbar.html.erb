@@ -1,9 +1,9 @@
 <% categories = Category.all %>
 <% group_size = (categories.length%3 != 0)? (categories.length/3+1).to_i : (categories.length/3).to_i %>
-<header class="navbar navbar-header navbar-header-fixed">
+<header class="navbar navbar-header navbar-header-fixed" data-step="3" data-intro="Éste es tu menú" data-position="bottom">
   <a href="" id="mainMenuOpen" class="burger-menu"><i data-feather="menu"></i></a>
   <a href="" id="chatContentClose" class="burger-menu d-none"><i data-feather="arrow-left"></i></a>
-  <div class="navbar-brand">
+  <div class="navbar-brand" data-step="8" data-intro="Para terminar el tutorial, haz click en finalizar, debajo de este texto" data-position="right">
     <%= link_to root_path, class: "df-logo" do  %>
       Jale<span>citos</span>
     <% end %>
@@ -17,16 +17,16 @@
       <li class="nav-label pd-l-20 pd-lg-l-25 d-lg-none">Menu</li>
       <% if current_user %>
       <li class="nav-item with-sub active">
-        <a href="" class="nav-link"><i data-feather="briefcase"></i> Servicios</a>
+        <a href="" class="nav-link" data-step="4" data-intro="Aquí puedes crear un servicio" data-position="bottom"><i data-feather="briefcase"></i> Servicios</a>
         <ul class="navbar-menu-sub">
           <li class="nav-sub-item">
             <%= link_to new_gig_path, class: "nav-sub-link" do  %>
-              <i data-feather="bar-chart-2"></i>Nuevo Servicio
+              <i data-feather="plus"></i>Nuevo Servicio
             <% end %>
           </li>
           <li class="nav-sub-item">
             <%= link_to my_account_users_path, class: "nav-sub-link" do  %>
-              <i data-feather="users"></i>Mis Servicios
+              <i data-feather="book"></i>Mis Servicios
             <% end %>
           </li>
           <li class="nav-sub-item">
@@ -37,16 +37,16 @@
         </ul>
       </li>
       <li class="nav-item with-sub">
-        <a href="" class="nav-link"><i data-feather="package"></i> Pedidos</a>
+        <a href="" class="nav-link" data-step="5" data-intro="Aquí puedes crear un pedido" data-position="bottom"><i data-feather="package"></i> Pedidos</a>
         <ul class="navbar-menu-sub">
           <li class="nav-sub-item">
             <%= link_to new_request_path, class: "nav-sub-link" do  %>
-              <i data-feather="bar-chart-2"></i>Nuevo Pedido
+              <i data-feather="plus"></i>Nuevo Pedido
             <% end %>
           </li>
           <li class="nav-sub-item">
             <%= link_to my_account_users_path, class: "nav-sub-link" do  %>
-              <i data-feather="users"></i>Mis Pedidos
+              <i data-feather="book"></i>Mis Pedidos
             <% end %>
           </li>
         </ul>
@@ -92,7 +92,7 @@
       <hr class="d-lg-none mg-r-5 mg-l-5">
       <% if current_user %>
       <div class="location-header">
-        <li class="nav-item">
+        <li class="nav-item" data-step="6" data-intro="Ésta es tu ubicación, puedes cambiarla en cualquier momento para ver cosas más cercanas a ti" data-position="bottom">
          <%= form_with model: User, url: update_users_path, method: :put , remote: true do |f|%>
             <%= f.text_field :location, class: 'form-control rounded', id: "menu_autocomplete", placeholder: "Ubicación",
             value: (current_user.location(true).present?)? current_user.location : "",
@@ -106,7 +106,7 @@
     </ul>
 
   </div><!-- navbar-menu-wrapper -->
-  <div class="navbar-right">
+  <div class="navbar-right" data-step="7" data-intro="En este lugar puedes buscar servicios y pedidos, ver tus mensajes y notificaciones o configurar tu perfil" data-position="left">
     <%= link_to "", class: "search-link", id: "navbarSearch" do  %>
       <i data-feather="search"></i>
     <% end %>
