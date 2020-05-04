@@ -63,7 +63,7 @@ class User < ApplicationRecord
   # update verified gigs when account is verified
   before_update :verify_gigs, :if => :verified_changed?
   before_update :set_roles
-  before_update :remove_domains
+  before_update :remove_whitespaces_from_profiles
   #when user is banned, unbanned or disabled...
   after_validation :enable_disable_stuff, :if => :status_changed? #this is after updates so dont refund nothing and reverse everything is some validation fails, it would be a big trouble because refund will send to openpay the request and if validation fails then the status of the order will reset to in progress, for example, and refund was requested... trouble
 
@@ -396,18 +396,13 @@ class User < ApplicationRecord
      if self.website.present?
        errors.add(:base, "El sitio no es una url") if ! url_regex.match?(self.website)
      end
-     if self.facebook_changed?
-       puts self.facebook
-       errors.add(:base, "La página de facebook no es una url válida") if ! url_regex.match?(self.facebook)
-       errors.add(:base, "El perfil de facebook debe apuntar a facebook.com") if get_host_without_www(self.facebook) != "facebook.com" && get_host_without_www(self.facebook) != "fb.com"
-     end
-     if self.instagram_changed?
-       errors.add(:base, "La página de instagram no es una url válida") if ! url_regex.match?(self.instagram)
-       errors.add(:base, "El perfil de instagram debe apuntar a instagram.com") if get_host_without_www(self.instagram) != "instagram.com"
-     end
    end
-   def remove_domains #this removes domains and other innecesary stuff like params
-     self.facebook = self.facebook.gsub(/.*com\//, '').gsub(/\/.*/, '').gsub(/\?.*/, '') if facebook_changed?
-     self.instagram = self.instagram.gsub(/.*com\//, '').gsub(/\/.*/, '').gsub(/\?.*/, '') if instagram_changed?
+   def remove_whitespaces_from_profiles
+     #also delete / if stars with it
+     self.facebook = self.facebook.delete(' ')
+     self.facebook = self.facebook.delete_prefix("/")
+
+     self.instagram = self.instagram.delete(' ')
+     self.instagram = self.instagram.delete_prefix("/")
    end
 end

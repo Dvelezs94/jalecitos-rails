@@ -43,7 +43,7 @@
 
     <%= render 'shared_user/users/confirm_email' if @verify_email && controller.action_name != "wizard" %>
     <div class="content content-fixed">
-      <%= render 'shared_user/users/phone_available' if @phone_available %>
+      <%= render 'shared_user/users/phone_available' if @phone_available && params[:modal].blank? %>
       <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
       <!-- Remove at some point no hire -->
 
