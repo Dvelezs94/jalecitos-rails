@@ -4,7 +4,7 @@
       <li class="nav-item">
         <a class="nav-link <%= "active" if params[:collapse].nil? %>" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Editar Perfil</a>
       </li>
-      <li class="nav-item<%= "d-none" if current_user.provider.present? %>">
+      <li class="nav-item <%= "d-none" if current_user.provider.present? %>">
         <a class="nav-link <%= "active" if params[:collapse] == "security" %>" id="security-tab" data-toggle="tab" href="#security" role="tab" aria-controls="security" aria-selected="false">Seguridad</a>
       </li>
       <!-- <li class="nav-item"> <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab" aria-controls="notifications" aria-selected="false">Notificationes</a> </li> -->
