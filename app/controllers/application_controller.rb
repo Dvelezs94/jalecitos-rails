@@ -80,8 +80,8 @@ end
         @mylng = @userinfo.lng
         @myaddress = @userinfo.full_address
       rescue #put mexico city lat and lng as default if google fails
-        @mylat = "19.432608"
-        @mylng = "-99.133209"
+        @mylat = 19.432608
+        @mylng = -99.133209
         @myaddress = "Mexico City, Mexico"
       end
       #save cookies so server doesnt make a lot of requests to google
