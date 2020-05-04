@@ -17,27 +17,12 @@ module GetPages
     end
   end
 
-  def wizard_paginate
-    if params[:wizard_gigs]
-      get_wizard_gigs
-    elsif params[:wizard_requests]
-      get_wizard_requests
-    end
-  end
-
-  def wizard_get_all
-    get_wizard_gigs
-    get_wizard_requests
-  end
-
   def get_wizard_gigs
-    @wizard_gigs =  Gig.includes(:user, :likes, :category, city: [state: :country]).where(status: "wizard").
-    page(params[:wizard_gigs]).per(15)
+    @wizard_gigs =  Gig.where(status: "wizard").limit(4)
   end
 
   def get_wizard_requests
-    @wizard_requests = Request.includes(city: [state: :country]).where(status: "wizard").
-    page(params[:wizard_requests]).per(15)
+    @wizard_requests = Request.where(status: "wizard").limit(4)
   end
 
   def get_last_gigs_near_by

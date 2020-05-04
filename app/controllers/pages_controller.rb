@@ -58,13 +58,10 @@ class PagesController < ApplicationController
   end
 
   def wizard
-    if params[:current] #if some pagination is present...
-      wizard_paginate
-      render template: "shared/carousels/add_items_carousel.js.erb"
-    else
-      wizard_get_all
-      render 'shared_user/root/homepage'
-    end
+      get_wizard_gigs
+      get_wizard_requests
+      render 'shared_user/root/wizard'
+
   end
 
   def sitemap

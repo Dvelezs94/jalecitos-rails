@@ -1,5 +1,9 @@
 <div class="row row-xs" paginated-gigs>
-
+  <% if @liked_gigs.empty? %>
+  <div class="container text-center">
+    Nada para mostrar
+  </div>
+  <% end %>
   <%= render partial: "shared_user/root/gig", collection: @liked_gigs, as: "gig" %>
   <%= paginate @likes %>
 

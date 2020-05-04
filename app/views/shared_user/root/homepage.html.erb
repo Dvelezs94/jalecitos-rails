@@ -1,53 +1,48 @@
-<% if controller.action_name == "home" %>
-
-  <div class="row row-xs">
-    <%= render 'shared_user/root/featured_ads_carousel'  %>
-    <% if @last_gigs_near_by.any? %>
+<div class="row row-xs">
+  <%= render 'shared_user/root/featured_ads_carousel' %>
+  <% if @last_gigs_near_by.any? %>
     <div class="col-12 d-flex align-items-center justify-content-between mg-b-10 mg-t-20">
       <div>
         <h4 class="mg-b-0 tx-spacing--1">Lo último para ti</h4>
       </div>
       <div>
         <% if @last_gigs_near_by.total_count > @show_x_last_gigs_near_by %>
-          <%= link_to search_path(query: "", lat: @mylat, lng: @mylng, order_by: "recent", location: @myaddress), class: "link-03" do  %>
-          Ver más <i data-feather="chevron-right"></i>
-          <% end %>
-        <%end %>
-      </div>
+          <%= link_to search_path(query: "", lat: @mylat, lng: @mylng, order_by: "recent", location: @myaddress), class: "link-03" do %>
+          Ver más
+          <i data-feather="chevron-right"></i>
+        <% end %>
+      <%end %>
     </div>
-    <%= render partial: "shared_user/root/gig", collection: @last_gigs_near_by, as: "gig" %>
-    <% end %>
-    <% if @last_reqs_near_by.any? %>
-    <div class="col-12 d-flex align-items-center justify-content-between mg-b-10 mg-t-20">
-      <div>
-        <h4 class="mg-b-0 tx-spacing--1">Últimos pedidos</h4>
-      </div>
-      <div>
-        <% if @last_reqs_near_by.total_count > @show_x_last_reqs_near_by %>
-          <%= link_to search_path(query: "", lat: @mylat, lng: @mylng, order_by: "recent", location: @myaddress, model_name: "requests"), class: "link-03" do  %>
-          Ver más <i data-feather="chevron-right"></i>
-          <% end %>
-        <%end %>
-      </div>
+  </div>
+  <%= render partial: "shared_user/root/gig", collection: @last_gigs_near_by, as: "gig" %>
+<% end %>
+
+<% if @last_reqs_near_by.any? %>
+  <div class="col-12 d-flex align-items-center justify-content-between mg-b-10 mg-t-20">
+    <div>
+      <h4 class="mg-b-0 tx-spacing--1">Últimos pedidos</h4>
     </div>
-    <%= render partial: "shared_user/root/request", collection: @last_reqs_near_by, as: "request" %>
-    <% end %>
-    <%# render "shared/no_gigs" %>
+    <div>
+      <% if @last_reqs_near_by.total_count > @show_x_last_reqs_near_by %>
+        <%= link_to search_path(query: "", lat: @mylat, lng: @mylng, order_by: "recent", location: @myaddress, model_name: "requests"), class: "link-03" do %>
+        Ver más
+        <i data-feather="chevron-right"></i>
+      <% end %>
+    <%end %>
+  </div>
+</div>
+<%= render partial: "shared_user/root/request", collection: @last_reqs_near_by, as: "request" %>
+<% end %>
+<%# render "shared/no_gigs" %>
 
-    <%# gig_carousel( "Agregados recientemente", :recent_gigs) %>
+<%# gig_carousel( "Agregados recientemente", :recent_gigs) %>
 
-    <%# gig_carousel( "Jales Populares", :popular_gigs) %>
+  <%# gig_carousel( "Jales Populares", :popular_gigs) %>
 
     <%# req_carousel("Pedidos Recientes", :recent_requests) %>
 
+      <%# gig_carousel( "Jales Verificados", :verified_gigs) %>
 
-    <%# gig_carousel( "Jales Verificados", :verified_gigs) %>
+        <%# gig_carousel( "Jales Gustados", :liked_gigs, 'shared_user/gigs/liked_carousel', true) %>
 
-    <%# gig_carousel( "Jales Gustados", :liked_gigs, 'shared_user/gigs/liked_carousel', true) %>
-
-  </div>
-<% else %>
-  <%= gig_carousel( "Jales", :wizard_gigs) %>
-
-  <%= req_carousel("Pedidos", :wizard_requests) %>
-<% end %>
+</div>

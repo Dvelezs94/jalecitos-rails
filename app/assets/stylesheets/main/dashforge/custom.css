@@ -390,3 +390,17 @@ pre[preview] {
 .w-0 {
   width: 0;
 }
+/*used in intro js so if miss click on black screen dont get out of wizard*/
+.introjs-overlay {
+  pointer-events: none;
+}
+.middle-top-tooltip {
+  right: 50% !important;
+  top: 15% !important;
+  height: fit-content;
+}
+#navbarMenu.introjs-fixParent {
+  position: fixed !important;
+  z-index: 10000000 !important;
+}
+/**/
