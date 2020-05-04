@@ -4,7 +4,7 @@
   </div>
   <div>
     <% if @related_gigs.total_count > @show_x_related_gigs %>
-      <%= link_to search_path(query: "", category_id: @gig.category_id, lat: @gig.lat, lng: @gig.lng), class: "link-03" do  %>
+      <%= link_to search_path(query: "", category_id: @gig.category_id, lat: @gig.lat, lng: @gig.lng, location: @gig.location), class: "link-03" do  %>
       Ver más <i data-feather="chevron-right"></i>
       <% end %>
     <%end %>

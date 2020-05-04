@@ -28,14 +28,6 @@ class GigsController < ApplicationController
     if params[:reviews]
       get_reviews
     else
-      if !current_user
-        @userinfo = Geokit::Geocoders::MultiGeocoder.geocode(request.ip) #need lat and lng to show service distance
-        @mylat = @userinfo.lat
-        @mylng = @userinfo.lng
-      else
-        @mylat = current_user.lat
-        @mylng = current_user.lng
-      end
       define_pack_names
       get_my_reviews if current_user && @gig.user != current_user
       get_reviews
