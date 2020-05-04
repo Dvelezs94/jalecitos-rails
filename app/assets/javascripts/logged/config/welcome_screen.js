@@ -1,5 +1,5 @@
 function redirectToHome() {
-  window.location.href = "/";
+  window.location.href = "/?modal=completeInfo";
 }
 
 $(document).on('turbolinks:load', function() {

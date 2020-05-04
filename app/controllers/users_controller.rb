@@ -54,10 +54,7 @@ class UsersController < ApplicationController
     @success = current_user.update(user_params)
     respond_to do |format|
         format.js {
-          if @success
-            flash[:success] = "Tu información se ha actualizado."
-            redirect_to request.referrer #menu stuff maybe needs reload if user updated location
-          end #errors shows in partial
+          #response in partial
          }
         #changing location of config and mobile use this, and image of user
         format.html {

@@ -1,2 +1,7 @@
-//errors
-  toastr.error("<%= current_user.errors.full_messages.first %>")
+<% if @success  %>
+  <% flash[:success] = "Tu información se ha actualizado" %>
+  updateURL([],[]); // if new user, need to remove params and reload so the modal dont display again
+  window.location.reload();
+<% else %>
+  toastr.error("<%= current_user.errors.full_messages.first %>");
+<% end %>
