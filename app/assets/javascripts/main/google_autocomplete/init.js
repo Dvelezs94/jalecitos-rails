@@ -113,8 +113,8 @@ function initGoogleMap(id) {
   waitForElement("#" + id, function() {
     window.searchmap = new google.maps.Map(document.getElementById(id), {
       center: {
-        lat: parseFloat($("#search_autocomplete").attr("lat")) || 19.432608,
-        lng: parseFloat($("#search_autocomplete").attr("lng")) || -99.133209
+        lat: parseFloat($("#search_autocomplete").attr("lat")),
+        lng: parseFloat($("#search_autocomplete").attr("lng"))
       },
       zoom: 15,
       fullscreenControl: false,

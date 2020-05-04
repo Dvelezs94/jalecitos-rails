@@ -80,22 +80,22 @@ end
         @mylng = @userinfo.lng
         @myaddress = @userinfo.full_address
       rescue #put mexico city lat and lng as default if google fails
-        @mylat = 19.432608
-        @mylng = -99.133209
+        @mylat = "19.432608"
+        @mylng = "-99.133209"
         @myaddress = "Mexico City, Mexico"
       end
       #save cookies so server doesnt make a lot of requests to google
         cookies[:mylat] = {
           value: @mylat,
-          expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 3.second
+          expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 10.minutes
         }
         cookies[:mylng] = {
           value: @mylng,
-          expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 3.second
+          expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 10.minutes
         }
         cookies[:myaddress] = {
           value: @myaddress,
-          expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 3.second
+          expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 10.minutes
         }
     end
   end
