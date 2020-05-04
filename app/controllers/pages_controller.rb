@@ -14,7 +14,10 @@ class PagesController < ApplicationController
       home_paginate
       render template: "shared/carousels/add_items_carousel.js.erb"
     else
-      get_last_gigs_near_by if user_signed_in?
+      if user_signed_in?
+        get_last_gigs_near_by
+        get_last_reqs_near_by
+      end
       #home_get_all
       (user_signed_in?)? render(template: 'shared_user/root/homepage') : render(template: 'shared_guest/root/homepage')
     end

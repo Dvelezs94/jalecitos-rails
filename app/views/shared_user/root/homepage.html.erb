@@ -2,6 +2,7 @@
 
   <div class="row row-xs">
     <%= render 'shared_user/root/featured_ads_carousel'  %>
+    <% if @last_gigs_near_by.any? %>
     <div class="col-12 d-flex align-items-center justify-content-between mg-b-10 mg-t-20">
       <div>
         <h4 class="mg-b-0 tx-spacing--1">Lo último para ti</h4>
@@ -15,7 +16,22 @@
       </div>
     </div>
     <%= render partial: "shared_user/root/gig", collection: @last_gigs_near_by, as: "gig" %>
-
+    <% end %>
+    <% if @last_reqs_near_by.any? %>
+    <div class="col-12 d-flex align-items-center justify-content-between mg-b-10 mg-t-20">
+      <div>
+        <h4 class="mg-b-0 tx-spacing--1">Últimos pedidos</h4>
+      </div>
+      <div>
+        <% if @last_reqs_near_by.total_count > @show_x_last_reqs_near_by %>
+          <%= link_to search_path(query: "", lat: @mylat, lng: @mylng, order_by: "recent", location: @myaddress, model_name: "requests"), class: "link-03" do  %>
+          Ver más <i data-feather="chevron-right"></i>
+          <% end %>
+        <%end %>
+      </div>
+    </div>
+    <%= render partial: "shared_user/root/request", collection: @last_reqs_near_by, as: "request" %>
+    <% end %>
     <%# render "shared/no_gigs" %>
 
     <%# gig_carousel( "Agregados recientemente", :recent_gigs) %>
