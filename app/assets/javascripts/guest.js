@@ -25,3 +25,5 @@
 //= require js.cookie
 
 //= require serviceworker-companion
+
+//= require data-confirm-modal

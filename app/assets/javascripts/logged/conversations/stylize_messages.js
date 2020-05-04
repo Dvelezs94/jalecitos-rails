@@ -1,6 +1,8 @@
 $(document).on('turbolinks:load', function() {
-  stylize_messages();
-  $("[content-scrolleable]").scrollTop($("[messages-list]")[0].scrollHeight); //scroll to bottom
+  if ($("[messages-list]").length > 0){    
+    stylize_messages();
+    $("[content-scrolleable]").scrollTop($("[messages-list]")[0].scrollHeight); //scroll to bottom
+  }
 });
 
 function stylize_messages() {

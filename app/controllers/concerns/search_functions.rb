@@ -26,15 +26,8 @@ module SearchFunctions
     dist = {}
     if params[:lat].present? # guest or user with location
       dist = dist.merge(location: { origin: { lat: params[:lat], lon: params[:lng] }, function: 'exp', factor: 50 })
-    elsif current_user && current_user.lat # first search when filter isnt there
-      dist = dist.merge(location: { origin: { lat: current_user.lat, lon: current_user.lng }, function: 'exp', factor: 50 })
-    else # get location by ip
-      begin
-        @userinfo = Geokit::Geocoders::MultiGeocoder.geocode(request.ip)
-        dist = dist.merge(location: { origin: { lat: @userinfo.lat, lon: @userinfo.lng }, function: 'exp', factor: 50 }) if @userinfo.lat && @userinfo.lng
-      rescue
-        # do nothing, maybe i can put a default location
-      end
+    else # use location given by set_location (applicaiton_controller)
+      dist = dist.merge(location: { origin: { lat: @mylat, lon: @mylng }, function: 'exp', factor: 50 })
     end
     dist
   end
