@@ -9,8 +9,7 @@
       <h5 class="mg-b-2 tx-spacing--1"><%= @user.name %></h5>
       <p class="tx-color-03 mg-b-25"><%= @user.alias %></p>
       <div class="d-flex mg-b-25">
-
-        <%=link_to( "Reportar", "#", class: "btn btn-xs btn-white flex-fill", data: {toggle: "modal", target: "#reportModal"} ) if @user != current_user%>
+        <%=link_to( "Reportar", "#", class: "btn btn-xs btn-white flex-fill", data: {toggle: "modal", target: "#reportModal"} ) if current_user && @user != current_user%>
 
         <%=link_to( "Mensaje", conversations_path( user_id: @user.id), class: "btn btn-xs btn-primary flex-fill mg-l-10" ) if @user != current_user%>
       </div>

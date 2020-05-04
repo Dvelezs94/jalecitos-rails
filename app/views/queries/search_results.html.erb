@@ -9,9 +9,9 @@
         </div>
         <div class="form-group col-md-2">
           <%= f.text_field :location, class: 'form-control rounded', id: "search_autocomplete", placeholder: "Ubicación",
-           value: (params[:location].present?)? params[:location] : current_user.location ,
-           lat: (params[:location].present?)? params[:lat] :current_user.lat || nil,
-           lng: (params[:location].present?)? params[:lng] : current_user.lng || nil %>
+           value: (params[:location].present?)? params[:location] : @myaddress ,
+           lat: (params[:location].present?)? params[:lat] : @mylat,
+           lng: (params[:location].present?)? params[:lng] : @mylng %>
           </div>
           <div class="form-group col-md-2">
             <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría", :selected => params[:category_id] }, class: 'custom-select') %>
@@ -62,7 +62,7 @@
 
 
       </div>
-      <div id="searchList" class="pos-absolute flex-column  d-flex" onscroll="searchList_scroll();">
+      <div id="searchList" class="pos-absolute flex-column w-100 d-flex" onscroll="searchList_scroll();">
         <% if params[:model_name] == "requests" %>
           <%= render partial: 'shared/queries/request', collection: @requests %>
           <%= paginate @requests, param_name: :requests %>

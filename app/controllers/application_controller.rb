@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # before_action :check_if_user_banned, if: :important_route?
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :update_sign_in_at_periodically
+  before_action :set_location
   UPDATE_LOGIN_PERIOD = 1.hours
   include ApplicationHelper
 
@@ -60,6 +61,43 @@ end
 
   def is_number? string
     true if Float(string) rescue false
+  end
+
+  def set_location
+    if current_user && current_user.lat.present? && current_user.lng.present?
+      @mylat = current_user.lat
+      @mylng = current_user.lng
+      @myaddress = current_user.address_name
+    elsif cookies[:mylat] && cookies[:mylng] # if cookie, grab from there
+      @mylat = cookies[:mylat]
+      @mylng = cookies[:mylng]
+      @myaddress = cookies[:myaddress]
+    else #try to get lat and lng from google
+      begin
+        @userinfo = Geokit::Geocoders::MultiGeocoder.geocode(request.ip)
+        raise "error geocoding" if @userinfo.success == false
+        @mylat = @userinfo.lat
+        @mylng = @userinfo.lng
+        @myaddress = @userinfo.full_address
+      rescue #put mexico city lat and lng as default if google fails
+        @mylat = 19.432608
+        @mylng = -99.133209
+        @myaddress = "Mexico City, Mexico"
+      end
+      #save cookies so server doesnt make a lot of requests to google
+        cookies[:mylat] = {
+          value: @mylat,
+          expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 3.second
+        }
+        cookies[:mylng] = {
+          value: @mylng,
+          expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 3.second
+        }
+        cookies[:myaddress] = {
+          value: @myaddress,
+          expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 3.second
+        }
+    end
   end
 
 end

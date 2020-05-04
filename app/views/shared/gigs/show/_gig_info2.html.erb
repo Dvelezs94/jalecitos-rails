@@ -13,9 +13,10 @@
   <span>
     <%= link_to "Compartir", {}, class: "share_item_url btn btn-xs btn-outline-primary" if @gig.published? %>
     <%= link_to "Editar", edit_gig_path(city_slug(@gig.city),@gig.category.name.parameterize, @gig), class: "btn btn-xs btn-outline-primary" if !@gig.published? %> <%# if not published (and i can access to view, it means is my gig) %>
+    <% if current_user %>
     <a href="" class="link-01" id="moreMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="more-vertical"></i></a>
     <div class="dropdown-menu" aria-labelledby="moreMenuButton">
-      <% if user_signed_in? && (@gig.user == current_user) %>
+      <% if (@gig.user == current_user) %>
       <% unless @gig.banned? || @gig.gig_packages[0].nil? %>
         <%= link_to toggle_status_gig_path(@gig), class: "dropdown-item"  do %>
           <%= status_text_helper(@gig) %>
@@ -34,6 +35,7 @@
         <% end %>
       <% end %>
     </div>
+    <% end %>
   </span>
 </div>
 

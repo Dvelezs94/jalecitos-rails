@@ -22,7 +22,7 @@
       </div>
     <% end %>
     <div class="card-footer d-flex justify-content-between align-items-center">
-      <%= render("gigs/likes", gig: gig, with_number: false) if current_user != gig.user %>
+      <%= render("gigs/likes", gig: gig, with_number: false) if current_user && current_user != gig.user%>
       <%= link_to "Mapa", the_gig_path(gig), data: {target: "#showmapModal", toggle: "modal"} %>
       <%= link_to the_gig_path(gig), class: "share_item_url" do %>
         Compartir

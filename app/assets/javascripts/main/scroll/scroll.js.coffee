@@ -1,17 +1,13 @@
 $(document).on "turbolinks:load", ->
   #pagination in most pages
   if $('.pagination').length && ! $('[contacts-list]').length
-
-
-
     $(window).scroll ->
-      console.log(1)
       url = $('a.next-page:visible').attr('href')
       if url && $(window).scrollTop() > $(document).height() - $(window).height() - 300
         $('.pagination:visible').text("")
         $(".loading").show()
         $.getScript url
-
+    $("img").lazyload() #fixes bug when search is loaded doesnt load images
 
   #special pagination in messages
   else

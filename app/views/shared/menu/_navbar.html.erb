@@ -15,6 +15,7 @@
     </div><!-- navbar-menu-header -->
     <ul class="nav navbar-menu justify-content-center">
       <li class="nav-label pd-l-20 pd-lg-l-25 d-lg-none">Menu</li>
+      <% if current_user %>
       <li class="nav-item with-sub active">
         <a href="" class="nav-link"><i data-feather="briefcase"></i> Servicios</a>
         <ul class="navbar-menu-sub">
@@ -50,6 +51,7 @@
           </li>
         </ul>
       </li>
+      <% end %>
       <li class="nav-item with-sub">
         <a href="" class="nav-link"><i data-feather="layers"></i> Categorías</a>
         <div class="navbar-menu-sub">
@@ -59,7 +61,7 @@
                   <% categories.in_groups_of(group_size)[n].each do |cat| %>
                     <% if cat.present? %>
                     <li class="nav-sub-item">
-                      <%= link_to search_path(query: "", category_id: cat.id, lat: current_user.lat, lng: current_user.lng), class: "nav-sub-link" do %>
+                      <%= link_to search_path(query: "", category_id: cat.id, lat: @mylat, lng: @mylng), class: "nav-sub-link" do %>
                         <%= cat.name %>
                       <% end %>
                     </li>
@@ -72,6 +74,7 @@
       </li>
       <li class="nav-item"><a href="" class="link-04 nav-link" id="invite-friend"><i data-feather="share-2"></i>Invitar</a></li>
       <hr class="d-lg-none mg-r-5 mg-l-5">
+      <% if current_user %>
       <div class="location-header">
         <li class="nav-item">
          <%= form_with model: User, url: update_users_path, method: :put , remote: true do |f|%>
@@ -83,6 +86,7 @@
           <% end %>
         </li>
       </div>
+      <% end %>
     </ul>
 
   </div><!-- navbar-menu-wrapper -->
@@ -90,6 +94,7 @@
     <%= link_to "", class: "search-link", id: "navbarSearch" do  %>
       <i data-feather="search"></i>
     <% end %>
+    <% if current_user %>
     <div class="dropdown dropdown-message">
       <a href="" class="dropdown-link new-indicator" data-toggle="dropdown">
         <i data-feather="message-square"></i>
@@ -139,6 +144,7 @@
         <% end %>
       </div><!-- dropdown-menu -->
     </div><!-- dropdown -->
+    <% end %>
   </div><!-- navbar-right -->
   <div class="navbar-search">
     <%= form_with url: search_path, method: :get ,:html => {id: "simple-query"}, local: true do |f|%>

@@ -20,7 +20,8 @@ paginator_container = $("#searchList");
   search_button.find("span").toggleClass("d-none");
   $("#loading-results").addClass("d-none");
   $("#searchList").removeClass("invisible");
-  updateURL(<%= raw(params.keys) %>,<%= raw(params.values) %>)
+  updateURL(<%= raw(params.keys) %>,<%= raw(params.values) %>);
+  $("img").lazyload(); //fixes bug when search is loaded doesnt load images
 <% end %>
 
 // this both pagination and filtering uses (removes paginator and adds the new one, then load the map)

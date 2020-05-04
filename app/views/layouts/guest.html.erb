@@ -16,6 +16,8 @@
     <!-- Card Anti Fraud System -->
     <!-- <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script> <script type="text/javascript" src="https://resources.openpay.mx/lib/openpay-data.v1.min.js"></script> -->
     <%= javascript_include_tag 'guest', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places", 'data-turbolinks-eval': 'false', :async => true, :defer => true %>
+
     <%= javascript_include_tag 'lazy_load', 'data-turbolinks-track': 'reload'%>
 
     <!-- For PWA -->
@@ -33,11 +35,15 @@
 
   <body>
     <%= google_tag_manager %>
+    <%= render "shared/menu/navbar" %>
+    <div flash-notifications class="pos-fixed t-70 r-10 zi-10000 t-mobile-20"></div>
+
     <div class="content content-fixed">
       <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
       <%= notification_helper %>
       <%= yield %>
       </div>
     </div>
+    <%= render partial: "gigs/display_map" %>
   </body>
 </html>
