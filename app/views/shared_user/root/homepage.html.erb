@@ -8,7 +8,7 @@
       </div>
       <div>
         <% if @last_gigs_near_by.total_count > @show_x_last_gigs_near_by %>
-          <%= link_to search_path(query: "", lat: (@userinfo.present?)? @userinfo.lat : current_user.lat, lng: (@userinfo.present?)? @userinfo.lng : current_user.lng, order_by: "recent"), class: "link-03" do  %>
+          <%= link_to search_path(query: "", lat: @mylat, lng: @mylng, order_by: "recent", location: @myaddress), class: "link-03" do  %>
           Ver más <i data-feather="chevron-right"></i>
           <% end %>
         <%end %>
