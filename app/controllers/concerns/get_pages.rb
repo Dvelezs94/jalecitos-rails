@@ -50,6 +50,14 @@ module GetPages
               limit: @show_x_last_gigs_near_by, order: { created_at: :desc})
   end
 
+  def get_last_reqs_near_by
+    @show_x_last_reqs_near_by = 8
+    @last_reqs_near_by = Request.search("*",
+        where: where_filter,
+            boost_by_distance: boost_by_distance_condition,
+              limit: @show_x_last_reqs_near_by, order: { created_at: :desc})
+  end
+
   def get_popular_gigs bool=false
     @popular_gigs = Gig.search("*",
        includes: [:user, :likes, :category, city: [state: :country]],

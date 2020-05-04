@@ -68,7 +68,7 @@ end
       @mylat = current_user.lat
       @mylng = current_user.lng
       @myaddress = current_user.address_name
-    elsif cookies[:mylat] && cookies[:mylng] # if cookie, grab from there
+    elsif cookies[:mylat] && cookies[:mylng] &&  cookies[:myaddress]# if cookie, grab from there
       @mylat = cookies[:mylat]
       @mylng = cookies[:mylng]
       @myaddress = cookies[:myaddress]
