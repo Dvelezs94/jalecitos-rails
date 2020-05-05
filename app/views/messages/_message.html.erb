@@ -2,7 +2,7 @@
 </div>
 
 <div class="media" message>
-  <div class="avatar avatar-sm avatar-online" avatar="<%= user.id %>" date="<%= message.created_at %>">
+  <div class="avatar avatar-sm <%= "avatar-online" if user.online? %>" avatar="<%= user.id %>" date="<%= message.created_at %>">
     <%= image_tag(avatar_display_helper(user.image_url(:thumb)), class: "rounded-circle avatar-initial") %>
   </div>
   <div class="media-body" title="<%= distance_of_time_in_words_to_now(message.created_at)%>" >
