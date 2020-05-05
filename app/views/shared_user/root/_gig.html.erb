@@ -4,7 +4,7 @@
     <%= image_tag( image_display_helper( default_gig_img(gig.images), gig.youtube_url ), class: "card-img-top gig-card-top", lazy: true ) %>
       <div class="card-body pd-b-5-f">
         <span class="media">
-          <div class="avatar avatar-sm avatar-online">
+          <div class="avatar avatar-sm <%= "avatar-online" if gig.user.online? %>">
             <%= image_tag(avatar_display_helper(gig.user.image_url(:thumb)), class: "rounded-circle", width: "32", lazy: true) %>
           </div>
           <div class="media-body mg-l-10 w-0"> <%#w-0 helps truncate of user name to work, actually i can use any width %>

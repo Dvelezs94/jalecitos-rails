@@ -245,6 +245,17 @@ class User < ApplicationRecord
        set_alias
    end
 
+   def self.who_is_online #shows all the users online
+     ids = ActionCable.server.pubsub.redis_connection_for_subscriptions.smembers "online"
+     where(id: ids)
+   end
+
+   def online?
+     ids = ActionCable.server.pubsub.redis_connection_for_subscriptions.smembers "online"
+     ids.include?(self.id.to_s)
+   end
+
+
    def create_user_score
      if self.score.nil?
       UserScore.create do |user_score|
@@ -398,11 +409,14 @@ class User < ApplicationRecord
      end
    end
    def remove_whitespaces_from_profiles
-     #also delete / if stars with it
-     self.facebook = self.facebook.delete(' ')
-     self.facebook = self.facebook.delete_prefix("/")
-
-     self.instagram = self.instagram.delete(' ')
-     self.instagram = self.instagram.delete_prefix("/")
+      if self.facebook.present?
+       #also delete / if stars with it
+       self.facebook = self.facebook.delete(' ')
+       self.facebook = self.facebook.delete_prefix("/")
+      end
+     if self.instagram.present?
+       self.instagram = self.instagram.delete(' ')
+       self.instagram = self.instagram.delete_prefix("/")
+     end
    end
 end
