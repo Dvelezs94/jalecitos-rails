@@ -12,7 +12,7 @@
   </div>
   <span>
     <%= link_to "Compartir", {}, class: "share_item_url btn btn-xs btn-outline-primary" if @gig.published? %>
-    <%= link_to "Editar", edit_gig_path(city_slug(@gig.city),@gig.category.name.parameterize, @gig), class: "btn btn-xs btn-outline-primary" if !@gig.published? %> <%# if not published (and i can access to view, it means is my gig) %>
+    <%= link_to "Editar", edit_gig_path(city_slug(@gig),@gig.category.name.parameterize, @gig), class: "btn btn-xs btn-outline-primary" if !@gig.published? %> <%# if not published (and i can access to view, it means is my gig) %>
     <% if current_user %>
     <a href="" class="link-01" id="moreMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="more-vertical"></i></a>
     <div class="dropdown-menu" aria-labelledby="moreMenuButton">
@@ -22,10 +22,10 @@
           <%= status_text_helper(@gig) %>
         <% end %>
       <% end %>
-        <%= link_to edit_gig_path(city_slug(@gig.city),@gig.category.name.parameterize, @gig), class: "dropdown-item" do %>
+        <%= link_to edit_gig_path(city_slug(@gig),@gig.category.name.parameterize, @gig), class: "dropdown-item" do %>
         <i data-feather='edit-2'></i> Editar
         <% end %>
-        <%= link_to gig_path(city_slug(@gig.city),@gig), method: :delete, data: { confirm: 'Se eliminará permanentemente' }, class: "dropdown-item" do %>
+        <%= link_to gig_path(city_slug(@gig),@gig), method: :delete, data: { confirm: 'Se eliminará permanentemente' }, class: "dropdown-item" do %>
         <i data-feather='trash'></i> Eliminar
         <% end %>
       <% elsif user_signed_in?%>

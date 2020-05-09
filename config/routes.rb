@@ -14,22 +14,19 @@ Rails.application.routes.draw do
       post :create_openpay_user
       post :charge_openpay_user
       get :openpay_dashboard
-      get :tickets
-      get :orders
-      get :ally_codes
       post :predispersion_fee
       get :marketing_notifications
     end
   end
   #custom routes for city_id
-  get '/jale/:city_slug/:id' => 'gigs#old_show', as: "old_gig"
-  get '/jale/:city_slug/:category/:id' => 'gigs#show', as: "gig"
-  get '/jale/:city_slug/:category/:id/edit' => 'gigs#edit', as: "edit_gig"
-  patch '/jale/:city_slug/:category/:id' => 'gigs#update'
-  put '/jale/:city_slug/:category/:id' => 'gigs#update'
-  delete '/jale/:city_slug/:category/:id' => 'gigs#destroy'
+  get '/jale/:city_slug/:category/:id' => 'gigs#old_show', as: "old_gig"
+  get '/servicio/:city_slug/:category/:id' => 'gigs#show', as: "gig"
+  get '/servicio/:city_slug/:category/:id/edit' => 'gigs#edit', as: "edit_gig"
+  patch '/servicio/:city_slug/:category/:id' => 'gigs#update'
+  put '/servicio/:city_slug/:category/:id' => 'gigs#update'
+  delete '/servicio/:city_slug/:category/:id' => 'gigs#destroy'
   #doesnt need to be declared, just for spanish friendly url for user
-  get '/jales/nuevo' => 'gigs#new', as: "new_gig"
+  get '/servicios/nuevo' => 'gigs#new', as: "new_gig"
   #post "/jales" => "gigs#create", as: "gigs" #doesnt need to be declared
   resources :marketing_notifications
   resources :gigs, except: [:index, :show, :edit, :update, :destroy, :new] do
