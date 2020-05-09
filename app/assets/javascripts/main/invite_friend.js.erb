@@ -20,13 +20,13 @@ $(document).on('turbolinks:load', function() {
     share_content(elem,desk,text,confirmation, url);
     event.preventDefault();
   });
-  $(document).on("click", '.share_item_url', function(event) {
+  $(".share_item_url").on("click", function(event) { //iif you want to change to dynamic object event, need to check the url of meta info in admin because it breaks (needs double click to copy link)
+    event.preventDefault();
     let url = this.href;
     elem='.share_item_url'
     desk=""
     text=`${url}`
     confirmation = "La url ha sido copiada. ¡Compartela con las personas!"
     share_content(elem,desk,text,confirmation, url);
-    event.preventDefault();
   });
 });

@@ -1,3 +1,12 @@
+<% if params[:id].present? %>
+<div class="alert alert-primary mg-b-0" role="alert">
+    <%= the_gig_url(@gig) %>
+    <%= link_to the_gig_url(@gig), class: "share_item_url" do %>
+    <i data-feather="copy" class="feather-16"></i>
+    <% end %>
+</div>
+<br>
+<% end %>
 <table id="tablaseo">
   <thead>
     <tr>

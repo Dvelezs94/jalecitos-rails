@@ -1,5 +1,10 @@
 <div class="container">
-
+  <div class="alert alert-primary mg-b-0" role="alert">
+      <%= the_gig_url(@gig) %>
+      <%= link_to the_gig_url(@gig), class: "share_item_url" do %>
+      <i data-feather="copy" class="feather-16"></i>
+      <% end %>
+  </div>
 
 <%= form_with(model: @gig.seo, url: seo_path, method: :put, local: true, :html => { }) do |form| %>
 <% if @gig.seo.errors.any? %>

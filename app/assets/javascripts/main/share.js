@@ -11,13 +11,13 @@ function share_content(elem, desk, text, confirmation, url){
         url: url
     })
   } else {
+    console.log(3)
   new Clipboard(elem, {
       text: function() {
         return text;
       }
     });
 
-    alert(confirmation);
+    show_notice(confirmation);
   }
-  event.preventDefault();
 }
