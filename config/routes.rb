@@ -6,15 +6,12 @@ Rails.application.routes.draw do
       get :index_dashboard, as: 'dashboard'
       get :categories
       get :users
-      get :disputes
       get :reports
+
+      resources :seo, only:[ :edit, :update, :index ]
       get :bans
       get :verifications
       get '/verifications/:id' => 'admins#show_verification', as: "show_verification"
-      post :create_openpay_user
-      post :charge_openpay_user
-      get :openpay_dashboard
-      post :predispersion_fee
       get :marketing_notifications
     end
   end

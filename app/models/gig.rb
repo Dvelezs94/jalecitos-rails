@@ -37,7 +37,7 @@ class Gig < ApplicationRecord
   has_many :likes, dependent: :destroy
 
   has_many :completed_reviews, -> (gig) { includes(:gig_rating, :giver).where(receiver_id: gig.user_id, status: "completed").order(updated_at: :desc) }, class_name: 'Review', as: :reviewable
-
+  belongs_to :seo
   has_many :faqs, inverse_of: :gig, dependent: :destroy #inverse of allow to save faqs at same time of creating gig (see cocoon gem guide)
   accepts_nested_attributes_for :faqs,allow_destroy: true, limit: 10 #worst case (deleted 5 and sending 5 new in update) so the hash would be 10 items size
   belongs_to :category
@@ -93,6 +93,16 @@ class Gig < ApplicationRecord
     title = self.name
     title[0] = title[0].upcase # make upcase first char
     title
+  end
+
+  def seo_title
+    self.seo.present?? self.seo.title : nil
+  end
+  def seo_description
+    self.seo.present?? self.seo.description : nil
+  end
+  def seo_keywords
+    self.seo.present?? self.seo.keywords : nil
   end
 
   def tags_content #useful for use eager loading (i eager load :tags and then get the names) because tag_list cand be eager loaded

@@ -1,0 +1,28 @@
+<table id="tablaseo">
+  <thead>
+    <tr>
+      <th scope="col">Título</th>
+      <th scope="col">Visitas</th>
+      <th scope="col">Ubicación</th>
+      <th scope="col">Puntuación</th>
+      <th scope="col">meta_title</th>
+      <th scope="col">description</th>
+      <th scope="col">keywords</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @gigs.each do |gig| %>
+    <tr>
+
+      <td><a class="text-dark" href="<%= edit_seo_path(gig.id) %>"><%= gig.title %></a></td>
+      <td><a class="text-dark" href="<%= edit_seo_path(gig.id) %>"><%= gig.visits %></a></td>
+      <td><a class="text-dark" href="<%= edit_seo_path(gig.id) %>"><%= gig.location %></a></td>
+      <td><a class="text-dark" href="<%= edit_seo_path(gig.id) %>"><%= gig.score_average %></a></td>
+      <td><a class="text-dark" href="<%= edit_seo_path(gig.id) %>"><%= gig.seo_title %></a></td>
+      <td><a class="text-dark" href="<%= edit_seo_path(gig.id) %>"><%= gig.seo_description %></a></td>
+      <td><a class="text-dark" href="<%= edit_seo_path(gig.id) %>"><%= gig.seo_keywords %></a></td>
+    </tr>
+
+    <% end %>
+  </tbody>
+</table>
