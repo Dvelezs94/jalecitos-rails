@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_214543) do
+ActiveRecord::Schema.define(version: 2020_05_09_020934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,8 +165,10 @@ ActiveRecord::Schema.define(version: 2020_04_16_214543) do
     t.float "lat"
     t.float "lng"
     t.string "address_name"
+    t.bigint "seo_id"
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["city_id"], name: "index_gigs_on_city_id"
+    t.index ["seo_id"], name: "index_gigs_on_seo_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true
     t.index ["user_id"], name: "index_gigs_on_user_id"
   end
@@ -419,6 +421,14 @@ ActiveRecord::Schema.define(version: 2020_04_16_214543) do
     t.index ["order_id"], name: "index_reviews_on_order_id"
   end
 
+  create_table "seos", force: :cascade do |t|
+    t.bigint "gig_id"
+    t.string "title"
+    t.string "keywords"
+    t.string "description"
+    t.index ["gig_id"], name: "index_seos_on_gig_id"
+  end
+
   create_table "states", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -571,6 +581,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_214543) do
   add_foreign_key "faqs", "gigs"
   add_foreign_key "gigs", "categories"
   add_foreign_key "gigs", "cities"
+  add_foreign_key "gigs", "seos"
   add_foreign_key "gigs", "users"
   add_foreign_key "likes", "gigs"
   add_foreign_key "likes", "users"
@@ -595,6 +606,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_214543) do
   add_foreign_key "requests", "cities"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "orders"
+  add_foreign_key "seos", "gigs"
   add_foreign_key "states", "countries"
   add_foreign_key "ticket_responses", "tickets"
   add_foreign_key "ticket_responses", "users"

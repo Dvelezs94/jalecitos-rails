@@ -10485,10 +10485,10 @@ table.dataTable {
       line-height: 0;
       top: 50%;
       right: 10px; }
-  table.dataTable thead .sorting_asc::after {
-    content: '\f3d8'; }
-  table.dataTable thead .sorting_desc::after {
-    content: '\f3d0'; }
+  /* table.dataTable thead .sorting_asc::after {
+    content: '\f3d8'; } */
+  /* table.dataTable thead .sorting_desc::after {
+    content: '\f3d0'; } */
   table.dataTable thead .sorting {
     background-image: none;
     position: relative; }
@@ -10498,12 +10498,12 @@ table.dataTable {
       position: absolute;
       line-height: 0;
       right: 10px; }
-    table.dataTable thead .sorting::before {
+    /* table.dataTable thead .sorting::before {
       content: '\f3d8';
-      top: 40%; }
-    table.dataTable thead .sorting::after {
+      top: 40%; } */
+    /* table.dataTable thead .sorting::after {
       content: '\f3d0';
-      top: 60%; }
+      top: 60%; } */
   table.dataTable tbody td.sorting_1 {
     background-color: #f3f4f7; }
   table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child::before {

@@ -1,0 +1,38 @@
+<div class="container">
+
+
+<%= form_with(model: @gig.seo, url: seo_path, method: :put, local: true, :html => { }) do |form| %>
+<% if @gig.seo.errors.any? %>
+  <%@gig.seo.errors.full_messages.each do |error| %>
+    <%= notification_generator_helper error, :error %>
+  <% end %>
+<% end %>
+
+
+<div class="form-group">
+  <label class="d-inline-block">meta_title
+</label>
+    <%= form.text_area :title, class: 'name-class name-0 form-control required', maxlength: 100 %>
+</div>
+<div class="form-group">
+  <label class="d-inline-block">meta_description </label>
+  <%= form.text_area :description,
+  class: "description-class description-0 form-control required", rows: 5 %>
+</div>
+
+
+<div class="form-group justify-content-center">
+  <label for="tags" class="d-block">keywords</label>
+  <%= form.text_field :keywords, class: 'form-control tagsinput' %>
+</div>
+<div class="btn-group" role="group" aria-label="Basic example">
+<%= link_to seo_index_path, class: "btn btn-secondary" do  %>
+Atrás
+<% end %>
+<%= link_to the_gig_path(@gig), class: "btn btn-primary" do  %>
+Ver servicio
+<% end %>
+<%= form.submit "Guardar", class: "btn btn-success" %>
+<% end %>
+</div>
+</div>
