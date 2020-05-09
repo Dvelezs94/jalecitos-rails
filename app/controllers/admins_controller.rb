@@ -24,11 +24,6 @@ class AdminsController < ApplicationController
     set_paginator
   end
 
-  def orders
-    @orders_count = Order.all.length
-    @orders =  Order.order(created_at: :desc).page(params[:order]).per(25)
-    set_paginator
-  end
 
   def disputes
     @disputes = Dispute.order(status: :asc).page(params[:dispute]).per(25)
@@ -50,20 +45,12 @@ class AdminsController < ApplicationController
     set_paginator
   end
 
-  def ally_codes
-    @ally_codes = AllyCode.order(created_at: :desc).page(params[:ally_code]).per(25)
-    @ally_code = AllyCode.new
-    set_paginator
-  end
+
 
   def show_verification
       @verification = Verification.find(params[:id])
   end
 
-  def tickets
-    @tickets = Ticket.order(status: :asc).page(params[:ticket]).per(25)
-    set_paginator
-  end
 
   def marketing_notifications
     @marketing_notifications = MarketingNotification.order(scheduled_at: :desc).page(params[:marketing_notification]).per(25)

@@ -2,7 +2,7 @@
   <script>
     toast_phone = toastr.info("Agrega paquetes al servicio para publicarlo.", "",{timeOut: 10000, positionClass: "toast-bottom-full-width"})
     $(toast_phone).click(function () {
-      window.location = "<%= edit_gig_path(city_slug(@gig.city),@gig.category.name.parameterize,@gig) %>"
+      window.location = "<%= edit_gig_path(city_slug(@gig),@gig.category.name.parameterize,@gig) %>"
     });
   </script>
 <% else %>

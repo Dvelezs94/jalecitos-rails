@@ -7,7 +7,7 @@
     </div>
     <div class="col-10 col-sm-12 col-md-12 col-lg-6 text-center mar-0-auto">
       <h4>Por Edad</h4>
-      <%= column_chart User.group(:age).count %>
+      <%= column_chart User.group_by_year(:birth).count %>
     </div>
     <div class="col-10 col-sm-12 col-md-12 col-lg-6 text-center mar-0-auto">
       <h4>Por Ciudad</h4>

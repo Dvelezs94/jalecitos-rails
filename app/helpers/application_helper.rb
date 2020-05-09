@@ -14,8 +14,8 @@ module ApplicationHelper
     current_location.distance_to(destination, :units => :kms).to_i.to_s(:delimited, delimiter: ' ', separator: '.')  + " kms"
   end
 
-  def city_slug city
-    slug = (city.present?)? city.name : "México"
+  def city_slug element
+    slug = (element.address_name.present?)? element.address_name.split(",")[-3..-2].join(",").gsub(/[0-9]/, '').strip : "México"
     return slug.parameterize
   end
 
@@ -359,16 +359,16 @@ module ApplicationHelper
 
   def the_gig_path gig, format = nil
     if format == nil
-      gig_path(city_slug(gig.city), gig.category.name.parameterize,gig.slug)
+      gig_path(city_slug(gig), gig.category.name.parameterize,gig.slug)
     else
-      gig_path(city_slug(gig.city), gig.category.name.parameterize,gig.slug, format: format)
+      gig_path(city_slug(gig), gig.category.name.parameterize,gig.slug, format: format)
     end
   end
   def the_gig_url gig, format = nil
     if format == nil
-      gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug,:protocol => 'https')
+      gig_url(city_slug(gig), gig.category.name.parameterize,gig.slug,:protocol => 'https')
     else
-      gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug, format: format,:protocol => 'https')
+      gig_url(city_slug(gig), gig.category.name.parameterize,gig.slug, format: format,:protocol => 'https')
     end
   end
 end

@@ -8,8 +8,8 @@
   <%= link_to icon("fas","share-alt", class: "fa-lg gig_action_icon", title: "Compartir"), {}, id: "share" %>
   <% if user_signed_in? && (@gig.user == current_user) %>
     <%= link_to status_text_helper(@gig), toggle_status_gig_path(@gig) unless @gig.banned? || @gig.gig_packages[0].nil? %>
-    <%= link_to icon("fas","pen", class: "fa-lg gig_action_icon", title: "Editar"), edit_gig_path(city_slug(@gig.city),@gig.category.name.parameterize, @gig) %>
-    <%= link_to icon("fas","trash", class: "fa-lg gig_action_icon", title: "Eliminar"), gig_path(city_slug(@gig.city),@gig), method: :delete, data: { confirm: '¿Estás seguro de querer borrar este trabajo?' }%>
+    <%= link_to icon("fas","pen", class: "fa-lg gig_action_icon", title: "Editar"), edit_gig_path(city_slug(@gig),@gig.category.name.parameterize, @gig) %>
+    <%= link_to icon("fas","trash", class: "fa-lg gig_action_icon", title: "Eliminar"), gig_path(city_slug(@gig),@gig), method: :delete, data: { confirm: '¿Estás seguro de querer borrar este trabajo?' }%>
   <% elsif user_signed_in?%>
     <div class="hearted1 likes-<%= @gig.slug %>">
       <%= render "gigs/likes", gig: @gig, with_number: false %>

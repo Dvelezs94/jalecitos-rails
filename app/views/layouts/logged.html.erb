@@ -37,7 +37,6 @@
   <body class="app-chat" > <%# app chat class is necessary for chat in mobile%>
 
     <%= google_tag_manager %>
-    <%=hidden_field_tag :new_message, (flash.any?)? "true" : "false" %><%# useful for gritter behaviour (dont display notifications of cache) %>
     <%= render "shared/menu/navbar" %>
     <div flash-notifications class="pos-fixed t-70 r-10 zi-10000 t-mobile-20"></div>
 
