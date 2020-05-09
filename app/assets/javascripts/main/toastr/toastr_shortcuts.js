@@ -1,5 +1,5 @@
 function show_notice (text) {
-  toastr.notice(text)
+  toastr.info(text)
 }
 
 function show_success (text) {

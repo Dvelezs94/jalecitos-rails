@@ -5,6 +5,7 @@ class SeoController < ApplicationController
   before_action :create_seo, only: [:edit]
   def index
     @gigs = Gig.includes(:seo).where(status: "published")
+    @gig = Gig.find(params[:id]) if params[:id].present? #sent when record is updated
   end
 
   def edit
@@ -16,7 +17,7 @@ class SeoController < ApplicationController
     end
     if @success
       flash[:success] = "Actualizado con éxito"
-      redirect_to seo_index_path
+      redirect_to seo_index_path(id: @gig.id)
     else
       render :edit
     end
