@@ -9,9 +9,6 @@
     <% flash[:notice] = 'Tu servicio se ha publicado exitosamente' %>
   <% end %>
   window.location = "<%= the_gig_path(@gig) %>"
-<% elsif @active_orders %> //used in update
-  <% flash[:alert] = @error %>
-  window.location = "<%= the_gig_path(@gig) %>"
 <% else %>
   alert("Ha ocurrido un error, por favor, inténtelo más tarde");
 <% end %>

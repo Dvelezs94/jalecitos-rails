@@ -43,7 +43,6 @@ class Request < ApplicationRecord
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
   validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
   validates_length_of :description, :maximum => 1000, :message => "debe contener como máximo 1000 caracteres."
-  validate :location_validate
   validate :budget_options
   validate :invalid_change, on: :update
   validate :finished_request, on: :update

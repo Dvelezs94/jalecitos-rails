@@ -6,7 +6,7 @@ class GigsController < ApplicationController
   include SetLayout
   include BannedFunctions
   access user: { except: [:ban_gig] }, admin: [:ban_gig], all: [:show, :old_show]
-  before_action :set_gig, only: [:destroy, :ban_gig]
+  before_action :set_gig, only: [:destroy, :ban_gig, :mail_contact]
   before_action :set_gig_with_first_pack, only: :toggle_status
   before_action :set_gig_with_all_asc, only: [:show, :old_show]
   before_action :remember_review, only: [:show]
@@ -41,6 +41,12 @@ class GigsController < ApplicationController
   def ban_gig
     (@gig.published? || @gig.draft?) ? @gig.banned! : @gig.draft!
     redirect_to root_path, notice: "Gig status has been updated"
+  end
+
+  def mail_contact
+    if params[:message].present? && params[:email].present? && params[:name].present? && params[:phone_number].present?
+      ContactMailer.new_message(params[:message], params[:email], params[:name], params[:phone_number], @gig.user.email).deliver
+    end
   end
 
   def toggle_status
@@ -179,7 +185,7 @@ class GigsController < ApplicationController
     end
 
     def set_gig_with_all_asc
-      @gig = Gig.includes(:gig_packages, :category, :faqs, :tags,:likes,:user => [:score, city: [state: :country]], city: [state: :country]).friendly.find(params[:id])
+      @gig = Gig.includes(:gig_packages, :category, :faqs, :tags,:likes,:user => [:score]).friendly.find(params[:id])
       @gig_hits = @gig.visits
     end
 

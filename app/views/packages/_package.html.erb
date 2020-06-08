@@ -35,7 +35,7 @@
             Mensaje
           <% end %>
 
-          <%= link_to "mailto:"+@gig.user.email, class: "dropdown-item email-contact", target: "_blank" do %>
+          <%= link_to "#email_contact", class: "dropdown-item email-contact", data: {toggle: "collapse"}, aria: {expanded: "false", controls: "email_contact"} do %>
             Mail
           <% end %>
 

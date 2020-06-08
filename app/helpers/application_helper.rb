@@ -15,7 +15,8 @@ module ApplicationHelper
   end
 
   def city_slug element
-    slug = (element.address_name.present?)? element.address_name.split(",")[-3..-2].join(",").gsub(/[0-9]/, '').strip : "México"
+    strings = element.address_name.split(",")
+    slug = (element.address_name.present?)? (strings.length > 3)? strings[-3..-2].join(",").gsub(/[0-9]/, '').strip: strings[-2].gsub(/[0-9]/, '').strip : "México"
     return slug.parameterize
   end
 

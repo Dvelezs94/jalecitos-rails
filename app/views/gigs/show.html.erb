@@ -9,6 +9,7 @@
 <div class="col-lg-3 mg-t-40 mg-lg-t-0" gig_card_info>
   <% @show_packages = true %>
   <%= render 'shared/gigs/show/packages_info' %>
+  <%= render "shared/gigs/show/mail_contact" %>
   <%= render 'shared/gigs/show/user_about2' %>
   <%= render "shared/gigs/show/rate_gig" if current_user && current_user != @gig.user && @my_reviews.blank? %>
   </div>

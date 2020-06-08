@@ -32,12 +32,11 @@ class Gig < ApplicationRecord
   friendly_id :name, use: :slugged
   #Associations
   belongs_to :user
-  belongs_to :city, optional: true
   #belongs_to :active_user, { where(:users => { status: "active" }) }, :class_name => "User"
   has_many :likes, dependent: :destroy
 
   has_many :completed_reviews, -> (gig) { includes(:gig_rating, :giver).where(receiver_id: gig.user_id, status: "completed").order(updated_at: :desc) }, class_name: 'Review', as: :reviewable
-  belongs_to :seo
+  belongs_to :seo, optional: true
   has_many :faqs, inverse_of: :gig, dependent: :destroy #inverse of allow to save faqs at same time of creating gig (see cocoon gem guide)
   accepts_nested_attributes_for :faqs,allow_destroy: true, limit: 10 #worst case (deleted 5 and sending 5 new in update) so the hash would be 10 items size
   belongs_to :category
@@ -55,7 +54,6 @@ class Gig < ApplicationRecord
   validates_length_of :description, :maximum => 1000, :message => "debe contener como máximo 1000 caracteres."
   validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
   validates_length_of :youtube_url, :maximum => 250, :message => "debe contener como máximo 250 caracteres." #this message doesnt get shown, i didnt displayed it
-  validate :location_validate
   #Gallery validations
   validates :images, length: {
   maximum: 5,
