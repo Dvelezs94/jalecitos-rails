@@ -422,11 +422,9 @@ ActiveRecord::Schema.define(version: 2020_05_09_020934) do
   end
 
   create_table "seos", force: :cascade do |t|
-    t.bigint "gig_id"
     t.string "title"
     t.string "keywords"
     t.string "description"
-    t.index ["gig_id"], name: "index_seos_on_gig_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -606,7 +604,6 @@ ActiveRecord::Schema.define(version: 2020_05_09_020934) do
   add_foreign_key "requests", "cities"
   add_foreign_key "requests", "users"
   add_foreign_key "reviews", "orders"
-  add_foreign_key "seos", "gigs"
   add_foreign_key "states", "countries"
   add_foreign_key "ticket_responses", "tickets"
   add_foreign_key "ticket_responses", "users"
