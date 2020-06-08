@@ -72,6 +72,11 @@ function seed() {
   bash $BASE_NAME reindex
 }
 
+function reindex() {
+  echo "Reindexing models, this could take a while..."
+  bash $BASE_NAME run rails reindex
+}
+
 function expose() {
   ngrok http 80
 }
@@ -100,9 +105,15 @@ case $1 in
     shift
     docker-compose exec app $@
   ;;
+  reindex)
+    reindex
+  ;;
   restart)
     stop
     start
+    echo "Waiting 15 seconds for services to come up, then I will reindex"
+    sleep 15
+    reindex || echo "Failed to reindex, try again manually in 15 secs"
   ;;
   logs)
     logs
@@ -119,9 +130,6 @@ case $1 in
   expose)
     expose
   ;;
-  restart-mac)
-    $BASE_NAME restart && sleep 15 && $BASE_NAME reindex
-  ;;
   clear-tmp)
     clear-tmp
   ;;
@@ -135,8 +143,8 @@ case $1 in
     $BASE_NAME build               You will need this if you want to build from scratch
     $BASE_NAME status              check containers status
     $BASE_NAME start/stop          Start the project by using docker-compose
+    $BASE_NAME reindex             Reindex All models
     $BASE_NAME restart             restart
-    $BASE_NAME restart-mac         restart and reindex
     $BASE_NAME console             run rails console
     $BASE_NAME clear-tmp           Clear tmp files like js and assets
     $BASE_NAME logs                Tail logs
