@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resources :gigs, except: [:index, :show, :edit, :update, :destroy, :new] do
     resource :reports, only: [:create], as: "report"
     member do
+          post :mail_contact
            get :toggle_status
            get :ban_gig, as: 'ban'
       end

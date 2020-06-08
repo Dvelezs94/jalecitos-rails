@@ -1,10 +1,11 @@
-<div class="container">
-  <div class="alert alert-primary mg-b-0" role="alert">
-      <%= the_gig_url(@gig) %>
-      <%= link_to the_gig_url(@gig), class: "share_item_url" do %>
-      <i data-feather="copy" class="feather-16"></i>
-      <% end %>
-  </div>
+<div class="alert alert-primary mg-b-0" role="alert">
+  <%= the_gig_url(@gig) %>
+  <%= link_to the_gig_url(@gig), class: "share_item_url" do %>
+  <i data-feather="copy" class="feather-16"></i>
+  <% end %>
+</div>
+<div class="card">
+  <div class="card-body">
 
 <%= form_with(model: @gig.seo, url: seo_path, method: :put, local: true, :html => { }) do |form| %>
 <% if @gig.seo.errors.any? %>
@@ -34,10 +35,11 @@
 <%= link_to seo_index_path, class: "btn btn-secondary" do  %>
 Atrás
 <% end %>
-<%= link_to the_gig_path(@gig), class: "btn btn-primary" do  %>
+<%= link_to the_gig_path(@gig), target: "_blank", class: "btn btn-primary" do  %>
 Ver servicio
 <% end %>
 <%= form.submit "Guardar", class: "btn btn-success" %>
 <% end %>
+</div>
 </div>
 </div>

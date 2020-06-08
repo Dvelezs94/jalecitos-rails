@@ -9,11 +9,5 @@ module LocationFunctions
     end
   end
   private
-  #used in gigs and requests
-  def location_validate
-    if city == ""
-      errors.add(:base, "La ubicación debe ser una proporcionada en las opciones.")
-    end
-  end
 
 end

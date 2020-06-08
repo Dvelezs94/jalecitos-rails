@@ -73,7 +73,6 @@ class User < ApplicationRecord
   # User Score
   belongs_to :score, foreign_key: :score_id, class_name: "UserScore", optional: true
 
-  belongs_to :city, optional: true
   # ally code in case it has one
   belongs_to :ally_code, optional: true
 

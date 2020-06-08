@@ -42,9 +42,6 @@ class PackagesController < ApplicationController
             @success = true
           else
             @success = false
-            @active_orders = true
-            @error = "Un paquete no ha podido actualizarse debido a que tienes órdenes pendientes, activas o disputadas"
-            break
           end
         end
       elsif @gig.gig_packages.count == 0 && params[:packages].count == 3
