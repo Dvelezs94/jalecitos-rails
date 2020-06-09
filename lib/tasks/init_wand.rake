@@ -12,9 +12,9 @@ task :init_wand => [:environment] do
   puts "Los precios de los primeros paquetes han sido agregados en una golumna de gig..."
   #######################
   Gig.all.each do |gig|
-    gig.lat = 19.4978
-    gig.lng = -99.1269
-    gig.address_name = "Ciudad de México, MX"
+    gig.lat = 19.4326077
+    gig.lng = -99.133208
+    gig.address_name = "Ciudad de México, México"
     if gig.city_id.present?
       begin
       obj=Geokit::Geocoders::GoogleGeocoder.geocode "#{gig.city.name}, #{gig.city.state.name}, #{gig.city.state.country.name}"
@@ -30,9 +30,9 @@ task :init_wand => [:environment] do
   puts "Todos los jales han actualizado su ubicacion a coordenadas, ahora corriendo los pedidos..."
   ##############################################################
   Request.all.each do |req|
-    req.lat = 19.4978
-    req.lng = -99.1269
-    req.address_name = "Ciudad de México, MX"
+    req.lat = 19.4326077
+    req.lng = -99.133208
+    req.address_name = "Ciudad de México, México"
     if req.city_id.present?
       begin
       obj=Geokit::Geocoders::GoogleGeocoder.geocode "#{req.city.name}, #{req.city.state.name}, #{req.city.state.country.name}"
@@ -48,9 +48,9 @@ task :init_wand => [:environment] do
   puts "Todos los pedidos han actualizado su ubicacion a coordenadas, ahora corriendo los usuarios..."
   ###############################################################
   User.all.each do |user|
-    user.lat = 19.4978
-    user.lng = -99.1269
-    user.address_name = "Ciudad de México, MX"
+    user.lat = 19.4326077
+    user.lng = -99.133208
+    user.address_name = "Ciudad de México, México"
     if user.city_id.present?
       begin
       obj=Geokit::Geocoders::GoogleGeocoder.geocode "#{user.city.name}, #{user.city.state.name}, #{user.city.state.country.name}"
