@@ -1,17 +1,24 @@
 class PagesController < ApplicationController
   include SetLayout
   include GetPages
+  include SearchFunctions
   access user: :all, admin: [:home], all: [:work, :home, :autocomplete_search, :terms_and_conditions, :privacy_policy, :sales_conditions, :employer_employee_rules, :robots, :sitemap, :install, :gig_slugs]
   before_action :admin_redirect, only: :home
+  before_action :verify_email, only: :home
   before_action :phone_available, only: :home
   before_action :pending_review, only: [:home], :if => :search_pending_review?
+  before_action :go_to_sign_in, only: :home
   layout :set_layout
   def home
     if params[:current] #if some pagination is present...
       home_paginate
       render template: "shared/carousels/add_items_carousel.js.erb"
     else
-      home_get_all
+      if user_signed_in?
+        get_last_gigs_near_by
+        get_last_reqs_near_by
+      end
+      #home_get_all
       (user_signed_in?)? render(template: 'shared_user/root/homepage') : render(template: 'shared_guest/root/homepage')
     end
     update_push_subscription if user_signed_in?
@@ -29,7 +36,8 @@ class PagesController < ApplicationController
   end
 
   def liked
-    @liked_gigs = Gig.find(current_user.likes.pluck(:gig_id))
+    @likes = current_user.likes.page(params[:page]).per(20)
+    @liked_gigs = Gig.find(@likes.pluck(:gig_id))
   end
 
   def terms_and_conditions
@@ -50,13 +58,10 @@ class PagesController < ApplicationController
   end
 
   def wizard
-    if params[:current] #if some pagination is present...
-      wizard_paginate
-      render template: "shared/carousels/add_items_carousel.js.erb"
-    else
-      wizard_get_all
-      render 'shared_user/root/homepage'
-    end
+      get_wizard_gigs
+      get_wizard_requests
+      render 'shared_user/root/wizard'
+
   end
 
   def sitemap
@@ -100,7 +105,7 @@ class PagesController < ApplicationController
   end
 
   def phone_available
-    if current_user && current_user.phone_number.nil? && !cookies[:phone_available]
+    if current_user && current_user.phone_number.blank? && !cookies[:phone_available] && !@verify_email #i dont want to display both at same time, its more important the mail
       cookies[:phone_available] = {
         expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 10.second  #time that elapses to show message again
       }
@@ -108,6 +113,17 @@ class PagesController < ApplicationController
     end
   end
 
+  def verify_email
+    if current_user && current_user.confirmed_at.nil? && !cookies[:verify_email]
+      cookies[:verify_email] = {
+        expires: (ENV.fetch("RAILS_ENV") == "production")? 1.day: 10.second  #time that elapses to show message again
+      }
+      @verify_email = true
+    end
+  end
+  def go_to_sign_in
+    redirect_to new_user_session_path if ! user_signed_in?
+  end
 
   def search_pending_review?
     #format html helps to not query pending reviews when pagination triggers

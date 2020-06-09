@@ -1,14 +1,13 @@
 if (<%= @success %>){
-  $(".modal").css("display", "none");
-  show_success("Se ha editado tu comentario");
-  old_review = $(".paginated_reviews").find("[review-id="+ "<%= @review.id %>" + "]");
+  $(".modal").modal("hide");
+  old_review = $("#paginated_reviews").find("[review-id="+ "<%= @review.id %>" + "]");
   old_review.after("<%= j render(partial: 'shared/reviews/review', collection: [@review]) %>");
-  display_reviews(true);
-  $('html, body').animate({
-    scrollTop: (old_review.offset().top-200)
-  }, 1000);
+  $("#paginated_reviews").collapse("show"); //show collapse (if they update review, i suppose its opened, so this may not be necessary)
+  moveTo(old_review);
   old_review.remove();
+  show_success("Comentario actualizado");
 }
 else{
-  show_error("<%= @review.errors.full_messages.first || "Ha ocurrido un error inesperado, por favor, inténtalo más tarde" %>")
+  show_error("<%= @review.errors.full_messages.first || 'Ha ocurrido un error inesperado, por favor, inténtalo más tarde' %>")
 }
+feather.replace();

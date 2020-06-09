@@ -1,0 +1,48 @@
+<div class="modal fade" id="offerModal" tabindex="-1" role="dialog" aria-labelledby="offerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <%= form_with(model: @my_offer || Offer, url: offer_form_url_helper, method: ((@my_offer.present?)? :put : :post), local: true, :html => { class: "current_form" }) do |form| %>
+        <div class="modal-body">
+          <h4>Oferta</h4>
+          <div class="alert alert-primary">
+            <span class="tx-danger">*</span>
+            Significa que el campo es obligatorio.</div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2" class="">Descripción</label>
+            <%= form.text_area :description, maxlength: 1000,
+            placeholder: "Explica con detalle tus habilidades y por qué se te debería contratar",
+            class: "description-class description-0 form-control", rows: 2 %>
+          </div>
+          <div class="form-group">
+            <div class="custom-control custom-radio">
+              <%= form.radio_button :materials, true, class: "custom-control-input",checked: true %>
+              <label class="custom-control-label" for="offer_materials_true">Incluye material y servicio</label>
+            </div>
+
+            <div class="custom-control custom-radio">
+                <%= form.radio_button :materials, false, class: "custom-control-input"%>
+              <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+              <label class="custom-control-label" for="offer_materials_false">Incluye <strong>solamente</strong> servicio</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Horas estimadas</label>
+              <%= form.number_field :hours, class: 'form-control', step: 1, placeholder: "5" %>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Precio <span class="tx-danger">*</span></label>
+              <%= form.number_field :price, min: "100", max: "10000", step: "1",
+              class: "form-control required", placeholder: "500" %>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="cancel" data-dismiss="modal">Cerrar</button>
+          <%= form.submit "Ofertar", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

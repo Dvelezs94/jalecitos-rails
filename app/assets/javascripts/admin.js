@@ -8,8 +8,6 @@
 
 //= require bootstrap
 
-//= require gritter
-
 //= require jquery.validate
 
 //= require Chart.bundle
@@ -23,3 +21,5 @@
 //= require clipboard
 
 //= require rails_emoji_picker
+
+//= require data-confirm-modal

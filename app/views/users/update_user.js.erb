@@ -1,5 +1,7 @@
 <% if @success  %>
-  <%= add_gritter(@message, :image => :success, :title => "Éxito", :time => 1000)%>
+  <% flash[:success] = "Tu información se ha actualizado" %>
+  updateURL([],[]); // if new user, need to remove params and reload so the modal dont display again
+  window.location.reload();
 <% else %>
-  <%= add_gritter("Inténtalo de nuevo más tarde.", :image => :error, :title => "Error")%>
+  toastr.error("<%= current_user.errors.full_messages.first %>");
 <% end %>

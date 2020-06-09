@@ -5,15 +5,18 @@
     <script defer src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/5.8.5/firebase-messaging.js"></script>
     <!-- End fiebase -->
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= favicon_link_tag image_path 'favicon.ico' %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.26.0/feather.min.js"></script>
     <%= stylesheet_link_tag 'logged', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <!-- <script defer type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script> -->
     <!-- <script defer type='text/javascript' src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script> -->
     <%= javascript_include_tag 'logged', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'google_turbolink', 'data-turbolinks-track': 'reload', :defer => true, :async => true %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places", 'data-turbolinks-eval': 'false', :async => true, :defer => true %>
+    <%# javascript_include_tag 'google_turbolink', 'data-turbolinks-track': 'reload', :defer => true, :async => true %>
     <%= javascript_include_tag 'lazy_load', 'data-turbolinks-track': 'reload'%>
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" > -->
@@ -28,30 +31,32 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
     <!-- <meta name="viewport" content="initial-scale=1, viewport-fit=cover, height="device-height", user-scalable=0"> -->
     <meta name="theme-color" content="#2B8261" />
-    <title>Jalecitos</title>
+    <title>Wand</title>
     <%= ios_pwa_tags %>
   </head>
-  <body id="page-top">
+  <body class="app-chat" > <%# app chat class is necessary for chat in mobile%>
+
     <%= google_tag_manager %>
-    <%=hidden_field_tag :new_message, (flash.any?)? "true" : "false" %><%# useful for gritter behaviour (dont display notifications of cache) %>
-    <%= render 'shared/menu/main_nav_bar' %>
-    <%= render "shared/transition/transition-icon" %>
-    <div class="main_container">
+    <%= render "shared/menu/navbar" %>
+    <div flash-notifications class="pos-fixed t-70 r-10 zi-10000 t-mobile-20"></div>
+
+    <%= render 'shared_user/users/confirm_email' if @verify_email && controller.action_name != "wizard" %>
+    <div class="content content-fixed">
+      <%= render 'shared_user/users/phone_available' if @phone_available && params[:modal].blank? %>
+      <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
       <!-- Remove at some point no hire -->
 
       <%= notification_helper %>
-      <div class="gap"></div>
       <%= banned_notification %>
       <%= yield %>
+
+
       <% if @p_review.present? %>
         <%= render partial: 'reviews/review', collection: [@p_review]%>
       <% end %>
+      </div>
     </div>
-    <div class="plusarea">
-      <a href="#" id="newelementbtndesktop"><i class="fa fa-plus"></i></a>
-    </div>
-    <%= render 'shared_user/new_element_modal' %>
-    <%= render 'shared_user/menu/phone_bottom_menu' %>
+    <%= render partial: "gigs/display_map" %>
   </body>
 
 </html>

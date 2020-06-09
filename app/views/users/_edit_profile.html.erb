@@ -1,0 +1,10 @@
+<div class="tab-pane fade <%= "show active" if params[:collapse].nil? %>" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  <%= form_with(model: @user, remote: true, url: update_users_path, method: :put) do |form| %>
+    <%= render partial: "users/user_fields", locals:{ form: form, user: @user }%>
+    <div class="form-group row mg-b-0">
+      <div class="col-sm-10">
+        <%= form.submit "Guardar", class: "btn btn-primary", data: {disable_with: "Guardando..."} %>
+      </div>
+    </div>
+  <% end %>
+</div>

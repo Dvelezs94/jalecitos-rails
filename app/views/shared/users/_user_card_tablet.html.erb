@@ -10,7 +10,7 @@
         <p><%= @user.location %></p>
       </div>
       <div class="authorisesstar">
-        <%= star_display_helper( score_average(@user.score) ) %>
+        <%= star_display_helper( @user.score_average ) %>
         <p>Activo(a) hace
           <%= distance_of_time_in_words_to_now(@user.current_sign_in_at) rescue "nunca" %></p>
       </div>
@@ -43,7 +43,7 @@
       <h3>Miembro desde hace
         <%= time_ago_in_words(@user.created_at) %></h3>
       <p class="fr">Edad:
-        <%= (@user.age.nil?)? "Indefinida" : @user.age %></p>
+        <%= (@user.birth.nil?)? "Indefinida" : @user.age %></p>
       <p class="tr"><pre><%= (@user.bio.nil?)? "Sin descripción" : @user.safe_bio %></pre></p>
     </div>
   </div>

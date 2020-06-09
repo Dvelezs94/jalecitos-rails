@@ -1,21 +1,35 @@
-<div class="configuration-area">
-   <div class="container">
-       <div class="row">
-           <div class="col-lg-12">
-               <div class="configuration-text" id="configuration-page">
-                   <h2><i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.go(-1);"></i>Configuración</h2>
-               </div>
-           </div>
-       </div>
-   </div>
-</div>
+<div class="container ht-100p">
+  <div class="row justify-content-center">
+    <ul class="nav nav-line flex-column" id="settings" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link <%= "active" if params[:collapse].nil? %>" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Editar Perfil</a>
+      </li>
+      <li class="nav-item <%= "d-none" if current_user.provider.present? %>">
+        <a class="nav-link <%= "active" if params[:collapse] == "security" %>" id="security-tab" data-toggle="tab" href="#security" role="tab" aria-controls="security" aria-selected="false">Seguridad</a>
+      </li>
+      <!-- <li class="nav-item"> <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab" aria-controls="notifications" aria-selected="false">Notificationes</a> </li> -->
+      <li class="nav-item">
+        <a class="nav-link <%= "active" if params[:collapse] == "help" %>" id="help-tab" data-toggle="tab" href="#help" role="tab" aria-controls="help" aria-selected="false">Ayuda</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <%= "active" if params[:collapse] == "account" %>" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false">Cuenta</a>
+      </li>
+    </ul>
 
-<%# render 'users/configuration_desktop' %>
-<%= render 'users/configuration_mobile' %>
-<%= render 'users/new_bank' %>
-<%= render 'users/new_card' %>
-<%= render 'users/new_billing_profile' %>
-<% if current_user.provider.nil? %>
-  <%= render 'devise/passwords/edit' %>
-<% end %>
-<%= render 'users/confirm_modals/confirm_delete_account' %>
+    <div class="tab-content bd bd-gray-300 pd-20 wd-md-80p wd-lg-60p" id="settingsContent">
+
+      <%= render 'users/edit_profile' %>
+      <%= render 'users/security' if current_user.provider.nil? %>
+      <%= render 'users/help' %>
+      <%= render 'users/account' %>
+      <%# render 'users/configuration_desktop' %>
+        <%# render 'users/configuration_mobile' %>
+          <%# render 'users/new_bank' %>
+            <%# render 'users/new_card' %>
+              <%# render 'users/new_billing_profile' %>
+                <%# if current_user.provider.nil? %>
+                  <%# render 'devise/passwords/edit' %><%# end %>
+                  <%# render 'users/confirm_modals/confirm_delete_account' %>
+                  </div>
+                </div>
+              </div>

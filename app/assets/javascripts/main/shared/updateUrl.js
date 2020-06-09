@@ -14,7 +14,6 @@ function updateURL(name, value, focusAfterReload="") { //removes all other query
       window.history.pushState({path:newurl},'',newurl);
   }
 }
-
 function updateFormURL(name, value) {
   var strings = "";
   //prepare all the query strings

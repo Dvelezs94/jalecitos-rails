@@ -1,35 +1,46 @@
 <% if params[:page] %>
   //if scroll is at top, move bottom 1 space to stay in current message
-  $(".message_view_box").scrollTop(1)
+  $("[content-scrolleable]").scrollTop(1)
   //add items
-  $(".message_view_box ul.messages-list").prepend('<%= j render "conversations/conversation_content", messages: @messages.sort %>');
+  $("[messages-list]").prepend('<%= j render "conversations/conversation_content", messages: @messages.sort %>');
   //remove old pagination
-  $(".message_view_box").find('.pag-and-load').remove();
+  $("[messages-list]").find('nav').remove();
   // check if puts new pagination
   <% if @messages.next_page %>
-    $(".message_view_box").prepend('<%= j paginate(@messages) %>');
+    $("[messages-list]").prepend('<%= j paginate(@messages) %>');
   <% end %>
+  stylize_messages();
   <% sleep 1 %>
 <% elsif params[:conversation] || params[:word] == "" %>
     <% if params[:word] == "" %>
-      $("#contacts-list").html("");
-      $(".no-matches").remove(); //if came from a search remove phrase of no results if exist
+      $("[contacts-list]").html("");
     <% end %>
-    $("#contacts-list").find(".pag-and-load").remove(); // if i am paginating normally, remove pagination to append new things
+    $("[contacts-list]").find("nav").remove(); // if i am paginating normally, remove pagination to append new things
     <% @users.each do |user| %>
-      $("#contacts-list").append('<%= j render "conversations/conversation_min", user: user %>')
+      $("[contacts-list]").append('<%= j render "conversations/conversation_min", user: user %>')
     <% end %>
     <% if @conversations.next_page %>
-      $("#contacts-list").append('<%= j paginate @conversations, param_name: :conversation %>')
+      $("[contacts-list]").append('<%= j paginate @conversations, param_name: :conversation %>')
     <% end %>
     <% sleep 1 if params[:conversation] %>
 <% elsif params[:word] %>
-    $("#contacts-list").html("");
+    $("[contacts-list]").html("");
     <% if @users.present? %>
       <% @users.each do |user| %>
-        $("#contacts-list").append("<%= j render partial: 'conversation_min', locals: { user: user } %>");
+        $("[contacts-list]").append("<%= j render partial: 'conversation_min', locals: { user: user } %>");
       <% end %>
     <% else %>
-      $("#contacts-list").append("<div class='no-matches'>Sin coincidencias</div>");
+      $("[contacts-list]").append("<p class='container'>Sin coincidencias</p>");
     <% end %>
+<% elsif params[:user_id] %>
+    updateURL(<%= raw(params.keys) %>,<%= raw(params.values) %>);
+    $("[data-conversation-id]").remove(); //remove old conversation
+    $("[chat-wrapper]").append("<%= j render 'conversation', conversation: @conversation, opposite_user: opposite_conversation_user(@conversation, current_user) %>");
+    new PerfectScrollbar('.chat-content-body', {
+      suppressScrollX: true
+    });
+    <%= puts params.class %>
+    $("[content-scrolleable]").scrollTop($("[messages-list]")[0].scrollHeight);
+    messages_scroll(); // add scroll pagination event
+    stylize_messages();
 <% end %>

@@ -1,0 +1,3 @@
+<script>toast_phone = toastr.warning("Tienes <%= ((current_user.created_at+15.days - Time.now )/1.day).to_i.to_s %> días para confirmar tu correo. Da click aquí si no recibiste tu correo de confirmación", "", {"positionClass": "toast-bottom-full-width", timeOut: 10000})
+  $(toast_phone).click(function(){ window.location = "<%= send_new_confirmation_email_users_path %>" });
+</script>

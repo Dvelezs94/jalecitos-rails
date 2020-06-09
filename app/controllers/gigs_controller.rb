@@ -1,11 +1,12 @@
 class GigsController < ApplicationController
   include GigStatus
   include GetGig
+  include SearchFunctions
   include PackTypes
   include SetLayout
   include BannedFunctions
   access user: { except: [:ban_gig] }, admin: [:ban_gig], all: [:show, :old_show]
-  before_action :set_gig, only: [:destroy, :ban_gig]
+  before_action :set_gig, only: [:destroy, :ban_gig, :mail_contact]
   before_action :set_gig_with_first_pack, only: :toggle_status
   before_action :set_gig_with_all_asc, only: [:show, :old_show]
   before_action :remember_review, only: [:show]
@@ -18,6 +19,7 @@ class GigsController < ApplicationController
   before_action :max_gigs, only: [:new, :create]
   before_action :check_running_orders, only: :destroy
   layout :set_layout
+
   def old_show
     #redirecting in redirect_to_show
   end
@@ -25,9 +27,6 @@ class GigsController < ApplicationController
   def show
     if params[:reviews]
       get_reviews
-    elsif params[:related_gigs]
-      get_related_gigs(true)
-      render template: "shared/carousels/add_items_carousel.js.erb"
     else
       define_pack_names
       get_my_reviews if current_user && @gig.user != current_user
@@ -36,14 +35,18 @@ class GigsController < ApplicationController
       Searchkick.multi_search([@related_gigs])
     end
     # increment gig visit
-    if current_user != @gig.user
-      punch_gig
-    end
+    punch_gig if current_user != @gig.user
   end
 
   def ban_gig
     (@gig.published? || @gig.draft?) ? @gig.banned! : @gig.draft!
     redirect_to root_path, notice: "Gig status has been updated"
+  end
+
+  def mail_contact
+    if params[:message].present? && params[:email].present? && params[:name].present? && params[:phone_number].present?
+      ContactMailer.new_message(params[:message], params[:email], params[:name], params[:phone_number], @gig.user.email).deliver
+    end
   end
 
   def toggle_status
@@ -182,7 +185,7 @@ class GigsController < ApplicationController
     end
 
     def set_gig_with_all_asc
-      @gig = Gig.includes(:gig_packages, :category, :faqs, :tags,:likes,:user => [:score, city: [state: :country]], city: [state: :country]).friendly.find(params[:id])
+      @gig = Gig.includes(:gig_packages, :category, :faqs, :tags,:likes,:user => [:score]).friendly.find(params[:id])
       @gig_hits = @gig.visits
     end
 
@@ -198,7 +201,10 @@ class GigsController < ApplicationController
     def gig_params
       gig_params = params.require(:gig).permit(:name,
                                   :description,
-                                  :city_id,
+                                  :address_name,
+                                  :lat,
+                                  :youtube_url,
+                                  :lng,
                                   :category_id,
                                   :tag_list,
                                   :profession,

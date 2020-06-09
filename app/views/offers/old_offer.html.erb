@@ -1,0 +1,43 @@
+
+  <div class="fernanda-single-box <%= offer.user == offer.request.employee ? 'chosen-offer' : nil %>">
+    <div class="offer_image_name">
+      <%= image_tag(offer.user.image_url) %>
+      <h5><%= link_to(offer.user.alias, user_path(offer.user.slug)) %></h5>
+      <span>
+        <i class="fa fa-star"></i>
+        <%= offer.user.score_average(false) %></span>
+
+    </div>
+    <div class="fernanda-user-box-text">
+      <p>Horas estimadas:
+          <%= offer.hours if offer.hours.present? %>
+          <strong><%= number_to_currency(purchase_order_total(offer.price), precision: 2) %>
+            MXN</strong>
+        </p>
+    </div>
+    <% if current_user == offer.user || current_user == offer.request.user %>
+      <div class="ipsum-text">
+
+      <pre><strong>El precio establecido<%= (offer.materials) ? " " : " NO " %>cubre material a utilizar.</strong></pre>
+
+      <pre><p><%=offer.description %></p></pre>
+      </div>
+    <% end %>
+    <% if current_user == offer.user && !@already_hired%>
+      <div class="Borrar-btn">
+        <%= link_to 'Editar', edit_request_offer_path(offer.request, offer), class: "Editar-b" %>
+        <%= link_to "Borrar", request_offer_path(offer.request, offer), method: :delete, data: { confirm: '¿Estás seguro de querer borrar esta oferta?' }, class: "Borrar-b" %>
+      </div>
+    <% end %>
+    <% if current_user == offer.request.user && !@already_hired %>
+      <div class="hire-pack-btn">
+        <% if offer.user.whatsapp_enabled && offer.user.phone_number.present? %>
+        <%= link_to "#{icon("fab", "whatsapp ft-20", title: "Whatsapp")}".html_safe, "https://wa.me/#{offer.user.phone_number}?text=#{"Hola me interesa su oferta en mi pedido *#{offer.request.name}*. #{request_url(offer.request.slug)}"}", class: "btn btn-success wapp-contact", target: "_blank" %>
+        <% end %>
+        <% if offer.user.phone_number.present? %>
+        <%= link_to "#{icon("fas", "phone", title: "Llamar")}".html_safe, "tel:#{offer.user.phone_number}", class: "btn btn-secondary phone-contact", target: "_blank" %>
+        <% end %>
+        <%= link_to "#{icon('fas', 'comment', title: "Mensaje")}".html_safe, conversations_path(user_id: offer.user.id, model_id: offer.request.id, model: "Request"), class: "btn btn-primary msg-contact" %>
+      </div>
+    <% end %>
+  </div>

@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  include OpenpayHelper
+  
   include RefererFunctions
   access user: [:create, :destroy]
   before_action :authenticate_user!

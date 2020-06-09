@@ -4,116 +4,43 @@
     <%= notification_generator_helper error, :error %>
   <% end %>
 <% end %>
-<!-- ---post request form -->
-<div class="section">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-7 col-md-12 centered-form">
-        <h3 class="text-center">Agrega un nuevo Jale para ofertar tus servicios</h3>
-        <p class="text-center">¿No sabes cómo empezar? ¡Revisa La Guía para que tengas más probabilidad de éxito!</p>
-        <p class="text-center"><a href="https://blog.jalecitos.com/guia/como-crear-un-jale/" target="_blank">Guía para hacer un Jale</a></p>
-        <div class="form_box post_form_col">
-
-          <div class="form_block form_section row">
-            <div class="flex-space-bet">
-              <p class="form-title">¿Cúal es tu profesión u oficio en este jale?</p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-            <%= render 'shared_user/gigs/forms/hints/profession_hint.html.erb' %>
-            <%= form.text_field :profession, class: "styled", required: true, maxlength: 50, placeholder: "Ej: Fotógrafo" %>
-          </div>
-
-          <div class="form_block form_section row ">
-            <div class="flex-space-bet">
-              <p class="form-title">¿Qué vas a ofrecer?</p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-            <%= render 'shared_user/gigs/forms/hints/name_hint.html.erb' %>
-            <div style="position:relative;width:100%;margin:0 auto;" class="row">
-              <span class="action action-gig">Ofrezco </span>
-              <%= form.text_area :name, class: 'name-class name-4 required styled action-indent', placeholder: "realizarte una sesión de fotografías.", maxlength: 100 %>
-            </div>
-
-          </div>
-          <div class="form_block form_section row ">
-            <div class="flex-space-bet">
-              <p class="form-title">Descripción general:</p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-            <%= render 'shared_user/gigs/forms/hints/description_hint.html.erb' %>
-            <%= form.text_area :description, id: "description", maxlength: 1000,
-            placeholder: "Fotógrafo profesional con x años de experiencia. Ofrezco servicios de fotografía de calidad para eventos.",
-            class: "description-class description-4 styled required", rows: 5 %>
-
-          </div>
-          <div class="form_block form_section row">
-            <div class="flex-space-bet">
-              <p class="form-title">Elige una categoria:</p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-            <%= render 'shared_user/gigs/forms/hints/category_hint.html.erb' %>
-            <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría" }, class: 'form-select required' ) %>
-
-          </div>
-          <!-- 2 end -->
-          <div class="form_block form_section row">
-            <div class="flex-space-bet">
-              <p class="form-title">¿En qué ciudad de México ofertas este jale?
-              </p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-            <%= render 'shared_user/gigs/forms/hints/city_hint.html.erb' %>
-            <%= render "shared_user/forms/choose_city"%>
-            <%= form.text_field :location, class: 'required font-awesome styled form_autocomplete', id: "form_autocomplete", size: 50, placeholder: '&#xf3c5; Busca tu ciudad...'.html_safe, value: (gig.location(true) != nil)? gig.location : current_user.location(true) %>
-            <%= form.hidden_field :city_id, class: "city", id: "form_autocomplete_id",
-             value: (gig.city_id != nil)? gig.city_id : current_user.city_id %>
-
-          </div>
-
-          <!-- tags -->
-          <div class="form_block form_section row">
-            <div class="flex-space-bet">
-              <p class="form-title">Especifica las etiquetas para que te encuentren más rapido (<strong>Opcional</strong>)
-              </p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-            <%= render 'shared_user/gigs/forms/hints/tags_hint.html.erb' %>
-
-            <div class="tags-input" data-name="tags-input">
-              <%= form.hidden_field :tags_content, class: "hidden_tag_list", name: "gig[tag_list]" %>
-              <textarea name="tag_list" rows="1" class="main-input tags-main-input styled font-awesome" placeholder="&#xf02c;"></textarea>
-            </div>
-            <label class="tag-error error"></label>
-
-          </div>
-
-          <div class="form_block form_section row" id="faqs_form">
-            <div class="flex-space-bet">
-              <p class="form-title">Preguntas frecuentes (Opcional)</p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-            <%= render 'shared_user/gigs/forms/hints/faqs_hint.html.erb' %>
-            <div class="accordion" id="faq-accordion" role="tablist">
-            <%= form.fields_for :faqs do |faq| %>
-              <%= render "/faqs/faq_fields", f: faq %>
-            <% end %>
-            <div class="links">
-              <%= link_to_add_association 'Agregar Pregunta', form, :faqs, class: 'btn btn-success float-right', partial: "/faqs/faq_fields", id: "add_faq" %>
-            </div>
-            </div>
-          </div>
-
-
-
-        </div>
-        </div>
-        <!-- form box -->
-        <!-- -->
-      </div>
-      <!-- -->
-    </div>
-    <!-- col lg 7 -->
+  <div class="alert alert-primary">
+    <span class="tx-danger">*</span>
+    Significa que el campo es obligatorio.</div>
+  <div class="form-group">
+    <label class="d-block">¿Cúal es tu profesión u oficio en este trabajo?
+      <span class="tx-danger">*</span></label>
+      <%= form.text_field :profession, class: "form-control", required: true, maxlength: 50, placeholder: "Ej: Fotógrafo" %>
   </div>
-<!-- container fluid -->
+  <div class="form-group">
+    <label class="d-inline-block">¿Qué estás ofreciendo?
+      <span class="tx-danger">*</span></label>
+      <%= form.text_area :name, class: 'name-class name-4 required form-control', placeholder: "Realizarte una sesión de fotografías", maxlength: 100 %>
+  </div>
+  <div class="form-group">
+    <label class="d-inline-block">Describe detalladamente el trabajo a realizar</label> <span class="tx-danger">*</span>
+    <%= form.text_area :description, maxlength: 1000,
+    placeholder: "Fotógrafo profesional con x años de experiencia. Ofrezco servicios de fotografía de calidad para eventos.",
+    class: "description-class description-4 form-control required", rows: 5 %>
+  </div>
+  <div class="form-group">
+    <label for="category">Categoría
+      <span class="tx-danger">*</span></label>
+    <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Seleccione" }, class: 'custom-select required' ) %>
+  </div>
+  <div class="form-group">
+    <label for="tags" class="d-block">Especifica las etiquetas para que te encuentren más rapido</label>
+    <%= form.text_field :tag_list, value: gig.tag_list.join(","), class: 'form-control tagsinput' %>
+  </div>
+  <div class="form-group">
+    <label class="d-block">Dirección o ciudad en la que ofreces el servicio
+      <span class="tx-danger">*</span></label>
+      <%= form.text_field :location, class: 'required form-control', id: "form_autocomplete_gig",
+       size: 50, placeholder: 'Dirección de tu trabajo'.html_safe,
+        value: gig.location(true) || current_user.location(true),
+        lat: (gig.lat || current_user.lat),
+         lng: (gig.lng|| current_user.lng),
+         address_name: (gig.address_name|| current_user.address_name)  %>
+  </div>
 
-<% end %>
+  <% end %>

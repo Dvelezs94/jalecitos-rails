@@ -1,0 +1,19 @@
+<div class="modal fade" id="completeInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+  <h4 class="modal-title">Completa tu perfil <small class="tx-gray-600">(Puedes cambiarlo en configuración)</small> </h4>
+</div>
+
+      <hr>
+      <%= form_with(model: current_user, remote: true, url: update_users_path, method: :put, class: "ht-50vh overflow-auto container", id: "update-user-form" ) do |form|%>
+        <%= render partial: "users/user_fields", locals:{ form: form, user: current_user } %>
+      <% end %>
+      <div class="modal-footer justify-content-between">
+        <button class="btn btn-secondary" type="cancel" data-dismiss="modal" onclick="updateURL([],[]);">Ahora no</button>
+        <input class="btn btn-primary" type="submit" data-disable-with="Guardando..." value="Guardar" form="update-user-form">
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <% if @success %>
   alert("Tu reporte ha sido enviado y lo revisaremos a la brevedad.");
 <% elsif @too_many_today %>
-  alert("Has reportado muchos elementos por hoy, estamos revisándolos.");  
+  alert("Has reportado muchos elementos por hoy, estamos revisándolos.");
 <% elsif params[:report][:cause] == "" %>
   alert("Asegúrate de proporcionar una causa del reporte.");
 <% else %>
@@ -9,6 +9,6 @@
 <% end %>
 
 <% if params[:report][:cause] != "" %> //close if sent or already sent
-  $(".modal").hide();
+  $(".modal").modal("hide");
   $(".reportForm :input").val(""); //empty the values
 <%end  %>

@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
-  if ($("#filter-conversation").length > 0) {
-    $("#filter-conversation").keyup(
+  if ($("[filter-conversation]").length > 0) {
+    $("[filter-conversation]").keyup(
       filter_conversation
     );
   }

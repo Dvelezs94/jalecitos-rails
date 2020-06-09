@@ -1,5 +1,5 @@
 class BanksController < ApplicationController
-  include OpenpayHelper
+
   include UsersHelper
   access user: [:create, :destroy]
   before_action :authenticate_user!
