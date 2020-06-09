@@ -1,17 +1,30 @@
-<% if current_user && with_number == false %>
-  <% if gig.likes.select{|l| l.user_id == current_user.id}.present? %>
-    <%= link_to "#{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'like')}".html_safe, gig_like_path(gig.slug), method: :delete, class: 'like', remote: true %>
-  <% else %>
-    <%= link_to "#{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'unlike')}".html_safe, gig_like_path(gig.slug), method: :post, class: 'unlike', remote: true %>
+<% gig_show = false if gig_show.nil? %>
+
+<% if gig_show && current_user %>
+  <% if gig.likes.select{|l| l.user_id == current_user.id}.present? %>  <%#user liked the gig %>
+    <%= link_to gig_like_path(gig.id, with_number: with_number, gig_show: true), class: "dropdown-item", method: :delete, remote: true, gig_id: "#{gig.id}"  do %>
+      <%= (with_number)? gig.likes.length : "<i data-feather='heart' class='tx-danger filled'></i>".html_safe %> Me gusta
+    <% end %>
+  <% else %> <%#user doesnt liked yet the gig %>
+    <%= link_to gig_like_path(gig.id, with_number: with_number, gig_show: true), class: "dropdown-item", method: :post, remote: true, gig_id: "#{gig.id}"  do %>
+      <%= (with_number)? gig.likes.length : "<i data-feather='heart'></i>".html_safe %> Me gusta
+    <%end %>
   <% end %>
+
+<%# homepage %>
+
 <% elsif current_user %>
-  <% if gig.likes.select{|l| l.user_id == current_user.id}.present? %>
-    <%= link_to "#{gig.likes.length}  #{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'like with_number')}".html_safe, gig_like_path(gig.slug), method: :delete, class: 'like', remote: true %>
-  <% else %>
-    <%= link_to "#{gig.likes.length if gig.likes.length > 0}  #{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'unlike with_number')}".html_safe, gig_like_path(gig.slug), method: :post, class: 'unlike', remote: true %>
+  <% if gig.likes.select{|l| l.user_id == current_user.id}.present? %>  <%#user liked the gig %>
+    <%= link_to gig_like_path(gig.id, with_number: with_number), class: "link-05", method: :delete, remote: true, gig_id: "#{gig.id}"  do %>
+      <%= (with_number)? gig.likes.length : "<i data-feather='heart' class='feather-12 tx-warning filled tx-danger filled'></i>".html_safe %> Me gusta
+    <% end %>
+  <% else %> <%#user doesnt liked yet the gig %>
+    <%= link_to gig_like_path(gig.id, with_number: with_number), method: :post, remote: true, gig_id: "#{gig.id}"  do %>
+       <%= gig.likes.length if with_number %> Me gusta
+    <% end %>
   <% end %>
-<% else %>
-  <% if gig.likes.length > 0 %>
-  <%= link_to "#{gig.likes.length}#{icon('fas', 'heart medium-icon', title: 'Me gusta', class: 'unlike')}".html_safe, "#", method: :post, class: 'unlike disabled-by-text', remote: true %>
+<% else %> <%#is a guest%>
+  <%= link_to gig_like_path(gig.id, with_number: with_number), method: :post, remote: true, gig_id: "#{gig.id}"  do %>
+    <%= gig.likes.length if with_number %> Me gusta
   <% end %>
 <% end %>

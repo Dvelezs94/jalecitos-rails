@@ -16,11 +16,11 @@
             <div class="button-area">
               <nav class="filters navbar navbar-expand-lg navbar-light bg-light">
                 <%= f.text_field :location, class: 'form-control', id: "search_autocomplete", size: 50,
-                placeholder: "Ubicación", value: (params[:location].nil?)? current_user.location(true) : params[:location] %>
-                <%= f.hidden_field :city_id, class: "city", value: (params[:city_id].nil?)? current_user.city_id : params[:city_id] %>
+                placeholder: "Ubicación", value: (params[:location].nil?)? current_user.location(true) : params[:location],
+                lat: (params[:location].present?)? params[:lat] : current_user.lat || nil,
+                lng: (params[:location].present?)? params[:lng] : current_user.lng || nil %>
                 <%= f.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría",
-                :selected => params[:category_id] }, class: 'form-control', id: "category-select",
-                onchange: "$(this).closest('form').submit()") %>
+                :selected => params[:category_id] }, class: 'form-control', id: "category-select") %>
               </nav>
             </div>
             <% end %>

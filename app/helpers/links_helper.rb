@@ -1,6 +1,6 @@
 module LinksHelper
   def make_links val
-    regexp = /((https?:\/\/|www\.)(\w+\.)+[A-Za-z]+|(\w+\.)+(com|org|net|co|us|mx|info))((\?|\/)[^\s]*|((?=[^a-zA-Z0-9])|\z))/
+    regexp = url_regex()
     #EXPLANATION OF REGEX
     #There are 3 options in the regex:
     #1: if url has https, then match url with any only-word extension
@@ -17,6 +17,16 @@ module LinksHelper
       link_url = ( url_parsed.scheme )? url : "http://" + url
       "<a href='#{URI.parse(link_url)}'target='_blank'>#{url}</a>"
     }
+  end
+
+  def url_regex
+    /((https?:\/\/|www\.)(\w+\.)+[A-Za-z]+|(\w+\.)+(com|org|net|co|us|mx|info))((\?|\/)[^\s]*|((?=[^a-zA-Z0-9])|\z))/
+  end
+
+  def get_host_without_www(url) #example: http://www.jaja.fb.com/momo?param= jaja  returns jaja.fb.com
+    url = "http://#{url}" if URI.parse(url).scheme.nil?
+    host = URI.parse(url).host.downcase
+    host.start_with?('www.') ? host[4..-1] : host
   end
 
   def safes_content content

@@ -8,25 +8,22 @@ class Gig < ApplicationRecord
   include LinksHelper
   require 'voight_kampff'
   #search
-  searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
+  searchkick locations: [:location], language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
   def search_data
     {
       #always first remove emojis and then special chars, otherwise there will be rare bugs with symbols inside string when sending to searchkick
       name: no_multi_spaces(remove_nexus(I18n.transliterate(no_special_chars(RemoveEmoji::Sanitize.call(name)).downcase))).strip,
       description: no_multi_spaces(remove_nexus(I18n.transliterate(no_special_chars(RemoveEmoji::Sanitize.call(description)).downcase))).strip,
       tags: tag_list.join(" "),
-      city_id: city_id,
-      state_id: (city_id.present?)? city.state_id : nil,
       category_id: category_id,
       status: status,
       profession: profession,
       user_id: user_id,
       created_at: created_at,
       updated_at: updated_at,
-      #order_count: order_count,
-      #verified: user.verified,
+      price: lowest_price,
       score: score_average * score_times
-     }
+    }.merge(location: {lat: lat, lon: lng})
   end
   #Tags
   acts_as_taggable
@@ -35,12 +32,11 @@ class Gig < ApplicationRecord
   friendly_id :name, use: :slugged
   #Associations
   belongs_to :user
-  belongs_to :city, optional: true
   #belongs_to :active_user, { where(:users => { status: "active" }) }, :class_name => "User"
   has_many :likes, dependent: :destroy
 
   has_many :completed_reviews, -> (gig) { includes(:gig_rating, :giver).where(receiver_id: gig.user_id, status: "completed").order(updated_at: :desc) }, class_name: 'Review', as: :reviewable
-
+  belongs_to :seo, optional: true
   has_many :faqs, inverse_of: :gig, dependent: :destroy #inverse of allow to save faqs at same time of creating gig (see cocoon gem guide)
   accepts_nested_attributes_for :faqs,allow_destroy: true, limit: 10 #worst case (deleted 5 and sending 5 new in update) so the hash would be 10 items size
   belongs_to :category
@@ -52,13 +48,12 @@ class Gig < ApplicationRecord
   #has_many :prof_pack, ->{ limit(60).order(id: :asc) }, class_name: 'Package'  #this was used on profile, but now i  dont need packages because i keep since price in gig
   has_many :related_pack, ->{ limit(30).order(id: :asc) }, class_name: 'Package'
   #Validations
-  validates_presence_of :name, :profession, :description
-  validate :maximum_amount_of_tags, :no_spaces_in_tag, :tag_length
+  validates_presence_of :name, :profession, :description, :lat, :lng, :address_name
+  validate :maximum_amount_of_tags, :tag_length
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
   validates_length_of :description, :maximum => 1000, :message => "debe contener como máximo 1000 caracteres."
   validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
   validates_length_of :youtube_url, :maximum => 250, :message => "debe contener como máximo 250 caracteres." #this message doesnt get shown, i didnt displayed it
-  validate :location_validate
   #Gallery validations
   validates :images, length: {
   maximum: 5,
@@ -82,7 +77,7 @@ class Gig < ApplicationRecord
   end
 
   def title
-    "Ofrezco #{to_downcase(self.name)}"
+    "#{to_upcase(self.name)}"
   end
   def safe_description
     make_links(CGI::escapeHTML(self.description)).html_safe #escapes html from user and make our links
@@ -96,6 +91,16 @@ class Gig < ApplicationRecord
     title = self.name
     title[0] = title[0].upcase # make upcase first char
     title
+  end
+
+  def seo_title
+    self.seo.present?? self.seo.title : nil
+  end
+  def seo_description
+    self.seo.present?? self.seo.description : nil
+  end
+  def seo_keywords
+    self.seo.present?? self.seo.keywords : nil
   end
 
   def tags_content #useful for use eager loading (i eager load :tags and then get the names) because tag_list cand be eager loaded

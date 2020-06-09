@@ -33,7 +33,7 @@ class NotificationRelayWorker
 
     # Render Website notification
     html = {:fadeItem => ApplicationController.render(partial: "notifications/flash/notification", locals: {notification: notification}, formats: [:html]),
-            :listItem => ApplicationController.render(partial: "notifications/notification", locals: {notification: notification})
+            :listItem => ApplicationController.render(partial: "notifications/notification_min", locals: {notification: notification})
       }
     #if its present i have to check if its still pending
     if review_id.present?

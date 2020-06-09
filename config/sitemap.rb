@@ -28,8 +28,8 @@ SitemapGenerator::Sitemap.create do
   end
 
   Profession.all.each do |profession|
-    City.all.each do |city|
-      add search_path(query: profession.name, city: city.name, state: city.state.name)
+    Gig.all.pluck(:address_name).uniq.each do |address_seo|
+      add search_path(query: profession.name, address_seo: address_seo)
     end
   end
 

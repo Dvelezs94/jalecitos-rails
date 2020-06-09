@@ -1,0 +1,100 @@
+<div class="form-group row">
+  <div class="col-sm-2 d-flex justify-content-end">
+    <div class="avatar avatar-lg"><%= image_tag(avatar_display_helper(user.image_url()), class: "rounded-circle", id: "userImage")%></div>
+  </div>
+  <div class="col-sm-10 pd-t-15">
+    <div class="custom-file">
+      <%= form.file_field :image, class: 'custom-file-input', accept: ".png, .jpg, .jpeg" %>
+      <label class="custom-file-label" for="customFile">Cambiar foto de perfil</label>
+    </div>
+  </div>
+</div>
+<div class="form-group row">
+  <label class="col-sm-2 col-form-label tx-right">Email</label>
+  <div class="col-sm-10">
+    <%= form.text_field :email, class: "form-control", disabled: "true" %>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="user_name" class="col-sm-2 col-form-label tx-right">Nombre</label>
+  <div class="col-sm-10">
+    <%= form.text_field :name, class: "form-control", placeholder: "Mario Pérez", autocomplete: "off" %>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="user_alias" class="col-sm-2 col-form-label tx-right">Alias (@)</label>
+  <div class="col-sm-10">
+    <%= form.text_field :alias, class: "form-control", placeholder: "mario99", autocomplete: "off" %>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="user_website" class="col-sm-2 col-form-label tx-right">Sitio Web</label>
+  <div class="col-sm-10">
+    <%= form.url_field :website, class: "form-control", placeholder: "https://ejemplo.com", autocomplete: "off" %>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="user_facebook" class="col-sm-2 col-form-label tx-right">Página de Facebook</label>
+  <div class="col-sm-10 d-flex align-items-center">
+    <i data-feather="facebook" class="feather-16"></i> facebook.com/
+    <%= form.text_field :facebook, class: "mail-field tx-gray-600 mg-l-5 pd-b-0", placeholder: "usuario", autocomplete: "off", value: user.facebook %>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="user_instagram" class="col-sm-2 col-form-label tx-right">Página de Instagram</label>
+  <div class="col-sm-10 d-flex align-items-center">
+    <i data-feather="instagram" class="feather-16"></i>  instagram.com/
+    <%= form.text_field :instagram, class: "mail-field tx-gray-600 mg-l-5 pd-b-0", placeholder: "usuario", autocomplete: "off", value: user.instagram %>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="user_bio" class="col-sm-2 col-form-label tx-right">Biografía</label>
+  <div class="col-sm-10">
+    <%= form.text_area :bio, class: "form-control", rows: "2" %>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="skills" class="col-sm-2 col-form-label tx-right">Habilidades</label>
+  <div class="col-sm-10">
+    <%= form.text_field :tag_list, value: user.tag_list.join(","), class: 'form-control tagsinput' %>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="userphone" class="col-sm-2 col-form-label tx-right">Teléfono</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <select id="select-country" class="custom-select col-2 col-sm-3 col-xs-3"></select>
+      <%= form.text_field :phone_number, class: "form-control", placeholder: "+52 555 555 5555", id: "userphone", autocomplete: "off" %>
+    </div>
+  </div>
+</div>
+<div class="form-group row">
+  <div class="col-sm-2 tx-right">Whatsapp</div>
+  <div class="col-sm-10">
+    <div class="custom-control custom-checkbox">
+      <%= form.check_box :whatsapp_enabled, class: "custom-control-input", id: "customCheck1" %>
+      <label class="custom-control-label" for="customCheck1">Habilitar para éste número</label>
+    </div>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="userbirth" class="col-sm-2 col-form-label tx-right">Fecha de nacimiento</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <%= form.text_field :birth, class: "form-control", placeholder: "yyyy/mm/dd", id: "userbirth", autocomplete: "off" %>
+    </div>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="config_autocomplete" class="col-sm-2 col-form-label tx-right">Tu ubicación</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <%= form.text_field :location, class: 'form-control', id: "config_autocomplete",
+      value: user.location(true),
+      lat: (user.lat),
+       lng: (user.lng),
+       address_name: (user.address_name)
+       %>
+    </div>
+  </div>
+</div>

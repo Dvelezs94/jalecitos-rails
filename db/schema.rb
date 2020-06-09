@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_06_030224) do
+ActiveRecord::Schema.define(version: 2020_05_09_020934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,8 +162,13 @@ ActiveRecord::Schema.define(version: 2020_01_06_030224) do
     t.string "youtube_url"
     t.integer "visits", default: 0
     t.float "lowest_price"
+    t.float "lat"
+    t.float "lng"
+    t.string "address_name"
+    t.bigint "seo_id"
     t.index ["category_id"], name: "index_gigs_on_category_id"
     t.index ["city_id"], name: "index_gigs_on_city_id"
+    t.index ["seo_id"], name: "index_gigs_on_seo_id"
     t.index ["slug"], name: "index_gigs_on_slug", unique: true
     t.index ["user_id"], name: "index_gigs_on_user_id"
   end
@@ -218,7 +223,7 @@ ActiveRecord::Schema.define(version: 2020_01_06_030224) do
   create_table "offers", force: :cascade do |t|
     t.bigint "user_id"
     t.string "description"
-    t.float "price"
+    t.integer "price"
     t.bigint "request_id"
     t.integer "hours"
     t.datetime "created_at", null: false
@@ -278,7 +283,7 @@ ActiveRecord::Schema.define(version: 2020_01_06_030224) do
     t.integer "pack_type"
     t.string "name"
     t.string "description"
-    t.float "price"
+    t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "gig_id"
@@ -393,6 +398,9 @@ ActiveRecord::Schema.define(version: 2020_01_06_030224) do
     t.bigint "city_id"
     t.integer "offers_count", default: 0
     t.json "images"
+    t.float "lat"
+    t.float "lng"
+    t.string "address_name"
     t.index ["category_id"], name: "index_requests_on_category_id"
     t.index ["city_id"], name: "index_requests_on_city_id"
     t.index ["slug"], name: "index_requests_on_slug", unique: true
@@ -411,6 +419,12 @@ ActiveRecord::Schema.define(version: 2020_01_06_030224) do
     t.integer "receiver_id"
     t.index ["giver_id"], name: "index_reviews_on_giver_id"
     t.index ["order_id"], name: "index_reviews_on_order_id"
+  end
+
+  create_table "seos", force: :cascade do |t|
+    t.string "title"
+    t.string "keywords"
+    t.string "description"
   end
 
   create_table "states", force: :cascade do |t|
@@ -511,7 +525,6 @@ ActiveRecord::Schema.define(version: 2020_01_06_030224) do
     t.datetime "confirmation_sent_at"
     t.string "openpay_id"
     t.integer "status", default: 0
-    t.integer "age"
     t.string "available"
     t.boolean "transactional_emails", default: true
     t.boolean "marketing_emails", default: true
@@ -527,6 +540,13 @@ ActiveRecord::Schema.define(version: 2020_01_06_030224) do
     t.string "session_token"
     t.string "phone_number"
     t.boolean "whatsapp_enabled", default: true
+    t.float "lat"
+    t.float "lng"
+    t.string "address_name"
+    t.date "birth"
+    t.string "website"
+    t.string "facebook"
+    t.string "instagram"
     t.index ["ally_code_id"], name: "index_users_on_ally_code_id"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -559,6 +579,7 @@ ActiveRecord::Schema.define(version: 2020_01_06_030224) do
   add_foreign_key "faqs", "gigs"
   add_foreign_key "gigs", "categories"
   add_foreign_key "gigs", "cities"
+  add_foreign_key "gigs", "seos"
   add_foreign_key "gigs", "users"
   add_foreign_key "likes", "gigs"
   add_foreign_key "likes", "users"

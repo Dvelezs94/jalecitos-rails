@@ -1,0 +1,21 @@
+<div class="row row-xs odd" data-step="2" data-intro="Aquí podrás ver servicios que ofrecen otros usuarios, tú también puedes ofrecer uno" data-position="auto" data-tooltipClass="middle-top-tooltip">
+  <div class="col-12 d-flex align-items-center justify-content-between mg-b-10 mg-t-20">
+    <div>
+      <h4 class="mg-b-0 tx-spacing--1">Lo último para ti</h4>
+    </div>
+    <div>
+  </div>
+</div>
+<%= render partial: "shared_user/root/gig", collection: @wizard_gigs, as: "gig" %>
+</div>
+
+<div class="row row-xs"data-step="3" data-intro="Más abajo encontrarás los pedidos de otros usuarios, si lo deseas, puedes postularte en cualquiera para realizar lo que piden" data-position="auto">
+<div class="col-12 d-flex align-items-center justify-content-between mg-b-10 mg-t-20">
+  <div>
+    <h4 class="mg-b-0 tx-spacing--1">Últimos pedidos</h4>
+  </div>
+  <div>
+</div>
+</div>
+<%= render partial: "shared_user/root/request", collection: @wizard_requests, as: "request" %>
+</div>

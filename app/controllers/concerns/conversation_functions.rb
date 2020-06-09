@@ -8,8 +8,7 @@ module ConversationFunctions
       limit(1).first
       if ! @conversation
           #  Create conversation if not found. this can be refactored later
-          Conversation.create(sender_id: current_user.id, recipient_id: @remote_user)
-          set_recipient
+          @conversation = Conversation.create(sender_id: current_user.id, recipient_id: @remote_user)
       end
     else
       @conversation = nil

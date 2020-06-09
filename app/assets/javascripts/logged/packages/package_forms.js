@@ -1,8 +1,8 @@
 function generate_error(formNumber,index, input) {
-  var err_span = $(input).next();
+  var err_span = $(input).nextAll('span:first');
   err_span.html("Por favor, llene este campo");
   $(input).addClass("error");
-  $("a.package-nav")[formNumber].click();//open the form with the error
+  $("#pack-names a")[formNumber].click();//open the form with the error
   $('html, body').animate({ //go to the input
     scrollTop: ($(input).offset().top-200)
   }, 500);

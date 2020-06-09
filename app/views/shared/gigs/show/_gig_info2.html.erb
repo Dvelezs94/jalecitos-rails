@@ -1,0 +1,85 @@
+<% gig_safe_desc = @gig.safe_description %>
+<% gig_title = @gig.safe_title %>
+
+<h1><%= gig_title %></h1>
+<p class="tx-gray-500"><%= "#{@gig_hits} Vistas" %> ● <%= "#{@gig.likes.length} Me gusta" %></p>
+<div class="d-flex justify-content-between align-items-center">
+  <div>
+    <span class="d-mobile-none d-md-inline">A unos <b><%= distance(@gig, @mylat, @mylng) %></b> de ti</span>
+    <button type="button" class="btn btn-xs btn-outline-success mg-md-l-5" data-toggle="modal" data-target="#showmapModal" already-on-page="true" lat="<%= @gig.lat %>" lng="<%= @gig.lng %>" title="<%= @gig.title %>">
+      <i data-feather="map"></i> Ver en Mapa
+    </button>
+  </div>
+  <span>
+    <%= link_to "Compartir", {}, class: "share_item_url btn btn-xs btn-outline-primary" if @gig.published? %>
+    <%= link_to "Editar", edit_gig_path(city_slug(@gig),@gig.category.name.parameterize, @gig), class: "btn btn-xs btn-outline-primary" if !@gig.published? %> <%# if not published (and i can access to view, it means is my gig) %>
+    <% if current_user %>
+    <a href="" class="link-01" id="moreMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="more-vertical"></i></a>
+    <div class="dropdown-menu" aria-labelledby="moreMenuButton">
+      <% if (@gig.user == current_user) %>
+      <% unless @gig.banned? || @gig.gig_packages[0].nil? %>
+        <%= link_to toggle_status_gig_path(@gig), class: "dropdown-item"  do %>
+          <%= status_text_helper(@gig) %>
+        <% end %>
+      <% end %>
+        <%= link_to edit_gig_path(city_slug(@gig),@gig.category.name.parameterize, @gig), class: "dropdown-item" do %>
+        <i data-feather='edit-2'></i> Editar
+        <% end %>
+        <%= link_to gig_path(city_slug(@gig),@gig), method: :delete, data: { confirm: 'Se eliminará permanentemente' }, class: "dropdown-item" do %>
+        <i data-feather='trash'></i> Eliminar
+        <% end %>
+      <% elsif user_signed_in?%>
+        <%= render("gigs/likes", gig: @gig, with_number: false, gig_show: true)  %>
+        <%= link_to "#", class: "dropdown-item", data: {toggle: "modal", target: "#reportModal"} do %>
+          <i data-feather="flag"></i> Reportar
+        <% end %>
+      <% end %>
+    </div>
+    <% end %>
+  </span>
+</div>
+
+<div class="row row-xs mg-sm-t-10 mg-b-10 mg-t-15">
+  <div class="col-12">
+    <div id="carouselExample2" class="carousel slide" data-ride="carousel" data-interval="false">
+      <div class="carousel-inner gig-show-picture bg-black-8">
+
+        <% if @gig.youtube_url.present? %>
+        <div class="carousel-item gig h-100 active">
+          <%=  YouTubeRails.youtube_embed_url(@gig.youtube_url,"100%", "100%", ssl: true, disable_suggestion: true).html_safe %>
+        </div>
+
+        <% end %>
+        <!-- Slides -->
+        <% if @gig.images.length > 0 %>
+          <% @gig.images.each_with_index do |image, index| %>
+            <div class="carousel-item gig <%= "active" if @gig.youtube_url.blank? && index == 0 %>">
+              <%= image_tag( image.url, data: {lity: true}) %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="carousel-item gig active">
+            <%= image_tag( "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/app_images/gig-no-image-2.png", data: {lity: true})%>
+          </div>
+        <% end %>
+
+        <!-- more items goes here -->
+      </div>
+      <a class="carousel-control-prev" href="#carouselExample2" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"><i data-feather="chevron-left"></i></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExample2" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"><i data-feather="chevron-right"></i></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+<small class="tx-gray-600"><%= @gig.location %></small>
+<p class="pre-wrap"><%= gig_safe_desc %></p>
+
+<div class="accordion" id="gig-show-accordion">
+  <%= render partial: "faqs/faq", collection: @gig.faqs %>
+</div>

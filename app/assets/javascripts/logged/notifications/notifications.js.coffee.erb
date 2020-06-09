@@ -4,11 +4,11 @@ $(document).on "turbolinks:load", ->
 
 class Notifications
   constructor: ->
-    @notifications = $("[data-behavior='notification-items']")
+    @notifications = $("[notifications]")
     @setup() if @notifications.length > 0
 
   setup: ->
-    $("[data-behavior='read-notifications']").on "click", @readNotifications
+    $("[read-notifications]").on "click", @readNotifications
     $.ajax(
       url: "/notifications.json"
       dataType: "JSON"
@@ -22,7 +22,7 @@ class Notifications
       dataType: "JSON"
       method: "POST"
       success: ->
-        $(".notif-icon").removeClass("unread");
+        $("[read-notifications] span").addClass("d-none");
     )
 
   renderNotifications: (data) =>
@@ -32,28 +32,20 @@ class Notifications
                  unread_count += 1
 
     items = $.map data, (notification) ->
-      "
-      <a href='#{notification.redirect.path}'>
-      <div class='belldropdown-box notifications-#{notification.seen}'>
-        <div class='sameicon'>
-          <img class='notif-avatar' src='#{notification.user.image_url}'>
-        </div>
-        <div class='belldropdown-text'>
-        <div class='head-notif'>
-          <div class='timer'>
-          <span><i class='fa fa-clock-o' aria-hidden='true'></i>#{notification.date}</span>
+      #same as notification_min partial
+      "<a href='#{notification.redirect.path}' class='dropdown-item' notification>
+        <div class='media'>
+          <div class='avatar avatar-sm avatar-online'><img src='#{notification.user.image_url}' class='rounded-circle'></div>
+          <div class='media-body mg-l-15'>
+            <p>#{notification.text}</p>
+            <span>#{notification.date}</span>
           </div>
-          </div>
-          <p class='greensbold'>#{notification.text}</p>
         </div>
-      </div>
-      </a>
-      "
+      </a>"
 
+    $("[notifications]").after(items)
     if unread_count > 0 # put the red dot if there are unread notifications
-      $(".notif-icon").addClass("unread");
-    $("[data-behavior='notification-items']").html(items)
-    if items.length > 0
-      $("[data-behavior='notification-items']").append('<div  class="all-not-link" ><a href="/notifications/all">Ver todas</a></div>')
-    else
-      $("[data-behavior='notification-items']").append('<div  class="no-notifications" >No hay nada para mostrar</div>')
+      $("[read-notifications] span").removeClass("d-none");
+      #$("[read-notifications] span").html(unread_count);
+    if items.length == 0
+      $("[notifications]").after('<div  class="container" >No hay nada para mostrar</div>');

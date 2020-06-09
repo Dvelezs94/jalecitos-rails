@@ -5,12 +5,12 @@ function ajaxSent(){
   //change style of buttons
   links.addClass("isDisabled");
   //show loading
-  if($("div.loading").length > 1){
+  if($("[change_in_ajax]").length > 1){
     //when there is more than one loading gif, loading zones are used to find the closest one
-    $(window.target).closest("div.loading-zone").find("div.loading").show();
+    $(window.target).closest("div.loading-zone").find("[change_in_ajax]").removeClass("d-none");
   }
   else{
-    $("div.loading").show();
+    $("[change_in_ajax]").removeClass("d-none");
   }
 }
 function ajaxRecieved(){
@@ -23,12 +23,12 @@ function ajaxRecieved(){
   }
   //if all responses recieved, hide loading
   if(window.sentRequests == 0){
-    if($("div.loading").length > 1){
+    if($("[change_in_ajax]").length > 1){
       //when there is more than one loading gif, loading zones are used to find the closest one
-      $(window.target).closest("div.loading-zone").find("div.loading").hide();
+      $(window.target).closest("div.loading-zone").find("[change_in_ajax]").addClass("d-none");
     }
     else{
-      $("div.loading").hide();
+      $("[change_in_ajax]").addClass("d-none");
     }
   }
 }

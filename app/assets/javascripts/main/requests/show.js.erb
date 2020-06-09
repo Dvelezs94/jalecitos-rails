@@ -1,8 +1,0 @@
-$(document).on('turbolinks:load', function() {
-  my_offer_container = $(".paginated-other_offers");
-  other_offers_container = $(".other_offers_container");
-  //my offer doesnt exist, and other offers neither
-  if ( my_offer_container.length > 0 && other_offers_container.length > 0 && my_offer_container.children().length  == 0 && other_offers_container.children().length  == 1) {
-    my_offer_container.html("No hay postulados");
-  }
-});

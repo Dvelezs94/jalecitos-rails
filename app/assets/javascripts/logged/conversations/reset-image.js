@@ -7,6 +7,6 @@ $(document).on('turbolinks:load', function() {
 function delete_image() {
   $("#message_image").val('');
   $("#output").attr("src", "");
-  $("#output").attr("display", "none");
-  $('#attach-i').show();
+  $("#output").addClass("d-none");
+  $('[no-msg-img]').removeClass("d-none");
 }

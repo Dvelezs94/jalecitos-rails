@@ -1,0 +1,32 @@
+<div class="col-sm-6 col-md-4 col-lg-3 mg-t-10" single-element lat="<%= gig.lat %>"  lng="<%= gig.lng %>" title="<%= gig.title %>">
+  <div class="card">
+    <%= link_to the_gig_path(gig), class: "link-01-a" do %>
+    <%= image_tag( image_display_helper( default_gig_img(gig.images), gig.youtube_url ), class: "card-img-top gig-card-top", lazy: true ) %>
+      <div class="card-body pd-b-5-f">
+        <span class="media">
+          <div class="avatar avatar-sm <%= "avatar-online" if gig.user.online? %>">
+            <%= image_tag(avatar_display_helper(gig.user.image_url(:thumb)), class: "rounded-circle", width: "32", lazy: true) %>
+          </div>
+          <div class="media-body mg-l-10 w-0"> <%#w-0 helps truncate of user name to work, actually i can use any width %>
+            <h6 class="mg-b-0 truncate"><%= gig.user.noa %></h6>
+            <small class="d-block tx-gray-600 truncate">Activo hace <%= distance_of_time_in_words_to_now(gig.user.current_sign_in_at) %></small>
+          </div><!-- media-body -->
+        </span>
+        <p class="card-title mg-t-10 tx-16 multi-line-truncate-2"><%= gig.min_title %></p>
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <%= one_star_disp_help gig %>
+          </div>
+          <small>Desde <strong><%= query_home_or_profile_helper(gig) %></strong></small>
+        </div>
+      </div>
+    <% end %>
+    <div class="card-footer d-flex justify-content-between align-items-center">
+      <%= render("gigs/likes", gig: gig, with_number: false) if current_user && current_user != gig.user%>
+      <%= link_to "Mapa", the_gig_path(gig), data: {target: "#showmapModal", toggle: "modal"} %>
+      <%= link_to the_gig_path(gig), class: "share_item_url" do %>
+        Compartir
+      <% end %>
+    </div>
+  </div>
+</div>

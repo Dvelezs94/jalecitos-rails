@@ -1,42 +1,24 @@
-<div class="servico-singleteam single-review" review-id="<%= review.id %>">
-  <div class="servico-authoristd">
-    <%= link_to image_tag(avatar_display_helper(review.giver.image_url(:thumb)), class: "icon-review"), user_path(review.giver.slug) %>
-  </div>
-  <div class="authoristed-contents1">
-    <div class="flex align-items-center">
-      <p class="loyed1 truncate max-w-75">
-        <strong><%= link_to review.giver.alias, user_path(review.giver.slug), style:"color: black;" %></strong>
-      </p>
-      <p class="loyed1">
-        <%= image_tag("star-on", title: review.gig_rating.stars, class: "single-star") %>
-        <span class="rating-score"><%= review.gig_rating.stars.to_i %></span>
-      </p>
-
+<div class="media w-100 " review-id="<%= review.id %>" display-hidden-menu>
+  <div class="avatar mg-r-20"><%= image_tag(avatar_display_helper(review.giver.image_url(:thumb)), class: "rounded-circle") %> </div>
+  <div class="media-body">
+    <div class="d-flex align-items-center ht-20">
+      <small class="tx-inverse">
+        <strong class=""> <%= review.giver.alias %> <span><i data-feather="star" class="feather-12 tx-warning filled tx-warning filled"></i>
+          <span class="tx-warning tx-13" stars> <%= review.gig_rating.stars.to_i %> </span></span>
+        </strong>
+        <span class="text-muted"> <%= distance_of_time_in_words_to_now(review.created_at) %> </span>
+      </small>
       <% if current_user == review.giver %>
-      <div class="btn-group dropleft review-more ripple">
-        <div data-toggle="dropdown" haspopup="true" expanded="false" class="w-100">
-          <%= icon("fas", "ellipsis-v") %>
-        </div>
-        <div class="dropdown-menu">
+      <span class="ml-auto" menu-hidden>
+        <a href="" class="link-01" id="moreMenuButton-<%= review.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="more-vertical" class="feather-16"></i></a>
+        <div class="dropdown-menu" aria-labelledby="moreMenuButton-<%= review.id %>">
           <%= link_to("Eliminar", review_path(review.id), method: :delete, remote: true,class: "dropdown-item", data: {confirm: "El elemento se eliminará"}) if current_user == review.giver %>
-          <%= link_to("Editar", review_path(review.id), class: "dropdown-item edit-review")  if current_user == review.giver %>
+          <%= link_to "Editar", review_path(review.id), class: "dropdown-item", data: {toggle: "modal", target: "#editreviewModal"} if current_user == review.giver %>
           <%= link_to "Reportar", review_path(review.id), class: "dropdown-item report-review"  if current_user != review.giver %>
         </div>
-      </div>
+      </span>
       <% end %>
     </div>
-    <p class="loyed2">
-      <% if review.comment.present? %>
-        <% splitted_words = review.comment.split  %>
-          <span class='truncated-text' style='display: inline;'><%=safes_content(review.comment.truncate_words(50)) %></span>
-          <% if splitted_words.size > 50 %>
-            <span class='complete-text' style='display: none;'><%= safes_content(splitted_words[50..-1].join(' ')) %></span>
-            <div>
-              <%= link_to('Ver más', '#', onclick: 'toggleReviewText(event)') %>
-            </div>
-          <% end %>
-        <% end %>
-      </p>
-      <p class="loyed3"><%= distance_of_time_in_words_to_now(review.updated_at) %></p>
-    </div>
+    <p class="tx-left text-break" review-comment><%= review.comment %></p>
   </div>
+</div>

@@ -1,36 +1,37 @@
-<div class="chat-right-side-text" data-conversation-id="<%= conversation.id %>" id="conversation_div">
-    <div class="Harold-Bates-text">
-        <h3 style="margin-bottom:0;"><%= link_to icon("fa", "arrow-left"), conversations_path %> <%= link_to opposite_user.alias, user_path(opposite_user.slug), style: "color: #000;margin-left: 10px;" %></h3>
-          <span>Activo hace <%= opposite_user.current_sign_in_at != nil ? distance_of_time_in_words_to_now(opposite_user.current_sign_in_at) : "nunca" %></span>
+<div class="chat-content" data-conversation-id="<%= conversation.id %>">
+  <div class="chat-content-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="avatar avatar-sm"><%= image_tag(avatar_display_helper(opposite_user.image_url(:thumb)), class: "rounded-circle") %></div>
+      <h6 id="channelTitle" class="mg-l-10 mg-b-0"><%= opposite_user.alias %></h6>
     </div>
-<!--
-    <div class="chat-right-side-date">
-        <span>Febrero 18</span>
-    </div>
--->
-<div class="message_view_box">
-  <%= paginate @messages %>
-  <ul class="messages-list">
-  <%= render 'conversations/conversation_content', messages: @messages.sort %>
-  </ul>
-</div>
+  </div>
+  <!-- chat-content-header -->
 
-
-
-<div class="right-bottom-chat-write">
-    <div class="bottom-chat-write">
-      <%= form_for [@conversation, Message.new], remote: true do |f| %>
-      <label for="message_image" style="width:45px;">
-        <%= icon("fas","image", class: "fa-2x", title: "Adjuntar imagen", id: "attach-i")  %>
-        <%= f.file_field :image, accept: ".jpg, .jpeg, .png", style: "display: none;" %>
-        <img id="output" style="width: inherit;display:none;"></img>
-      </label>
-      <%= f.text_field :body, autofocus: true, size: 499, autocomplete: "off", placeholder: "Escribe un mensaje" %>
-      <%= f.hidden_field :related_to_id, value: params[:model_id] %>
-      <%= f.hidden_field :related_to_type, value: params[:model] %>
-      <%= button_tag( :class => "btn send-message", id: "send-message", :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i>" }) do %>
-      <%= "Enviar" %>
-        <% end %>
+  <div class="chat-content-body" content-scrolleable>
+    <div class="chat-group" messages-list="<%= opposite_user.id %>">
+      <%= paginate @messages %>
+      <% @messages.sort.each do |message| %> <%#made this way so message_broadcast_worker is faster %>
+        <%= render message, user: message.user %>
       <% end %>
     </div>
+  </div>
+  <!-- chat-content-body -->
+
+  <%= form_for [@conversation, Message.new], remote: true do |f| %>
+  <div class="chat-content-footer">
+    <%= f.text_field :body, autofocus: true, size: 499, autocomplete: "off", placeholder: "Mensaje", class: "form-control align-self-center bd-0" %>
+    <%= f.hidden_field :related_to_id, value: params[:model_id] %>
+    <%= f.hidden_field :related_to_type, value: params[:model] %>
+    <nav>
+      <label title="Subir imagen" for="message_image">
+        <%= f.file_field :image, accept: ".jpg, .jpeg, .png", class: "d-none" %>
+        <i data-feather="image" no-msg-img></i>
+        <img id="output" class="d-none mw-45px"></img>
+      </label>
+    </nav>
+    <%= f.submit("Enviar", class: "d-none",:data => { :disable_with => "Enviando" }) %>
+  </div>
+  <!-- chat-content-footer -->
+<% end %>
 </div>
+<!-- chat-content -->

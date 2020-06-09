@@ -8,13 +8,16 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%# gig_review_google if @gig.present? && current_page?( the_gig_path(@gig) ) && @gig.score_times > 0 #lo quite porque no tiene sentido poner esto%>
-    <%= render "google/searchbox" if current_page?(root_path) %>
-    <%= render "google/faq_homepage" if current_page?(root_path) %>
+    <%# render "google/searchbox" if current_page?(root_path) %>
+    <%# render "google/faq_homepage" if current_page?(root_path) %>
     <%= favicon_link_tag image_path 'favicon.ico' %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.26.0/feather.min.js"></script>
     <%= stylesheet_link_tag 'guest', media: 'all', 'data-turbolinks-track': 'reload' %>
     <!-- Card Anti Fraud System -->
     <!-- <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script> <script type="text/javascript" src="https://resources.openpay.mx/lib/openpay-data.v1.min.js"></script> -->
     <%= javascript_include_tag 'guest', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places", 'data-turbolinks-eval': 'false', :async => true, :defer => true %>
+
     <%= javascript_include_tag 'lazy_load', 'data-turbolinks-track': 'reload'%>
 
     <!-- For PWA -->
@@ -24,26 +27,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, viewport-fit=cover, maximum-scale=1,user-scalable=0">
     <meta name="theme-color" content="#2B8261" />
-    <%= meta_tags %>
+    <%= render "shared_guest/meta_tags" %>
     <%= ios_pwa_tags %>
     <!--Propeller Ads-->
     <meta name="propeller" content="82c24c638ce9bb9de35ae367316dc3fb">
   </head>
 
-  <body id="page-top">
+  <body>
     <%= google_tag_manager %>
-    <%=hidden_field_tag :new_message, (flash.any?)? "true" : "false" %><%# useful for gritter behaviour (dont display notifications of cache) %>
-    <%= render 'shared/menu/main_nav_bar' %>
-    <%= render "shared/transition/transition-icon" %>
-    <div class="main_container">
+    <%= render "shared/menu/navbar" %>
+    <div flash-notifications class="pos-fixed t-70 r-10 zi-10000 t-mobile-20"></div>
+
+    <div class="content content-fixed">
+      <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
       <%= notification_helper %>
-      <% if  ! (current_page?(root_path) || current_page?(new_user_session_path)) || params[:query] %>
-        <div class="gap"></div>
-      <% end  %>
       <%= yield %>
-      <%= render 'shared_guest/log/sessions'%>
+      </div>
     </div>
-    <%= render 'shared_guest/footer' %>
-    <%= render 'pages/contact' %>
+    <%= render partial: "gigs/display_map" %>
   </body>
 </html>

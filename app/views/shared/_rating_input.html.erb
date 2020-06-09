@@ -1,0 +1,9 @@
+<% id_for_label = (id_for_label.present?)? id_for_label.to_s : "0" %>
+<% stars = nil if stars.blank? %>
+<div class="form-group rating-input">
+  <%=f.radio_button :stars, 5, :id => "star5-#{id_for_label}", checked: "#{ "checked" if stars == 5 }" , required: "true" %><label for="star5-<%= id_for_label %>" title="Excelente"><i data-feather="star" class="feather-18 tx-warning"></i></label>
+  <%=f.radio_button :stars, 4, :id => "star4-#{id_for_label}", checked: "#{ "checked" if stars == 4 }"  %><label for="star4-<%= id_for_label %>" title="Bueno"><i data-feather="star" class="feather-18 tx-warning"></i></label>
+  <%=f.radio_button :stars, 3, :id => "star3-#{id_for_label}", checked: "#{ "checked" if stars == 3 }"  %><label for="star3-<%= id_for_label %>" title="Decente"><i data-feather="star" class="feather-18 tx-warning"></i></label>
+  <%=f.radio_button :stars, 2, :id => "star2-#{id_for_label}", checked: "#{ "checked" if stars == 2 }"  %><label for="star2-<%= id_for_label %>" title="Malo"><i data-feather="star" class="feather-18 tx-warning"></i></label>
+  <%=f.radio_button :stars, 1, :id => "star1-#{id_for_label}", checked: "#{ "checked" if stars == 1 }" %><label for="star1-<%= id_for_label %>" title="Muy malo"><i data-feather="star" class="feather-18 tx-warning"></i></label>
+</div>

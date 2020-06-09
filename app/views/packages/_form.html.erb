@@ -1,127 +1,127 @@
-<%= form_with(model: package, url: package_form_url_helper, method: form_method_helper, local: true, :html => { :id => "packages_form", class: "pack_form" }) do |form|%>
 <% has_all_pack = params[:action] == 'edit' && (@gig.gig_packages.any? && @gig.gig_packages[2].name != '') %>
-<div class="container-fluid section centered-form packages-builder">
-  <h3 id="how-many-pack">Define tus paquetes</h3>
-  <div class="col-lg-8 mar-0-auto">
-    <nav class="pack-names">
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link package-nav active" id="pack-tab-0" data-toggle="tab" href="#package-0" role="tab" aria-selected="true">Básico</a>
-        <a class="nav-item nav-link package-nav <%= "hidden" if params[:action] == 'new' || @gig.gig_packages.none? || @gig.gig_packages[1].name == "" %>" id="pack-tab-1" data-toggle="tab" href="#package-1" role="tab" aria-selected="false">Éstandar</a>
-        <a class="nav-item nav-link package-nav <%= "hidden" if params[:action] == 'new' || @gig.gig_packages.none? || @gig.gig_packages[2].name == "" %>" id="pack-tab-2" data-toggle="tab" href="#package-2" role="tab" aria-selected="false">Premium</a>
-        <a href="#" class="pack-tab-displayer <%= "hidden" if has_all_pack %>" id="new-package-1" ><%= icon("fas", "plus") %></a>
-      </div>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
-      <% package.each_with_index do |pack, n| %>
-        <div class="tab-pane fade <%= "show active" if n==0 %>" id="package-<%= n %>" role="tabpanel" aria-labelledby="pack-tab-<%= n %>">
+<%= form_with(model: package, url: package_form_url_helper, method: form_method_helper, local: true, :html => { :id => "packages_form", class: "pack_form" }) do |form|%>
+<ul class="nav nav-line nav-justified" id="pack-names" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pack-tab-0" data-toggle="tab" href="#package-0" role="tab" aria-selected="true" aria-controls="basic">Básico
+      <span class="tx-danger">*</span></a>
+  </li>
+  <li class="nav-item <%= "d-none" if params[:action] == 'new' || @gig.gig_packages.none? || @gig.gig_packages[1].name == "" %>">
+    <a class="nav-link" id="pack-tab-1" data-toggle="tab" href="#package-1" role="tab" aria-selected="false" aria-controls="standard">Estándar</a>
+  </li>
+  <li class="nav-item <%= "d-none" if params[:action] == 'new' || @gig.gig_packages.none? || @gig.gig_packages[2].name == "" %>">
+    <a class="nav-link" id="pack-tab-2" data-toggle="tab" href="#package-2" role="tab" aria-selected="false" aria-controls="premium">Premium</a>
+  </li>
+  <li class="nav-item <%= "d-none" if has_all_pack %>">
+    <a href="#" class="nav-link pack-tab-displayer" style="color:green;" id="new-package-1" >Nuevo</a>
+  </li>
+</ul>
+<div class="tab-content bd bd-gray-300 bd-t-0 pd-20 rounded-bottom" id="packagesContent">
 
-          <div class="form_box pack_form_col">
-            <% if pack.errors.any? %>
-              <%pack.errors.full_messages.each do |error| %>
-                <%= notification_generator_helper error, :error %>
-              <% end %>
-            <% end %>
+  <% package.each_with_index do |pack, n| %>
+  <div class="tab-pane fade <%= "show active" if n==0 %>" id="package-<%= n %>" role="tabpanel" aria-labelledby="pack-tab-<%= n %>">
+    <% if pack.errors.any? %>
+      <%pack.errors.full_messages.each do |error| %>
+        <%= notification_generator_helper error, :error %>
+      <% end %>
+    <% end %>
+    <%= fields_for 'packages[]', pack do |pa| %>
+    <div class="form-group">
+      <label class="d-block">Nombre del paquete
+        <span class="tx-danger">*</span></label>
 
-            <%= fields_for 'packages[]', pack do |pa| %>
+        <%= pa.text_field :name, class:
+        "name-class name-#{n} form_fields_#{n} form-control",maxlength: 100,
+         placeholder: "Fotos tamaño infantil", id: "package_name_#{n}" %>
+        <span class="span-error"></span>
+    </div>
+    <div class="form-group">
+      <label class="d-block">Describe este paquete
+        <span class="tx-danger">*</span></label>
 
-            <div class="form-block form-group-<%= n %> row col-lg-11 centered-form">
-              <strong class="form-title">Nombre del paquete</strong>
-              <%= pa.text_field :name, class: "name-class name-#{n} form_fields_#{n} styled",maxlength: 100,
-               placeholder: "Fotos tamaño infantil", id: "package_name_#{n}" %>
-              <span class="span-error"></span>
+        <%= pa.text_area :description, id: "description#{n}", maxlength: 1000,
+        placeholder: "5 fotos tamaño infantil a color",
+        class: "description-class description-#{n} form_fields_#{n} form-control", rows: 5 %>
+     <span class="span-error"></span>
+
+    </div>
+
+    <div class="form-group">
+      <label class="d-block">Método de cobro<span class="tx-danger">*</span></label>
+      <%= render "shared_user/forms/choose_payment",  n: n, pack: package[n] %>
+      <div class="row d-none" display_id="by_service_<%= n %>" display_class="by_service">
+        <div class="row centered justify-content-center col-lg-12 col-md-12 col-sm-12 col-12"> <!--col-lg-6 col-md-6 col-sm-12 col-12 no hire-->
+          <label class="d-block mg-t-10">Lo que ganaré
+            <span class="tx-danger">*</span></label>
+          <div class="row justify-content-center w-100">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <%= pa.number_field :price, min: "0", max: "1000000", step: "1",
+              class: "price-input price-input-#{n} form-control form_fields_#{n}", id: "price_input_#{n}" %> <!--min: "100", max: "10000"-->
+              <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+              </div>
+              <span class="span-error w-100"></span> <%# w-100 fixes space when error appears %>
             </div>
-
-            <hr>
-            <div class="form-block form-group-<%= n %> row col-lg-11 centered-form">
-              <div class="flex-space-bet">
-                <p class="form-title">Lo que realizaré:</p>
-              </div>
-
-                 <%= pa.text_area :description, id: "description#{n}", maxlength: 1000,
-                 placeholder: "5 fotos tamaño infantil a color",
-                 class: "description-class description-#{n} form_fields_#{n} styled", rows: 5 %>
-
-              <span class="span-error"></span>
-            </div>
-            <hr>
-
-            <div class="form-block form-group-<%= n %> pack-price-class col-lg-11 centered-form">
-              <div class="flex-space-bet">
-                <p class="form-title">¿Cómo quiero cobrar?
-                </p>
-                <%# icon("fas", "question-circle", class: "question_hint toggler") %>
-              </div>
-              <%# render 'shared_user/gigs/forms/hints/city_hint.html.erb'%>
-              <%= render "shared_user/forms/choose_payment",  n: n, pack: package[n] %>
-              <div class="row hidden" display_id="by_service_<%= n %>" display_class="by_service">
-                <div class="row centered justify-content-center col-lg-12 col-md-12 col-sm-12 col-12"> <!--col-lg-6 col-md-6 col-sm-12 col-12 no hire-->
-                  <p class="price-text form-title">Lo que ganaré:</p>
-                  <div class="row justify-content-center w-100">
-                    <%= pa.number_field :price, min: "0", max: "1000000", step: ".01",
-                    class: "price-input price-input-#{n} form-control form_fields_#{n}", id: "price_input_#{n}" %> <!--min: "100", max: "10000"-->
-                    <span class="span-error"></span>
-                  </div>
-                </div>
-                <%# no hire %>
-                <!-- <div class="form_block row will-show col-lg-6 col-md-6 col-sm-12 col-12">
-                  <div class="flex-space-bet">
-                    <p class="price-text form-title">Precio final:  <%# icon("fas", "question-circle", class: "question_hint toggler") %></p>
-                  </div>
-                  <%# render 'shared_user/pack/hints/price_hint.html.erb' %>
-                  <label id="price-calc-<%# n %>" class="label-price"></label>
-                </div> -->
-              </div>
-              <div class="row hidden" display_id="by_units_<%= n %>" display_class="by_unit">
-                <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
-                  <p class="price-text form-title">Tipo de unidad:</p>
-                  <div class="row justify-content-center w-100">
-                    <%= pa.select :unit_type, grouped_options_for_select(unit_options, selected: pack.unit_type),{},
-                     class:"form-control form_fields_#{n} text-center unit_type", style: "text-align-last:center;" , id: "unit_select_#{n}"%>
-                    <span class="span-error"></span>
-                  </div>
-                </div>
-                <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
-                  <p class="price-text form-title">Precio por unidad:</p>
-                  <div class="row justify-content-center w-100">
-                    <%= pa.number_field :price, min: "1", max: "1000000", step: "0.5", id: "unit_price_#{n}",
-                    class: "form-control form_fields_#{n} text-center unit_price" %> <!-- max: "5000" no hire-->
-                    <span class="span-error"></span>
-                  </div>
-                </div>
-                <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
-                  <p class="price-text form-title">Mínima cantidad a vender:</p>
-                  <div class="row justify-content-center w-100">
-                    <%= pa.number_field :min_amount, min: "1", max: "99999", step: "1", id: "min_amount_#{n}",
-                    class: "form-control form_fields_#{n} min_amount text-center"  %>
-                    <span class="span-error"></span>
-                  </div>
-                </div>
-                <div class="row centered justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
-                  <p class="price-text form-title">Máxima cantidad a vender:</p>
-                  <div class="row justify-content-center w-100">
-                    <%= pa.number_field :max_amount, min: "2", max: "1000000", step: "1", id: "max_amount_#{n}",
-                    class: "form-control form_fields_#{n} max_amount text-center"  %> <!-- max: "10000" no hire-->
-                    <span class="span-error"></span>
-                  </div>
-                </div>
-              </div>
-              <%# render "shared_user/see_level_table", n: n no hire%>
-              <%# render "shared/level_table", n: n, user: true, h: true  no hire%>
-            </div>
-              <div style="margin:0 20px;display:flex;justify-content:flex-end;">
-                <%=link_to icon("fas", "trash-alt", class: "fa-2x", style: "color: red;"), "#{n}", class: "erase-all" %>
-              </div>
-            <% end %>
           </div>
+        </div>
 
+      </div>
+      <div class="row d-none" display_id="by_units_<%= n %>" display_class="by_unit">
+        <div class="row justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
+          <label class="d-block mg-t-10">Tipo de unidad
+            <span class="tx-danger">*</span></label>
+          <div class="row justify-content-center w-100">
+            <%= pa.select :unit_type, grouped_options_for_select(unit_options, selected: pack.unit_type),{},
+             class:"form-control form_fields_#{n} text-center unit_type", style: "text-align-last:center;" , id: "unit_select_#{n}"%>
+            <span class="span-error"></span>
+          </div>
         </div>
-        <% n += 1  %>
+        <div class="row justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
+          <label class="d-block mg-t-10">Precio por unidad
+            <span class="tx-danger">*</span></label>
+          <div class="row justify-content-center w-100">
+            <%= pa.number_field :price, min: "1", max: "1000000", step: "0.5", id: "unit_price_#{n}",
+            class: "form-control form_fields_#{n} text-center unit_price" %> <!-- max: "5000" no hire-->
+            <span class="span-error"></span>
+          </div>
+        </div>
+        <div class="row justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
+          <label class="d-block mg-t-10">Mínima cantidad a vender
+            <span class="tx-danger">*</span></label>
+          <div class="row justify-content-center w-100">
+            <%= pa.number_field :min_amount, min: "1", max: "99999", step: "1", id: "min_amount_#{n}",
+            class: "form-control form_fields_#{n} min_amount text-center"  %>
+            <span class="span-error"></span>
+          </div>
+        </div>
+        <div class="row justify-content-center col-lg-6 col-md-6 col-sm-6 col-12 mar-0-auto">
+          <label class="d-block mg-t-10">Máxima cantidad a vender
+            <span class="tx-danger">*</span></label>
+          <div class="row justify-content-center w-100">
+            <%= pa.number_field :max_amount, min: "2", max: "1000000", step: "1", id: "max_amount_#{n}",
+            class: "form-control form_fields_#{n} max_amount text-center"  %> <!-- max: "10000" no hire-->
+            <span class="span-error"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end mg-t-10">
+        <%=link_to "#{n}", class: "erase-all" do %>
+        <button type="button" class="btn btn-danger btn-icon">
+          <i data-feather="trash"></i>
+        </button>
         <% end %>
-        <div class="row justify-content-center">
-          <%= button_tag "Nuevo paquete", class: "btn btn-success pack-tab-displayer #{ "hidden" if has_all_pack}", id: "new-package-2" %>
-        </div>
       </div>
     </div>
+  <% end %> <%#end fields for %>
   </div>
+  <% n += 1  %>
+  <% end %> <%#end each package %>
+</div>
+  <%# button_tag "Nuevo paquete", class: "btn btn-success pack-tab-displayer #{ "d-none" if has_all_pack}", id: "new-package-2" %>
+  <% end %> <%#end form %>
 
-<% end %>
+
+  <%# OLD PARTIAL ------------------------------------ %>

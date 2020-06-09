@@ -9,21 +9,20 @@ class Request < ApplicationRecord
   include BeforeDestroyFunctions
   include ApplicationHelper
   #search
-  searchkick language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
+  searchkick locations: [:location], language: "spanish", word_start: [:name, :description, :profession, :tags], suggest: [:name, :description, :profession, :tags]
   def search_data
     {
       #always first remove emojis and then special chars, otherwise there will be rare bugs with symbols inside string when sending to searchkick
       name: no_multi_spaces(remove_nexus(I18n.transliterate(no_special_chars(RemoveEmoji::Sanitize.call(name)).downcase))).strip,
       description: no_multi_spaces(remove_nexus(I18n.transliterate(no_special_chars(RemoveEmoji::Sanitize.call(description)).downcase))).strip,
       tags: tag_list.join(" "),
-      city_id: city_id,
-      state_id: (city_id.present?)? city.state_id : nil,
       category_id: category_id,
       status: status,
       user_id: user_id,
+      price: budget[/\d+/].to_i, #finds first number
       profession: profession,
       created_at: created_at
-     }
+     }.merge(location: {lat: lat, lon: lng})
   end
   #Tags
   acts_as_taggable
@@ -39,12 +38,11 @@ class Request < ApplicationRecord
   has_many :offers, dependent: :destroy
   belongs_to :employee, class_name: "User", optional: true
   #Validations
-  validates_presence_of :name, :description, :budget, :category_id
-  validate  :tag_length, :no_spaces_in_tag, :maximum_amount_of_tags
+  validates_presence_of :name, :description, :budget, :category_id, :lat, :lng
+  validate  :tag_length, :maximum_amount_of_tags
   validates_length_of :name, :maximum => 100, :message => "debe contener como máximo 100 caracteres."
   validates_length_of :profession, :maximum => 50, :message => "debe contener como máximo 50 caracteres."
   validates_length_of :description, :maximum => 1000, :message => "debe contener como máximo 1000 caracteres."
-  validate :location_validate
   validate :budget_options
   validate :invalid_change, on: :update
   validate :finished_request, on: :update
@@ -108,7 +106,7 @@ class Request < ApplicationRecord
   end
 
   def title
-    "Busco #{to_downcase(self.name)}"
+    to_upcase(self.name)
   end
 
   def budget_options

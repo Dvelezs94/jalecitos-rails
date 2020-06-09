@@ -1,14 +1,6 @@
   <h2>Gigs</h2>
   <div class="admin-chart row">
     <div class="col-10 col-sm-12 col-md-12 col-lg-6 text-center mar-0-auto" >
-      <h4>Por estado</h4>
-      <%= pie_chart Gig.group(:status).count %>
-    </div>
-    <div class="col-10 col-sm-12 col-md-12 col-lg-6 text-center mar-0-auto" >
-      <h4>Por Ciudad</h4>
-      <%= pie_chart City.joins(:gigs).group(:name).count %>
-    </div>
-    <div class="col-10 col-sm-12 col-md-12 col-lg-6 text-center mar-0-auto" >
       <h4>Por Categoria</h4>
       <%= pie_chart Category.joins(:gigs).group(:name).count %>
     </div>

@@ -23,7 +23,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_by_email(@auth.info.email)
     if ! @user
       if @auth.info.email.present?
-        @new_user = User.new(provider: @auth.provider, email: @auth.info.email, password: Devise.friendly_token[0,20], name: @auth.info.name, image: @auth.info.image, lat: request.env["omniauth.params"]["lat"], lon: request.env["omniauth.params"]["lon"])
+        @new_user = User.new(provider: @auth.provider, email: @auth.info.email, password: Devise.friendly_token[0,20], name: @auth.info.name, image: @auth.info.image, lat: @mylat, lng: @mylng, address_name: @myaddress)
         @new_user.skip_confirmation!
         success = @new_user.save
         if success
@@ -41,7 +41,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # if the user already exists, just log in
     elsif @user.persisted?
       if check_if_banned(@user)
-        redirect_to cookies.permanent.signed[:mb].present? ? mobile_sign_in_path : root_path
+        redirect_to root_path
       else
         log_in_and_remember(@user)
         #  the z is just to fix the fb issue that is appending #_=_ to the last url param
