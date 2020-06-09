@@ -3,9 +3,6 @@ class AdminsController < ApplicationController
   access admin: :all
   include ActionView::Helpers::NumberHelper
   before_action :set_vars
-  before_action only: [:create_openpay_user, :openpay_dashboard, :predispersion_fee] do
-    init_openpay("customer")
-  end
   before_action :set_balance, only: [:openpay_dashboard, :predispersion_fee]
 
   def index_dashboard

@@ -5,9 +5,6 @@ class User < ApplicationRecord
   #includes
   #friendly_id
   extend FriendlyId
-  #Payments
-  include OpenpayFunctions
-  include OpenpayHelper
   #validations
   include LocationFunctions
   #inspects
@@ -53,13 +50,10 @@ class User < ApplicationRecord
   validates :phone_number, :presence => {:message => 'Tienes que proporcionar un numero valido'},
                        :length => { :minimum => 10, :maximum => 25 }, #idk the min and max length, just in case someone wants to enter a big string
                        :allow_blank => true
-  # Create User Score and openpay user
   after_validation :create_user_score
-  after_validation :create_openpay_account
 
-  before_create :set_location
   # update user timezone if location changed
-  before_update :update_time_zone, :if => :city_id_changed?
+  before_update :update_time_zone, :if => :lat_changed?
   # update verified gigs when account is verified
   before_update :verify_gigs, :if => :verified_changed?
   before_update :set_roles
@@ -261,16 +255,6 @@ class User < ApplicationRecord
         self.score = user_score
       end
     end
-   end
-
-   def set_location
-     begin
-       loc = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{lat},#{lon}"
-       # Convert the geocoded location provided by the user on signup to valid using our GeoDatabase
-       self.city_id = get_city_id_in_db(loc.city, loc.state_name, "MX")
-     rescue
-       true
-     end
    end
 
    def unban!

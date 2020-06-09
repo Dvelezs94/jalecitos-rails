@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   attr_accessor :pending_refund_worker, :c_user, :finish_order_worker, :employer_review_id
   include ActiveModel::Dirty
   include OrderFunctions
-  include OpenpayHelper
+  
   include OpenpayFunctions
   include MoneyHelper
   include ApplicationHelper

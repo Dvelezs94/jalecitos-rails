@@ -1,6 +1,6 @@
 class PayoutsController < ApplicationController
   include ApplicationHelper
-  include OpenpayHelper
+  
   include OrderFunctions
   include LevelHelper
   access user: :all
