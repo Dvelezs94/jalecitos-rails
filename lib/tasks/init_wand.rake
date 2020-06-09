@@ -63,21 +63,24 @@ task :init_wand => [:environment] do
     end
     user.save
   end
-  puts "Todos los usuarios han actualizado su ubicacion a coordenadas, borrando columnas innecesarias..."
+  puts "Todos los usuarios han actualizado su ubicacion a coordenadas, reindexando..."
   ##################
-  ActiveRecord::Migration.remove_column :gigs, :order_count
-  ActiveRecord::Migration.remove_column :gigs, :city_id
-  ActiveRecord::Migration.remove_column :requests, :city_id
-  ActiveRecord::Migration.remove_column :users, :city_id
-  ActiveRecord::Migration.remove_column :users, :openpay_id
-  ActiveRecord::Migration.remove_column :users, :secure_transaction
-  ActiveRecord::Migration.remove_column :users, :secure_transaction_job_id
-  puts "Se ha eliminado la columna city_id de gigs,req y users y order_count de gig, ya que no guardamos ciudades y no se contrata por app, además se eliminaron los campos de openpayu en users"
-  puts "Borrando tablas de ciudad, estado y país"
-  ActiveRecord::Base.connection.execute("drop table countries CASCADE")
-  ActiveRecord::Base.connection.execute("drop table states CASCADE")
-  ActiveRecord::Base.connection.execute("drop table cities CASCADE")
-  puts "Se han borrado las tablas, reindexando..."
+  # ActiveRecord::Migration.remove_column :gigs, :order_count
+  # ActiveRecord::Migration.remove_column :gigs, :city_id
+  # ActiveRecord::Migration.remove_column :requests, :city_id
+  # ActiveRecord::Migration.remove_column :users, :city_id
+  # ActiveRecord::Migration.remove_column :users, :openpay_id
+  # ActiveRecord::Migration.remove_column :users, :secure_transaction
+  # ActiveRecord::Migration.remove_column :users, :secure_transaction_job_id
+  # puts "Se ha eliminado la columna city_id de gigs,req y users y order_count de gig, ya que no guardamos ciudades y no se contrata por app, además se eliminaron los campos de openpayu en users"
+  # puts "Borrando tablas de ciudad, estado y país"
+  # ActiveRecord::Base.connection.execute("drop table countries CASCADE")
+  # ActiveRecord::Base.connection.execute("drop table states CASCADE")
+  # ActiveRecord::Base.connection.execute("drop table cities CASCADE")
+  # puts "Se han borrado las tablas"
+  # City.search_index.delete
+  #
+  # puts "Se borró el search index de cities en elasticsearch"
 
   #####################################
   reindex_list = [Gig, Request, User]
@@ -87,9 +90,6 @@ task :init_wand => [:environment] do
 
 
   puts "Se hizo el reindex de gigs, requests y users"
-  City.search_index.delete
-
-  puts "Se borró el search index de cities en elasticsearch"
 
   puts "Task finalizado con éxito."
 end
