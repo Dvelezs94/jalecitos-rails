@@ -15,13 +15,17 @@ class Conversations
     )
 
   renderBoolean: (data) =>
+    $("[new-messages]").after(data.messages);
+    feather.replace();
+    if data.messages.trim().length > 0
+      $("[no-messages]").addClass("d-none"); #hide no messages text if message exist
     # put the red dot if there are unread conversations
-    if data.unread == true
-      $(".mess-icon").addClass("unread");
+    if data.unread
+      $("[new-message]").removeClass("d-none");
 
   readConversation: () =>
     $.ajax(
-      url: "/conversations/" + $("#conversation_div").data("conversation-id") + "/read_conversation"
+      url: "/conversations/" + $("[data-conversation-id]").data("conversation-id") + "/read_conversation"
       data: { authenticity_token: $('[name="csrf-token"]')[0].content }
       dataType: "JSON"
       method: "POST"

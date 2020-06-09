@@ -3,7 +3,7 @@ class PayoutCompleteWorker
   sidekiq_options retry: 2, dead: false
   include OrderFunctions
   include ApplicationHelper
-  include OpenpayHelper
+  
   include LevelHelper
   include PushFunctions
 

@@ -6,15 +6,18 @@ class ReviewsController < ApplicationController
   before_action :check_rated, only: [:update]
 
   before_action :not_recommend_myself, only: [:create]
-  before_action :just_one_or_five_stars, only: [:create]
   # before_action :review_once
 
   def update
     #get the params
-    fields = review_params
-    #if comment is empty, save as nil for saving space
-    fields[:comment] = nil if fields[:comment] == ""
-    @success = @review.update(fields)
+    @review.with_lock do #lock review if many changes are applied
+      fields = review_params
+      #if comment is empty, save as nil for saving space
+      fields[:comment] = nil if fields[:comment] == ""
+      @success = @review.update(fields)
+      #this updates stars
+      @success = @review.rating.update( get_stars ) if @success
+    end
     # head :no_content
   end
 
@@ -24,7 +27,7 @@ class ReviewsController < ApplicationController
     fields[:comment] = nil if fields[:comment] == ""
     current_user.with_lock do
       @review = Review.new(fields)
-      @success = @review.save
+      @success = @review.save!
       if @success
         fields = rating_params
         @rating = Rate.new(fields)
@@ -79,19 +82,20 @@ class ReviewsController < ApplicationController
     review_params
   end
 
+  def get_stars
+    review_params = params.require(:review).require(:rating_attributes).permit(:stars)
+    review_params[:stars] = review_params[:stars].to_i.to_s
+    return review_params
+  end
+
   def rating_params
     review_params = params.require(:review).permit(rating_attributes: [:stars] )
+    review_params[:rating_attributes][:stars] = review_params[:rating_attributes][:stars].to_i.to_s  #get sure that its an integer
     review_params[:rating_attributes][:dimension] = "Recommendation"
     review_params[:rating_attributes][:rateable_type] = "Review"
     review_params[:rating_attributes][:rateable_id] = @review.id
     review_params[:rating_attributes][:rater_id] = current_user.id
     review_params[:rating_attributes]
   end
-
-  def just_one_or_five_stars
-    stars = params[:review][:rating_attributes][:stars]
-    head(:no_content) if stars != "5" && stars != "1"
-  end
-
 
 end

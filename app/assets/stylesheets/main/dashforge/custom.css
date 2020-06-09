@@ -1,0 +1,414 @@
+
+.location-header {
+  margin: 0 10px;
+}
+
+.v-align-m {
+  display: inline;
+  vertical-align: middle;
+}
+
+.gig-card-top {
+  object-fit: cover;
+  height: 250px
+}
+@media (max-width: 1200px) {
+
+    .wizard > .steps .disabled .title {
+      display: none;
+    }
+  }
+@media (max-width: 992px) {
+    .gig-card-top {
+      height: 200px;
+    }
+    .wizard > .steps > ul li + li::before {
+      display: none;
+    }
+  }
+  @media (max-width: 768px) {
+    .gig-card-top {
+      height: 180px;
+    }
+
+  }
+  @media (max-width: 576px) {
+    .gig-card-top {
+      height: 200px;
+    }
+  }
+
+.gig-card-horizontal {
+  object-fit: cover;
+  height: 150px;
+  width: 30%;
+}
+
+.no-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.h-30-vh {
+  max-height: 30vh;
+}
+
+.feather-12{
+    width: 12px;
+    height: 12px;
+}
+
+.feather-16{
+    width: 16px;
+    height: 16px;
+}
+
+.feather-18{
+    width: 18px;
+    height: 18px;
+}
+
+.feather-24{
+    width: 24px;
+    height: 24px;
+}
+
+.feather-32{
+    width: 32px;
+    height: 32px;
+}
+
+.filled {
+  fill: currentColor;
+}
+
+.gmap {
+  height: 80vh;
+}
+
+.gig-show-picture {
+  height: 600px; }
+.carousel-item.gig img {
+  height:600px;
+  width:100%;
+  object-fit: contain; }
+.gig-show-picture {
+  height: 500px; }
+.carousel-item.gig img {
+  height:500px;
+  width:100%;
+  object-fit: contain; }
+  @media (max-width: 992px) {
+    .gig-show-picture {
+      height: 405px !important;
+    }
+    .carousel-item.gig img {
+      height:405px !important; }
+    }
+  @media (max-width: 768px) {
+    .gig-show-picture {
+      height: 370px !important;
+    }
+    .carousel-item.gig img {
+      height:370px !important; }
+    }
+  @media (max-width: 576px) {
+    .gig-show-picture {
+      height: 320px !important;
+    }
+    .carousel-item.gig img {
+      height: 320px !important; }
+    }
+
+@media (max-width: 576px) {
+  .d-mobile-none {
+    display: none;
+  }
+}
+.mar-0-auto {
+  margin: 0 auto;
+}
+
+.new_gig_image_item {
+ display: inline-block;
+ padding:  .25rem;
+ width:  100%;
+}
+
+.new_gig_image_well {
+ position:relative;
+ display: block;
+}
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.screen-size-wrapper {
+  position: fixed;
+  top: 70px;
+  bottom: 0;
+  left: 25px;
+  right: 25px;
+}
+.screen-size-wrapper-map {
+  position: fixed;
+  top: 55px !important;
+  bottom: 0;
+  left: 10px !important;
+  right: 10px !important;
+}
+#searchList {
+  top:40px;
+  bottom: 5px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+
+@media (max-width: 576px) {
+  ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+  }
+  .screen-size-wrapper {
+    left: 10px;
+    right: 10px;
+  }
+}
+
+#mapPopOver {
+  display: none;
+}
+/* google fix autocomplete on mobile menu */
+.pac-container.pac-logo {
+  z-index: 9999;
+}
+/*windowinfo of google maps in search*/
+.gm-style-iw-d,
+.gm-style-iw.gm-style-iw-c {
+  min-width: 200px !important;
+}
+.gm-style-iw-d {
+  overflow-y: scroll !important;
+}
+.gm-style-iw.gm-style-iw-c {
+  padding: 10px !important;
+}
+.gm-style-iw-d .media,
+.gm-style-iw-d img,
+.gm-style-iw-d .share_item_url,
+.gm-style-iw-d .gig_buttons a[gig_id]{
+  display: none;
+}
+.gm-style-iw-d .req-card .card-body,
+.gm-style-iw-d .card-footer {
+  padding: 10px !important;
+}
+.gm-style-iw-d .gig-card .card-body {
+  padding: 3px !important;
+}
+.gm-style-iw-d .card-footer a {
+  margin-left: auto;
+}
+.gm-style-iw-d .gig_buttons {
+  float: right !important;
+}
+
+.gm-style-iw-d .card-title {
+  font-size: 14px !important;
+}
+
+.gm-style-iw-d .col-lg-6 {
+  max-width: 100% !important;
+}
+/*windowinfo of google maps in single elements display map*/
+.gm-style-iw-d [single-element] {
+  max-width: 100%;
+}
+.gm-style-iw-d [single-element] .card-footer {
+  display: none !important;
+}
+.gm-style-iw-d [single-element] .card-body {
+  padding-top: 5px;
+}
+
+/*end*/
+
+.wizard > .steps > ul li + li::before {
+  content: '\2192';
+}
+/*count in forms css*/
+.count{
+  float: right;
+  font-size: 0.8rem;
+}
+/*error forms css*/
+span.error,
+div.error,
+.span-error,
+label.error{
+  color: red;
+}
+/* deactivates links when uploading image */
+.isDisabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.isDisabled > a {
+  color: currentColor;
+  display: inline-block;  /* For IE11/ MS Edge bug */
+  pointer-events: none;
+  text-decoration: none;
+}
+
+/* good place for error in price (not error for not filling) */
+#packages_form .input-group label.error {
+  position: absolute;
+  top: 100%;
+}
+/*color of range slider (these three groups of classes changes colors of different elements of range slider)*/
+.irs--flat .irs-from,
+.irs--flat .irs-to,
+.irs--flat .irs-single {
+  background-color: #0168fa !important;
+}
+.irs--flat .irs-from::before,
+.irs--flat .irs-to::before,
+.irs--flat .irs-single::before {
+  background-color: #0168fa !important;
+}
+.irs--flat .irs-bar {
+  background-color: #0168fa !important;
+}
+.irs--flat .irs-handle>i:first-child {
+  background-color: #0168fa !important;
+}
+
+.irs--flat .irs-from:before,
+.irs--flat .irs-to:before,
+.irs--flat .irs-single:before {
+  border-top-color: #0168fa !important;
+}
+/*review options in big devices shows only on hover review*/
+@media (min-width: 1200px) {
+
+  [menu-hidden] {
+    display: none;
+  }
+  [display-hidden-menu]:hover [menu-hidden]{
+    display: block;
+  }
+}
+
+.vh-50 {
+  height: 50vh;
+}
+/*gig title of jquery steps*/
+@media (min-width: 992px) and (max-width: 1200px) {
+  #section_parent_gig > .steps .done a .title, #section_parent_gig > .steps .done a:hover .title, #section_parent_gig > .steps .done a:active .title {
+    display: none;
+  }
+  }
+/*config menu on mobile*/
+@media (max-width: 768px) {
+  #settings {
+    flex-direction: row !important;
+    border-right: none !important;
+    justify-content: space-between;
+  }
+  #settings .nav-item {
+    margin-top: 0 !important;
+    margin-bottom: 10px;
+  }
+  #settings .nav-link.active::after {
+    display: none;
+  }
+}
+
+pre[preview] {
+  font-size: 100%;
+}
+
+/*truncate text*/
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.multi-line-truncate-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
+}
+.multi-line-truncate-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
+}
+
+.bootstrap-tagsinput .tag {
+  color: #1b2e4b;
+  background-color: white;
+  border: 1px solid #c0ccda;
+  border-radius: 0.25rem;
+}
+.bootstrap-tagsinput .tag [data-role="remove"] {
+  margin-bottom: 2px;
+}
+.pre-wrap {
+  white-space: pre-wrap !important;
+}
+/*this fixes css of tags input*/
+.bootstrap-tagsinput .tag [data-role="remove"]::after {
+  content: 'x';
+}
+.mw-130px {
+  max-width: 130px;
+}
+.mw-45px {
+  max-width: 45px;
+}
+.zi-10000 {
+  z-index: 10000;
+}
+@media (max-width: 992px){
+  .t-mobile-20 {
+    top: 20px;
+  }
+}
+.w-0 {
+  width: 0;
+}
+/*used in intro js so if miss click on black screen dont get out of wizard*/
+.introjs-overlay {
+  pointer-events: none;
+}
+.middle-top-tooltip {
+  right: 50% !important;
+  top: 15% !important;
+  height: fit-content;
+}
+#navbarMenu.introjs-fixParent {
+  position: fixed !important;
+  z-index: 10000000 !important;
+}
+/**/
+
+.ht-50vh {
+  height: 50vh;
+}
+.mail-field {
+  border: none;
+  border-bottom: 1px solid rgba(72, 94, 144, 0.16) !important;
+}

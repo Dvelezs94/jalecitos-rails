@@ -1,0 +1,15 @@
+<% if @gig.gig_packages.none? %>
+  <script>
+    toast_phone = toastr.info("Agrega paquetes al servicio para publicarlo.", "",{timeOut: 10000, positionClass: "toast-bottom-full-width"})
+    $(toast_phone).click(function () {
+      window.location = "<%= edit_gig_path(city_slug(@gig),@gig.category.name.parameterize,@gig) %>"
+    });
+  </script>
+<% else %>
+  <script>
+    toast_phone = toastr.info("¡Tu servicio está listo para publicarse! Haz click aquí para hacerlo.", "",{timeOut: 10000, positionClass: "toast-bottom-full-width"})
+    $(toast_phone).click(function () {
+      window.location = "<%= toggle_status_gig_path(@gig) %>"
+    });
+  </script>
+<% end %>

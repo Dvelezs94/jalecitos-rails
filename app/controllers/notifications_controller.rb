@@ -6,7 +6,7 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications = Notification.includes(:user, :notifiable).where(recipient_id: current_user.id).
-    order(created_at: :desc).limit(15)
+    order(created_at: :desc).limit(5)
   end
 
   def all

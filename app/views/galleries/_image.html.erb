@@ -1,9 +1,18 @@
 <% item = @item || @gig || @request %>
-<div class="current_img img-thum">
-  <%= link_to gallery_path(image.file.filename, item_id: item.id, class: item.class),
-      method: :delete, data: {confirm: "¿Estás seguro de borrar este elemento?"},
-      remote: true, style: "position: relative;" do %>
-      <%= image_tag(image.url, width: 250, class: "delete-image") %>
-      <%= icon("fas","trash", class: "del-img-icon fa-4x", onclick: "$(this).closest('img.delete-image').click();") %>
-      <% end %>
+<div class="col-6 pd-x-0 current_img">
+  <div class="new_gig_image_item">
+    <div class="new_gig_image_well">
+      <%= image_tag(image.url, width: 250, class: "img-thumbnail") %>
+      <figcaption class="pos-absolute b-0 l-0 wd-100p pd-20 d-flex justify-content-center">
+        <div class="btn-group">
+
+          <%= link_to gallery_path(File.basename(image.file.filename, ".*"), item_id: item.id, class: item.class),
+              method: :delete, data: {confirm: "¿Estás seguro de borrar este elemento?"},
+              remote: true, class: "btn btn-dark btn-icon" do %>
+              <i data-feather="trash-2"></i>
+              <% end %>
+        </div>
+      </figcaption>
+    </div>
+  </div>
 </div>

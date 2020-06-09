@@ -1,21 +1,21 @@
-<div class="row" style="height: 60vh;align-items:center;">
-  <div class="modal-content" style="text-align:center;height:auto;max-width:400px;padding:10px;">
-    <h3>Reenviar instrucciones de confirmación</h3>
-
-    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-    <%= render "users/shared/error_messages", resource: resource %>
-    <div class="field form-group">
-      <%= f.label :email %><br/>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control", required: true %>
+<div class="container d-flex justify-content-center ht-100p">
+  <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+  <div class="mx-wd-300 wd-sm-450 ht-100p d-flex flex-column align-items-center justify-content-center">
+    <div class="wd-80p wd-sm-300 mg-b-15"><img src="https://via.placeholder.com/2083x1466" class="img-fluid" alt=""></div>
+    <h4 class="tx-20 tx-sm-24">Reenviar instrucciones de confirmación</h4>
+    <p class="tx-color-03 mg-b-30 tx-center">Ingresa tu correo y se te reenviará un correo para confirmar tu cuenta</p>
+    <div class="wd-100p d-flex flex-column flex-sm-row mg-b-40">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control flex-fill", required: true, placeholder: "Ingresa tu correo" %>
+      <%= f.submit "Solicitar", class: "btn btn-brand-02 mg-sm-l-10 mg-t-10 mg-sm-t-0" %>
     </div>
-
-    <div class="actions">
-      <%= f.submit "Reenviar", class: "btn btn-success form-control" %>
-    </div>
-    <hr>
-  <% end %>
-
-  <%= render "users/shared/links" %>
-
-</div>
+  </div>
+  <div class="tx-13 mg-t-20 tx-center">
+    <%= link_to "¿Olvidaste tu contraseña?", new_password_path(resource_name) %>
+  </div>
+  <div class="tx-13 mg-t-20 tx-center">
+    Volver al
+    <%= link_to "inicio", platform_redirect_root_path %>
+  </div>
+<% end %>
 </div>

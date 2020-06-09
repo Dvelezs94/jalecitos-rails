@@ -14,7 +14,7 @@ module ReportsHelper
     if object.class == User
       "Usuario"
     elsif object.class == Gig
-      "Jale"
+      "servicio"
     else
       "Pedido"
     end

@@ -1,0 +1,8 @@
+$("[paginated-gigs] > nav").remove(); //this deletes pagination
+$("[paginated-gigs]").append('<%= j render partial: "shared_user/root/gig", collection: @liked_gigs, as: "gig" %>');
+
+<% if @likes.next_page %>
+  $("[paginated-gigs]").append('<%= j paginate(@liked_gigs) %>');
+<% end %>
+
+<% sleep 1 %>

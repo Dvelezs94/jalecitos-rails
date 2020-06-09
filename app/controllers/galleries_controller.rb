@@ -1,9 +1,9 @@
 class GalleriesController < ApplicationController
   layout 'logged'
   access user: :all
-  before_action :set_item, only: [:create, :save_video]
+  before_action :set_item, only: [:create]
   before_action :set_item_destroy, only: [:destroy]
-  before_action :check_item_ownership, only: [:create, :destroy, :save_video]
+  before_action :check_item_ownership, only: [:create, :destroy]
   before_action :check_if_content, only: [:create]
   skip_before_action :verify_authenticity_token
 
@@ -37,17 +37,14 @@ class GalleriesController < ApplicationController
     end
   end
 
-  def save_video #also for destroying
-    if @item.youtube_url != params[:gig][:youtube_url]
-      @success = @item.update(:youtube_url => params[:gig][:youtube_url])
-    end
-  end
-
   def destroy
     @item.with_lock do #one delete at time
       @images = @item.images #get all the images
       @images.delete_if do |image| #delete the matching image
-        true if File.basename(image.file.filename, ".*") == params[:id] #compare filenames without extension
+        if File.basename(image.file.filename, ".*") == params[:id] #compare filenames without extension
+          @removed_image = image #im going to remove it from carousel in view, using this in js
+          true
+        end
       end
       if @images.count == 0 #if there is no image left...
         @item.remove_images! #remove everything
@@ -56,7 +53,6 @@ class GalleriesController < ApplicationController
       end
       @success = true if @item.save
     end
-    head :no_content #response with no content
   end
 
   private

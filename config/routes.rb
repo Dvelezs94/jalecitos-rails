@@ -6,35 +6,30 @@ Rails.application.routes.draw do
       get :index_dashboard, as: 'dashboard'
       get :categories
       get :users
-      get :disputes
       get :reports
+
+      resources :seo, only:[ :edit, :update, :index ]
       get :bans
       get :verifications
       get '/verifications/:id' => 'admins#show_verification', as: "show_verification"
-      post :create_openpay_user
-      post :charge_openpay_user
-      get :openpay_dashboard
-      get :tickets
-      get :orders
-      get :ally_codes
-      post :predispersion_fee
       get :marketing_notifications
     end
   end
   #custom routes for city_id
-  get '/jale/:city_slug/:id' => 'gigs#old_show', as: "old_gig"
-  get '/jale/:city_slug/:category/:id' => 'gigs#show', as: "gig"
-  get '/jale/:city_slug/:category/:id/edit' => 'gigs#edit', as: "edit_gig"
-  patch '/jale/:city_slug/:category/:id' => 'gigs#update'
-  put '/jale/:city_slug/:category/:id' => 'gigs#update'
-  delete '/jale/:city_slug/:category/:id' => 'gigs#destroy'
+  get '/jale/:city_slug/:category/:id' => 'gigs#old_show', as: "old_gig"
+  get '/servicio/:city_slug/:category/:id' => 'gigs#show', as: "gig"
+  get '/servicio/:city_slug/:category/:id/edit' => 'gigs#edit', as: "edit_gig"
+  patch '/servicio/:city_slug/:category/:id' => 'gigs#update'
+  put '/servicio/:city_slug/:category/:id' => 'gigs#update'
+  delete '/servicio/:city_slug/:category/:id' => 'gigs#destroy'
   #doesnt need to be declared, just for spanish friendly url for user
-  get '/jales/nuevo' => 'gigs#new', as: "new_gig"
+  get '/servicios/nuevo' => 'gigs#new', as: "new_gig"
   #post "/jales" => "gigs#create", as: "gigs" #doesnt need to be declared
   resources :marketing_notifications
   resources :gigs, except: [:index, :show, :edit, :update, :destroy, :new] do
     resource :reports, only: [:create], as: "report"
     member do
+          post :mail_contact
            get :toggle_status
            get :ban_gig, as: 'ban'
       end
@@ -69,11 +64,7 @@ Rails.application.routes.draw do
    devise_scope :user do
      post 'user/disable', :to => 'users/registrations#disable'
    end
-   resources :galleries, only: [:create, :destroy] do
-     collection do
-       post :save_video
-     end
-   end
+   resources :galleries, only: [:create, :destroy]
    resources :packages, except: [:destroy,:show,:index, :new, :edit, :update] do
      collection do
        patch 'update_packages', to: 'packages#update_packages', as: 'update'
@@ -149,8 +140,6 @@ Rails.application.routes.draw do
     end
   end
   put "deny_report/:id", to: "reports#deny", as: "deny_report"
-  get 'mobile_sign_in', to: 'mobiles#log_in'
-  get 'mobile_sign_up', to: 'mobiles#register'
   get 'configuration', to: 'users#configuration'
   get 'wizard', to: 'pages#wizard'
   get 'finance', to: 'pages#finance'
@@ -163,18 +152,15 @@ Rails.application.routes.draw do
   # get 'guest_search', to: 'queries#guest_search'
   # get 'guest_autocomplete_search', to: 'queries#guest_autocomplete_search'
 
-  # get 'user_mobile_search', to: 'queries#user_mobile_search'
   # get 'user_autocomplete_search', to: 'queries#user_autocomplete_search'
   # get 'user_search', to: 'queries#user_search'
 
-  get 'user_mobile_search', to: 'queries#user_mobile_search'
   get 'buscar', to: 'queries#search', as: "search"
   get '/guest_search', to: redirect { |path_params, req| "/buscar?#{req.params.to_query}" }
   get 'autocomplete_search', to: 'queries#autocomplete_search'
 
 
   get 'autocomplete_profession', to: 'queries#autocomplete_profession'
-  get 'autocomplete_location', to: 'queries#autocomplete_location'
   get 'terminos-y-condiciones', to: 'pages#terms_and_conditions'
   get 'aviso-de-privacidad', to: 'pages#privacy_policy'
   get 'condiciones-de-venta', to: 'pages#sales_conditions'

@@ -1,0 +1,47 @@
+<% @categories = Category.all %>
+<% @group_size = (@categories.length%3 != 0)? (@categories.length/3+1).to_i : (@categories.length/3).to_i %>
+<header class="navbar navbar-header navbar-header-fixed" data-step="4" data-intro="Éste es tu menú" data-position="bottom">
+  <a href="" id="mainMenuOpen" class="burger-menu"><i data-feather="menu"></i></a>
+  <a href="" id="chatContentClose" class="burger-menu d-none"><i data-feather="arrow-left"></i></a>
+  <div class="navbar-brand">
+    <%= link_to root_path, class: "df-logo", data: { step: "9", intro: "Para terminar el tutorial, haz click en finalizar, debajo de este texto", position: "right"} do  %>
+      Jale<span>citos</span>
+    <% end %>
+  </div><!-- navbar-brand -->
+
+    <% if current_user %>
+      <%= (current_user.has_role?(:admin))? render("shared/menu/admin_links") : render("shared/menu/user_links") %>
+    <% else %>
+      <%= render "shared/menu/guest_links" %>
+    <% end %>
+
+  <div class="navbar-search">
+    <%= form_with url: search_path, method: :get ,:html => {id: "simple-query"}, local: true do |f|%>
+    <div class="navbar-search-header">
+      <%= f.search_field :query, value: params[:query], class:"form-control", placeholder: "Escribe y presiona Enter para buscar", autocomplete: "off" %><%# la clase ahead query pondria el autocomplete  %>
+      <button class="btn"><i data-feather="search"></i></button>
+      <a id="navbarSearchClose" href="" class="link-03 mg-l-5 mg-lg-l-10"><i data-feather="x"></i></a>
+    </div><!-- navbar-search-header -->
+    <% end %>
+    <div class="navbar-search-body">
+      <label class="tx-10 tx-medium tx-uppercase tx-spacing-1 tx-color-03 mg-b-10 d-flex align-items-center">Búsquedas recientes</label>
+      <ul class="list-unstyled">
+        <li><a href="dashboard-one.html">modern dashboard</a></li>
+        <li><a href="app-calendar.html">calendar app</a></li>
+        <li><a href="base/template/collections/modal.html">modal examples</a></li>
+        <li><a href="base/template/components/el-avatar.html">avatar</a></li>
+      </ul>
+
+      <hr class="mg-y-30 bd-0">
+
+      <label class="tx-10 tx-medium tx-uppercase tx-spacing-1 tx-color-03 mg-b-10 d-flex align-items-center">Search Suggestions</label>
+
+      <ul class="list-unstyled">
+        <li><a href="dashboard-one.html">cryptocurrency</a></li>
+        <li><a href="app-calendar.html">button groups</a></li>
+        <li><a href="base/template/collections/modal.html">form elements</a></li>
+        <li><a href="base/template/components/el-avatar.html">contact app</a></li>
+      </ul>
+    </div><!-- navbar-search-body -->
+  </div><!-- navbar-search -->
+</header><!-- navbar -->

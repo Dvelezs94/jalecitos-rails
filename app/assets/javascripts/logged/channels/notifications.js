@@ -10,21 +10,22 @@ App.notifications = App.cable.subscriptions.create("NotificationsChannel", {
   received: function(data) {
     //parse all the recieved data
     data = JSON.parse(data.html);
-    // Called when there's incoming data on the websocket for this channel
-    $("#notifications").prepend(data.fadeItem);
+    // add to flash notifications and display
+    $("[flash-notifications]").prepend(data.fadeItem);
+    $("[flash-notifications] .toast").toast("show");
     //add that notification to the list
-    $(".notification-items").prepend(data.listItem);
+    $("[notifications]").after(data.listItem);
+    if ($("[notification]").length > 5){
+      $("[notification]:last").remove();
+    }
 
     //if a review modal is recieved and the user doesnt have displayed other
     if(data.reviewItem && $("#reviewModal").length == 0){
       $("body").prepend(data.reviewItem); // gets the modal
       modals('rev-modal', 'reviewModal', "closeReview", "none", true ); //shows the modal
-      activate_ratyrate(); //activates stars
       review_validation(); //activates the validation of the form
     }
     //put the red dot
-    $(".notif-icon").addClass("unread");
-    //then hide and remove notification
-    $("#notifications .toast__container").last().delay(5000).hide(1500, function(){ $("#notifications .toast__container").last().remove(); });
+    $("[read-notifications] span").removeClass("d-none");
   }
 });

@@ -1,0 +1,7 @@
+<a class="want_review d-none"></a> <!-- need to add this so clipboard works-->
+<script>
+  toast_review = toastr.info("Recuerda que tu servicio tendrá prioridad en las búsquedas mientras más comentarios positivos tenga. Haz click aquí para invitar a que lo califiquen.", "",{timeOut: 10000, positionClass: "toast-bottom-full-width"});
+  $(toast_review).click(function () {
+    $(".want_review")[0].click();
+  });
+</script>

@@ -8,8 +8,15 @@ module ApplicationHelper
     end
   end
 
-  def city_slug city
-    slug = (city.present?)? city.name : "México"
+  def distance model, lat, lng
+    current_location = Geokit::LatLng.new(lat, lng)
+    destination = "#{model.lat},#{model.lng}"
+    current_location.distance_to(destination, :units => :kms).to_i.to_s(:delimited, delimiter: ' ', separator: '.')  + " kms"
+  end
+
+  def city_slug element
+    strings = element.address_name.split(",")
+    slug = (element.address_name.present?)? (strings.length > 3)? strings[-3..-2].join(",").gsub(/[0-9]/, '').strip: strings[-2].gsub(/[0-9]/, '').strip : "México"
     return slug.parameterize
   end
 
@@ -25,16 +32,16 @@ module ApplicationHelper
   def prof_and_loc model  #this function is used in home and queries
     profession = model.profession.present? ? model.profession : "Sin profesión"
     if current_user #if user
-      if model.city_id != nil && model.city_id == current_user.city_id #element has my location
-        profession + " (Mi ciudad)"
-      else #element hasnt my location
-        "#{profession} (#{model.location})"
+      if model.lat && current_user.address_name.present?#both model and user have location
+        profession + " (#{distance(model, current_user.lat, current_user.lng)})"
+      else
+        "#{profession} (#{model.address_name || "Sin dirección"})"
       end
     else # is guest
-      if @city.present? && @city.id == model.city_id #query and element has my location
-        profession + " (Mi ciudad)"
+      if model.lat && params[:lat].present? #guest accepted location
+        profession + " (#{distance(model, params[:lat].to_f, params[:lon].to_f)})"
       else#element has other location (or i didnt had set one location or home)
-        "#{profession} (#{model.location})"
+        "#{profession} (#{model.address_name || "Sin dirección"})"
       end
     end
   end
@@ -83,15 +90,22 @@ module ApplicationHelper
           flash_type = :warning
         when flash[:success]
           flash_type = :success
-        when flash[:progress]
-          flash_type = :progress
       end
       notification_generator_helper msg, flash_type
     end
   end
 
   def notification_generator_helper msg, flash_type
-     js add_gritter(msg, :image => flash_type, :title=>"Jalecitos", :sticky => false, :time => 5000 )
+    if flash_type == :error
+      type = "error"
+    elsif flash_type == :success
+      type = "success"
+    elsif flash_type == :notice
+      type = "info"
+    else
+      type = "warning"
+    end
+    ("<script>toastr." + type + "('"+ msg + "')</script>").html_safe
   end
 
   def image_display_helper image, yt_url #used in min versions
@@ -206,46 +220,14 @@ module ApplicationHelper
     end
   end
 
-  def seo_location(city)
-    if city
-      "#{city.name}, #{city.state.name}"
+  def seo_location(element)
+    if element.address_name.present?
+      element.location
     else
       "México"
     end
   end
 
-  def meta_tags
-    if @gig.present? && current_page?( the_gig_path(@gig) )
-        "<title>#{@gig.profession} en #{seo_location(@gig.city)} para #{@gig.name}</title>
-        <meta name='description' content='#{@gig.profession} en #{seo_location(@gig.city)} para #{@gig.name}. Contrata hoy expertos en #{@gig.category.name} en Jalecitos.'>
-        <meta name='keywords' content='#{@gig.location},#{@gig.profession},#{@gig.tags_content.join(',')}'>
-        <meta name='category' content='#{@gig.category.name}'>
-        <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
-    elsif @request.present? && current_page?( request_path(@request) )
-        "<title>Trabajo de #{@request.profession} en #{seo_location(@request.city)} | Encontrar trabajo de #{@request.profession} por internet.</title>
-        <meta name='description' content='Se solicita #{@request.profession} en #{@request.location} para #{@request.name}. Regístrate hoy en Jalecitos para encontrar trabajo.'>
-        <meta name='keywords' content='#{@request.location},#{@request.profession},#{@request.tag_list.join(',')}'>
-        <meta name='category' content='#{@request.category.name}'>
-        <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
-    elsif current_page?( search_path ) && params[:city] && params[:state] && params[:query]
-        "<title>#{params[:query]} en #{params[:city]}, #{params[:state]}</title>
-        <meta name='description' content='Encuenta el mejor #{params[:query]} en #{params[:city]}, #{params[:state]}'>
-        <meta name='keywords' content='contratar, #{params[:query]}, #{params[:city]}, empleo, freelancer'>
-        <meta name='category' content='Trabajo, Empleo, Freelancer'>
-        <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
-    elsif current_page?( search_path ) && params[:query]
-        "<title>Encuentra las mejores oportunidades de trabajo o Expertos para contratar  en línea utilizando Jalecitos</title>
-        <meta name='description' content='Necesitas trabajo o encontrar a un experto para alguna necesidad? Utiliza Jalecitos para encontrar empleo o expertos.'>
-        <meta name='keywords' content='encontrar, trabajo, empleos, expertos, internet, freeelancer'>
-        <meta name='category' content='Trabajo, Empleo'>
-        <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
-    else
-        "<title>Jalecitos | Ofrece tus servicios por internet</title>
-        <meta name='description' content='Ofrece los servicios de tu negocio en la mejor herramienta de marketing digital en México totalmente gratis'>
-        <meta name='keywords' content='marketing digital, ofrecer servicios por internet, sección amarilla, ofrecer servicios, negocio en línea, Freelancer, Freelance Mexico, Contratar expertos de confianza, contratar expertos por internet, contratar expertos México, contratar talento por internet'>
-        <meta property='og:image' content='https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/Logo+PNG.png'>".html_safe
-    end
-  end
 
   def star_display_helper number
     decimal = number % 1
@@ -278,26 +260,13 @@ module ApplicationHelper
   def one_star_disp_help gig
     html = ""
      if gig.score_times > 0
-       html += "#{image_tag("star-on.svg", title: gig.score_average, class: "review-star")}"
-       html += "<p class='gig-score-average'> #{gig.score_average}  <span class='gig-score-times'>(#{gig.score_times})</span> </p>"
+       html += '<i data-feather="star" class="feather-12 tx-warning filled"></i>'
+       html += "<span class='tx-warning'> #{gig.score_average.round(1)} <small class='tx-gray-600'>(#{gig.score_times})</small></span>"
     else
-      html += "<h6 class='na'>N/A</h6>"
+      html += '<i data-feather="star" class="feather-12 tx-gray-600 filled"></i>'
+      html += "<span> <small class='tx-gray-600'>(0)</small></span>"
     end
     html.html_safe
-  end
-
-  def score_average us, return_number=true
-    if us.employee_score_times == 0.0 && us.employer_score_times == 0.0 && return_number == true
-      0.0
-    elsif us.employee_score_times == 0.0 && us.employer_score_times == 0.0 && return_number != true
-      "N/A"
-    elsif us.employer_score_times == 0.0
-      us.employee_score_average
-    elsif us.employee_score_times == 0.0
-      us.employer_score_average
-    else
-      score_average = ( ( us.employee_score_average* us.employee_score_times)+( us.employer_score_average* us.employer_score_times) ) / (us.employer_score_times + us.employee_score_times )
-    end
   end
 
   def ios_pwa_tags
@@ -342,7 +311,7 @@ module ApplicationHelper
   end
 
   def platform_redirect_root_path
-    cookies.signed[:mb] ? mobile_sign_in_path : root_path
+    root_path
   end
 
   def get_invoice uuid
@@ -359,16 +328,16 @@ module ApplicationHelper
 
   def the_gig_path gig, format = nil
     if format == nil
-      gig_path(city_slug(gig.city), gig.category.name.parameterize,gig.slug)
+      gig_path(city_slug(gig), gig.category.name.parameterize,gig.slug)
     else
-      gig_path(city_slug(gig.city), gig.category.name.parameterize,gig.slug, format: format)
+      gig_path(city_slug(gig), gig.category.name.parameterize,gig.slug, format: format)
     end
   end
   def the_gig_url gig, format = nil
     if format == nil
-      gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug,:protocol => 'https')
+      gig_url(city_slug(gig), gig.category.name.parameterize,gig.slug,:protocol => 'https')
     else
-      gig_url(city_slug(gig.city), gig.category.name.parameterize,gig.slug, format: format,:protocol => 'https')
+      gig_url(city_slug(gig), gig.category.name.parameterize,gig.slug, format: format,:protocol => 'https')
     end
   end
 end

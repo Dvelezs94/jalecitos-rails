@@ -1,13 +1,10 @@
 class User < ApplicationRecord
-  attr_accessor :lat, :lon, :roles_word
+  attr_accessor :roles_word
   include ApplicationHelper
   include LinksHelper
   #includes
   #friendly_id
   extend FriendlyId
-  #Payments
-  include OpenpayFunctions
-  include OpenpayHelper
   #validations
   include LocationFunctions
   #inspects
@@ -17,13 +14,12 @@ class User < ApplicationRecord
   # Avatar image
   mount_uploader :image, AvatarUploader
   #search
-  searchkick language: "spanish"
+  searchkick locations: [:location], language: "spanish"
   # only send these fields to elasticsearch
   def search_data
     {
       tags: tag_list.join(" "),
-      city_id: city_id
-    }
+    }.merge(location: {lat: lat, lon: lng})
   end
   #Define who can do the rating, which happens to be the user
   ratyrate_rater
@@ -36,11 +32,10 @@ class User < ApplicationRecord
   friendly_id :alias, use: :slugged #this is after the alias is generated because if not then it will generate a number slug because alias isnt set yet
   # Validates uniqueness of id
   validates :email, :alias,  uniqueness: true
-  validates_numericality_of :age, greater_than_or_equal_to: 0, less_than: 101, allow_blank: true
   validates :available, :inclusion=> { :in => ["Tiempo completo", "Medio tiempo", "Esporádico", "Fin de semana"]}, allow_blank: true
   validates_length_of :name, maximum: 100
   validates_length_of :alias, maximum: 30
-  validate :maximum_amount_of_tags, :no_spaces_in_tag, :tag_length
+  validate :maximum_amount_of_tags, :tag_length
   # validate :location_syntax
   validates_length_of :bio, maximum: 500
   validates_presence_of :alias, :slug
@@ -49,29 +44,29 @@ class User < ApplicationRecord
   validates_presence_of :name, if: :name_changed?  #dont allow blank again if value is filled
   validate :check_running_orders, if: :user_disabled?, on: :update
 
+  validate :websites
+
   #validate phone number syntax
   validates :phone_number, :presence => {:message => 'Tienes que proporcionar un numero valido'},
-                       :numericality => true,
-                       :length => { :minimum => 10, :maximum => 10 },
+                       :length => { :minimum => 10, :maximum => 25 }, #idk the min and max length, just in case someone wants to enter a big string
                        :allow_blank => true
-  # Create User Score and openpay user
   after_validation :create_user_score
-  after_validation :create_openpay_account
 
-  before_create :set_location
   # update user timezone if location changed
-  before_update :update_time_zone, :if => :city_id_changed?
+  before_update :update_time_zone, :if => :lat_changed?
   # update verified gigs when account is verified
   before_update :verify_gigs, :if => :verified_changed?
   before_update :set_roles
+  before_update :remove_whitespaces_from_profiles
   #when user is banned, unbanned or disabled...
   after_validation :enable_disable_stuff, :if => :status_changed? #this is after updates so dont refund nothing and reverse everything is some validation fails, it would be a big trouble because refund will send to openpay the request and if validation fails then the status of the order will reset to in progress, for example, and refund was requested... trouble
+
+
 
   # Associations
   # User Score
   belongs_to :score, foreign_key: :score_id, class_name: "UserScore", optional: true
 
-  belongs_to :city, optional: true
   # ally code in case it has one
   belongs_to :ally_code, optional: true
 
@@ -125,8 +120,53 @@ class User < ApplicationRecord
     Order.where(employee: self, status: "completed", paid_at: nil, payment_verification: verification)
   end
 
+  def noa #name or alias
+    (self.name.present?)? self.name : self.alias
+  end
+
   def verify_gigs
       self.gigs.each { |gig| gig.touch }
+  end
+
+  def age
+    now = Time.now.utc.to_date
+    now.year - self.birth.year - ((now.month > self.birth.month || (now.month == self.birth.month && now.day >= self.birth.day)) ? 0 : 1)
+  end
+
+  def score_average return_number=true
+    us = self.score
+    if us.employee_score_times == 0.0 && us.employer_score_times == 0.0
+      return (return_number)? 0.0 : "N/A"
+    elsif us.employer_score_times == 0.0
+      sa = us.employee_score_average
+    elsif us.employee_score_times == 0.0
+      sa = us.employer_score_average
+    else
+      sa = ( ( us.employee_score_average* us.employee_score_times)+( us.employer_score_average* us.employer_score_times) ) / (us.employer_score_times + us.employee_score_times )
+    end
+    return sa.round(1)
+  end
+
+  def get_hashtag string
+    name = (string == "fb")? self.facebook : self.instagram
+    #this removes all before .com/ and itself, then removes after any / or ?
+    return "@" + name
+  end
+
+  def facebook_url
+    (self.facebook.present?)? "https://facebook.com/"+ self.facebook : nil
+  end
+  def instagram_url
+    (self.instagram.present?)? "https://instagram.com/"+ self.instagram : nil
+  end
+
+  def score_average_times
+    us = self.score
+    if us.employee_score_times == 0.0 && us.employer_score_times == 0.0
+      return 0
+    else
+      us.employer_score_times + us.employee_score_times
+    end
   end
 
   def level_enabled?
@@ -198,22 +238,23 @@ class User < ApplicationRecord
        set_alias
    end
 
+   def self.who_is_online #shows all the users online
+     ids = ActionCable.server.pubsub.redis_connection_for_subscriptions.smembers "online"
+     where(id: ids)
+   end
+
+   def online?
+     ids = ActionCable.server.pubsub.redis_connection_for_subscriptions.smembers "online"
+     ids.include?(self.id.to_s)
+   end
+
+
    def create_user_score
      if self.score.nil?
       UserScore.create do |user_score|
         self.score = user_score
       end
     end
-   end
-
-   def set_location
-     begin
-       loc = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{lat},#{lon}"
-       # Convert the geocoded location provided by the user on signup to valid using our GeoDatabase
-       self.city_id = get_city_id_in_db(loc.city, loc.state_name, "MX")
-     rescue
-       true
-     end
    end
 
    def unban!
@@ -227,14 +268,6 @@ class User < ApplicationRecord
    def active_orders?
      active_orders = Order.where("(employee_id=? OR employer_id=?)", self, self).where(status: ["pending", "in_progress", "disputed"])
      active_orders.any?
-   end
-
-   def international_phone_number(prefix=false)
-     if not prefix.present?
-       return "521" + phone_number rescue nil
-     else
-       return "+521" + phone_number rescue nil
-     end
    end
    def safe_bio
      make_links(CGI::escapeHTML(self.bio)).html_safe #escapes html from user and make our links
@@ -351,5 +384,22 @@ class User < ApplicationRecord
 
    def check_running_orders
      errors.add(:base, "No puedes cancelar tu cuenta ya que tienes órdenes activas") if self.active_orders?
+   end
+
+   def websites
+     if self.website.present?
+       errors.add(:base, "El sitio no es una url") if ! url_regex.match?(self.website)
+     end
+   end
+   def remove_whitespaces_from_profiles
+      if self.facebook.present?
+       #also delete / if stars with it
+       self.facebook = self.facebook.delete(' ')
+       self.facebook = self.facebook.delete_prefix("/")
+      end
+     if self.instagram.present?
+       self.instagram = self.instagram.delete(' ')
+       self.instagram = self.instagram.delete_prefix("/")
+     end
    end
 end

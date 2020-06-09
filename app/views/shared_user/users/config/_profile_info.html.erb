@@ -73,7 +73,6 @@
           <label for="">Ubicación</label>
           <%= form_with model: User, url: update_users_path, method: :put , local: true do |f|%>
           <%= f.text_field :location, class: 'config_autocomplete', id: "config_autocomplete", size: 50, placeholder:" Elige tu ciudad", value: current_user.location(true) %>
-          <%= f.hidden_field :city_id, class: "city", id: "city_2" %>
           <%= icon("fas", "map-marker-alt") %>
         <% end %>
       </div>

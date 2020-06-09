@@ -1,77 +1,50 @@
-<div class="refrigerador-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="refrigerador-content">
-                    <div class="icon-areas">
-                        <i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.go(-1);"></i>
-                    </div>
-                    <div class="arreglar-title flex-space-bet">
-                        <h3><%= @request.title %></h3>
-                        <%= render "shared_user/requests/show/req_actions", desktop: true %>
-                    </div>
-                    <div class="Saltillo">
-                        <a><%= @request.location %></a>
-                        <span>Publicado hace <%= distance_of_time_in_words(@request.created_at, Time.now) %></span>
-                    </div>
-                    <span class="show_req_budget">Presupuesto: <%= @request.budget %> MXN</span>
-                    <div class="ipsum-text">
-                     <pre><%= @request.description %></pre>
-                     <!-- <a onclick="myFunction()" id="myBtn" href="#">Ver más <i class="fa fa-angle-down" aria-hidden="true"></i></a> -->
-                     </div>
-                     <div class="container row" style="margin: 0 auto 20px auto">
-                       <% @request.images.each do |image| %>
-                       <div class="current_img img-thum resp_img_show">
-                         <%=link_to image_tag(image.url, size: '150x150', data: {lity: true}), image.url  %>
-                       </div>
-                       <% end %>
-                     </div>
-
-
-                     <div class="Postularme-btn">
-                     <% if !@already_hired %>
-                       <% if current_user != @request.user && @my_offer.present?  %>
-                        <p class="text-muted">Tu oferta está postulada</p>
-                       <% elsif current_user != @request.user %>
-                        <%= link_to 'Postularme', new_request_offer_path(@request), class: "btn btn-success postularme-offer" %>
-                       <% end %>
-                     <% end %>
-                    </div>
-
-                </div>
-            </div>
+<div class="row row-xs">
+  <div class="col-sm-12 col-md-8 col-lg-9 mg-b-10">
+    <h2><%= @request.title %></h2>
+    <p class="tx-16"><%= @request.description %></p>
+    <% @request.images.each do |image| %>
+    <%= image_tag(image.url, class: "img-thumbnail ht-lg-200 ht-xs-100 ht-md-150", data: {lity: true}) %>
+    <% end %>
+  </div>
+  <div class=" col-sm-12 col-md-4 col-lg-3">
+    <div class="card">
+      <div class="card-body">
+        <%= link_to "#", class: "share_item_url btn btn-primary btn-block mg-b-10" do %>
+        <i data-feather="share-2"></i> Compartir
+        <% end %>
+        <% if @request.user == current_user && @request.published? %>
+          <%= link_to edit_request_path(@request), class: "btn btn-info btn-block mg-b-10" do %>
+            <i data-feather="edit"></i> Editar
+          <% end %>
+          <%= link_to request_path(@request), class: "btn btn-danger btn-block mg-b-10", method: :delete, :data => {:confirm => 'Confirma que quieres borrar este pedido'} do  %>
+            <i data-feather="trash"></i> Eliminar
+          <% end %>
+        <% elsif user_signed_in? && @request.user != current_user %>
+            <a href="" class="btn btn-success btn-block mg-b-10" data-toggle="modal" data-target="#offerModal"><i data-feather="edit-2"></i> <%= (@my_offer.nil?)? "Postularme" : "Editar oferta" %></a>
+          <%= link_to "#", class: "mg-t-10 link-05", data: {toggle: "modal", target: "#reportModal"} do %>
+            <i data-feather="flag" class="feather-16"></i> Reportar este pedido
+          <% end %>
+        <% end %>
+        <div class="divider-text w-100">Info</div>
+        <p class="card-text mg-t-10 tx-gray-700">Publicado hace <%= distance_of_time_in_words_to_now(@request.created_at) %></p>
+        <div id="reqMap" class="ht-200" lat="<%= @request.lat %>" lng="<%= @request.lng %>" title="<%= @request.title %>"></div>
+        <small class="tx-gray-600"><%= @request.location %></small>
+        <div class="alert alert-solid alert-secondary tx-center mg-t-10 mg-b-0" role="alert"><%= @request.budget %> MXN</div>
+        <div class="d-flex justify-content-between align-items-center">
         </div>
+      </div>
     </div>
-</div>
-<div class="postulados-area">
-   <div class="container">
-       <div class="row">
-           <div class="col-lg-12">
-               <div class="postulados-text">
-                   <h2>Postulados</h2>
-               </div>
-           </div>
-       </div>
-   </div>
-</div>
+  </div>
+  <div class="divider-text w-100"><%= "sin " if @request.offers_count == 0 %>postulaciones</div>
+  <div class="row row-xs" paginated-other_offers>
 
-<div class="fernanda-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="paginator-container other_offers_container">
-                    <div class="paginated-other_offers fernanda-user-box">
-                        <%= render( @my_offer ) if @my_offer.present? %>
-                        <%= render( @other_offers ) if @other_offers.present? %>
-                      <%# if (@my_offer.nil? && @other_offers.nil?) %>
-                        <%# No hay postulados %>
-                      <%# end %>
-                    </div>
-                    <%= paginate @other_offers if @other_offers.present? %>
-                </div>
-            </div>
-        </div>
-    </div>
+  <%= render( @my_offer ) if @my_offer.present? %>
+  <%= render( @other_offers ) if @other_offers.present? %>
+  <%= paginate @other_offers if @other_offers.present? %>
+
+  </div>
 </div>
 
 <%= render "reports/report", object: @request%>
+
+<%= render "offers/offer_modal" if current_user && @request.user != current_user %>

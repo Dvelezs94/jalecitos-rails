@@ -1,0 +1,31 @@
+$(document).on('turbolinks:load', function() {
+    // $('.report-review').on('click', function () {
+    //   form = $("#reportRequestForm");
+    //   form.attr("action", $(this).attr("href"));
+    //   $("#review_cause").val("");
+    // });
+
+    $(document).on('click','a[data-target="#editreviewModal"]' , function () {
+      edit_review(this);
+    });
+});
+function edit_review(elem) {
+  //change url
+  form = $("#editReviewForm");
+  form.attr("action", $(elem).attr("href"));
+  //get comment inputs
+  comment_form = form.find("#review-comment-edit");
+  review = $(elem).closest("[review-id]");
+  //put comment text in form input
+  text = review.find("[review-comment]").text();
+  comment_form.val(text);
+  //change stars according
+  var stars = parseInt(review.find("[stars]").text());
+  radio_inputs = form.find(".rating-input input");
+  $.each(radio_inputs, function( index, elem ) {
+    elem_stars = parseInt(elem.value);
+    if ( elem_stars == stars) {
+      elem.checked = true
+    }
+  });
+}

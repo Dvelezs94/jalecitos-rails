@@ -3,20 +3,15 @@ class QueriesController < ApplicationController
   include SearchFunctions
   include LocationFunctions
   include GetQuery
-  access user: [:autocomplete_profession, :user_mobile_search], admin: :all, all: [:search, :autocomplete_search, :autocomplete_location]
+  access user: [:autocomplete_profession, :user_mobile_search], admin: :all, all: [:search, :autocomplete_search]
   layout :set_layout
-  before_action :set_state, only: [:search]
 
   def search
     query = filter_query
-    if params[:gigs]
-      get_gig(query, true)
-    elsif params[:requests]
+    if params[:model_name] == "requests"
       get_request(query, true)
     else
-      get_gig(query)
-      get_request(query)
-      Searchkick.multi_search([@gigs, @requests])
+      get_gig(query, true)
     end
     render template: "queries/search_results"
   end
@@ -39,40 +34,5 @@ class QueriesController < ApplicationController
       misspellings: {below: 2}
     }).map(&:name)
   end
-
-  def autocomplete_location
-    query = params[:query]
-    #init the filter params
-    @cities = City.search(query, {
-      includes: [state: :country],
-      fields: ["name"],
-      match: :word_start,
-      limit: 10,
-      misspellings: {below: 2}
-    }).map do |city|
-      { :location => "#{city.name}, #{city.state.name}, #{city.state.country.name}", :id => city.id }
-    end
-    render json: @cities
-
-  end
-
-  def user_mobile_search
-
-  end
   private
-
-  def set_state
-    if params[:city_id].present?
-      get_city_and_state_in_db_by_city_id(params[:city_id])
-    elsif params[:lon].present? && params[:lat].present?
-      begin
-        loc = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{params[:lat]},#{params[:lon]}"
-        get_city_and_state_in_db(loc.city, loc.state_name, "MX") #this makes global variables for using
-      rescue
-        #nothing
-      end
-    elsif params[:city].present? && params[:state].present? #used in sitemap (i think so)
-        get_city_and_state_in_db(params[:city], params[:state], "MX") #this makes global variables for using
-    end
-  end
 end

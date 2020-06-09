@@ -1,8 +1,8 @@
-$(".paginated-elements").append('<%= j render(@notifications) %>');
-
+$("[paginated-notif] > nav").remove(); //this deletes pagination
+$("[paginated-notif]").append('<%= j render(@notifications) %>');
+stylize_notifications();
 <% if @notifications.next_page %>
-  $('.pag-and-load').replaceWith('<%= j paginate(@notifications) %>');
-<% else %>
-  $('.pag-and-load').remove();
+  $("[paginated-notif]").append('<%= j paginate(@notifications) %>');
 <% end %>
+
 <% sleep 1 %>

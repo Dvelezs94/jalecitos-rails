@@ -1,11 +1,10 @@
 $(document).on('turbolinks:load', function() {
   $("#message_image").change(function(){
-    $('#attach-i').hide();
+    $("[no-msg-img]").addClass("d-none");
     var reader = new FileReader();
     reader.onload = function(){
-      var output = document.getElementById('output');
-      output.style.display = "block";
-      output.src = reader.result;
+      $("#output").removeClass("d-none");
+      $("#output").attr("src", reader.result);
     };
     reader.readAsDataURL(event.target.files[0]);
   });
