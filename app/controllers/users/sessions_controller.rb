@@ -2,7 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  layout "mobile"
+  layout "guest"
   after_action :set_cookie, only: :create
 
   # GET /resource/sign_in
@@ -12,7 +12,11 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    super
+    self.resource = warden.authenticate!(auth_options)
+    #set_flash_message!(:notice, :signed_in)
+    sign_in(resource_name, resource)
+    yield resource if block_given?
+    respond_with resource, location: after_sign_in_path_for(resource)
   end
 
   # DELETE /resource/sign_out
@@ -36,20 +40,14 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def after_sign_out_path_for(resource)
-    if cookies.permanent.signed[:mb].present?
-      mobile_sign_in_path
-    else
-      root_path
-    end
+    root_path
   end
 
   def after_sign_in_path_for resource
     if check_if_banned(resource)
       sign_out resource
-      cookies.permanent.signed[:mb].present? ? mobile_sign_in_path : root_path
-    else
-      cookies.permanent.signed[:mb].present? ? root_path( notifications: "enable") : root_path
     end
+      root_path
     #if i am in localhost/sign_in path, redirect to localhost, otherwise, it will throw a too many times redirect error
     # (Rails.application.routes.recognize_path(request.referrer)[:controller] == "users/sessions")? root_path : request.referrer + "?review=true"
   end

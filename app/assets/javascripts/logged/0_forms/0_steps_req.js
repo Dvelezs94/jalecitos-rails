@@ -48,6 +48,7 @@ $(document).on('turbolinks:load', function() {
       },
       onFinishing: function(event, currentIndex) {
         form = form_cont.find("#section_parent_req-p-" + currentIndex + " form").first();
+        $("a[href='#finish']").html("Guardando...");
         syncAjaxReq(form)
         return true;
       },
@@ -66,6 +67,7 @@ function syncAjaxReq(form) {
     data: form.find("[name!='_method']").serialize(),
     success: function() {},
     error: function() {
+      $("a[href='#finish']").html("Finalizar");
       show_error("Parece que no estás conectado a internet, intenta guardar de nuevo");
       if (form.hasClass("req_form")) { //if its gig form, go again to it...
         setTimeout(function() { //if steps changes rapidly between steps, it crashes, i have to wait

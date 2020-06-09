@@ -1,0 +1,9 @@
+<a href='<%= url_generator_helper(notification, notification.notifiable) %>' class='dropdown-item' notification>
+  <div class='media'>
+    <div class='avatar avatar-sm <%= "avatar-online" if notification.user.online? %>'><img src='<%= notification.user.image_url %>' class='rounded-circle'></div>
+    <div class='media-body mg-l-15'>
+      <p><%= build_notification_text(notification, notification.notifiable) %></p>
+      <span><%= notification.created_at.strftime("%b %e, %I:%M %P") %></span>
+    </div>
+  </div>
+</a>

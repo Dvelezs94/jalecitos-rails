@@ -1,12 +1,17 @@
-<% name = (params[:reviews].present?)? "review" : "request" %>
+<% name = (params[:reviews].present?)? "review" : (params[:gigs].present?)? "gig" : "request"  %>
 <% collection = instance_variable_get("@"+name+"s") %>
 
-paginator_container = $('.paginated-'+'<%= j name %>'+"s").closest(".paginator-container");
-$(".paginated-"+'<%= j name %>'+"s").append('<%= j render(partial: "shared/users/#{name}", collection: collection) %>');
-paginator_container.find('.pag-and-load').remove();
+elements_list = $('[paginated-'+'<%= j name %>'+"s]");
+paginator_container = elements_list.closest("[pag-and-list]").find("[paginator-container]");
+elements_list.append('<%= j render(partial: "shared/users/#{name}", collection: collection) %>');
+paginator_container.html("");
 
 <% if collection.next_page %>
-  paginator_container.append("<%= j paginate(collection, param_name: name+'s') %>");
-<% end %>
+  paginator_container.append("<%= j link_to_next_page(collection, 'Mostrar más <i data-feather="chevron-down" class="mg-l-2 mg-r-0 mg-t-2 feather-12"></i>'.html_safe,
+   param_name: name+'s', remote: true, data: {disable_with: 'Cargando...'}, class: 'link-03 d-inline-flex align-items-center') %>");
 
+<% else %>
+paginator_container.remove();
+<% end %>
+feather.replace();
 <% sleep 1 %>

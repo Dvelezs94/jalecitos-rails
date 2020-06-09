@@ -1,0 +1,23 @@
+<div class="card mg-b-20 mg-lg-b-25" pag-and-list>
+  <div class="card-header pd-y-15 pd-x-20 d-flex align-items-center justify-content-between">
+    <h6 class="tx-uppercase tx-semibold mg-b-0">Servicios</h6>
+  </div><!-- card-header -->
+  <div class="card-body pd-25">
+    <div class="row" paginated-gigs>
+      <%= render partial: "shared/users/gig", collection: @gigs, as: "gig" %>
+    <%= "Nada para mostrar" if @gigs.empty? %>
+    </div><!-- row -->
+  </div><!-- card-body -->
+  <% if @gigs.total_count > @gigs.length %>
+    <nav class="nav nav-with-icon tx-13 card-footer bg-transparent pd-y-15 pd-x-20" paginator-container>
+      <%= link_to_next_page(@gigs, "Mostrar más <i data-feather='chevron-down' class='mg-l-2 mg-r-0 mg-t-2'></i>".html_safe,
+       param_name: :gigs, remote: true, data: {disable_with: "Cargando..."}, class: "link-03 d-inline-flex align-items-center") %>
+    </nav>
+  <% end %>
+</div><!-- card -->
+
+<!-- <div class="media">
+  <div class="placeholder-media wd-100p">
+    <div class="line"></div>
+  </div>
+</div> -->

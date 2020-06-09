@@ -3,7 +3,7 @@ class PayoutFailedWorker
   sidekiq_options retry: 5, dead: false
   include OrderFunctions
   include ApplicationHelper
-  include OpenpayHelper
+  
 
   def perform(payout_id, error)
     @jalecitos_payout = Payout.find_by_transaction_id(payout_id)

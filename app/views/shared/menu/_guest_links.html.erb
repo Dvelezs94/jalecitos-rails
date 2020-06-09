@@ -1,0 +1,51 @@
+<div id="navbarMenu" class="navbar-menu-wrapper">
+  <div class="navbar-menu-header">
+    <a href="base/template/index.html" class="df-logo">Jale<span>citos</span></a>
+    <a id="mainMenuClose" href=""><i data-feather="x"></i></a>
+  </div><!-- navbar-menu-header -->
+<ul class="nav navbar-menu justify-content-center">
+  <li class="nav-label pd-l-20 pd-lg-l-25 d-lg-none">Menu</li>
+<li class="nav-item with-sub active">
+  <a href="" class="nav-link"><i data-feather="briefcase"></i> Cuenta</a>
+  <ul class="navbar-menu-sub">
+    <li class="nav-sub-item">
+      <%= link_to new_user_session_path, class: "nav-sub-link" do  %>
+        <i data-feather="user-check"></i>Iniciar Sesión
+      <% end %>
+    </li>
+    <li class="nav-sub-item">
+      <%= link_to new_user_registration_path, class: "nav-sub-link" do  %>
+        <i data-feather="user-plus"></i>Registrarme
+      <% end %>
+    </li>
+  </ul>
+</li>
+<li class="nav-item with-sub">
+  <a href="" class="nav-link"><i data-feather="layers"></i> Categorías</a>
+  <div class="navbar-menu-sub">
+    <div class="d-lg-flex">
+        <% 3.times do |n| %>
+          <ul>
+            <% @categories.in_groups_of(@group_size)[n].each do |cat| %>
+              <% if cat.present? %>
+              <li class="nav-sub-item">
+                <%= link_to search_path(query: "", category_id: cat.id, lat: @mylat, lng: @mylng), class: "nav-sub-link" do %>
+                  <%= cat.name %>
+                <% end %>
+              </li>
+              <% end %>
+            <% end %>
+            </ul>
+        <% end %>
+    </div>
+  </div><!-- nav-sub -->
+</li>
+<li class="nav-item"><a href="" class="link-04 nav-link" id="invite-friend"><i data-feather="share-2"></i>Invitar</a></li>
+<hr class="d-lg-none mg-r-5 mg-l-5">
+</ul>
+</div>
+<div class="navbar-right">
+  <%= link_to "", class: "search-link", id: "navbarSearch" do  %>
+    <i data-feather="search"></i>
+  <% end %>
+</div>

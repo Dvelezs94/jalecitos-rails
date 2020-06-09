@@ -9,6 +9,8 @@
   </div>
   <div class="servicoteam-wrap">
     <div class="paginated_reviews">
+
+
     <% if @reviews.blank? && @my_reviews.blank? %>
       <% if @gig.user != current_user %>
         <% if current_user %>
@@ -20,12 +22,16 @@
         <a href="#"class="want_review">Comparte tu Jale para conseguir reseñas haciendo click aquí</a>
       <% end %>
     <% else %>
+
       <%= render partial: "shared/reviews/review", collection: @my_reviews %>
       <%= render partial: "shared/reviews/review", collection: @reviews %>
       <div class="page3-viewmore">
         <%= link_to_next_page(@reviews, "Ver más#{icon("fas", "angle-down")}".html_safe,class: "review_paginator" , param_name: :reviews,remote: true) %>
       </div>
     <% end %>
+
+
+
     </div>
   </div>
 

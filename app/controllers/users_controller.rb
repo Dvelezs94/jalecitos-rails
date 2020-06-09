@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  include OpenpayHelper
+  
   include SetLayout
   include GetUser
   include UsersHelper
@@ -24,10 +24,11 @@ class UsersController < ApplicationController
   def show
     if params[:reviews]
       get_reviews
+    elsif params[:gigs]
+      get_gigs
     else
       get_reviews
       get_gigs
-      Searchkick.multi_search([@gigs])
     end
   end
 
@@ -36,12 +37,13 @@ class UsersController < ApplicationController
     if params[:reviews]
       get_reviews
     elsif params[:requests]
-      get_requests(true)
+      get_requests
+    elsif params[:gigs]
+      get_gigs
     else
       get_reviews
       get_gigs
       get_requests
-      Searchkick.multi_search([@gigs, @requests])
     end
     render "show"
   end
@@ -49,29 +51,13 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   #aqui la parte del usuario de la url no importa, ya que aqui adentro se usa current_user, esto para darle seguridad a los usuarios de solo editar su perfil
   def update_user
-    if params[:user]["name"].present?
-      update_openpay_name(params[:user]["name"])
-    end
     @success = current_user.update(user_params)
     respond_to do |format|
-      # if params[:user]["alias"]
-      #   # flash[:success] = 'Tu alias ha sido actualizado.'
-      #   format.json  { render :json => { :redirect => configuration_path } }
-      #labels and image of user
         format.js {
-          if params[:user][:image].present?
-            @message = "Tu imagen de perfil se ha actualizado."
-          else
-            @message = "Tus etiquetas se han actualizado."
-            puts @message
-          end
+          #response in partial
          }
-        #best_in_place
-        format.json { respond_with_bip(current_user) }
         #changing location of config and mobile use this, and image of user
         format.html {
-          flash[:success] = "Tu ubicación se ha actualizado."
-          redirect_to request.referrer
          }
     end
 
@@ -107,20 +93,27 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name,
+      user_params = params.require(:user).permit(:name,
                                    :alias,
                                    :image,
                                    :bio,
                                    :age,
-                                   :available,
-                                   :city_id,
-                                   :roles_word,
+                                   :lat,
+                                   :lng,
+                                   :address_name,
+                                   # :roles_word,
                                    :tag_list,
                                    :transactional_emails,
-                                   :marketing_emails,
+                                   # :marketing_emails,
                                    :whatsapp_enabled,
-                                   :phone_number
+                                   :phone_number,
+                                   :birth,
+                                   :website,
+                                   :facebook,
+                                   :instagram
                                  )
+      user_params[:phone_number] = "" if user_params[:phone_number].present? && user_params[:phone_number].split(" ").length < 2 #this tells me that maybe the string just has the code that is put in the frontend input
+      return user_params
     end
 
     def check_if_my_profile

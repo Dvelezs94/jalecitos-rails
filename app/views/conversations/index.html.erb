@@ -1,38 +1,4 @@
-<div class="messages-box-area">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4 conversation-filter-box">
-        <div class="messages-box-left-side">
-          <div class="mensajes-chat">
-            <h1>Mensajes</h1>
-          </div>
-          <div class="conversación-input">
-            <i class="fa fa-search" aria-hidden="true"></i>
-            <input type="text" placeholder="Buscar conversación" id="filter-conversation">
-          </div>
-          <div id="contacts-list">
-          <% @users.each do |user| %>
-            <%= render partial: "conversation_min", locals: { user: user } %>
-          <% end %>
-          <%= paginate @conversations, param_name: :conversation %>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-8 nopadding" id="conversation-list">
-      <div class="chat-right-side">
-        <% if params[:user_id] && params[:user_id] != current_user.slug %>
-          <%= render 'conversations/conversation', conversation: @conversation, opposite_user: opposite_conversation_user(@conversation, current_user) %>
-        <% else %>
-          <div id="empty_box">
-            <div class="empty-state no-conversations text-center">
-              <%= icon "fas","comments", class: "fa-5x" %>
-              <h4>Nada que ver aquí</h4>
-              <small>Abre una conversación para mostrarla aquí</small>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="chat-wrapper" chat-wrapper>
+  <%= render "chat_sidebar" %>
+  <%= render "conversation", conversation: @conversation, opposite_user: opposite_conversation_user(@conversation, current_user) if params[:user_id].present? %>
 </div>

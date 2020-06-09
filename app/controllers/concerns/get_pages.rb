@@ -17,33 +17,37 @@ module GetPages
     end
   end
 
-  def wizard_paginate
-    if params[:wizard_gigs]
-      get_wizard_gigs
-    elsif params[:wizard_requests]
-      get_wizard_requests
-    end
-  end
-
-  def wizard_get_all
-    get_wizard_gigs
-    get_wizard_requests
-  end
-
   def get_wizard_gigs
-    @wizard_gigs =  Gig.includes(:user, :likes, :category, city: [state: :country]).where(status: "wizard").
-    page(params[:wizard_gigs]).per(15)
+    @wizard_gigs =  Gig.where(status: "wizard").limit(4)
   end
 
   def get_wizard_requests
-    @wizard_requests = Request.includes(city: [state: :country]).where(status: "wizard").
-    page(params[:wizard_requests]).per(15)
+    @wizard_requests = Request.where(status: "wizard").limit(4)
+  end
+
+  def get_last_gigs_near_by
+    @show_x_last_gigs_near_by = 16
+    @last_gigs_near_by = Gig.search("*",
+       includes: [:user, :likes],
+        where: where_filter,
+          boost_by: boost_by_score,
+            boost_by_distance: boost_by_distance_condition,
+              limit: @show_x_last_gigs_near_by, order: { created_at: :desc})
+  end
+
+  def get_last_reqs_near_by
+    @show_x_last_reqs_near_by = 8
+    @last_reqs_near_by = Request.search("*",
+        where: where_filter,
+            boost_by_distance: boost_by_distance_condition,
+              limit: @show_x_last_reqs_near_by, order: { created_at: :desc})
   end
 
   def get_popular_gigs bool=false
     @popular_gigs = Gig.search("*",
        includes: [:user, :likes, :category, city: [state: :country]],
-        where: conditions, boost_where: boost_where_condition,
+        where: conditions,
+        boost_by_distance: boost_by_distance_condition,
          boost_by: {score: {factor: 100}},
           page: params[:popular_gigs], per_page: 15, execute: bool)
   end
@@ -72,14 +76,6 @@ module GetPages
          page: params[:recent_requests], per_page: 15, execute: bool)
   end
 
-  def get_verified_gigs bool=false
-    @verified_gigs = Gig.search("*",
-       includes: [:user, :category],
-        where: conditions("verified"),
-         boost_where: boost_where_condition, boost_by: {score: {factor: 100}},
-          page: params[:verified_gigs], per_page: 15, execute: bool)
-  end
-
   def get_liked_gigs
     @liked_gigs = Like.where(user_id: current_user.id).order(created_at: :desc).page(params[:liked_gigs]).per(15)
   end
@@ -88,6 +84,13 @@ module GetPages
     @liked_gigs_items = Gig.includes(:user, :likes, :category, city: [state: :country])
     .where(id: @liked_gigs.pluck(:gig_id), status: "published")
     .order(created_at: :desc)
+  end
+  def get_verified_gigs bool=false
+    @verified_gigs = Gig.search("*",
+       includes: [:user, :category],
+        where: conditions("verified"),
+         boost_where: boost_where_condition, boost_by: {score: {factor: 100}},
+          page: params[:verified_gigs], per_page: 15, execute: bool)
   end
 
   def get_purchases
@@ -116,14 +119,9 @@ module GetPages
 
   def conditions string=nil
     if current_user
-      if current_user.location(true) && string == "verified"
-        {status: "published", _or: [{state_id: current_user.city.state_id}, {state_id: nil}], verified: true}
-        # {status: "published", verified: true}
-      elsif current_user.location(true)
-        {status: "published", _or: [{state_id: current_user.city.state_id}, {state_id: nil}]}
+      if current_user.location(true)
+        {status: "published"}
         # {status: "published"}
-      elsif string == "verified"
-        {status: "published", verified: true}
       else
         {status: "published"}
       end
@@ -132,8 +130,12 @@ module GetPages
     end
   end
 
-  def boost_where_condition
-    {city_id: {value: current_user.city_id, factor: 5}}
+  def boost_by_distance_condition
+    if current_user.lat
+      {location: {origin: {lat: current_user.lat, lon: current_user.lng}, function: "exp"}}
+    else #user doesnt has a place of search
+      {}
+    end
   end
 
   def random_conditions

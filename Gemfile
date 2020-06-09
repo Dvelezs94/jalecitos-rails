@@ -58,7 +58,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '~> 4.2', '>= 4.2.1'
 gem 'jquery-rails'
-gem 'font-awesome-sass', '~> 5.6', '>= 5.6.1'
 #gem 'simple-line-icons-rails', github: 'hi5dev/simple-line-icons-rails', branch: 'railties-5.2'
 gem "autoprefixer-rails"
 #gem 'therubyracer'
@@ -77,7 +76,8 @@ gem 'omniauth-facebook', '~> 5.0'
 # Google omniauth
 gem 'omniauth-google-oauth2', '~> 0.6.1'
 #Notifications
-gem 'gritter', '~> 1.2'
+gem 'toastr-rails'
+#gem 'toastr-rails', '~> 1.0', '>= 1.0.3' #added js and css manually because this is older
 #Store images
 gem 'carrierwave', '~> 1.2', '>= 1.2.3'
 gem 'carrierwave-aws', '~> 1.3'
@@ -85,8 +85,6 @@ gem 'carrierwave-aws', '~> 1.3'
 gem 'mini_magick', '~> 4.9', '>= 4.9.2'
 # AWS sdk to support role based auth and s3 files
 gem 'aws-sdk', '~> 3.0', '>= 3.0.1'
-# FeatherIcons
-gem 'feathericon-rails', '~> 1.0'
 # Pagination
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 #Text editor
@@ -105,8 +103,6 @@ gem 'jquery-easing-rails', '~> 0.0.2'
 gem 'jquery-validation-rails', '~> 1.16'
 #slick
 # gem 'jquery-slick-rails', '~> 1.9'
-# Payments
-gem 'openpay', '~> 2.0'
 #Search engine
 gem 'searchkick', '~> 3.1', '>= 3.1.2'
 #search autocomplete
@@ -173,3 +169,5 @@ gem 'rails_emoji_picker', '~> 0.1.5'
 gem 'cocoon', '~> 1.2', '>= 1.2.14'
 #removes emojis, user in elasticsearch
 gem 'remove_emoji', '~> 1.0'
+#styling of data confirm links
+gem 'data-confirm-modal', '~> 1.6', '>= 1.6.3'

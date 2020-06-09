@@ -1,0 +1,51 @@
+<div class="col-md-12 pd-l-0 pd-r-0 mg-t-15 <%= "collapse" if current_user %>" mail_contact id="email_contact">
+  <div class="card">
+    <div class="card-body tx-13">
+      <div>
+          <h5 class="mg-b-5-f tx-center">Contactar por correo</h5>
+        <%= form_with(url: mail_contact_gig_path(@gig), method: :post) do |f| %>
+        <div class="form-group row">
+          <label class="col-form-label col-12 tx-gray-600">Mensaje<span class="tx-danger">*</span></label>
+          <div class="col-12">
+            <%= f.text_area :message,
+             class: "form-control" , rows: 3, maxlength: 5000, required: true,
+             value: "Hola. Me interesa #{@gig.title}, Por favor contáctame.",
+             placeholder: "Escribe tu mensaje" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-12 tx-gray-600">Nombre<span class="tx-danger">*</span></label>
+          <div class="col-12">
+            <%= f.text_field :name,
+             class: "form-control", maxlength: 100, required: true,
+             value: current_user.present?? current_user.name : nil,
+             placeholder: "Escribe tu nombre" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-12 tx-gray-600">Correo<span class="tx-danger">*</span></label>
+          <div class="col-12">
+            <%= f.email_field :email,
+             class: "form-control", maxlength: 100, required: true,
+             value: current_user.present?? current_user.email : nil,
+             placeholder: "Escribe tu correo electrónico" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-12 tx-gray-600">Teléfono<span class="tx-danger">*</span></label>
+          <div class="col-12">
+            <%= f.number_field :phone_number, required: true,
+             class: "form-control", maxlength: 20,
+             value: current_user.present?? current_user.phone_number : nil,
+             placeholder: "Escribe tu teléfono" %>
+          </div>
+        </div>
+
+          <div class="form-group mg-b-0">
+            <%= f.submit 'Contactar', :class => 'btn btn-block btn-success', data: {disable_with: "Enviando..."} %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div><!-- card -->
+</div>

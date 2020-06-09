@@ -1,0 +1,132 @@
+<div id="navbarMenu" class="navbar-menu-wrapper">
+  <div class="navbar-menu-header">
+    <a href="base/template/index.html" class="df-logo">Jale<span>citos</span></a>
+    <a id="mainMenuClose" href=""><i data-feather="x"></i></a>
+  </div><!-- navbar-menu-header -->
+<ul class="nav navbar-menu justify-content-center">
+  <li class="nav-label pd-l-20 pd-lg-l-25 d-lg-none">Menu</li>
+<li class="nav-item with-sub">
+  <a href="" class="nav-link" data-step="5" data-intro="Aquí puedes crear un servicio que tú ofrezcas" data-position="bottom"><i data-feather="briefcase"></i> Servicios</a>
+  <ul class="navbar-menu-sub">
+    <li class="nav-sub-item">
+      <%= link_to new_gig_path, class: "nav-sub-link" do  %>
+        <i data-feather="plus"></i>Nuevo Servicio
+      <% end %>
+    </li>
+    <li class="nav-sub-item">
+      <%= link_to my_account_users_path, class: "nav-sub-link" do  %>
+        <i data-feather="book"></i>Mis Servicios
+      <% end %>
+    </li>
+    <li class="nav-sub-item">
+      <%= link_to likes_path, class: "nav-sub-link" do  %>
+        <i data-feather="heart"></i>Gustados
+      <% end %>
+    </li>
+  </ul>
+</li>
+<li class="nav-item with-sub">
+  <a href="" class="nav-link" data-step="6" data-intro="Aquí puedes crear un pedido para solicitar algo" data-position="bottom"><i data-feather="package"></i> Pedidos</a>
+  <ul class="navbar-menu-sub">
+    <li class="nav-sub-item">
+      <%= link_to new_request_path, class: "nav-sub-link" do  %>
+        <i data-feather="plus"></i>Nuevo Pedido
+      <% end %>
+    </li>
+    <li class="nav-sub-item">
+      <%= link_to my_account_users_path, class: "nav-sub-link" do  %>
+        <i data-feather="book"></i>Mis Pedidos
+      <% end %>
+    </li>
+  </ul>
+</li>
+<li class="nav-item with-sub">
+  <a href="" class="nav-link"><i data-feather="layers"></i> Categorías</a>
+  <div class="navbar-menu-sub">
+    <div class="d-lg-flex">
+        <% 3.times do |n| %>
+          <ul>
+            <% @categories.in_groups_of(@group_size)[n].each do |cat| %>
+              <% if cat.present? %>
+              <li class="nav-sub-item">
+                <%= link_to search_path(query: "", category_id: cat.id, lat: @mylat, lng: @mylng), class: "nav-sub-link" do %>
+                  <%= cat.name %>
+                <% end %>
+              </li>
+              <% end %>
+            <% end %>
+            </ul>
+        <% end %>
+    </div>
+  </div><!-- nav-sub -->
+</li>
+<li class="nav-item"><a href="" class="link-04 nav-link" id="invite-friend"><i data-feather="share-2"></i>Invitar</a></li>
+<hr class="d-lg-none mg-r-5 mg-l-5">
+<div class="location-header">
+  <li class="nav-item" data-step="7" data-intro="Ésta es tu ubicación, puedes cambiarla en cualquier momento para ver cosas más cercanas a ti" data-position="bottom">
+   <%= form_with model: User, url: update_users_path, method: :put , remote: true do |f|%>
+      <%= f.text_field :location, class: 'form-control rounded', id: "menu_autocomplete", placeholder: "Ubicación",
+      value: (current_user.location(true).present?)? current_user.location : "",
+      lat: (params[:location].present?)? params[:lat] : current_user.lat || nil,
+      lng: (params[:location].present?)? params[:lng] : current_user.lng || nil %>
+      <%= f.submit("Enviar", class: "d-none") %>
+    <% end %>
+  </li>
+</div>
+</ul>
+</div>
+<div class="navbar-right" data-step="8" data-intro="En este lugar puedes buscar servicios y pedidos, ver tus mensajes y notificaciones o configurar tu perfil" data-position="left">
+  <%= link_to "", class: "search-link", id: "navbarSearch" do  %>
+    <i data-feather="search"></i>
+  <% end %>
+
+<div class="dropdown dropdown-message">
+  <a href="" class="dropdown-link new-indicator" data-toggle="dropdown">
+    <i data-feather="message-square"></i>
+    <span class="d-none" new-message></span><!-- -->
+  </a>
+  <div class="dropdown-menu dropdown-menu-right">
+    <div class="dropdown-header" new-messages>Últimos mensajes</div>
+    <!-- message content loaded by ajax -->
+  <span class="container" no-messages>Nada para mostrar</span>
+
+    <div class="dropdown-footer"><a href="<%= conversations_path %>">Ver todos los mensajes</a></div>
+  </div><!-- dropdown-menu -->
+</div><!-- dropdown -->
+<div class="dropdown dropdown-notification">
+  <a href="" class="dropdown-link new-indicator" data-toggle="dropdown" read-notifications>
+    <i data-feather="bell"></i>
+    <span class="d-none"></span>
+  </a>
+  <div class="dropdown-menu dropdown-menu-right">
+    <div class="dropdown-header" notifications>Notificaciones</div>
+    <!-- notification content -->
+
+    <div class="dropdown-footer"><a href="<%= all_notifications_path %>">Ver todas las notificaciones</a> </div>
+  </div><!-- dropdown-menu -->
+</div><!-- dropdown -->
+<div class="dropdown dropdown-profile">
+  <a href="" class="dropdown-link" data-toggle="dropdown" data-display="static">
+    <div class="avatar avatar-sm">
+      <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "rounded-circle", lazy: true) %>
+    </div>
+  </a><!-- dropdown-link -->
+  <div class="dropdown-menu dropdown-menu-right tx-13">
+    <div class="avatar avatar-lg mg-b-15">
+      <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "rounded-circle") %>
+    </div>
+    <h6 class="tx-semibold mg-b-25"><%= current_user.name %></h6>
+    <%= link_to my_account_users_path, class: "dropdown-item" do  %>
+      <i data-feather="user"></i>Mi perfil
+    <% end %>
+    <%= link_to configuration_path, class: "dropdown-item" do  %>
+      <i data-feather="settings"></i>Configuración
+    <% end %>
+    <hr>
+    <!-- <a href="page-help-center.html" class="dropdown-item"><i data-feather="help-circle"></i> Ayuda</a> -->
+    <%= link_to destroy_user_session_path(device: "pending"), method: :delete, class: "dropdown-item" do  %>
+      <i data-feather="log-out"></i>Cerrar sesión
+    <% end %>
+  </div><!-- dropdown-menu -->
+</div><!-- dropdown -->
+</div>

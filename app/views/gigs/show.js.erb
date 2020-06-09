@@ -1,9 +1,7 @@
-$(".paginated_reviews").append('<%= j render(partial: "shared/reviews/review", collection: @reviews) %>');
-$(".page3-viewmore").html("");
+$("#paginated_reviews > a").remove(); //this deletes pagination
+$("#paginated_reviews").append('<%= j render(partial: "shared/reviews/review", collection: @reviews) %>');
 <% if @reviews.next_page %>
-  $(".page3-viewmore").append('<%= j link_to_next_page(@reviews, "Ver más#{icon("fas", "angle-down")}".html_safe,class: "review_paginator" ,remote: true, param_name: :reviews) %>');
-<% else %>
-  $(".page3-viewmore").remove();
+  $("#paginated_reviews").append('<%= j link_to_next_page(@reviews, "Cargar más", remote: true, param_name: :reviews, data: {disable_with: "Cargando..."}) %>');
 <% end %>
 
 <% sleep 1 %>

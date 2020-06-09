@@ -9,6 +9,7 @@ $(document).on('turbolinks:load', function() {
       headerTag: "h3",
       bodyTag: "section",
       transitionEffect: "slideLeft",
+      titleTemplate: '<span class="number">#index#</span> <span class="title">#title#</span>',
       labels: {
         previous: "Anterior",
         next: "Siguiente",
@@ -36,6 +37,7 @@ $(document).on('turbolinks:load', function() {
         form = form_cont.find("#section_parent_gig-p-" + currentIndex + " form").first();
         if (form.valid()) {
           syncAjaxGig(form);
+          if (currentIndex == 0) update_faq_accordion(); //in case of creation, erases preview faqs when gig form is submitted. better ux
           return true;
         } else {
           return false;
@@ -45,12 +47,14 @@ $(document).on('turbolinks:load', function() {
         window.changed = false; //restart at no changes
         return true;
       },
-      onFinishing: async function(event, currentIndex) {
+      onFinishing: function(event, currentIndex) {
         form = form_cont.find("#section_parent_gig-p-" + currentIndex + " form");
         if (form.valid() && validatePackages()) {
+          $("a[href='#finish']").html("Guardando...");
           syncAjaxGig(form);
           return true;
         } else {
+          window.test = form
           return false;
         }
       },
@@ -69,6 +73,7 @@ function syncAjaxGig(form) {
     data: form.find("[name!='_method']").serialize(),
     success: function() {},
     error: function() {
+      $("a[href='#finish']").html("Finalizar");
       show_error("Parece que no estás conectado a internet, intenta guardar de nuevo");
       if (form.hasClass("gig_form")) { //if its gig form, go again to it...
         setTimeout(function() { //if steps changes rapidly between steps, it crashes, i have to wait

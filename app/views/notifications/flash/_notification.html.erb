@@ -1,23 +1,14 @@
-<div class="toast__container" id="notif-<%= notification.id %>">
-  <div class="toast__cell">
-    <div class="toast">
-      <%= link_to url_generator_helper(notification, notification.notifiable) do %>
-      <div class="toast__icon">
-        <%= image_tag(notification.user.image_url(:thumb)) %>
-      </div>
-      <div class="toast__content">
-
-        <p class="toast__message">
-          <%= build_notification_text(notification, notification.notifiable) %></p>
-      </div>
-    <% end %>
-    <div class="toast__close">
-      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.642 15.642" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 15.642 15.642">
-        <path
-          fill-rule="evenodd"
-          d="M8.882,7.821l6.541-6.541c0.293-0.293,0.293-0.768,0-1.061  c-0.293-0.293-0.768-0.293-1.061,0L7.821,6.76L1.28,0.22c-0.293-0.293-0.768-0.293-1.061,0c-0.293,0.293-0.293,0.768,0,1.061  l6.541,6.541L0.22,14.362c-0.293,0.293-0.293,0.768,0,1.061c0.147,0.146,0.338,0.22,0.53,0.22s0.384-0.073,0.53-0.22l6.541-6.541  l6.541,6.541c0.147,0.146,0.338,0.22,0.53,0.22c0.192,0,0.384-0.073,0.53-0.22c0.293-0.293,0.293-0.768,0-1.061L8.882,7.821z"></path>
-      </svg>
-    </div>
-  </div>
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="50000">
+<div class="toast-header">
+  <h6 class="tx-inverse tx-14 mg-b-0 mg-r-auto">Notificación</h6>
+  <small>Ahora<%# distance_of_time_in_words_to_now(notification.created_at) %></small>
+  <button type="button" class="ml-2 mb-1 close tx-normal" data-dismiss="toast" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
+<a href="<%=url_generator_helper(notification, notification.notifiable) %>" class="tx-black">
+<div class="toast-body">
+    <%= build_notification_text(notification, notification.notifiable) %>
+</div>
+</a>
 </div>

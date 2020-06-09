@@ -1,63 +1,22 @@
-<div class="top-gig innerpages3-area">
-  <% if current_user && current_user.active? && (@gig.gig_packages.none? || @gig.draft?) %>
-  <div class="alert alert-warning alert-dismissible fade show text-center" role="alert" style="margin-bottom:0 !important;">
-    <% if @gig.gig_packages.none? %>
-      <%= link_to("Agrega paquetes al Jale para publicarlo.", edit_gig_path(city_slug(@gig.city),@gig.category.name.parameterize,@gig))%>
-    <% else %>
-      <%= link_to("¡Tu jale está listo para publicarse! <br> Haz click aquí para publicarlo.".html_safe, toggle_status_gig_path(@gig)) %>
-    <% end %>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
+<%= render 'shared/gigs/show/details_hints' if current_user && current_user.active? && (@gig.gig_packages.none? || @gig.draft?) && request.original_url != request.referrer %>
+<%= render 'shared/gigs/show/remember_review' if @remember_review && request.original_url != request.referrer  %>
+<%# if request.original_url != request.referrer means that user comes from other page, if that were same, then he updated gig status, then i dont need to display messages  %>
+<div class="row">
+  <div class="col-lg-9">
+    <%= render 'shared/gigs/show/gig_info2' %>
+    <%= render 'shared/gigs/show/reviews2' %>
+</div><!-- col -->
+<div class="col-lg-3 mg-t-40 mg-lg-t-0" gig_card_info>
+  <% @show_packages = true %>
+  <%= render 'shared/gigs/show/packages_info' %>
+  <%= render "shared/gigs/show/mail_contact" %>
+  <%= render 'shared/gigs/show/user_about2' %>
+  <%= render "shared/gigs/show/rate_gig" if current_user && current_user != @gig.user && @my_reviews.blank? %>
   </div>
-  <% end %>
-  <% if @remember_review %>
-  <div class="alert alert-info alert-dismissible fade show text-center" role="alert" style="margin-bottom:0 !important;">
-    <div class="want_review">
-      Recuerda que tu Jale tendrá prioridad en las búsquedas mientras más comentarios positivos tenga. Haz click aquí para invitar a que comenten tu Jale.
-    </div>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <% end %>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-7 small-padding">
-        <div class="innerpage-leftside">
-        <%= render 'shared/gigs/show/gig_info' %>
-        <%= render 'shared/gigs/show/package_info', device: "phone-tablet" %>
-
-        <% if @gig.faqs.any? %>
-        <div class="sed-content">
-          <h2>Preguntas frecuentes</h2>
-          <div class="accordion" id="faq_gig" role="tablist" aria-multiselectable="true">
-            <%= render partial: "faqs/faq", collection: @gig.faqs %>
-          </div>
-        </div>
-        <% end %>
-        <%= render 'shared/gigs/show/reviews' %>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-5">
-        <!-- only in computer -->
-        <%= render 'shared/gigs/show/package_info', device: "computer" %>
-        <% if current_user && current_user != @gig.user && not_rated_gig(@gig) %>
-        <div class="recommendation">
-          <h4 ><strong>¿Recomendarías este Jale?</strong></h4>
-          <div class="row justify-content-center mar-0-auto">
-            <button type="button" class="btn btn-success col-lg-5 col-md-5 col-sm-5 col-5 mr-1" id="recommendgigbtn">Sí</button>
-            <button type="button" class="btn btn-light col-lg-5 col-md-5 col-sm-5 col-5" id="notrecommendgigbtn" , style="border:1px solid #D3D3D3">No</button>
-          </div>
-        </div>
-        <% end %>
-        <%= render 'shared/gigs/show/user_card_info' %>
-      </div>
-    </div>
-  </div>
-  <%= gig_carousel( "Jales Relacionados", :related_gigs) %>
+</div>
+<div class="row row-xs">
+  <%= render 'shared/gigs/show/suggestions' if @related_gigs.any? && @gig.published?%>
 </div>
 <%= render 'reports/report', object: @gig %>
-<%= render 'reports/review' %>
 <%= render 'reviews/edit' %>
-<%= render 'reviews/recommendation', object: @gig %>
+<%# render 'reports/review' %>

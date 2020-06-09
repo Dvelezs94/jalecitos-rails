@@ -1,8 +1,3 @@
-show_success("El Jale se ha agregado a tus favoritos");
-item = $(".likes-<%= j @gig.slug %>");
-if( item.find(".with_number").length > 0 ) {
-  item.html("<%= j render 'gigs/likes', gig: @gig, with_number: true %>")
-}
-else {
-  item.html("<%= j render 'gigs/likes', gig: @gig, with_number: false %>")
-}
+item = $("a[gig_id=<%= j @gig.id.to_s %>]");
+item.replaceWith("<%= j render 'gigs/likes', gig: @gig, with_number: ActiveModel::Type::Boolean.new.cast(params[:with_number]), gig_show: ActiveModel::Type::Boolean.new.cast(params[:gig_show]) %>");
+feather.replace();

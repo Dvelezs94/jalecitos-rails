@@ -1,8 +1,0 @@
-@keyframes fadeout{
-  from {opacity: 1px;}
-  to {opacity: 0px;}
-}
-
-.fadeout {
-  animation: fadeout 1s;
-}

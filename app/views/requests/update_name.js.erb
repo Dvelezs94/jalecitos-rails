@@ -3,6 +3,6 @@
   <% if params[:action] == "update" %>
     updateURL(["req_id"], ["<%= @request.id %>"]); //if user changes name (slug) and reloads it will grab req_id to find request
   <% else %>
-    <%= add_gritter("Tu pedido se ha publicado, puedes agregar algunas imágenes", :image => :success, :title => "Éxito", :time => 5000)%>
+    toastr.success("Tu pedido se ha publicado, puedes agregar algunas imágenes")
   <% end %>
 <% end %>

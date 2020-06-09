@@ -14,7 +14,7 @@
                 <% if current_user.provider.nil? %>
                   <%= f.password_field :password, placeholder: "Digita tu contraseña actual" %>
                 <% else %>
-                  <%= f.submit "Si, cancelar cuenta", class: "default-deny-btn",:data => {:confirm => 'Por última vez, ¿estás seguro de cancelar tu cuenta?'} %>
+                  <%= f.submit "Si, cancelar cuenta", class: "default-deny-btn",:data => {:confirm => '¿Estás seguro de cancelar tu cuenta?', verify: 'wand', verify_text: 'Escribe "wand" para proceder'} %>
                 <% end %>
                <% end %>
              </div>

@@ -1,0 +1,35 @@
+<div class="chat-right-side-text" data-conversation-id="<%= conversation.id %>" id="conversation_div">
+    <div class="Harold-Bates-text">
+          <span>Activo hace <%= opposite_user.current_sign_in_at != nil ? distance_of_time_in_words_to_now(opposite_user.current_sign_in_at) : "nunca" %></span>
+    </div>
+<!--
+    <div class="chat-right-side-date">
+        <span>Febrero 18</span>
+    </div>
+-->
+<div class="message_view_box">
+  <%= paginate @messages %>
+  <ul class="messages-list">
+  <%= render 'conversations/conversation_content', messages: @messages.sort %>
+  </ul>
+</div>
+
+
+
+<div class="right-bottom-chat-write">
+    <div class="bottom-chat-write">
+      <%= form_for [@conversation, Message.new], remote: true do |f| %>
+      <label for="message_image" style="width:45px;">
+        <%# icon("fas","image", class: "fa-2x", title: "Adjuntar imagen", id: "attach-i")  %>
+        <%= f.file_field :image, accept: ".jpg, .jpeg, .png", style: "display: none;" %>
+        <img id="output" style="width: inherit;display:none;"></img>
+      </label>
+      <%= f.text_field :body, autofocus: true, size: 499, autocomplete: "off", placeholder: "Escribe un mensaje" %>
+      <%= f.hidden_field :related_to_id, value: params[:model_id] %>
+      <%= f.hidden_field :related_to_type, value: params[:model] %>
+      <%= button_tag( :class => "btn send-message", id: "send-message", :data => { :disable_with => "<i class='fa fa-spinner fa-spin'></i>" }) do %>
+      <%= "Enviar" %>
+        <% end %>
+      <% end %>
+    </div>
+</div>

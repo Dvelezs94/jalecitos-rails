@@ -8,8 +8,6 @@
 
 //= require bootstrap
 
-//= require gritter
-
 //= require jquery.validate
 
 
@@ -27,3 +25,5 @@
 //= require js.cookie
 
 //= require serviceworker-companion
+
+//= require data-confirm-modal

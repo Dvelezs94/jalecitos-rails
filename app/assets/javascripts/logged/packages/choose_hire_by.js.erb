@@ -9,7 +9,7 @@ function displayHireByInputs() {
     the_id = inp.id;
     container = $("[display_id="+the_id+"]")
     if ( $(inp).prop('checked') ) { //if checked, remove class hidden of its corresponding area
-      container.removeClass("hidden");
+      container.removeClass("d-none");
     }
     else {
       container.find(":input").prop( "disabled", true ); //disable hidden inputs
@@ -26,15 +26,15 @@ function displayHireByInputs() {
 function displayHireInput () {
   the_id = this.id;
 
-  min_amount = $(this).closest(".form-block").find(".min_amount");
+  min_amount = $(this).closest(".form-group").find(".min_amount");
 
-  old_block = $(this).closest(".form-block").find("[display_id]:visible");
-  old_block.addClass("hidden"); //hide the visible block
+  old_block = $(this).closest(".form-group").find("[display_id]:visible");
+  old_block.addClass("d-none"); //hide the visible block
   old_block.find(":input").prop( "disabled", true ); //disable the old inputs
   old_block.find(":input").attr("pack_validate", "false"); // mark inputs for no validation
 
   new_block = $("[display_id="+the_id+"]");
-  new_block.removeClass("hidden"); //show the hidden block
+  new_block.removeClass("d-none"); //show the hidden block
   new_block.find(":input").prop( "disabled", false ); //enable the new inputs
   new_block.find(":input").attr("pack_validate", "true"); // mark inputs for validation
 }

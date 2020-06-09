@@ -7,11 +7,7 @@
 
 //= require popper
 
-
 //= require bootstrap
-
-//= require gritter
-
 //= require jquery.steps
 
 //= require jquery.easing
@@ -20,7 +16,6 @@
 
 //= require jquery.nicescroll.js
 
-//= require introjs
 
 //= require best_in_place
 
@@ -29,6 +24,7 @@
 //= require_tree ./main
 
 //= require_tree ./logged
+//= require introjs
 
 //= require serviceworker-companion
 
@@ -36,8 +32,7 @@
 
 //= require twitter/typeahead
 
-
-
 //= require js.cookie
 
 //= require cocoon
+//= require data-confirm-modal

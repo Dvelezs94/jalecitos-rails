@@ -3,7 +3,7 @@ class FinishOrderWorker
   sidekiq_options retry: false, dead: false
   include OpenpayFunctions
   include OrderFunctions
-  include OpenpayHelper
+  
   include ApplicationHelper
   include MoneyHelper
 

@@ -1,0 +1,22 @@
+<div class="col-md-12 pd-l-0 pd-r-0 mg-t-15">
+  <div class="card">
+    <div class="card-body tx-13">
+      <div id="new_review_content">
+          <h5 class="mg-b-5-f tx-center">Califica este servicio</h5>
+        <%= form_with(model: Review, url: reviews_path, method: :post, :html => { class: "review_form" }) do |f| %>
+          <%= f.hidden_field :reviewable_id, value: @gig.id %>
+          <%= f.fields_for :rating_attributes do |r| %>
+            <%= render partial: "shared/rating_input", locals: {f: r} %>
+          <% end %>
+          <div class="form-group">
+            <%= f.text_area :comment, placeholder: "¿Qué tal te ha parecido el servicio de #{@gig.user.alias}?", id: "recommendation_comment",
+             class: "form-control" , rows: 2, maxlength: 2000 %>
+          </div>
+          <div class="form-group mg-b-0">
+            <%= f.submit 'Enviar reseña', :class => 'btn btn-block btn-success', data: {disable_with: "Enviando..."} %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div><!-- card -->
+</div>

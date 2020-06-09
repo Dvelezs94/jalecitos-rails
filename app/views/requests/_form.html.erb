@@ -5,107 +5,56 @@
   <% end %>
 <% end %>
 
-<!-- ---post request form -->
-<div class="container-fluid section">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-7 col-md-12 centered-form">
-        <h3 class="text-center">Encuentra al profesional indicado con un nuevo Pedido</h3>
-        <p class="text-center">¿No sabes cómo empezar? Visita nuestro video de cómo hacer un pedido.</p>
-        <p class="text-center"><a href="https://youtu.be/fTjhQc6Yiy0" target="_blank">Guía para hacer un Pedido</a></p>
-        <div class="form_box post_form_col">
 
-          <div class="form_block form_section row">
-            <div class="flex-space-bet">
-              <p class="form-title">¿A quién buscas? (Opcional):</p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-            <%= render 'shared_user/requests/forms/hints/profession_hint.html.erb' %>
-            <%= form.text_field :profession, class: "styled req-prof-input", maxlength: 50, placeholder: "Ej: Fotógrafo" %>
-          </div>
 
-          <div class="form_block form_section row">
-            <div class="flex-space-bet">
-              <p class="form-title">Define tu pedido:</p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-            <%= render 'shared_user/requests/forms/hints/name_hint.html.erb' %>
-            <span class="action action-req">Busco ...</span>
-            <%= form.text_area :name, class: 'name-class name-0 styled required', placeholder: "a alguien que me tome unas fotografías.", maxlength: 100 %>
 
-          </div>
-          <div class="form_block form_section row ">
-            <div class="flex-space-bet">
-              <p class="form-title">Descripción:</p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-            <%= render 'shared_user/requests/forms/hints/description_hint.html.erb' %>
-
-            <%= form.text_area :description, id: "description", maxlength: 1000,
-            placeholder: "Necesito fotografías blanco y negro tamaño infantil.",
-            class: "description-class description-0 styled required", rows: 5 %>
-
-          </div>
-
-          <div class="form_block form_section row">
-            <div class="flex-space-bet">
-              <p class="form-title">Elige una categoria:</p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-            <%= render 'shared_user/requests/forms/hints/category_hint.html.erb' %>
-            <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Categoría" }, class: 'form-select required' ) %>
-
-          </div>
-          <!-- 2 end -->
-          <div class="form_block form_section row">
-            <div class="flex-space-bet">
-              <p class="form-title">¿En qué ciudad quieres que se muestre tu pedido?
-              </p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-
-            <%= render 'shared_user/requests/forms/hints/city_hint.html.erb' %>
-            <%= render "shared_user/forms/choose_city"%>
-            <%= form.text_field :location, class: 'required font-awesome styled form_autocomplete', id: "form_autocomplete", size: 50, placeholder: '&#xf3c5; Busca tu ciudad...'.html_safe, value: (request.location(true) != nil)? request.location : current_user.location(true) %>
-            <%= form.hidden_field :city_id, class: "city", id: "form_autocomplete_id",
-             value: (request.city_id != nil)? request.city_id : current_user.city_id %>
-          </div>
-
-          <!-- tags -->
-          <div class="form_block form_section row">
-            <div class="flex-space-bet">
-              <p class="form-title">Especifica las etiquetas para que te encuentren más rapido (<strong>Opcional</strong>)
-              </p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-
-            <%= render 'shared_user/requests/forms/hints/tags_hint.html.erb' %>
-            <div class="tags-input" data-name="tags-input">
-              <%= form.hidden_field :tag_list, class: "hidden_tag_list" %>
-              <textarea name="tag_list" rows="1" class="main-input tags-main-input styled font-awesome" placeholder="&#xf02c;"></textarea>
-            </div>
-            <label class="tag-error error"></label>
-
-          </div>
-
-          <div class="form_block form_section row">
-            <div class="flex-space-bet">
-              <p class="form-title">¿Cuál es tu presupuesto? (MXN)
-              </p>
-              <%= icon("fas", "question-circle", class: "question_hint toggler") %>
-            </div>
-            <%= render 'shared_user/requests/forms/hints/budget_hint.html.erb' %>
-            <%= form.select :budget, options_for_budget, {}, prompt: 'Selecciona Una Opcion', class: "form-select required" %>
-          </div>
-
-        </div>
-        <!-- form box -->
-        <!-- -->
-      </div>
-      <!-- -->
-    </div>
-    <!-- col lg 7 -->
-  </div>
+<div class="alert alert-primary">
+  <span class="tx-danger">*</span>
+  Significa que el campo es obligatorio.</div>
+<div class="form-group">
+  <label class="d-block">¿A quién buscas?
+  </label>
+    <%= form.text_field :profession, class: "form-control", maxlength: 50, placeholder: "Ej: Fotógrafo" %>
 </div>
-<!-- container fluid -->
+<div class="form-group">
+  <label class="d-inline-block">¿Qué estás buscando?
+    <span class="tx-danger">*</span></label>
+    <%= form.text_area :name, class: 'name-class name-0 form-control required', placeholder: "Busco a alguien que me tome unas fotografías.", maxlength: 100 %>
+</div>
+<div class="form-group">
+  <label class="d-inline-block">Describe detalladamente lo que buscas.</label> <span class="tx-danger">*</span>
+  <%= form.text_area :description, maxlength: 1000,
+  placeholder: "Necesito fotografías blanco y negro tamaño infantil.",
+  class: "description-class description-0 form-control required", rows: 5 %>
+</div>
+<div class="form-group">
+  <label for="category">Categoría
+    <span class="tx-danger">*</span></label>
+  <%= form.collection_select(:category_id, Category.all, :id, :name, { include_blank: "Seleccione" }, class: 'custom-select required' ) %>
+</div>
+
+<div class="form-group">
+  <label for="category">Presupuesto
+    <span class="tx-danger">*</span></label>
+  <%= form.select :budget, options_for_budget, {}, prompt: 'Selecciona Una Opcion', class: "custom-select required" %>
+</div>
+
+
+<div class="form-group">
+  <label for="tags" class="d-block">Especifica las etiquetas para que te encuentren más rapido.</label>
+  <%= form.text_field :tag_list, value: request.tag_list.join(","), class: 'form-control tagsinput' %>
+</div>
+<div class="form-group">
+  <label class="d-block">Dirección o ciudad en la que buscas.
+    <span class="tx-danger">*</span></label>
+    <%= form.text_field :location, class: 'required form-control', id: "form_autocomplete_req",
+     size: 50, placeholder: 'Dirección o ciudad'.html_safe,
+      value: request.location(true) || current_user.location(true),
+      lat: (request.lat || current_user.lat),
+       lng: (request.lng|| current_user.lng),
+       address_name: (request.address_name|| current_user.address_name)  %>
+
+</div>
+
+
 <% end %>
