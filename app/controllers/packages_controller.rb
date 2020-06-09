@@ -1,7 +1,7 @@
 class PackagesController < ApplicationController
   layout 'logged'
   include PackTypes
-  include OpenpayHelper
+  
   include MoneyHelper
   include BannedFunctions
   access user: {except: [:hire]} # no hire, user: :all

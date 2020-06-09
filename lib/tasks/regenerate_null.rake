@@ -1,5 +1,5 @@
 # task :regenerate_null => [:environment] do
-#   include OpenpayHelper
+#
 #   @failed_openpay = 0
 #   @failed_user_score = 0
 #   @failed_savings = 0

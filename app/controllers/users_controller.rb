@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  include OpenpayHelper
+  
   include SetLayout
   include GetUser
   include UsersHelper

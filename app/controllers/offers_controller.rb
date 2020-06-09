@@ -1,7 +1,7 @@
 class OffersController < ApplicationController
   layout 'logged'
   include OffersHelper
-  include OpenpayHelper
+  
   include MoneyHelper
   include BannedFunctions
   access all: [:show], user: {except: [:hire]} #no hire user: :all

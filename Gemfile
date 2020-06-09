@@ -103,8 +103,6 @@ gem 'jquery-easing-rails', '~> 0.0.2'
 gem 'jquery-validation-rails', '~> 1.16'
 #slick
 # gem 'jquery-slick-rails', '~> 1.9'
-# Payments
-gem 'openpay', '~> 2.0'
 #Search engine
 gem 'searchkick', '~> 3.1', '>= 3.1.2'
 #search autocomplete
