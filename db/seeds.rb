@@ -4,7 +4,7 @@ require "#{Rails.root}/db/init_seeds/professions"
 
 include RequestsHelper
 
-  10.times do |x|
+  50.times do |x|
     User.create! do |user|
       loc = Geokit::Geocoders::GoogleGeocoder.reverse_geocode("#{rand(21.8..22.0)},#{rand(-102.4..-102.3)}")
       user.name = Faker::Name.first_name
@@ -51,7 +51,7 @@ include RequestsHelper
     end
   end
 
-  10.times do |x|
+  50.times do |x|
     3.times do |y|
       @pack = Package.create! do |package|
         package.name = Faker::Commerce.product_name + "#{x}#{y}"

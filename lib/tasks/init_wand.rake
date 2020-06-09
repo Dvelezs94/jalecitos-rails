@@ -11,29 +11,56 @@ task :init_wand => [:environment] do
   end
   puts "Los precios de los primeros paquetes han sido agregados en una golumna de gig..."
   #######################
-  Gig.last(2).each do |gig|
-    obj=Geokit::Geocoders::GoogleGeocoder.geocode gig.location
-    gig.lat = obj.lat
-    gig.lng = obj.lng
-    gig.address_name = obj.formatted_address
+  Gig.all.each do |gig|
+    gig.lat = 19.4978
+    gig.lng = -99.1269
+    gig.address_name = "Ciudad de México, MX"
+    if gig.city_id.present?
+      begin
+      obj=Geokit::Geocoders::GoogleGeocoder.geocode "#{gig.city.name}, #{gig.city.state.name}, #{gig.city.state.country.name}"
+      gig.lat = obj.lat
+      gig.lng = obj.lng
+      gig.address_name = obj.formatted_address
+      rescue
+        #nothing
+      end
+    end
     gig.save
   end
   puts "Todos los jales han actualizado su ubicacion a coordenadas, ahora corriendo los pedidos..."
   ##############################################################
-  Request.last(2).each do |req|
-    obj=Geokit::Geocoders::GoogleGeocoder.geocode req.location
-    req.lat = obj.lat
-    req.lng = obj.lng
-    req.address_name = obj.formatted_address
+  Request.all.each do |req|
+    req.lat = 19.4978
+    req.lng = -99.1269
+    req.address_name = "Ciudad de México, MX"
+    if req.city_id.present?
+      begin
+      obj=Geokit::Geocoders::GoogleGeocoder.geocode "#{req.city.name}, #{req.city.state.name}, #{req.city.state.country.name}"
+      req.lat = obj.lat
+      req.lng = obj.lng
+      req.address_name = obj.formatted_address
+      rescue
+        #nothing
+      end
+    end
     req.save
   end
   puts "Todos los pedidos han actualizado su ubicacion a coordenadas, ahora corriendo los usuarios..."
   ###############################################################
-  User.last(2).each do |user|
-    obj=Geokit::Geocoders::GoogleGeocoder.geocode user.location
-    user.lat = obj.lat
-    user.lng = obj.lng
-    user.address_name = obj.formatted_address
+  User.all.each do |user|
+    user.lat = 19.4978
+    user.lng = -99.1269
+    user.address_name = "Ciudad de México, MX"
+    if user.city_id.present?
+      begin
+      obj=Geokit::Geocoders::GoogleGeocoder.geocode "#{user.city.name}, #{user.city.state.name}, #{user.city.state.country.name}"
+      user.lat = obj.lat
+      user.lng = obj.lng
+      user.address_name = obj.formatted_address
+      rescue
+        #nothing
+      end
+    end
     user.save
   end
   puts "Todos los usuarios han actualizado su ubicacion a coordenadas, borrando columnas innecesarias..."
