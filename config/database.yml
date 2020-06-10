@@ -25,3 +25,5 @@ staging:
 production:
   <<: *default
   database: jalecitos
+  variables:
+    statement_timeout: 2000000
