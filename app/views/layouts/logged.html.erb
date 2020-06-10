@@ -12,8 +12,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.26.0/feather.min.js"></script>
     <%= stylesheet_link_tag 'logged', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-    <!-- <script defer type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script> -->
-    <!-- <script defer type='text/javascript' src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script> -->
     <%= javascript_include_tag 'logged', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places", 'data-turbolinks-eval': 'false', :async => true, :defer => true %>
     <%# javascript_include_tag 'google_turbolink', 'data-turbolinks-track': 'reload', :defer => true, :async => true %>
