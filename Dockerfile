@@ -54,7 +54,11 @@ RUN bundle install
 
 ARG CI_AGENT
 ARG ENVNAME
-ARG MAPS_API_KEY
+ARG GCM_API_KEY
+ARG GCM_SENDER_ID
+ARG GCM_VAPID_PUBLIC_KEY
+ARG GOOGLE_MAP_API
+ARG GOOGLE_TAG_MANAGER_ID
 
 # Run asset precompile if CI_AGENT key is set
 RUN if [ -n "$CI_AGENT" ]; then rails assets:clobber && rails assets:precompile; fi
