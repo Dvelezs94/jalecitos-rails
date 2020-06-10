@@ -8,14 +8,17 @@ CarrierWave.configure do |config|
     config.base_path = "/uploads/tmp"
   else
     config.storage = :fog
+    config.fog_directory = ENV.fetch('S3_BUCKET_NAME') {""}                 # required
+    config.fog_public    = true
+    config.fog_attributes = { 'Cache-Control': 'max-age=315576000' }
+
     config.fog_credentials = {
       provider:              'AWS',                            # required
       region:                ENV.fetch('AWS_REGION') {'us-east-1'},
       use_iam_profile:       true
     }
 
-    config.fog_directory = ENV.fetch('S3_BUCKET_NAME') {""}                 # required
-    config.fog_public    = false
+
 
     # store files locally in test and development environments
   end
