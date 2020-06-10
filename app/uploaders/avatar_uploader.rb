@@ -6,7 +6,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
   #resize uploaded image
   # process resize_to_fill: [600, 400]
  # Choose what kind of storage to use for this uploader:
-   storage :aws
+ if Rails.env.test? || Rails.env.development?
+   storage :file
+ else
+   storage :fog
+ end
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -22,9 +26,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
      "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/blank-profile-picture.png"
    end
 
-   def size_range
-     1..10.megabytes
-   end
   # Process files as they are uploaded:
   # process scale: [200, 300]
   #

@@ -6,7 +6,11 @@ class GigUploader < CarrierWave::Uploader::Base
    #resize uploaded image
    #process resize_to_fit: [600, 400]
   # Choose what kind of storage to use for this uploader:
-    storage :aws
+  if Rails.env.test? || Rails.env.development?
+    storage :file
+  else
+    storage :fog
+  end
 
   # storage :fog
 

@@ -3,7 +3,11 @@ class VerificationUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
   # Choose what kind of storage to use for this uploader:
-  storage :aws
+  if Rails.env.test? || Rails.env.development?
+    storage :file
+  else
+    storage :fog
+  end
 
 
   # Override the directory where uploaded files will be stored.
