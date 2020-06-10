@@ -290,6 +290,6 @@ Devise.setup do |config|
   # end
 
   # Facebook login
-  config.omniauth :facebook, ENV.fetch("FACEBOOK_ID") , ENV.fetch("FACEBOOK_SECRET") , callback_url: ENV.fetch("FACEBOOK_CALLBACK")
-  config.omniauth :google_oauth2, ENV.fetch('GOOGLE_AUTH_ID'), ENV.fetch('GOOGLE_AUTH_SECRET'), {}
+  config.omniauth :facebook, ENV.fetch("FACEBOOK_ID") {""}, ENV.fetch("FACEBOOK_SECRET") {""}, callback_url: ENV.fetch("FACEBOOK_CALLBACK") {""}
+  config.omniauth :google_oauth2, ENV.fetch('GOOGLE_AUTH_ID') {""}, ENV.fetch('GOOGLE_AUTH_SECRET') {""}, {}
 end
