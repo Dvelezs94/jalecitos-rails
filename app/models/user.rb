@@ -300,11 +300,15 @@ class User < ApplicationRecord
    end
 
    def update_time_zone
-     @client = GooglePlaces::Client.new(ENV.fetch("GOOGLE_MAP_API"))
-     @loc = @client.spots_by_query(self.location).first
-     @url = "https://maps.googleapis.com/maps/api/timezone/json?key=#{ENV.fetch("GOOGLE_MAP_API")}&location=#{@loc.lat},#{@loc.lng}&timestamp=#{Time.now.getutc.to_i}"
-     @res = JSON.parse(Net::HTTP.get(URI.parse("#{@url}")))
-     self.time_zone = @res["timeZoneId"] if TZInfo::Timezone.all_country_zone_identifiers.include? @res["timeZoneId"]
+     begin
+       @client = GooglePlaces::Client.new(ENV.fetch("GOOGLE_MAP_API"))
+       @loc = @client.spots_by_query(self.location).first
+       @url = "https://maps.googleapis.com/maps/api/timezone/json?key=#{ENV.fetch("GOOGLE_MAP_API")}&location=#{@loc.lat},#{@loc.lng}&timestamp=#{Time.now.getutc.to_i}"
+       @res = JSON.parse(Net::HTTP.get(URI.parse("#{@url}")))
+       self.time_zone = @res["timeZoneId"] if TZInfo::Timezone.all_country_zone_identifiers.include? @res["timeZoneId"]
+     rescue
+       true
+     end
    end
 
    def enable_disable_stuff
