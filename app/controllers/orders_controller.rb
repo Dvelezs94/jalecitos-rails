@@ -3,8 +3,8 @@ class OrdersController < ApplicationController
   include BannedFunctions
   before_action :redirect_if_user_banned, only: [:create]
   include SetLayout
-  
-  include OpenpayFunctions
+
+  # include OpenpayFunctions
   include UsersHelper
   include ApplicationHelper
   include OrderFunctions

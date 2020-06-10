@@ -1,9 +1,9 @@
 class FinishOrderWorker
   include Sidekiq::Worker
   sidekiq_options retry: false, dead: false
-  include OpenpayFunctions
+  # include OpenpayFunctions
   include OrderFunctions
-  
+
   include ApplicationHelper
   include MoneyHelper
 
