@@ -7,6 +7,7 @@ CarrierWave.configure do |config|
     config.root = "public/uploads/tmp/"
     config.base_path = "/uploads/tmp"
   else
+    config.fog_provider = 'fog/aws'
     config.storage = :fog
     config.fog_directory = ENV.fetch('S3_BUCKET_NAME') {""}                 # required
     config.fog_public    = true
