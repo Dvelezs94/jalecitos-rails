@@ -115,12 +115,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
-    root_path
+    new_user_registration_path
   end
 
   private
   def check_captcha
-    unless verify_recaptcha
+    unless ENV.fetch("RAILS_ENV") != "production"  || verify_recaptcha
       self.resource = resource_class.new sign_up_params
       resource.validate # Look for any other validation errors besides Recaptcha
       flash[:error] = "Por favor, confirma que no eres un robot en tu registro."

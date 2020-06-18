@@ -76,7 +76,7 @@ gem 'omniauth-facebook', '~> 5.0'
 # Google omniauth
 gem 'omniauth-google-oauth2', '~> 0.6.1'
 #Notifications
-gem 'toastr-rails'
+#gem 'toastr-rails'
 #gem 'toastr-rails', '~> 1.0', '>= 1.0.3' #added js and css manually because this is older
 #Store images
 gem 'carrierwave', '~> 1.2', '>= 1.2.3'

@@ -24,7 +24,11 @@
 
       </div>
       <div class="form-group d-flex justify-content-center">
-        <%= recaptcha_tags %>
+        <% if ENV.fetch("RAILS_ENV") == "production" %>
+          <%= recaptcha_tags %>
+        <% else %>
+          El captcha solo se muestra en producción
+        <% end %>
       </div>
 
       <div class="form-group tx-12">

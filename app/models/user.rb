@@ -41,7 +41,6 @@ class User < ApplicationRecord
   validates_presence_of :alias, :slug
   validates :alias, format: { :with => /\A[a-zA-Z0-9\-\_]+\z/, message: "sólo puede contener caracteres alfanuméricos, guión y guión bajo." }
   validates :name, format: { :with => /\A[a-zA-Z\p{L}\p{M}\s]+\z/, message: "Sólo puede contener letras y espacios" }, :allow_blank => true #allow blank because on creation it doesnt have
-  validates_presence_of :name, if: :name_changed?  #dont allow blank again if value is filled
   validate :check_running_orders, if: :user_disabled?, on: :update
 
   validate :websites
