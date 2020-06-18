@@ -3394,7 +3394,7 @@ input[type="button"].btn-block {
     .navbar-dark .navbar-text a:hover, .navbar-dark .navbar-text a:focus {
       color: #fff; }
 
-.card {
+/* .card {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -3403,7 +3403,7 @@ input[type="button"].btn-block {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(72, 94, 144, 0.16);
-  border-radius: 0.25rem; }
+  border-radius: 0.25rem; } */
   .card > hr {
     margin-right: 0;
     margin-left: 0; }
@@ -5606,6 +5606,8 @@ button.bg-dark:focus {
 
 .w-25 {
   width: 25% !important; }
+  .w-40 {
+    width: 40% !important; }
 
 .w-50 {
   width: 50% !important; }
@@ -14081,6 +14083,9 @@ a.bg-twitter:hover, a.bg-twitter:focus, button.bg-twitter:hover, button.bg-twitt
 
 .ht-150 {
   height: 150px; }
+
+.mn-ht-50 {
+  min-height: 50px; }
 
 .mn-ht-150 {
   min-height: 150px; }
