@@ -1,4 +1,4 @@
-<div class="card mg-t-10 gig-card mg-r-25 mg-md-r-10 d-block position-static" loaded_in_map="false" lat="<%= gig.lat %>" lng="<%= gig.lng %>" title="<%= gig.min_title %>">
+<div class="card mg-t-10 gig-card mg-r-10 mg-l-10 mg-md-r-10 d-block position-static" loaded_in_map="false" lat="<%= gig.lat %>" lng="<%= gig.lng %>" title="<%= gig.min_title %>">
   <div class="card-horizontal mg-5">
     <div class="w-40">
       <%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), class: "card-img gig-card-horizontal w-100 h-100", lazy: true) %>
@@ -27,7 +27,7 @@
           Compartir
         <% end %>
         <%= link_to the_gig_path(gig) do %>
-          Ver más <i data-feather="chevron-right" class="feather-12 d-none d-md-inline"></i>
+          Más <i data-feather="chevron-right" class="feather-12 d-none d-md-inline"></i>
         <% end %>
       </div>
     </div>
