@@ -1,9 +1,9 @@
 <div class="media w-100 " review-id="<%= review.id %>" display-hidden-menu>
   <div class="avatar mg-r-20"><%= image_tag(avatar_display_helper(review.giver.image_url(:thumb)), class: "rounded-circle") %> </div>
   <div class="media-body">
-    <div class="d-flex align-items-center ht-20">
+    <div class="d-flex align-items-center ht-20 ">
       <small class="tx-inverse">
-        <strong class=""> <%= review.giver.alias %> <span><i data-feather="star" class="feather-12 tx-warning filled tx-warning filled"></i>
+        <strong class="n-dark-100"> <%= review.giver.alias %> <span><i data-feather="star" class="feather-12 tx-warning filled tx-warning filled"></i>
           <span class="tx-warning tx-13" stars> <%= review.gig_rating.stars.to_i %> </span></span>
         </strong>
         <span class="text-muted"> <%= distance_of_time_in_words_to_now(review.created_at) %> </span>
@@ -19,6 +19,6 @@
       </span>
       <% end %>
     </div>
-    <p class="tx-left text-break" review-comment><%= review.comment %></p>
+    <p class="tx-left text-break n-dark-100" review-comment><%= review.comment %></p>
   </div>
 </div>
