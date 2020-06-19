@@ -421,3 +421,93 @@ pre[preview] {
   border: none;
   border-bottom: 1px solid rgba(72, 94, 144, 0.16) !important;
 }
+
+/*colores de fer*/
+.p-purple-100 { /*purple*/
+  color: #6F52ED;
+}
+.p-purple-50 { /*purple 50%*/
+  color: #B7A8F6;
+}
+.p-purple-25 { /*purple 25%*/
+  color: #DBD4FB;
+}
+
+.a-blue-100 {
+  color: #2B11A2;
+}
+.a-blue-75 { /*Blue 75%*/
+  color: #9588D0;
+}
+.a-blue-25 { /*blue 25%*/
+  color: #CAC3E8;
+}
+
+.n-dark-100 {
+  color: #2C2746;
+}
+
+.n-grey-100 {
+  color: #474165;
+}
+.n-grey-75 {
+  color: #CAC9D1;
+}
+.n-purple-25{
+  color: #F5F3FE;
+}
+.n-grey-10 {
+  color: #F4F4F6;
+}
+.n-white-100 {
+  color: #FFFFFF;
+}
+.orange-100 {
+  color: #FF7B50;
+}
+.orange-75 {
+  color: #FFBDA7;
+}
+.orange-25 {
+  color: #FFDED3;
+}
+.green-100 {
+  color: #00C471;
+}
+.green-75 {
+  color: #80E1B8;
+}
+.green-25 {
+  color: #BFF0DB;
+}
+.yellow-100 {
+  color: #FFC700;
+}
+.yellow-75 {
+  color: #FFE380;
+}
+.yellow-25 {
+  color: #FFF1BF;
+}
+.blue-100 {
+  color: #0084F4;
+}
+.blue-75 {
+  color: #80C1F9;
+}
+.blue-25 {
+  color: #BFE0FC;
+}
+.red-100 {
+  color: #FF3C20;
+}
+.red-75 {
+  color: #FF9D8F;
+}
+.red-25 {
+  color: #FFCEC7;
+}
+.black-100 {
+  color: #000000;
+}
+/*fin colores de fer*/
