@@ -57,8 +57,8 @@
 }
 
 .feather-12{
-    width: 12px;
-    height: 12px;
+    width: 12px !important;
+    height: 12px !important;
 }
 
 .feather-16{
@@ -547,12 +547,25 @@ pre[preview] {
   color: var(--a-blue-100);
 }
 
-.btn-purple {
-  background-color: #fff;
-  color: var(--a-blue-100);;
-  border: 1px solid var(--a-blue-100);;
-}
-.btn-purple:hover {
+.btn-p-purple-100 {
   color: #fff;
-  background-color: var(--a-blue-100);;
+  background-color: var(--p-purple-100);;
+}
+.btn-p-purple-100:hover {
+  color: #fff;
+  background-color: var(--p-purple-100);;
+}
+
+.ben-a-blue-100-border {
+  background-color: #fff;
+  color: var(--a-blue-100);
+  border: 1px solid var(--a-blue-100);
+}
+.ben-a-blue-100-border:hover {
+  color: #fff;
+  background-color: var(--a-blue-100);
+}
+
+.mg-t-0-i {
+  margin-top: 0 !important
 }
