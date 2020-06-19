@@ -27,6 +27,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
       if (opposite_user_id == $("[messages-list]").attr("messages-list")) $("[contacts-list] > a:first-child").find("span").remove();
     }
     if (data['role'] == "receiver"){ // if i am the receiver
+      $("[no-messages]").addClass("d-none"); //remove no messages if is first message
       $("[new-messages]").after(data['message_min']); //add message to message menu view
       feather.replace();
       if ( $("[data-message-min]").length > 5 ) $("[data-message-min]:last").remove();//just 5 messages on menu view
