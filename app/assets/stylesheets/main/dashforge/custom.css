@@ -423,91 +423,136 @@ pre[preview] {
 }
 
 /*colores de fer*/
+
+:root {
+  --p-purple-100: #6F52ED;
+  --p-purple-50: #B7A8F6;
+  --p-purple-25: #DBD4FB;
+  --a-blue-100: #2B11A2;
+  --a-blue-75: #9588D0;
+  --a-blue-25: #CAC3E8;
+  --n-dark-100: #2C2746;
+  --n-grey-100: #474165;
+  --n-grey-75: #CAC9D1;
+  --n-purple-25: #F5F3FE;
+  --n-grey-10: #F4F4F6;
+  --n-white-100: #ffffff;
+  --orange-100: #FF7B50;
+  --orange-75: #FFBDA7;
+  --orange-25: #FFDED3;
+  --green-100: #00C471;
+  --green-75: #80E1B8;
+  --green-25: #BFF0DB;
+  --yellow-100: #FFC700;
+  --yellow-75: #FFE380;
+  --yellow-25: #FFF1BF;
+  --blue-100: #0084F4;
+  --blue-75: #80C1F9;
+  --blue-25: #BFE0FC;
+  --red-100: #FF3C20;
+  --red-75: #FF9D8F;
+  --red-25: #FFCEC7;
+  --black-100: #000000;
+}
 .p-purple-100 { /*purple*/
-  color: #6F52ED;
+  color: var(--p-purple-100);
 }
 .p-purple-50 { /*purple 50%*/
-  color: #B7A8F6;
+  color: var(--p-purple-50);
 }
 .p-purple-25 { /*purple 25%*/
-  color: #DBD4FB;
+  color: var(--p-purple-25);
 }
 
 .a-blue-100 {
-  color: #2B11A2;
+  color: var(--a-blue-100);
 }
 .a-blue-75 { /*Blue 75%*/
-  color: #9588D0;
+  color: var(--a-blue-75);
 }
 .a-blue-25 { /*blue 25%*/
-  color: #CAC3E8;
+  color: var(--a-blue-25);
 }
 
 .n-dark-100 {
-  color: #2C2746;
+  color: var(--n-dark-100);
 }
 
 .n-grey-100 {
-  color: #474165;
+  color: var(--n-grey-100);
 }
 .n-grey-75 {
-  color: #CAC9D1;
+  color: var(--n-grey-75);
 }
 .n-purple-25{
-  color: #F5F3FE;
+  color: var(--n-purple-25);
 }
 .n-grey-10 {
-  color: #F4F4F6;
+  color: var(--n-grey-10);
 }
 .n-white-100 {
-  color: #FFFFFF;
+  color: var(--n-white-100);
 }
 .orange-100 {
-  color: #FF7B50;
+  color: var(--orange-100);
 }
 .orange-75 {
-  color: #FFBDA7;
+  color: var(--orange-75);
 }
 .orange-25 {
-  color: #FFDED3;
+  color: var(--orange-25);
 }
 .green-100 {
-  color: #00C471;
+  color: var(--green-100);
 }
 .green-75 {
-  color: #80E1B8;
+  color: var(--green-75);
 }
 .green-25 {
-  color: #BFF0DB;
+  color: var(--green-25);
 }
 .yellow-100 {
-  color: #FFC700;
+  color: var(--yellow-100);
 }
 .yellow-75 {
-  color: #FFE380;
+  color: var(--yellow-75);
 }
 .yellow-25 {
-  color: #FFF1BF;
+  color: var(--yellow-25);
 }
 .blue-100 {
-  color: #0084F4;
+  color: var(--blue-100);
 }
 .blue-75 {
-  color: #80C1F9;
+  color: var(--blue-75);
 }
 .blue-25 {
-  color: #BFE0FC;
+  color: var(--blue-25);
 }
 .red-100 {
-  color: #FF3C20;
+  color: var(--red-100);
 }
 .red-75 {
-  color: #FF9D8F;
+  color: var(--red-75);
 }
 .red-25 {
-  color: #FFCEC7;
+  color: var(--red-25);
 }
 .black-100 {
-  color: #000000;
+  color: var(--black-100);
 }
 /*fin colores de fer*/
+
+.nav-link.p-purple-100.active {
+  color: var(--a-blue-100);
+}
+
+.btn-purple {
+  background-color: #fff;
+  color: var(--a-blue-100);;
+  border: 1px solid var(--a-blue-100);;
+}
+.btn-purple:hover {
+  color: #fff;
+  background-color: var(--a-blue-100);;
+}

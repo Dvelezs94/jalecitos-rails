@@ -175,7 +175,7 @@ class GigsController < ApplicationController
     end
 
     def set_gig_edit
-      @gig = Gig.includes(:gig_packages, :faqs, :category, :tags, city: [state: :country]).friendly.find(params[:id])
+      @gig = Gig.includes(:gig_packages, :faqs, :category, :tags).friendly.find(params[:id])
     end
 
 
