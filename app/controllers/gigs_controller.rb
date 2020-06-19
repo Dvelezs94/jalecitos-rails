@@ -88,7 +88,7 @@ class GigsController < ApplicationController
           render :new
         end
       else #create
-        @success = @gig.save
+        @success = @gig.save!
         if !@success
           render :new
         end
