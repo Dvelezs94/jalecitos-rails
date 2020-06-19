@@ -10,7 +10,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
 @import url("https://fonts.googleapis.com/css?family=Rubik:300,400");
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"); /*IBM PLEX SANS is already included (i dont know where but it works, dashforge is actually using it by default)*/
 /* ############### BOOTSTRAP FRAMEWORK ############### */
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -58,6 +58,10 @@ html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+  input {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+  }
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block; }
@@ -144,7 +148,7 @@ sup {
   top: -.5em; }
 
 a {
-  color: #0168fa;
+  color: #0084F4;
   text-decoration: none;
   background-color: transparent; }
   a:hover {
@@ -187,6 +191,7 @@ table {
   border-collapse: collapse; }
 
 caption {
+  font-family: 'DM Sans', sans-serif;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   color: #7987a1;
@@ -201,6 +206,8 @@ label {
   margin-bottom: 0.5rem; }
 
 button {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: bold;
   border-radius: 0; }
 
 button:focus {
@@ -326,6 +333,10 @@ h4 {
   font-weight: 500;
 }
 
+button {
+
+}
+
 h1, .h1 {
   font-size: 2.1875rem; }
 
@@ -376,6 +387,7 @@ hr {
 
 small,
 .small {
+  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 80%;
   font-weight: 400; }
 
@@ -34008,7 +34020,7 @@ a.bg-twitter:hover, a.bg-twitter:focus, button.bg-twitter:hover, button.bg-twitt
   color: #10b759; }
 
 .tx-warning {
-  color: #ffc107; }
+  color: #FFC700; }
 
 .tx-danger {
   color: #dc3545; }
