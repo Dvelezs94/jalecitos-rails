@@ -1,0 +1,12 @@
+<div class="col-6 col-sm-4 col-md-3 pd-b-5 flex-0-f">
+  <div class="card card-file">
+    <div class="card-file-thumb bg-white">
+        <%= image_tag image, class: "img-inherit", :data => {lity: true} %>
+    </div>
+    <div class="card-body">
+      <h6><%= image.filename %></h6>
+      <span><%= "#{image.metadata[:width]} x #{image.metadata[:height]}" %> </span>
+    </div>
+    <div class="card-footer"><span class="d-sm-inline"><%= t("general_inputs.size") %>: </span><%= number_to_human_size(image.byte_size, precision: 2) %><%= link_to raw("<i class='fe fe-trash fnt-md tx-danger a-right'></i>"), banner_path(image.record, image), class: "float-right", method: :delete, data: { confirm: "¿Estás seguro de borrar el recurso?" } %></div>
+  </div>
+</div><!-- col -->

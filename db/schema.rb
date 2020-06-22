@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_19_145704) do
+ActiveRecord::Schema.define(version: 2020_06_22_144826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,13 @@ ActiveRecord::Schema.define(version: 2020_06_19_145704) do
     t.index ["rateable_type"], name: "index_average_caches_on_rateable_type"
     t.index ["rater_id", "rateable_id"], name: "index_average_caches_on_rater_id_and_rateable_id"
     t.index ["rater_id"], name: "index_average_caches_on_rater_id"
+  end
+
+  create_table "banners", force: :cascade do |t|
+    t.string "image"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "bans", force: :cascade do |t|
