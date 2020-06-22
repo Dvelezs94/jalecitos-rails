@@ -26,7 +26,8 @@ class BannersController < ApplicationController
     puts "X"*100
     params[:files].each do |file|
       puts file
-      @banner = Banner.new(image: file) #order 0 by default
+      banner = Banner.new(image: file) #order 0 by default
+      @success = banner.save
     end
   end
 
