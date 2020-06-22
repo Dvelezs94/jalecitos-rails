@@ -34,7 +34,7 @@
         <div class="form-group row">
           <label class="col-form-label col-12 tx-gray-600">Teléfono<span class="tx-danger">*</span></label>
           <div class="col-12">
-            <%= f.number_field :phone_number, required: true,
+            <%= f.telephone_field :phone_number, required: true,
              class: "form-control", maxlength: 20,
              value: current_user.present?? current_user.phone_number : nil,
              placeholder: "Escribe tu teléfono" %>

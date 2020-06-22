@@ -12,12 +12,12 @@
             <small class="d-block tx-gray-600 truncate">Activo hace <%= distance_of_time_in_words_to_now(gig.user.current_sign_in_at) %></small>
           </div><!-- media-body -->
         </span>
-        <p class="card-title mg-t-10 tx-16 multi-line-truncate-2"><%= gig.min_title %></p>
+        <p class="card-title mg-t-10 tx-16 multi-line-truncate-2 mn-ht-50-576"><%= gig.min_title %></p>
         <div class="d-flex justify-content-between align-items-center">
           <div>
             <%= one_star_disp_help gig %>
           </div>
-          <small>Desde <strong><%= query_home_or_profile_helper(gig) %></strong></small>
+          <small class="green-100">Desde <strong><%= query_home_or_profile_helper(gig) %></strong></small>
         </div>
       </div>
     <% end %>

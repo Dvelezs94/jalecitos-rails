@@ -17,8 +17,8 @@ include RequestsHelper
       user.address_name = (loc.full_address.present?)? loc.full_address : "Aguascalientes, Ags., México"
       user.birth = rand(50.years).seconds.ago
       user.website = Faker::Internet.url
-      user.facebook = Faker::Internet.url("facebook.com")
-      user.instagram = Faker::Internet.url("instagram.com")
+      user.facebook = Faker::Name.first_name
+      user.instagram = Faker::Name.first_name
 
       # This is so we dont have to confirm the email on seeds
       user.confirmed_at = Time.now

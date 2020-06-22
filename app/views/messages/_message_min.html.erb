@@ -4,7 +4,7 @@
     <div class="avatar avatar-sm <%= "avatar-online" if user.online? %>"><%= image_tag(avatar_display_helper(user.image_url(:thumb)), class: "rounded-circle") %></div>
     <div class="media-body mg-l-15">
       <strong><%= user.alias %></strong>
-      <p><%= message.safe_body.truncate(50)%></p>
+      <p><%= message.body.truncate(50)%></p>
       <% if message.image? %>
         <p class="font-weight-bold"> Imagen <i data-feather="camera" class="feather-12 mg-b-1"></i>  </p>
       <% end %>

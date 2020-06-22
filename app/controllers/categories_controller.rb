@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  layout 'admin'
   access admin: :all
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
@@ -25,7 +26,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
 
     if @category.save
-      redirect_to root_path, notice: 'Category was successfully created.'
+      redirect_to categories_path, notice: 'Category was successfully created.'
     else
       render :new
     end
@@ -34,7 +35,7 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1
   def update
     if @category.update(category_params)
-      redirect_to root_path, notice: 'Category was successfully updated.'
+      redirect_to categories_path, notice: 'Category was successfully updated.'
     else
       render :edit
     end
@@ -43,7 +44,7 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   def destroy
     @category.destroy
-    redirect_to root_path, notice: 'Category was successfully destroyed.'
+    redirect_to categories_path, notice: 'Category was successfully destroyed.'
   end
 
   private
@@ -54,6 +55,13 @@ class CategoriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def category_params
-        params.require(:category).permit(:name)
+        params.require(:category).permit(:name,
+                                         :seo_title,
+                                         :seo_description,
+                                         :seo_keywords
+                                       )
+    end
+
+    def seo_params
     end
 end

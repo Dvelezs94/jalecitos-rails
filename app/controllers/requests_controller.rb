@@ -87,7 +87,7 @@ class RequestsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_request
       #dont include offers because the logic does it
-      @request = Request.includes(:user, city: [state: :country]).friendly.find(params[:id])
+      @request = Request.includes(:user).friendly.find(params[:id])
     end
 
     def request_params

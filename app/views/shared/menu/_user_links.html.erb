@@ -1,12 +1,12 @@
 <div id="navbarMenu" class="navbar-menu-wrapper">
   <div class="navbar-menu-header">
-    <a href="base/template/index.html" class="df-logo">Jale<span>citos</span></a>
+    <a href="base/template/index.html" class="df-logo"><%= image_tag 'wand', width:80%></a>
     <a id="mainMenuClose" href=""><i data-feather="x"></i></a>
   </div><!-- navbar-menu-header -->
 <ul class="nav navbar-menu justify-content-center">
   <li class="nav-label pd-l-20 pd-lg-l-25 d-lg-none">Menu</li>
 <li class="nav-item with-sub">
-  <a href="" class="nav-link" data-step="5" data-intro="Aquí puedes crear un servicio que tú ofrezcas" data-position="bottom"><i data-feather="briefcase"></i> Servicios</a>
+  <a href="" class="nav-link n-dark-100 font-weight-bold" data-step="5" data-intro="Aquí puedes crear un servicio que tú ofrezcas" data-position="bottom"><i data-feather="briefcase"></i> Servicios</a>
   <ul class="navbar-menu-sub">
     <li class="nav-sub-item">
       <%= link_to new_gig_path, class: "nav-sub-link" do  %>
@@ -26,7 +26,7 @@
   </ul>
 </li>
 <li class="nav-item with-sub">
-  <a href="" class="nav-link" data-step="6" data-intro="Aquí puedes crear un pedido para solicitar algo" data-position="bottom"><i data-feather="package"></i> Pedidos</a>
+  <a href="" class="nav-link n-dark-100 font-weight-bold" data-step="6" data-intro="Aquí puedes crear un pedido para solicitar algo" data-position="bottom"><i data-feather="package"></i> Pedidos</a>
   <ul class="navbar-menu-sub">
     <li class="nav-sub-item">
       <%= link_to new_request_path, class: "nav-sub-link" do  %>
@@ -41,7 +41,7 @@
   </ul>
 </li>
 <li class="nav-item with-sub">
-  <a href="" class="nav-link"><i data-feather="layers"></i> Categorías</a>
+  <a href="" class="nav-link n-dark-100 font-weight-bold"><i data-feather="layers"></i> Categorías</a>
   <div class="navbar-menu-sub">
     <div class="d-lg-flex">
         <% 3.times do |n| %>
