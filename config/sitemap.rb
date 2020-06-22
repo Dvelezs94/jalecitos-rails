@@ -31,6 +31,9 @@ SitemapGenerator::Sitemap.create do
       add search_path(query: profession.name, address_seo: address_seo)
     end
   end
+  Category.all.each do |cat|
+    add search_path(category_name: cat.name, category_id: cat.id)
+  end
 
   add '/trabaja'
 end

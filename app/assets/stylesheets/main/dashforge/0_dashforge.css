@@ -10,6 +10,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
 @import url("https://fonts.googleapis.com/css?family=Rubik:300,400");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"); /*IBM PLEX SANS is already included (i dont know where but it works, dashforge is actually using it by default)*/
 /* ############### BOOTSTRAP FRAMEWORK ############### */
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -57,6 +58,10 @@ html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+  input {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+  }
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block; }
@@ -143,7 +148,7 @@ sup {
   top: -.5em; }
 
 a {
-  color: #0168fa;
+  color: var(--blue-100);
   text-decoration: none;
   background-color: transparent; }
   a:hover {
@@ -186,6 +191,7 @@ table {
   border-collapse: collapse; }
 
 caption {
+  font-family: 'DM Sans', sans-serif;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   color: #7987a1;
@@ -200,6 +206,8 @@ label {
   margin-bottom: 0.5rem; }
 
 button {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: bold;
   border-radius: 0; }
 
 button:focus {
@@ -316,6 +324,19 @@ h1, h2, h3, h4, h5, h6,
   line-height: 1.25;
   color: #001737; }
 
+h1,h2,h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: bold;
+}
+h4 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+}
+
+button {
+
+}
+
 h1, .h1 {
   font-size: 2.1875rem; }
 
@@ -366,6 +387,7 @@ hr {
 
 small,
 .small {
+  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 80%;
   font-weight: 400; }
 
@@ -3384,7 +3406,7 @@ input[type="button"].btn-block {
     .navbar-dark .navbar-text a:hover, .navbar-dark .navbar-text a:focus {
       color: #fff; }
 
-.card {
+/* .card {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -3393,7 +3415,7 @@ input[type="button"].btn-block {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(72, 94, 144, 0.16);
-  border-radius: 0.25rem; }
+  border-radius: 0.25rem; } */
   .card > hr {
     margin-right: 0;
     margin-left: 0; }
@@ -5596,6 +5618,8 @@ button.bg-dark:focus {
 
 .w-25 {
   width: 25% !important; }
+  .w-40 {
+    width: 40% !important; }
 
 .w-50 {
   width: 50% !important; }
@@ -8520,7 +8544,8 @@ textarea.form-control {
     .ui-accordion-header {
       transition: none; } }
   .ui-accordion-header ~ .ui-accordion-header {
-    margin-top: -1px; }
+    margin-top: -1px;
+  font-family: "DM sans", sans-serif; }
   .ui-accordion-header:first-of-type {
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem; }
@@ -8543,7 +8568,8 @@ textarea.form-control {
   .ui-accordion-header.ui-state-active {
     background-color: #fff;
     border-bottom-width: 0;
-    color: #0168fa; }
+    color: var(--n-grey-100);
+    }
     .ui-accordion-header.ui-state-active .ui-accordion-header-icon::before {
       content: '-'; }
 
@@ -8551,7 +8577,8 @@ textarea.form-control {
   border: 1px solid rgba(72, 94, 144, 0.16);
   border-top-width: 0;
   padding: 0 20px 20px 35px;
-  position: relative; }
+  position: relative;
+  font-family: "IBM Plex Sans", sans-serif;}
   .ui-accordion-content:last-of-type {
     border-bottom-right-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem; }
@@ -10439,7 +10466,10 @@ textarea.form-control {
         left: 0;
         right: 0;
         height: 2px;
-        background-color: #0168fa; }
+        background-color: var(--a-blue-100); }
+        .nav-line .nav-link:hover {
+          color: var(--a-blue-100);
+        }
   .nav-line.flex-column {
     border-bottom: 0;
     border-right: 2px solid rgba(72, 94, 144, 0.16); }
@@ -14071,6 +14101,9 @@ a.bg-twitter:hover, a.bg-twitter:focus, button.bg-twitter:hover, button.bg-twitt
 
 .ht-150 {
   height: 150px; }
+
+.mn-ht-50 {
+  min-height: 50px; }
 
 .mn-ht-150 {
   min-height: 150px; }
@@ -33993,7 +34026,7 @@ a.bg-twitter:hover, a.bg-twitter:focus, button.bg-twitter:hover, button.bg-twitt
   color: #10b759; }
 
 .tx-warning {
-  color: #ffc107; }
+  color: var(--yellow-100); }
 
 .tx-danger {
   color: #dc3545; }

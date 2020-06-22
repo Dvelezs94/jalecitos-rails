@@ -5,7 +5,6 @@
     <script defer src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/5.8.5/firebase-messaging.js"></script>
     <!-- End fiebase -->
-
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= favicon_link_tag image_path 'favicon.ico' %>
@@ -13,7 +12,7 @@
     <%= stylesheet_link_tag 'logged', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <%= javascript_include_tag 'logged', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places", 'data-turbolinks-eval': 'false', :async => true, :defer => true %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API']}&libraries=places", 'data-turbolinks-eval': 'false', :defer => true %>
     <%# javascript_include_tag 'google_turbolink', 'data-turbolinks-track': 'reload', :defer => true, :async => true %>
     <%= javascript_include_tag 'lazy_load', 'data-turbolinks-track': 'reload'%>
 

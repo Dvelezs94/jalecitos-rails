@@ -1,6 +1,6 @@
 <div id="navbarMenu" class="navbar-menu-wrapper">
   <div class="navbar-menu-header">
-    <a href="base/template/index.html" class="df-logo">Jale<span>citos</span></a>
+    <a href="base/template/index.html" class="df-logo"><%= image_tag 'wand', width:80%></a>
     <a id="mainMenuClose" href=""><i data-feather="x"></i></a>
   </div><!-- navbar-menu-header -->
 <ul class="nav navbar-menu justify-content-center">
@@ -16,11 +16,6 @@
     <li class="nav-sub-item">
       <%= link_to users_admins_path, class: "nav-sub-link" do  %>
         <i data-feather="user"></i>Usuarios (<%= @user_count %>)
-      <% end %>
-    </li>
-    <li class="nav-sub-item">
-      <%= link_to categories_admins_path, class: "nav-sub-link" do  %>
-        <i data-feather="book"></i>Categorías
       <% end %>
     </li>
   </ul>
@@ -50,8 +45,20 @@
     </li>
     <li class="nav-sub-item">
       <%= link_to seo_index_path, class: "nav-sub-link" do  %>
-        <i data-feather="search"></i>SEO
+        <i data-feather="search"></i>SEO Servicios
       <% end %>
+      </li>
+      <li class="nav-sub-item">
+        <%= link_to categories_path, class: "nav-sub-link" do  %>
+          <i data-feather="book"></i>Categorías (Editar y Seo)
+        <% end %>
+      </li>
+      <li class="nav-sub-item">
+        <%= link_to banners_path, class: "nav-sub-link" do  %>
+          <i data-feather="image"></i>Imágenes Banner
+        <% end %>
+      </li>
+      </ul>
     </li>
   </ul>
 </li>

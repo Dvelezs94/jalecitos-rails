@@ -8,11 +8,17 @@
     <meta name='description' content='Se solicita <%=@request.profession%> en <%=@request.location%> para <%=@request.name%>. Regístrate hoy en Wand para encontrar trabajo.'>
     <meta name='keywords' content='<%=@request.location%>,<%=@request.profession%>,<%=@request.tag_list.join(',')%>'>
     <meta name='category' content='<%=@request.category.name%>'>
-<% elsif current_page?( search_path ) && params[:address_seo]  %>
+<% elsif current_page?( search_path ) && params[:address_seo].present?  %>
     <title><%=params[:query]%> en <%=params[:address_seo]%></title>
     <meta name='description' content='Encuenta el mejor <%=params[:query]%> en <%=params[:address_seo]%>'>
     <meta name='keywords' content='contratar, <%= params[:query]%>, <%=params[:address_seo]%>, empleo, freelancer'>
-    <meta name='category' con|tent='Trabajo, Empleo, Freelancer'>
+    <meta name='category' content='Trabajo, Empleo, Freelancer'>
+<% elsif current_page?( search_path ) && params[:category_id].present?  %>
+    <% cat = Category.find(params[:category_id]) %>
+    <title><%= cat.seo_title.present?? cat.seo_title : cat.name %></title>
+    <meta name='description' content='<%=cat.seo_description%>'>
+    <meta name='keywords' content='contratar, <%= cat.seo_keywords%>, empleo, freelancer'>
+    <meta name='category' content='Trabajo, Empleo, Freelancer, <%= cat.name %>, <%= cat.seo_title %>'>
 <% else %>
     <title>Wand | Ofrece tus servicios por internet</title>
     <meta name='description' content='Ofrece los servicios de tu negocio en la mejor herramienta de marketing digital en México totalmente gratis'>

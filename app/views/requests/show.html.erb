@@ -9,34 +9,38 @@
   <div class=" col-sm-12 col-md-4 col-lg-3">
     <div class="card">
       <div class="card-body">
-        <%= link_to "#", class: "share_item_url btn btn-primary btn-block mg-b-10" do %>
-        <i data-feather="share-2"></i> Compartir
+        <small class="card-text mg-t-10 p-purple-50">Publicado hace <%= distance_of_time_in_words_to_now(@request.created_at) %></small>
+        Presupuesto <br>
+        <span class="a-blue-100 dm-sans"> <%= @request.budget %> MXN </span>
+        <hr>
+        <%= link_to "#", class: "share_item_url btn btn-p-purple-100-border btn-block mg-b-10" do %>
+        <i data-feather="send"></i> Compartir
         <% end %>
         <% if @request.user == current_user && @request.published? %>
-          <%= link_to edit_request_path(@request), class: "btn btn-info btn-block mg-b-10" do %>
-            <i data-feather="edit"></i> Editar
+          <%= link_to edit_request_path(@request), class: "btn btn-p-purple-100 btn-block mg-b-10" do %>
+            Editar
           <% end %>
-          <%= link_to request_path(@request), class: "btn btn-danger btn-block mg-b-10", method: :delete, :data => {:confirm => 'Confirma que quieres borrar este pedido'} do  %>
+          <%= link_to request_path(@request), class: "btn btn-red-100-border btn-block mg-b-10", method: :delete, :data => {:confirm => 'Confirma que quieres borrar este pedido'} do  %>
             <i data-feather="trash"></i> Eliminar
           <% end %>
         <% elsif user_signed_in? && @request.user != current_user %>
-            <a href="" class="btn btn-success btn-block mg-b-10" data-toggle="modal" data-target="#offerModal"><i data-feather="edit-2"></i> <%= (@my_offer.nil?)? "Postularme" : "Editar oferta" %></a>
-          <%= link_to "#", class: "mg-t-10 link-05", data: {toggle: "modal", target: "#reportModal"} do %>
-            <i data-feather="flag" class="feather-16"></i> Reportar este pedido
+            <a href="" class="btn btn-p-purple-100 btn-block mg-b-10" data-toggle="modal" data-target="#offerModal"> <%= (@my_offer.nil?)? "Postularme" : "Editar oferta" %></a>
+          <%= link_to "#", class: "mg-t-10 orange-100 d-flex justify-content-center", data: {toggle: "modal", target: "#reportModal"} do %>
+             Reportar este pedido
           <% end %>
         <% end %>
-        <div class="divider-text w-100">Info</div>
-        <p class="card-text mg-t-10 tx-gray-700">Publicado hace <%= distance_of_time_in_words_to_now(@request.created_at) %></p>
+
+
         <div id="reqMap" class="ht-200" lat="<%= @request.lat %>" lng="<%= @request.lng %>" title="<%= @request.title %>"></div>
         <small class="tx-gray-600"><%= @request.location %></small>
-        <div class="alert alert-solid alert-secondary tx-center mg-t-10 mg-b-0" role="alert"><%= @request.budget %> MXN</div>
+
         <div class="d-flex justify-content-between align-items-center">
         </div>
       </div>
     </div>
   </div>
   <div class="divider-text w-100"><%= "sin " if @request.offers_count == 0 %>postulaciones</div>
-  <div class="row row-xs" paginated-other_offers>
+  <div class="row row-xs w-100" paginated-other_offers>
 
   <%= render( @my_offer ) if @my_offer.present? %>
   <%= render( @other_offers ) if @other_offers.present? %>

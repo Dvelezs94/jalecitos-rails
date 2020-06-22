@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
+  resources :banners
   post '/rate' => 'rater#create', :as => 'rate'
   root to: "pages#home"
   resources :admins, only: [] do
     collection do
       get :index_dashboard, as: 'dashboard'
-      get :categories
       get :users
       get :reports
 
