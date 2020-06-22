@@ -1,12 +1,29 @@
-<div class="col-6 col-sm-4 col-md-3 pd-b-5 flex-0-f">
+<div class="col-sm-12 col-md-4 col-lg-3 pd-b-5 pd-md-l-0">
   <div class="card card-file">
     <div class="card-file-thumb bg-white">
-        <%= image_tag banner.image.url, class: "img-inherit", :data => {lity: true} %>
+        <%= image_tag banner.image.url, class: " w-100 img-inherit", :data => {lity: true} %>
     </div>
     <div class="card-body">
-      <h6><%= banner.image.filename %></h6>
-      <span><%= "#{banner.image.metadata[:width]} x #{banner.image.metadata[:height]}" %> </span>
+      <span>
+        <%= "#{banner.wd.first} x #{banner.wd.second}" %>
+      </span>
+      <div class="pd-t-10"></div>
+      <%= form_with model: banner,class: "row send-on-change", remote: true do |f|%>
+      <% positions = @active_banners.last.present?? [*1..@active_banners.last.display+1] : [*1..1] %>
+      <%= f.select(:display,
+      options_for_select(positions.map{|pos| [ pos, pos ]}.unshift(["Inactivo", "0"]), selected: banner.display),{}, {class: 'custom-select'}) %>
+      <%= f.submit "", class: "d-none" %>
+      <% end %>
     </div>
-    <div class="card-footer"><span class="d-sm-inline"><%= t("general_inputs.size") %>: </span><%= number_to_human_size(banner.image.byte_size, precision: 2) %><%= link_to raw("<i class='fe fe-trash fnt-md tx-danger a-right'></i>"), banner_path(banner.image.record, banner.image), class: "float-right", method: :delete, data: { confirm: "¿Estás seguro de borrar el recurso?" } %></div>
+    <div class="card-footer">
+      <span class="d-sm-inline">
+        <%= t("general_inputs.size") %>
+        \:
+      </span>
+      <%= number_to_human_size(banner.image.size.byte, precision: 2) %>
+      <%= link_to "Borrar", banner_path(banner), class: "float-right", method: :delete, data: { confirm: "¿Estás seguro de eliminar el recurso?" } %>
+    </div>
   </div>
-</div><!-- col -->
+</div>
+<!-- col
+-->

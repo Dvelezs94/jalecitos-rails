@@ -1,3 +1,7 @@
+<h4 class="mg-b-0 tx-spacing--1">
+  Vista previa
+</h4>
+<%= render 'shared_user/root/featured_ads_carousel' if @active_banners.any? %>
 <div class="content content-fixed">
   <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
     <div class="d-flex align-items-center justify-content-between mg-b-20 mg-lg-b-30">
@@ -17,6 +21,7 @@
   </div>
 </div>
 <div class="container row">
-  <%= render @banners %>
+  <%= render @active_banners %>
+  <%= render @inactive_banners %>
 </div>
 <%= render "upload_images" %>
