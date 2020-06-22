@@ -19,7 +19,9 @@
           <div class="divider-text w-100">Bio</div>
           <p class="text-center"><%= (@gig.user.bio.present?)? @gig.user.safe_bio : "Sin descripción" %></p>
           <div class="col d-flex align-items-center justify-content-between">
-            <%= link_to "Perfil", user_path(@gig.user.slug), class: "btn btn-block btn-white" %>
+            <%= link_to user_path(@gig.user.slug), class: "btn btn-block blue-100 font-weight-bold" do %>
+            Ver perfil <i data-feather="chevron-right" class="feather-12 d-md-inline mg-t-0-i"></i>
+            <% end %>
           </div>
         </div>
       </div>

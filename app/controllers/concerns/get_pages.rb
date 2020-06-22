@@ -45,7 +45,7 @@ module GetPages
 
   def get_popular_gigs bool=false
     @popular_gigs = Gig.search("*",
-       includes: [:user, :likes, :category, city: [state: :country]],
+       includes: [:user, :likes, :category],
         where: conditions,
         boost_by_distance: boost_by_distance_condition,
          boost_by: {score: {factor: 100}},
@@ -54,7 +54,7 @@ module GetPages
 
   def get_recent_gigs bool=false
     @recent_gigs = Gig.search("*",
-       includes: [:user, :likes, :category, city: [state: :country]],
+       includes: [:user, :likes, :category],
         where: conditions,
          order: [{ created_at: { order: :desc, unmapped_type: :long}}],
           page: params[:recent_gigs], per_page: 15, execute: bool)
@@ -62,7 +62,7 @@ module GetPages
 
   def get_random_gigs
     @random_gigs   = Gig.search("*",
-      includes: [:user, :likes, :category, city: [state: :country]],
+      includes: [:user, :likes, :category],
                           body: random_conditions,
                           page: params[:random_gigs],
                           per_page: 15,
@@ -71,7 +71,6 @@ module GetPages
 
   def get_recent_requests bool=false
     @recent_requests = Request.search("*",
-       includes: [city: [state: :country]],
         where: conditions, order: [{ created_at: { order: :desc, unmapped_type: :long}}],
          page: params[:recent_requests], per_page: 15, execute: bool)
   end
@@ -81,7 +80,7 @@ module GetPages
   end
 
   def get_liked_gigs_items
-    @liked_gigs_items = Gig.includes(:user, :likes, :category, city: [state: :country])
+    @liked_gigs_items = Gig.includes(:user, :likes, :category)
     .where(id: @liked_gigs.pluck(:gig_id), status: "published")
     .order(created_at: :desc)
   end

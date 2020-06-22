@@ -32,7 +32,7 @@ SitemapGenerator::Sitemap.create do
     end
   end
   Category.all.each do |cat|
-    add search_path(category_id: cat.id)
+    add search_path(category_name: cat.name, category_id: cat.id)
   end
 
   add '/trabaja'

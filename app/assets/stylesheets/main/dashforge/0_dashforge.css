@@ -148,7 +148,7 @@ sup {
   top: -.5em; }
 
 a {
-  color: #0084F4;
+  color: var(--blue-100);
   text-decoration: none;
   background-color: transparent; }
   a:hover {
@@ -8544,7 +8544,8 @@ textarea.form-control {
     .ui-accordion-header {
       transition: none; } }
   .ui-accordion-header ~ .ui-accordion-header {
-    margin-top: -1px; }
+    margin-top: -1px;
+  font-family: "DM sans", sans-serif; }
   .ui-accordion-header:first-of-type {
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem; }
@@ -8567,7 +8568,8 @@ textarea.form-control {
   .ui-accordion-header.ui-state-active {
     background-color: #fff;
     border-bottom-width: 0;
-    color: #0168fa; }
+    color: var(--n-grey-100);
+    }
     .ui-accordion-header.ui-state-active .ui-accordion-header-icon::before {
       content: '-'; }
 
@@ -8575,7 +8577,8 @@ textarea.form-control {
   border: 1px solid rgba(72, 94, 144, 0.16);
   border-top-width: 0;
   padding: 0 20px 20px 35px;
-  position: relative; }
+  position: relative;
+  font-family: "IBM Plex Sans", sans-serif;}
   .ui-accordion-content:last-of-type {
     border-bottom-right-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem; }
@@ -10463,7 +10466,10 @@ textarea.form-control {
         left: 0;
         right: 0;
         height: 2px;
-        background-color: #0168fa; }
+        background-color: var(--a-blue-100); }
+        .nav-line .nav-link:hover {
+          color: var(--a-blue-100);
+        }
   .nav-line.flex-column {
     border-bottom: 0;
     border-right: 2px solid rgba(72, 94, 144, 0.16); }
@@ -34020,7 +34026,7 @@ a.bg-twitter:hover, a.bg-twitter:focus, button.bg-twitter:hover, button.bg-twitt
   color: #10b759; }
 
 .tx-warning {
-  color: #FFC700; }
+  color: var(--yellow-100); }
 
 .tx-danger {
   color: #dc3545; }

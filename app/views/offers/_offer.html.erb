@@ -3,7 +3,7 @@
   <div class="avatar mg-r-20"><%= image_tag(offer.user.image_url, class: "rounded-circle") %></div>
   <div class="media-body">
     <div class="d-flex justify-content-between align-items-center ht-20">
-          <small class="tx-inverse">
+          <small class="tx-inverse dm-sans">
             <strong> <%= offer.user.alias %> <span><i data-feather="star" class="feather-12 tx-warning filled tx-warning filled"></i>
               <span class="tx-warning tx-13" stars> <%= offer.user.score_average(false) %> </span></span>
             </strong>
@@ -22,7 +22,7 @@
     <p class="tx-left"><%= offer.description %></p>
     <div class="d-flex text-muted justify-content-between">
       <span class="d-flex">
-        <p><%= number_to_currency(purchase_order_total(offer.price), precision: 2) %> MXN (<strong><%=(offer.materials) ? "con " : " sin " %>material</strong>)&nbsp;
+        <p class="a-blue-100 dm-sans"> oferta: <%= number_to_currency(purchase_order_total(offer.price), precision: 2) %> MXN (<%=(offer.materials) ? "con " : " sin " %>material)&nbsp;
     <%= " 🞄 " + offer.hours.to_s+ " horas"  if offer.hours.present? %></p>
       </span>
       <% if current_user == @request.user%>
