@@ -53,7 +53,6 @@ class RequestsController < ApplicationController
       end
     else #create
       @success = @request.save!
-      CloseRequestWorker.perform_in(@request.created_at + 30.days, @request.id) if @success
       if !@success
         render :new
       end
