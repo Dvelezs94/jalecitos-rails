@@ -4,6 +4,7 @@ class CloseRequestWorker
 
   def perform()
     Request.published.where("? > created_at", Time.now-30.days).each do |request|
-    request.closed!
+      request.closed!
+    end
   end
 end
