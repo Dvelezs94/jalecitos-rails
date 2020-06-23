@@ -9,14 +9,22 @@
   <div class=" col-sm-12 col-md-4 col-lg-3">
     <div class="card">
       <div class="card-body">
-        <small class="card-text mg-t-10 p-purple-50">Publicado hace <%= distance_of_time_in_words_to_now(@request.created_at) %></small>
+        <small class="card-text mg-t-10 p-purple-50 d-block">Publicado hace <%= distance_of_time_in_words_to_now(@request.created_at) %></small>
         Presupuesto <br>
         <span class="a-blue-100 dm-sans"> <%= @request.budget %> MXN </span>
         <hr>
+        <% if @request.closed? || @request.completed? %>
+          <%= link_to "#", class: "btn btn-n-grey-100 btn-block mg-b-10" do %>
+            Cerrado
+          <% end %>
+        <% end %>
         <%= link_to "#", class: "share_item_url btn btn-p-purple-100-border btn-block mg-b-10" do %>
         <i data-feather="send"></i> Compartir
         <% end %>
         <% if @request.user == current_user && @request.published? %>
+          <%= link_to close_request_path(@request), class: "btn btn-green-100-border btn-block mg-b-10", method: :put, :data => {:confirm => 'Confirma que quieres finalizar este pedido', title: "El pedido se cerrará automáticamente en #{ distance_of_time_in_words(@request.created_at, @request.created_at+30.days)}"} do %>
+            Finalizar
+          <% end %>
           <%= link_to edit_request_path(@request), class: "btn btn-p-purple-100 btn-block mg-b-10" do %>
             Editar
           <% end %>
@@ -24,10 +32,13 @@
             <i data-feather="trash"></i> Eliminar
           <% end %>
         <% elsif user_signed_in? && @request.user != current_user %>
-            <a href="" class="btn btn-p-purple-100 btn-block mg-b-10" data-toggle="modal" data-target="#offerModal"> <%= (@my_offer.nil?)? "Postularme" : "Editar oferta" %></a>
-          <%= link_to "#", class: "mg-t-10 orange-100 d-flex justify-content-center", data: {toggle: "modal", target: "#reportModal"} do %>
-             Reportar este pedido
-          <% end %>
+
+            <% if @request.published? %>
+              <a href="" class="btn btn-p-purple-100 btn-block mg-b-10" data-toggle="modal" data-target="#offerModal"> <%= (@my_offer.nil?)? "Postularme" : "Editar oferta" %></a>
+            <% end %>
+            <%= link_to "#", class: "mg-t-10 orange-100 d-flex justify-content-center", data: {toggle: "modal", target: "#reportModal"} do %>
+               Reportar este pedido
+            <% end %>
         <% end %>
 
 
