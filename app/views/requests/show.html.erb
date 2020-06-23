@@ -22,7 +22,7 @@
         <i data-feather="send"></i> Compartir
         <% end %>
         <% if @request.user == current_user && @request.published? %>
-          <%= link_to close_request_path(@request), class: "btn btn-green-100-border btn-block mg-b-10", method: :put, :data => {:confirm => 'Confirma que quieres finalizar este pedido', title: "El pedido se cerrará automáticamente en #{ distance_of_time_in_words(@request.created_at, @request.created_at+30.days)}"} do %>
+          <%= link_to close_request_path(@request), class: "btn btn-green-100-border btn-block mg-b-10", method: :put, :data => {:confirm => 'Confirma que quieres finalizar este pedido', placement: "top", toggle: "tooltip"}, title: "El pedido se cerrará automáticamente en #{((@request.created_at+30.days).to_date - (@request.created_at).to_date).to_i} días" do %>
             Finalizar
           <% end %>
           <%= link_to edit_request_path(@request), class: "btn btn-p-purple-100 btn-block mg-b-10" do %>
