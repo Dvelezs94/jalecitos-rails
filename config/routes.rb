@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :banners
+  resources :banners do
+    collection do
+      put :update_status
+    end
+  end
   post '/rate' => 'rater#create', :as => 'rate'
   root to: "pages#home"
   resources :admins, only: [] do

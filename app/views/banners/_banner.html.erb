@@ -10,6 +10,7 @@
       <div class="pd-t-10"></div>
       <%= form_with model: banner,class: "row send-on-change", remote: true do |f|%>
       <% positions = @active_banners.last.present?? [*1..@active_banners.last.display+1] : [*1..1] %>
+      <%= f.text_field :url, class: "form-control", placeholder: "link" %>
       <%= f.select(:display,
       options_for_select(positions.map{|pos| [ pos, pos ]}.unshift(["Inactivo", "0"]), selected: banner.display),{}, {class: 'custom-select'}) %>
       <%= f.submit "", class: "d-none" %>
