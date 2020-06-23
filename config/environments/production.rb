@@ -96,7 +96,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  Rails.application.routes.default_url_options[:host] = 'https://www.jalecitos.com'
-  config.action_mailer.default_url_options = { host: 'https://www.jalecitos.com' }
+  Rails.application.routes.default_url_options[:host] = 'https://app.wandapp.com.mx'
+  config.action_mailer.default_url_options = { host: 'https://app.wandapp.com.mx' }
   GoogleTagManager.gtm_id = ENV.fetch("GOOGLE_TAG_MANAGER_ID")
 end
