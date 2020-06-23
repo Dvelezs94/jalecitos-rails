@@ -92,7 +92,6 @@ Rails.application.routes.draw do
    resources :requests, except: [:index] do
      member do
        put :close
-
      end
      resources :offers, except: [:index, :show] do
        member do
