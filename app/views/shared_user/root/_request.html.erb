@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body pd-b-5-f pd-t-10-f" onclick="goToElement($(this).closest('[loaded_in_map]')[0])">
       <small class="tx-gray-600 n-grey-75">Publicado hace <%= distance_of_time_in_words_to_now(request.created_at) %></small>
-      <p class="card-title tx-16"><%= request.title %></p>
+      <p class="card-title tx-16 multi-line-truncate-2 mn-ht-50"><%= request.title %></p>
       <div class="d-flex justify-content-between align-items-center">
         <small class="p-purple-50"><%= request.offers_count %> ofertas</small>
         <small class="green-100"><strong><%= request.budget %></strong></small>

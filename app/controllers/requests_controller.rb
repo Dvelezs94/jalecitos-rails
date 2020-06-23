@@ -5,11 +5,11 @@ class RequestsController < ApplicationController
   access all: [:show], user: :all
   before_action :authenticate_user!, except: :show
   before_action :redirect_if_user_banned, only: [:new, :create]
-  before_action :set_request, only: [:show, :destroy]
+  before_action :set_request, only: [:show, :destroy, :close]
   before_action :set_req_update, only: [:edit, :update]
   before_action :set_req_create, only: [:create]
   before_action :check_request_ban, only: [:show]
-  before_action :check_request_ownership, only:[:edit, :update, :destroy, :create]
+  before_action :check_request_ownership, only:[:edit, :update, :destroy, :create, :close]
   before_action :verify_if_published, only: [:edit, :update, :destroy]
   layout :set_layout
 
@@ -28,6 +28,11 @@ class RequestsController < ApplicationController
        end
       end
     end
+  end
+
+  def close
+    @request.closed!
+    redirect_to request_path(@request)
   end
 
   # GET /requests/new

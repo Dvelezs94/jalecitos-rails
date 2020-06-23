@@ -12,3 +12,6 @@ run_marketing_notifications:
 deny_waiting_orders:
   cron: "0 2 * * *"
   class: "DenyWaitingOrdersWorker"
+close_requests_job:
+  cron: "0 3 * * *"
+  class: "CloseRequestWorker"
