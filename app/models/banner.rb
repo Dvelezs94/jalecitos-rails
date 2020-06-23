@@ -19,4 +19,13 @@ class Banner < ApplicationRecord
     display > 0
   end
 
+  def url_with_protocol
+    u = URI.parse(self.url)
+    if(!u.scheme)
+      "https://#{self.url}"
+    elsif(%w{http https}.include?(u.scheme))
+      self.url
+    end
+  end
+
 end

@@ -22,6 +22,10 @@ class BannersController < ApplicationController
   def edit
   end
 
+  def update_status
+    Banner.all.update(active: params[:active])
+  end
+
   # POST /banners
   def create
     params[:files].each do |file|
@@ -33,6 +37,8 @@ class BannersController < ApplicationController
   # PATCH/PUT /banners/1
   def update
     @banner.with_lock do
+      old_display = @banner.display
+      old_url = @banner.url
       if @banner.update(banner_params)
         flash[:success] = "Actualizado"
         #keep numeration in lowest numbers
@@ -40,7 +46,7 @@ class BannersController < ApplicationController
       else
         flash[:error] = @banner.errors.full_messages.first
       end
-      redirect_to banners_path
+      redirect_to(banners_path, notice: "Vista previa actualizada") if (@banner.display != old_display) || (old_url != @banner.url && @banner.display > 0)
     end
   end
 
@@ -61,7 +67,7 @@ class BannersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def banner_params
-      par = params.require(:banner).permit(:display)
+      par = params.require(:banner).permit(:display, :url)
     end
     def keep_numeration
       all = Banner.where.not(display: 0).order(display: :asc)

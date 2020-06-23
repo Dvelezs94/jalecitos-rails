@@ -1,15 +1,22 @@
 <h4 class="mg-b-0 tx-spacing--1">
   Vista previa
 </h4>
-<%= render 'shared_user/root/featured_ads_carousel' if @active_banners.any? %>
+<div class="container">
+  <%= render 'shared_user/root/featured_ads_carousel' if @active_banners.any? %>
+</div>
 <div class="content content-fixed">
   <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
     <div class="d-flex align-items-center justify-content-between mg-b-20 mg-lg-b-30">
-      <div>
+      <div class="">
         <h4 class="mg-b-0 tx-spacing--1">
           Banners
         </h4>
       </div>
+      <%= form_with url: update_status_banners_path, method: :put, class: "row send-on-change", remote: true do |f|%>
+      <%= f.select(:active,
+      options_for_select([["Activado", "true"], ["Desactivado", "false"]], selected: (Banner.where(active: true).limit(1).any?)? true : false),{}, {class: 'custom-select'}) %>
+      <%= f.submit "", class: "d-none" %>
+      <% end %>
       <div class="d-block">
         <a href="#modalUploadMultimedia" data-toggle="modal">
           <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5">
