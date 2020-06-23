@@ -556,6 +556,15 @@ pre[preview] {
   background-color: var(--p-purple-100);
 }
 
+.btn-n-grey-100 {
+  color: #fff;
+  background-color: var(--n-grey-100);
+}
+.btn-n-grey-100:hover {
+  color: #fff;
+  background-color: var(--n-grey-100);
+}
+
 .btn-p-purple-100-border {
   background-color: #fff;
   color: var(--p-purple-100);
@@ -565,6 +574,17 @@ pre[preview] {
   color: #fff;
   background-color: var(--p-purple-100);
 }
+
+.btn-green-100-border {
+  background-color: #fff;
+  color: var(--green-100);
+  border: 1px solid var(--green-100);
+}
+.btn-green-100-border:hover {
+  color: #fff;
+  background-color: var(--green-100);
+}
+
 
 .btn-red-100-border {
   background-color: #fff;
