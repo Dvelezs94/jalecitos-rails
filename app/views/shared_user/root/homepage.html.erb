@@ -1,5 +1,6 @@
 <div class="row row-xs">
-  <%= render 'shared_user/root/featured_ads_carousel' %>
+  <% @active_banners = Banner.where.not(display: 0).where(active: true).order(display: :asc) %>
+  <%= render 'shared_user/root/featured_ads_carousel' if @active_banners.any? %>
   <% if @last_gigs_near_by.any? %>
     <div class="col-12 d-flex align-items-center justify-content-between mg-b-10 mg-t-20">
       <div>
