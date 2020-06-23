@@ -13,6 +13,5 @@ deny_waiting_orders:
   cron: "0 2 * * *"
   class: "DenyWaitingOrdersWorker"
 close_requests_job:
-  # cron: "*/1 * * * *"
   cron: "0 3 * * *"
-  class: "CloseRequestWorker"  
+  class: "CloseRequestWorker"
