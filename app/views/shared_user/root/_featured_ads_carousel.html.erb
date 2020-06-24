@@ -9,7 +9,7 @@
       <% @active_banners.each_with_index do |banner, index| %>
       <div class="carousel-item <%= "active" if index == 0 %>">
         <% if banner.url.present? %>
-        <%= link_to banner.url_with_protocol, target: "_blank" do %>
+        <%= link_to banner.url_with_protocol, target: (banner.external_url.present?)?"_blank" :"_self" do %>
           <%= image_tag banner.image.url, class: "w-100 h-30-vh" %>
         <% end %>
         <% else %>
