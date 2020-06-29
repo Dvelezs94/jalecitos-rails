@@ -1,6 +1,6 @@
 <% if offer.user.active? %>
 <div class="media w-100" display-hidden-menu>
-  <div class="avatar mg-r-20"><%= image_tag(offer.user.image_url, class: "rounded-circle") %></div>
+  <div class="avatar mg-r-20"><%= image_tag(avatar_display_helper(offer.user.image_url), class: "rounded-circle") %></div>
   <div class="media-body">
     <div class="d-flex justify-content-between align-items-center ht-20">
           <small class="tx-inverse dm-sans">
