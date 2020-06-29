@@ -11,6 +11,7 @@ $(document).on('turbolinks:load', function() {
     new PerfectScrollbar('.chat-content-body', {
       suppressScrollX: true
     });
+    showChatContent(); //if opens conversations with chat opened, fixes bug of responsive chat open
     }
 
     ///// UI INTERACTION /////
