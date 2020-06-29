@@ -1,5 +1,5 @@
 <% user = notification.user %>
-<div class="timeline-label" day><%= notification.created_at.strftime("%b %e, %Y") %></div>
+<div class="timeline-label a-blue-100" day><%= notification.created_at.strftime("%b %e, %Y") %></div>
 
 <div class="timeline-item">
   <div class="timeline-time"><%= notification.created_at.strftime("%I:%M %P") %></div>
@@ -7,9 +7,9 @@
     <h6 class="mg-b-0"><%= build_notification_text(notification, notification.notifiable) %></h6>
     <p>
       <%= link_to user.noa, user_path(user.slug) %>
-      <%= notification.user.location %>.</p>
+    <span class="p-purple-50"><%= notification.user.location %></span>.</p>
     <nav class="nav nav-row mg-t-15">
-      <a href="<%=url_generator_helper(notification, notification.notifiable) %>" class="nav-link">Ver detalles</a>
+      <a href="<%=url_generator_helper(notification, notification.notifiable) %>" class="p-purple-100">Ver detalles</a>
     </nav>
   </div>
 </div>
