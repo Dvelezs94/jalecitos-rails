@@ -61,6 +61,7 @@
   </div><!-- nav-sub -->
 </li>
 <li class="nav-item"><a href="" class="link-04 nav-link" id="invite-friend"><i data-feather="share-2"></i>Invitar</a></li>
+<% unless current_page? search_path %>
 <hr class="d-lg-none mg-r-5 mg-l-5">
 <div class="location-header">
   <li class="nav-item" data-step="7" data-intro="Ésta es tu ubicación, puedes cambiarla en cualquier momento para ver cosas más cercanas a ti" data-position="bottom">
@@ -73,6 +74,7 @@
     <% end %>
   </li>
 </div>
+<% end %>
 </ul>
 </div>
 <div class="navbar-right" data-step="8" data-intro="En este lugar puedes buscar servicios y pedidos, ver tus mensajes y notificaciones o configurar tu perfil" data-position="left">
@@ -113,7 +115,7 @@
   </a><!-- dropdown-link -->
   <div class="dropdown-menu dropdown-menu-right tx-13">
     <div class="avatar avatar-lg mg-b-15">
-      <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "rounded-circle") %>
+      <%= image_tag(avatar_display_helper(current_user.image_url(:thumb), false), class: "rounded-circle") %>
     </div>
     <h6 class="tx-semibold mg-b-25"><%= current_user.name %></h6>
     <%= link_to my_account_users_path, class: "dropdown-item" do  %>
