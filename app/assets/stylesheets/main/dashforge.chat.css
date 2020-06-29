@@ -354,7 +354,7 @@
   display: flex;
   align-items: center;
   margin: 20px 0;
-  color: #8392a5;
+  color: var(--a-blue-75);
   font-size: 10px;
   font-family: -apple-system, BlinkMacSystemFont, "Inter UI", Roboto, sans-serif;
   font-weight: 500;
@@ -367,7 +367,7 @@
     display: block;
     flex: 1;
     height: 1px;
-    background-color: #e5e9f2; }
+    background-color: var(--p-purple-25); }
   .chat-group-divider::before {
     margin-right: 10px; }
   .chat-group-divider::after {

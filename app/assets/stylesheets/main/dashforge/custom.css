@@ -77,23 +77,23 @@
 }
 
 .feather-16{
-    width: 16px;
-    height: 16px;
+    width: 16px !important;
+    height: 16px !important;
 }
 
 .feather-18{
-    width: 18px;
-    height: 18px;
+    width: 18px !important;
+    height: 18px !important;
 }
 
 .feather-24{
-    width: 24px;
-    height: 24px;
+    width: 24px !important;
+    height: 24px !important;
 }
 
 .feather-32{
-    width: 32px;
-    height: 32px;
+    width: 32px !important;
+    height: 32px !important;
 }
 
 .filled {
@@ -381,9 +381,9 @@ pre[preview] {
 }
 
 .bootstrap-tagsinput .tag {
-  color: #1b2e4b;
-  background-color: white;
-  border: 1px solid #c0ccda;
+  color: var(--a-blue-100);
+  background-color: var(--p-purple-25);
+  border: 1px solid var(--a-blue-100);
   border-radius: 0.25rem;
 }
 .bootstrap-tagsinput .tag [data-role="remove"] {
@@ -479,7 +479,7 @@ pre[preview] {
 }
 
 .a-blue-100 {
-  color: var(--a-blue-100);
+  color: var(--a-blue-100) !important;
 }
 .a-blue-75 { /*Blue 75%*/
   color: var(--a-blue-75);
@@ -489,7 +489,7 @@ pre[preview] {
 }
 
 .n-dark-100 {
-  color: var(--n-dark-100);
+  color: var(--n-dark-100) !important;
 }
 
 .n-grey-100 {
@@ -577,7 +577,8 @@ pre[preview] {
   border: none;
 }
 
-.btn-success:hover {
+.btn-success:hover,
+.btn-success:active{
   color: #fff;
   background-color: var(--a-blue-100);
 }
@@ -590,6 +591,27 @@ pre[preview] {
   color: #fff;
   background-color: var(--n-grey-100);
 }
+
+.btn-a-blue-100-background-p-purple-25 {
+  color: var(--a-blue-100);
+  background-color: var(--p-purple-25);
+  border: 1px solid var(--a-blue-100);
+}
+.btn-a-blue-100-background-p-purple-25:hover {
+  color: var(--a-blue-100);
+}
+
+
+.btn- {
+  color: var(--green-100);
+  background-color: var(--green-25);
+  border: 1px solid var(--green-100);
+}
+.btn-:hover {
+  color: var(--green-100);
+}
+
+
 
 .btn-p-purple-100-border {
   background-color: #fff;
@@ -653,4 +675,10 @@ a.orange-100:hover {
 #no-conversation {
   height: 100%;
   width: -webkit-fill-available;
+}
+.mg-t-2-i {
+  margin-top: 2px !important;
+}
+.border-none {
+  border: none;
 }
