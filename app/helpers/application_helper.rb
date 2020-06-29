@@ -110,7 +110,7 @@ module ApplicationHelper
 
   def image_display_helper image, yt_url #used in min versions
     if image.nil? && ! yt_url.present?
-      image_path("service.png")
+      image_path("service.svg")
     elsif image.nil?
       YouTubeRails.extract_video_image(yt_url, "medium")
     elsif image.file.extension == "gif"
@@ -126,9 +126,9 @@ module ApplicationHelper
   end
 
 
-  def avatar_display_helper image, thumb = true
+  def avatar_display_helper image
     if image.nil?
-      (thumb)? image_path("profile_thumb.png") : image_path("profile.png")
+      image_path("profile.svg")
     else
       image
     end

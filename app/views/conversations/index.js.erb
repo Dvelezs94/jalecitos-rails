@@ -39,7 +39,7 @@
     new PerfectScrollbar('.chat-content-body', {
       suppressScrollX: true
     });
-    <%= puts params.class %>
+    $("#no-conversation").remove();
     $("[content-scrolleable]").scrollTop($("[messages-list]")[0].scrollHeight);
     messages_scroll(); // add scroll pagination event
     stylize_messages();

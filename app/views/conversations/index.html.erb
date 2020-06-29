@@ -1,4 +1,8 @@
 <div class="chat-wrapper" chat-wrapper>
   <%= render "chat_sidebar" %>
-  <%= render "conversation", conversation: @conversation, opposite_user: opposite_conversation_user(@conversation, current_user) if params[:user_id].present? %>
+  <% if params[:user_id].present? %>
+  <%= render "conversation", conversation: @conversation, opposite_user: opposite_conversation_user(@conversation, current_user) %>
+  <% else %>
+  <%= image_tag image_path("conversation.svg"), class: "mg-l-250", id: "no-conversation" %>
+  <% end %>
 </div>

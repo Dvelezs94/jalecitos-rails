@@ -115,7 +115,7 @@
   </a><!-- dropdown-link -->
   <div class="dropdown-menu dropdown-menu-right tx-13">
     <div class="avatar avatar-lg mg-b-15">
-      <%= image_tag(avatar_display_helper(current_user.image_url(:thumb), false), class: "rounded-circle") %>
+      <%= image_tag(avatar_display_helper(current_user.image_url(:thumb)), class: "rounded-circle") %>
     </div>
     <h6 class="tx-semibold mg-b-25"><%= current_user.name %></h6>
     <%= link_to my_account_users_path, class: "dropdown-item" do  %>
