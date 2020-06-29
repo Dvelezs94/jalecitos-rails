@@ -574,6 +574,7 @@ pre[preview] {
 .btn-success {
   color: #fff;
   background-color: var(--p-purple-100);
+  border: none;
 }
 
 .btn-success:hover {
