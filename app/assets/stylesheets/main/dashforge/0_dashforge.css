@@ -2781,8 +2781,8 @@ input[type="button"].btn-block {
   opacity: 0; }
   .custom-control-input:checked ~ .custom-control-label::before {
     color: #fff;
-    border-color: #0168fa;
-    background-color: #0168fa; }
+    border-color: var(--p-purple-100);
+    background-color: var(--p-purple-100); }
   .custom-control-input:focus ~ .custom-control-label::before {
     box-shadow: 0 0 0 0.2rem rgba(1, 104, 250, 0.25); }
   .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
@@ -7819,7 +7819,7 @@ textarea.form-control {
   .nav-link:hover, .nav-link:focus {
     color: #0168fa; }
   .nav-link.active {
-    color: #0168fa; }
+    color: var(--p-purple-100); }
 
 .nav-pills .nav-link {
   transition: all 0.2s ease-in-out; }
@@ -10911,35 +10911,35 @@ table.dataTable {
     .wizard > .steps .disabled a,
     .wizard > .steps .disabled a:hover,
     .wizard > .steps .disabled a:active {
-      color: #97a3b9; }
+      color: var(--a-blue-75); }
       .wizard > .steps .disabled a .number,
       .wizard > .steps .disabled a:hover .number,
       .wizard > .steps .disabled a:active .number {
-        color: #97a3b9;
-        border-color: #b4bdce; }
+        color: var(--a-blue-75);;
+        border-color: var(--a-blue-75); }
     .wizard > .steps .disabled .title {
       display: none; }
       @media (min-width: 768px) {
         .wizard > .steps .disabled .title {
           display: inline-block; } }
     .wizard > .steps .current a, .wizard > .steps .current a:hover, .wizard > .steps .current a:active {
-      color: #0168fa; }
+      color: var(--a-blue-100); }
       .wizard > .steps .current a .title, .wizard > .steps .current a:hover .title, .wizard > .steps .current a:active .title {
         display: inline-block; }
       .wizard > .steps .current a .number, .wizard > .steps .current a:hover .number, .wizard > .steps .current a:active .number {
-        border-color: #0168fa;
-        background-color: #0168fa;
+        border-color: var(--a-blue-100);;
+        background-color: var(--a-blue-100);;
         color: #fff; }
     .wizard > .steps .done a, .wizard > .steps .done a:hover, .wizard > .steps .done a:active {
-      color: #10b759; }
+      color: var(--p-purple-100); }
       .wizard > .steps .done a .title, .wizard > .steps .done a:hover .title, .wizard > .steps .done a:active .title {
         display: none; }
         @media (min-width: 768px) {
           .wizard > .steps .done a .title, .wizard > .steps .done a:hover .title, .wizard > .steps .done a:active .title {
             display: inline-block; } }
       .wizard > .steps .done a .number, .wizard > .steps .done a:hover .number, .wizard > .steps .done a:active .number {
-        border-color: #10b759;
-        background-color: #10b759;
+        border-color: var(--p-purple-100);
+        background-color: var(--p-purple-100);
         color: #fff; }
   .wizard > .content {
     border-top: 1px solid rgba(72, 94, 144, 0.16);
@@ -10981,20 +10981,37 @@ table.dataTable {
       display: flex;
       justify-content: space-between; }
       .wizard > .actions > ul > li:last-child a {
-        background-color: #10b759; }
+        background-color: var(--a-blue-100); }
     .wizard > .actions a,
     .wizard > .actions a:hover,
     .wizard > .actions a:active {
       display: block;
-      background-color: #0168fa;
+      background-color: var(--p-purple-100);
       padding: 9px 20px;
       line-height: 1.539;
       color: #fff;
       border-radius: 0.25rem; }
+      .wizard > .actions a[href='#previous'] {
+        display: block;
+        color: var(--p-purple-100);
+        background-color: #fff;
+        border: 1px solid var(--p-purple-100);
+        padding: 9px 20px;
+        line-height: 1.539;
+        border-radius: 0.25rem; }
+        .wizard > .actions a[href='#previous']:hover,
+        .wizard > .actions a[href='#previous']:active{
+          color: #fff;
+          background-color: var(--p-purple-100);
+        }
     .wizard > .actions .disabled a,
     .wizard > .actions .disabled a:hover,
-    .wizard > .actions .disabled a:active {
-      background-color: #97a3b9; }
+    .wizard > .actions .disabled a:active{
+      background-color: var(--n-grey-75);
+      color: #fff;
+      border: 1px solid var(--n-grey-75);
+      cursor: default;}
+
   .wizard.vertical > .steps {
     padding: 15px 20px; }
     @media (min-width: 576px) {

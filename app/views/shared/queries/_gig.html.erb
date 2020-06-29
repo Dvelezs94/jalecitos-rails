@@ -19,7 +19,7 @@
         <div>
           <%= one_star_disp_help gig %>
         </div>
-        <small>Desde <strong><%= query_home_or_profile_helper(gig) %></strong></small>
+        <small class="green-100">Desde <strong><%= query_home_or_profile_helper(gig) %></strong></small>
       </div>
       <div class="d-flex justify-content-between align-items-center mg-t-10 gig_buttons col-12 align-self-end">
         <%= render("gigs/likes", gig: gig, with_number: false) if current_user && current_user != gig.user %>
