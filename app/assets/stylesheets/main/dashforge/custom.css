@@ -592,6 +592,16 @@ pre[preview] {
   background-color: var(--n-grey-100);
 }
 
+.btn-green-100-background-green-25 {
+  color: var(--green-100);
+  background-color: var(--green-25);
+  border: 1px solid var(--green-100);
+}
+.btn-green-100-background-green-25:hover {
+  color: var(--green-100);
+}
+
+
 .btn-a-blue-100-background-p-purple-25 {
   color: var(--a-blue-100);
   background-color: var(--p-purple-25);
