@@ -12,6 +12,13 @@
   min-height: 400px;
 }
 
+.form-control:focus {
+    box-shadow: 0 0 0 0.1rem var(--p-purple-25);
+    border-color: var(--p-purple-25);
+}
+
+.
+
 .video-item iframe {
   height: -webkit-fill-available;
 }
@@ -558,9 +565,20 @@ pre[preview] {
   color: #fff;
   background-color: var(--p-purple-100);
 }
+
 .btn-p-purple-100:hover {
   color: #fff;
+  background-color: var(--a-blue-100);
+}
+/*overwrite of btn-success to be equal to btn-p-purple-100*/
+.btn-success {
+  color: #fff;
   background-color: var(--p-purple-100);
+}
+
+.btn-success:hover {
+  color: #fff;
+  background-color: var(--a-blue-100);
 }
 
 .btn-n-grey-100 {

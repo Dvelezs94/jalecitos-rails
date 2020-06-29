@@ -27,7 +27,7 @@
           <%= f.check_box :remember_me, :checked => false, class: "custom-control-input" %>
           <label class="custom-control-label" for="user_remember_me">Recordarme</label>
         </div>
-        <%= f.submit 'Entrar', class: "btn btn-brand-02 btn-block", :data => { :disable_with => "Entrando..." } %>
+        <%= f.submit 'Entrar', class: "btn btn-p-purple-100 btn-block", :data => { :disable_with => "Entrando..." } %>
       <% end %>
       <div class="divider-text">o</div>
       <%= button_to user_facebook_omniauth_authorize_path(lat:"latitude", lon:"longitude"), form_class: 'facebook-login btn-block', class: "btn btn-outline-facebook btn-block", :data => { :disable_with => "Entrando..." } do %>
