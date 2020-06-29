@@ -643,3 +643,13 @@ a.orange-100:hover {
 .ibm-plex-sans {
   font-family: "IBM Plex Sans", sans-serif;
 }
+
+
+.min-w-30vw {
+  min-width: 30vw;
+}
+
+#no-conversation {
+  height: 100%;
+  width: -webkit-fill-available;
+}
