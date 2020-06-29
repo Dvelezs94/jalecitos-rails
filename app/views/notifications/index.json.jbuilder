@@ -2,7 +2,7 @@ json.array! @notifications do |notification|
   json.id notification.id
   json.user do
     json.slug notification.user.slug
-    json.image_url notification.user.image_url
+    json.image_url avatar_display_helper(notification.user.image_url)
   end
   json.action notification.action
   # Build the url depending on the notifiable type

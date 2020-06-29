@@ -469,7 +469,7 @@ pre[preview] {
   --black-100: #000000;
 }
 .p-purple-100 { /*purple*/
-  color: var(--p-purple-100);
+  color: var(--p-purple-100) !important;
 }
 .p-purple-50 { /*purple 50%*/
   color: var(--p-purple-50);
@@ -681,4 +681,10 @@ a.orange-100:hover {
 }
 .border-none {
   border: none;
+}
+.timeline-label:first-child::before {
+  background-color: var(--a-blue-100);
+}
+.timeline-body::before {
+  border: 2px solid var(--p-purple-100) !important;
 }
