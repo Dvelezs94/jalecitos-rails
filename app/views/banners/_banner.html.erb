@@ -10,10 +10,6 @@
       <div class="pd-t-10"></div>
       <%= form_with model: banner,class: "row send-on-change", remote: true do |f|%>
       <% positions = @active_banners.last.present?? [*1..@active_banners.last.display+1] : [*1..1] %>
-      <div class="custom-control custom-checkbox">
-        <%= f.check_box :external_url, class:"custom-control-input", id: "customCheck#{banner.id}" %>
-        <label class="custom-control-label" for="customCheck<%= banner.id %>">Url externa</label>
-      </div>
       <%= f.text_field :url, class: "form-control", placeholder: "link" %>
       <%= f.select(:display,
       options_for_select(positions.map{|pos| [ pos, pos ]}.unshift(["Inactivo", "0"]), selected: banner.display),{}, {class: 'custom-select'}) %>

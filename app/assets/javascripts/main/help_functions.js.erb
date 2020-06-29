@@ -24,16 +24,12 @@ function sleep(milliseconds) {
     }
   }
 }
-function waitForElement(elementPath, callBack, times = 0) {
-  timeout = setTimeout(function() {
+function waitForElement(elementPath, callBack) {
+  window.setTimeout(function() {
     if ($(elementPath).length) {
       callBack(elementPath, $(elementPath));
-    }
-    else if (times == 10) {
-      clearTimeout(timeout)
-    }
-    else {
-      waitForElement(elementPath, callBack, times+1);
+    } else {
+      waitForElement(elementPath, callBack);
     }
   }, 500)
 }

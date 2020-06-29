@@ -42,10 +42,10 @@
 <div class="row row-xs mg-sm-t-10 mg-b-10 mg-t-15">
   <div class="col-12">
     <div id="carouselExample2" class="carousel slide" data-ride="carousel" data-interval="false">
-      <div class="carousel-inner gig-show-picture">
+      <div class="carousel-inner gig-show-picture bg-black-8">
 
         <% if @gig.youtube_url.present? %>
-        <div class="carousel-item gig h-100 active video-item">
+        <div class="carousel-item gig h-100 active">
           <%=  YouTubeRails.youtube_embed_url(@gig.youtube_url,"100%", "100%", ssl: true, disable_suggestion: true).html_safe %>
         </div>
 
@@ -59,7 +59,7 @@
           <% end %>
         <% else %>
           <div class="carousel-item gig active">
-            <%= image_tag( image_path("service_show.png"), class: "h-100 w-100",data: {lity: true})%>
+            <%= image_tag( "https://s3.us-east-2.amazonaws.com/cdn.jalecitos.com/images/app_images/gig-no-image-2.png", data: {lity: true})%>
           </div>
         <% end %>
 

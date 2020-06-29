@@ -3,7 +3,7 @@
   <div class="media align-items-stretch justify-content-center ht-100p pos-relative">
     <div class="media-body align-items-center d-none d-lg-flex">
       <div class="mx-wd-600">
-        <%= image_tag image_path("signin.png"), width: 600, height: 450%>
+        <img src="https://via.placeholder.com/1260x950" class="img-fluid" alt="">
       </div>
     </div>
     <!-- media-body -->
@@ -27,7 +27,7 @@
           <%= f.check_box :remember_me, :checked => false, class: "custom-control-input" %>
           <label class="custom-control-label" for="user_remember_me">Recordarme</label>
         </div>
-        <%= f.submit 'Entrar', class: "btn btn-p-purple-100 btn-block", :data => { :disable_with => "Entrando..." } %>
+        <%= f.submit 'Entrar', class: "btn btn-brand-02 btn-block", :data => { :disable_with => "Entrando..." } %>
       <% end %>
       <div class="divider-text">o</div>
       <%= button_to user_facebook_omniauth_authorize_path(lat:"latitude", lon:"longitude"), form_class: 'facebook-login btn-block', class: "btn btn-outline-facebook btn-block", :data => { :disable_with => "Entrando..." } do %>

@@ -38,7 +38,7 @@
         <%= link_to "Aviso de Privacidad", aviso_de_privacidad_path, target: "_blank" %>
       </div>
       <!-- form-group -->
-      <%= f.button 'Crear cuenta', class: "btn btn-p-purple-100 btn-block", :data => { :disable_with => "Creando..." } %>
+      <%= f.button 'Crear cuenta', class: "btn btn-brand-02 btn-block", :data => { :disable_with => "Creando..." } %>
     <% end %>
     <div class="divider-text">o</div>
     <%= button_to user_facebook_omniauth_authorize_path(lat:"latitude", lon:"longitude"), form_class: 'facebook-login btn-block', class: "btn btn-outline-facebook btn-block", :data => { :disable_with => "Entrando..." } do %>
@@ -56,9 +56,9 @@
 </div>
 </div>
 <!-- sign-wrapper -->
-<div class="media-body d-none d-lg-flex pos-relative">
+<div class="media-body pd-y-30 pd-lg-x-50 pd-xl-x-60 align-items-center d-none d-lg-flex pos-relative">
 <div class="mx-lg-wd-500 mx-xl-wd-550">
-  <%= image_tag image_path("signup.png"), width: 550, height: 700%>
+<img src="https://via.placeholder.com/1280x1225" class="img-fluid" alt="">
 </div>
 </div>
 <!-- media-body -->
