@@ -1,6 +1,6 @@
-<div class="card mg-t-10 gig-card mg-r-10 mg-l-10 mg-md-r-10 d-block position-static" loaded_in_map="false" lat="<%= gig.lat %>" lng="<%= gig.lng %>" title="<%= gig.min_title %>">
+<div class="card mg-t-10 gig-card mg-r-10 mg-l-5 mg-md-r-10 d-block position-static" loaded_in_map="false" lat="<%= gig.lat %>" lng="<%= gig.lng %>" title="<%= gig.min_title %>">
   <div class="card-horizontal mg-5">
-    <div class="w-40">
+    <div class="w-40" hide-on-map>
       <%= image_tag( image_display_helper(default_gig_img(gig.images), gig.youtube_url), class: "card-img gig-card-horizontal w-100 h-100", lazy: true) %>
     </div>
     <div class="card-body pd-b-5-f w-min d-flex flex-wrap">

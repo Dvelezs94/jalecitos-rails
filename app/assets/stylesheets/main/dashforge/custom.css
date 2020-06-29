@@ -221,7 +221,7 @@
   padding: 10px !important;
 }
 .gm-style-iw-d .media,
-.gm-style-iw-d img,
+.gm-style-iw-d [hide-on-map],
 .gm-style-iw-d .share_item_url,
 .gm-style-iw-d .gig_buttons a[gig_id]{
   display: none;
@@ -574,6 +574,7 @@ pre[preview] {
 .btn-success {
   color: #fff;
   background-color: var(--p-purple-100);
+  border: none;
 }
 
 .btn-success:hover {
