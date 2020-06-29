@@ -8,6 +8,14 @@
   vertical-align: middle;
 }
 
+.video-item {
+  min-height: 400px;
+}
+
+.video-item iframe {
+  height: -webkit-fill-available;
+}
+
 .gig-card-top {
   object-fit: cover;
   height: 250px
@@ -89,18 +97,17 @@
   height: 80vh;
 }
 
-.gig-show-picture {
-  height: 600px; }
+
 .carousel-item.gig img {
   height:600px;
   width:100%;
   object-fit: contain; }
-.gig-show-picture {
-  height: 500px; }
+
 .carousel-item.gig img {
   height:500px;
   width:100%;
   object-fit: contain; }
+
   @media (max-width: 992px) {
     .gig-show-picture {
       height: 405px !important;

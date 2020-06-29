@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-3 col-md-2 col-lg">
       <div class="avatar avatar-xxl <%= "avatar-online" if current_user == @user || @user.online? %>">
-        <%= image_tag(avatar_display_helper(@user.image_url()), class: "rounded-circle", data: {lity: true}, lazy: true) %>
+        <%= image_tag(avatar_display_helper(@user.image_url(), false), class: "rounded-circle", data: {lity: true}, lazy: true) %>
         </div>
     </div><!-- col -->
     <div class="col-sm-8 col-md-7 col-lg mg-t-20 mg-sm-t-0 mg-lg-t-25">
