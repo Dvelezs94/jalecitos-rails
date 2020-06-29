@@ -9046,7 +9046,7 @@ textarea.form-control {
     margin-bottom: 2px; }
   .dropdown-message .media-body span,
   .dropdown-notification .media-body span {
-    color: #8392a5;
+    color: var(--p-purple-50);
     font-size: 11px;
     font-family: -apple-system, BlinkMacSystemFont, "Inter UI", Roboto, sans-serif; }
   .dropdown-message .media-body strong,
