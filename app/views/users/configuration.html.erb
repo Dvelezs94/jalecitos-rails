@@ -8,9 +8,9 @@
         <a class="nav-link <%= "active" if params[:collapse] == "security" %>" id="security-tab" data-toggle="tab" href="#security" role="tab" aria-controls="security" aria-selected="false">Seguridad</a>
       </li>
       <!-- <li class="nav-item"> <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab" aria-controls="notifications" aria-selected="false">Notificationes</a> </li> -->
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link <%= "active" if params[:collapse] == "help" %>" id="help-tab" data-toggle="tab" href="#help" role="tab" aria-controls="help" aria-selected="false">Ayuda</a>
-      </li>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link <%= "active" if params[:collapse] == "account" %>" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false">Cuenta</a>
       </li>
@@ -20,7 +20,7 @@
 
       <%= render 'users/edit_profile' %>
       <%= render 'users/security' if current_user.provider.nil? %>
-      <%= render 'users/help' %>
+      <%# render 'users/help' %>
       <%= render 'users/account' %>
       <%# render 'users/configuration_desktop' %>
         <%# render 'users/configuration_mobile' %>
