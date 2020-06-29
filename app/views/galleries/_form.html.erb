@@ -5,8 +5,8 @@
   <%= form.fields_for :faqs do |faq| %>
   <%= render "/faqs/faq_fields", f: faq %>
 <% end %>
-<div class="links tx-right">
-  <%= link_to_add_association 'Agregar Pregunta', form, :faqs, class: 'btn btn-success', partial: "/faqs/faq_fields", id: "add_faq" %>
+<div class="links">
+  <%= link_to_add_association "Agrega una pregunta <i data-feather='plus-circle' class='float-right mg-t-2-i feather-18'></i>".html_safe, form, :faqs, class: 'btn w-100 btn-green-100-background-green-25 mg-t-10 tx-left', partial: "/faqs/faq_fields", id: "add_faq" %>
 </div>
 
 <!-- Question master sample -->
@@ -32,10 +32,9 @@
 </div>
 </div>
 </div>
-<div class="col-12 tx-right pd-r-0">
-<label for="file-input" class="btn btn-success">
-  <i data-feather="plus"></i>
-  Agregar Imagen
+<div class="col-12 tx-right pd-r-0 pd-l-0">
+<label for="file-input" class="btn btn-green-100-background-green-25 tx-left w-100">
+  Sube tus imágenes <i data-feather='plus-circle' class='float-right mg-t-2-i feather-18'></i>
 </label>
 </div>
 

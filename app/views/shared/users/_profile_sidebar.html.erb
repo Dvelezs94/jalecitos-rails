@@ -6,8 +6,8 @@
         </div>
     </div><!-- col -->
     <div class="col-sm-8 col-md-7 col-lg mg-t-20 mg-sm-t-0 mg-lg-t-25">
-      <h5 class="mg-b-2 tx-spacing--1"><%= @user.name %></h5>
-      <p class="tx-color-03 mg-b-25"><%= @user.alias %></p>
+      <h3 class="mg-b-2 tx-spacing--1"><%= @user.name %></h3>
+      <h4 class="tx-color-03 mg-b-25 p-purple-100"><%= @user.alias %></h4>
       <div class="d-flex mg-b-25">
         <%=link_to( "Reportar", "#", class: "btn btn-xs btn-white flex-fill", data: {toggle: "modal", target: "#reportModal"} ) if current_user && @user != current_user%>
 
@@ -19,15 +19,15 @@
       <div class="d-flex">
         <div class="profile-skillset flex-fill">
           <h4><a class="link-01"><%= @user.score_average(false) %></a></h4>
-          <label>Estrellas</label>
+          <label class="a-blue-100">Estrellas</label>
         </div>
         <div class="profile-skillset flex-fill">
           <h4><a class="link-01"><%= @reviews.total_count %></a></h4>
-          <label>Reseñas</label>
+          <label class="a-blue-100">Reseñas</label>
         </div>
         <div class="profile-skillset flex-fill">
           <h4><a class="link-01"><%= @gigs.total_count %></a></h4>
-          <label>Servicios</label>
+          <label class="a-blue-100">Servicios</label>
         </div>
       </div>
     </div><!-- col -->
@@ -36,7 +36,7 @@
       <label class="tx-sans tx-10 tx-semibold tx-uppercase tx-color-01 tx-spacing-1 mg-b-15">Habilidades</label>
       <ul class="list-inline list-inline-skills">
         <% @user.tag_list.each do |tag| %>
-        <li class="list-inline-item"><a ><%= tag %></a></li>
+        <li class="list-inline-item "><small class="btn btn-a-blue-100-background-p-purple-25 pd-3 border-none"><%= tag.upcase %></small></li>
         <% end %>
       </ul>
     </div><!-- col -->
@@ -45,9 +45,9 @@
     <div class="col-sm-6 col-md-5 col-lg mg-t-40">
       <label class="tx-sans tx-10 tx-semibold tx-uppercase tx-color-01 tx-spacing-1 mg-b-15">Social</label>
       <ul class="list-unstyled profile-info-list">
-        <% if @user.website.present?  %><li><%= link_to("<i data-feather='globe'></i>#{@user.website}".html_safe, @user.website, target: "_blank", class: "truncate")%></li> <% end %>
-        <% if @user.facebook.present? %><li><%= link_to("<i data-feather='facebook'></i>#{@user.get_hashtag('fb')}".html_safe, @user.facebook_url, target: "_blank", class: "truncate") %></li> <% end %>
-        <% if @user.instagram.present? %><li><%= link_to("<i data-feather='instagram'></i>#{@user.get_hashtag('ig')}".html_safe, @user.instagram_url, target: "_blank", class: "truncate") %></li> <% end %>
+        <% if @user.website.present?  %><li><%= link_to("<i data-feather='globe' class='n-dark-100'></i>#{@user.website}".html_safe, @user.website, target: "_blank", class: "truncate")%></li> <% end %>
+        <% if @user.facebook.present? %><li><%= link_to("<i data-feather='facebook' class='n-dark-100'></i>#{@user.get_hashtag('fb')}".html_safe, @user.facebook_url, target: "_blank", class: "truncate") %></li> <% end %>
+        <% if @user.instagram.present? %><li><%= link_to("<i data-feather='instagram' class='n-dark-100'></i>#{@user.get_hashtag('ig')}".html_safe, @user.instagram_url, target: "_blank", class: "truncate") %></li> <% end %>
       </ul>
     </div><!-- col -->
     <% end %>
@@ -55,10 +55,10 @@
       <label class="tx-sans tx-10 tx-semibold tx-uppercase tx-color-01 tx-spacing-1 mg-b-15">Información de contacto</label>
       <ul class="list-unstyled profile-info-list">
         <!-- <li><i data-feather="briefcase"></i> <span class="tx-color-03">Monterrey, NL. MX.</span></li> -->
-        <% if @user.phone_number.present?  %>  <li><%= link_to "<i data-feather='smartphone'></i> #{@user.phone_number}".html_safe, "tel:#{@user.phone_number}", target: "_blank" %></li> <% end %>
-        <li><%= link_to "<i data-feather='mail'></i> #{@user.email}".html_safe, "mailto:"+@user.email, target: "_blank" %></li>
+        <% if @user.phone_number.present?  %>  <li><%= link_to "<i data-feather='smartphone' class='n-dark-100'></i> #{@user.phone_number}".html_safe, "tel:#{@user.phone_number}", target: "_blank" %></li> <% end %>
+        <li><%= link_to "<i data-feather='mail' class='n-dark-100'></i> #{@user.email}".html_safe, "mailto:"+@user.email, target: "_blank" %></li>
         <li><%= link_to conversations_path(user_id: @user.id ) do %>
-          <i data-feather='send'></i> <%= @user.alias %>
+          <i data-feather='send' class='n-dark-100'></i> <%= @user.alias %>
         <% end %></li>
 
       </ul>
