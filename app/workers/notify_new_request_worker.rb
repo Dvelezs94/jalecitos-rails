@@ -12,9 +12,9 @@ class NotifyNewRequestWorker
     specif = tag_list.push(request.profession).join(" ")
     if specif.present? #profession or tags
       # Search from gigs
-      @gigs = Gig.search(specif, fields: [:tags, :profession], operator: "or", where: { location: { near: {lat: request.lat, lon: request.lng}, within: "1000km" } }, load: false, execute: false)
+      @gigs = Gig.search(specif, fields: [:tags, :profession], operator: "or", where: { location: { near: {lat: request.lat, lon: request.lng}, within: "200km" } }, load: false, execute: false)
       # Search from users
-      @users = User.search(specif, fields: [:tags], operator: "or", where: { location: { near: {lat: request.lat, lon: request.lng}, within: "1000km" } }, load: false, execute: false)
+      @users = User.search(specif, fields: [:tags], operator: "or", where: { location: { near: {lat: request.lat, lon: request.lng}, within: "200km" } }, load: false, execute: false)
       #make search in one request
       Searchkick.multi_search([@gigs, @users])
       #get ids
