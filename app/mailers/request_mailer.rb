@@ -2,7 +2,6 @@ class RequestMailer < ApplicationMailer
   def new_request(receiver, request)
     @request = request
     @user = User.find(receiver)
-
     data = {
       "personalizations": [
         {

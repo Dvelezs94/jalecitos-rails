@@ -1,6 +1,7 @@
 class NotifyNewRequestWorker
   include Sidekiq::Worker
   include PushFunctions
+  include ActionView::Helpers::AssetUrlHelper
   sidekiq_options retry: 2, dead: false
   include Rails.application.routes.url_helpers
 
@@ -13,7 +14,7 @@ class NotifyNewRequestWorker
       # Search from gigs
       @gigs = Gig.search(specif, fields: [:tags, :profession], operator: "or", where: { location: { near: {lat: request.lat, lon: request.lng}, within: "1000km" } }, load: false, execute: false)
       # Search from users
-      @users = User.search(specif, fields: [:tags], operator: "or", where: {where: { location: { near: {lat: request.lat, lon: request.lng}, within: "1000km" } }}, load: false, execute: false)
+      @users = User.search(specif, fields: [:tags], operator: "or", where: { location: { near: {lat: request.lat, lon: request.lng}, within: "1000km" } }, load: false, execute: false)
       #make search in one request
       Searchkick.multi_search([@gigs, @users])
       #get ids
@@ -33,9 +34,9 @@ class NotifyNewRequestWorker
         notification: {
           title: "Wand",
           body:  "¡Encontramos un pedido que puede interesarte! - #{request.title}",
-          icon: image_path("favicon.ico"),
+          icon: image_url("favicon.ico"),
           click_action: request_path(request.slug),
-          badge: image_path("favicon.ico")
+          badge: image_url("favicon.ico")
         },
         webpush: {
           headers: {

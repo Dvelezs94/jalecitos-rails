@@ -17,7 +17,7 @@ class ContactMailer < ApplicationMailer
         }
       ],
       "from": {
-        "email": "noreply@jalecitos.com",
+        "email": "noreply@wandapp.com.mx",
         "name": "Wand"
       },
       "reply_to": {

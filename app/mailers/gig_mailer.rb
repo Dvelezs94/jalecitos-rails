@@ -22,7 +22,7 @@ class GigMailer < ApplicationMailer
           }
         ],
         "from": {
-          "email": "noreply@jalecitos.com",
+          "email": "noreply@wandapp.com.mx",
           "name": "Jalecitos"
         },
         "template_id": "d-f16f50d328b04c1a8f6e7198e6998ad6"
