@@ -21,8 +21,8 @@ class RequestMailer < ApplicationMailer
         }
       ],
       "from": {
-        "email": "noreply@jalecitos.com",
-        "name": "Jalecitos"
+        "email": "noreply@wandapp.com.mx",
+        "name": "Wand"
       },
       "template_id": "d-82c78cae3a0049d2b556a258a1fee8cd"
     }
