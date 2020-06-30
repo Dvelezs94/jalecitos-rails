@@ -2,10 +2,10 @@
 $(document).on('turbolinks:load', function() {
 
   $('#invite-friend').click(function (event) {
-    let url = "https://www.jalecitos.com/sign_up/";
+    let url = "https://www.wandapp.com.mx/sign_up/";
     elem='#invite-friend';
-    desk="¡Unete a Jalecitos y oferta tus servicios en linea hoy mismo!";
-    text=`Únete a Jalecitos y oferta tus servicios en línea hoy mismo en ${url}`;
+    desk="¡Unete a Wand y oferta tus servicios en linea hoy mismo!";
+    text=`Únete a Wand y oferta tus servicios en línea hoy mismo en ${url}`;
     confirmation = "La invitación ha sido copiada. ¡Compartela con tus amigos para que se unan!";
     share_content(elem,desk,text,confirmation, url);
     event.preventDefault();

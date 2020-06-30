@@ -21,7 +21,7 @@ class OfferMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-0786709333f0406d86f9eca1fec0bdac"
     }

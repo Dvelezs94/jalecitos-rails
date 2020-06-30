@@ -74,7 +74,7 @@ class BanksController < ApplicationController
 
     def verify_personal_information
       if current_user.name.blank?
-        flash[:error] = "Asegurate de tener tu nombre completo en Jalecitos para poder agregar una cuenta bancaria"
+        flash[:error] = "Asegurate de tener tu nombre completo en Wand para poder agregar una cuenta bancaria"
         redirect_to configuration_path(bestFocusAfterReload: "change_user_name")
       end
     end

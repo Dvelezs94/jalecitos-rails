@@ -83,7 +83,7 @@ class PayoutMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-f7072a9372b54565bee54f626cf308df"
     }
