@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@jalecitos.com'
+  default from: 'noreply@wandapp.com.mx'
   layout 'mailer'
 
   def sendgrid_client

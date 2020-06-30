@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  
+
   include RefererFunctions
   access user: [:create, :destroy]
   before_action :authenticate_user!
@@ -56,7 +56,7 @@ class CardsController < ApplicationController
 
   def verify_personal_information
     if current_user.name.blank?
-      flash[:error] = "Asegúrate de tener tu nombre completo en Jalecitos para proceder a agregar una tarjeta"
+      flash[:error] = "Asegúrate de tener tu nombre completo en Wand para proceder a agregar una tarjeta"
       redirect_to configuration_path(bestFocusAfterReload: "change_user_name")
     end
   end

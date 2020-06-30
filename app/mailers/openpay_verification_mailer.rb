@@ -17,8 +17,8 @@ class OpenpayVerificationMailer < ApplicationMailer
         }
       ],
       "from": {
-        "email": "noreply@jalecitos.com",
-        "name": "Jalecitos"
+        "email": "noreply@wandapp.com.mx",
+        "name": "Wand"
       },
       "template_id": "d-8438f1c20e4b44f899e06440a116e93e"
     }
