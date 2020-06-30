@@ -17,6 +17,8 @@ SitemapGenerator::Sitemap.create do
   # The root path '/' and sitemap index file are added automatically for you.
   # Links are added to the Sitemap in the order they are specified.
   add root_path, :changefreq => 'daily'
+  add new_user_session_path
+  add new_user_registration_path
 
   Gig.published.find_each do |gig|
     add the_gig_path(gig), :lastmod => gig.updated_at
