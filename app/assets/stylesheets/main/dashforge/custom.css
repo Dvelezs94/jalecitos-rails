@@ -17,8 +17,6 @@
     border-color: var(--p-purple-25);
 }
 
-.
-
 .video-item iframe {
   height: -webkit-fill-available;
 }
@@ -297,24 +295,24 @@ label.error{
 .irs--flat .irs-from,
 .irs--flat .irs-to,
 .irs--flat .irs-single {
-  background-color: #0168fa !important;
+  background-color: var(--blue-100) !important;
 }
 .irs--flat .irs-from::before,
 .irs--flat .irs-to::before,
 .irs--flat .irs-single::before {
-  background-color: #0168fa !important;
+  background-color: var(--blue-100) !important;
 }
 .irs--flat .irs-bar {
-  background-color: #0168fa !important;
+  background-color: var(--blue-100) !important;
 }
 .irs--flat .irs-handle>i:first-child {
-  background-color: #0168fa !important;
+  background-color: var(--blue-100) !important;
 }
 
 .irs--flat .irs-from:before,
 .irs--flat .irs-to:before,
 .irs--flat .irs-single:before {
-  border-top-color: #0168fa !important;
+  border-top-color: var(--blue-100) !important;
 }
 /*review options in big devices shows only on hover review*/
 @media (min-width: 1200px) {
