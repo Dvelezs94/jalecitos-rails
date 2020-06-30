@@ -12,9 +12,9 @@
   min-height: 400px;
 }
 
-.form-control:focus {
-    box-shadow: 0 0 0 0.1rem var(--p-purple-25);
-    border-color: var(--p-purple-25);
+.form-control:focus{
+    box-shadow: 0 0 0 0.1rem var(--p-purple-25) !important;
+    border-color: var(--p-purple-25) !important;
 }
 
 .video-item iframe {

@@ -17,7 +17,7 @@ class TicketMailer < ApplicationMailer
         }
       ],
       "from": {
-        "email": "noreply@jalecitos.com",
+        "email": "noreply@wandapp.com.mx",
         "name": "Jalecitos"
       },
       "template_id": "d-4fde3f09539e463aae4c7ef480d1c3b4"
@@ -44,8 +44,8 @@ class TicketMailer < ApplicationMailer
         }
       ],
       "from": {
-        "email": "noreply@jalecitos.com",
-        "name": "Jalecitos"
+        "email": "noreply@wandapp.com.mx",
+        "name": "Wand"
       },
       "template_id": "d-bfc359a568fd46d284fce9cce0b8c6f3"
     }

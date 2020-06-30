@@ -22,7 +22,7 @@ class PayoutMailer < ApplicationMailer
         }
       ],
       "from": {
-        "email": "noreply@jalecitos.com",
+        "email": "noreply@wandapp.com.mx",
         "name": "Jalecitos"
       },
       "template_id": "d-80b5e08079de40f79d07b6b73ff538f2"
@@ -53,7 +53,7 @@ class PayoutMailer < ApplicationMailer
         }
       ],
       "from": {
-        "email": "noreply@jalecitos.com",
+        "email": "noreply@wandapp.com.mx",
         "name": "Jalecitos"
       },
       "template_id": "d-13cee9a591d64ad4826814cd5c4266c7"
@@ -82,8 +82,8 @@ class PayoutMailer < ApplicationMailer
         }
       ],
       "from": {
-        "email": "noreply@jalecitos.com",
-        "name": "Jalecitos"
+        "email": "noreply@wandapp.com.mx",
+        "name": "Wand"
       },
       "template_id": "d-f7072a9372b54565bee54f626cf308df"
     }

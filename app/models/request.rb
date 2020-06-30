@@ -91,7 +91,7 @@ class Request < ApplicationRecord
       errors.add(:base, "El recurso ya se ha completado, así que no tiene sentido bloquearlo")
     end
     if status_changed?(from: "wizard", to: "banned")
-      errors.add(:base, "No se puede bloquear un recurso de jalecitos")
+      errors.add(:base, "No se puede bloquear un recurso de Wand")
     end
     if status_changed?(from: "closed", to: "banned")
       errors.add(:base, "El pedido ya se ha cerrado antes")
