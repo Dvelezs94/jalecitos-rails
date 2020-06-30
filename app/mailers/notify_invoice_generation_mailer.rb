@@ -18,7 +18,7 @@ class NotifyInvoiceGenerationMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-a429eb88402e4c9fb58c0ada5de294c5"
     }

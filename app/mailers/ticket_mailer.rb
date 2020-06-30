@@ -45,7 +45,7 @@ class TicketMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-bfc359a568fd46d284fce9cce0b8c6f3"
     }

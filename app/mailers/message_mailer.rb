@@ -20,7 +20,7 @@ class MessageMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-f74e56ed150f4d17b0c0196e4ccc3f0d"
     }

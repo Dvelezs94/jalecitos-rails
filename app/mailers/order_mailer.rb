@@ -21,7 +21,7 @@ class OrderMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-506e9eadc66b4d518efc64f061d365af"
     }
@@ -57,7 +57,7 @@ class OrderMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-af72ef499d514d58ae35d2ee5a587ae2"
     }
@@ -94,7 +94,7 @@ class OrderMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-de81dcb50898496fbd493ae667671a84"
     }
@@ -131,7 +131,7 @@ class OrderMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-bed1e792ddb44a49ab68c5dec5d429e7"
     }
@@ -167,7 +167,7 @@ class OrderMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-958c8e1758c949538a8151829672f264"
     }
@@ -195,7 +195,7 @@ class OrderMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-c2a12c29f7494f09a2c5a63f5a01440c"
     }
@@ -223,7 +223,7 @@ class OrderMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-dc6a5e483f424ee7a867e5e0e8b3d48b"
     }
@@ -251,7 +251,7 @@ class OrderMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-8570d6c13aef4ce1a538ae43a524cb99"
     }
@@ -283,7 +283,7 @@ class OrderMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-b4c1b012e85047de86d61c8f189894e6"
     }

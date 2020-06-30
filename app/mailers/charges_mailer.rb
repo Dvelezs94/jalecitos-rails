@@ -17,7 +17,7 @@ class ChargesMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-4ca7e27879db47da876f01e06c708d80"
     }
@@ -43,7 +43,7 @@ class ChargesMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-82a04a72af184270b047369b26649296"
     }

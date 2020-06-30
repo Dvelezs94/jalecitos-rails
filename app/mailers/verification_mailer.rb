@@ -15,7 +15,7 @@ class VerificationMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-c6af64524cee4e85a0687c9c50da066a"
     }
@@ -40,7 +40,7 @@ class VerificationMailer < ApplicationMailer
       ],
       "from": {
         "email": "noreply@wandapp.com.mx",
-        "name": "Jalecitos"
+        "name": "Wand"
       },
       "template_id": "d-b6f398e256a3415ba9bb4c3648faa577"
     }
