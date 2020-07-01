@@ -1,7 +1,7 @@
 <!-- Carousel -->
 <div class="col-12 pd-0-f">
-  <div id="carouselFeaturedAds" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
+  <div id="carouselFeaturedAds" class="carousel slide" data-ride="carousel" >
+    <ol class="carousel-indicators d-none">
       <li data-target="#carouselFeaturedAds" data-slide-to="0" class="active"></li>
       <li data-target="#carouselFeaturedAds" data-slide-to="1"></li>
     </ol>
@@ -10,10 +10,10 @@
       <div class="carousel-item <%= "active" if index == 0 %>">
         <% if banner.url.present? %>
         <%= link_to banner.url_with_protocol, target: (banner.external_url.present?)?"_blank" :"_self" do %>
-          <%= image_tag banner.image.url, class: "w-100 h-30-vh" %>
+          <%= image_tag banner.image.url, class: "w-100" %>
         <% end %>
         <% else %>
-          <%= image_tag banner.image.url, class: "w-100 h-30-vh" %>
+          <%= image_tag banner.image.url, class: "w-100" %>
         <% end %>
       </div>
       <% end %>
