@@ -1,5 +1,6 @@
 <div class="mg-t-10 mg-l-5 mg-r-10 req-card" loaded_in_map="false" lat="<%= request.lat %>" lng="<%= request.lng %>" title="<%= request.title %>">
   <div class="card">
+    <%= link_to request_path(request.slug), class: "black-100" do %>
     <div class="card-body pd-b-5-f pd-t-10-f" onclick="goToElement($(this).closest('[loaded_in_map]')[0])">
       <small class="tx-gray-600">Publicado hace <%= distance_of_time_in_words_to_now(request.created_at) %></small>
       <p class="card-title tx-16"><%= request.title %></p>
@@ -8,12 +9,13 @@
         <small><strong><%= request.budget %></strong></small>
       </div>
     </div>
+    <% end %>
     <div class="card-footer d-flex justify-content-between">
       <%= link_to request_path(request.slug), class: "share_item_url" do %>
         Compartir
       <% end %>
-      <%= link_to request_path(request.slug) do %>
-        Ver más <i data-feather="chevron-right" class="feather-12 d-none d-md-inline"></i>
+      <%= link_to "#", onclick: "goToElement($(this).closest('[loaded_in_map]')[0])", class: "d-none d-md-block" do %>
+        Mapa <i data-feather="chevron-right" class="feather-12 d-none d-md-inline"></i>
       <% end %>
     </div>
   </div>

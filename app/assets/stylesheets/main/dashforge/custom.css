@@ -23,8 +23,12 @@
 
 .gig-card-top {
   object-fit: cover;
-  height: 250px
+  height: 24vh;
+  max-height: 35vh;
+  padding: 5px;
+  border-radius: 0.25rem;
 }
+
 @media (max-width: 1200px) {
 
     .wizard > .steps .disabled .title {
@@ -33,7 +37,7 @@
   }
 @media (max-width: 992px) {
     .gig-card-top {
-      height: 200px;
+      height: 24vh;
     }
     .wizard > .steps > ul li + li::before {
       display: none;
@@ -41,18 +45,19 @@
   }
   @media (max-width: 768px) {
     .gig-card-top {
-      height: 180px;
+      height: 24vh;
     }
 
   }
   @media (max-width: 576px) {
     .gig-card-top {
-      height: 200px;
+      height: auto;
     }
   }
 
 .gig-card-horizontal {
   object-fit: cover;
+  max-height: -webkit-fill-available;
 }
 
 .no-overflow {
@@ -551,6 +556,9 @@ pre[preview] {
   color: var(--red-25);
 }
 .black-100 {
+  color: var(--black-100);
+}
+.black-100:hover {
   color: var(--black-100);
 }
 /*fin colores de fer*/
