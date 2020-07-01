@@ -23,12 +23,12 @@
         <small class="green-100">Desde <strong><%= query_home_or_profile_helper(gig) %></strong></small>
       </div>
       <% end %>
-      <div class="d-flex justify-content-between align-items-center mg-t-10 gig_buttons col-12 align-self-end">
+      <div class="d-flex justify-content-between align-items-center mg-t-10 col-12 align-self-end" hide-on-map>
         <%= render("gigs/likes", gig: gig, with_number: false) if current_user && current_user != gig.user %>
         <%= link_to the_gig_path(gig), class: "share_item_url" do %>
           Compartir
         <% end %>
-        <%= link_to "#", onclick: "goToElement($(this).closest('[loaded_in_map]')[0])", class: "d-none d-md-block" do %>
+        <%= link_to "#", onclick: "goToElement($(this).closest('[loaded_in_map]')[0])", class: "d-768-none" do %>
           Mapa <i data-feather="chevron-right" class="feather-12 d-none d-md-inline"></i>
         <% end %>
       </div>

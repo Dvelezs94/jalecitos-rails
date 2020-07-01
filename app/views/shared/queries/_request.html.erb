@@ -10,11 +10,11 @@
       </div>
     </div>
     <% end %>
-    <div class="card-footer d-flex justify-content-between">
+    <div class="card-footer d-flex justify-content-between" hide-on-map>
       <%= link_to request_path(request.slug), class: "share_item_url" do %>
         Compartir
       <% end %>
-      <%= link_to "#", onclick: "goToElement($(this).closest('[loaded_in_map]')[0])", class: "d-none d-md-block" do %>
+      <%= link_to "#", onclick: "goToElement($(this).closest('[loaded_in_map]')[0])", class: "d-768-none" do %>
         Mapa <i data-feather="chevron-right" class="feather-12 d-none d-md-inline"></i>
       <% end %>
     </div>

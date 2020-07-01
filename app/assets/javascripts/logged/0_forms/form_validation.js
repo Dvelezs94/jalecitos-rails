@@ -20,9 +20,7 @@ $(document).on('turbolinks:load', function() {
   if ($(".reportForm").length > 0) {
     $(".reportForm").validate();
   }
-  if ($(".review_form").length > 0) {
-    review_validation();
-  }
+
   if ($(".report_request_form").length > 0) {
     $(".report_request_form").validate();
   }

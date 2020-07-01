@@ -42,5 +42,6 @@
     $("#no-conversation").remove();
     $("[content-scrolleable]").scrollTop($("[messages-list]")[0].scrollHeight);
     messages_scroll(); // add scroll pagination event
+    $("#message_body").focus();
     stylize_messages();
 <% end %>
