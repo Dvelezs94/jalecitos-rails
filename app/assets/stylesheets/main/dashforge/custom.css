@@ -688,6 +688,10 @@ a.orange-100:hover {
 #no-conversation {
   height: 100%;
   width: -webkit-fill-available;
+  background-color: #ffffff;
+}
+#message_body:focus {
+  box-shadow: none !important;
 }
 .mg-t-2-i {
   margin-top: 2px !important;
