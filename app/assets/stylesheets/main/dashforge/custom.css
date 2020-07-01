@@ -704,3 +704,11 @@ a.orange-100:hover {
 .timeline-body::before {
   border: 2px solid var(--p-purple-100) !important;
 }
+@media (max-width: 768px) {  
+  #navbarMenu li {
+    font-size: 20px;
+  }
+  #navbarMenu a {
+    font-size: 18px;
+  }
+}
