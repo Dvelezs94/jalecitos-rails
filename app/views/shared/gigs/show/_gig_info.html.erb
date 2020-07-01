@@ -3,7 +3,7 @@
 <div class="innerpage-leftsidejata">
   <div class="verificos-title">
     <h1><%= gig_title %></h1>
-    <small class="visit-count gig-visits-likes"><%= "#{@gig_hits} Vistas" %> ● <%= "#{@gig.likes.length} Me gusta" %></small>
+    <small class="visit-count gig-visits-likes"><%= "#{@gig.likes.length} Me gusta" %></small>
     <div class="div-space-between mar-bot-7">
       <p class="mar-bot-0"><%= @gig.location %></p>
       <div class="pacificobg-socialicon">
@@ -75,7 +75,7 @@
         <%= render "shared_user/gigs/show/gig_actions", desktop: true %>
       </div>
       <h2><%= gig_title %></h2>
-      <small class="visit-count gig-visits-likes"><%= "#{@gig_hits} Vistas" %> ● <%= "#{@gig.likes.length} Me gusta" %></small>
+      <small class="visit-count gig-visits-likes"><%= "#{@gig.likes.length} Me gusta" %></small>
       <br>
       <pre> <p><%= gig_safe_desc %></p> </pre>
       <br>
