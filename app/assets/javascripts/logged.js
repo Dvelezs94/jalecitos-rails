@@ -8,7 +8,6 @@
 //= require popper
 
 //= require bootstrap
-//= require jquery.steps
 
 //= require jquery.easing
 
