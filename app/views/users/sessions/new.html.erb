@@ -1,19 +1,23 @@
 <div class="container">
 
   <% if params[:ref] == "jalecitos" %>
-  <div class="alert alert-primary mg-b-0 tx-center" role="alert">
-   Hemos renovado todo de Jalecitos, pero aún <strong>puedes iniciar sesión con tus datos anteriores</strong>. <br> ¡Disfruta de esta nueva experiencia llamada <strong>Wand</strong>!
-   </div>
-   <br>
+    <div class="alert alert-primary mg-b-0 tx-center" role="alert">
+      Hemos renovado todo de Jalecitos, pero aún
+      <strong>puedes iniciar sesión con tus datos anteriores</strong>.
+      <br>
+      ¡Disfruta de esta nueva experiencia llamada
+      <strong>Wand</strong>!
+    </div>
+    <br>
   <% end %>
   <div class="media align-items-stretch justify-content-center ht-100p pos-relative">
     <div class="media-body align-items-center d-none d-lg-flex">
-
+      <div class="mx-wd-600">
         <%= image_tag image_path("signin.svg"), width: 600, height: 450%>
-
+      </div>
     </div>
     <!-- media-body -->
-    <div class="sign-wrapper min-w-30vw">
+    <div class="sign-wrapper mg-lg-l-50 mg-xl-l-60">
       <div class="wd-100p">
         <h3 class="tx-color-01 mg-b-5">Inicio de sesión</h3>
         <p class="tx-color-03 tx-16 mg-b-40">Inicia sesión para poder continuar</p>
