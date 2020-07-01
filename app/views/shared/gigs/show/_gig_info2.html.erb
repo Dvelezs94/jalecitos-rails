@@ -2,7 +2,7 @@
 <% gig_title = @gig.safe_title %>
 
 <h1><%= gig_title %></h1>
-<p class="tx-gray-500"><%= "#{@gig_hits} Vistas" %> ● <%= "#{@gig.likes.length} Me gusta" %></p>
+<p class="tx-gray-500"><%= "#{@gig.likes.length} Me gusta" %></p>
 <div class="d-flex justify-content-between align-items-center">
   <div>
     <span class="d-mobile-none d-md-inline">A unos <b><%= distance(@gig, @mylat, @mylng) %></b> de ti</span>
