@@ -226,8 +226,8 @@
 .gm-style-iw-d .media,
 .gm-style-iw-d [hide-on-map],
 .gm-style-iw-d .share_item_url,
-.gm-style-iw-d .gig_buttons a[gig_id]{
-  display: none;
+.gm-style-iw-d [hide-on-map]{
+  display: none !important;
 }
 .gm-style-iw-d .req-card .card-body,
 .gm-style-iw-d .card-footer {
@@ -238,9 +238,6 @@
 }
 .gm-style-iw-d .card-footer a {
   margin-left: auto;
-}
-.gm-style-iw-d .gig_buttons {
-  float: right !important;
 }
 
 .gm-style-iw-d .card-title {
@@ -704,11 +701,14 @@ a.orange-100:hover {
 .timeline-body::before {
   border: 2px solid var(--p-purple-100) !important;
 }
-@media (max-width: 768px) {  
+@media (max-width: 768px) {
   #navbarMenu li {
     font-size: 20px;
   }
   #navbarMenu a {
     font-size: 18px;
+  }
+  .d-768-none {
+    display: none;
   }
 }
