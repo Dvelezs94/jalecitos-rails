@@ -40,9 +40,6 @@
         <%= f.submit 'Entrar', class: "btn btn-p-purple-100 btn-block", :data => { :disable_with => "Entrando..." } %>
       <% end %>
       <div class="divider-text">o</div>
-      <%= button_to user_facebook_omniauth_authorize_path(lat:"latitude", lon:"longitude"), form_class: 'facebook-login btn-block', class: "btn btn-outline-facebook btn-block", :data => { :disable_with => "Entrando..." } do %>
-      Entrar con Facebook
-    <% end %>
     <%= button_to user_google_oauth2_omniauth_authorize_path(lat:"latitude", lon:"longitude"), form_class: 'google-login btn-block', class: "btn btn-outline-google btn-block", :data => { :disable_with => "Entrando..." } do %>
     Entrar con Google
   <% end %>
