@@ -1,10 +1,8 @@
 $(document).on('turbolinks:load', function() {
   if ($(".gig_form").length > 0) {
-    //detecting changes on each form
-    $(document).on('change keyup paste', ':input', function() {
-      window.changed = true;
-    });
+
     var form_cont = $("#section_parent_gig");
+
     window.gig_step = form_cont.steps({
       headerTag: "h3",
       bodyTag: "section",
