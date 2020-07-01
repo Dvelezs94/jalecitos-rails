@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_06_24_142627) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: false
-    t.boolean "external_url"
+    t.boolean "external_url", default: false
   end
 
   create_table "bans", force: :cascade do |t|
