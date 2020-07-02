@@ -65,7 +65,7 @@ class PagesController < ApplicationController
   end
 
   def sitemap
-    redirect_to "https://app.wandapp.com.mx.s3.amazonaws.com/sitemaps/sitemap.xml"
+    redirect_to "https://cdn-wand.s3.amazonaws.com/sitemaps/sitemap.xml"
   end
 
   def gig_slugs
