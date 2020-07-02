@@ -56,7 +56,7 @@ class GigUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :carousel, :if => :not_gif?  do #we dont resize the gifs
-    process resize_to_fill: [218, 145]
+    process resize_to_fill: [250, 200]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
