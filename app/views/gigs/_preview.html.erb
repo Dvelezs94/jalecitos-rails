@@ -1,7 +1,7 @@
 <% edit = controller.action_name == "edit" %>
 <div class="col-lg-6 col-md-12 order-xs-2 order-sm-2 order-lg-1">
   <div class="alert alert-warning" role="alert">Vista Previa de la publicación</div>
-  <h1 preview="gig[name]"><%= gig.name || "Realizarte una sesión de fotografías" %></span></h1>
+  <h1 preview="gig[name]"><%= gig.name || "Realizarte una sesión de fotografías" %></h1>
   <p class="tx-gray-500"><%= (edit)? gig.likes.length : rand(100..1000) %> Me gusta</p>
 
 

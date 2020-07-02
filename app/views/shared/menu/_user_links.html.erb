@@ -5,6 +5,20 @@
   </div><!-- navbar-menu-header -->
 <ul class="nav navbar-menu justify-content-center">
   <li class="nav-label pd-l-20 pd-lg-l-25 d-lg-none">Menu</li>
+  <% unless current_page? search_path %>
+  <div class="location-header">
+    <li class="nav-item" data-step="7" data-intro="Ésta es tu ubicación, puedes cambiarla en cualquier momento para ver cosas más cercanas a ti" data-position="bottom">
+      <%= form_with model: User, url: update_users_path, method: :put , remote: true do |f|%>
+      <%= f.text_field :location, class: 'form-control rounded', id: "menu_autocomplete", placeholder: "Ubicación",
+      value: (current_user.location(true).present?)? current_user.location : "",
+      lat: (params[:location].present?)? params[:lat] : current_user.lat || nil,
+      lng: (params[:location].present?)? params[:lng] : current_user.lng || nil %>
+      <%= f.submit("Enviar", class: "d-none") %>
+      <% end %>
+    </li>
+  </div>
+  <hr class="d-lg-none mg-r-5 mg-l-5">
+  <% end %>
 <li class="nav-item with-sub">
   <a href="" class="nav-link n-dark-100 font-weight-bold" data-step="5" data-intro="Aquí puedes crear un servicio que tú ofrezcas" data-position="bottom"><i data-feather="briefcase"></i> Servicios</a>
   <ul class="navbar-menu-sub">
@@ -61,20 +75,6 @@
   </div><!-- nav-sub -->
 </li>
 <li class="nav-item"><a href="" class="link-04 nav-link" id="invite-friend"><i data-feather="share-2"></i>Invitar</a></li>
-<% unless current_page? search_path %>
-<hr class="d-lg-none mg-r-5 mg-l-5">
-<div class="location-header">
-  <li class="nav-item" data-step="7" data-intro="Ésta es tu ubicación, puedes cambiarla en cualquier momento para ver cosas más cercanas a ti" data-position="bottom">
-   <%= form_with model: User, url: update_users_path, method: :put , remote: true do |f|%>
-      <%= f.text_field :location, class: 'form-control rounded', id: "menu_autocomplete", placeholder: "Ubicación",
-      value: (current_user.location(true).present?)? current_user.location : "",
-      lat: (params[:location].present?)? params[:lat] : current_user.lat || nil,
-      lng: (params[:location].present?)? params[:lng] : current_user.lng || nil %>
-      <%= f.submit("Enviar", class: "d-none") %>
-    <% end %>
-  </li>
-</div>
-<% end %>
 </ul>
 </div>
 <div class="navbar-right" data-step="8" data-intro="En este lugar puedes buscar servicios y pedidos, ver tus mensajes y notificaciones o configurar tu perfil" data-position="left">

@@ -119,23 +119,17 @@
   object-fit: contain; }
 
   @media (max-width: 992px) {
-    .gig-show-picture {
-      height: 405px !important;
-    }
+
     .carousel-item.gig img {
       height:405px !important; }
     }
   @media (max-width: 768px) {
-    .gig-show-picture {
-      height: 370px !important;
-    }
+
     .carousel-item.gig img {
       height:370px !important; }
     }
   @media (max-width: 576px) {
-    .gig-show-picture {
-      height: 320px !important;
-    }
+
     .carousel-item.gig img {
       height: 320px !important; }
     }
@@ -715,4 +709,12 @@ a.orange-100:hover {
   .d-768-none {
     display: none;
   }
+}
+
+.w-60 {
+  width: 60% !important;
+}
+
+.mn-w-32 {
+  min-width: 32px;
 }
