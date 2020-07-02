@@ -116,7 +116,7 @@ module ApplicationHelper
     elsif image.file.extension == "gif"
       image.url
     else
-      image.url(:carousel)
+      image.url()
     end
   end
 
