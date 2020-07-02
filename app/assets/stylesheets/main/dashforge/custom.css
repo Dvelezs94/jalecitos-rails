@@ -19,6 +19,7 @@
 
 .video-item iframe {
   height: -webkit-fill-available;
+  min-height: 56vh;
 }
 
 .gig-card-top {
