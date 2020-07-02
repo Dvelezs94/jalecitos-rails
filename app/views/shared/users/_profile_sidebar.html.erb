@@ -55,8 +55,8 @@
       <label class="tx-sans tx-10 tx-semibold tx-uppercase tx-color-01 tx-spacing-1 mg-b-15">Información de contacto</label>
       <ul class="list-unstyled profile-info-list">
         <!-- <li><i data-feather="briefcase"></i> <span class="tx-color-03">Monterrey, NL. MX.</span></li> -->
-        <% if @user.phone_number.present?  %>  <li><%= link_to "<i data-feather='smartphone' class='n-dark-100'></i> #{@user.phone_number}".html_safe, "tel:#{@user.phone_number}", target: "_blank" %></li> <% end %>
-        <li><%= link_to "<i data-feather='mail' class='n-dark-100'></i> #{@user.email}".html_safe, "mailto:"+@user.email, target: "_blank" %></li>
+        <% if @user.phone_number.present? && @user.whatsapp_enabled  %>  <li><%= link_to "<i data-feather='smartphone' class='n-dark-100'></i> #{@user.phone_number}".html_safe, "tel:#{@user.phone_number}", target: "_blank" %></li> <% end %>
+        <!-- <li><%# link_to "<i data-feather='mail' class='n-dark-100'></i> #{@user.email}".html_safe, "mailto:"+@user.email, target: "_blank" %></li> -->
         <li><%= link_to conversations_path(user_id: @user.id ) do %>
           <i data-feather='send' class='n-dark-100'></i> <%= @user.alias %>
         <% end %></li>
