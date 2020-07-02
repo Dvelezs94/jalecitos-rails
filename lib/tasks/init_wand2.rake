@@ -1,7 +1,7 @@
 task :init_wand2 => [:environment] do
   time = Time.parse("2020-07-01 16:44:52.053554")+20.minute
   #######################
-  Gig.where("updated_at > ?", time).each do |gig|
+  Gig.where("updated_at < ?", time).each do |gig|
     city = City.find(gig.city_id) if gig.city_id.present?
     if gig.city_id.nil? || city.name.include?("Ciudad De M")
       gig.lat = 19.4326077
@@ -31,7 +31,7 @@ task :init_wand2 => [:environment] do
   end
   puts "Todos los jales han actualizado su ubicacion a coordenadas, ahora corriendo los pedidos..."
   ##############################################################
-  Request.where("updated_at > ?", time).each do |req|
+  Request.where("updated_at < ?", time).each do |req|
     city = City.find(req.city_id) if req.city_id.present?
     if req.city_id.nil? || city.name.include?("Ciudad De M")
       req.lat = 19.4326077
@@ -61,7 +61,7 @@ task :init_wand2 => [:environment] do
   end
   puts "Todos los pedidos han actualizado su ubicacion a coordenadas, ahora corriendo los usuarios..."
   ###############################################################
-  User.where("updated_at > ?", time).each do |user|
+  User.where("updated_at < ?", time).each do |user|
     city = City.find(user.city_id) if user.city_id.present?
     if user.city_id.nil? || city.name.include?("Ciudad De M")
       user.lat = 19.4326077
