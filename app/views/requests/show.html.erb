@@ -1,7 +1,7 @@
 <div class="row row-xs">
   <div class="col-sm-12 col-md-8 col-lg-9 mg-b-10">
     <h2><%= @request.title %></h2>
-    <p class="tx-16"><%= @request.description %></p>
+    <p class="tx-16 pre-wrap"><%= @request.description %></p>
     <% @request.images.each do |image| %>
     <%= image_tag(image.url, class: "img-thumbnail ht-lg-200 ht-xs-100 ht-md-150", data: {lity: true}) %>
     <% end %>
