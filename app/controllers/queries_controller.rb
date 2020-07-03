@@ -4,6 +4,7 @@ class QueriesController < ApplicationController
   include LocationFunctions
   include GetQuery
   access user: [:autocomplete_profession, :user_mobile_search], admin: :all, all: [:search, :autocomplete_search]
+  before_action :check_query, only: :search
   layout :set_layout
 
   def search
@@ -35,4 +36,7 @@ class QueriesController < ApplicationController
     }).map(&:name)
   end
   private
+  def check_query
+    redirect_to root_path if params[:query].nil?
+  end
 end
