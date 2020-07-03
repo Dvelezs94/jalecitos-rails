@@ -34,9 +34,9 @@ class Request < ApplicationRecord
   #Associations
   belongs_to :user
   belongs_to :category
-  belongs_to :city, optional: true
+  #belongs_to :city, optional: true
   has_many :offers, dependent: :destroy
-  belongs_to :employee, class_name: "User", optional: true
+  #belongs_to :employee, class_name: "User", optional: true
   #Validations
   validates_presence_of :name, :description, :budget, :category_id, :lat, :lng
   validate  :tag_length, :maximum_amount_of_tags
@@ -46,7 +46,6 @@ class Request < ApplicationRecord
   validate :budget_options
   validate :invalid_change, on: :update
   validate :finished_request, on: :update
-  validate :refund_money, if: :interrupting_request?, on: :update
   #Custom fields
   mount_uploaders :images, RequestUploader
   validates :images, length: {
@@ -74,16 +73,6 @@ class Request < ApplicationRecord
 
   def interrupting_request?
     status_changed?(from: "in_progress", to: "banned") || status_changed?(from: "in_progress", to: "closed") || payment_success_and_request_banned_or_closed_or_employer_inactive || payment_success_and_employee_not_active
-  end
-
-  def refund_money
-      act_order = passed_active_order || self.active_order
-      @success = act_order.update(status: "refund_in_progress", c_user: c_user)
-      if @success && payment_success_and_employee_not_active
-        create_notification(act_order.employee, act_order.employer, "El talento", act_order, "purchases")
-      elsif ! @success# cant update order so i trigger that error
-        errors.add(:base, act_order.errors.full_messages.first)
-      end
   end
 
   def invalid_change
