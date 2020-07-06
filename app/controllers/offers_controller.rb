@@ -1,7 +1,7 @@
 class OffersController < ApplicationController
   layout 'logged'
   include OffersHelper
-  
+
   include MoneyHelper
   include BannedFunctions
   access all: [:show], user: {except: [:hire]} #no hire user: :all
@@ -15,7 +15,6 @@ class OffersController < ApplicationController
   before_action :redirect_if_offer_has_order, only: [:edit]
   before_action :check_if_offered, only: :create
   before_action :deny_owner, only: [:new, :create]
-  before_action :check_if_already_hired
 
   # GET /offers/new
   def new
@@ -121,13 +120,6 @@ class OffersController < ApplicationController
 
     def allow_owner
       if current_user != @request.user
-        redirect_to root_path, notice: "No puedes acceder a esta ruta"
-        return
-      end
-    end
-    # function to check if the request has already hired someone, so they cannnot make changes to offers after that
-    def check_if_already_hired
-      if @request.employee.present?
         redirect_to root_path, notice: "No puedes acceder a esta ruta"
         return
       end
