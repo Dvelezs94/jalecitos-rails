@@ -5,7 +5,9 @@ module FilterRestrictions
   end
 
   def no_special_chars text
-    text.gsub(/([[:punct:]]|[[:space:]])/, ' ') # [[:punct:]] is [`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/] and [[:space:]] is for \t, \n, etc
+    #text.gsub(/([[:punct:]]|[[:space:]])/, ' ') # [[:punct:]] is [`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/] and [[:space:]] is for \t, \n, etc
+    text.gsub(/([[:space:]])/, ' ') # [[:punct:]] is [`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/] and [[:space:]] is for \t, \n, etc
+
   end
 
   def remove_uris(text)
