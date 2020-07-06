@@ -3,6 +3,7 @@ class MessageNotificationWorker
   sidekiq_options retry: false, dead: false
   include ApplicationHelper
   include PushFunctions
+  include ActionView::Helpers::AssetTagHelper
   include Rails.application.routes.url_helpers
 
   #Message (user, recipient, body, conversation_id)
