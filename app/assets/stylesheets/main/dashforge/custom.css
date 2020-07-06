@@ -719,3 +719,7 @@ a.orange-100:hover {
 .mn-w-32 {
   min-width: 32px;
 }
+
+.arrow-shadow {
+  filter:drop-shadow(1px 1px 0px rgba(0,0,0, 0.1)) drop-shadow(-1px 1px 0px rgba(0,0,0, 0.1)) drop-shadow(1px -1px 0px rgba(0,0,0, 0.1)) drop-shadow(-1px -1px 0px rgba(0,0,0, 0.1));
+}

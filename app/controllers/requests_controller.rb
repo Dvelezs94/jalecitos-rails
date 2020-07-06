@@ -16,7 +16,6 @@ class RequestsController < ApplicationController
 
   # GET /requests/1
   def show
-    check_if_already_hired
     if params[:page]
       get_other_offers
     else
@@ -142,19 +141,4 @@ class RequestsController < ApplicationController
      redirect_to(request_path(@request), notice: 'El pedido ya no puede ser borrado o editado') if ! @request.published?
     end
 
-    def check_if_already_hired
-      if @request.employee.present?
-        @already_hired = true
-        return true
-      end
-      if current_user && @request.user == current_user
-        my_request_hires = current_user.purchases.includes(:purchase).where(purchase_type: "Offer").where.not(status: ["denied", "refund_in_progress", "refunded"])
-        my_request_hires.each do |mrh|
-          if mrh.purchase.request == @request
-            @already_hired = true
-            break
-          end
-        end
-      end
-    end
 end
