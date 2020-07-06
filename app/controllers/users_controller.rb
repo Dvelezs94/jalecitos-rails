@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+
   include SetLayout
   include GetUser
   include UsersHelper
@@ -84,7 +84,11 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.friendly.find(params[:id])
+      @user = User.find_by(slug: params[:id])
+      if @user.nil?
+        flash[:error] = "El usuario no existe"
+        redirect_to root_path()
+      end
     end
 
     def set_user_config
