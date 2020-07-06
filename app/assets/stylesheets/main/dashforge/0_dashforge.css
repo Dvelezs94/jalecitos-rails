@@ -12234,7 +12234,7 @@ textarea.parsley-success:focus {
     .navbar-menu-sub {
       position: absolute;
       top: 41.5px;
-      left: -25px;
+      right: 0;
       background-color: #fff;
       padding: 20px 25px;
       border: 1px solid rgba(192, 204, 218, 0.53);
@@ -12246,7 +12246,7 @@ textarea.parsley-success:focus {
     content: '';
     position: absolute;
     top: -10px;
-    left: 25px;
+    right: 25px;
     border-bottom: 10px solid rgba(192, 204, 218, 0.53);
     border-left: 10px solid transparent;
     border-right: 10px solid transparent; }
@@ -12254,7 +12254,7 @@ textarea.parsley-success:focus {
     content: '';
     position: absolute;
     top: -8.5px;
-    left: 26px;
+    right: 26px;
     border-bottom: 9px solid #fff;
     border-left: 9px solid transparent;
     border-right: 9px solid transparent; }
