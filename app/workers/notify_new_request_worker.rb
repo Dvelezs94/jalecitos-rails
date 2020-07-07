@@ -9,12 +9,12 @@ class NotifyNewRequestWorker
     request = Request.find(request_id)
     #specifications
     tag_list = request.tag_list
-    specif = tag_list.push(request.profession).join(" ")
+    specif = tag_list.push(request.profession).collect{|i|  i.gsub(/\s+/, "")}.join(" ") #remove white spaces from tags of more than 1 word, because searchkick matches every word by separate, so the tag "data cleaning" matches with a request of "cleaning house". Now if someone requests with tag "cleaning house" i convert it to "cleaninghouse" and its more difficult to match and now it has to match all the sentence (every white space costs y edit to word so it matches cleaning house)
     if specif.present? #profession or tags
       # Search from gigs
-      @gigs = Gig.search(specif, fields: [:tags, :profession], operator: "or", where: { location: { near: {lat: request.lat, lon: request.lng}, within: "200km" } }, load: false, execute: false)
+      @gigs = Gig.search(specif, fields: [:tags, :profession], operator: "or", where: { location: { near: {lat: request.lat, lon: request.lng}, within: "200km" } }, load: false, execute: false, misspellings: {prefix_length: 5, edit_distance: 2})
       # Search from users
-      @users = User.search(specif, fields: [:tags], operator: "or", where: { location: { near: {lat: request.lat, lon: request.lng}, within: "200km" } }, load: false, execute: false)
+      @users = User.search(specif, fields: [:tags], operator: "or", where: { location: { near: {lat: request.lat, lon: request.lng}, within: "200km" } }, load: false, execute: false, misspellings: {prefix_length: 5, edit_distance: 2})
       #make search in one request
       Searchkick.multi_search([@gigs, @users])
       #get ids
