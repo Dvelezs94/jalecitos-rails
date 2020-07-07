@@ -7,7 +7,7 @@ class CloseRequestWorker
       begin
         @req = request.update(status: "closed")
       rescue => e
-        Bugsnag.notify("Error en request con id:" + request.id.to_s+ " con error "+ @req.errors.full_messages.first)
+        Bugsnag.notify("Error en request con id:" + request.id.to_s+ " con error "+ @req.errors.full_messages.join(","))
       end
     end
   end
